@@ -1,0 +1,13 @@
+php:
+  preset: laravel
+  version: 9
+  disabled:
+    - no_unused_imports
+  finder:
+    not-name:
+      - index.php
+js:
+  finder:
+    not-name:
+      - vite.config.ts
+css: true
