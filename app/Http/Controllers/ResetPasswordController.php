@@ -13,16 +13,16 @@ class ResetPasswordController extends Controller
     public function __invoke(Request $request)
     {
         $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
+            'token'    => 'required',
+            'email'    => 'required|email',
             'password' => 'required|min:8|confirmed',
         ]);
 
         $status = Password::reset(
             $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) use ($request) {
+            function ($user, $password) {
                 $user->forceFill([
-                    'password' => Hash::make($password)
+                    'password' => Hash::make($password),
                 ])->setRememberToken(Str::random(60));
                 $user->save();
                 event(new PasswordReset($user));
@@ -30,7 +30,7 @@ class ResetPasswordController extends Controller
         );
 
         return response()->json([
-            "message" => "Password successfully reset!",
+            'message' => 'Password successfully reset!',
         ], 200);
     }
 }

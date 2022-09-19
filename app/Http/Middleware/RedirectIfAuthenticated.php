@@ -25,7 +25,8 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 if ($request->wantsJson()) {
                     return redirect('/api/user');
-                };
+                }
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }

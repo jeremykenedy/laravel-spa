@@ -14,8 +14,9 @@ class PasswordController extends Controller
             'password' => 'required|min:6|max:255|confirmed',
         ]);
         $user->update(['password' => Hash::make($request->password)]);
+
         return response()->json([
-            'message' => 'Password Updated Successfully'
+            'message' => 'Password Updated Successfully',
         ], 200);
     }
 }

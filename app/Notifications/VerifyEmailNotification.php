@@ -16,7 +16,6 @@ class VerifyEmailNotification extends verifyEmail implements ShouldQueue
 {
     use Queueable;
 
-
     /**
      * Get the verification URL for the given notifiable.
      *
@@ -29,7 +28,7 @@ class VerifyEmailNotification extends verifyEmail implements ShouldQueue
             'verify',
             Carbon::now()->addMinutes(60),
             [
-                'id' => $notifiable->getKey(),
+                'id'   => $notifiable->getKey(),
                 'hash' => sha1($notifiable->getEmailForVerification()),
             ]
         );
