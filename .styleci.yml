@@ -1,10 +1,12 @@
-php:
-  preset: laravel
-  version: 9
-  disabled:
-    - no_unused_imports
-  enabled:
-    - align_double_arrow
-  finder:
-    not-name:
-      - index.php
+preset: laravel
+
+enabled:
+  - align_double_arrow
+
+disabled:
+  - unused_use
+
+finder:
+  not-name:
+    - index.php
+    - server.php
