@@ -3,11 +3,8 @@ php:
   version: 9
   disabled:
     - no_unused_imports
+  enabled:
+    - align_double_arrow
   finder:
     not-name:
       - index.php
-js:
-  finder:
-    not-name:
-      - vite.config.ts
-css: true

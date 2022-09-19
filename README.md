@@ -1,5 +1,8 @@
 # Laravel SPA
 
+[![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=master)](https://github.styleci.io/repos/537735029?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 #### Table of contents
 - [About](#about)
 - [Features](#features)
@@ -67,7 +70,7 @@ This starter template that is built on:
 ### Seeds
 ##### Seeded Users
 
-|Email|Password|Access|
+|Email|Password|
 |:------------|:------------|
 |user@user.com|password|
 

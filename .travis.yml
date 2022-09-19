@@ -1,0 +1,20 @@
+language: php
+
+php:
+  - 8.0.2
+
+services:
+  - mysql
+
+before_script:
+  - cp .env.travis .env
+  - mysql -u root -e 'create database laravelSpa;'
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
+  - php artisan migrate:install --env=testing --no-interaction
+  - composer dump-autoload
+  - sudo chgrp -R www-data storage bootstrap/cache
+  - sudo chmod -R ug+rwx storage bootstrap/cache
+  - php artisan migrate
+  - php artisan db:seed
