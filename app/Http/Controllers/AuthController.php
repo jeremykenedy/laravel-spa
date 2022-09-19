@@ -9,22 +9,22 @@ class AuthController extends Controller
 {
     public function Login(Request $request)
     {
-
         $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
+            'email'    => 'required|email',
+            'password' => 'required',
         ]);
 
-        if (!$this->guard()->attempt($credentials)) {
+        if (! $this->guard()->attempt($credentials)) {
             return response()->json([
-                'message' => 'The provided credentials are incorrect.'
+                'message' => 'The provided credentials are incorrect.',
             ], 401);
         }
         $this->guard()->attempt($credentials);
         $token = $this->guard()->user()->createToken('auth-token')->plainTextToken;
+
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'Bearer',
+            'token_type'   => 'Bearer',
         ], 200);
     }
 
@@ -33,9 +33,10 @@ class AuthController extends Controller
         $user = $request->user();
         $user->tokens()->delete();
         $this->guard()->logout();
+
         return response()->json([
             'status_code' => '200',
-            'message' => 'logged out successfully'
+            'message'     => 'logged out successfully',
         ]);
     }
 

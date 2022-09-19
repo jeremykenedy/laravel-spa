@@ -14,7 +14,7 @@ class RegisterController extends Controller
         $data = $request->validate([
             'name'      => 'required|min:3|max:255',
             'email'     => 'required|email|unique:users,email',
-            'password'  => 'required|min:6|max:255|confirmed'
+            'password'  => 'required|min:6|max:255|confirmed',
         ]);
 
         $user = User::create([
@@ -26,10 +26,11 @@ class RegisterController extends Controller
         if ($user) {
             event(new Registered($user));
             $token = $user->createToken('access_token')->plainTextToken;
+
             return response()->json([
-                "token" => $token ,
-                "type"  => "Bearer",
-                "user"  => $user,
+                'token' => $token,
+                'type'  => 'Bearer',
+                'user'  => $user,
             ]);
         }
     }
