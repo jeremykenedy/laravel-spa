@@ -2,11 +2,11 @@
 
 namespace App\Exceptions;
 
+use App\Mail\ExceptionOccured;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Throwable;
 use Log;
 use Mail;
-use App\Mail\ExceptionOccured;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -45,13 +45,12 @@ class Handler extends ExceptionHandler
     /**
      * Sends an email upon exception.
      *
-     * @param \Throwable $exception
-     *
+     * @param  \Throwable  $exception
      * @return void
      */
     public function sendEmail(Throwable $exception)
     {
-       try {
+        try {
             $content['message'] = $exception->getMessage();
             $content['file'] = $exception->getFile();
             $content['line'] = $exception->getLine();
