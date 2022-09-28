@@ -1,14 +1,21 @@
 {
-    "name": "jeremykenedy/LaravelSpa",
+    "name": "jeremykenedy/laravel-spa",
     "type": "project",
     "description": "The Laravel Framework as and API and SPA.",
     "keywords": ["framework", "laravel", "vite", "vue3", "spa", "tailwindcss"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeremy Kenedy",
+            "email": "jeremykenedy@gmail.com"
+        }
+    ],
     "require": {
         "php": "^8.0.2",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
+        "jeremykenedy/laravel-exception-notifier": "^3.1",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7"

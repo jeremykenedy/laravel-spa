@@ -30,10 +30,10 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
 Route::post('/verify-resend', [VerificationController::class, 'resend']);
+Route::get('/user', UserController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/profile', ProfileController::class);
     Route::patch('/password', PasswordController::class);
-    Route::get('/user', UserController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
 });
