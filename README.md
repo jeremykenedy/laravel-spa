@@ -95,11 +95,13 @@ LaravelSpa
 ├── .editorconfig
 ├── .env
 ├── .env.example
+├── .env.travis
 ├── .eslintrc.js
 ├── .gitattributes
 ├── .gitignore
 ├── .prettierignore
 ├── .styleci.yml
+├── .travis.yml
 ├── LICENSE
 ├── README.md
 ├── app
@@ -128,6 +130,8 @@ LaravelSpa
 │   │       ├── TrustHosts.php
 │   │       ├── TrustProxies.php
 │   │       └── VerifyCsrfToken.php
+│   ├── Mail
+│   │   └── ExceptionOccured.php
 │   ├── Models
 │   │   └── User.php
 │   ├── Notifications
@@ -155,6 +159,7 @@ LaravelSpa
 │   ├── cache.php
 │   ├── cors.php
 │   ├── database.php
+│   ├── exceptions.php
 │   ├── filesystems.php
 │   ├── hashing.php
 │   ├── logging.php
@@ -176,7 +181,8 @@ LaravelSpa
 │   │   ├── 2021_04_26_093603_create_jobs_table.php
 │   │   └── 2022_09_05_192055_update_users_table.php
 │   └── seeders
-│       └── DatabaseSeeder.php
+│       ├── DatabaseSeeder.php
+│       └── UsersTableSeeder.php
 ├── env.d.ts
 ├── license.svg
 ├── package-lock.json
@@ -189,11 +195,11 @@ LaravelSpa
 │   ├── .htaccess
 │   ├── build
 │   │   ├── assets
-│   │   │   ├── app-legacy.3ad2cd47.js
+│   │   │   ├── app-legacy.20e73516.js
 │   │   │   ├── app-legacy.c0ed8668.js
 │   │   │   ├── app.01108a3d.css
-│   │   │   ├── app.1f8de6b6.css
-│   │   │   ├── app.5665825f.js
+│   │   │   ├── app.20dc7309.js
+│   │   │   ├── app.66b42942.css
 │   │   │   ├── fa-brands-400.3fe890d0.woff2
 │   │   │   ├── fa-brands-400.c7ae37d3.ttf
 │   │   │   ├── fa-regular-400.fdc1f753.ttf
@@ -274,6 +280,8 @@ LaravelSpa
 │   │       └── validation.php
 │   └── views
 │       ├── app.blade.php
+│       ├── emails
+│       │   └── exception.blade.php
 │       └── welcome.blade.php
 ├── routes
 │   ├── api.php
@@ -281,12 +289,13 @@ LaravelSpa
 │   ├── console.php
 │   └── web.php
 ├── server.php
+├── src
 ├── tailwind.config.js
 ├── tsconfig.json
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-33 directories, 161 files
+36 directories, 167 files
 ```
 
 * Tree command can be installed using brew: `brew install tree`
