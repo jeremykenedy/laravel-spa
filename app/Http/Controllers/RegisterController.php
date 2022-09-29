@@ -24,6 +24,8 @@ class RegisterController extends Controller
         ]);
 
         if ($user) {
+            $userRole = config('roles.models.role')::whereName('User')->first();
+            $user->attachRole($userRole);
             event(new Registered($user));
             $token = $user->createToken('access_token')->plainTextToken;
 

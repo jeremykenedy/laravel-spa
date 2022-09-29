@@ -15,16 +15,49 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $superAdminRole = config('roles.models.role')::whereName('Super Admin')->first();
+        $adminRole = config('roles.models.role')::whereName('Admin')->first();
+        $moderatorRole = config('roles.models.role')::whereName('Moderator')->first();
+        $editorRole = config('roles.models.role')::whereName('Editor')->first();
+        $userRole = config('roles.models.role')::whereName('User')->first();
+
+        $seededSuperAdmin = 'superadmin@superadmin.com';
+        $user = User::where('email', '=', $seededSuperAdmin)->first();
+        if ($user === null) {
+            $user = User::create([
+                'name'                          => 'Rick Sanchez',
+                'email'                         => $seededSuperAdmin,
+                'password'                      => Hash::make('password'),
+                'email_verified_at'             => now(),
+                'theme_dark'                    => false,
+            ]);
+            $user->attachRole($superAdminRole);
+        }
+
+        $seededAdmin = 'admin@admin.com';
+        $user = User::where('email', '=', $seededAdmin)->first();
+        if ($user === null) {
+            $user = User::create([
+                'name'                          => 'Morty Smith',
+                'email'                         => $seededAdmin,
+                'password'                      => Hash::make('password'),
+                'email_verified_at'             => now(),
+                'theme_dark'                    => false,
+            ]);
+            $user->attachRole($adminRole);
+        }
+
         $seededUser = 'user@user.com';
         $user = User::where('email', '=', $seededUser)->first();
         if ($user === null) {
             $user = User::create([
-                'name'                          => 'Rick Sanchez',
+                'name'                          => 'Beth Smith',
                 'email'                         => $seededUser,
                 'password'                      => Hash::make('password'),
                 'email_verified_at'             => now(),
                 'theme_dark'                    => false,
             ]);
+            $user->attachRole($userRole);
         }
     }
 }
