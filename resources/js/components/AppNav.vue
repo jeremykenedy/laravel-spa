@@ -73,7 +73,12 @@
               @click="drop = !drop"
             >
               {{ user && user.name ? user.name : '' }}
-              <UserCircleIcon class="float-right ml-2 mt-0 h-6 w-6" />
+              <img
+                v-if="user && user.avatar"
+                :src="user.avatar"
+                class="float-right ml-2 mt-0 h-6 w-6 rounded-full"
+              />
+              <UserCircleIcon v-else class="float-right ml-2 mt-0 h-6 w-6" />
             </div>
 
             <div

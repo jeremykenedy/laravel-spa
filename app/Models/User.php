@@ -8,12 +8,23 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission;
+
+    /**
+     * The accessors to append to the model's array.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'roles',
+        'avatar',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -55,5 +66,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmailNotification());
+    }
+
+    public function getRolesAttribute()
+    {
+        return $this->getRoles();
+    }
+
+    public function getAvatarAttribute()
+    {
+        return 'https://www.gravatar.com/avatar/'.md5(Str::lower($this->email)).'.jpg?s=200&d=mp';
     }
 }
