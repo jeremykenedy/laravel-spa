@@ -39,5 +39,4 @@ yarn-error.log
 /storage/framework/testing/*
 /storage/framework/views/*
 docker-compose.override.yml
-yarn.lock
 composer.lock
