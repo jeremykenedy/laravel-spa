@@ -8,11 +8,21 @@ export default {
     return {
       authenticated: false,
       user: null,
+      roles: {
+        superAdmin: false,
+        admin: false,
+        moderator: false,
+        editor: false,
+        user: false,
+      },
     };
   },
   getters: {
     user(state) {
       return state.user;
+    },
+    roles(state) {
+      return state.roles;
     },
     verified(state) {
       if (state.user) return state.user.email_verified_at;
@@ -32,6 +42,33 @@ export default {
     },
     setUser(state, payload) {
       state.user = payload;
+      if (payload && payload.roles && payload.roles.length > 0) {
+        payload.roles.forEach(function (role, index) {
+          if (role.name == 'Super Admin') {
+            state.roles.superAdmin = true;
+          }
+          if (role.name == 'Admin') {
+            state.roles.admin = true;
+          }
+          if (role.name == 'Moderator') {
+            state.roles.moderator = true;
+          }
+          if (role.name == 'Editor') {
+            state.roles.editor = true;
+          }
+          if (role.name == 'User') {
+            state.roles.user = true;
+          }
+        });
+      } else {
+        state.roles = {
+          superAdmin: false,
+          admin: false,
+          moderator: false,
+          editor: false,
+          user: false,
+        };
+      }
     },
     setTheme(state, payload) {
       if (payload) {

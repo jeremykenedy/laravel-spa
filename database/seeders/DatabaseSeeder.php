@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\ConnectRelationshipsSeeder;
+use Database\Seeders\PermissionsTableSeeder;
+use Database\Seeders\RolesTableSeeder;
 use Database\Seeders\UsersTableSeeder;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Model::unguard();
+
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(ConnectRelationshipsSeeder::class);
         $this->call(UsersTableSeeder::class);
         // \App\Models\User::factory(10)->create();
+
+        Model::reguard();
     }
 }

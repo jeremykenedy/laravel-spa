@@ -154,7 +154,7 @@
                 :loading="loading"
                 :disabled="loading"
                 :text="loading ? 'Login' : 'Login'"
-                btn-class="uppercase leading-snug inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
+                btn-class="leading-snug inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
                 type="submit"
               >
                 <template #text>
@@ -188,7 +188,7 @@
   </section>
 </template>
 <script>
-import CircleSvg from '../components/CircleSvg.vue';
+import CircleSvg from '@components/CircleSvg.vue';
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { mapActions } from 'vuex';
 
