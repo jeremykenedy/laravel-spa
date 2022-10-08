@@ -12,7 +12,8 @@
             class="rounded bg-white p-4 dark:bg-slate-800 dark:text-gray-300"
           >
             <h1 class="mt-4 mb-4 text-center text-2xl">
-              Welcome {{ user && user.name ? user.name : 'Registered User' }}!
+              {{ greeting }},
+              {{ user && user.name ? user.name : 'Registered User' }}!
             </h1>
             <div v-if="roles" class="mb-6 text-center">
               <hr class="mx-auto mb-3 w-10" />
@@ -63,6 +64,19 @@ export default {
       user: 'auth/user',
       roles: 'auth/roles',
     }),
+    greeting() {
+      const date = new Date();
+      const currentTime = date.getHours();
+      let greeting;
+      if (currentTime >= 0 && currentTime <= 12) {
+        greeting = 'Good Morning';
+      } else if (currentTime > 12 && currentTime <= 18) {
+        greeting = 'Good Afternoon';
+      } else {
+        greeting = 'Good Evening';
+      }
+      return greeting;
+    },
   },
 };
 </script>

@@ -1,24 +1,26 @@
 <template>
   <div class="min-h-screen bg-white dark:bg-slate-800">
+    <div id="top_border" />
     <VerifyNotice
       v-if="
         $route.name !== 'home' &&
         authenticated &&
         user &&
         user.id &&
-        !user.email_verified_at
+        !user.email_verified_at &&
+        !isAdminPage
       "
       :id="user.id"
     />
-    <AppNav />
+    <AppNav v-if="!isAdminPage" />
     <div class="w-full">
-      <router-view v-slot="{ Component }" class="p-6">
+      <router-view v-slot="{ Component }" :class="isAdminPage ? '' : 'p-6'">
         <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
     </div>
-    <AppFooter class="sticky top-[100vh] w-full" />
+    <AppFooter v-if="!isAdminPage" class="sticky top-[100vh] w-full" />
     <AppToast />
   </div>
 </template>
@@ -42,6 +44,20 @@ export default {
       authenticated: 'auth/authenticated',
       user: 'auth/user',
     }),
+    currentRouteName() {
+      return this.$route.name;
+    },
+    isAdminPage() {
+      if (
+        this.currentRouteName == 'admin' ||
+        this.currentRouteName == 'roles' ||
+        this.currentRouteName == 'settings' ||
+        this.currentRouteName == 'users'
+      ) {
+        return true;
+      }
+      return false;
+    },
   },
 };
 </script>

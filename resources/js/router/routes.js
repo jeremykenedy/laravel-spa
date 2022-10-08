@@ -9,9 +9,13 @@ import VerifyEmail from '@/views/VerifyEmail.vue';
 import Settings from '@/views/Settings.vue';
 import Profile from '@/views/Profile.vue';
 import Password from '@/views/Password.vue';
-
 import auth from '@/middleware/auth';
 import guest from '@/middleware/guest';
+
+import AdminLayout from '@/layouts/AdminLayout.vue';
+import Admin from '@/views/admin/Admin.vue';
+import Users from '@/views/admin/Users.vue';
+import Roles from '@/views/admin/Roles.vue';
 
 export default [
   {
@@ -30,6 +34,30 @@ export default [
     name: 'dashboard',
     meta: {
       middleware: [auth],
+    },
+  },
+  {
+    path: '/admin',
+    component: AdminLayout,
+    children: [
+      {
+        path: '',
+        name: 'admin',
+        component: Admin,
+      },
+      {
+        path: 'users',
+        name: 'users',
+        component: Users,
+      },
+      {
+        path: 'roles',
+        name: 'roles',
+        component: Roles,
+      },
+    ],
+    meta: {
+      middleware: [auth], // HERE :: TODO
     },
   },
   {

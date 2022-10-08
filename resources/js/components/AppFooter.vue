@@ -1,6 +1,6 @@
 <template>
-  <footer class="max-w-container mx-auto mt-32 w-full px-4 sm:px-6 lg:px-8">
-    <div class="border-t border-slate-900/5 py-4 dark:border-slate-700">
+  <footer :class="footerClass">
+    <div class="border-t py-4" :class="borderClass">
       <p
         class="text-center text-sm leading-6 text-slate-500 dark:text-gray-300"
       >
@@ -14,7 +14,16 @@
 export default {
   name: 'AppFooter',
   components: {},
-  props: {},
+  props: {
+    footerClass: {
+      type: String,
+      default: 'max-w-container mx-auto mt-32 w-full px-4 sm:px-6 lg:px-8',
+    },
+    borderClass: {
+      type: String,
+      default: 'border-slate-900/5 dark:border-slate-700',
+    },
+  },
   setup() {
     return {};
   },

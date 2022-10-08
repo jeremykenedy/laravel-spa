@@ -31,6 +31,23 @@
         </div>
         <PopoverGroup as="nav" class="hidden space-x-10 md:flex">
           <router-link
+            v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
+            v-slot="{ isActive }"
+            :to="{ name: 'admin' }"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
+            @click="closeDrop"
+          >
+            <span
+              :class="[
+                isActive &&
+                  'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+              ]"
+            >
+              <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" />
+            </span>
+          </router-link>
+
+          <router-link
             v-if="authenticated"
             v-slot="{ isActive }"
             :to="{ name: 'dashboard' }"
@@ -87,9 +104,11 @@
               @click="drop = !drop"
             >
               <router-link
-                v-if="authenticated"
+                v-if="
+                  authenticated && roles && (roles.admin || roles.superAdmin)
+                "
                 v-slot="{ isActive }"
-                :to="{ name: 'dashboard' }"
+                :to="{ name: 'admin' }"
               >
                 <span
                   class="flex items-center rounded-t p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white"
@@ -97,6 +116,27 @@
                     isActive
                       ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
                       : 'text-gray-700'
+                  "
+                >
+                  <BuildingLibraryIcon class="mr-2 h-6 w-6" />
+                  Admin
+                </span>
+              </router-link>
+              <router-link
+                v-if="authenticated"
+                v-slot="{ isActive }"
+                :to="{ name: 'dashboard' }"
+              >
+                <span
+                  class="flex items-center p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white"
+                  :class="
+                    isActive
+                      ? roles && (roles.admin || roles.superAdmin)
+                        ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
+                        : 'cursor-default whitespace-nowrap rounded-t bg-slate-500 text-white'
+                      : roles && (roles.admin || roles.superAdmin)
+                      ? 'text-gray-700'
+                      : 'rounded-t text-gray-700'
                   "
                 >
                   <HomeIcon class="mr-2 h-6 w-6" />
@@ -220,6 +260,29 @@
           </div>
           <div class="space-y-6 py-6 px-5">
             <div class="">
+              <div
+                v-if="
+                  authenticated && roles && (roles.admin || roles.superAdmin)
+                "
+                class="mb-6 text-left"
+              >
+                <router-link
+                  v-slot="{ isActive }"
+                  :to="{ name: 'admin' }"
+                  class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                  @click="close"
+                >
+                  <span
+                    :class="[
+                      isActive &&
+                        'text-gray-800 hover:text-gray-900 dark:text-gray-600',
+                    ]"
+                  >
+                    <HomeIcon class="float-left mr-2 h-6 w-6" /> Admin
+                  </span>
+                </router-link>
+              </div>
+
               <div v-if="authenticated" class="mb-6 text-left">
                 <router-link
                   v-slot="{ isActive }"
@@ -340,6 +403,7 @@ import {
 import {
   Bars3Icon,
   HomeIcon,
+  BuildingLibraryIcon,
   InformationCircleIcon,
   XMarkIcon,
   CogIcon,
@@ -352,6 +416,7 @@ export default {
   name: 'AppNav',
   components: {
     HomeIcon,
+    BuildingLibraryIcon,
     InformationCircleIcon,
     Popover,
     PopoverButton,
@@ -379,6 +444,7 @@ export default {
     ...mapGetters({
       authenticated: 'auth/authenticated',
       user: 'auth/user',
+      roles: 'auth/roles',
     }),
   },
   watch: {},
