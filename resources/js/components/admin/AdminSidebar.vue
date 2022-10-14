@@ -28,22 +28,22 @@
     </div>
 
     <div class="mb-4 px-4">
-      <!-- <p class="mb-1 pl-4 text-sm font-semibold">MAIN</p> -->
+      <!-- <p class="mb-1 pl-4 text-sm font-semibold dark:text-gray-100">MAIN</p> -->
       <router-link
         v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
         v-slot="{ isActive }"
         :to="{ name: 'admin' }"
       >
         <div
-          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 hover:bg-gray-100"
+          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
           :class="
             currentRouteName == 'admin'
-              ? 'cursor-default bg-gray-200'
-              : 'cursor-pointer'
+              ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
+              : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
           "
         >
-          <BuildingLibraryIcon class="mr-2 h-6 w-6" />
-          <span class="text-gray-700">Dashboard</span>
+          <BuildingLibraryIcon class="mr-2 mb-1 h-6 w-6" />
+          <span class="">Dashboard</span>
         </div>
       </router-link>
 
@@ -53,11 +53,15 @@
         :to="{ name: 'users' }"
       >
         <div
-          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 hover:bg-gray-100"
-          :class="isActive ? 'cursor-default bg-gray-200' : 'cursor-pointer'"
+          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
+          :class="
+            isActive
+              ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
+              : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
+          "
         >
-          <UsersIcon class="mr-2 h-6 w-6" />
-          <span class="text-gray-700">Users</span>
+          <UsersIcon class="mr-2 mb-1 h-6 w-6" />
+          <span class="">Users</span>
         </div>
       </router-link>
 
@@ -67,11 +71,15 @@
         :to="{ name: 'roles' }"
       >
         <div
-          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 hover:bg-gray-100"
-          :class="isActive ? 'cursor-default bg-gray-200' : 'cursor-pointer'"
+          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
+          :class="
+            isActive
+              ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
+              : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
+          "
         >
           <ShieldCheckIcon class="mr-2 h-6 w-6" />
-          <span class="text-gray-700">Roles</span>
+          <span class="">Roles</span>
         </div>
       </router-link>
 

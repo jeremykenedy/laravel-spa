@@ -1,3 +1,4 @@
+// import Vue from 'vue';
 import { createStore } from 'vuex';
 import sharedMutations from 'vuex-shared-mutations';
 import auth from '@/store/auth';

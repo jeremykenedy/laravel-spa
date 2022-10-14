@@ -1,5 +1,5 @@
 <template>
-  <div id="home" class="p-3">
+  <div id="admin" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <div v-if="roles" class="float-right mb-6 text-center">
       <span
         v-if="roles.superAdmin"
@@ -30,12 +30,6 @@
 
     <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
       <ol class="inline-flex list-none p-0">
-        <li class="flex items-center text-blue-500">
-          <a href="#" class="disabled text-gray-700">Admin</a>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
         <li class="flex items-center">
           <router-link
             v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
@@ -49,7 +43,7 @@
                   'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
               ]"
             >
-              Dashboard
+              Admin
             </span>
           </router-link>
         </li>

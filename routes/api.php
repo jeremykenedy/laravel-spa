@@ -7,6 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +34,9 @@ Route::post('/verify-resend', [VerificationController::class, 'resend']);
 Route::get('/user', UserController::class);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::patch('/profile', ProfileController::class);
+    Route::patch('/profile', [ProfileController::class, 'profile']);
+    Route::patch('/theme', [ProfileController::class, 'theme']);
     Route::patch('/password', PasswordController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/users', [UsersController::class, 'users']);
 });

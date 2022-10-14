@@ -82,6 +82,25 @@
 
       <!-- right navbar -->
       <div class="relative flex items-center">
+        <div class="my-1 mr-3 w-full py-2 sm:flex sm:items-center">
+          <span
+            :class="
+              loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
+            "
+            @click="toggleTheme()"
+          >
+            <i
+              class="fa-solid fa-fw fa-2x float-left mr-4 text-slate-600"
+              :class="form.theme_dark ? 'fa-toggle-on' : 'fa-toggle-off'"
+            />
+            <i
+              v-if="loading"
+              class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+              style="left: -1.4em; top: 1.2em"
+            />
+          </span>
+        </div>
+
         <!--
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -120,6 +139,7 @@
       >
         <router-link
           v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
+          v-slot="{ isActive }"
           :to="{ name: 'admin' }"
         >
           <span
@@ -317,6 +337,12 @@ export default {
   data() {
     return {
       dropDownOpen: false,
+      form: {
+        theme_dark: false,
+      },
+      errors: null,
+      success: '',
+      loading: false,
     };
   },
   computed: {
@@ -334,12 +360,16 @@ export default {
   },
   watch: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.form.theme_dark = this.user.theme_dark;
+  },
   beforeUnmount() {},
   updated() {},
   methods: {
     ...mapActions({
       toggleSidebar: 'sidebar/toggleSidebar',
+      updateTheme: 'auth/theme',
+      popToast: 'toast/popToast',
     }),
     toggleSidebarTrigger() {
       this.toggleSidebar();
@@ -350,6 +380,37 @@ export default {
     },
     openDrop() {
       this.dropDownOpen = true;
+    },
+    async toggleTheme() {
+      this.loading = true;
+      this.errors = null;
+      this.success = '';
+      this.form.theme_dark = !this.form.theme_dark;
+      try {
+        await this.updateTheme(this.form).then((response) => {
+          if (
+            response &&
+            response.data &&
+            response.data.user &&
+            response.data.user.id
+          ) {
+            this.form.theme_dark = response.data.user.theme_dark;
+            this.popToast({
+              message: `Theme Saved`,
+              timer: 2000,
+              icon: 'success',
+            });
+          }
+        });
+      } catch (e) {
+        this.errors = e.data;
+        this.popToast({
+          message: `Error Updating Theme`,
+          timer: 5000,
+          icon: 'error',
+        });
+      }
+      this.loading = false;
     },
   },
 };

@@ -165,6 +165,25 @@ export default {
       commit('setTheme', null);
       throw res.response;
     },
+    async theme({ commit }, payload) {
+      const res = await axios.patch('/api/theme', payload);
+      if (
+        res.status == 200 &&
+        res &&
+        res.data &&
+        res.data.user &&
+        res.data.user.id
+      ) {
+        commit('setUser', res.data.user);
+        commit('setTheme', res.data.user.theme_dark);
+        commit('setAuthentication', true);
+        return res;
+      }
+      commit('setUser', null);
+      commit('setAuthentication', false);
+      commit('setTheme', null);
+      throw res.response;
+    },
     async password({ dispatch }, payload) {
       const res = await axios.patch('/api/password', payload);
       if (
