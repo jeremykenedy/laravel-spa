@@ -8,7 +8,7 @@
   >
     <div class="mb-8 flex h-20 w-full items-center border-b px-4">
       <div class="flex justify-center lg:w-0 lg:flex-1">
-        <router-link :to="{ name: 'home' }" @click="closeDrop">
+        <router-link :to="{ name: 'home' }">
           <svg
             viewBox="0 0 50 31"
             class="h-6 w-auto text-indigo-500 dark:text-indigo-300"

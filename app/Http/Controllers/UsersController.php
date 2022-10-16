@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        // $this->middleware('auth:sanctum');
+        $this->middleware('auth:sanctum');
 
         try {
             ob_start('ob_gzhandler');
@@ -19,25 +19,13 @@ class UsersController extends Controller
         }
     }
 
-    public function users()
+    public function users(Request $request)
     {
+        $per = 10;
+        if ($request->has('per')) {
+           $per = $request->input('per');
+        }
 
-
-        $users = User::all();
-
-
-
-        return response()->json([
-            'code'      => 200,
-            'message'   => 'Here are all the users',
-            'data'      => ['users' => $users],
-        ], Response::HTTP_OK);
+        return response()->json(User::paginate($per));
     }
-
-    // public function __invoke(Request $request)
-    // {
-    //     if (auth('sanctum')->check()) {
-    //         return response()->json(auth('sanctum')->user());
-    //     }
-    // }
 }

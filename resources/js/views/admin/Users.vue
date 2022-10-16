@@ -34,44 +34,57 @@
           </router-link>
         </li>
       </ol>
+      <PerPage
+        :items="users"
+        :per-page="perPage"
+        class="float-right mb-2"
+        style="margin-top: -0.5em"
+        @changed="perPageChanged"
+      />
     </nav>
-
     <div>
       <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
         <table class="min-w-full leading-normal">
           <thead>
-            <tr>
+            <tr
+              class="border-b-2 border-gray-300 bg-gray-200 text-gray-600 dark:border-gray-500 dark:bg-slate-900 dark:text-gray-200"
+            >
               <th
-                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+                class="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
               >
                 User
               </th>
               <th
-                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+                class="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
               >
                 Email
               </th>
               <th
-                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+                class="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
               >
                 Role(s)
               </th>
               <th
-                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+                class="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
               >
                 Created at
               </th>
               <th
-                class="border-b-2 border-gray-200 bg-gray-100 px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-600"
+                class="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
               >
                 Status
               </th>
             </tr>
           </thead>
-
           <tbody v-if="dataReady">
-            <tr v-for="user in users" :key="user.id">
-              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+            <tr
+              v-for="user in users"
+              :key="user.id"
+              class="bg-gray-100 text-gray-900 dark:bg-slate-700 dark:text-gray-100"
+            >
+              <td
+                class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+              >
                 <div class="flex items-center">
                   <div class="h-10 w-10 flex-shrink-0">
                     <img
@@ -81,17 +94,18 @@
                     />
                   </div>
                   <div class="ml-3">
-                    <p class="whitespace-no-wrap text-gray-900">
+                    <p class="whitespace-no-wrap">
                       {{ user.name }}
                     </p>
                   </div>
                 </div>
               </td>
-
-              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <td
+                class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+              >
                 <div class="flex items-center">
                   <a
-                    class="whitespace-no-wrap text-gray-900"
+                    class="whitespace-no-wrap"
                     :href="'mailto:' + user.email"
                     title="send email"
                   >
@@ -100,15 +114,17 @@
                 </div>
               </td>
 
-              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                <p class="whitespace-no-wrap text-gray-900">
+              <td
+                class="whitespace-no-wrap border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+              >
+                <p>
                   <span v-if="user.roles && user.roles.length">
                     <span
                       v-for="role in user.roles"
                       :key="'user_' + user.id + '_role_' + role.id"
                     >
                       <span
-                        class="mr-1 cursor-default rounded px-2.5 py-0.5 text-sm font-medium"
+                        class="whitespace-no-wrap m-1 inline-block cursor-default rounded px-2.5 py-0.5 text-xs font-bold"
                         :class="roleClass(role.slug)"
                       >
                         {{ role.name }}
@@ -117,23 +133,26 @@
                   </span>
                 </p>
               </td>
-              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
-                <p
-                  v-if="user.created_at"
-                  class="whitespace-no-wrap text-gray-900"
-                >
+              <td
+                class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+              >
+                <p v-if="user.created_at" class="whitespace-no-wrap">
                   {{ parseDisplayDate(user.created_at) }}
                 </p>
               </td>
-              <td class="border-b border-gray-200 bg-white px-5 py-5 text-sm">
+              <td
+                class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+              >
                 <span
-                  class="relative inline-block px-3 py-1 font-semibold leading-tight text-green-900"
+                  class="relative inline-block px-3 py-1 font-semibold leading-tight"
                 >
                   <span
                     aria-hidden
-                    class="absolute inset-0 rounded-full opacity-50"
+                    class="absolute inset-0 rounded-full"
                     :class="
-                      user.email_verified_at ? 'bg-green-200' : 'bg-red-200'
+                      user.email_verified_at
+                        ? 'bg-green-700 text-green-900 dark:text-gray-100'
+                        : 'bg-red-700 text-red-900 dark:text-gray-100'
                     "
                   ></span>
                   <span class="relative">
@@ -143,35 +162,26 @@
               </td>
             </tr>
           </tbody>
-
           <tbody v-if="!dataReady">
-            <td colspan="5" class="pt-10 pb-10 text-center">
-              <i class="fa fa-circle-notch fa-spin fa-5x text-gray-400" />
-            </td>
+            <tr
+              class="bg-gray-100 text-gray-900 dark:bg-slate-700 dark:text-gray-100"
+            >
+              <td colspan="5" class="pt-10 pb-10 text-center">
+                <i class="fa fa-circle-notch fa-spin fa-5x text-gray-400" />
+              </td>
+            </tr>
           </tbody>
         </table>
-        <!--
         <div
-          v-if="dataReady"
-          class="xs:flex-row xs:justify-between flex flex-col items-center border-t bg-white px-5 py-5"
+          v-if="dataReady && users && users.length >= 1"
+          class="xs:flex-row xs:justify-between flex flex-col items-center px-3 py-3 dark:bg-slate-700"
         >
-          <span class="xs:text-sm text-xs text-gray-900">
-            Showing 1 to 4 of 50 Entries
-          </span>
-          <div class="xs:mt-0 mt-2 inline-flex">
-            <button
-              class="rounded-l bg-gray-300 py-2 px-4 text-sm font-semibold text-gray-800 hover:bg-gray-400"
-            >
-              Prev
-            </button>
-            <button
-              class="rounded-r bg-gray-300 py-2 px-4 text-sm font-semibold text-gray-800 hover:bg-gray-400"
-            >
-              Next
-            </button>
-          </div>
+          <Pagination
+            :pagination="pagination"
+            :offset="4"
+            @paginate="getUsers"
+          />
         </div>
-        -->
       </div>
     </div>
   </div>
@@ -179,14 +189,18 @@
 
 <script lang="ts">
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 import moment from 'moment';
+import Pagination from '@components/Pagination.vue';
+import PerPage from '@components/PerPage.vue';
 
 export default {
   name: 'Users',
   components: {
     ChevronRightIcon,
+    Pagination,
+    PerPage,
   },
   props: {},
   setup() {
@@ -194,7 +208,10 @@ export default {
   },
   data() {
     return {
-      users: {},
+      offset: 4,
+      users: [],
+      pagination: {},
+      perPage: 10,
       dataReady: false,
     };
   },
@@ -213,41 +230,51 @@ export default {
   beforeUnmount() {},
   updated() {},
   methods: {
-    async getUsers() {
-      this.dataReady = false;
+    ...mapActions({
+      popToast: 'toast/popToast',
+    }),
+    perPageChanged(value) {
+      this.perPage = parseInt(value);
+      this.pagination.current_page = 1;
+      this.getUsers();
+    },
+    async getUsers(updatedPage = null) {
+      if (updatedPage) {
+        this.pagination.current_page = updatedPage;
+      }
       await axios
-        .get('/api/users')
-        .then((res) => {
-          if (
-            res.data &&
-            res.data.code &&
-            res.data.code == 200 &&
-            res.data.data &&
-            res.data.data.users
-          ) {
-            this.users = res.data.data.users;
-          } else {
-            // Error
-          }
+        .get(
+          `/api/users?page=${this.pagination.current_page}&per=${this.perPage}`,
+        )
+        .then(({ data }) => {
+          this.users = data.data;
+          delete data.data;
+          this.pagination = data;
+          this.dataReady = true;
         })
-        .catch((err) => {
-          // Error
+        .catch(({ response }) => {
+          this.popToast({
+            message: `Error Getting Users`,
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
         });
       this.dataReady = true;
     },
     roleClass(slug) {
       if (slug == 'admin') {
-        return 'bg-orange-100 text-orange-800 dark:bg-orange-700 dark:text-orange-300';
+        return 'bg-orange-100 text-orange-800 dark:bg-orange-700 dark:text-gray-100';
       } else if (slug == 'super.admin') {
-        return 'bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-blue-300';
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-gray-100';
       } else if (slug == 'user') {
-        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-300';
+        return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-gray-100';
       } else if (slug == 'editor') {
-        return 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-300';
+        return 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-gray-100';
       } else if (slug == 'moderator') {
-        return 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-300';
+        return 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-gray-100';
       }
-      return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
+      return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100';
     },
     parseDisplayDate(date) {
       return moment(date).format('MMM Do YYYY, h:mma');
@@ -256,5 +283,14 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+input:focus,
+select:focus,
+textarea:focus,
+button:focus,
+option:focus {
+  outline: none !important;
+  border: none !important;
+}
+</style>
 <style lang="scss" scoped></style>
