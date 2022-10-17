@@ -39,4 +39,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/password', PasswordController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/users', [UsersController::class, 'users']);
+    Route::post('/users/toggleVerify', [UsersController::class, 'toggleVerify']);
 });

@@ -28,4 +28,19 @@ class UsersController extends Controller
 
         return response()->json(User::paginate($per));
     }
+
+    public function toggleVerify(Request $request)
+    {
+        $data = $request->all();
+        $user = User::findOrFail($data['user']['id']);
+        if ($data['action'] == 'unVerifyUser') {
+            $user->email_verified_at = null;
+        } else {
+            $user->email_verified_at = now();
+        }
+        $user->save();
+        $user->load('roles');
+
+        return response()->json($user);
+    }
 }

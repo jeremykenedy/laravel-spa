@@ -57,7 +57,7 @@ export default {
     btnColor: { type: String, default: 'text-white' },
     btnHoverColor: { type: String, default: 'hover:bg-indigo-700' },
     btnClassDark: { type: String, default: 'dark:bg-indigo-600' },
-    btnHoverClassDark: { type: String, default: 'dark:bg-indigo-600' },
+    btnHoverClassDark: { type: String, default: 'hover:dark:bg-indigo-600' },
     btnColorDark: { type: String, default: 'dark:text-white' },
     btnHoverColorDark: {
       type: String,
