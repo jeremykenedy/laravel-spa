@@ -42,6 +42,19 @@
         @changed="perPageChanged"
       />
     </nav>
+
+    <AppButton
+      :disabled="showCreateUserForm || !dataReady"
+      class="float-right mb-2 bg-green-600 px-2 py-0 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-green-500 hover:shadow-lg focus:shadow-lg active:shadow-lg dark:bg-green-600 dark:hover:bg-green-500"
+      @click="triggerCreateUser"
+    >
+      <template #text>
+        <UserPlusIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+        <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+        <span class="sr-only">Create New User</span>
+      </template>
+    </AppButton>
+
     <UsersTable
       :users="users"
       :pagination="pagination"
@@ -50,12 +63,16 @@
       @get-users="getUsers"
       @confirm-un-verify-user="confirmUnVerifyUser"
       @confirm-verify-user="confirmVerifyUser"
+      @deleteUser="deleteUser"
     />
+
+    {{ showCreateUserForm }}
   </div>
 </template>
 
 <script lang="ts">
-import { ChevronRightIcon } from '@heroicons/vue/24/outline';
+import { ChevronRightIcon, UserPlusIcon } from '@heroicons/vue/24/outline';
+import CircleSvg from '@components/CircleSvg.vue';
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 import PerPage from '@components/PerPage.vue';
@@ -67,6 +84,8 @@ export default {
     ChevronRightIcon,
     PerPage,
     UsersTable,
+    UserPlusIcon,
+    CircleSvg,
   },
   props: {},
   setup() {
@@ -78,6 +97,7 @@ export default {
       pagination: {},
       perPage: 10,
       dataReady: false,
+      showCreateUserForm: false,
     };
   },
   computed: {
@@ -161,7 +181,7 @@ export default {
           this.popToast({
             message: `Successfully Verified!`,
             timer: 5000,
-            icon: 'warning',
+            icon: 'success',
           });
         })
         .catch(({ response }) => {
@@ -172,6 +192,29 @@ export default {
           });
           this.dataReady = true;
         });
+    },
+    async deleteUser(value) {
+      await axios
+        .delete('/api/users/delete/user/' + value.id)
+        .then(({ data }) => {
+          this.users = this.users.filter((u) => u.id != data.id);
+          this.popToast({
+            message: `Successfully Deleted!`,
+            timer: 5000,
+            icon: 'success',
+          });
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: `Error Deleting User`,
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+    },
+    triggerCreateUser() {
+      this.showCreateUserForm = true;
     },
   },
 };

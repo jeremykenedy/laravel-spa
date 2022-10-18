@@ -54,43 +54,47 @@
     </td>
     <td class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500">
       <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
-        <div
-          class="inline rounded px-1 py-0"
-          :class="
-            user.email_verified_at
-              ? 'bg-green-700 text-green-900 dark:text-gray-100'
-              : 'bg-red-700 text-red-900 dark:text-gray-100'
-          "
-        >
-          {{ user.email_verified_at ? 'Verified' : 'Unverified' }}
-        </div>
+        <div class="whitespace-nowrap">
+          <div
+            class="inline rounded px-1 py-0"
+            :class="
+              user.email_verified_at
+                ? 'bg-green-700 text-green-900 dark:text-gray-100'
+                : 'bg-red-700 text-red-900 dark:text-gray-100'
+            "
+          >
+            {{ user.email_verified_at ? 'Verified' : 'Unverified' }}
+          </div>
 
-        <AppButton
-          v-if="!locked"
-          :loading="!dataReady"
-          class="inline-block rounded bg-transparent px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-          btn-class="bg-transparent dark:bg-transparent"
-          btn-class-dark="bg-transparent dark:bg-transparent"
-          @click="fireVerification"
-        >
-          <template #text>
-            <i v-if="!user.email_verified_at" class="far fa-circle fa-fw" />
-            <i
-              v-if="user.email_verified_at"
-              class="far fa-circle-check fa-fw"
-            />
-          </template>
-        </AppButton>
+          <AppButton
+            v-if="!locked"
+            :loading="!dataReady"
+            class="inline-block rounded bg-transparent px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+            btn-class="bg-transparent dark:bg-transparent"
+            btn-class-dark="bg-transparent dark:bg-transparent"
+            @click="fireVerification"
+          >
+            <template #text>
+              <i v-if="!user.email_verified_at" class="far fa-circle fa-fw" />
+              <i
+                v-if="user.email_verified_at"
+                class="far fa-circle-check fa-fw"
+              />
+            </template>
+          </AppButton>
+        </div>
 
         <div v-if="user.email_verified_at" class="inset-0 py-1">
           {{ parseDisplayDate(user.email_verified_at) }}
         </div>
       </span>
     </td>
-    <td class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500">
+    <td
+      class="whitespace-nowrap border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+    >
       <AppButton
         :loading="!dataReady"
-        class="inline-block rounded px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+        class="mr-2 inline-block rounded px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
         :btn-class="
           locked
             ? 'bg-green-600 focus:bg-indigo-700 active:bg-indigo-800'
@@ -123,6 +127,37 @@
             class="ml-2 mr-2 mt-0 h-4 w-4"
           />
           <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+          <span class="sr-only"
+            >{{ locked ? 'Unlock' : 'Lock' }} User Settings</span
+          >
+        </template>
+      </AppButton>
+
+      <!--
+      <AppButton
+        v-if="!locked"
+        :loading="!dataReady"
+        class="mr-2 inline-block rounded bg-yellow-600 px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-yellow-600 dark:hover:bg-yellow-500"
+        @click="triggerEditUser"
+      >
+        <template #text>
+          <PencilSquareIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+          <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+          <span class="sr-only">Edit User</span>
+        </template>
+      </AppButton>
+      -->
+
+      <AppButton
+        v-if="!locked"
+        :loading="!dataReady"
+        class="inline-block rounded bg-red-600 px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-red-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-red-600 dark:hover:bg-red-500"
+        @click="triggerDeleteUser"
+      >
+        <template #text>
+          <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+          <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+          <span class="sr-only">Edit User</span>
         </template>
       </AppButton>
     </td>
@@ -131,7 +166,12 @@
 
 <script lang="ts">
 import moment from 'moment';
-import { LockClosedIcon, LockOpenIcon } from '@heroicons/vue/24/outline';
+import {
+  LockClosedIcon,
+  LockOpenIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from '@heroicons/vue/24/outline';
 import CircleSvg from '@components/CircleSvg.vue';
 import { mapActions } from 'vuex';
 
@@ -141,6 +181,8 @@ export default {
     LockClosedIcon,
     LockOpenIcon,
     CircleSvg,
+    PencilSquareIcon,
+    TrashIcon,
   },
   props: {
     user: { type: Object, required: true },
@@ -230,6 +272,47 @@ export default {
             } else {
               this.$emit('confirmVerifyUser', this.user);
             }
+          } else if (result.isDenied) {
+            self.popToast({
+              message: `Cancelled`,
+              timer: 2000,
+              icon: 'error',
+            });
+          }
+        });
+    },
+    triggerEditUser() {
+      //
+    },
+    triggerDeleteUser() {
+      const self = this;
+      const title = '<strong>Delete ' + this.user.name + '?</strong>';
+      const html =
+        'Are you sure you want to <strong>Delete' +
+        this.user.name +
+        '</strong>?<small> (' +
+        this.user.email +
+        ')</small><h6>This will delete the user.</h6>';
+      const icon = 'warning';
+      const confirmButtonColor = '#FF0000';
+      const denyButtonColor = '#777777';
+      const confirmButtonText = 'Delete';
+      const denyButtonText = 'Cancel';
+      self.$swal
+        .fire({
+          title: title,
+          icon: icon,
+          html: html,
+          showCancelButton: false,
+          showDenyButton: true,
+          confirmButtonColor: confirmButtonColor,
+          denyButtonColor: denyButtonColor,
+          confirmButtonText: confirmButtonText,
+          denyButtonText: denyButtonText,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$emit('deleteUser', this.user);
           } else if (result.isDenied) {
             self.popToast({
               message: `Cancelled`,

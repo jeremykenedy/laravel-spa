@@ -40,4 +40,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/users', [UsersController::class, 'users']);
     Route::post('/users/toggleVerify', [UsersController::class, 'toggleVerify']);
+    Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
 });

@@ -21,7 +21,7 @@
             Role(s)
           </th>
           <th
-            class="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
+            class="whitespace-nowrap px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider"
           >
             Created at
           </th>
@@ -44,6 +44,7 @@
             :data-ready="dataReady"
             @confirm-un-verify-user="confirmUnVerifyUser"
             @confirm-verify-user="confirmVerifyUser"
+            @deleteUser="deleteUser"
           />
         </template>
       </tbody>
@@ -124,6 +125,9 @@ export default {
     },
     confirmVerifyUser(value) {
       this.$emit('confirmVerifyUser', value);
+    },
+    deleteUser(value) {
+      this.$emit('deleteUser', value);
     },
   },
 };

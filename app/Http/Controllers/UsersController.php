@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+use Log;
+
 class UsersController extends Controller
 {
     public function __construct()
@@ -40,6 +42,13 @@ class UsersController extends Controller
         }
         $user->save();
         $user->load('roles');
+
+        return response()->json($user);
+    }
+
+    public function deleteUser(Request $request, User $user)
+    {
+        $user->delete();
 
         return response()->json($user);
     }
