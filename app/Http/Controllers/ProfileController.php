@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
-    //
-    public function __invoke(Request $request)
+    public function profile(Request $request)
     {
         $user = $request->user();
         $request->validate([
@@ -20,6 +19,20 @@ class ProfileController extends Controller
         return response()->json([
             'user'      => $user,
             'message'   => 'profile updated successfully .',
+        ], 200);
+    }
+
+    public function theme(Request $request)
+    {
+        $user = $request->user();
+        $request->validate([
+            'theme_dark'    => 'boolean',
+        ]);
+        $user->update($request->only('theme_dark'));
+
+        return response()->json([
+            'user'      => $user,
+            'message'   => 'theme updated successfully .',
         ], 200);
     }
 }

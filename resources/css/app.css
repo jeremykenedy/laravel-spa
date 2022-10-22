@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+/*@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');*/
+/*@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700');*/
+
 @import '~/sweetalert2/dist/sweetalert2.min.css';
 @tailwind base;
 @tailwind components;
@@ -7,7 +10,7 @@
 html {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Nunito,
     Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   line-height: 1.5;
@@ -15,7 +18,64 @@ html {
 body {
   margin: 0;
   font-family: 'Nunito', sans-serif;
-  @apply border-t-4 border-slate-500;
+  /*font-family: 'Nunito', sans-serif;*/
+  /*font-family: Poppins, sans-serif;*/
+}
+
+ul,
+li,
+ol,
+dd,
+div,
+a,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.overlay {
+  position: relative;
+}
+
+/* 1024 -1 so it doesnt show when it hits 1024px */
+@media only screen and (max-width: 1023px) {
+  .overlay:after {
+    content: ' ';
+    z-index: 29;
+    display: block;
+    height: 100%;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    position: fixed;
+  }
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+#top_border {
+  height: 2px;
+  @apply border-t-2 border-slate-500;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
 }
 a {
   background-color: transparent;

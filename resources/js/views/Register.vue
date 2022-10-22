@@ -157,9 +157,9 @@
 </template>
 
 <script>
-import CircleSvg from '../components/CircleSvg.vue';
+import CircleSvg from '@components/CircleSvg.vue';
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
-import Errors from '../components/Errors.vue';
+import Errors from '@components/Errors.vue';
 import { mapActions } from 'vuex';
 
 export default {

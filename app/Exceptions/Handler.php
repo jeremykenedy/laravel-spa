@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use App\Mail\ExceptionOccured;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Log;
 use Mail;
 use Throwable;

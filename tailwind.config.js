@@ -6,6 +6,8 @@ module.exports = {
   },
   variants: {
     aspectRatio: ['responsive', 'hover'],
+    opacity: ['disabled'],
+    cursor: ['disabled'],
   },
   corePlugins: {
     aspectRatio: false,
