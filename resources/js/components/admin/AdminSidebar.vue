@@ -65,6 +65,7 @@
         </div>
       </router-link>
 
+      <!--
       <router-link
         v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
         v-slot="{ isActive }"
@@ -82,6 +83,7 @@
           <span class="">Roles</span>
         </div>
       </router-link>
+      -->
 
       <!--
       <div
