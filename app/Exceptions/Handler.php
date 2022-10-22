@@ -58,12 +58,11 @@ class Handler extends ExceptionHandler
             $e instanceof \jeremykenedy\LaravelRoles\App\Exceptions\LevelDeniedException;
 
         if ($userLevelCheck) {
-
             if ($request->expectsJson()) {
-                return Response::json(array(
-                    'error'    =>  403,
-                    'message'   =>  'Unauthorized.'
-                ), 403);
+                return Response::json([
+                    'error'     => 403,
+                    'message'   => 'Unauthorized.',
+                ], 403);
             }
 
             abort(403);
