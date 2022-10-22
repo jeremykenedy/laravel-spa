@@ -8,7 +8,7 @@
         :class="sideBarOpen ? 'overlay' : ''"
       >
         <AdminNavBar />
-        <div class="dark:bg-slate-800p-6 mb-20 bg-white">
+        <div class="mb-20 bg-white dark:bg-slate-800">
           <router-view />
         </div>
         <AppFooter

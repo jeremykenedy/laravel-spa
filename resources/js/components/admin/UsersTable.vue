@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
+  <div class="overflow-x-scroll rounded-lg shadow" style="width: 100%">
     <table class="min-w-full leading-normal">
       <thead>
         <tr
@@ -42,9 +42,13 @@
           <UsersTableRow
             :user="user"
             :data-ready="dataReady"
+            :available-roles="availableRoles"
+            :lock-jiggled="lockJiggled"
             @confirm-un-verify-user="confirmUnVerifyUser"
             @confirm-verify-user="confirmVerifyUser"
-            @deleteUser="deleteUser"
+            @delete-user="deleteUser"
+            @edit-user="editUser"
+            @send-user-verification="sendUserVerification"
           />
         </template>
       </tbody>
@@ -80,6 +84,7 @@ export default {
   },
   props: {
     dataReady: { type: Boolean, default: false },
+    lockJiggled: { type: Boolean, default: false },
     users: {
       type: Array,
       default: function () {
@@ -92,6 +97,7 @@ export default {
         return {};
       },
     },
+    availableRoles: { type: Array, default: null },
   },
   setup() {
     return {};
@@ -128,6 +134,12 @@ export default {
     },
     deleteUser(value) {
       this.$emit('deleteUser', value);
+    },
+    editUser(value) {
+      this.$emit('editUser', value);
+    },
+    sendUserVerification(value) {
+      this.$emit('sendUserVerification', value);
     },
   },
 };

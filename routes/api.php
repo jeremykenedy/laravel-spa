@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\VerificationController;
@@ -39,6 +41,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/password', PasswordController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/users', [UsersController::class, 'users']);
-    Route::post('/users/toggleVerify', [UsersController::class, 'toggleVerify']);
+    Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
     Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
+    Route::post('/users/create-user', [UsersController::class, 'createUser']);
+    Route::patch('/users/update-user/{user}', [UsersController::class, 'updateUser']);
+    Route::get('/roles', [RolesController::class, 'roles']);
+    Route::get('/roles-complete', [RolesController::class, 'rolesComplete']);
+    Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
 });

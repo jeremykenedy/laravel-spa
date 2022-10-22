@@ -1,14 +1,17 @@
 <template>
   <div
-    class="relative mx-auto flex w-full items-start rounded border border border-red-100 bg-red-100 px-4 py-3 text-red-500 md:w-10/12 md:p-2"
+    class="relative mx-auto flex w-full items-start rounded border border border-red-400 bg-red-400 px-4 py-3 text-white dark:border-red-600 dark:bg-red-600 md:p-2"
+    :class="containerClass"
     role="alert shadow"
   >
-    <span v-if="!content.errors" class="block w-full text-center sm:inline">{{
-      content.message
-    }}</span>
-    <div v-else class="block w-full text-center sm:inline">
+    <span
+      v-if="!errorsList && message"
+      class="block w-full text-center sm:inline"
+      >{{ message }}</span
+    >
+    <div v-if="errorsList" class="block w-full text-center sm:inline">
       <ul class="text-left text-sm">
-        <li v-for="error in content.errors" :key="error.index">
+        <li v-for="error in errorsList" :key="error.index">
           <ul>
             <li v-for="e in error" :key="e.index">
               {{ e }}
@@ -29,6 +32,7 @@ export default {
   components: {
     XMarkIcon,
   },
+
   props: {
     type: {
       type: String,
@@ -39,6 +43,27 @@ export default {
       default() {
         return {};
       },
+    },
+    errors: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    containerClass: { type: String, default: 'md:w-10/12' },
+  },
+  computed: {
+    message() {
+      if (this.content && this.content.message) {
+        return this.content.message;
+      }
+      return false;
+    },
+    errorsList() {
+      if (this.errors) {
+        return this.errors;
+      }
+      return false;
     },
   },
 };

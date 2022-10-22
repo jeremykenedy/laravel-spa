@@ -63,28 +63,43 @@
       -->
     </div>
 
-    <!--
     <div class="-mx-3 mb-20 flex flex-wrap">
       <div class="w-1/2 px-3 xl:w-1/4">
         <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-blue-400 xl:mb-0"
+          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900 xl:mb-0"
         >
-          <svg
-            class="mr-4 hidden h-16 w-16 fill-current lg:block"
-            viewBox="0 0 20 20"
-          >
-            <path
-              d="M17.35,2.219h-5.934c-0.115,0-0.225,0.045-0.307,0.128l-8.762,8.762c-0.171,0.168-0.171,0.443,0,0.611l5.933,5.934c0.167,0.171,0.443,0.169,0.612,0l8.762-8.763c0.083-0.083,0.128-0.192,0.128-0.307V2.651C17.781,2.414,17.587,2.219,17.35,2.219M16.916,8.405l-8.332,8.332l-5.321-5.321l8.333-8.332h5.32V8.405z M13.891,4.367c-0.957,0-1.729,0.772-1.729,1.729c0,0.957,0.771,1.729,1.729,1.729s1.729-0.772,1.729-1.729C15.619,5.14,14.848,4.367,13.891,4.367 M14.502,6.708c-0.326,0.326-0.896,0.326-1.223,0c-0.338-0.342-0.338-0.882,0-1.224c0.342-0.337,0.881-0.337,1.223,0C14.84,5.826,14.84,6.366,14.502,6.708"
-            ></path>
-          </svg>
-
-          <div class="text-gray-700">
-            <p class="text-3xl font-semibold">237</p>
-            <p>Products Sold</p>
+          <i class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300" />
+          <div>
+            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+              <i v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
+              <span v-if="!loading">
+                {{ users.length }}
+              </span>
+            </p>
+            <p class="text-gray-600 dark:text-gray-400">Registered Users</p>
+          </div>
+        </div>
+      </div>
+      <div class="w-1/2 px-3 xl:w-1/4">
+        <div
+          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900 xl:mb-0"
+        >
+          <i
+            class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
+          />
+          <div>
+            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+              <i v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
+              <span v-if="!loading">
+                {{ rolesData.length }}
+              </span>
+            </p>
+            <p class="text-gray-600 dark:text-gray-400">Roles</p>
           </div>
         </div>
       </div>
 
+      <!--
       <div class="w-1/2 px-3 xl:w-1/4">
         <div
           class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-blue-400 xl:mb-0"
@@ -144,8 +159,9 @@
           </div>
         </div>
       </div>
+       -->
     </div>
-
+    <!--
     <div class="-mx-3 flex flex-wrap">
       <div class="w-full px-3 xl:w-1/3">
         <p class="mb-4 text-xl font-semibold">Recent Sales</p>
@@ -213,7 +229,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import axios from 'axios';
 // import Chart from 'chart.js';
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 
@@ -228,6 +245,10 @@ export default {
   },
   data() {
     return {
+      dataReady: false,
+      loading: false,
+      users: [],
+      rolesData: [],
       // buyersData: {
       //   type: 'line',
       //   data: {
@@ -338,12 +359,37 @@ export default {
   watch: {},
   created() {},
   mounted() {
+    this.getDashboardData();
     // new Chart(document.getElementById('buyers-chart'), this.buyersData);
     // new Chart(document.getElementById('reviews-chart'), this.reviewsData);
   },
   beforeUnmount() {},
   updated() {},
-  methods: {},
+  methods: {
+    ...mapActions({
+      popToast: 'toast/popToast',
+    }),
+    async getDashboardData() {
+      this.loading = true;
+      await axios
+        .get(`/api/dashboard/data`)
+        .then(({ data }) => {
+          this.users = data.users;
+          this.rolesData = data.roles;
+          this.dataReady = true;
+          this.loading = false;
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: `Error Getting Users`,
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+      this.dataReady = true;
+    },
+  },
 };
 </script>
 

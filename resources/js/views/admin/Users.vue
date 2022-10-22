@@ -54,19 +54,30 @@
         <span class="sr-only">Create New User</span>
       </template>
     </AppButton>
-
     <UsersTable
       :users="users"
       :pagination="pagination"
       :per-page="perPage"
       :data-ready="dataReady"
+      :available-roles="availableRoles"
+      :lock-jiggled="lockJigled"
       @get-users="getUsers"
       @confirm-un-verify-user="confirmUnVerifyUser"
       @confirm-verify-user="confirmVerifyUser"
-      @deleteUser="deleteUser"
+      @delete-user="deleteUser"
+      @edit-user="editUser"
+      @send-user-verification="sendUserVerification"
     />
-
-    {{ showCreateUserForm }}
+    <UserFormModal
+      :key="userFormKey"
+      :showing-form="showCreateUserForm"
+      :user="userEditing"
+      :new-user="creatingNewUser"
+      :available-roles="availableRoles"
+      @close-modal="closeUserForm"
+      @user-created="userCreated"
+      @user-updated="userUpdated"
+    />
   </div>
 </template>
 
@@ -77,6 +88,7 @@ import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 import PerPage from '@components/PerPage.vue';
 import UsersTable from '@components/admin/UsersTable.vue';
+import UserFormModal from '@components/users/UserFormModal.vue';
 
 export default {
   name: 'Users',
@@ -86,6 +98,7 @@ export default {
     UsersTable,
     UserPlusIcon,
     CircleSvg,
+    UserFormModal,
   },
   props: {},
   setup() {
@@ -98,6 +111,12 @@ export default {
       perPage: 10,
       dataReady: false,
       showCreateUserForm: false,
+      userEditing: null,
+      creatingNewUser: false,
+      userFormKey: 432489,
+      availableRoles: [],
+      rolesDataReady: false,
+      lockJigled: false,
     };
   },
   computed: {
@@ -110,6 +129,7 @@ export default {
   watch: {},
   created() {},
   mounted() {
+    this.getRoles();
     this.getUsers();
   },
   beforeUnmount() {},
@@ -117,6 +137,7 @@ export default {
   methods: {
     ...mapActions({
       popToast: 'toast/popToast',
+      verifyResend: 'auth/verifyResend',
     }),
     perPageChanged(value) {
       this.perPage = parseInt(value);
@@ -149,7 +170,7 @@ export default {
     },
     async confirmUnVerifyUser(value) {
       await axios
-        .post('/api/users/toggleVerify', {
+        .post('/api/users/toggle-verify', {
           action: 'unVerifyUser',
           user: value,
         })
@@ -172,7 +193,7 @@ export default {
     },
     async confirmVerifyUser(value) {
       await axios
-        .post('/api/users/toggleVerify', {
+        .post('/api/users/toggle-verify', {
           action: 'confirmVerifyUser',
           user: value,
         })
@@ -213,8 +234,78 @@ export default {
           this.dataReady = true;
         });
     },
+    async getRoles() {
+      this.rolesDataReady = false;
+      await axios
+        .get(`/api/roles`)
+        .then(({ data }) => {
+          this.availableRoles = data.roles;
+          this.rolesDataReady = true;
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: `Error Getting Roles`,
+            timer: 5000,
+            icon: 'error',
+          });
+          this.rolesDataReady = true;
+        });
+    },
     triggerCreateUser() {
+      this.userFormKey = this.userFormKey + 1;
+      this.creatingNewUser = true;
       this.showCreateUserForm = true;
+      this.userEditing = null;
+    },
+    triggerUpdateUser(user) {
+      this.creatingNewUser = false;
+      this.userEditing = user;
+    },
+    userCreated(data) {
+      this.users.push(data);
+      this.getUsers(); // Realign just in case.
+      this.closeUserForm();
+    },
+    userUpdated(data) {
+      this.users = this.users.map((u) => (u.id !== data.id ? u : data));
+      this.getUsers(); // Realign just in case.
+      this.jiggleTheLock();
+      this.closeUserForm();
+    },
+    jiggleTheLock() {
+      const self = this;
+      self.lockJigled = true;
+      setTimeout(function () {
+        self.lockJigled = false;
+      }, 1);
+    },
+    closeUserForm() {
+      this.userEditing = null;
+      this.creatingNewUser = false;
+      this.showCreateUserForm = false;
+    },
+    editUser(user) {
+      this.userFormKey = this.userFormKey + 1;
+      this.userEditing = user;
+      this.creatingNewUser = false;
+      this.showCreateUserForm = true;
+    },
+    async sendUserVerification(user) {
+      try {
+        await this.verifyResend({ id: user.id }).then((response) => {
+          this.popToast({
+            message: 'Email sent.',
+            timer: 5000,
+            icon: 'success',
+          });
+        });
+      } catch (e) {
+        this.popToast({
+          message: 'An errored, please try again later.',
+          timer: 5000,
+          icon: 'error',
+        });
+      }
     },
   },
 };

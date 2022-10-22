@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
-    //
-
     /**
      * Mark the authenticated user's email address as verified.
      *

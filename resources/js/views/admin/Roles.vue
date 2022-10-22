@@ -35,12 +35,21 @@
         </li>
       </ol>
     </nav>
+
+    <div>
+      {{ dataReady }}
+      <hr />
+      {{ roles }}
+      <hr />
+      {{ rolesData }}
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
+import axios from 'axios';
 
 export default {
   name: 'Roles',
@@ -53,7 +62,7 @@ export default {
   },
   data() {
     return {
-      //
+      rolesData: null,
     };
   },
   computed: {
@@ -65,10 +74,33 @@ export default {
   },
   watch: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.getRoles();
+  },
   beforeUnmount() {},
   updated() {},
-  methods: {},
+  methods: {
+    ...mapActions({
+      popToast: 'toast/popToast',
+    }),
+    async getRoles() {
+      this.dataReady = false;
+      await axios
+        .get(`/api/roles-complete`)
+        .then(({ data }) => {
+          this.rolesData = data.roles;
+          this.dataReady = true;
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: `Error Getting Roles`,
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+    },
+  },
 };
 </script>
 

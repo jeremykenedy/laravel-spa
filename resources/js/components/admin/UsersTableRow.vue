@@ -10,13 +10,13 @@
           />
         </div>
         <div class="ml-3">
-          <p class="whitespace-no-wrap">
+          <p class="whitespace-no-wrap text-xs">
             {{ user.name }}
           </p>
         </div>
       </div>
     </td>
-    <td class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500">
+    <td class="border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500">
       <div class="flex items-center">
         <a
           class="whitespace-no-wrap"
@@ -27,9 +27,8 @@
         </a>
       </div>
     </td>
-
     <td
-      class="whitespace-no-wrap border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500"
+      class="whitespace-no-wrap border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500"
     >
       <p>
         <span v-if="user.roles && user.roles.length">
@@ -47,38 +46,53 @@
         </span>
       </p>
     </td>
-    <td class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500">
+    <td class="border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500">
       <p v-if="user.created_at" class="whitespace-no-wrap">
         {{ parseDisplayDate(user.created_at) }}
       </p>
     </td>
-    <td class="border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500">
+    <td class="border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500">
       <span class="relative inline-block px-3 py-1 font-semibold leading-tight">
         <div class="whitespace-nowrap">
           <div
             class="inline rounded px-1 py-0"
             :class="
               user.email_verified_at
-                ? 'bg-green-700 text-green-900 dark:text-gray-100'
-                : 'bg-red-700 text-red-900 dark:text-gray-100'
+                ? 'bg-green-700 text-gray-100'
+                : 'bg-red-700 text-gray-100'
             "
           >
             {{ user.email_verified_at ? 'Verified' : 'Unverified' }}
           </div>
-
           <AppButton
-            v-if="!locked"
+            v-if="!user.email_verified_at"
+            :disabled="locked"
             :loading="!dataReady"
-            class="inline-block rounded bg-transparent px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-            btn-class="bg-transparent dark:bg-transparent"
-            btn-class-dark="bg-transparent dark:bg-transparent"
+            class="ml-2 inline-block rounded bg-transparent px-1 py-2 text-xs font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+            btn-class="text-yellow-700 dark:bg-transparent hover:bg-gray-200"
+            btn-class-dark="bg-transparent dark:bg-transparent dark:hover:bg-gray-900"
+            @click="triggerUserConfirmEmail"
+          >
+            <template #text>
+              <i class="far fa-paper fa-fw fa-sm fa-regular fa-envelope" />
+            </template>
+          </AppButton>
+          <AppButton
+            :disabled="locked"
+            :loading="!dataReady"
+            class="ml-1 inline-block rounded bg-transparent px-1 py-2 text-xs font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+            btn-class="text-yellow-700 dark:bg-transparent dark:hover:bg-gray-900 hover:bg-gray-200"
+            btn-class-dark="bg-transparent dark:bg-transparent dark:hover:bg-gray-900"
             @click="fireVerification"
           >
             <template #text>
-              <i v-if="!user.email_verified_at" class="far fa-circle fa-fw" />
+              <i
+                v-if="!user.email_verified_at"
+                class="far fa-circle fa-fw fa-sm"
+              />
               <i
                 v-if="user.email_verified_at"
-                class="far fa-circle-check fa-fw"
+                class="far fa-circle-check fa-fw fa-sm"
               />
             </template>
           </AppButton>
@@ -94,26 +108,26 @@
     >
       <AppButton
         :loading="!dataReady"
-        class="mr-2 inline-block rounded px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+        class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
         :btn-class="
           locked
-            ? 'bg-green-600 focus:bg-indigo-700 active:bg-indigo-800'
-            : 'bg-red-600 focus:bg-red-700 active:bg-red-800'
+            ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
         "
         :btn-hover-class="
           locked
-            ? 'hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800'
-            : 'hover:bg-red-700 focus:bg-red-700 active:bg-red-800'
+            ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
         "
         :btn-class-dark="
           locked
-            ? 'bg-green-600 focus:bg-indigo-700 active:bg-indigo-800'
-            : 'bg-red-600 focus:bg-red-700 active:bg-red-800'
+            ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
         "
         :btn-hover-class-dark="
           locked
-            ? 'hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800'
-            : 'hover:bg-red-700 focus:bg-red-700 active:bg-red-800'
+            ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
         "
         @click="locked = !locked"
       >
@@ -133,11 +147,10 @@
         </template>
       </AppButton>
 
-      <!--
       <AppButton
-        v-if="!locked"
+        :disabled="locked"
         :loading="!dataReady"
-        class="mr-2 inline-block rounded bg-yellow-600 px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-yellow-600 dark:hover:bg-yellow-500"
+        class="mr-2 inline-block rounded bg-yellow-500 px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-yellow-600 dark:hover:bg-yellow-500"
         @click="triggerEditUser"
       >
         <template #text>
@@ -146,18 +159,17 @@
           <span class="sr-only">Edit User</span>
         </template>
       </AppButton>
-      -->
 
       <AppButton
-        v-if="!locked"
+        :disabled="locked"
         :loading="!dataReady"
-        class="inline-block rounded bg-red-600 px-5 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-red-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-red-600 dark:hover:bg-red-500"
+        class="mr-2 inline-block rounded bg-red-600 px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-red-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-red-600 dark:hover:bg-red-500"
         @click="triggerDeleteUser"
       >
         <template #text>
           <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
           <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
-          <span class="sr-only">Edit User</span>
+          <span class="sr-only">Delete User</span>
         </template>
       </AppButton>
     </td>
@@ -187,6 +199,8 @@ export default {
   props: {
     user: { type: Object, required: true },
     dataReady: { type: Boolean, default: false },
+    availableRoles: { type: Array, default: null },
+    lockJiggled: { type: Boolean, default: false },
   },
   setup() {
     return {};
@@ -197,7 +211,11 @@ export default {
     };
   },
   computed: {},
-  watch: {},
+  watch: {
+    lockJiggled(jiggled) {
+      this.locked = true;
+    },
+  },
   created() {},
   mounted() {},
   beforeUnmount() {},
@@ -282,7 +300,7 @@ export default {
         });
     },
     triggerEditUser() {
-      //
+      this.$emit('editUser', this.user);
     },
     triggerDeleteUser() {
       const self = this;
@@ -313,6 +331,45 @@ export default {
         .then((result) => {
           if (result.isConfirmed) {
             this.$emit('deleteUser', this.user);
+          } else if (result.isDenied) {
+            self.popToast({
+              message: `Cancelled`,
+              timer: 2000,
+              icon: 'error',
+            });
+          }
+        });
+    },
+    triggerUserConfirmEmail() {
+      const self = this;
+      const title =
+        '<strong>Send ' + this.user.name + ' verification email</strong>';
+      const html =
+        'Are you sure you want to <strong>Send ' +
+        this.user.name +
+        '<small> (' +
+        this.user.email +
+        ')</small> a Verification Email</strong>?<h6>This will send the user an email.</h6>';
+      const icon = 'info';
+      const confirmButtonColor = '#10b981';
+      const denyButtonColor = '#777777';
+      const confirmButtonText = 'Confirm Send';
+      const denyButtonText = 'Cancel';
+      self.$swal
+        .fire({
+          title: title,
+          icon: icon,
+          html: html,
+          showCancelButton: false,
+          showDenyButton: true,
+          confirmButtonColor: confirmButtonColor,
+          denyButtonColor: denyButtonColor,
+          confirmButtonText: confirmButtonText,
+          denyButtonText: denyButtonText,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$emit('sendUserVerification', this.user);
           } else if (result.isDenied) {
             self.popToast({
               message: `Cancelled`,
