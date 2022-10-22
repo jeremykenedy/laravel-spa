@@ -68,10 +68,12 @@
         <div
           class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900 xl:mb-0"
         >
-          <i class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300" />
+          <span
+            class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300"
+          />
           <div>
             <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
-              <i v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
+              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
               <span v-if="!loading">
                 {{ users.length }}
               </span>
@@ -84,12 +86,12 @@
         <div
           class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900 xl:mb-0"
         >
-          <i
+          <span
             class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
           />
           <div>
             <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
-              <i v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
+              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
               <span v-if="!loading">
                 {{ rolesData.length }}
               </span>

@@ -93,6 +93,7 @@
               <img
                 v-if="user && user.avatar"
                 :src="user.avatar"
+                :alt="user.name"
                 class="float-right ml-2 mt-0 h-6 w-6 rounded-full"
               />
               <UserCircleIcon v-else class="float-right ml-2 mt-0 h-6 w-6" />

@@ -91,6 +91,7 @@
         <img
           v-if="user && user.avatar"
           :src="user.avatar"
+          :alt="user.name"
           class="h-8 w-8 cursor-pointer rounded-full border shadow-lg"
           @click="dropDownOpen = !dropDownOpen"
         />
