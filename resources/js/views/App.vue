@@ -4,6 +4,7 @@
     <VerifyNotice
       v-if="
         $route.name !== 'home' &&
+        $route.name !== 'verify-email' &&
         authenticated &&
         user &&
         user.id &&
