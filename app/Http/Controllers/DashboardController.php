@@ -25,9 +25,10 @@ class DashboardController extends Controller
     {
         $roles = new RolesCollection(config('roles.models.role')::all());
         $users = User::all('id', 'name', 'email');
+
         return response()->json([
             'users'  => $users,
-            'roles' => $roles,
+            'roles'  => $roles,
         ]);
     }
 }

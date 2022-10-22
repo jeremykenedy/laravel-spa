@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Users\RolesCollection;
-use App\Http\Requests\Users\GetUserRolesRequest;
 use App\Http\Requests\Users\CreateUserRequest;
+use App\Http\Requests\Users\GetUserRolesRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
+use App\Http\Resources\Users\RolesCollection;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -30,7 +30,7 @@ class UsersController extends Controller
     {
         $per = 10;
         if ($request->has('per')) {
-           $per = $request->input('per');
+            $per = $request->input('per');
         }
 
         return response()->json(User::paginate($per));

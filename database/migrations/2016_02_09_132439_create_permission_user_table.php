@@ -19,7 +19,7 @@ class CreatePermissionUserTable extends Migration
         $tableCheck = Schema::connection($connection)->hasTable($table);
         $userTable = app(config('auth.providers.users.model'))->getTable();
 
-        if (!$tableCheck) {
+        if (! $tableCheck) {
             Schema::connection($connection)->create($table, function (Blueprint $table) use ($permissionsTable, $userTable) {
                 $table->increments('id')->unsigned();
                 $table->integer('permission_id')->unsigned()->index();

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\Users\RolesCollection;
 use App\Http\Requests\Users\GetUserRolesRequest;
+use App\Http\Resources\Users\RolesCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
