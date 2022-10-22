@@ -42,7 +42,7 @@
             <span
               class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
             >
-              <i
+              <span
                 class="fas fa-user"
                 :class="
                   errors && errors.name ? 'text-red-600' : 'text-slate-300'
@@ -70,7 +70,7 @@
             <span
               class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <i
+              <span
                 class="fas fa-envelope"
                 :class="
                   errors && errors.email ? 'text-red-600' : 'text-slate-300'
@@ -99,7 +99,7 @@
             <span
               class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <i
+              <span
                 class="fas fa-user-shield"
                 :class="
                   errors && errors.email ? 'text-red-600' : 'text-slate-300'
@@ -127,7 +127,7 @@
             <span
               class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <i
+              <span
                 class="fas fa-user-shield"
                 :class="
                   errors && errors.email ? 'text-red-600' : 'text-slate-300'
@@ -173,11 +173,11 @@
                 "
                 @click="form.theme_dark = !form.theme_dark"
               >
-                <i
+                <span
                   class="fa-solid fa-fw fa-2x float-left mr-4 text-slate-600 dark:text-gray-300"
                   :class="form.theme_dark ? 'fa-toggle-on' : 'fa-toggle-off'"
                 />
-                <i
+                <span
                   v-if="loading"
                   class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
                   style="left: -1.4em; top: 1.2em"
@@ -243,7 +243,7 @@
                 ? 'Updating'
                 : 'Update'
             }}
-            <i v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
+            <span v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
           </template>
         </AppButton>
         <AppButton
@@ -454,4 +454,3 @@ export default {
   color: #ffffff;
 }
 </style>
-<style lang="scss" scoped></style>

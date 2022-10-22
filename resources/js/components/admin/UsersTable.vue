@@ -1,6 +1,6 @@
 <template>
   <div class="overflow-x-scroll rounded-lg shadow" style="width: 100%">
-    <table class="min-w-full leading-normal">
+    <table class="min-w-full leading-normal" aria-describedby="Users Table">
       <thead>
         <tr
           class="border-b-2 border-gray-300 bg-gray-200 text-gray-600 dark:border-gray-500 dark:bg-slate-900 dark:text-gray-200"
@@ -57,7 +57,7 @@
           class="bg-gray-100 text-gray-900 dark:bg-slate-700 dark:text-gray-100"
         >
           <td colspan="6" class="pt-10 pb-10 text-center">
-            <i class="fa fa-circle-notch fa-spin fa-5x text-gray-400" />
+            <span class="fa fa-circle-notch fa-spin fa-5x text-gray-400" />
           </td>
         </tr>
       </tbody>
@@ -144,6 +144,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
-<style lang="scss" scoped></style>

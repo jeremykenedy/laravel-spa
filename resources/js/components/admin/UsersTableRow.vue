@@ -74,7 +74,7 @@
             @click="triggerUserConfirmEmail"
           >
             <template #text>
-              <i class="far fa-paper fa-fw fa-sm fa-regular fa-envelope" />
+              <span class="far fa-paper fa-fw fa-sm fa-regular fa-envelope" />
             </template>
           </AppButton>
           <AppButton
@@ -86,11 +86,11 @@
             @click="fireVerification"
           >
             <template #text>
-              <i
+              <span
                 v-if="!user.email_verified_at"
                 class="far fa-circle fa-fw fa-sm"
               />
-              <i
+              <span
                 v-if="user.email_verified_at"
                 class="far fa-circle-check fa-fw fa-sm"
               />
@@ -382,6 +382,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
-<style lang="scss" scoped></style>
