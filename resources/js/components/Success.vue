@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative mx-auto flex w-full items-start rounded border border border-green-100 bg-green-100 px-4 py-3 text-green-500 md:w-10/12 md:p-2"
+    class="relative mx-auto flex w-full items-start rounded border border border-green-100 bg-green-100 px-4 py-3 text-green-500 md:p-2"
     role="alert shadow"
   >
     <span class="block w-full text-left sm:inline">

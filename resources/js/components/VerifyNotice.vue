@@ -50,7 +50,9 @@ export default {
   },
   computed: {
     ...mapGetters({
+      authenticated: 'auth/authenticated',
       user: 'auth/user',
+      roles: 'auth/roles',
     }),
   },
   methods: {
