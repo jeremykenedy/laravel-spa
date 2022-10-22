@@ -18,6 +18,7 @@
             <img
               v-if="form && form.avatar"
               :src="form.avatar"
+              :alt="form.name"
               class="float-left ml-2 mr-2 mt-1 h-10 w-10 rounded-full"
             />
             <UserCircleIcon
