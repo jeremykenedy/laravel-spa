@@ -53,7 +53,8 @@ export default {
         this.currentRouteName == 'admin' ||
         this.currentRouteName == 'roles' ||
         this.currentRouteName == 'settings' ||
-        this.currentRouteName == 'users'
+        this.currentRouteName == 'users' ||
+        this.currentRouteName == 'app-settings'
       ) {
         return true;
       }

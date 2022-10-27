@@ -39,6 +39,7 @@
                   v-model="form.password"
                   type="password"
                   name="password"
+                  autocomplete="on"
                   :class="{
                     'border-red-500':
                       errors && errors.errors && errors.errors.password,

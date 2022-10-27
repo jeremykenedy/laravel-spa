@@ -33,6 +33,7 @@
         v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
         v-slot="{ isActive }"
         :to="{ name: 'admin' }"
+        @click="toggleSidebar"
       >
         <div
           class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
@@ -48,9 +49,10 @@
       </router-link>
 
       <router-link
-        v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
+        v-if="authenticated && roles && roles.superAdmin"
         v-slot="{ isActive }"
         :to="{ name: 'users' }"
+        @click="toggleSidebar"
       >
         <div
           class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
@@ -65,11 +67,11 @@
         </div>
       </router-link>
 
-      <!--
       <router-link
-        v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
+        v-if="authenticated && roles && roles.superAdmin"
         v-slot="{ isActive }"
         :to="{ name: 'roles' }"
+        @click="toggleSidebar"
       >
         <div
           class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
@@ -83,7 +85,25 @@
           <span class="">Roles</span>
         </div>
       </router-link>
-      -->
+
+      <router-link
+        v-if="authenticated && roles && roles.superAdmin"
+        v-slot="{ isActive }"
+        :to="{ name: 'app-settings' }"
+        @click="toggleSidebar"
+      >
+        <div
+          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
+          :class="
+            isActive
+              ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
+              : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
+          "
+        >
+          <CogIcon class="mr-2 h-6 w-6" />
+          <span class="">App Settings</span>
+        </div>
+      </router-link>
 
       <!--
       <div
@@ -205,11 +225,12 @@
 </template>
 
 <script lang="ts">
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters, mapActions } from 'vuex';
 import {
   UsersIcon,
   BuildingLibraryIcon,
   ShieldCheckIcon,
+  CogIcon,
 } from '@heroicons/vue/24/outline';
 
 export default {
@@ -218,6 +239,7 @@ export default {
     UsersIcon,
     BuildingLibraryIcon,
     ShieldCheckIcon,
+    CogIcon,
   },
   props: {
     appName: { type: String, default: 'Workflow' },
@@ -248,7 +270,12 @@ export default {
   mounted() {},
   beforeUnmount() {},
   updated() {},
-  methods: {},
+  methods: {
+    ...mapActions({
+      toggleSidebar: 'sidebar/toggleSidebar',
+      popToast: 'toast/popToast',
+    }),
+  },
 };
 </script>
 

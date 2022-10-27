@@ -16,6 +16,7 @@ import AdminLayout from '@/layouts/AdminLayout.vue';
 import Admin from '@/views/admin/Admin.vue';
 import Users from '@/views/admin/Users.vue';
 import Roles from '@/views/admin/Roles.vue';
+import AppSettings from '@/views/admin/AppSettings.vue';
 
 export default [
   {
@@ -54,6 +55,11 @@ export default [
         path: 'roles',
         name: 'roles',
         component: Roles,
+      },
+      {
+        path: 'app-settings',
+        name: 'app-settings',
+        component: AppSettings,
       },
     ],
     meta: {

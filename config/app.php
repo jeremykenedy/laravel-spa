@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        QCod\Settings\SettingsServiceProvider::class,
     ],
 
     /*
@@ -192,6 +192,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        "Settings" => QCod\Settings\Facade::class,
     ])->toArray(),
 
 ];

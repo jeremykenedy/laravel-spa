@@ -7,11 +7,15 @@
         <div class="mr-4 inline-block flex items-center lg:hidden">
           <button
             class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
-            :class="sideBarOpen ? 'bg-slate-100 text-gray-900' : ''"
+            :class="
+              sideBarOpen ? 'bg-slate-100 text-gray-900 dark:text-gray-100' : ''
+            "
             @click="toggleSidebarTrigger()"
           >
-            <span class="sr-only">Open menu</span>
-            <Bars3Icon class="h-6 w-6" aria-hidden="true" />
+            <span v-if="!sideBarOpen" class="sr-only">Open menu</span>
+            <span v-if="sideBarOpen" class="sr-only">CLose menu</span>
+            <Bars3Icon v-if="!sideBarOpen" class="h-6 w-6" aria-hidden="true" />
+            <XMarkIcon v-if="sideBarOpen" class="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
 
@@ -187,7 +191,7 @@ import {
   HomeIcon,
   BuildingLibraryIcon,
   InformationCircleIcon,
-  // XMarkIcon,
+  XMarkIcon,
   CogIcon,
   ArrowLeftOnRectangleIcon,
   // ChevronDownIcon,
@@ -201,7 +205,7 @@ export default {
     BuildingLibraryIcon,
     InformationCircleIcon,
     Bars3Icon,
-    // XMarkIcon,
+    XMarkIcon,
     CogIcon,
     ArrowLeftOnRectangleIcon,
     // ChevronDownIcon,
@@ -247,6 +251,7 @@ export default {
       toggleSidebar: 'sidebar/toggleSidebar',
       updateTheme: 'auth/theme',
       popToast: 'toast/popToast',
+      logout: 'auth/logout',
     }),
     toggleSidebarTrigger() {
       this.toggleSidebar();

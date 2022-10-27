@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\AppSettingsSeeder;
 use Database\Seeders\ConnectRelationshipsSeeder;
 use Database\Seeders\PermissionsTableSeeder;
 use Database\Seeders\RolesTableSeeder;
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConnectRelationshipsSeeder::class);
         $this->call(UsersTableSeeder::class);
         // \App\Models\User::factory(10)->create();
+        $this->call(AppSettingsSeeder::class);
 
         Model::reguard();
     }

@@ -81,6 +81,7 @@
                   v-model="form.password"
                   type="password"
                   name="password"
+                  autocomplete="on"
                   :class="{ 'border-red-500': errors && errors.password }"
                   :disabled="loading"
                   class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none sm:mt-0 sm:w-8/12"

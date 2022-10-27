@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppSettingsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgotPasswordController;
@@ -48,4 +49,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/roles', [RolesController::class, 'roles']);
     Route::get('/roles-complete', [RolesController::class, 'rolesComplete']);
     Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
+    Route::get('/app-settings', [AppSettingsController::class, 'index']);
 });

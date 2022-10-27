@@ -14,6 +14,7 @@
           v-model="form.password"
           :type="showPassword ? 'text' : 'password'"
           name="password"
+          autocomplete="on"
           class="mt-3 ml-1 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
         />
         <i
