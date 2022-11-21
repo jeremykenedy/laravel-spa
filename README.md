@@ -32,6 +32,10 @@ This starter template that is built on:
 - Heroicons
 - Font Awesome 6
 - ESLint with Prettier
+- Admin Area
+- Roles Management
+- Permissions Management
+- Users Managemenet
 
 ### Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
@@ -75,30 +79,39 @@ This starter template that is built on:
 |user@user.com|password|
 
 ### Screenshots
-![Home](https://laravel-spa.s3.us-west-2.amazonaws.com/home.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030347Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=f275b8244c27af01961717ee3e1ed52116b4839b490fcc1d7ac55d54efcc1ffa)
-![About](https://laravel-spa.s3.us-west-2.amazonaws.com/about.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030253Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=43e25c333d28c87f691696d697ff438f865f1a75eb7d4289c340af27fb61c63f)
-![Login](https://laravel-spa.s3.us-west-2.amazonaws.com/login.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030356Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=1d23a59ab0b2e0590cedba3d3f52b516c171393ed3cd202c947a550efd097fd4)
-![Register](https://laravel-spa.s3.us-west-2.amazonaws.com/register.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030518Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=2b3e09f783ee97c0330bb4b1a0b0ba4a1acb344cec4375e4c1e13cbabdee5eb6)
-![Dashboard](https://laravel-spa.s3.us-west-2.amazonaws.com/dashboard.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030324Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=88067ddafa94b708223d2fcc530f63a48e2c15c9dc1ca1f10175ec916340fc73)
-![Settings - Profile](https://laravel-spa.s3.us-west-2.amazonaws.com/profile1.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030442Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=4ceb59d0081c90c474d746337710a96fdc26c36d61ebff73d60102a6c52cf96c)
-![Settings - Password](https://laravel-spa.s3.us-west-2.amazonaws.com/profile2.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030449Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=d580dc6cf63e98e6d2bd5dc36e5739c98bb5b32d573b480eed2d19b30686556c)
-![Profile Dark](https://laravel-spa.s3.us-west-2.amazonaws.com/profile3.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030459Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=7f98b02e021dd90eb2660398c048cc95a46ef5d43156623f6db4358f9e90c679)
-![Forgot Password](https://laravel-spa.s3.us-west-2.amazonaws.com/forgot.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030335Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=7fc865159fe81f14e69eb502d287a0992cdfc7d0156a97c610f8e9e0ebe53e8d)
-![Reset Password](https://laravel-spa.s3.us-west-2.amazonaws.com/reset.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030529Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=0b6226161148996d7c91cbf90e058f499cebe6eb17b09a8aa750d6f17a839ab1)
-![Mobile Menu](https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030428Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=3855616a6b72d6f9eb5bb4c4521a2860b8199abcc9ea02492ad3da757ff932ab)
-![Mobile Login](https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png?response-content-disposition=inline&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEIP%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLXdlc3QtMiJHMEUCIQCjGt0n%2BzFEQKBPpb%2BuuKcAaRWFcK7uYYnzmgYD%2FzQGzQIgYJxUmFAscxR6mRPA7lCnIKttq%2BFDcBuux4fwf%2FL5UKUqmQIIPBAAGgwwNDcyNjY0NDE1NjQiDLGPMMy9p80R%2BbCCVyr2AeZ6G2Zpr0Jd2e8TDy9D7RccfYC0dUGtgkwGLPNQa0MVOd8lnbWcJu76PimuOFY5JrCtOpRB63QVAbGkDkmsu94rxJnH%2FJojjP6lIVbiX7dKiBV58tfia9XSsQwl9UesB1FFHRURsLdna6br1LdqC4qwWmA%2BU2lzcisoYPgVLvzLBuJWXU4Rf4bVl3S6AWs1%2B4i8OOi1jLT6fgp5qMY%2F8M1uJbqd4Xcq8WP8%2B7df9uDRyKzcooTWamZcxXSGM3bAprceOjgMUr7dNZxBb9C%2B5vWnWmYP5X9JsmPk08bb%2BeT%2F67VP10%2B3PrX8LWI5%2FC1avl6lfDrrBTDNjtSZBjrfAfnDMyanO6%2BcKK0mIpRmqYggyyV2yb2i3nm98xtZPQWqOZGMfWhrpDRmKsMoYpadQLHaPAjVONtlPAr0F7Iy41N4zcUYB57YnzW4BLoaaphLzHyH4GJuuJMtbbn9SXduBUvxyDnlWF0%2B9RxP1u7%2BvCLPa%2FnCalVgslW%2FReZfKQy0Iz3XgDVkCbRgO8NI8QxvQIGg6M27YI4Al8aBT7p9icoBYpbXRYrCCr6YSQyJAW0PUPTT6i5ERNAu0Fx6I8D%2F%2BTVrsJT6OHf5lgxhLSfCQ6RVdVukln3fE0Rk1LoSA5A%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20220929T030406Z&X-Amz-SignedHeaders=host&X-Amz-Expires=300&X-Amz-Credential=ASIAQWAKMVFOM2LQFCVC%2F20220929%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=ce8e8b076de33f2eef7d894792280edb1ab003318941fea1e01870d01b14e6df)
+![Home](https://laravel-spa.s3.us-west-2.amazonaws.com/home.png)
+![About](https://laravel-spa.s3.us-west-2.amazonaws.com/about.png)
+![Login](https://laravel-spa.s3.us-west-2.amazonaws.com/login.png)
+![Register](https://laravel-spa.s3.us-west-2.amazonaws.com/register.png)
+![Dashboard](https://laravel-spa.s3.us-west-2.amazonaws.com/dashboard.png)
+![Settings - Profile](https://laravel-spa.s3.us-west-2.amazonaws.com/profile1.png)
+![Settings - Password](https://laravel-spa.s3.us-west-2.amazonaws.com/profile2.png)
+![Profile Dark](https://laravel-spa.s3.us-west-2.amazonaws.com/profile3.png)
+![Forgot Password](https://laravel-spa.s3.us-west-2.amazonaws.com/forgot.png)
+![Reset Password](https://laravel-spa.s3.us-west-2.amazonaws.com/reset.png)
+![Mobile Menu](https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png)
+![Mobile Login](https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png)
 
 ### File Tree
 ```
 LaravelSpa
 ├── .browserslistrc
 ├── .editorconfig
-├── .env
 ├── .env.example
 ├── .env.travis
 ├── .eslintrc.js
 ├── .gitattributes
+├── .github
+│   └── workflows
+│       ├── codeql.yml
+│       ├── dependency-review.yml
+│       ├── greetings.yml
+│       ├── laravel.yml
+│       ├── node.js.yml
+│       ├── php.yml
+│       └── stale.yml
 ├── .gitignore
+├── .npmrc
 ├── .prettierignore
 ├── .styleci.yml
 ├── .travis.yml
@@ -111,28 +124,56 @@ LaravelSpa
 │   │   └── Handler.php
 │   ├── Http
 │   │   ├── Controllers
+│   │   │   ├── AppSettingsController.php
 │   │   │   ├── AuthController.php
 │   │   │   ├── Controller.php
+│   │   │   ├── DashboardController.php
 │   │   │   ├── ForgotPasswordController.php
 │   │   │   ├── PasswordController.php
+│   │   │   ├── PermissionsController.php
 │   │   │   ├── ProfileController.php
 │   │   │   ├── RegisterController.php
 │   │   │   ├── ResetPasswordController.php
+│   │   │   ├── RolesController.php
 │   │   │   ├── UserController.php
+│   │   │   ├── UsersController.php
 │   │   │   └── VerificationController.php
 │   │   ├── Kernel.php
-│   │   └── Middleware
-│   │       ├── Authenticate.php
-│   │       ├── EncryptCookies.php
-│   │       ├── PreventRequestsDuringMaintenance.php
-│   │       ├── RedirectIfAuthenticated.php
-│   │       ├── TrimStrings.php
-│   │       ├── TrustHosts.php
-│   │       ├── TrustProxies.php
-│   │       └── VerifyCsrfToken.php
+│   │   ├── Middleware
+│   │   │   ├── Authenticate.php
+│   │   │   ├── EncryptCookies.php
+│   │   │   ├── PreventRequestsDuringMaintenance.php
+│   │   │   ├── RedirectIfAuthenticated.php
+│   │   │   ├── TrimStrings.php
+│   │   │   ├── TrustHosts.php
+│   │   │   ├── TrustProxies.php
+│   │   │   └── VerifyCsrfToken.php
+│   │   ├── Requests
+│   │   │   ├── AppSettings
+│   │   │   ├── Permissions
+│   │   │   │   ├── CreatePermissionRequest.php
+│   │   │   │   ├── GetPermissionsRequest.php
+│   │   │   │   └── UpdatePermissionRequest.php
+│   │   │   ├── Roles
+│   │   │   │   ├── CreateRoleRequest.php
+│   │   │   │   └── UpdateRoleRequest.php
+│   │   │   └── Users
+│   │   │       ├── CreateUserRequest.php
+│   │   │       ├── GetUserRolesRequest.php
+│   │   │       └── UpdateUserRequest.php
+│   │   └── Resources
+│   │       ├── Permissions
+│   │       │   ├── PermissionResource.php
+│   │       │   └── PermissionsCollection.php
+│   │       └── Users
+│   │           ├── RoleResource.php
+│   │           └── RolesCollection.php
 │   ├── Mail
 │   │   └── ExceptionOccured.php
 │   ├── Models
+│   │   ├── Permission.php
+│   │   ├── Role.php
+│   │   ├── Setting.php
 │   │   └── User.php
 │   ├── Notifications
 │   │   ├── ResetPasswordNotification.php
@@ -159,12 +200,14 @@ LaravelSpa
 │   ├── cache.php
 │   ├── cors.php
 │   ├── database.php
+│   ├── debugbar.php
 │   ├── exceptions.php
 │   ├── filesystems.php
 │   ├── hashing.php
 │   ├── logging.php
 │   ├── mail.php
 │   ├── queue.php
+│   ├── roles.php
 │   ├── sanctum.php
 │   ├── services.php
 │   ├── session.php
@@ -174,18 +217,29 @@ LaravelSpa
 │   ├── factories
 │   │   └── UserFactory.php
 │   ├── migrations
+│   │   ├── 2014_10_00_000000_create_settings_table.php
+│   │   ├── 2014_10_00_000001_add_group_column_on_settings_table.php
 │   │   ├── 2014_10_12_000000_create_users_table.php
 │   │   ├── 2014_10_12_100000_create_password_resets_table.php
+│   │   ├── 2016_01_15_105324_create_roles_table.php
+│   │   ├── 2016_01_15_114412_create_role_user_table.php
+│   │   ├── 2016_01_26_115212_create_permissions_table.php
+│   │   ├── 2016_01_26_115523_create_permission_role_table.php
+│   │   ├── 2016_02_09_132439_create_permission_user_table.php
 │   │   ├── 2019_08_19_000000_create_failed_jobs_table.php
 │   │   ├── 2019_12_14_000001_create_personal_access_tokens_table.php
 │   │   ├── 2021_04_26_093603_create_jobs_table.php
-│   │   └── 2022_09_05_192055_update_users_table.php
+│   │   ├── 2022_09_05_192055_update_users_table.php
+│   │   └── 2022_11_02_051027_update_settings_table.php
 │   └── seeders
+│       ├── AppSettingsSeeder.php
+│       ├── ConnectRelationshipsSeeder.php
 │       ├── DatabaseSeeder.php
+│       ├── PermissionsTableSeeder.php
+│       ├── RolesTableSeeder.php
 │       └── UsersTableSeeder.php
 ├── env.d.ts
 ├── license.svg
-├── package-lock.json
 ├── package.json
 ├── phpunit.xml
 ├── postcss.config.js
@@ -195,20 +249,24 @@ LaravelSpa
 │   ├── .htaccess
 │   ├── build
 │   │   ├── assets
-│   │   │   ├── app-legacy.20e73516.js
+│   │   │   ├── 404.508db666.png
+│   │   │   ├── app-legacy.433c7c11.js
 │   │   │   ├── app-legacy.c0ed8668.js
-│   │   │   ├── app.01108a3d.css
-│   │   │   ├── app.20dc7309.js
-│   │   │   ├── app.66b42942.css
-│   │   │   ├── fa-brands-400.3fe890d0.woff2
-│   │   │   ├── fa-brands-400.c7ae37d3.ttf
-│   │   │   ├── fa-regular-400.fdc1f753.ttf
-│   │   │   ├── fa-regular-400.fe69d948.woff2
-│   │   │   ├── fa-solid-900.6d53c706.ttf
-│   │   │   ├── fa-solid-900.d27bc752.woff2
-│   │   │   ├── fa-v4compatibility.4d73f280.ttf
-│   │   │   ├── fa-v4compatibility.7d1c2ce5.woff2
-│   │   │   └── polyfills-legacy.b74fa8a6.js
+│   │   │   ├── app.2bd2621f.css
+│   │   │   ├── app.3f641b8b.js
+│   │   │   ├── app.50bd7134.css
+│   │   │   ├── fa-brands-400.b1d1c1b0.ttf
+│   │   │   ├── fa-brands-400.c61287c2.woff2
+│   │   │   ├── fa-regular-400.5da313b0.woff2
+│   │   │   ├── fa-regular-400.d7b19fe2.ttf
+│   │   │   ├── fa-solid-900.8f06540f.woff2
+│   │   │   ├── fa-solid-900.e4f6a7e9.ttf
+│   │   │   ├── fa-v4compatibility.2ddb3b41.ttf
+│   │   │   ├── fa-v4compatibility.f46715c9.woff2
+│   │   │   ├── plugs.12bd3189.png
+│   │   │   ├── polyfills-legacy.06fde1ca.js
+│   │   │   ├── vendor-legacy.f28d9fab.js
+│   │   │   └── vendor.a027a23b.js
 │   │   ├── manifest.json
 │   │   ├── webUpdateNoticeInjectScript.js
 │   │   ├── webUpdateNoticeInjectStyle.css
@@ -235,43 +293,83 @@ LaravelSpa
 ├── resources
 │   ├── css
 │   │   └── app.css
+│   ├── img
+│   │   ├── 404.png
+│   │   └── plugs.png
 │   ├── js
 │   │   ├── app.js
 │   │   ├── bootstrap.js
 │   │   ├── components
-│   │   │   ├── AppButton.vue
 │   │   │   ├── AppFooter.vue
 │   │   │   ├── AppNav.vue
-│   │   │   ├── AppToast.vue
 │   │   │   ├── CircleSvg.vue
 │   │   │   ├── Errors.vue
+│   │   │   ├── Pagination.vue
+│   │   │   ├── PerPage.vue
 │   │   │   ├── Success.vue
-│   │   │   └── VerifyNotice.vue
+│   │   │   ├── VerifyNotice.vue
+│   │   │   ├── admin
+│   │   │   │   ├── AdminNavBar.vue
+│   │   │   │   ├── AdminSidebar.vue
+│   │   │   │   ├── RolesTable.vue
+│   │   │   │   ├── RolesTableRow.vue
+│   │   │   │   ├── UsersTable.vue
+│   │   │   │   └── UsersTableRow.vue
+│   │   │   ├── common
+│   │   │   │   ├── AppButton.vue
+│   │   │   │   ├── AppModal.vue
+│   │   │   │   ├── AppSwitch.vue
+│   │   │   │   ├── AppTable.vue
+│   │   │   │   └── AppToast.vue
+│   │   │   ├── roles
+│   │   │   │   ├── PermissionFormModal.vue
+│   │   │   │   ├── RoleFormModal.vue
+│   │   │   │   └── RolesBadges.vue
+│   │   │   └── users
+│   │   │       ├── UserForm.vue
+│   │   │       └── UserFormModal.vue
+│   │   ├── layouts
+│   │   │   └── AdminLayout.vue
 │   │   ├── middleware
 │   │   │   ├── auth.js
 │   │   │   ├── guest.js
-│   │   │   └── middlewarePipeline.js
+│   │   │   ├── middlewarePipeline.js
+│   │   │   ├── roleAdmin.js
+│   │   │   ├── roleSuperAdmin.js
+│   │   │   └── roleUser.js
 │   │   ├── router
 │   │   │   ├── index.js
 │   │   │   └── routes.js
+│   │   ├── services
+│   │   │   ├── common.js
+│   │   │   └── users.js
 │   │   ├── store
 │   │   │   ├── auth.js
 │   │   │   ├── index.js
+│   │   │   ├── sidebar.js
 │   │   │   └── toast.js
 │   │   └── views
-│   │       ├── About.vue
 │   │       ├── App.vue
 │   │       ├── Blank.vue
-│   │       ├── Dashboard.vue
-│   │       ├── ForgotPassword.vue
-│   │       ├── Home.vue
-│   │       ├── Login.vue
-│   │       ├── Password.vue
-│   │       ├── Profile.vue
-│   │       ├── Register.vue
-│   │       ├── ResetPassword.vue
-│   │       ├── Settings.vue
-│   │       └── VerifyEmail.vue
+│   │       ├── admin
+│   │       │   ├── Admin.vue
+│   │       │   ├── AppSettings.vue
+│   │       │   ├── Permissions.vue
+│   │       │   ├── Roles.vue
+│   │       │   └── Users.vue
+│   │       └── pages
+│   │           ├── About.vue
+│   │           ├── Dashboard.vue
+│   │           ├── ForgotPassword.vue
+│   │           ├── Home.vue
+│   │           ├── Login.vue
+│   │           ├── NotFound.vue
+│   │           ├── Password.vue
+│   │           ├── Profile.vue
+│   │           ├── Register.vue
+│   │           ├── ResetPassword.vue
+│   │           ├── Settings.vue
+│   │           └── VerifyEmail.vue
 │   ├── lang
 │   │   └── en
 │   │       ├── auth.php
@@ -289,17 +387,17 @@ LaravelSpa
 │   ├── console.php
 │   └── web.php
 ├── server.php
-├── src
 ├── tailwind.config.js
+├── tailwindcss-perspective.js
 ├── tsconfig.json
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-36 directories, 167 files
+54 directories, 243 files
 ```
 
 * Tree command can be installed using brew: `brew install tree`
-* File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests'`
+* File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests|.DS_Store|.env'`
 
 ### License
 Laravel-Spa is licensed under the [MIT license](https://opensource.org/licenses/MIT). Enjoy!
