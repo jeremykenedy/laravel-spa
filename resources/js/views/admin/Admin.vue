@@ -1,33 +1,8 @@
 <template>
   <div id="admin" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <div v-if="roles" class="float-right mb-6 text-center">
-      <span
-        v-if="roles.superAdmin"
-        class="mr-2 cursor-default rounded bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800 dark:bg-blue-200 dark:text-blue-800"
-        >Super Admin</span
-      >
-      <span
-        v-if="roles.admin"
-        class="mr-2 cursor-default rounded bg-gray-100 px-2.5 py-0.5 text-sm font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-300"
-        >Admin</span
-      >
-      <span
-        v-if="roles.moderator"
-        class="mr-2 cursor-default rounded bg-red-100 px-2.5 py-0.5 text-sm font-medium text-red-800 dark:bg-red-200 dark:text-red-900"
-        >Moderator</span
-      >
-      <span
-        v-if="roles.editor"
-        class="mr-2 cursor-default rounded bg-green-100 px-2.5 py-0.5 text-sm font-medium text-green-800 dark:bg-green-200 dark:text-green-900"
-        >Editor</span
-      >
-      <span
-        v-if="roles.user"
-        class="mr-2 cursor-default rounded bg-yellow-100 px-2.5 py-0.5 text-sm font-medium text-yellow-800 dark:bg-yellow-200 dark:text-yellow-900"
-        >User</span
-      >
+      <RolesBadges :roles="roles" />
     </div>
-
     <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
       <ol class="inline-flex list-none p-0">
         <li class="flex items-center">
@@ -64,9 +39,12 @@
     </div>
 
     <div class="-mx-3 mb-20 flex flex-wrap">
-      <div class="w-1/2 px-3 xl:w-1/4">
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
+      >
         <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900 xl:mb-0"
+          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
         >
           <span
             class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300"
@@ -82,9 +60,13 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2 px-3 xl:w-1/4">
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
+      >
         <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900 xl:mb-0"
+          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
         >
           <span
             class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
@@ -101,8 +83,79 @@
         </div>
       </div>
 
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
+      >
+        <div
+          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
+        >
+          <span
+            class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
+          />
+          <div>
+            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
+              <span v-if="!loading">
+                {{ permissionsData.length }}
+              </span>
+            </p>
+            <p class="text-gray-600 dark:text-gray-400">Permissions</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
+      >
+        <div
+          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
+        >
+          <span
+            class="fas fa-lock fa-fw fa-3x text-gray-700 dark:text-gray-300"
+          />
+          <div>
+            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
+              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
+              <span
+                v-if="!loading"
+                class="fa-brands fa-square-facebook fa-fw"
+                :class="
+                  checkSettingEnabled('enableFbLogin')
+                    ? 'text-blue-600 dark:text-blue-600'
+                    : 'text-gray-300 dark:text-gray-700'
+                "
+              >
+              </span>
+              <span
+                v-if="!loading"
+                class="fa-brands fa-twitter fa-fw"
+                :class="
+                  checkSettingEnabled('enableTwitterLogin')
+                    ? 'text-blue-300 dark:text-blue-300'
+                    : 'text-gray-300 dark:text-gray-700'
+                "
+              >
+              </span>
+              <span
+                v-if="!loading"
+                class="fa-brands fa-google fa-fw"
+                :class="
+                  checkSettingEnabled('enableGoogleLogin')
+                    ? 'text-green-300 dark:text-green-300'
+                    : 'text-gray-300 dark:text-gray-700'
+                "
+              >
+              </span>
+            </p>
+            <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>
+          </div>
+        </div>
+      </div>
+
       <!--
-      <div class="w-1/2 px-3 xl:w-1/4">
+      <div class="w-full sm:w-1/2 px-3 xl:w-1/3">
         <div
           class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-blue-400 xl:mb-0"
         >
@@ -122,7 +175,7 @@
         </div>
       </div>
 
-      <div class="w-1/2 px-3 xl:w-1/4">
+      <div class="w-full sm:w-1/2 px-3 xl:w-1/3">
         <div
           class="flex w-full items-center rounded-lg border bg-white p-6 text-blue-400"
         >
@@ -142,7 +195,7 @@
         </div>
       </div>
 
-      <div class="w-1/2 px-3 xl:w-1/4">
+      <div class="w-full sm:w-1/2 px-3 xl:w-1/3">
         <div
           class="flex w-full items-center rounded-lg border bg-white p-6 text-blue-400"
         >
@@ -163,6 +216,7 @@
       </div>
        -->
     </div>
+
     <!--
     <div class="-mx-3 flex flex-wrap">
       <div class="w-full px-3 xl:w-1/3">
@@ -235,11 +289,13 @@ import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 // import Chart from 'chart.js';
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
+import RolesBadges from '@components/roles/RolesBadges.vue';
 
 export default {
   name: 'Admin',
   components: {
     ChevronRightIcon,
+    RolesBadges,
   },
   props: {},
   setup() {
@@ -251,6 +307,8 @@ export default {
       loading: false,
       users: [],
       rolesData: [],
+      permissionsData: [],
+      authSettings: [],
       // buyersData: {
       //   type: 'line',
       //   data: {
@@ -378,6 +436,8 @@ export default {
         .then(({ data }) => {
           this.users = data.users;
           this.rolesData = data.roles;
+          this.authSettings = data.authSettings;
+          this.permissionsData = data.permissions;
           this.dataReady = true;
           this.loading = false;
         })
@@ -390,6 +450,17 @@ export default {
           this.dataReady = true;
         });
       this.dataReady = true;
+    },
+    checkSettingEnabled(key = null) {
+      let found = false;
+      let enabled = false;
+      if (key) {
+        found = this.authSettings.find((obj) => obj.key == key);
+        if (found && found.val == 1) {
+          enabled = true;
+        }
+      }
+      return enabled;
     },
   },
 };

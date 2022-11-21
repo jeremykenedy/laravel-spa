@@ -144,7 +144,7 @@
                       :to="{ name: 'login' }"
                       class="text-sm font-bold text-blue-500 hover:text-blue-300"
                     >
-                      Sing In
+                      Sign In
                     </router-link>
                   </span>
                 </div>

@@ -1,11 +1,14 @@
 <template>
   <div id="main-body" class="leading-normal tracking-normal">
     <div class="flex flex-wrap">
-      <AdminSidebar />
+      <AdminSidebar :class="fullScreenSideBarOpen ? '' : 'lg:hidden'" />
       <div
         id="main-content"
-        class="min-h-screen w-full bg-white pl-0 dark:bg-slate-800 lg:pl-64"
-        :class="sideBarOpen ? 'overlay' : ''"
+        class="min-h-screen w-full bg-white pl-0 dark:bg-slate-800"
+        :class="
+          (sideBarOpen ? 'overlay ' : ' ') +
+          (fullScreenSideBarOpen ? 'lg:pl-64' : '')
+        "
       >
         <AdminNavBar />
         <div class="mb-20 bg-white dark:bg-slate-800">
@@ -46,6 +49,7 @@ export default {
   computed: {
     ...mapState('sidebar', {
       sideBarOpen: (state) => state.sideBarOpen,
+      fullScreenSideBarOpen: (state) => state.fullScreenSideBarOpen,
     }),
   },
   watch: {},

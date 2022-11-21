@@ -27,10 +27,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 import AppNav from '@components/AppNav.vue';
 import AppFooter from '@components/AppFooter.vue';
-import AppToast from '@components/AppToast.vue';
 import VerifyNotice from '@components/VerifyNotice.vue';
 
 export default {
@@ -38,7 +37,6 @@ export default {
     AppNav,
     VerifyNotice,
     AppFooter,
-    AppToast,
   },
   computed: {
     ...mapGetters({
@@ -52,6 +50,7 @@ export default {
       if (
         this.currentRouteName == 'admin' ||
         this.currentRouteName == 'roles' ||
+        this.currentRouteName == 'permissions' ||
         this.currentRouteName == 'settings' ||
         this.currentRouteName == 'users' ||
         this.currentRouteName == 'app-settings'
@@ -60,6 +59,11 @@ export default {
       }
       return false;
     },
+  },
+  methods: {
+    ...mapActions({
+      popToast: 'toast/popToast',
+    }),
   },
 };
 </script>

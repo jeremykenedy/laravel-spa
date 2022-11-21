@@ -84,6 +84,31 @@
           v-if="authenticated"
           class="hidden items-center justify-end md:flex md:flex-1 lg:w-0"
         >
+          <span
+            v-tippy="'Toggle Theme ' + (user.theme_dark ? 'Light' : 'Dark')"
+            class="mr-2"
+            :class="
+              loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
+            "
+            @click="toggleTheme()"
+          >
+            <Switch
+              v-model="user.theme_dark"
+              :class="user.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
+              class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              <span class="sr-only">Toggle Theme</span>
+              <span
+                aria-hidden="true"
+                :class="
+                  user.theme_dark
+                    ? 'translate-x-4 bg-gray-800'
+                    : 'translate-x-0 bg-white'
+                "
+                class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out"
+              />
+            </Switch>
+          </span>
           <div ref="dropMenu" class="relative">
             <div
               class="cursor-pointer items-center p-3 text-base font-medium tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
@@ -202,8 +227,8 @@
             @click="closeDrop"
           >
             <AppButton
+              primary
               text="Sign up"
-              type="button"
               class="ml-8"
               :class="[isActive && 'opacity-60']"
             />
@@ -321,7 +346,7 @@
                 </router-link>
               </div>
 
-              <div class="mb-8 text-left">
+              <div class="mb-7 text-left">
                 <router-link
                   v-if="authenticated"
                   v-slot="{ isActive }"
@@ -339,6 +364,35 @@
                     Settings
                   </span>
                 </router-link>
+              </div>
+              <div
+                class="mr-2 mb-10"
+                :class="
+                  loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
+                "
+                @click="toggleTheme()"
+              >
+                <Switch
+                  v-model="user.theme_dark"
+                  :class="user.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
+                  class="relative inline-flex h-[18px] w-[30px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                >
+                  <span class="sr-only">Toggle Theme</span>
+                  <span
+                    aria-hidden="true"
+                    :class="
+                      user.theme_dark
+                        ? 'translate-x-3 bg-gray-800'
+                        : 'translate-x-0 bg-white'
+                    "
+                    class="pointer-events-none inline-block h-[14px] w-[14px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out"
+                  />
+                </Switch>
+                <span
+                  class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                >
+                  Toggle Theme {{ user.theme_dark ? 'Light' : 'Dark' }}
+                </span>
               </div>
             </div>
             <div v-if="!authenticated">
@@ -439,6 +493,9 @@ export default {
       appName: 'Workflow',
       // logo: "https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600",
       drop: false,
+      errors: null,
+      success: '',
+      loading: false,
     };
   },
   computed: {
@@ -456,12 +513,45 @@ export default {
   methods: {
     ...mapActions({
       logout: 'auth/logout',
+      updateTheme: 'auth/theme',
+      popToast: 'toast/popToast',
     }),
     closeDrop() {
       this.drop = false;
     },
     openDrop() {
       this.drop = true;
+    },
+    async toggleTheme() {
+      this.loading = true;
+      this.errors = null;
+      this.success = '';
+      try {
+        await this.updateTheme({ theme_dark: !this.user.theme_dark }).then(
+          (response) => {
+            if (
+              response &&
+              response.data &&
+              response.data.user &&
+              response.data.user.id
+            ) {
+              this.popToast({
+                message: `Theme Saved`,
+                timer: 2000,
+                icon: 'success',
+              });
+            }
+          },
+        );
+      } catch (e) {
+        this.errors = e.data;
+        this.popToast({
+          message: `Error Updating Theme`,
+          timer: 5000,
+          icon: 'error',
+        });
+      }
+      this.loading = false;
     },
   },
 };

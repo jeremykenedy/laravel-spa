@@ -92,9 +92,9 @@
 
 <script>
 import axios from 'axios';
-import Success from '../components/Success.vue';
-import Errors from '../components/Errors.vue';
-import CircleSvg from '../components/CircleSvg.vue';
+import Success from '@components/Success.vue';
+import Errors from '@components/Errors.vue';
+import CircleSvg from '@components/CircleSvg.vue';
 import { PaperAirplaneIcon, CheckCircleIcon } from '@heroicons/vue/24/outline';
 import { mapActions } from 'vuex';
 

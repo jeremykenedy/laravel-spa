@@ -2,24 +2,14 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
-  extends: [
-    "eslint:recommended",
-    "plugin:vue/vue3-recommended",
-    "plugin:vue/vue3-essential",
-    "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier",
-  ],
+  extends: ["eslint:recommended", "plugin:vue/vue3-recommended", "plugin:vue/vue3-essential", "@vue/eslint-config-typescript/recommended", "@vue/eslint-config-prettier", "plugin:storybook/recommended"],
   parserOptions: {
     ecmaVersion: 13,
-    sourceType: "module",
+    sourceType: "module"
   },
-  plugins: [
-    "vue",
-    "html",
-    "prettier",
-  ],
+  plugins: ["vue", "html", "prettier"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",
@@ -34,5 +24,5 @@ module.exports = {
     "vue/no-unused-components": 0,
     "vue/require-explicit-emits": 0,
     "@typescript-eslint/no-this-alias": 0
-  },
+  }
 };

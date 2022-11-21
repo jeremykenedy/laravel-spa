@@ -19,6 +19,32 @@
           </button>
         </div>
 
+        <div class="hidden lg:inline-flex">
+          <div class="mr-4 inline-block flex items-center">
+            <button
+              class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
+              @click="toggleFullScreenSidebarTrigger()"
+            >
+              <span v-if="!fullScreenSideBarOpen" class="sr-only"
+                >Open menu</span
+              >
+              <span v-if="fullScreenSideBarOpen" class="sr-only"
+                >CLose menu</span
+              >
+              <Bars3Icon
+                v-if="!fullScreenSideBarOpen"
+                class="h-6 w-6"
+                aria-hidden="true"
+              />
+              <Bars3BottomLeftIcon
+                v-if="fullScreenSideBarOpen"
+                class="h-6 w-6"
+                aria-hidden="true"
+              />
+            </button>
+          </div>
+        </div>
+
         <div as="nav" class="ml-5 flex space-x-10">
           <router-link
             v-if="authenticated && roles && (roles.admin || roles.superAdmin)"
@@ -73,8 +99,10 @@
       </div>
 
       <div class="relative flex items-center">
+        <!--
         <div class="my-1 mr-3 w-full py-2 sm:flex sm:items-center">
           <span
+            v-tippy="'Toggle Theme ' + (form.theme_dark ? 'Light' : 'Dark')"
             :class="
               loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
             "
@@ -89,6 +117,34 @@
               class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
               style="left: -1.4em; top: 1.2em"
             />
+          </span>
+        </div>
+        -->
+
+        <div class="my-1 mr-5 mt-2 w-full py-2 sm:flex sm:items-center">
+          <span
+            v-tippy="'Toggle Theme ' + (form.theme_dark ? 'Light' : 'Dark')"
+            :class="
+              loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
+            "
+            @click="toggleTheme()"
+          >
+            <Switch
+              v-model="form.theme_dark"
+              :class="form.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
+              class="relative inline-flex h-[26px] w-[48px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              <span class="sr-only">Toggle Theme</span>
+              <span
+                aria-hidden="true"
+                :class="
+                  form.theme_dark
+                    ? 'translate-x-5 bg-gray-800'
+                    : 'translate-x-0 bg-white'
+                "
+                class="pointer-events-none inline-block h-[22px] w-[24px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out"
+              />
+            </Switch>
           </span>
         </div>
 
@@ -194,6 +250,7 @@ import {
   XMarkIcon,
   CogIcon,
   ArrowLeftOnRectangleIcon,
+  Bars3BottomLeftIcon,
   // ChevronDownIcon,
   UserCircleIcon,
 } from '@heroicons/vue/24/outline';
@@ -210,6 +267,7 @@ export default {
     ArrowLeftOnRectangleIcon,
     // ChevronDownIcon,
     UserCircleIcon,
+    Bars3BottomLeftIcon,
   },
   props: {},
   setup() {
@@ -229,6 +287,7 @@ export default {
   computed: {
     ...mapState('sidebar', {
       sideBarOpen: (state) => state.sideBarOpen,
+      fullScreenSideBarOpen: (state) => state.fullScreenSideBarOpen,
     }),
     ...mapGetters({
       authenticated: 'auth/authenticated',
@@ -249,12 +308,17 @@ export default {
   methods: {
     ...mapActions({
       toggleSidebar: 'sidebar/toggleSidebar',
+      toggleFullScreenSidebar: 'sidebar/toggleFullScreenSidebar',
       updateTheme: 'auth/theme',
       popToast: 'toast/popToast',
       logout: 'auth/logout',
     }),
     toggleSidebarTrigger() {
       this.toggleSidebar();
+      this.closeDrop();
+    },
+    toggleFullScreenSidebarTrigger() {
+      this.toggleFullScreenSidebar();
       this.closeDrop();
     },
     closeDrop() {

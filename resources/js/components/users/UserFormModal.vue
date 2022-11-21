@@ -446,11 +446,11 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
-/deep/ .multiselect-option {
+:deep() .multiselect-option {
   background: transparent;
   color: #777;
 }
-/deep/ .multiselect-option.is-pointed {
+:deep() .multiselect-option.is-pointed {
   background: #10b981;
   color: #ffffff;
 }

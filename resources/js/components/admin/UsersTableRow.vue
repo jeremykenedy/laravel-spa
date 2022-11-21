@@ -10,7 +10,7 @@
           />
         </div>
         <div class="ml-3">
-          <p class="whitespace-no-wrap text-xs">
+          <p class="whitespace-nowrap text-xs">
             {{ user.name }}
           </p>
         </div>
@@ -19,7 +19,7 @@
     <td class="border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500">
       <div class="flex items-center">
         <a
-          class="whitespace-no-wrap"
+          class="whitespace-nowrap"
           :href="'mailto:' + user.email"
           title="send email"
         >
@@ -28,7 +28,7 @@
       </div>
     </td>
     <td
-      class="whitespace-no-wrap border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500"
+      class="whitespace-nowrap border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500"
     >
       <p>
         <span v-if="user.roles && user.roles.length">
@@ -37,7 +37,7 @@
             :key="'user_' + user.id + '_role_' + role.id"
           >
             <span
-              class="whitespace-no-wrap m-1 inline-block cursor-default rounded px-2.5 py-0.5 text-xs font-bold"
+              class="m-1 inline-block cursor-default whitespace-nowrap rounded px-2.5 py-0.5 text-xs font-bold"
               :class="roleClass(role.slug)"
             >
               {{ role.name }}
@@ -47,7 +47,7 @@
       </p>
     </td>
     <td class="border-b border-gray-300 px-5 py-5 text-xs dark:border-gray-500">
-      <p v-if="user.created_at" class="whitespace-no-wrap">
+      <p v-if="user.created_at" class="whitespace-nowrap">
         {{ parseDisplayDate(user.created_at) }}
       </p>
     </td>
@@ -146,11 +146,12 @@
           >
         </template>
       </AppButton>
-
       <AppButton
+        v-tippy="'Edit User'"
+        warning
         :disabled="locked"
         :loading="!dataReady"
-        class="mr-2 inline-block rounded bg-yellow-500 px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-yellow-600 dark:hover:bg-yellow-500"
+        class="mr-2 px-1 py-1 text-sm"
         @click="triggerEditUser"
       >
         <template #text>
@@ -161,9 +162,11 @@
       </AppButton>
 
       <AppButton
+        v-tippy="'Delete User'"
+        danger
         :disabled="locked"
         :loading="!dataReady"
-        class="mr-2 inline-block rounded bg-red-600 px-1 py-1 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-red-500 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:bg-red-600 dark:hover:bg-red-500"
+        class="mr-2 px-1 py-1 text-sm"
         @click="triggerDeleteUser"
       >
         <template #text>

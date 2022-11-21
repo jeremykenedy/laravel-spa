@@ -10,8 +10,8 @@
         </style>
         @vite(['resources/css/app.css'])
     </head>
-    <body class="bg-gray-50 h-screen antialiased leading-none font-sans">
-        <div id="app"></div>
+    <body class="bg-gray-50 h-screen antialiased leading-none font-sans overflow-x-hidden overflow-y-auto">
+        <div id="app"  v-cloak></div>
         @vite(['resources/js/app.js'])
     </body>
 </html>

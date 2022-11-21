@@ -44,8 +44,9 @@
     </nav>
 
     <AppButton
+      v-tippy="'Create User'"
       :disabled="showCreateUserForm || !dataReady"
-      class="float-right mb-2 bg-green-600 px-2 py-0 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-green-500 hover:shadow-lg focus:shadow-lg active:shadow-lg dark:bg-green-600 dark:hover:bg-green-500"
+      class="float-right mb-2 px-2 py-2 text-sm font-medium"
       @click="triggerCreateUser"
     >
       <template #text>
@@ -54,6 +55,7 @@
         <span class="sr-only">Create New User</span>
       </template>
     </AppButton>
+
     <UsersTable
       :users="users"
       :pagination="pagination"

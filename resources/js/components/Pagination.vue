@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="vue-pagination">
     <ul
       v-if="showPagination"
       class="list-reset border-grey-light mb-2 flex w-auto rounded border font-sans"

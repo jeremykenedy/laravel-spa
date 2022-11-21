@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
@@ -7,10 +7,14 @@ import eslint from 'vite-plugin-eslint';
 import StylelintPlugin from 'vite-plugin-stylelint';
 import Inspect from 'vite-plugin-inspect';
 import legacy from '@vitejs/plugin-legacy';
+const fs = require('node:fs');
 
 export default defineConfig({
   plugins: [
-    laravel(['resources/css/app.css', 'resources/js/app.js']),
+    laravel({
+      input: ['resources/css/app.css', 'resources/js/app.js'],
+      refresh: true,
+    }),
     vue({
       template: {
         transformAssetUrls: {
@@ -29,6 +33,11 @@ export default defineConfig({
         buttonText: 'refresh',
       },
     }),
+    StylelintPlugin({
+      fix: false,
+      quite: true,
+      lintOnStart: false,
+    }),
     eslint({
       cache: true,
       fix: true,
@@ -38,27 +47,34 @@ export default defineConfig({
       failOnWarning: false,
       failOnError: true,
     }),
-    StylelintPlugin({
-      fix: true,
-      quite: true,
-      lintOnStart: false,
-    }),
     legacy({
       targets: ['defaults', 'not IE 11'],
       polyfills: true,
     }),
+    splitVendorChunkPlugin(),
     Inspect(),
   ],
+  server: {
+    https: {
+      key: fs.readFileSync(
+        '/Users/jeremykenedy/.config/valet/Certificates/laravel-secret-messages.test.key',
+      ),
+      cert: fs.readFileSync(
+        '/Users/jeremykenedy/.config/valet/Certificates/laravel-secret-messages.test.crt',
+      ),
+    },
+    host: 'laravel-secret-messages.test',
+  },
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'node_modules'),
       '@': path.resolve(__dirname, 'resources/js'),
+      '@img': path.resolve(__dirname, 'resources/img'),
       '@views': path.resolve(__dirname, 'resources/js/views'),
-      '@pages': path.resolve(__dirname, 'resources/js/views'),
+      '@pages': path.resolve(__dirname, 'resources/js/views/pages'),
       '@store': path.resolve(__dirname, 'resources/js/store'),
       '@services': path.resolve(__dirname, 'resources/js/services'),
       '@router': path.resolve(__dirname, 'resources/js/router'),
-      // '@pages': path.resolve(__dirname, 'resources/js/views/pages'),
       '@components': path.resolve(__dirname, 'resources/js/components'),
     },
   },

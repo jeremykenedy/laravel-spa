@@ -8,30 +8,23 @@
         <div
           class="relative flex w-full flex-col rounded-lg border-0 bg-white shadow-lg outline-none focus:outline-none dark:bg-slate-600"
         >
-          <div
-            class="flex items-start justify-between rounded-t border-b border-solid border-slate-200 p-5"
-          >
+          <div class="flex items-start justify-between rounded-t p-5">
+            <!-- border-b border-solid border-slate-200 -->
             <h3 class="text-3xl font-semibold">
               <slot v-if="hasTitleSlot" name="title" />
             </h3>
-            <button
-              class="float-right ml-auto border-0 bg-transparent p-1 text-3xl font-semibold leading-none text-black opacity-5 outline-none focus:outline-none"
+            <AppButton
+              v-if="showClose"
+              text="X"
+              class="text-1xl float-right border-0 bg-transparent text-gray-600 shadow-none outline-none hover:text-gray-800 focus:outline-none"
               @click="closeModal()"
-            >
-              <span
-                class="block h-6 w-6 bg-transparent text-2xl text-black opacity-5 outline-none focus:outline-none"
-              >
-                ×
-              </span>
-            </button>
+            />
           </div>
           <div class="relative flex-auto p-6">
             <slot v-if="hasBodySlot" name="body" />
           </div>
-          <div
-            v-if="hasFooterSlot"
-            class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6"
-          >
+          <div v-if="hasFooterSlot" class="flex items-center justify-end p-6">
+            <!-- rounded-b border-t border-solid border-slate-200 -->
             <slot v-if="hasFooterSlot" name="footer" />
           </div>
           <div
@@ -65,6 +58,7 @@ export default {
   name: 'AppModal',
   props: {
     showModal: { type: Boolean, default: false },
+    showClose: { type: Boolean, default: true },
     modalWidthClass: {
       type: String,
       default: 'min-w-[96%] sm:min-w-[60%] lg:min-w-[50%]',

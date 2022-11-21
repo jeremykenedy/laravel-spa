@@ -111,10 +111,10 @@
 </template>
 
 <script>
-import Errors from '../components/Errors.vue';
 import axios from 'axios';
-import Success from '../components/Success.vue';
-import CircleSvg from '../components/CircleSvg.vue';
+import Errors from '@components/Errors.vue';
+import Success from '@components/Success.vue';
+import CircleSvg from '@components/CircleSvg.vue';
 import { CheckCircleIcon } from '@heroicons/vue/24/outline';
 import { mapActions } from 'vuex';
 

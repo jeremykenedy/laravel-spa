@@ -2,7 +2,11 @@
 /*@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');*/
 /*@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700');*/
 
+@import '~/tippy.js/dist/tippy.css';
+@import '~/tippy.js/themes/material.css';
+@import '~/tippy.js/animations/perspective.css';
 @import '~/sweetalert2/dist/sweetalert2.min.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -100,47 +104,6 @@ video {
   max-width: 100%;
   height: auto;
 }
-.swal2-popup.swal2-modal {
-  @apply rounded-lg;
-}
-.swal2-confirm {
-  @apply rounded-md;
-}
-
-.dark .swal2-popup.swal2-toast {
-  @apply bg-slate-900;
-}
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-success
-  [class^='swal2-success-circular-line'][class$='right'],
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-success
-  [class^='swal2-success-circular-line'][class$='left'],
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-error
-  [class^='swal2-error-circular-line'][class$='right'],
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-error
-  [class^='swal2-error-circular-line'][class$='left'] {
-  @apply bg-slate-900 !important;
-}
-.dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-title {
-  @apply text-green-500 !important;
-}
-.dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-timer-progress-bar {
-  @apply bg-green-500 !important;
-}
-.dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-title {
-  @apply text-red-500 !important;
-}
-.dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-timer-progress-bar {
-  @apply bg-red-500 !important;
-}
-
 .bg-white {
   --bg-opacity: 1;
   background-color: #fff;
@@ -411,4 +374,104 @@ video {
   .border-r {
     @apply border-gray-200 dark:border-gray-700;
   }
+}
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+/*Sweet Alert overrides*/
+.swal2-popup.swal2-modal {
+  @apply rounded-lg;
+}
+.swal2-confirm {
+  @apply rounded-md;
+}
+.dark .swal2-popup.swal2-toast {
+  @apply bg-slate-900;
+}
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-success
+  [class^='swal2-success-circular-line'][class$='right'],
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-success
+  [class^='swal2-success-circular-line'][class$='left'],
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-error
+  [class^='swal2-error-circular-line'][class$='right'],
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-error
+  [class^='swal2-error-circular-line'][class$='left'] {
+  @apply bg-slate-900 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-title {
+  @apply text-green-500 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-timer-progress-bar {
+  @apply bg-green-500 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-title {
+  @apply text-red-500 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-timer-progress-bar {
+  @apply bg-red-500 !important;
+}
+
+/*Vue Tables 3 overrides*/
+.VueTables.VueTables--client {
+  /*@apply p-0 rounded shadow;*/
+}
+.VueTables .VueTables__search {
+  @apply mb-3 rounded border py-2 px-2 text-gray-600 shadow dark:text-gray-200;
+}
+.VueTables .VueTables__search .VueTables__search__input {
+  @apply ml-3 rounded border-0 bg-gray-200 text-sm text-gray-600 shadow dark:bg-slate-900 dark:text-gray-200;
+}
+.VueTables .table-responsive.VueTables__wrapper {
+  @apply rounded border-0 bg-gray-50 shadow dark:bg-slate-700;
+}
+.VueTables .table-responsive {
+  overflow: hidden !important;
+  overflow-x: auto !important;
+}
+.VueTables table {
+  @apply w-full rounded;
+}
+.VueTables .table-responsive.VueTables__wrapper tr,
+.VueTables .table-responsive.VueTables__wrapper th,
+.VueTables .table-responsive.VueTables__wrapper td {
+  @apply border-0 bg-transparent;
+}
+.VueTables .table-responsive.VueTables__wrapper th {
+  @apply bg-transparent px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider !important;
+  white-space: nowrap;
+}
+.VueTables .table-responsive.VueTables__wrapper thead tr {
+  @apply border-b-2 border-gray-300 bg-gray-200 text-gray-600 dark:border-gray-500 dark:bg-slate-900 dark:text-gray-200;
+}
+.VueTables .table-responsive.VueTables__wrapper tbody tr {
+  /*@apply bg-gray-100 text-gray-900 dark:bg-slate-700 dark:text-gray-100*/
+}
+.VueTables .table-responsive.VueTables__wrapper tbody td {
+  @apply border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500;
+}
+.VueTables .table-responsive.VueTables__wrapper tbody tr:last-child td {
+  /*@apply border-0*/
+}
+.VueTables .vue-pagination {
+  @apply w-full py-4 text-center;
+}
+.VueTables .vue-pagination ul {
+  @apply flex content-center justify-center;
+}
+.VueTables .VuePagination {
+  display: none !important;
+}
+
+.VueTables .table-responsive.VueTables__wrapper + p {
+  display: none !important;
 }

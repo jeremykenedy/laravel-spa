@@ -66,9 +66,9 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Errors from '../components/Errors.vue';
-import Success from '../components/Success.vue';
-import CircleSvg from '../components/CircleSvg.vue';
+import Errors from '@components/Errors.vue';
+import Success from '@components/Success.vue';
+import CircleSvg from '@components/CircleSvg.vue';
 
 export default {
   components: {

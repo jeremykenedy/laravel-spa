@@ -4,9 +4,13 @@ import router from '@router';
 import store from '@store';
 import axios from 'axios';
 import VueSweetalert2 from 'vue-sweetalert2';
-// import { plugin as VueTippy } from 'vue-tippy'
-import AppButton from '@components/AppButton.vue';
+import { plugin as VueTippy } from 'vue-tippy';
+import AppButton from '@components/common/AppButton.vue';
+import AppToast from '@components/common/AppToast.vue';
+import AppSwitch from '@components/common/AppSwitch.vue';
+// import AppTable from '@components/common/AppTable.vue';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
 
 axios.defaults.withCredentials = true;
 
@@ -17,6 +21,22 @@ store.dispatch('auth/getUser').then(() => {
     .use(store)
     .use(router)
     .use(VueSweetalert2)
+    .use(ClientTable, {}, 'tailwind')
+    .use(VueTippy, {
+      directive: 'tippy', // => v-tippy
+      component: 'tippy', // => <tippy/>
+      componentSingleton: 'tippy-singleton', // => <tippy-singleton/>,
+      defaultProps: {
+        arrow: true,
+        theme: 'material',
+        animation: 'perspective',
+        placement: 'auto-end',
+        allowHTML: true,
+      },
+    })
     .component('AppButton', AppButton)
+    .component('AppToast', AppToast)
+    .component('AppSwitch', AppSwitch)
+    // .component('AppTable', AppTable)
     .mount('#app');
 });
