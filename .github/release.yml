@@ -1,4 +1,4 @@
-# .github/workflows/release.yml
+# .github/release.yml
 
 changelog:
   exclude:
