@@ -192,7 +192,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
-        "Settings" => QCod\Settings\Facade::class,
+        'Settings' => QCod\Settings\Facade::class,
     ])->toArray(),
 
 ];

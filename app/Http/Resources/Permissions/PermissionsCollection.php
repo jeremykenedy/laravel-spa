@@ -21,7 +21,6 @@ class PermissionsCollection extends ResourceCollection
      */
     public static $wrap = 'permissions';
 
-
     /**
      * Transform the resource collection into an array.
      *
