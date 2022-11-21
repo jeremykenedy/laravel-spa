@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \QCod\Settings\Setting\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use QCod\Settings\Setting\Setting;
 
 class AppSettingsController extends Controller
 {

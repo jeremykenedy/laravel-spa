@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Permissions\CreatePermissionRequest;
-use App\Http\Requests\Permissions\UpdatePermissionRequest;
 use App\Http\Requests\Permissions\GetPermissionsRequest;
+use App\Http\Requests\Permissions\UpdatePermissionRequest;
 use App\Http\Resources\Permissions\PermissionsCollection;
-use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-
 use Log;
 
 class PermissionsController extends Controller

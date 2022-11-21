@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Users\RolesCollection;
-use App\Models\User;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -56,5 +56,4 @@ class DashboardController extends Controller
 
         return $data;
     }
-
 }

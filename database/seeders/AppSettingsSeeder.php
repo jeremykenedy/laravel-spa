@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use \QCod\Settings\Setting\Setting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use QCod\Settings\Setting\Setting;
 
 class AppSettingsSeeder extends Seeder
 {
@@ -21,75 +21,75 @@ class AppSettingsSeeder extends Seeder
                 'key'       => 'enableFbLogin',
                 'val'       => false,
                 'type'      => 'boolean',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Facebook Id',
                 'key'       => 'appFbId',
                 'val'       => '',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Facebook Secret',
                 'key'       => 'appFbSecret',
                 'val'       => '',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Facebook Redirect',
                 'key'       => 'appFbRedirect',
                 'val'       => url('social/handle/facebook'),
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Twitter Login Enabled',
                 'key'       => 'enableTwitterLogin',
                 'val'       => false,
                 'type'      => 'boolean',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'key'       => 'appTwitterId',
                 'name'      => 'App Twitter Id',
                 'val'       => '',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Twitter Secret',
                 'key'       => 'appTwitterSecret',
                 'val'       => '',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Twitter Redirect',
                 'key'       => 'appTwitterRedirect',
                 'val'       => url('social/handle/twitter'),
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Google Login Enabled',
                 'key'       => 'enableGoogleLogin',
                 'type'      => 'boolean',
                 'val'       => false,
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'key'       => 'appGoogleId',
                 'name'      => 'App Google Id',
                 'val'       => '',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Google Secret',
                 'key'       => 'appGoogleSecret',
                 'val'       => '',
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             [
                 'name'      => 'App Google Redirect',
                 'key'       => 'appGoogleRedirect',
                 'val'       => url('social/handle/google'),
-                'group'     => 'auth'
+                'group'     => 'auth',
             ],
             // [
             //     'name'      => 'App Google Analytics Enabled',
