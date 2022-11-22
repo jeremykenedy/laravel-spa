@@ -16,9 +16,13 @@ class AppSettingsController extends Controller
     public function index()
     {
         $authSettings = Setting::whereGroup('auth')->get();
+        $analyticsSettings = Setting::whereGroup('analytics')->get();
+        $generalSettings = Setting::whereGroup('general')->get();
 
         return response()->json([
-            'authSettings'  => $authSettings,
+            'authSettings'      => $authSettings,
+            'analyticsSettings' => $analyticsSettings,
+            'generalSettings'   => $generalSettings,
         ]);
     }
 

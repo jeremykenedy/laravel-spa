@@ -87,6 +87,7 @@
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-inspect": "^0.6.1",
     "vite-plugin-stylelint": "^3.0.8",
+    "vue-gtag-next": "^1.14.0",
     "vue-sweetalert2": "^5.0.5",
     "vue-tippy": "^6.0.0-alpha.65"
   }

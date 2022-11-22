@@ -8,19 +8,19 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/XIcon.js");
-/* harmony import */ var _components_Errors_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Errors.vue */ "./resources/js/components/Errors.vue");
-/* harmony import */ var _components_Success_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Success.vue */ "./resources/js/components/Success.vue");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _components_CircleSvg_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/CircleSvg.vue */ "./resources/js/components/CircleSvg.vue");
+/* harmony import */ const _heroicons_vue_solid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @heroicons/vue/solid */ "./node_modules/@heroicons/vue/solid/esm/XIcon.js");
+/* harmony import */ const _components_Errors_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Errors.vue */ "./resources/js/components/Errors.vue");
+/* harmony import */ const _components_Success_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Success.vue */ "./resources/js/components/Success.vue");
+/* harmony import */ const moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ const moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ const _components_CircleSvg_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/CircleSvg.vue */ "./resources/js/components/CircleSvg.vue");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
-function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { const protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { let state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { const delegate = context.delegate; if (delegate) { const delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; const record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} let IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); const getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); const Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { const record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { const result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } let previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { const method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } const record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; const info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { const entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { const record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { const iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { let i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { const ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); const iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { const keys = []; for (const key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { const key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (const name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; const rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; const context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (let i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { const hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (let i = this.tryEntries.length - 1; i >= 0; --i) { const entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); const record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (let i = this.tryEntries.length - 1; i >= 0; --i) { const entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, "catch": function _catch(tryLoc) { for (let i = this.tryEntries.length - 1; i >= 0; --i) { const entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { const record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+function _asyncToGenerator(fn) { return function () { const self = this, args = arguments; return new Promise(function (resolve, reject) { const gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
@@ -53,7 +53,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   methods: {
     update: function update() {
-      var _this = this;
+      const _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -143,7 +143,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/XIcon.js");
+/* harmony import */ const _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/XIcon.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -171,7 +171,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/XIcon.js");
+/* harmony import */ const _heroicons_vue_outline__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @heroicons/vue/outline */ "./node_modules/@heroicons/vue/outline/esm/XIcon.js");
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -198,63 +198,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": function() { return /* binding */ render; }
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ const vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+const _hoisted_1 = {
   "class": "flex items-center justify-between border p-4 font-semibold"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ");
+const _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ");
 
-var _hoisted_3 = {
+const _hoisted_3 = {
   "class": "text-sm font-medium text-gray-600"
 };
-var _hoisted_4 = {
+const _hoisted_4 = {
   "class": "bg-white p-4"
 };
-var _hoisted_5 = {
+const _hoisted_5 = {
   "class": "my-1 w-full py-2 sm:flex sm:items-center sm:justify-between"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+const _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "name",
   "class": "w-4/12"
 }, " Name ", -1
 /* HOISTED */
 );
 
-var _hoisted_7 = {
+const _hoisted_7 = {
   "class": "my-1 w-full py-2 sm:flex sm:items-center sm:justify-between"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+const _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "Email",
   "class": "w-4/12"
 }, " Email ", -1
 /* HOISTED */
 );
 
-var _hoisted_9 = {
+const _hoisted_9 = {
   "class": "my-1 w-full py-2 sm:flex sm:items-center sm:justify-end"
 };
-var _hoisted_10 = {
+const _hoisted_10 = {
   "class": "mt-3 flex w-full items-center justify-between sm:mt-0 sm:w-8/12"
 };
-var _hoisted_11 = {
+const _hoisted_11 = {
   key: 0,
   "class": "flex items-center justify-center rounded-sm bg-blue-500 p-2 px-6 text-white hover:bg-blue-600"
 };
-var _hoisted_12 = {
+const _hoisted_12 = {
   key: 1,
   type: "submit",
   "class": "rounded-sm bg-blue-500 p-3 text-white hover:bg-blue-600"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_Success = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Success");
+  const _component_Success = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Success");
 
-  var _component_Errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Errors");
+  const _component_Errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Errors");
 
-  var _component_circle_svg = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("circle-svg");
+  const _component_circle_svg = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("circle-svg");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.verified ? "Verified at : ".concat($options.moment($options.verified).format('MMMM Do YYYY, h:mm a'), " ") : 'Not verified !'), 1
   /* TEXT */
@@ -319,13 +319,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": function() { return /* binding */ render; }
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ const vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = ["width", "height", "viewBox", "stroke"];
+const _hoisted_1 = ["width", "height", "viewBox", "stroke"];
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<g fill=\"none\" fill-rule=\"evenodd\"><g transform=\"translate(1 1)\" stroke-width=\"2\"><circle stroke-opacity=\".8\" cx=\"18\" cy=\"18\" r=\"18\"></circle><path d=\"M36 18c0-9.94-8.06-18-18-18\"><animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 18 18\" to=\"360 18 18\" dur=\"1s\" repeatCount=\"indefinite\"></animateTransform></path></g></g>", 1);
+const _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<g fill=\"none\" fill-rule=\"evenodd\"><g transform=\"translate(1 1)\" stroke-width=\"2\"><circle stroke-opacity=\".8\" cx=\"18\" cy=\"18\" r=\"18\"></circle><path d=\"M36 18c0-9.94-8.06-18-18-18\"><animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 18 18\" to=\"360 18 18\" dur=\"1s\" repeatCount=\"indefinite\"></animateTransform></path></g></g>", 1);
 
-var _hoisted_3 = [_hoisted_2];
+const _hoisted_3 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("svg", {
     width: $props.w,
@@ -351,25 +351,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": function() { return /* binding */ render; }
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ const vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+const _hoisted_1 = {
   "class": "relative mx-auto flex w-full items-start rounded border border border-red-100 bg-red-100 px-4 py-3 text-red-500 md:w-10/12 md:p-2",
   role: "alert shadow"
 };
-var _hoisted_2 = {
+const _hoisted_2 = {
   key: 0,
   "class": "block w-full text-center sm:inline"
 };
-var _hoisted_3 = {
+const _hoisted_3 = {
   key: 1,
   "class": "block w-full text-center sm:inline"
 };
-var _hoisted_4 = {
+const _hoisted_4 = {
   "class": "text-left text-sm"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_XIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("XIcon");
+  const _component_XIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("XIcon");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <strong class=\"font-bold\">Holy smokes!</strong> "), !$props.content.errors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.content.message), 1
   /* TEXT */
@@ -410,17 +410,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "render": function() { return /* binding */ render; }
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ const vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+const _hoisted_1 = {
   "class": "relative mx-auto flex w-full items-start rounded border border border-green-100 bg-green-100 px-4 py-3 text-green-500 md:w-10/12 md:p-2",
   role: "alert shadow"
 };
-var _hoisted_2 = {
+const _hoisted_2 = {
   "class": "block w-full text-left sm:inline"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_XIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("XIcon");
+  const _component_XIcon = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("XIcon");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <strong class=\"font-bold\">Holy smokes!</strong> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.content), 1
   /* TEXT */
@@ -453,7 +453,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var af = moment.defineLocale('af', {
+    const af = moment.defineLocale('af', {
         months: 'Januarie_Februarie_Maart_April_Mei_Junie_Julie_Augustus_September_Oktober_November_Desember'.split(
             '_'
         ),
@@ -547,7 +547,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var pluralForm = function (n) {
+    const pluralForm = function (n) {
             return n === 0
                 ? 0
                 : n === 1
@@ -612,7 +612,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         pluralize = function (u) {
             return function (number, withoutSuffix, string, isFuture) {
-                var f = pluralForm(number),
+                let f = pluralForm(number),
                     str = plurals[u][pluralForm(number)];
                 if (f === 2) {
                     str = str[withoutSuffix ? 0 : 1];
@@ -635,7 +635,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             'ديسمبر',
         ];
 
-    var arDz = moment.defineLocale('ar-dz', {
+    const arDz = moment.defineLocale('ar-dz', {
         months: months,
         monthsShort: months,
         weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
@@ -718,7 +718,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var arKw = moment.defineLocale('ar-kw', {
+    const arKw = moment.defineLocale('ar-kw', {
         months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
             '_'
         ),
@@ -792,7 +792,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '1',
             2: '2',
             3: '3',
@@ -869,7 +869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         pluralize = function (u) {
             return function (number, withoutSuffix, string, isFuture) {
-                var f = pluralForm(number),
+                let f = pluralForm(number),
                     str = plurals[u][pluralForm(number)];
                 if (f === 2) {
                     str = str[withoutSuffix ? 0 : 1];
@@ -892,7 +892,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             'ديسمبر',
         ];
 
-    var arLy = moment.defineLocale('ar-ly', {
+    const arLy = moment.defineLocale('ar-ly', {
         months: months,
         monthsShort: months,
         weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
@@ -983,7 +983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var arMa = moment.defineLocale('ar-ma', {
+    const arMa = moment.defineLocale('ar-ma', {
         months: 'يناير_فبراير_مارس_أبريل_ماي_يونيو_يوليوز_غشت_شتنبر_أكتوبر_نونبر_دجنبر'.split(
             '_'
         ),
@@ -1057,7 +1057,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '١',
             2: '٢',
             3: '٣',
@@ -1082,7 +1082,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '٠': '0',
         };
 
-    var arSa = moment.defineLocale('ar-sa', {
+    const arSa = moment.defineLocale('ar-sa', {
         months: 'يناير_فبراير_مارس_أبريل_مايو_يونيو_يوليو_أغسطس_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
             '_'
         ),
@@ -1181,7 +1181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var arTn = moment.defineLocale('ar-tn', {
+    const arTn = moment.defineLocale('ar-tn', {
         months: 'جانفي_فيفري_مارس_أفريل_ماي_جوان_جويلية_أوت_سبتمبر_أكتوبر_نوفمبر_ديسمبر'.split(
             '_'
         ),
@@ -1257,7 +1257,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '١',
             2: '٢',
             3: '٣',
@@ -1346,7 +1346,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         pluralize = function (u) {
             return function (number, withoutSuffix, string, isFuture) {
-                var f = pluralForm(number),
+                let f = pluralForm(number),
                     str = plurals[u][pluralForm(number)];
                 if (f === 2) {
                     str = str[withoutSuffix ? 0 : 1];
@@ -1369,7 +1369,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             'ديسمبر',
         ];
 
-    var ar = moment.defineLocale('ar', {
+    const ar = moment.defineLocale('ar', {
         months: months,
         monthsShort: months,
         weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
@@ -1463,7 +1463,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var suffixes = {
+    const suffixes = {
         1: '-inci',
         5: '-inci',
         8: '-inci',
@@ -1484,7 +1484,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         90: '-ıncı',
     };
 
-    var az = moment.defineLocale('az', {
+    const az = moment.defineLocale('az', {
         months: 'yanvar_fevral_mart_aprel_may_iyun_iyul_avqust_sentyabr_oktyabr_noyabr_dekabr'.split(
             '_'
         ),
@@ -1549,7 +1549,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 // special case for zero
                 return number + '-ıncı';
             }
-            var a = number % 10,
+            const a = number % 10,
                 b = (number % 100) - a,
                 c = number >= 100 ? 100 : null;
             return number + (suffixes[a] || suffixes[b] || suffixes[c]);
@@ -1587,7 +1587,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function plural(word, num) {
-        var forms = word.split('_');
+        const forms = word.split('_');
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
@@ -1595,7 +1595,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             : forms[2];
     }
     function relativeTimeWithPlural(number, withoutSuffix, key) {
-        var format = {
+        const format = {
             ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
             mm: withoutSuffix ? 'хвіліна_хвіліны_хвілін' : 'хвіліну_хвіліны_хвілін',
             hh: withoutSuffix ? 'гадзіна_гадзіны_гадзін' : 'гадзіну_гадзіны_гадзін',
@@ -1612,7 +1612,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var be = moment.defineLocale('be', {
+    const be = moment.defineLocale('be', {
         months: {
             format: 'студзеня_лютага_сакавіка_красавіка_траўня_чэрвеня_ліпеня_жніўня_верасня_кастрычніка_лістапада_снежня'.split(
                 '_'
@@ -1745,7 +1745,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var bg = moment.defineLocale('bg', {
+    const bg = moment.defineLocale('bg', {
         months: 'януари_февруари_март_април_май_юни_юли_август_септември_октомври_ноември_декември'.split(
             '_'
         ),
@@ -1803,7 +1803,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}-(ев|ен|ти|ви|ри|ми)/,
         ordinal: function (number) {
-            var lastDigit = number % 10,
+            const lastDigit = number % 10,
                 last2Digits = number % 100;
             if (number === 0) {
                 return number + '-ев';
@@ -1851,7 +1851,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var bm = moment.defineLocale('bm', {
+    const bm = moment.defineLocale('bm', {
         months: 'Zanwuyekalo_Fewuruyekalo_Marisikalo_Awirilikalo_Mɛkalo_Zuwɛnkalo_Zuluyekalo_Utikalo_Sɛtanburukalo_ɔkutɔburukalo_Nowanburukalo_Desanburukalo'.split(
             '_'
         ),
@@ -1921,7 +1921,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '১',
             2: '২',
             3: '৩',
@@ -1946,7 +1946,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '০': '0',
         };
 
-    var bnBd = moment.defineLocale('bn-bd', {
+    const bnBd = moment.defineLocale('bn-bd', {
         months: 'জানুয়ারি_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split(
             '_'
         ),
@@ -2069,7 +2069,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '১',
             2: '২',
             3: '৩',
@@ -2094,7 +2094,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '০': '0',
         };
 
-    var bn = moment.defineLocale('bn', {
+    const bn = moment.defineLocale('bn', {
         months: 'জানুয়ারি_ফেব্রুয়ারি_মার্চ_এপ্রিল_মে_জুন_জুলাই_আগস্ট_সেপ্টেম্বর_অক্টোবর_নভেম্বর_ডিসেম্বর'.split(
             '_'
         ),
@@ -2207,7 +2207,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '༡',
             2: '༢',
             3: '༣',
@@ -2232,7 +2232,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '༠': '0',
         };
 
-    var bo = moment.defineLocale('bo', {
+    const bo = moment.defineLocale('bo', {
         months: 'ཟླ་བ་དང་པོ_ཟླ་བ་གཉིས་པ_ཟླ་བ་གསུམ་པ_ཟླ་བ་བཞི་པ_ཟླ་བ་ལྔ་པ_ཟླ་བ་དྲུག་པ_ཟླ་བ་བདུན་པ_ཟླ་བ་བརྒྱད་པ_ཟླ་བ་དགུ་པ_ཟླ་བ་བཅུ་པ_ཟླ་བ་བཅུ་གཅིག་པ_ཟླ་བ་བཅུ་གཉིས་པ'.split(
             '_'
         ),
@@ -2351,7 +2351,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function relativeTimeWithMutation(number, withoutSuffix, key) {
-        var format = {
+        const format = {
             mm: 'munutenn',
             MM: 'miz',
             dd: 'devezh',
@@ -2383,7 +2383,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return text;
     }
     function softMutation(text) {
-        var mutationTable = {
+        const mutationTable = {
             m: 'v',
             b: 'v',
             d: 'z',
@@ -2394,7 +2394,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return mutationTable[text.charAt(0)] + text.substring(1);
     }
 
-    var monthsParse = [
+    const monthsParse = [
             /^gen/i,
             /^c[ʼ\']hwe/i,
             /^meu/i,
@@ -2442,7 +2442,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             /^Sa/i,
         ];
 
-    var br = moment.defineLocale('br', {
+    const br = moment.defineLocale('br', {
         months: 'Genver_Cʼhwevrer_Meurzh_Ebrel_Mae_Mezheven_Gouere_Eost_Gwengolo_Here_Du_Kerzu'.split(
             '_'
         ),
@@ -2497,7 +2497,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(añ|vet)/,
         ordinal: function (number) {
-            var output = number === 1 ? 'añ' : 'vet';
+            const output = number === 1 ? 'añ' : 'vet';
             return number + output;
         },
         week: {
@@ -2539,7 +2539,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function translate(number, withoutSuffix, key) {
-        var result = number + ' ';
+        let result = number + ' ';
         switch (key) {
             case 'ss':
                 if (number === 1) {
@@ -2600,7 +2600,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var bs = moment.defineLocale('bs', {
+    const bs = moment.defineLocale('bs', {
         months: 'januar_februar_mart_april_maj_juni_juli_august_septembar_oktobar_novembar_decembar'.split(
             '_'
         ),
@@ -2706,7 +2706,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ca = moment.defineLocale('ca', {
+    const ca = moment.defineLocale('ca', {
         months: {
             standalone:
                 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split(
@@ -2780,7 +2780,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(r|n|t|è|a)/,
         ordinal: function (number, period) {
-            var output =
+            let output =
                 number === 1
                     ? 'r'
                     : number === 2
@@ -2825,7 +2825,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months = {
+    const months = {
             format: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
                 '_'
             ),
@@ -2858,7 +2858,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return n > 1 && n < 5 && ~~(n / 10) !== 1;
     }
     function translate(number, withoutSuffix, key, isFuture) {
-        var result = number + ' ';
+        const result = number + ' ';
         switch (key) {
             case 's': // a few seconds / in a few seconds / a few seconds ago
                 return withoutSuffix || isFuture ? 'pár sekund' : 'pár sekundami';
@@ -2911,7 +2911,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var cs = moment.defineLocale('cs', {
+    const cs = moment.defineLocale('cs', {
         months: months,
         monthsShort: monthsShort,
         monthsRegex: monthsRegex,
@@ -3024,7 +3024,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var cv = moment.defineLocale('cv', {
+    const cv = moment.defineLocale('cv', {
         months: 'кӑрлач_нарӑс_пуш_ака_май_ҫӗртме_утӑ_ҫурла_авӑн_юпа_чӳк_раштав'.split(
             '_'
         ),
@@ -3053,7 +3053,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         relativeTime: {
             future: function (output) {
-                var affix = /сехет$/i.exec(output)
+                const affix = /сехет$/i.exec(output)
                     ? 'рен'
                     : /ҫул$/i.exec(output)
                     ? 'тан'
@@ -3107,7 +3107,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var cy = moment.defineLocale('cy', {
+    const cy = moment.defineLocale('cy', {
         months: 'Ionawr_Chwefror_Mawrth_Ebrill_Mai_Mehefin_Gorffennaf_Awst_Medi_Hydref_Tachwedd_Rhagfyr'.split(
             '_'
         ),
@@ -3157,7 +3157,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         dayOfMonthOrdinalParse: /\d{1,2}(fed|ain|af|il|ydd|ed|eg)/,
         // traditional ordinal numbers above 31 are not commonly used in colloquial Welsh
         ordinal: function (number) {
-            var b = number,
+            let b = number,
                 output = '',
                 lookup = [
                     '',
@@ -3223,7 +3223,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var da = moment.defineLocale('da', {
+    const da = moment.defineLocale('da', {
         months: 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'.split(
             '_'
         ),
@@ -3299,7 +3299,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
@@ -3313,7 +3313,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return withoutSuffix ? format[key][0] : format[key][1];
     }
 
-    var deAt = moment.defineLocale('de-at', {
+    const deAt = moment.defineLocale('de-at', {
         months: 'Jänner_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
@@ -3394,7 +3394,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
@@ -3408,7 +3408,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return withoutSuffix ? format[key][0] : format[key][1];
     }
 
-    var deCh = moment.defineLocale('de-ch', {
+    const deCh = moment.defineLocale('de-ch', {
         months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
@@ -3491,7 +3491,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             m: ['eine Minute', 'einer Minute'],
             h: ['eine Stunde', 'einer Stunde'],
             d: ['ein Tag', 'einem Tag'],
@@ -3505,7 +3505,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return withoutSuffix ? format[key][0] : format[key][1];
     }
 
-    var de = moment.defineLocale('de', {
+    const de = moment.defineLocale('de', {
         months: 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
@@ -3585,7 +3585,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months = [
+    const months = [
             'ޖެނުއަރީ',
             'ފެބްރުއަރީ',
             'މާރިޗު',
@@ -3609,7 +3609,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             'ހޮނިހިރު',
         ];
 
-    var dv = moment.defineLocale('dv', {
+    const dv = moment.defineLocale('dv', {
         months: months,
         monthsShort: months,
         weekdays: weekdays,
@@ -3701,7 +3701,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         );
     }
 
-    var el = moment.defineLocale('el', {
+    const el = moment.defineLocale('el', {
         monthsNominativeEl:
             'Ιανουάριος_Φεβρουάριος_Μάρτιος_Απρίλιος_Μάιος_Ιούνιος_Ιούλιος_Αύγουστος_Σεπτέμβριος_Οκτώβριος_Νοέμβριος_Δεκέμβριος'.split(
                 '_'
@@ -3764,7 +3764,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             sameElse: 'L',
         },
         calendar: function (key, mom) {
-            var output = this._calendarEl[key],
+            let output = this._calendarEl[key],
                 hours = mom && mom.hours();
             if (isFunction(output)) {
                 output = output.apply(mom);
@@ -3819,7 +3819,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enAu = moment.defineLocale('en-au', {
+    const enAu = moment.defineLocale('en-au', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -3863,7 +3863,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -3906,7 +3906,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enCa = moment.defineLocale('en-ca', {
+    const enCa = moment.defineLocale('en-ca', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -3950,7 +3950,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -3989,7 +3989,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enGb = moment.defineLocale('en-gb', {
+    const enGb = moment.defineLocale('en-gb', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -4033,7 +4033,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -4076,7 +4076,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enIe = moment.defineLocale('en-ie', {
+    const enIe = moment.defineLocale('en-ie', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -4120,7 +4120,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -4163,7 +4163,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enIl = moment.defineLocale('en-il', {
+    const enIl = moment.defineLocale('en-il', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -4207,7 +4207,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -4246,7 +4246,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enIn = moment.defineLocale('en-in', {
+    const enIn = moment.defineLocale('en-in', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -4290,7 +4290,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -4333,7 +4333,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enNz = moment.defineLocale('en-nz', {
+    const enNz = moment.defineLocale('en-nz', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -4377,7 +4377,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -4420,7 +4420,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var enSg = moment.defineLocale('en-sg', {
+    const enSg = moment.defineLocale('en-sg', {
         months: 'January_February_March_April_May_June_July_August_September_October_November_December'.split(
             '_'
         ),
@@ -4464,7 +4464,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -4510,7 +4510,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var eo = moment.defineLocale('eo', {
+    const eo = moment.defineLocale('eo', {
         months: 'januaro_februaro_marto_aprilo_majo_junio_julio_aŭgusto_septembro_oktobro_novembro_decembro'.split(
             '_'
         ),
@@ -4593,7 +4593,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
+    const monthsShortDot =
             'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
                 '_'
             ),
@@ -4615,7 +4615,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         monthsRegex =
             /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
-    var esDo = moment.defineLocale('es-do', {
+    const esDo = moment.defineLocale('es-do', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
             '_'
         ),
@@ -4721,7 +4721,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
+    const monthsShortDot =
             'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
                 '_'
             ),
@@ -4743,7 +4743,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         monthsRegex =
             /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
-    var esMx = moment.defineLocale('es-mx', {
+    const esMx = moment.defineLocale('es-mx', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
             '_'
         ),
@@ -4851,7 +4851,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
+    const monthsShortDot =
             'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
                 '_'
             ),
@@ -4873,7 +4873,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         monthsRegex =
             /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
-    var esUs = moment.defineLocale('es-us', {
+    const esUs = moment.defineLocale('es-us', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
             '_'
         ),
@@ -4979,7 +4979,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortDot =
+    const monthsShortDot =
             'ene._feb._mar._abr._may._jun._jul._ago._sep._oct._nov._dic.'.split(
                 '_'
             ),
@@ -5001,7 +5001,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         monthsRegex =
             /^(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre|ene\.?|feb\.?|mar\.?|abr\.?|may\.?|jun\.?|jul\.?|ago\.?|sep\.?|oct\.?|nov\.?|dic\.?)/i;
 
-    var es = moment.defineLocale('es', {
+    const es = moment.defineLocale('es', {
         months: 'enero_febrero_marzo_abril_mayo_junio_julio_agosto_septiembre_octubre_noviembre_diciembre'.split(
             '_'
         ),
@@ -5110,7 +5110,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             s: ['mõne sekundi', 'mõni sekund', 'paar sekundit'],
             ss: [number + 'sekundi', number + 'sekundit'],
             m: ['ühe minuti', 'üks minut'],
@@ -5129,7 +5129,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return isFuture ? format[key][0] : format[key][1];
     }
 
-    var et = moment.defineLocale('et', {
+    const et = moment.defineLocale('et', {
         months: 'jaanuar_veebruar_märts_aprill_mai_juuni_juuli_august_september_oktoober_november_detsember'.split(
             '_'
         ),
@@ -5205,7 +5205,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var eu = moment.defineLocale('eu', {
+    const eu = moment.defineLocale('eu', {
         months: 'urtarrila_otsaila_martxoa_apirila_maiatza_ekaina_uztaila_abuztua_iraila_urria_azaroa_abendua'.split(
             '_'
         ),
@@ -5289,7 +5289,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '۱',
             2: '۲',
             3: '۳',
@@ -5314,7 +5314,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '۰': '0',
         };
 
-    var fa = moment.defineLocale('fa', {
+    const fa = moment.defineLocale('fa', {
         months: 'ژانویه_فوریه_مارس_آوریل_مه_ژوئن_ژوئیه_اوت_سپتامبر_اکتبر_نوامبر_دسامبر'.split(
             '_'
         ),
@@ -5421,7 +5421,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var numbersPast =
+    const numbersPast =
             'nolla yksi kaksi kolme neljä viisi kuusi seitsemän kahdeksan yhdeksän'.split(
                 ' '
             ),
@@ -5438,7 +5438,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             numbersPast[9],
         ];
     function translate(number, withoutSuffix, key, isFuture) {
-        var result = '';
+        let result = '';
         switch (key) {
             case 's':
                 return isFuture ? 'muutaman sekunnin' : 'muutama sekunti';
@@ -5482,7 +5482,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             : number;
     }
 
-    var fi = moment.defineLocale('fi', {
+    const fi = moment.defineLocale('fi', {
         months: 'tammikuu_helmikuu_maaliskuu_huhtikuu_toukokuu_kesäkuu_heinäkuu_elokuu_syyskuu_lokakuu_marraskuu_joulukuu'.split(
             '_'
         ),
@@ -5565,7 +5565,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var fil = moment.defineLocale('fil', {
+    const fil = moment.defineLocale('fil', {
         months: 'Enero_Pebrero_Marso_Abril_Mayo_Hunyo_Hulyo_Agosto_Setyembre_Oktubre_Nobyembre_Disyembre'.split(
             '_'
         ),
@@ -5642,7 +5642,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var fo = moment.defineLocale('fo', {
+    const fo = moment.defineLocale('fo', {
         months: 'januar_februar_mars_apríl_mai_juni_juli_august_september_oktober_november_desember'.split(
             '_'
         ),
@@ -5717,7 +5717,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var frCa = moment.defineLocale('fr-ca', {
+    const frCa = moment.defineLocale('fr-ca', {
         months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
             '_'
         ),
@@ -5806,7 +5806,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var frCh = moment.defineLocale('fr-ch', {
+    const frCh = moment.defineLocale('fr-ch', {
         months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
             '_'
         ),
@@ -5899,7 +5899,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsStrictRegex =
+    const monthsStrictRegex =
             /^(janvier|février|mars|avril|mai|juin|juillet|août|septembre|octobre|novembre|décembre)/i,
         monthsShortStrictRegex =
             /(janv\.?|févr\.?|mars|avr\.?|mai|juin|juil\.?|août|sept\.?|oct\.?|nov\.?|déc\.?)/i,
@@ -5920,7 +5920,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             /^déc/i,
         ];
 
-    var fr = moment.defineLocale('fr', {
+    const fr = moment.defineLocale('fr', {
         months: 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split(
             '_'
         ),
@@ -6026,12 +6026,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortWithDots =
+    const monthsShortWithDots =
             'jan._feb._mrt._apr._mai_jun._jul._aug._sep._okt._nov._des.'.split('_'),
         monthsShortWithoutDots =
             'jan_feb_mrt_apr_mai_jun_jul_aug_sep_okt_nov_des'.split('_');
 
-    var fy = moment.defineLocale('fy', {
+    const fy = moment.defineLocale('fy', {
         months: 'jannewaris_febrewaris_maart_april_maaie_juny_july_augustus_septimber_oktober_novimber_desimber'.split(
             '_'
         ),
@@ -6120,7 +6120,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months = [
+    const months = [
             'Eanáir',
             'Feabhra',
             'Márta',
@@ -6160,7 +6160,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         weekdaysShort = ['Domh', 'Luan', 'Máirt', 'Céad', 'Déar', 'Aoine', 'Sath'],
         weekdaysMin = ['Do', 'Lu', 'Má', 'Cé', 'Dé', 'A', 'Sa'];
 
-    var ga = moment.defineLocale('ga', {
+    const ga = moment.defineLocale('ga', {
         months: months,
         monthsShort: monthsShort,
         monthsParseExact: true,
@@ -6201,7 +6201,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(d|na|mh)/,
         ordinal: function (number) {
-            var output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
+            const output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
             return number + output;
         },
         week: {
@@ -6234,7 +6234,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months = [
+    const months = [
             'Am Faoilleach',
             'An Gearran',
             'Am Màrt',
@@ -6274,7 +6274,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         weekdaysShort = ['Did', 'Dil', 'Dim', 'Dic', 'Dia', 'Dih', 'Dis'],
         weekdaysMin = ['Dò', 'Lu', 'Mà', 'Ci', 'Ar', 'Ha', 'Sa'];
 
-    var gd = moment.defineLocale('gd', {
+    const gd = moment.defineLocale('gd', {
         months: months,
         monthsShort: monthsShort,
         monthsParseExact: true,
@@ -6315,7 +6315,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(d|na|mh)/,
         ordinal: function (number) {
-            var output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
+            const output = number === 1 ? 'd' : number % 10 === 2 ? 'na' : 'mh';
             return number + output;
         },
         week: {
@@ -6348,7 +6348,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var gl = moment.defineLocale('gl', {
+    const gl = moment.defineLocale('gl', {
         months: 'xaneiro_febreiro_marzo_abril_maio_xuño_xullo_agosto_setembro_outubro_novembro_decembro'.split(
             '_'
         ),
@@ -6443,7 +6443,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             s: ['थोडया सॅकंडांनी', 'थोडे सॅकंड'],
             ss: [number + ' सॅकंडांनी', number + ' सॅकंड'],
             m: ['एका मिणटान', 'एक मिनूट'],
@@ -6460,7 +6460,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return isFuture ? format[key][0] : format[key][1];
     }
 
-    var gomDeva = moment.defineLocale('gom-deva', {
+    const gomDeva = moment.defineLocale('gom-deva', {
         months: {
             standalone:
                 'जानेवारी_फेब्रुवारी_मार्च_एप्रील_मे_जून_जुलय_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
@@ -6588,7 +6588,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             s: ['thoddea sekondamni', 'thodde sekond'],
             ss: [number + ' sekondamni', number + ' sekond'],
             m: ['eka mintan', 'ek minut'],
@@ -6605,7 +6605,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return isFuture ? format[key][0] : format[key][1];
     }
 
-    var gomLatn = moment.defineLocale('gom-latn', {
+    const gomLatn = moment.defineLocale('gom-latn', {
         months: {
             standalone:
                 'Janer_Febrer_Mars_Abril_Mai_Jun_Julai_Agost_Setembr_Otubr_Novembr_Dezembr'.split(
@@ -6730,7 +6730,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '૧',
             2: '૨',
             3: '૩',
@@ -6755,7 +6755,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '૦': '0',
         };
 
-    var gu = moment.defineLocale('gu', {
+    const gu = moment.defineLocale('gu', {
         months: 'જાન્યુઆરી_ફેબ્રુઆરી_માર્ચ_એપ્રિલ_મે_જૂન_જુલાઈ_ઑગસ્ટ_સપ્ટેમ્બર_ઑક્ટ્બર_નવેમ્બર_ડિસેમ્બર'.split(
             '_'
         ),
@@ -6873,7 +6873,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var he = moment.defineLocale('he', {
+    const he = moment.defineLocale('he', {
         months: 'ינואר_פברואר_מרץ_אפריל_מאי_יוני_יולי_אוגוסט_ספטמבר_אוקטובר_נובמבר_דצמבר'.split(
             '_'
         ),
@@ -6984,7 +6984,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '१',
             2: '२',
             3: '३',
@@ -7037,7 +7037,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             /^दिस/i,
         ];
 
-    var hi = moment.defineLocale('hi', {
+    const hi = moment.defineLocale('hi', {
         months: {
             format: 'जनवरी_फ़रवरी_मार्च_अप्रैल_मई_जून_जुलाई_अगस्त_सितम्बर_अक्टूबर_नवम्बर_दिसम्बर'.split(
                 '_'
@@ -7172,7 +7172,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function translate(number, withoutSuffix, key) {
-        var result = number + ' ';
+        let result = number + ' ';
         switch (key) {
             case 'ss':
                 if (number === 1) {
@@ -7233,7 +7233,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var hr = moment.defineLocale('hr', {
+    const hr = moment.defineLocale('hr', {
         months: {
             format: 'siječnja_veljače_ožujka_travnja_svibnja_lipnja_srpnja_kolovoza_rujna_listopada_studenoga_prosinca'.split(
                 '_'
@@ -7347,10 +7347,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var weekEndings =
+    const weekEndings =
         'vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton'.split(' ');
     function translate(number, withoutSuffix, key, isFuture) {
-        var num = number;
+        const num = number;
         switch (key) {
             case 's':
                 return isFuture || withoutSuffix
@@ -7392,7 +7392,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         );
     }
 
-    var hu = moment.defineLocale('hu', {
+    const hu = moment.defineLocale('hu', {
         months: 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'.split(
             '_'
         ),
@@ -7483,7 +7483,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var hyAm = moment.defineLocale('hy-am', {
+    const hyAm = moment.defineLocale('hy-am', {
         months: {
             format: 'հունվարի_փետրվարի_մարտի_ապրիլի_մայիսի_հունիսի_հուլիսի_օգոստոսի_սեպտեմբերի_հոկտեմբերի_նոյեմբերի_դեկտեմբերի'.split(
                 '_'
@@ -7597,7 +7597,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var id = moment.defineLocale('id', {
+    const id = moment.defineLocale('id', {
         months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split(
             '_'
         ),
@@ -7700,7 +7700,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return true;
     }
     function translate(number, withoutSuffix, key, isFuture) {
-        var result = number + ' ';
+        const result = number + ' ';
         switch (key) {
             case 's':
                 return withoutSuffix || isFuture
@@ -7775,7 +7775,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var is = moment.defineLocale('is', {
+    const is = moment.defineLocale('is', {
         months: 'janúar_febrúar_mars_apríl_maí_júní_júlí_ágúst_september_október_nóvember_desember'.split(
             '_'
         ),
@@ -7850,7 +7850,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var itCh = moment.defineLocale('it-ch', {
+    const itCh = moment.defineLocale('it-ch', {
         months: 'gennaio_febbraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre'.split(
             '_'
         ),
@@ -7935,7 +7935,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var it = moment.defineLocale('it', {
+    const it = moment.defineLocale('it', {
         months: 'gennaio_febbraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre'.split(
             '_'
         ),
@@ -8058,7 +8058,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ja = moment.defineLocale('ja', {
+    const ja = moment.defineLocale('ja', {
         eras: [
             {
                 since: '2019-05-01',
@@ -8226,7 +8226,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var jv = moment.defineLocale('jv', {
+    const jv = moment.defineLocale('jv', {
         months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_Nopember_Desember'.split(
             '_'
         ),
@@ -8320,7 +8320,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ka = moment.defineLocale('ka', {
+    const ka = moment.defineLocale('ka', {
         months: 'იანვარი_თებერვალი_მარტი_აპრილი_მაისი_ივნისი_ივლისი_აგვისტო_სექტემბერი_ოქტომბერი_ნოემბერი_დეკემბერი'.split(
             '_'
         ),
@@ -8431,7 +8431,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var suffixes = {
+    const suffixes = {
         0: '-ші',
         1: '-ші',
         2: '-ші',
@@ -8454,7 +8454,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         100: '-ші',
     };
 
-    var kk = moment.defineLocale('kk', {
+    const kk = moment.defineLocale('kk', {
         months: 'қаңтар_ақпан_наурыз_сәуір_мамыр_маусым_шілде_тамыз_қыркүйек_қазан_қараша_желтоқсан'.split(
             '_'
         ),
@@ -8498,7 +8498,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}-(ші|шы)/,
         ordinal: function (number) {
-            var a = number % 10,
+            const a = number % 10,
                 b = number >= 100 ? 100 : null;
             return number + (suffixes[number] || suffixes[a] || suffixes[b]);
         },
@@ -8532,7 +8532,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '១',
             2: '២',
             3: '៣',
@@ -8557,7 +8557,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '០': '0',
         };
 
-    var km = moment.defineLocale('km', {
+    const km = moment.defineLocale('km', {
         months: 'មករា_កុម្ភៈ_មីនា_មេសា_ឧសភា_មិថុនា_កក្កដា_សីហា_កញ្ញា_តុលា_វិច្ឆិកា_ធ្នូ'.split(
             '_'
         ),
@@ -8654,7 +8654,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '೧',
             2: '೨',
             3: '೩',
@@ -8679,7 +8679,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '೦': '0',
         };
 
-    var kn = moment.defineLocale('kn', {
+    const kn = moment.defineLocale('kn', {
         months: 'ಜನವರಿ_ಫೆಬ್ರವರಿ_ಮಾರ್ಚ್_ಏಪ್ರಿಲ್_ಮೇ_ಜೂನ್_ಜುಲೈ_ಆಗಸ್ಟ್_ಸೆಪ್ಟೆಂಬರ್_ಅಕ್ಟೋಬರ್_ನವೆಂಬರ್_ಡಿಸೆಂಬರ್'.split(
             '_'
         ),
@@ -8798,7 +8798,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ko = moment.defineLocale('ko', {
+    const ko = moment.defineLocale('ko', {
         months: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split('_'),
         monthsShort: '1월_2월_3월_4월_5월_6월_7월_8월_9월_10월_11월_12월'.split(
             '_'
@@ -8891,7 +8891,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '١',
             2: '٢',
             3: '٣',
@@ -8930,7 +8930,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             'كانونی یەکەم',
         ];
 
-    var ku = moment.defineLocale('ku', {
+    const ku = moment.defineLocale('ku', {
         months: months,
         monthsShort: months,
         weekdays:
@@ -9028,7 +9028,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var suffixes = {
+    const suffixes = {
         0: '-чү',
         1: '-чи',
         2: '-чи',
@@ -9051,7 +9051,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         100: '-чү',
     };
 
-    var ky = moment.defineLocale('ky', {
+    const ky = moment.defineLocale('ky', {
         months: 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'.split(
             '_'
         ),
@@ -9097,7 +9097,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}-(чи|чы|чү|чу)/,
         ordinal: function (number) {
-            var a = number % 10,
+            const a = number % 10,
                 b = number >= 100 ? 100 : null;
             return number + (suffixes[number] || suffixes[a] || suffixes[b]);
         },
@@ -9133,7 +9133,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             m: ['eng Minutt', 'enger Minutt'],
             h: ['eng Stonn', 'enger Stonn'],
             d: ['een Dag', 'engem Dag'],
@@ -9143,14 +9143,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return withoutSuffix ? format[key][0] : format[key][1];
     }
     function processFutureTime(string) {
-        var number = string.substr(0, string.indexOf(' '));
+        const number = string.substr(0, string.indexOf(' '));
         if (eifelerRegelAppliesToNumber(number)) {
             return 'a ' + string;
         }
         return 'an ' + string;
     }
     function processPastTime(string) {
-        var number = string.substr(0, string.indexOf(' '));
+        const number = string.substr(0, string.indexOf(' '));
         if (eifelerRegelAppliesToNumber(number)) {
             return 'viru ' + string;
         }
@@ -9179,7 +9179,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return false;
         } else if (number < 100) {
             // 2 digits
-            var lastDigit = number % 10,
+            const lastDigit = number % 10,
                 firstDigit = number / 10;
             if (lastDigit === 0) {
                 return eifelerRegelAppliesToNumber(firstDigit);
@@ -9198,7 +9198,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var lb = moment.defineLocale('lb', {
+    const lb = moment.defineLocale('lb', {
         months: 'Januar_Februar_Mäerz_Abrëll_Mee_Juni_Juli_August_September_Oktober_November_Dezember'.split(
             '_'
         ),
@@ -9287,7 +9287,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var lo = moment.defineLocale('lo', {
+    const lo = moment.defineLocale('lo', {
         months: 'ມັງກອນ_ກຸມພາ_ມີນາ_ເມສາ_ພຶດສະພາ_ມິຖຸນາ_ກໍລະກົດ_ສິງຫາ_ກັນຍາ_ຕຸລາ_ພະຈິກ_ທັນວາ'.split(
             '_'
         ),
@@ -9372,7 +9372,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var units = {
+    const units = {
         ss: 'sekundė_sekundžių_sekundes',
         m: 'minutė_minutės_minutę',
         mm: 'minutės_minučių_minutes',
@@ -9406,7 +9406,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return units[key].split('_');
     }
     function translate(number, withoutSuffix, key, isFuture) {
-        var result = number + ' ';
+        const result = number + ' ';
         if (number === 1) {
             return (
                 result + translateSingular(number, withoutSuffix, key[0], isFuture)
@@ -9421,7 +9421,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
         }
     }
-    var lt = moment.defineLocale('lt', {
+    const lt = moment.defineLocale('lt', {
         months: {
             format: 'sausio_vasario_kovo_balandžio_gegužės_birželio_liepos_rugpjūčio_rugsėjo_spalio_lapkričio_gruodžio'.split(
                 '_'
@@ -9517,7 +9517,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var units = {
+    const units = {
         ss: 'sekundes_sekundēm_sekunde_sekundes'.split('_'),
         m: 'minūtes_minūtēm_minūte_minūtes'.split('_'),
         mm: 'minūtes_minūtēm_minūte_minūtes'.split('_'),
@@ -9553,7 +9553,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return withoutSuffix ? 'dažas sekundes' : 'dažām sekundēm';
     }
 
-    var lv = moment.defineLocale('lv', {
+    const lv = moment.defineLocale('lv', {
         months: 'janvāris_februāris_marts_aprīlis_maijs_jūnijs_jūlijs_augusts_septembris_oktobris_novembris_decembris'.split(
             '_'
         ),
@@ -9649,7 +9649,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 : wordKey[2];
         },
         translate: function (number, withoutSuffix, key) {
-            var wordKey = translator.words[key];
+            const wordKey = translator.words[key];
             if (key.length === 1) {
                 return withoutSuffix ? wordKey[0] : wordKey[1];
             } else {
@@ -9662,7 +9662,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
     };
 
-    var me = moment.defineLocale('me', {
+    const me = moment.defineLocale('me', {
         months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split(
             '_'
         ),
@@ -9704,7 +9704,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             },
             lastDay: '[juče u] LT',
             lastWeek: function () {
-                var lastWeekDays = [
+                const lastWeekDays = [
                     '[prošle] [nedjelje] [u] LT',
                     '[prošlog] [ponedjeljka] [u] LT',
                     '[prošlog] [utorka] [u] LT',
@@ -9765,7 +9765,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var mi = moment.defineLocale('mi', {
+    const mi = moment.defineLocale('mi', {
         months: 'Kohi-tāte_Hui-tanguru_Poutū-te-rangi_Paenga-whāwhā_Haratua_Pipiri_Hōngoingoi_Here-turi-kōkā_Mahuru_Whiringa-ā-nuku_Whiringa-ā-rangi_Hakihea'.split(
             '_'
         ),
@@ -9845,7 +9845,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var mk = moment.defineLocale('mk', {
+    const mk = moment.defineLocale('mk', {
         months: 'јануари_февруари_март_април_мај_јуни_јули_август_септември_октомври_ноември_декември'.split(
             '_'
         ),
@@ -9901,7 +9901,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}-(ев|ен|ти|ви|ри|ми)/,
         ordinal: function (number) {
-            var lastDigit = number % 10,
+            const lastDigit = number % 10,
                 last2Digits = number % 100;
             if (number === 0) {
                 return number + '-ев';
@@ -9949,7 +9949,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ml = moment.defineLocale('ml', {
+    const ml = moment.defineLocale('ml', {
         months: 'ജനുവരി_ഫെബ്രുവരി_മാർച്ച്_ഏപ്രിൽ_മേയ്_ജൂൺ_ജൂലൈ_ഓഗസ്റ്റ്_സെപ്റ്റംബർ_ഒക്ടോബർ_നവംബർ_ഡിസംബർ'.split(
             '_'
         ),
@@ -10076,7 +10076,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var mn = moment.defineLocale('mn', {
+    const mn = moment.defineLocale('mn', {
         months: 'Нэгдүгээр сар_Хоёрдугаар сар_Гуравдугаар сар_Дөрөвдүгээр сар_Тавдугаар сар_Зургадугаар сар_Долдугаар сар_Наймдугаар сар_Есдүгээр сар_Аравдугаар сар_Арван нэгдүгээр сар_Арван хоёрдугаар сар'.split(
             '_'
         ),
@@ -10170,7 +10170,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '१',
             2: '२',
             3: '३',
@@ -10196,7 +10196,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         };
 
     function relativeTimeMr(number, withoutSuffix, string, isFuture) {
-        var output = '';
+        let output = '';
         if (withoutSuffix) {
             switch (string) {
                 case 's':
@@ -10279,7 +10279,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return output.replace(/%d/i, number);
     }
 
-    var mr = moment.defineLocale('mr', {
+    const mr = moment.defineLocale('mr', {
         months: 'जानेवारी_फेब्रुवारी_मार्च_एप्रिल_मे_जून_जुलै_ऑगस्ट_सप्टेंबर_ऑक्टोबर_नोव्हेंबर_डिसेंबर'.split(
             '_'
         ),
@@ -10392,7 +10392,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var msMy = moment.defineLocale('ms-my', {
+    const msMy = moment.defineLocale('ms-my', {
         months: 'Januari_Februari_Mac_April_Mei_Jun_Julai_Ogos_September_Oktober_November_Disember'.split(
             '_'
         ),
@@ -10486,7 +10486,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ms = moment.defineLocale('ms', {
+    const ms = moment.defineLocale('ms', {
         months: 'Januari_Februari_Mac_April_Mei_Jun_Julai_Ogos_September_Oktober_November_Disember'.split(
             '_'
         ),
@@ -10580,7 +10580,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var mt = moment.defineLocale('mt', {
+    const mt = moment.defineLocale('mt', {
         months: 'Jannar_Frar_Marzu_April_Mejju_Ġunju_Lulju_Awwissu_Settembru_Ottubru_Novembru_Diċembru'.split(
             '_'
         ),
@@ -10657,7 +10657,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '၁',
             2: '၂',
             3: '၃',
@@ -10682,7 +10682,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '၀': '0',
         };
 
-    var my = moment.defineLocale('my', {
+    const my = moment.defineLocale('my', {
         months: 'ဇန်နဝါရီ_ဖေဖော်ဝါရီ_မတ်_ဧပြီ_မေ_ဇွန်_ဇူလိုင်_သြဂုတ်_စက်တင်ဘာ_အောက်တိုဘာ_နိုဝင်ဘာ_ဒီဇင်ဘာ'.split(
             '_'
         ),
@@ -10767,7 +10767,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var nb = moment.defineLocale('nb', {
+    const nb = moment.defineLocale('nb', {
         months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split(
             '_'
         ),
@@ -10844,7 +10844,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '१',
             2: '२',
             3: '३',
@@ -10869,7 +10869,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '०': '0',
         };
 
-    var ne = moment.defineLocale('ne', {
+    const ne = moment.defineLocale('ne', {
         months: 'जनवरी_फेब्रुवरी_मार्च_अप्रिल_मई_जुन_जुलाई_अगष्ट_सेप्टेम्बर_अक्टोबर_नोभेम्बर_डिसेम्बर'.split(
             '_'
         ),
@@ -10985,7 +10985,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortWithDots =
+    const monthsShortWithDots =
             'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split('_'),
         monthsShortWithoutDots =
             'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
@@ -11006,7 +11006,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         monthsRegex =
             /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
 
-    var nlBe = moment.defineLocale('nl-be', {
+    const nlBe = moment.defineLocale('nl-be', {
         months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split(
             '_'
         ),
@@ -11106,7 +11106,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsShortWithDots =
+    const monthsShortWithDots =
             'jan._feb._mrt._apr._mei_jun._jul._aug._sep._okt._nov._dec.'.split('_'),
         monthsShortWithoutDots =
             'jan_feb_mrt_apr_mei_jun_jul_aug_sep_okt_nov_dec'.split('_'),
@@ -11127,7 +11127,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         monthsRegex =
             /^(januari|februari|maart|april|mei|ju[nl]i|augustus|september|oktober|november|december|jan\.?|feb\.?|mrt\.?|apr\.?|ju[nl]\.?|aug\.?|sep\.?|okt\.?|nov\.?|dec\.?)/i;
 
-    var nl = moment.defineLocale('nl', {
+    const nl = moment.defineLocale('nl', {
         months: 'januari_februari_maart_april_mei_juni_juli_augustus_september_oktober_november_december'.split(
             '_'
         ),
@@ -11229,7 +11229,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var nn = moment.defineLocale('nn', {
+    const nn = moment.defineLocale('nn', {
         months: 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'.split(
             '_'
         ),
@@ -11306,7 +11306,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ocLnc = moment.defineLocale('oc-lnc', {
+    const ocLnc = moment.defineLocale('oc-lnc', {
         months: {
             standalone:
                 'genièr_febrièr_març_abril_mai_junh_julhet_agost_setembre_octòbre_novembre_decembre'.split(
@@ -11365,7 +11365,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(r|n|t|è|a)/,
         ordinal: function (number, period) {
-            var output =
+            let output =
                 number === 1
                     ? 'r'
                     : number === 2
@@ -11410,7 +11410,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '੧',
             2: '੨',
             3: '੩',
@@ -11435,7 +11435,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '੦': '0',
         };
 
-    var paIn = moment.defineLocale('pa-in', {
+    const paIn = moment.defineLocale('pa-in', {
         // There are months name as per Nanakshahi Calendar but they are not used as rigidly in modern Punjabi.
         months: 'ਜਨਵਰੀ_ਫ਼ਰਵਰੀ_ਮਾਰਚ_ਅਪ੍ਰੈਲ_ਮਈ_ਜੂਨ_ਜੁਲਾਈ_ਅਗਸਤ_ਸਤੰਬਰ_ਅਕਤੂਬਰ_ਨਵੰਬਰ_ਦਸੰਬਰ'.split(
             '_'
@@ -11551,7 +11551,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var monthsNominative =
+    const monthsNominative =
             'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudzień'.split(
                 '_'
             ),
@@ -11577,7 +11577,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return n % 10 < 5 && n % 10 > 1 && ~~(n / 10) % 10 !== 1;
     }
     function translate(number, withoutSuffix, key) {
-        var result = number + ' ';
+        const result = number + ' ';
         switch (key) {
             case 'ss':
                 return result + (plural(number) ? 'sekundy' : 'sekund');
@@ -11598,7 +11598,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var pl = moment.defineLocale('pl', {
+    const pl = moment.defineLocale('pl', {
         months: function (momentToFormat, format) {
             if (!momentToFormat) {
                 return monthsNominative;
@@ -11710,7 +11710,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ptBr = moment.defineLocale('pt-br', {
+    const ptBr = moment.defineLocale('pt-br', {
         months: 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'.split(
             '_'
         ),
@@ -11787,7 +11787,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var pt = moment.defineLocale('pt', {
+    const pt = moment.defineLocale('pt', {
         months: 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'.split(
             '_'
         ),
@@ -11872,7 +11872,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function relativeTimeWithPlural(number, withoutSuffix, key) {
-        var format = {
+        let format = {
                 ss: 'secunde',
                 mm: 'minute',
                 hh: 'ore',
@@ -11888,7 +11888,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return number + separator + format[key];
     }
 
-    var ro = moment.defineLocale('ro', {
+    const ro = moment.defineLocale('ro', {
         months: 'ianuarie_februarie_martie_aprilie_mai_iunie_iulie_august_septembrie_octombrie_noiembrie_decembrie'.split(
             '_'
         ),
@@ -11967,7 +11967,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function plural(word, num) {
-        var forms = word.split('_');
+        const forms = word.split('_');
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
@@ -11975,7 +11975,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             : forms[2];
     }
     function relativeTimeWithPlural(number, withoutSuffix, key) {
-        var format = {
+        const format = {
             ss: withoutSuffix ? 'секунда_секунды_секунд' : 'секунду_секунды_секунд',
             mm: withoutSuffix ? 'минута_минуты_минут' : 'минуту_минуты_минут',
             hh: 'час_часа_часов',
@@ -11990,7 +11990,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return number + ' ' + plural(format[key], +number);
         }
     }
-    var monthsParse = [
+    const monthsParse = [
         /^янв/i,
         /^фев/i,
         /^мар/i,
@@ -12008,7 +12008,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     // http://new.gramota.ru/spravka/rules/139-prop : § 103
     // Сокращения месяцев: http://new.gramota.ru/spravka/buro/search-answer?s=242637
     // CLDR data:          http://www.unicode.org/cldr/charts/28/summary/ru.html#1753
-    var ru = moment.defineLocale('ru', {
+    const ru = moment.defineLocale('ru', {
         months: {
             format: 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'.split(
                 '_'
@@ -12196,7 +12196,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months = [
+    const months = [
             'جنوري',
             'فيبروري',
             'مارچ',
@@ -12212,7 +12212,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ],
         days = ['آچر', 'سومر', 'اڱارو', 'اربع', 'خميس', 'جمع', 'ڇنڇر'];
 
-    var sd = moment.defineLocale('sd', {
+    const sd = moment.defineLocale('sd', {
         months: months,
         monthsShort: months,
         weekdays: days,
@@ -12296,7 +12296,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var se = moment.defineLocale('se', {
+    const se = moment.defineLocale('se', {
         months: 'ođđajagemánnu_guovvamánnu_njukčamánnu_cuoŋománnu_miessemánnu_geassemánnu_suoidnemánnu_borgemánnu_čakčamánnu_golggotmánnu_skábmamánnu_juovlamánnu'.split(
             '_'
         ),
@@ -12373,7 +12373,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     /*jshint -W100*/
-    var si = moment.defineLocale('si', {
+    const si = moment.defineLocale('si', {
         months: 'ජනවාරි_පෙබරවාරි_මාර්තු_අප්‍රේල්_මැයි_ජූනි_ජූලි_අගෝස්තු_සැප්තැම්බර්_ඔක්තෝබර්_නොවැම්බර්_දෙසැම්බර්'.split(
             '_'
         ),
@@ -12461,7 +12461,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months =
+    const months =
             'január_február_marec_apríl_máj_jún_júl_august_september_október_november_december'.split(
                 '_'
             ),
@@ -12470,7 +12470,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return n > 1 && n < 5;
     }
     function translate(number, withoutSuffix, key, isFuture) {
-        var result = number + ' ';
+        const result = number + ' ';
         switch (key) {
             case 's': // a few seconds / in a few seconds / a few seconds ago
                 return withoutSuffix || isFuture ? 'pár sekúnd' : 'pár sekundami';
@@ -12523,7 +12523,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var sk = moment.defineLocale('sk', {
+    const sk = moment.defineLocale('sk', {
         months: months,
         monthsShort: monthsShort,
         weekdays: 'nedeľa_pondelok_utorok_streda_štvrtok_piatok_sobota'.split('_'),
@@ -12625,7 +12625,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var result = number + ' ';
+        let result = number + ' ';
         switch (key) {
             case 's':
                 return withoutSuffix || isFuture
@@ -12708,7 +12708,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
 
-    var sl = moment.defineLocale('sl', {
+    const sl = moment.defineLocale('sl', {
         months: 'januar_februar_marec_april_maj_junij_julij_avgust_september_oktober_november_december'.split(
             '_'
         ),
@@ -12816,7 +12816,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var sq = moment.defineLocale('sq', {
+    const sq = moment.defineLocale('sq', {
         months: 'Janar_Shkurt_Mars_Prill_Maj_Qershor_Korrik_Gusht_Shtator_Tetor_Nëntor_Dhjetor'.split(
             '_'
         ),
@@ -12925,7 +12925,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return wordKey[2];
         },
         translate: function (number, withoutSuffix, key, isFuture) {
-            var wordKey = translator.words[key],
+            let wordKey = translator.words[key],
                 word;
 
             if (key.length === 1) {
@@ -12944,7 +12944,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
     };
 
-    var srCyrl = moment.defineLocale('sr-cyrl', {
+    const srCyrl = moment.defineLocale('sr-cyrl', {
         months: 'јануар_фебруар_март_април_мај_јун_јул_август_септембар_октобар_новембар_децембар'.split(
             '_'
         ),
@@ -12983,7 +12983,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             },
             lastDay: '[јуче у] LT',
             lastWeek: function () {
-                var lastWeekDays = [
+                const lastWeekDays = [
                     '[прошле] [недеље] [у] LT',
                     '[прошлог] [понедељка] [у] LT',
                     '[прошлог] [уторка] [у] LT',
@@ -13071,7 +13071,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             return wordKey[2];
         },
         translate: function (number, withoutSuffix, key, isFuture) {
-            var wordKey = translator.words[key],
+            let wordKey = translator.words[key],
                 word;
 
             if (key.length === 1) {
@@ -13090,7 +13090,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
     };
 
-    var sr = moment.defineLocale('sr', {
+    const sr = moment.defineLocale('sr', {
         months: 'januar_februar_mart_april_maj_jun_jul_avgust_septembar_oktobar_novembar_decembar'.split(
             '_'
         ),
@@ -13131,7 +13131,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             },
             lastDay: '[juče u] LT',
             lastWeek: function () {
-                var lastWeekDays = [
+                const lastWeekDays = [
                     '[prošle] [nedelje] [u] LT',
                     '[prošlog] [ponedeljka] [u] LT',
                     '[prošlog] [utorka] [u] LT',
@@ -13192,7 +13192,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ss = moment.defineLocale('ss', {
+    const ss = moment.defineLocale('ss', {
         months: "Bhimbidvwane_Indlovana_Indlov'lenkhulu_Mabasa_Inkhwekhweti_Inhlaba_Kholwane_Ingci_Inyoni_Imphala_Lweti_Ingongoni".split(
             '_'
         ),
@@ -13295,7 +13295,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var sv = moment.defineLocale('sv', {
+    const sv = moment.defineLocale('sv', {
         months: 'januari_februari_mars_april_maj_juni_juli_augusti_september_oktober_november_december'.split(
             '_'
         ),
@@ -13339,7 +13339,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(\:e|\:a)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? ':e'
@@ -13382,7 +13382,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var sw = moment.defineLocale('sw', {
+    const sw = moment.defineLocale('sw', {
         months: 'Januari_Februari_Machi_Aprili_Mei_Juni_Julai_Agosti_Septemba_Oktoba_Novemba_Desemba'.split(
             '_'
         ),
@@ -13456,7 +13456,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var symbolMap = {
+    const symbolMap = {
             1: '௧',
             2: '௨',
             3: '௩',
@@ -13481,7 +13481,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             '௦': '0',
         };
 
-    var ta = moment.defineLocale('ta', {
+    const ta = moment.defineLocale('ta', {
         months: 'ஜனவரி_பிப்ரவரி_மார்ச்_ஏப்ரல்_மே_ஜூன்_ஜூலை_ஆகஸ்ட்_செப்டெம்பர்_அக்டோபர்_நவம்பர்_டிசம்பர்'.split(
             '_'
         ),
@@ -13606,7 +13606,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var te = moment.defineLocale('te', {
+    const te = moment.defineLocale('te', {
         months: 'జనవరి_ఫిబ్రవరి_మార్చి_ఏప్రిల్_మే_జూన్_జులై_ఆగస్టు_సెప్టెంబర్_అక్టోబర్_నవంబర్_డిసెంబర్'.split(
             '_'
         ),
@@ -13715,7 +13715,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var tet = moment.defineLocale('tet', {
+    const tet = moment.defineLocale('tet', {
         months: 'Janeiru_Fevereiru_Marsu_Abril_Maiu_Juñu_Jullu_Agustu_Setembru_Outubru_Novembru_Dezembru'.split(
             '_'
         ),
@@ -13757,7 +13757,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(st|nd|rd|th)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -13800,7 +13800,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var suffixes = {
+    const suffixes = {
         0: '-ум',
         1: '-ум',
         2: '-юм',
@@ -13825,7 +13825,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         100: '-ум',
     };
 
-    var tg = moment.defineLocale('tg', {
+    const tg = moment.defineLocale('tg', {
         months: {
             format: 'январи_феврали_марти_апрели_майи_июни_июли_августи_сентябри_октябри_ноябри_декабри'.split(
                 '_'
@@ -13902,7 +13902,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}-(ум|юм)/,
         ordinal: function (number) {
-            var a = number % 10,
+            const a = number % 10,
                 b = number >= 100 ? 100 : null;
             return number + (suffixes[number] || suffixes[a] || suffixes[b]);
         },
@@ -13936,7 +13936,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var th = moment.defineLocale('th', {
+    const th = moment.defineLocale('th', {
         months: 'มกราคม_กุมภาพันธ์_มีนาคม_เมษายน_พฤษภาคม_มิถุนายน_กรกฎาคม_สิงหาคม_กันยายน_ตุลาคม_พฤศจิกายน_ธันวาคม'.split(
             '_'
         ),
@@ -14020,7 +14020,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var suffixes = {
+    const suffixes = {
         1: "'inji",
         5: "'inji",
         8: "'inji",
@@ -14041,7 +14041,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         90: "'ynjy",
     };
 
-    var tk = moment.defineLocale('tk', {
+    const tk = moment.defineLocale('tk', {
         months: 'Ýanwar_Fewral_Mart_Aprel_Maý_Iýun_Iýul_Awgust_Sentýabr_Oktýabr_Noýabr_Dekabr'.split(
             '_'
         ),
@@ -14130,7 +14130,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var tlPh = moment.defineLocale('tl-ph', {
+    const tlPh = moment.defineLocale('tl-ph', {
         months: 'Enero_Pebrero_Marso_Abril_Mayo_Hunyo_Hulyo_Agosto_Setyembre_Oktubre_Nobyembre_Disyembre'.split(
             '_'
         ),
@@ -14206,10 +14206,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var numbersNouns = 'pagh_wa’_cha’_wej_loS_vagh_jav_Soch_chorgh_Hut'.split('_');
+    const numbersNouns = 'pagh_wa’_cha’_wej_loS_vagh_jav_Soch_chorgh_Hut'.split('_');
 
     function translateFuture(output) {
-        var time = output;
+        let time = output;
         time =
             output.indexOf('jaj') !== -1
                 ? time.slice(0, -3) + 'leS'
@@ -14222,7 +14222,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
 
     function translatePast(output) {
-        var time = output;
+        let time = output;
         time =
             output.indexOf('jaj') !== -1
                 ? time.slice(0, -3) + 'Hu’'
@@ -14235,7 +14235,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
 
     function translate(number, withoutSuffix, string, isFuture) {
-        var numberNoun = numberAsNoun(number);
+        const numberNoun = numberAsNoun(number);
         switch (string) {
             case 'ss':
                 return numberNoun + ' lup';
@@ -14253,7 +14253,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }
 
     function numberAsNoun(number) {
-        var hundred = Math.floor((number % 1000) / 100),
+        let hundred = Math.floor((number % 1000) / 100),
             ten = Math.floor((number % 100) / 10),
             one = number % 10,
             word = '';
@@ -14269,7 +14269,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return word === '' ? 'pagh' : word;
     }
 
-    var tlh = moment.defineLocale('tlh', {
+    const tlh = moment.defineLocale('tlh', {
         months: 'tera’ jar wa’_tera’ jar cha’_tera’ jar wej_tera’ jar loS_tera’ jar vagh_tera’ jar jav_tera’ jar Soch_tera’ jar chorgh_tera’ jar Hut_tera’ jar wa’maH_tera’ jar wa’maH wa’_tera’ jar wa’maH cha’'.split(
             '_'
         ),
@@ -14350,7 +14350,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var suffixes = {
+    const suffixes = {
         1: "'inci",
         5: "'inci",
         8: "'inci",
@@ -14371,7 +14371,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         90: "'ıncı",
     };
 
-    var tr = moment.defineLocale('tr', {
+    const tr = moment.defineLocale('tr', {
         months: 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'.split(
             '_'
         ),
@@ -14477,7 +14477,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     // After the year there should be a slash and the amount of years since December 26, 1979 in Roman numerals.
     // This is currently too difficult (maybe even impossible) to add.
-    var tzl = moment.defineLocale('tzl', {
+    const tzl = moment.defineLocale('tzl', {
         months: 'Januar_Fevraglh_Març_Avrïu_Mai_Gün_Julia_Guscht_Setemvar_Listopäts_Noemvar_Zecemvar'.split(
             '_'
         ),
@@ -14537,7 +14537,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     });
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
-        var format = {
+        const format = {
             s: ['viensas secunds', "'iensas secunds"],
             ss: [number + ' secunds', '' + number + ' secunds'],
             m: ["'n míut", "'iens míut"],
@@ -14582,7 +14582,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var tzmLatn = moment.defineLocale('tzm-latn', {
+    const tzmLatn = moment.defineLocale('tzm-latn', {
         months: 'innayr_brˤayrˤ_marˤsˤ_ibrir_mayyw_ywnyw_ywlywz_ɣwšt_šwtanbir_ktˤwbrˤ_nwwanbir_dwjnbir'.split(
             '_'
         ),
@@ -14655,7 +14655,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var tzm = moment.defineLocale('tzm', {
+    const tzm = moment.defineLocale('tzm', {
         months: 'ⵉⵏⵏⴰⵢⵔ_ⴱⵕⴰⵢⵕ_ⵎⴰⵕⵚ_ⵉⴱⵔⵉⵔ_ⵎⴰⵢⵢⵓ_ⵢⵓⵏⵢⵓ_ⵢⵓⵍⵢⵓⵣ_ⵖⵓⵛⵜ_ⵛⵓⵜⴰⵏⴱⵉⵔ_ⴽⵟⵓⴱⵕ_ⵏⵓⵡⴰⵏⴱⵉⵔ_ⴷⵓⵊⵏⴱⵉⵔ'.split(
             '_'
         ),
@@ -14728,7 +14728,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var ugCn = moment.defineLocale('ug-cn', {
+    const ugCn = moment.defineLocale('ug-cn', {
         months: 'يانۋار_فېۋرال_مارت_ئاپرېل_ماي_ئىيۇن_ئىيۇل_ئاۋغۇست_سېنتەبىر_ئۆكتەبىر_نويابىر_دېكابىر'.split(
             '_'
         ),
@@ -14767,7 +14767,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
         },
         meridiem: function (hour, minute, isLower) {
-            var hm = hour * 100 + minute;
+            const hm = hour * 100 + minute;
             if (hm < 600) {
                 return 'يېرىم كېچە';
             } else if (hm < 900) {
@@ -14860,7 +14860,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     //! moment.js locale configuration
 
     function plural(word, num) {
-        var forms = word.split('_');
+        const forms = word.split('_');
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
@@ -14868,7 +14868,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             : forms[2];
     }
     function relativeTimeWithPlural(number, withoutSuffix, key) {
-        var format = {
+        const format = {
             ss: withoutSuffix ? 'секунда_секунди_секунд' : 'секунду_секунди_секунд',
             mm: withoutSuffix ? 'хвилина_хвилини_хвилин' : 'хвилину_хвилини_хвилин',
             hh: withoutSuffix ? 'година_години_годин' : 'годину_години_годин',
@@ -14885,7 +14885,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         }
     }
     function weekdaysCaseReplace(m, format) {
-        var weekdays = {
+        let weekdays = {
                 nominative:
                     'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split(
                         '_'
@@ -14923,7 +14923,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         };
     }
 
-    var uk = moment.defineLocale('uk', {
+    const uk = moment.defineLocale('uk', {
         months: {
             format: 'січня_лютого_березня_квітня_травня_червня_липня_серпня_вересня_жовтня_листопада_грудня'.split(
                 '_'
@@ -15045,7 +15045,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var months = [
+    const months = [
             'جنوری',
             'فروری',
             'مارچ',
@@ -15061,7 +15061,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         ],
         days = ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'];
 
-    var ur = moment.defineLocale('ur', {
+    const ur = moment.defineLocale('ur', {
         months: months,
         monthsShort: months,
         weekdays: days,
@@ -15145,7 +15145,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var uzLatn = moment.defineLocale('uz-latn', {
+    const uzLatn = moment.defineLocale('uz-latn', {
         months: 'Yanvar_Fevral_Mart_Aprel_May_Iyun_Iyul_Avgust_Sentabr_Oktabr_Noyabr_Dekabr'.split(
             '_'
         ),
@@ -15218,7 +15218,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var uz = moment.defineLocale('uz', {
+    const uz = moment.defineLocale('uz', {
         months: 'январ_феврал_март_апрел_май_июн_июл_август_сентябр_октябр_ноябр_декабр'.split(
             '_'
         ),
@@ -15289,7 +15289,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var vi = moment.defineLocale('vi', {
+    const vi = moment.defineLocale('vi', {
         months: 'tháng 1_tháng 2_tháng 3_tháng 4_tháng 5_tháng 6_tháng 7_tháng 8_tháng 9_tháng 10_tháng 11_tháng 12'.split(
             '_'
         ),
@@ -15387,7 +15387,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var xPseudo = moment.defineLocale('x-pseudo', {
+    const xPseudo = moment.defineLocale('x-pseudo', {
         months: 'J~áñúá~rý_F~ébrú~árý_~Márc~h_Áp~ríl_~Máý_~Júñé~_Júl~ý_Áú~gúst~_Sép~témb~ér_Ó~ctób~ér_Ñ~óvém~bér_~Décé~mbér'.split(
             '_'
         ),
@@ -15436,7 +15436,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         },
         dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     ~~((number % 100) / 10) === 1
                         ? 'th'
@@ -15479,7 +15479,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var yo = moment.defineLocale('yo', {
+    const yo = moment.defineLocale('yo', {
         months: 'Sẹ́rẹ́_Èrèlè_Ẹrẹ̀nà_Ìgbé_Èbibi_Òkùdu_Agẹmo_Ògún_Owewe_Ọ̀wàrà_Bélú_Ọ̀pẹ̀̀'.split(
             '_'
         ),
@@ -15553,7 +15553,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var zhCn = moment.defineLocale('zh-cn', {
+    const zhCn = moment.defineLocale('zh-cn', {
         months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
             '_'
         ),
@@ -15590,7 +15590,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
         },
         meridiem: function (hour, minute, isLower) {
-            var hm = hour * 100 + minute;
+            const hm = hour * 100 + minute;
             if (hm < 600) {
                 return '凌晨';
             } else if (hm < 900) {
@@ -15693,7 +15693,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var zhHk = moment.defineLocale('zh-hk', {
+    const zhHk = moment.defineLocale('zh-hk', {
         months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
             '_'
         ),
@@ -15729,7 +15729,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
         },
         meridiem: function (hour, minute, isLower) {
-            var hm = hour * 100 + minute;
+            const hm = hour * 100 + minute;
             if (hm < 600) {
                 return '凌晨';
             } else if (hm < 900) {
@@ -15812,7 +15812,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var zhMo = moment.defineLocale('zh-mo', {
+    const zhMo = moment.defineLocale('zh-mo', {
         months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
             '_'
         ),
@@ -15848,7 +15848,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
         },
         meridiem: function (hour, minute, isLower) {
-            var hm = hour * 100 + minute;
+            const hm = hour * 100 + minute;
             if (hm < 600) {
                 return '凌晨';
             } else if (hm < 900) {
@@ -15930,7 +15930,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     //! moment.js locale configuration
 
-    var zhTw = moment.defineLocale('zh-tw', {
+    const zhTw = moment.defineLocale('zh-tw', {
         months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split(
             '_'
         ),
@@ -15966,7 +15966,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             }
         },
         meridiem: function (hour, minute, isLower) {
-            var hm = hour * 100 + minute;
+            const hm = hour * 100 + minute;
             if (hm < 600) {
                 return '凌晨';
             } else if (hm < 900) {
@@ -16036,7 +16036,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   \***************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
-var map = {
+const map = {
 	"./af": "./node_modules/moment/locale/af.js",
 	"./af.js": "./node_modules/moment/locale/af.js",
 	"./ar": "./node_modules/moment/locale/ar.js",
@@ -16311,12 +16311,12 @@ var map = {
 
 
 function webpackContext(req) {
-	var id = webpackContextResolve(req);
+	const id = webpackContextResolve(req);
 	return __webpack_require__(id);
 }
 function webpackContextResolve(req) {
 	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
+		const e = new Error("Cannot find module '" + req + "'");
 		e.code = 'MODULE_NOT_FOUND';
 		throw e;
 	}
@@ -16349,7 +16349,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     0
 }(this, (function () { 'use strict';
 
-    var hookCallback;
+    let hookCallback;
 
     function hooks() {
         return hookCallback.apply(null, arguments);
@@ -16385,7 +16385,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (Object.getOwnPropertyNames) {
             return Object.getOwnPropertyNames(obj).length === 0;
         } else {
-            var k;
+            let k;
             for (k in obj) {
                 if (hasOwnProp(obj, k)) {
                     return false;
@@ -16414,7 +16414,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function map(arr, fn) {
-        var res = [],
+        let res = [],
             i,
             arrLen = arr.length;
         for (i = 0; i < arrLen; ++i) {
@@ -16424,7 +16424,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function extend(a, b) {
-        for (var i in b) {
+        for (const i in b) {
             if (hasOwnProp(b, i)) {
                 a[i] = b[i];
             }
@@ -16474,12 +16474,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return m._pf;
     }
 
-    var some;
+    let some;
     if (Array.prototype.some) {
         some = Array.prototype.some;
     } else {
         some = function (fun) {
-            var t = Object(this),
+            let t = Object(this),
                 len = t.length >>> 0,
                 i;
 
@@ -16495,7 +16495,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function isValid(m) {
         if (m._isValid == null) {
-            var flags = getParsingFlags(m),
+            let flags = getParsingFlags(m),
                 parsedParts = some.call(flags.parsedDateParts, function (i) {
                     return i != null;
                 }),
@@ -16530,7 +16530,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function createInvalid(flags) {
-        var m = createUTC(NaN);
+        const m = createUTC(NaN);
         if (flags != null) {
             extend(getParsingFlags(m), flags);
         } else {
@@ -16542,11 +16542,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // Plugins that add properties should also add the key here (null value),
     // so we can properly clone ourselves.
-    var momentProperties = (hooks.momentProperties = []),
+    let momentProperties = (hooks.momentProperties = []),
         updateInProgress = false;
 
     function copyConfig(to, from) {
-        var i,
+        let i,
             prop,
             val,
             momentPropertiesLen = momentProperties.length;
@@ -16628,14 +16628,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function deprecate(msg, fn) {
-        var firstTime = true;
+        let firstTime = true;
 
         return extend(function () {
             if (hooks.deprecationHandler != null) {
                 hooks.deprecationHandler(null, msg);
             }
             if (firstTime) {
-                var args = [],
+                let args = [],
                     arg,
                     i,
                     key,
@@ -16668,7 +16668,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }, fn);
     }
 
-    var deprecations = {};
+    const deprecations = {};
 
     function deprecateSimple(name, msg) {
         if (hooks.deprecationHandler != null) {
@@ -16691,7 +16691,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function set(config) {
-        var prop, i;
+        let prop, i;
         for (i in config) {
             if (hasOwnProp(config, i)) {
                 prop = config[i];
@@ -16714,7 +16714,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function mergeConfigs(parentConfig, childConfig) {
-        var res = extend({}, parentConfig),
+        let res = extend({}, parentConfig),
             prop;
         for (prop in childConfig) {
             if (hasOwnProp(childConfig, prop)) {
@@ -16748,13 +16748,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
-    var keys;
+    let keys;
 
     if (Object.keys) {
         keys = Object.keys;
     } else {
         keys = function (obj) {
-            var i,
+            let i,
                 res = [];
             for (i in obj) {
                 if (hasOwnProp(obj, i)) {
@@ -16765,7 +16765,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         };
     }
 
-    var defaultCalendar = {
+    const defaultCalendar = {
         sameDay: '[Today at] LT',
         nextDay: '[Tomorrow at] LT',
         nextWeek: 'dddd [at] LT',
@@ -16775,12 +16775,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     };
 
     function calendar(key, mom, now) {
-        var output = this._calendar[key] || this._calendar['sameElse'];
+        const output = this._calendar[key] || this._calendar['sameElse'];
         return isFunction(output) ? output.call(mom, now) : output;
     }
 
     function zeroFill(number, targetLength, forceSign) {
-        var absNumber = '' + Math.abs(number),
+        const absNumber = '' + Math.abs(number),
             zerosToFill = targetLength - absNumber.length,
             sign = number >= 0;
         return (
@@ -16790,7 +16790,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
-    var formattingTokens =
+    const formattingTokens =
             /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
         localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
         formatFunctions = {},
@@ -16801,7 +16801,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // ordinal:  'Mo'
     // callback: function () { this.month() + 1 }
     function addFormatToken(token, padded, ordinal, callback) {
-        var func = callback;
+        let func = callback;
         if (typeof callback === 'string') {
             func = function () {
                 return this[callback]();
@@ -16833,7 +16833,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function makeFormatFunction(format) {
-        var array = format.match(formattingTokens),
+        let array = format.match(formattingTokens),
             i,
             length;
 
@@ -16846,7 +16846,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
 
         return function (mom) {
-            var output = '',
+            let output = '',
                 i;
             for (i = 0; i < length; i++) {
                 output += isFunction(array[i])
@@ -16871,7 +16871,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function expandFormat(format, locale) {
-        var i = 5;
+        let i = 5;
 
         function replaceLongDateFormatTokens(input) {
             return locale.longDateFormat(input) || input;
@@ -16890,7 +16890,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return format;
     }
 
-    var defaultLongDateFormat = {
+    const defaultLongDateFormat = {
         LTS: 'h:mm:ss A',
         LT: 'h:mm A',
         L: 'MM/DD/YYYY',
@@ -16900,7 +16900,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     };
 
     function longDateFormat(key) {
-        var format = this._longDateFormat[key],
+        const format = this._longDateFormat[key],
             formatUpper = this._longDateFormat[key.toUpperCase()];
 
         if (format || !formatUpper) {
@@ -16925,20 +16925,20 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this._longDateFormat[key];
     }
 
-    var defaultInvalidDate = 'Invalid date';
+    const defaultInvalidDate = 'Invalid date';
 
     function invalidDate() {
         return this._invalidDate;
     }
 
-    var defaultOrdinal = '%d',
+    const defaultOrdinal = '%d',
         defaultDayOfMonthOrdinalParse = /\d{1,2}/;
 
     function ordinal(number) {
         return this._ordinal.replace('%d', number);
     }
 
-    var defaultRelativeTime = {
+    const defaultRelativeTime = {
         future: 'in %s',
         past: '%s ago',
         s: 'a few seconds',
@@ -16958,21 +16958,21 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     };
 
     function relativeTime(number, withoutSuffix, string, isFuture) {
-        var output = this._relativeTime[string];
+        const output = this._relativeTime[string];
         return isFunction(output)
             ? output(number, withoutSuffix, string, isFuture)
             : output.replace(/%d/i, number);
     }
 
     function pastFuture(diff, output) {
-        var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+        const format = this._relativeTime[diff > 0 ? 'future' : 'past'];
         return isFunction(format) ? format(output) : format.replace(/%s/i, output);
     }
 
-    var aliases = {};
+    const aliases = {};
 
     function addUnitAlias(unit, shorthand) {
-        var lowerCase = unit.toLowerCase();
+        const lowerCase = unit.toLowerCase();
         aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
     }
 
@@ -16983,7 +16983,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function normalizeObjectUnits(inputObject) {
-        var normalizedInput = {},
+        let normalizedInput = {},
             normalizedProp,
             prop;
 
@@ -16999,14 +16999,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return normalizedInput;
     }
 
-    var priorities = {};
+    const priorities = {};
 
     function addUnitPriority(unit, priority) {
         priorities[unit] = priority;
     }
 
     function getPrioritizedUnits(unitsObj) {
-        var units = [],
+        let units = [],
             u;
         for (u in unitsObj) {
             if (hasOwnProp(unitsObj, u)) {
@@ -17033,7 +17033,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function toInt(argumentForCoercion) {
-        var coercedNumber = +argumentForCoercion,
+        let coercedNumber = +argumentForCoercion,
             value = 0;
 
         if (coercedNumber !== 0 && isFinite(coercedNumber)) {
@@ -17094,7 +17094,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     function stringSet(units, value) {
         if (typeof units === 'object') {
             units = normalizeObjectUnits(units);
-            var prioritized = getPrioritizedUnits(units),
+            let prioritized = getPrioritizedUnits(units),
                 i,
                 prioritizedLen = prioritized.length;
             for (i = 0; i < prioritizedLen; i++) {
@@ -17109,7 +17109,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this;
     }
 
-    var match1 = /\d/, //       0 - 9
+    let match1 = /\d/, //       0 - 9
         match2 = /\d\d/, //      00 - 99
         match3 = /\d{3}/, //     000 - 999
         match4 = /\d{4}/, //    0000 - 9999
@@ -17167,10 +17167,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     }
 
-    var tokens = {};
+    const tokens = {};
 
     function addParseToken(token, callback) {
-        var i,
+        let i,
             func = callback,
             tokenLen;
         if (typeof token === 'string') {
@@ -17200,7 +17200,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
-    var YEAR = 0,
+    const YEAR = 0,
         MONTH = 1,
         DATE = 2,
         HOUR = 3,
@@ -17214,14 +17214,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return ((n % x) + x) % x;
     }
 
-    var indexOf;
+    let indexOf;
 
     if (Array.prototype.indexOf) {
         indexOf = Array.prototype.indexOf;
     } else {
         indexOf = function (o) {
             // I know
-            var i;
+            let i;
             for (i = 0; i < this.length; ++i) {
                 if (this[i] === o) {
                     return i;
@@ -17235,7 +17235,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (isNaN(year) || isNaN(month)) {
             return NaN;
         }
-        var modMonth = mod(month, 12);
+        const modMonth = mod(month, 12);
         year += (month - modMonth) / 12;
         return modMonth === 1
             ? isLeapYear(year)
@@ -17282,7 +17282,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     });
 
     addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
-        var month = config._locale.monthsParse(input, token, config._strict);
+        const month = config._locale.monthsParse(input, token, config._strict);
         // if we didn't find a month name, mark the date as invalid.
         if (month != null) {
             array[MONTH] = month;
@@ -17293,7 +17293,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // LOCALES
 
-    var defaultLocaleMonths =
+    const defaultLocaleMonths =
             'January_February_March_April_May_June_July_August_September_October_November_December'.split(
                 '_'
             ),
@@ -17332,7 +17332,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function handleStrictParse(monthName, format, strict) {
-        var i,
+        let i,
             ii,
             mom,
             llc = monthName.toLocaleLowerCase();
@@ -17379,7 +17379,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function localeMonthsParse(monthName, format, strict) {
-        var i, mom, regex;
+        let i, mom, regex;
 
         if (this._monthsParseExact) {
             return handleStrictParse.call(this, monthName, format, strict);
@@ -17434,7 +17434,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // MOMENTS
 
     function setMonth(mom, value) {
-        var dayOfMonth;
+        let dayOfMonth;
 
         if (!mom.isValid()) {
             // No op
@@ -17517,7 +17517,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return b.length - a.length;
         }
 
-        var shortPieces = [],
+        let shortPieces = [],
             longPieces = [],
             mixedPieces = [],
             i,
@@ -17558,7 +17558,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // FORMATTING
 
     addFormatToken('Y', 0, 0, function () {
-        var y = this.year();
+        const y = this.year();
         return y <= 9999 ? zeroFill(y, 4) : '+' + y;
     });
 
@@ -17612,7 +17612,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // MOMENTS
 
-    var getSetYear = makeGetSet('FullYear', true);
+    const getSetYear = makeGetSet('FullYear', true);
 
     function getIsLeapYear() {
         return isLeapYear(this.year());
@@ -17621,7 +17621,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     function createDate(y, m, d, h, M, s, ms) {
         // can't just apply() to create a date:
         // https://stackoverflow.com/q/181348
-        var date;
+        let date;
         // the date constructor remaps years 0-99 to 1900-1999
         if (y < 100 && y >= 0) {
             // preserve leap years using a full 400 year cycle, then reset
@@ -17637,7 +17637,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function createUTCDate(y) {
-        var date, args;
+        let date, args;
         // the Date.UTC function remaps years 0-99 to 1900-1999
         if (y < 100 && y >= 0) {
             args = Array.prototype.slice.call(arguments);
@@ -17656,7 +17656,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // start-of-first-week - start-of-year
     function firstWeekOffset(year, dow, doy) {
-        var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+        const // first-week day -- which january is always in the first week (4 for iso, 1 for other)
             fwd = 7 + dow - doy,
             // first-week day local weekday -- which local weekday is fwd
             fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
@@ -17666,7 +17666,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
     function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
-        var localWeekday = (7 + weekday - dow) % 7,
+        let localWeekday = (7 + weekday - dow) % 7,
             weekOffset = firstWeekOffset(year, dow, doy),
             dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
             resYear,
@@ -17690,7 +17690,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function weekOfYear(mom, dow, doy) {
-        var weekOffset = firstWeekOffset(mom.year(), dow, doy),
+        let weekOffset = firstWeekOffset(mom.year(), dow, doy),
             week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
             resWeek,
             resYear;
@@ -17713,7 +17713,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function weeksInYear(year, dow, doy) {
-        var weekOffset = firstWeekOffset(year, dow, doy),
+        const weekOffset = firstWeekOffset(year, dow, doy),
             weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
         return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
     }
@@ -17755,7 +17755,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return weekOfYear(mom, this._week.dow, this._week.doy).week;
     }
 
-    var defaultLocaleWeek = {
+    const defaultLocaleWeek = {
         dow: 0, // Sunday is the first day of the week.
         doy: 6, // The week that contains Jan 6th is the first week of the year.
     };
@@ -17771,12 +17771,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // MOMENTS
 
     function getSetWeek(input) {
-        var week = this.localeData().week(this);
+        const week = this.localeData().week(this);
         return input == null ? week : this.add((input - week) * 7, 'd');
     }
 
     function getSetISOWeek(input) {
-        var week = weekOfYear(this, 1, 4).week;
+        const week = weekOfYear(this, 1, 4).week;
         return input == null ? week : this.add((input - week) * 7, 'd');
     }
 
@@ -17826,7 +17826,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     });
 
     addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
-        var weekday = config._locale.weekdaysParse(input, token, config._strict);
+        const weekday = config._locale.weekdaysParse(input, token, config._strict);
         // if we didn't get a weekday name, mark the date as invalid
         if (weekday != null) {
             week.d = weekday;
@@ -17870,7 +17870,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return ws.slice(n, 7).concat(ws.slice(0, n));
     }
 
-    var defaultLocaleWeekdays =
+    const defaultLocaleWeekdays =
             'Sunday_Monday_Tuesday_Wednesday_Thursday_Friday_Saturday'.split('_'),
         defaultLocaleWeekdaysShort = 'Sun_Mon_Tue_Wed_Thu_Fri_Sat'.split('_'),
         defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
@@ -17879,7 +17879,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         defaultWeekdaysMinRegex = matchWord;
 
     function localeWeekdays(m, format) {
-        var weekdays = isArray(this._weekdays)
+        const weekdays = isArray(this._weekdays)
             ? this._weekdays
             : this._weekdays[
                   m && m !== true && this._weekdays.isFormat.test(format)
@@ -17910,7 +17910,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function handleStrictParse$1(weekdayName, format, strict) {
-        var i,
+        let i,
             ii,
             mom,
             llc = weekdayName.toLocaleLowerCase();
@@ -17983,7 +17983,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function localeWeekdaysParse(weekdayName, format, strict) {
-        var i, mom, regex;
+        let i, mom, regex;
 
         if (this._weekdaysParseExact) {
             return handleStrictParse$1.call(this, weekdayName, format, strict);
@@ -18055,7 +18055,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!this.isValid()) {
             return input != null ? this : NaN;
         }
-        var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+        const day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
         if (input != null) {
             input = parseWeekday(input, this.localeData());
             return this.add(input - day, 'd');
@@ -18068,7 +18068,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!this.isValid()) {
             return input != null ? this : NaN;
         }
-        var weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
+        const weekday = (this.day() + 7 - this.localeData()._week.dow) % 7;
         return input == null ? weekday : this.add(input - weekday, 'd');
     }
 
@@ -18082,7 +18082,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         // as a setter, sunday should belong to the previous week.
 
         if (input != null) {
-            var weekday = parseIsoWeekday(input, this.localeData());
+            const weekday = parseIsoWeekday(input, this.localeData());
             return this.day(this.day() % 7 ? weekday : weekday - 7);
         } else {
             return this.day() || 7;
@@ -18154,7 +18154,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return b.length - a.length;
         }
 
-        var minPieces = [],
+        let minPieces = [],
             shortPieces = [],
             longPieces = [],
             mixedPieces = [],
@@ -18283,7 +18283,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addParseToken(['H', 'HH'], HOUR);
     addParseToken(['k', 'kk'], function (input, array, config) {
-        var kInput = toInt(input);
+        const kInput = toInt(input);
         array[HOUR] = kInput === 24 ? 0 : kInput;
     });
     addParseToken(['a', 'A'], function (input, array, config) {
@@ -18295,13 +18295,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         getParsingFlags(config).bigHour = true;
     });
     addParseToken('hmm', function (input, array, config) {
-        var pos = input.length - 2;
+        const pos = input.length - 2;
         array[HOUR] = toInt(input.substr(0, pos));
         array[MINUTE] = toInt(input.substr(pos));
         getParsingFlags(config).bigHour = true;
     });
     addParseToken('hmmss', function (input, array, config) {
-        var pos1 = input.length - 4,
+        const pos1 = input.length - 4,
             pos2 = input.length - 2;
         array[HOUR] = toInt(input.substr(0, pos1));
         array[MINUTE] = toInt(input.substr(pos1, 2));
@@ -18309,12 +18309,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         getParsingFlags(config).bigHour = true;
     });
     addParseToken('Hmm', function (input, array, config) {
-        var pos = input.length - 2;
+        const pos = input.length - 2;
         array[HOUR] = toInt(input.substr(0, pos));
         array[MINUTE] = toInt(input.substr(pos));
     });
     addParseToken('Hmmss', function (input, array, config) {
-        var pos1 = input.length - 4,
+        const pos1 = input.length - 4,
             pos2 = input.length - 2;
         array[HOUR] = toInt(input.substr(0, pos1));
         array[MINUTE] = toInt(input.substr(pos1, 2));
@@ -18329,7 +18329,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return (input + '').toLowerCase().charAt(0) === 'p';
     }
 
-    var defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i,
+    const defaultLocaleMeridiemParse = /[ap]\.?m?\.?/i,
         // Setting the hour should keep the time, because the user explicitly
         // specified which hour they want. So trying to maintain the same hour (in
         // a new timezone) makes sense. Adding/subtracting hours does not follow
@@ -18344,7 +18344,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
-    var baseConfig = {
+    const baseConfig = {
         calendar: defaultCalendar,
         longDateFormat: defaultLongDateFormat,
         invalidDate: defaultInvalidDate,
@@ -18365,12 +18365,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     };
 
     // internal storage for locale config files
-    var locales = {},
+    let locales = {},
         localeFamilies = {},
         globalLocale;
 
     function commonPrefix(arr1, arr2) {
-        var i,
+        let i,
             minl = Math.min(arr1.length, arr2.length);
         for (i = 0; i < minl; i += 1) {
             if (arr1[i] !== arr2[i]) {
@@ -18388,7 +18388,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // try ['en-au', 'en-gb'] as 'en-au', 'en-gb', 'en', as in move through the list trying each
     // substring from most specific to least, but move to the next array item if it's a more specific variant than the current root
     function chooseLocale(names) {
-        var i = 0,
+        let i = 0,
             j,
             next,
             locale,
@@ -18425,7 +18425,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function loadLocale(name) {
-        var oldLocale = null,
+        let oldLocale = null,
             aliasedRequire;
         // TODO: Find a better way to register and load all the locales in Node
         if (
@@ -18453,7 +18453,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // no arguments are passed in, it will simply return the current global
     // locale key.
     function getSetGlobalLocale(key, values) {
-        var data;
+        let data;
         if (key) {
             if (isUndefined(values)) {
                 data = getLocale(key);
@@ -18479,7 +18479,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function defineLocale(name, config) {
         if (config !== null) {
-            var locale,
+            let locale,
                 parentConfig = baseConfig;
             config.abbr = name;
             if (locales[name] != null) {
@@ -18533,7 +18533,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function updateLocale(name, config) {
         if (config != null) {
-            var locale,
+            let locale,
                 tmpLocale,
                 parentConfig = baseConfig;
 
@@ -18578,7 +18578,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // returns locale data
     function getLocale(key) {
-        var locale;
+        let locale;
 
         if (key && key._locale && key._locale._abbr) {
             key = key._locale._abbr;
@@ -18605,7 +18605,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function checkOverflow(m) {
-        var overflow,
+        let overflow,
             a = m._a;
 
         if (a && getParsingFlags(m).overflow === -2) {
@@ -18650,7 +18650,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // iso 8601 regex
     // 0000-00-00 0000-W00 or 0000-W00-0 + T + 00 or 00:00 or 00:00:00 or 00:00:00.000 + +00:00 or +0000 or +00)
-    var extendedIsoRegex =
+    const extendedIsoRegex =
             /^\s*((?:[+-]\d{6}|\d{4})-(?:\d\d-\d\d|W\d\d-\d|W\d\d|\d\d\d|\d\d))(?:(T| )(\d\d(?::\d\d(?::\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
         basicIsoRegex =
             /^\s*((?:[+-]\d{6}|\d{4})(?:\d\d\d\d|W\d\d\d|W\d\d|\d\d\d|\d\d|))(?:(T| )(\d\d(?:\d\d(?:\d\d(?:[.,]\d+)?)?)?)([+-]\d\d(?::?\d\d)?|\s*Z)?)?$/,
@@ -18701,7 +18701,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // date from iso format
     function configFromISO(config) {
-        var i,
+        let i,
             l,
             string = config._i,
             match = extendedIsoRegex.exec(string) || basicIsoRegex.exec(string),
@@ -18765,7 +18765,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         minuteStr,
         secondStr
     ) {
-        var result = [
+        const result = [
             untruncateYear(yearStr),
             defaultLocaleMonthsShort.indexOf(monthStr),
             parseInt(dayStr, 10),
@@ -18781,7 +18781,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function untruncateYear(yearStr) {
-        var year = parseInt(yearStr, 10);
+        const year = parseInt(yearStr, 10);
         if (year <= 49) {
             return 2000 + year;
         } else if (year <= 999) {
@@ -18802,7 +18802,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     function checkWeekday(weekdayStr, parsedInput, config) {
         if (weekdayStr) {
             // TODO: Replace the vanilla JS Date object with an independent day-of-week check.
-            var weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
+            const weekdayProvided = defaultLocaleWeekdaysShort.indexOf(weekdayStr),
                 weekdayActual = new Date(
                     parsedInput[0],
                     parsedInput[1],
@@ -18824,7 +18824,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             // the only allowed military tz is Z
             return 0;
         } else {
-            var hm = parseInt(numOffset, 10),
+            const hm = parseInt(numOffset, 10),
                 m = hm % 100,
                 h = (hm - m) / 100;
             return h * 60 + m;
@@ -18833,7 +18833,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // date and time from ref 2822 format
     function configFromRFC2822(config) {
-        var match = rfc2822.exec(preprocessRFC2822(config._i)),
+        let match = rfc2822.exec(preprocessRFC2822(config._i)),
             parsedArray;
         if (match) {
             parsedArray = extractFromRFC2822Strings(
@@ -18862,7 +18862,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // date from 1) ASP.NET, 2) ISO, 3) RFC 2822 formats, or 4) optional fallback if parsing isn't strict
     function configFromString(config) {
-        var matched = aspNetJsonRegex.exec(config._i);
+        const matched = aspNetJsonRegex.exec(config._i);
         if (matched !== null) {
             config._d = new Date(+matched[1]);
             return;
@@ -18912,7 +18912,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function currentDateArray(config) {
         // hooks is actually the exported moment object
-        var nowValue = new Date(hooks.now());
+        const nowValue = new Date(hooks.now());
         if (config._useUTC) {
             return [
                 nowValue.getUTCFullYear(),
@@ -18928,7 +18928,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // note: all values past the year are optional and will default to the lowest possible value.
     // [year, month, day , hour, minute, second, millisecond]
     function configFromArray(config) {
-        var i,
+        let i,
             date,
             input = [],
             currentDate,
@@ -19017,7 +19017,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function dayOfYearFromWeekInfo(config) {
-        var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow, curWeek;
+        let w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow, curWeek;
 
         w = config._w;
         if (w.GG != null || w.W != null || w.E != null) {
@@ -19098,7 +19098,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         getParsingFlags(config).empty = true;
 
         // This array is used to make a Date, either with `new Date` or `Date.UTC`
-        var string = '' + config._i,
+        let string = '' + config._i,
             i,
             parsedInput,
             tokens,
@@ -19175,7 +19175,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function meridiemFixWrap(locale, hour, meridiem) {
-        var isPm;
+        let isPm;
 
         if (meridiem == null) {
             // nothing to do
@@ -19201,7 +19201,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // date from string and array of format strings
     function configFromStringAndArray(config) {
-        var tempConfig,
+        let tempConfig,
             bestMoment,
             scoreToBeat,
             i,
@@ -19266,7 +19266,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return;
         }
 
-        var i = normalizeObjectUnits(config._i),
+        const i = normalizeObjectUnits(config._i),
             dayOrDate = i.day === undefined ? i.date : i.day;
         config._a = map(
             [i.year, i.month, dayOrDate, i.hour, i.minute, i.second, i.millisecond],
@@ -19279,7 +19279,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function createFromConfig(config) {
-        var res = new Moment(checkOverflow(prepareConfig(config)));
+        const res = new Moment(checkOverflow(prepareConfig(config)));
         if (res._nextDay) {
             // Adding is smart enough around DST
             res.add(1, 'd');
@@ -19290,7 +19290,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function prepareConfig(config) {
-        var input = config._i,
+        let input = config._i,
             format = config._f;
 
         config._locale = config._locale || getLocale(config._l);
@@ -19323,7 +19323,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function configFromInput(config) {
-        var input = config._i;
+        const input = config._i;
         if (isUndefined(input)) {
             config._d = new Date(hooks.now());
         } else if (isDate(input)) {
@@ -19346,7 +19346,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function createLocalOrUTC(input, format, locale, strict, isUTC) {
-        var c = {};
+        const c = {};
 
         if (format === true || format === false) {
             strict = format;
@@ -19380,10 +19380,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return createLocalOrUTC(input, format, locale, strict, false);
     }
 
-    var prototypeMin = deprecate(
+    const prototypeMin = deprecate(
             'moment().min is deprecated, use moment.max instead. http://momentjs.com/guides/#/warnings/min-max/',
             function () {
-                var other = createLocal.apply(null, arguments);
+                const other = createLocal.apply(null, arguments);
                 if (this.isValid() && other.isValid()) {
                     return other < this ? this : other;
                 } else {
@@ -19394,7 +19394,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         prototypeMax = deprecate(
             'moment().max is deprecated, use moment.min instead. http://momentjs.com/guides/#/warnings/min-max/',
             function () {
-                var other = createLocal.apply(null, arguments);
+                const other = createLocal.apply(null, arguments);
                 if (this.isValid() && other.isValid()) {
                     return other > this ? this : other;
                 } else {
@@ -19409,7 +19409,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // moments should either be an array of moment objects or an array, whose
     // first element is an array of moment objects.
     function pickBy(fn, moments) {
-        var res, i;
+        let res, i;
         if (moments.length === 1 && isArray(moments[0])) {
             moments = moments[0];
         }
@@ -19427,22 +19427,22 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // TODO: Use [].sort instead?
     function min() {
-        var args = [].slice.call(arguments, 0);
+        const args = [].slice.call(arguments, 0);
 
         return pickBy('isBefore', args);
     }
 
     function max() {
-        var args = [].slice.call(arguments, 0);
+        const args = [].slice.call(arguments, 0);
 
         return pickBy('isAfter', args);
     }
 
-    var now = function () {
+    const now = function () {
         return Date.now ? Date.now() : +new Date();
     };
 
-    var ordering = [
+    const ordering = [
         'year',
         'quarter',
         'month',
@@ -19455,7 +19455,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     ];
 
     function isDurationValid(m) {
-        var key,
+        let key,
             unitHasDecimal = false,
             i,
             orderLen = ordering.length;
@@ -19494,7 +19494,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function Duration(duration) {
-        var normalizedInput = normalizeObjectUnits(duration),
+        const normalizedInput = normalizeObjectUnits(duration),
             years = normalizedInput.year || 0,
             quarters = normalizedInput.quarter || 0,
             months = normalizedInput.month || 0,
@@ -19542,7 +19542,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // compare two arrays, return the number of differences
     function compareArrays(array1, array2, dontConvert) {
-        var len = Math.min(array1.length, array2.length),
+        let len = Math.min(array1.length, array2.length),
             lengthDiff = Math.abs(array1.length - array2.length),
             diffs = 0,
             i;
@@ -19561,7 +19561,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function offset(token, separator) {
         addFormatToken(token, 0, 0, function () {
-            var offset = this.utcOffset(),
+            let offset = this.utcOffset(),
                 sign = '+';
             if (offset < 0) {
                 offset = -offset;
@@ -19593,10 +19593,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // timezone chunker
     // '+10:00' > ['10',  '00']
     // '-1530'  > ['-15', '30']
-    var chunkOffset = /([\+\-]|\d\d)/gi;
+    const chunkOffset = /([\+\-]|\d\d)/gi;
 
     function offsetFromString(matcher, string) {
-        var matches = (string || '').match(matcher),
+        let matches = (string || '').match(matcher),
             chunk,
             parts,
             minutes;
@@ -19614,7 +19614,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // Return a moment from input, that is local/utc/zone equivalent to model.
     function cloneWithOffset(input, model) {
-        var res, diff;
+        let res, diff;
         if (model._isUTC) {
             res = model.clone();
             diff =
@@ -19655,7 +19655,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // _changeInProgress == true case, then we have to adjust, because
     // there is no such time in the given timezone.
     function getSetOffset(input, keepLocalTime, keepMinutes) {
-        var offset = this._offset || 0,
+        let offset = this._offset || 0,
             localAdjust;
         if (!this.isValid()) {
             return input != null ? this : NaN;
@@ -19731,7 +19731,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (this._tzm != null) {
             this.utcOffset(this._tzm, false, true);
         } else if (typeof this._i === 'string') {
-            var tZone = offsetFromString(matchOffset, this._i);
+            const tZone = offsetFromString(matchOffset, this._i);
             if (tZone != null) {
                 this.utcOffset(tZone);
             } else {
@@ -19762,7 +19762,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return this._isDSTShifted;
         }
 
-        var c = {},
+        let c = {},
             other;
 
         copyConfig(c, this);
@@ -19792,7 +19792,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     // ASP.NET json date format regex
-    var aspNetRegex = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+)(\.\d*)?)?$/,
+    const aspNetRegex = /^(-|\+)?(?:(\d*)[. ])?(\d+):(\d+)(?::(\d+)(\.\d*)?)?$/,
         // from http://docs.closure-library.googlecode.com/git/closure_goog_date_date.js.source.html
         // somewhat more in line with 4.4.3.2 2004 spec, but allows decimal anywhere
         // and further modified to allow for strings containing both week and day
@@ -19800,7 +19800,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             /^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/;
 
     function createDuration(input, key) {
-        var duration = input,
+        let duration = input,
             // matching against regexp is expensive, do it on demand
             match = null,
             sign,
@@ -19878,13 +19878,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         // We'd normally use ~~inp for this, but unfortunately it also
         // converts floats to ints.
         // inp may be undefined, so careful calling replace on it.
-        var res = inp && parseFloat(inp.replace(',', '.'));
+        const res = inp && parseFloat(inp.replace(',', '.'));
         // apply sign while we're at it
         return (isNaN(res) ? 0 : res) * sign;
     }
 
     function positiveMomentsDifference(base, other) {
-        var res = {};
+        const res = {};
 
         res.months =
             other.month() - base.month() + (other.year() - base.year()) * 12;
@@ -19898,7 +19898,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function momentsDifference(base, other) {
-        var res;
+        let res;
         if (!(base.isValid() && other.isValid())) {
             return { milliseconds: 0, months: 0 };
         }
@@ -19918,7 +19918,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // TODO: remove 'name' arg after deprecation is removed
     function createAdder(direction, name) {
         return function (val, period) {
-            var dur, tmp;
+            let dur, tmp;
             //invert the arguments, but complain about it
             if (period !== null && !isNaN(+period)) {
                 deprecateSimple(
@@ -19942,7 +19942,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function addSubtract(mom, duration, isAdding, updateOffset) {
-        var milliseconds = duration._milliseconds,
+        const milliseconds = duration._milliseconds,
             days = absRound(duration._days),
             months = absRound(duration._months);
 
@@ -19967,7 +19967,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
-    var add = createAdder(1, 'add'),
+    const add = createAdder(1, 'add'),
         subtract = createAdder(-1, 'subtract');
 
     function isString(input) {
@@ -19989,7 +19989,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isMomentInputObject(input) {
-        var objectTest = isObject(input) && !isObjectEmpty(input),
+        let objectTest = isObject(input) && !isObjectEmpty(input),
             propertyTest = false,
             properties = [
                 'years',
@@ -20030,7 +20030,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isNumberOrStringArray(input) {
-        var arrayTest = isArray(input),
+        let arrayTest = isArray(input),
             dataTypeTest = false;
         if (arrayTest) {
             dataTypeTest =
@@ -20042,7 +20042,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isCalendarSpec(input) {
-        var objectTest = isObject(input) && !isObjectEmpty(input),
+        let objectTest = isObject(input) && !isObjectEmpty(input),
             propertyTest = false,
             properties = [
                 'sameDay',
@@ -20064,7 +20064,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function getCalendarFormat(myMoment, now) {
-        var diff = myMoment.diff(now, 'days', true);
+        const diff = myMoment.diff(now, 'days', true);
         return diff < -6
             ? 'sameElse'
             : diff < -1
@@ -20096,7 +20096,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
         // We want to compare the start of today, vs this.
         // Getting start-of-today depends on whether we're local/utc/offset or not.
-        var now = time || createLocal(),
+        const now = time || createLocal(),
             sod = cloneWithOffset(now, this).startOf('day'),
             format = hooks.calendarFormat(this, sod) || 'sameElse',
             output =
@@ -20115,7 +20115,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isAfter(input, units) {
-        var localInput = isMoment(input) ? input : createLocal(input);
+        const localInput = isMoment(input) ? input : createLocal(input);
         if (!(this.isValid() && localInput.isValid())) {
             return false;
         }
@@ -20128,7 +20128,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isBefore(input, units) {
-        var localInput = isMoment(input) ? input : createLocal(input);
+        const localInput = isMoment(input) ? input : createLocal(input);
         if (!(this.isValid() && localInput.isValid())) {
             return false;
         }
@@ -20141,7 +20141,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isBetween(from, to, units, inclusivity) {
-        var localFrom = isMoment(from) ? from : createLocal(from),
+        const localFrom = isMoment(from) ? from : createLocal(from),
             localTo = isMoment(to) ? to : createLocal(to);
         if (!(this.isValid() && localFrom.isValid() && localTo.isValid())) {
             return false;
@@ -20158,7 +20158,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isSame(input, units) {
-        var localInput = isMoment(input) ? input : createLocal(input),
+        let localInput = isMoment(input) ? input : createLocal(input),
             inputMs;
         if (!(this.isValid() && localInput.isValid())) {
             return false;
@@ -20184,7 +20184,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function diff(input, units, asFloat) {
-        var that, zoneDelta, output;
+        let that, zoneDelta, output;
 
         if (!this.isValid()) {
             return NaN;
@@ -20239,7 +20239,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return -monthDiff(b, a);
         }
         // difference in months
-        var wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month()),
+        let wholeMonthDiff = (b.year() - a.year()) * 12 + (b.month() - a.month()),
             // b is in (anchor - 1 month, anchor + 1 month)
             anchor = a.clone().add(wholeMonthDiff, 'months'),
             anchor2,
@@ -20270,7 +20270,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!this.isValid()) {
             return null;
         }
-        var utc = keepOffset !== true,
+        const utc = keepOffset !== true,
             m = utc ? this.clone().utc() : this;
         if (m.year() < 0 || m.year() > 9999) {
             return formatMoment(
@@ -20306,7 +20306,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!this.isValid()) {
             return 'moment.invalid(/* ' + this._i + ' */)';
         }
-        var func = 'moment',
+        let func = 'moment',
             zone = '',
             prefix,
             year,
@@ -20330,7 +20330,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 ? hooks.defaultFormatUtc
                 : hooks.defaultFormat;
         }
-        var output = formatMoment(this, inputString);
+        const output = formatMoment(this, inputString);
         return this.localeData().postformat(output);
     }
 
@@ -20372,7 +20372,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // instance.  Otherwise, it will return the locale configuration
     // variables for this instance.
     function locale(key) {
-        var newLocaleData;
+        let newLocaleData;
 
         if (key === undefined) {
             return this._locale._abbr;
@@ -20385,7 +20385,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
-    var lang = deprecate(
+    const lang = deprecate(
         'moment().lang() is deprecated. Instead, use moment().localeData() to get the language configuration. Use moment().locale() to change languages.',
         function (key) {
             if (key === undefined) {
@@ -20400,7 +20400,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this._locale;
     }
 
-    var MS_PER_SECOND = 1000,
+    const MS_PER_SECOND = 1000,
         MS_PER_MINUTE = 60 * MS_PER_SECOND,
         MS_PER_HOUR = 60 * MS_PER_MINUTE,
         MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
@@ -20431,7 +20431,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function startOf(units) {
-        var time, startOfDate;
+        let time, startOfDate;
         units = normalizeUnits(units);
         if (units === undefined || units === 'millisecond' || !this.isValid()) {
             return this;
@@ -20494,7 +20494,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function endOf(units) {
-        var time, startOfDate;
+        let time, startOfDate;
         units = normalizeUnits(units);
         if (units === undefined || units === 'millisecond' || !this.isValid()) {
             return this;
@@ -20575,7 +20575,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function toArray() {
-        var m = this;
+        const m = this;
         return [
             m.year(),
             m.month(),
@@ -20588,7 +20588,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function toObject() {
-        var m = this;
+        const m = this;
         return {
             years: m.year(),
             months: m.month(),
@@ -20647,7 +20647,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addParseToken(
         ['N', 'NN', 'NNN', 'NNNN', 'NNNNN'],
         function (input, array, config, token) {
-            var era = config._locale.erasParse(input, token, config._strict);
+            const era = config._locale.erasParse(input, token, config._strict);
             if (era) {
                 getParsingFlags(config).era = era;
             } else {
@@ -20664,7 +20664,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addParseToken(['y', 'yy', 'yyy', 'yyyy'], YEAR);
     addParseToken(['yo'], function (input, array, config, token) {
-        var match;
+        let match;
         if (config._locale._eraYearOrdinalRegex) {
             match = input.match(config._locale._eraYearOrdinalRegex);
         }
@@ -20677,7 +20677,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     });
 
     function localeEras(m, format) {
-        var i,
+        let i,
             l,
             date,
             eras = this._eras || getLocale('en')._eras;
@@ -20705,7 +20705,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function localeErasParse(eraName, format, strict) {
-        var i,
+        let i,
             l,
             eras = this.eras(),
             name,
@@ -20747,7 +20747,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function localeErasConvertYear(era, year) {
-        var dir = era.since <= era.until ? +1 : -1;
+        const dir = era.since <= era.until ? +1 : -1;
         if (year === undefined) {
             return hooks(era.since).year();
         } else {
@@ -20756,7 +20756,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function getEraName() {
-        var i,
+        let i,
             l,
             val,
             eras = this.localeData().eras();
@@ -20776,7 +20776,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function getEraNarrow() {
-        var i,
+        let i,
             l,
             val,
             eras = this.localeData().eras();
@@ -20796,7 +20796,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function getEraAbbr() {
-        var i,
+        let i,
             l,
             val,
             eras = this.localeData().eras();
@@ -20816,7 +20816,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function getEraYear() {
-        var i,
+        let i,
             l,
             dir,
             val,
@@ -20879,7 +20879,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function computeErasParse() {
-        var abbrPieces = [],
+        let abbrPieces = [],
             namePieces = [],
             narrowPieces = [],
             mixedPieces = [],
@@ -20990,17 +20990,17 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function getWeeksInYear() {
-        var weekInfo = this.localeData()._week;
+        const weekInfo = this.localeData()._week;
         return weeksInYear(this.year(), weekInfo.dow, weekInfo.doy);
     }
 
     function getWeeksInWeekYear() {
-        var weekInfo = this.localeData()._week;
+        const weekInfo = this.localeData()._week;
         return weeksInYear(this.weekYear(), weekInfo.dow, weekInfo.doy);
     }
 
     function getSetWeekYearHelper(input, week, weekday, dow, doy) {
-        var weeksTarget;
+        let weeksTarget;
         if (input == null) {
             return weekOfYear(this, dow, doy).year;
         } else {
@@ -21013,7 +21013,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function setWeekAll(weekYear, week, weekday, dow, doy) {
-        var dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
+        const dayOfYearData = dayOfYearFromWeeks(weekYear, week, weekday, dow, doy),
             date = createUTCDate(dayOfYearData.year, 0, dayOfYearData.dayOfYear);
 
         this.year(date.getUTCFullYear());
@@ -21078,7 +21078,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // MOMENTS
 
-    var getSetDayOfMonth = makeGetSet('Date', true);
+    const getSetDayOfMonth = makeGetSet('Date', true);
 
     // FORMATTING
 
@@ -21104,7 +21104,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // MOMENTS
 
     function getSetDayOfYear(input) {
-        var dayOfYear =
+        const dayOfYear =
             Math.round(
                 (this.clone().startOf('day') - this.clone().startOf('year')) / 864e5
             ) + 1;
@@ -21131,7 +21131,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // MOMENTS
 
-    var getSetMinute = makeGetSet('Minutes', false);
+    const getSetMinute = makeGetSet('Minutes', false);
 
     // FORMATTING
 
@@ -21153,7 +21153,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // MOMENTS
 
-    var getSetSecond = makeGetSet('Seconds', false);
+    const getSetSecond = makeGetSet('Seconds', false);
 
     // FORMATTING
 
@@ -21199,7 +21199,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addRegexToken('SS', match1to3, match2);
     addRegexToken('SSS', match1to3, match3);
 
-    var token, getSetMillisecond;
+    let token, getSetMillisecond;
     for (token = 'SSSS'; token.length <= 9; token += 'S') {
         addRegexToken(token, matchUnsigned);
     }
@@ -21229,7 +21229,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this._isUTC ? 'Coordinated Universal Time' : '';
     }
 
-    var proto = Moment.prototype;
+    const proto = Moment.prototype;
 
     proto.add = add;
     proto.calendar = calendar$1;
@@ -21345,7 +21345,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return string;
     }
 
-    var proto$1 = Locale.prototype;
+    const proto$1 = Locale.prototype;
 
     proto$1.calendar = calendar;
     proto$1.longDateFormat = longDateFormat;
@@ -21385,7 +21385,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     proto$1.meridiem = localeMeridiem;
 
     function get$1(format, index, field, setter) {
-        var locale = getLocale(),
+        const locale = getLocale(),
             utc = createUTC().set(setter, index);
         return locale[field](utc, format);
     }
@@ -21402,7 +21402,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return get$1(format, index, field, 'month');
         }
 
-        var i,
+        let i,
             out = [];
         for (i = 0; i < 12; i++) {
             out[i] = get$1(format, i, field, 'month');
@@ -21439,7 +21439,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             format = format || '';
         }
 
-        var locale = getLocale(),
+        let locale = getLocale(),
             shift = localeSorted ? locale._week.dow : 0,
             i,
             out = [];
@@ -21495,7 +21495,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         ],
         dayOfMonthOrdinalParse: /\d{1,2}(th|st|nd|rd)/,
         ordinal: function (number) {
-            var b = number % 10,
+            const b = number % 10,
                 output =
                     toInt((number % 100) / 10) === 1
                         ? 'th'
@@ -21521,10 +21521,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         getLocale
     );
 
-    var mathAbs = Math.abs;
+    const mathAbs = Math.abs;
 
     function abs() {
-        var data = this._data;
+        const data = this._data;
 
         this._milliseconds = mathAbs(this._milliseconds);
         this._days = mathAbs(this._days);
@@ -21541,7 +21541,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function addSubtract$1(duration, input, value, direction) {
-        var other = createDuration(input, value);
+        const other = createDuration(input, value);
 
         duration._milliseconds += direction * other._milliseconds;
         duration._days += direction * other._days;
@@ -21569,7 +21569,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function bubble() {
-        var milliseconds = this._milliseconds,
+        let milliseconds = this._milliseconds,
             days = this._days,
             months = this._months,
             data = this._data,
@@ -21638,7 +21638,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!this.isValid()) {
             return NaN;
         }
-        var days,
+        let days,
             months,
             milliseconds = this._milliseconds;
 
@@ -21697,7 +21697,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         };
     }
 
-    var asMilliseconds = makeAs('ms'),
+    const asMilliseconds = makeAs('ms'),
         asSeconds = makeAs('s'),
         asMinutes = makeAs('m'),
         asHours = makeAs('h'),
@@ -21722,7 +21722,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         };
     }
 
-    var milliseconds = makeGetter('milliseconds'),
+    const milliseconds = makeGetter('milliseconds'),
         seconds = makeGetter('seconds'),
         minutes = makeGetter('minutes'),
         hours = makeGetter('hours'),
@@ -21734,7 +21734,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return absFloor(this.days() / 7);
     }
 
-    var round = Math.round,
+    let round = Math.round,
         thresholds = {
             ss: 44, // a few seconds to seconds
             s: 45, // seconds to minute
@@ -21751,7 +21751,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function relativeTime$1(posNegDuration, withoutSuffix, thresholds, locale) {
-        var duration = createDuration(posNegDuration).abs(),
+        let duration = createDuration(posNegDuration).abs(),
             seconds = round(duration.as('s')),
             minutes = round(duration.as('m')),
             hours = round(duration.as('h')),
@@ -21818,7 +21818,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return this.localeData().invalidDate();
         }
 
-        var withSuffix = false,
+        let withSuffix = false,
             th = thresholds,
             locale,
             output;
@@ -21847,7 +21847,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return locale.postformat(output);
     }
 
-    var abs$1 = Math.abs;
+    const abs$1 = Math.abs;
 
     function sign(x) {
         return (x > 0) - (x < 0) || +x;
@@ -21865,7 +21865,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return this.localeData().invalidDate();
         }
 
-        var seconds = abs$1(this._milliseconds) / 1000,
+        let seconds = abs$1(this._milliseconds) / 1000,
             days = abs$1(this._days),
             months = abs$1(this._months),
             minutes,
@@ -21915,7 +21915,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
-    var proto$2 = Duration.prototype;
+    const proto$2 = Duration.prototype;
 
     proto$2.isValid = isValid$1;
     proto$2.abs = abs;
@@ -22034,9 +22034,9 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Profile_vue_vue_type_template_id_107d613a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Profile.vue?vue&type=template&id=107d613a */ "./resources/js/Views/Profile.vue?vue&type=template&id=107d613a");
-/* harmony import */ var _Profile_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Profile.vue?vue&type=script&lang=js */ "./resources/js/Views/Profile.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ const _Profile_vue_vue_type_template_id_107d613a__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Profile.vue?vue&type=template&id=107d613a */ "./resources/js/Views/Profile.vue?vue&type=template&id=107d613a");
+/* harmony import */ const _Profile_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Profile.vue?vue&type=script&lang=js */ "./resources/js/Views/Profile.vue?vue&type=script&lang=js");
+/* harmony import */ const _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -22059,9 +22059,9 @@ if (false) {}
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CircleSvg_vue_vue_type_template_id_51e930ce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CircleSvg.vue?vue&type=template&id=51e930ce */ "./resources/js/components/CircleSvg.vue?vue&type=template&id=51e930ce");
-/* harmony import */ var _CircleSvg_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CircleSvg.vue?vue&type=script&lang=js */ "./resources/js/components/CircleSvg.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ const _CircleSvg_vue_vue_type_template_id_51e930ce__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CircleSvg.vue?vue&type=template&id=51e930ce */ "./resources/js/components/CircleSvg.vue?vue&type=template&id=51e930ce");
+/* harmony import */ const _CircleSvg_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CircleSvg.vue?vue&type=script&lang=js */ "./resources/js/components/CircleSvg.vue?vue&type=script&lang=js");
+/* harmony import */ const _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -22084,9 +22084,9 @@ if (false) {}
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Errors_vue_vue_type_template_id_45dd1fd4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors.vue?vue&type=template&id=45dd1fd4 */ "./resources/js/components/Errors.vue?vue&type=template&id=45dd1fd4");
-/* harmony import */ var _Errors_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Errors.vue?vue&type=script&lang=js */ "./resources/js/components/Errors.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ const _Errors_vue_vue_type_template_id_45dd1fd4__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors.vue?vue&type=template&id=45dd1fd4 */ "./resources/js/components/Errors.vue?vue&type=template&id=45dd1fd4");
+/* harmony import */ const _Errors_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Errors.vue?vue&type=script&lang=js */ "./resources/js/components/Errors.vue?vue&type=script&lang=js");
+/* harmony import */ const _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -22109,9 +22109,9 @@ if (false) {}
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Success_vue_vue_type_template_id_e836a030__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Success.vue?vue&type=template&id=e836a030 */ "./resources/js/components/Success.vue?vue&type=template&id=e836a030");
-/* harmony import */ var _Success_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Success.vue?vue&type=script&lang=js */ "./resources/js/components/Success.vue?vue&type=script&lang=js");
-/* harmony import */ var _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+/* harmony import */ const _Success_vue_vue_type_template_id_e836a030__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Success.vue?vue&type=template&id=e836a030 */ "./resources/js/components/Success.vue?vue&type=template&id=e836a030");
+/* harmony import */ const _Success_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Success.vue?vue&type=script&lang=js */ "./resources/js/components/Success.vue?vue&type=script&lang=js");
+/* harmony import */ const _Users_jeremykenedy_sites_laravel_secret_messages_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
 
 
 
@@ -22265,7 +22265,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ render; }
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ const vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
 function render(_ctx, _cache) {
@@ -22298,7 +22298,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": function() { return /* binding */ render; }
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ const vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
 function render(_ctx, _cache) {

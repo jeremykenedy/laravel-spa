@@ -34,7 +34,7 @@ export default defineConfig({
       },
     }),
     StylelintPlugin({
-      fix: false,
+      fix: true,
       quite: true,
       lintOnStart: false,
     }),

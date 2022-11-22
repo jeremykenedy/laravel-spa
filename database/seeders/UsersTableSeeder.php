@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
         $seededSuperAdmin = 'superadmin@superadmin.com';
         $user = User::where('email', '=', $seededSuperAdmin)->first();
         if ($user === null) {
-            $user = User::create([
+            $user = User::withTrashed()->updateOrCreate([
                 'name'                          => 'Rick Sanchez',
                 'email'                         => $seededSuperAdmin,
                 'password'                      => Hash::make('password'),
@@ -37,7 +37,7 @@ class UsersTableSeeder extends Seeder
         $seededAdmin = 'admin@admin.com';
         $user = User::where('email', '=', $seededAdmin)->first();
         if ($user === null) {
-            $user = User::create([
+            $user = User::withTrashed()->updateOrCreate([
                 'name'                          => 'Morty Smith',
                 'email'                         => $seededAdmin,
                 'password'                      => Hash::make('password'),
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
         $seededUser = 'user@user.com';
         $user = User::where('email', '=', $seededUser)->first();
         if ($user === null) {
-            $user = User::create([
+            $user = User::withTrashed()->updateOrCreate([
                 'name'                          => 'Beth Smith',
                 'email'                         => $seededUser,
                 'password'                      => Hash::make('password'),
