@@ -34,7 +34,7 @@ export default defineConfig({
       },
     }),
     StylelintPlugin({
-      fix: false,
+      fix: true,
       quite: true,
       lintOnStart: false,
     }),
@@ -69,6 +69,7 @@ export default defineConfig({
     alias: {
       '~': path.resolve(__dirname, 'node_modules'),
       '@': path.resolve(__dirname, 'resources/js'),
+      '@css': path.resolve(__dirname, 'resources/css'),
       '@img': path.resolve(__dirname, 'resources/img'),
       '@views': path.resolve(__dirname, 'resources/js/views'),
       '@pages': path.resolve(__dirname, 'resources/js/views/pages'),

@@ -11,10 +11,13 @@ import AppSwitch from '@components/common/AppSwitch.vue';
 // import AppTable from '@components/common/AppTable.vue';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
+import VueGtag from 'vue-gtag-next';
 
 axios.defaults.withCredentials = true;
 
 const app = createApp(App);
+const APP_GA_TAG = GA_TAG; // eslint-disable-line
+const APP_GA_ENABLED = GA_ENABLED; // eslint-disable-line
 
 store.dispatch('auth/getUser').then(() => {
   app
@@ -36,7 +39,23 @@ store.dispatch('auth/getUser').then(() => {
     })
     .component('AppButton', AppButton)
     .component('AppToast', AppToast)
-    .component('AppSwitch', AppSwitch)
-    // .component('AppTable', AppTable)
-    .mount('#app');
+    .component('AppSwitch', AppSwitch);
+  // .component('AppTable', AppTable)
+
+  if (APP_GA_ENABLED) {
+    app.use(VueGtag, {
+      property: {
+        id: APP_GA_TAG,
+        // params: {
+        //   user_id: "12345",
+        //   send_page_view: true,
+        //   linker: {
+        //     domain: ['example.com']
+        //   }
+        // }
+      },
+    });
+  }
+
+  app.mount('#app');
 });

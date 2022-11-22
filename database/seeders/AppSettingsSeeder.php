@@ -91,19 +91,19 @@ class AppSettingsSeeder extends Seeder
                 'val'       => url('social/handle/google'),
                 'group'     => 'auth',
             ],
-            // [
-            //     'name'      => 'App Google Analytics Enabled',
-            //     'key'       => 'enableGoogleAnalytics',
-            //     'type'      => 'boolean',
-            //     'val'       => false,
-            //     'group'     => 'analytics'
-            // ],
-            // [
-            //     'name'      => 'App Google Analytics Key',
-            //     'key'       => 'appGoogleAnalyticsKey',
-            //     'val'       => null,
-            //     'group'     => 'analytics'
-            // ],
+            [
+                'name'      => 'App Google Analytics',
+                'key'       => 'enableGoogleAnalytics',
+                'type'      => 'boolean',
+                'val'       => false,
+                'group'     => 'analytics',
+            ],
+            [
+                'name'      => 'App Google Analytics Key',
+                'key'       => 'appGoogleAnalyticsKey',
+                'val'       => config('services.google.ga'),
+                'group'     => 'analytics',
+            ],
         ];
 
         $uniqueKeyOne = 'key';

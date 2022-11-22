@@ -190,7 +190,7 @@
 
               <div
                 class="flex cursor-pointer items-center rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-800 hover:text-white"
-                @click.prevent="logout"
+                @click.prevent="logout(), closeDrop()"
               >
                 <ArrowLeftOnRectangleIcon
                   class="mr-2 h-6 w-6"
@@ -366,6 +366,7 @@
                 </router-link>
               </div>
               <div
+                v-if="authenticated && user"
                 class="mr-2 mb-10"
                 :class="
                   loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
@@ -430,6 +431,7 @@
                 text="Logout"
                 type="button"
                 class="flex w-full items-center justify-center rounded-md border border-transparent bg-gray-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-800"
+                @click.prevent="logout(), closeDrop()"
               >
                 <template #text>
                   <ArrowLeftOnRectangleIcon
@@ -454,6 +456,7 @@ import {
   PopoverButton,
   PopoverGroup,
   PopoverPanel,
+  Switch,
 } from '@headlessui/vue';
 import {
   Bars3Icon,
@@ -483,6 +486,7 @@ export default {
     ArrowLeftOnRectangleIcon,
     ChevronDownIcon,
     UserCircleIcon,
+    Switch, // eslint-disable-line
   },
   props: {},
   setup() {

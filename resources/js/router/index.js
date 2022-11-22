@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { trackRouter } from 'vue-gtag-next';
 import routes from '@/router/routes.js';
 import store from '@/store';
 import middlewarePipeline from '@/middleware/middlewarePipeline';
@@ -27,5 +28,7 @@ router.beforeEach((to, from, next) => {
     next: middlewarePipeline(context, middleware, 1),
   });
 });
+
+trackRouter(router);
 
 export default router;

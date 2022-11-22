@@ -36,6 +36,7 @@ This starter template that is built on:
 - Roles Management
 - Permissions Management
 - Users Managemenet
+- [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/)
 
 ### Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`

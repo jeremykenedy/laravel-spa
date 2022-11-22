@@ -26,8 +26,13 @@
 </template>
 
 <script lang="ts">
+import { Switch } from '@headlessui/vue';
+
 export default {
   name: 'AppSwitch',
+  components: {
+    Switch, // eslint-disable-line
+  },
   props: {
     enabled: { type: Boolean, default: false },
     enableTooltip: { type: Boolean, default: false },

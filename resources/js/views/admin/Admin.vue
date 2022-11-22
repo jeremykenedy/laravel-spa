@@ -43,115 +43,143 @@
         v-if="authenticated && roles && roles.superAdmin"
         class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
       >
-        <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
-        >
-          <span
-            class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300"
-          />
-          <div>
-            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
-              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
-              <span v-if="!loading">
-                {{ users.length }}
-              </span>
-            </p>
-            <p class="text-gray-600 dark:text-gray-400">Registered Users</p>
+        <router-link :to="{ name: 'users' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span v-if="!loading">
+                  {{ users.length }}
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Registered Users</p>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
       <div
         v-if="authenticated && roles && roles.superAdmin"
         class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
       >
-        <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
-        >
-          <span
-            class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
-          />
-          <div>
-            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
-              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
-              <span v-if="!loading">
-                {{ rolesData.length }}
-              </span>
-            </p>
-            <p class="text-gray-600 dark:text-gray-400">Roles</p>
+        <router-link :to="{ name: 'roles' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span v-if="!loading">
+                  {{ rolesData.length }}
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Roles</p>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
       <div
         v-if="authenticated && roles && roles.superAdmin"
         class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
       >
-        <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
-        >
-          <span
-            class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
-          />
-          <div>
-            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
-              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
-              <span v-if="!loading">
-                {{ permissionsData.length }}
-              </span>
-            </p>
-            <p class="text-gray-600 dark:text-gray-400">Permissions</p>
+        <router-link :to="{ name: 'permissions' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span v-if="!loading">
+                  {{ permissionsData.length }}
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Permissions</p>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
       <div
         v-if="authenticated && roles && roles.superAdmin"
         class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
       >
-        <div
-          class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 dark:border-slate-900 dark:bg-slate-900"
-        >
-          <span
-            class="fas fa-lock fa-fw fa-3x text-gray-700 dark:text-gray-300"
-          />
-          <div>
-            <p class="text-3xl font-semibold text-gray-700 dark:text-gray-300">
-              <span v-if="loading" class="fas fa-circle-notch fa-spin fa-xs" />
-              <span
-                v-if="!loading"
-                class="fa-brands fa-square-facebook fa-fw"
-                :class="
-                  checkSettingEnabled('enableFbLogin')
-                    ? 'text-blue-600 dark:text-blue-600'
-                    : 'text-gray-300 dark:text-gray-700'
-                "
+        <router-link :to="{ name: 'app-settings' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-lock fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
               >
-              </span>
-              <span
-                v-if="!loading"
-                class="fa-brands fa-twitter fa-fw"
-                :class="
-                  checkSettingEnabled('enableTwitterLogin')
-                    ? 'text-blue-300 dark:text-blue-300'
-                    : 'text-gray-300 dark:text-gray-700'
-                "
-              >
-              </span>
-              <span
-                v-if="!loading"
-                class="fa-brands fa-google fa-fw"
-                :class="
-                  checkSettingEnabled('enableGoogleLogin')
-                    ? 'text-green-300 dark:text-green-300'
-                    : 'text-gray-300 dark:text-gray-700'
-                "
-              >
-              </span>
-            </p>
-            <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-square-facebook fa-fw"
+                  :class="
+                    checkSettingEnabled('enableFbLogin')
+                      ? 'text-blue-600 dark:text-blue-600'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-twitter fa-fw"
+                  :class="
+                    checkSettingEnabled('enableTwitterLogin')
+                      ? 'text-blue-300 dark:text-blue-300'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-google fa-fw"
+                  :class="
+                    checkSettingEnabled('enableGoogleLogin')
+                      ? 'text-green-300 dark:text-green-300'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>
+            </div>
           </div>
-        </div>
+        </router-link>
       </div>
 
       <!--

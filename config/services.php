@@ -30,4 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'google' => [
+        'ga' => env('GOOGLE_ANALYTICS_ID', null),
+    ],
 ];
