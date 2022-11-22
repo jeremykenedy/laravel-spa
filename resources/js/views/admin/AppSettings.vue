@@ -506,7 +506,7 @@
             <div class="setting-group mb-3">
               <div v-if="setting.key == 'enableGoogleAnalytics'">
                 <h4 class="w-100 mb-3 text-xl font-semibold">
-                  <i
+                  <span
                     class="fa-brands fa-google fa-fw text-green-500 dark:text-green-500"
                   />
                   Google Analytics
@@ -651,13 +651,16 @@ export default {
     async updateSetting(newValue, setting) {
       let index = null;
       if (setting && setting.group && setting.group == 'auth') {
-        index = this.authSettings.indexOf(setting);
+        // index = this.authSettings.indexOf(setting);
+        index = this.authSettings.map((o) => o.name).indexOf(setting.name);
       }
       if (setting && setting.group && setting.group == 'analytics') {
-        index = this.analyticsSettings.indexOf(setting);
+        // index = this.analyticsSettings.indexOf(setting);
+        index = this.analyticsSettings.map((o) => o.name).indexOf(setting.name);
       }
       if (setting && setting.group && setting.group == 'general') {
-        index = this.generalSettings.indexOf(setting);
+        // index = this.generalSettings.indexOf(setting);
+        index = this.generalSettings.map((o) => o.name).indexOf(setting.name);
       }
       const a = setting;
       if (newValue != a.val) {
