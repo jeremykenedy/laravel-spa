@@ -96,13 +96,13 @@ class AppSettingsSeeder extends Seeder
                 'key'       => 'enableGoogleAnalytics',
                 'type'      => 'boolean',
                 'val'       => false,
-                'group'     => 'analytics'
+                'group'     => 'analytics',
             ],
             [
                 'name'      => 'App Google Analytics Key',
                 'key'       => 'appGoogleAnalyticsKey',
                 'val'       => config('services.google.ga'),
-                'group'     => 'analytics'
+                'group'     => 'analytics',
             ],
         ];
 
