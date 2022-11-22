@@ -81,7 +81,5 @@ class PermissionsTableSeeder extends Seeder
                 $uniqueKeyOne => $item[$uniqueKeyOne],
             ], $item);
         }
-
-
     }
 }
