@@ -8,6 +8,18 @@ use QCod\Settings\Setting\Setting;
 
 class AppSettingsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->middleware('role:super.admin');
+
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,14 +27,12 @@ class AppSettingsController extends Controller
      */
     public function index()
     {
-        $authSettings = Setting::whereGroup('auth')->get();
-        $analyticsSettings = Setting::whereGroup('analytics')->get();
-        $generalSettings = Setting::whereGroup('general')->get();
+        $settings = Setting::all();
 
         return response()->json([
-            'authSettings'      => $authSettings,
-            'analyticsSettings' => $analyticsSettings,
-            'generalSettings'   => $generalSettings,
+            'authSettings'      => $settings->where('group', 'auth'),
+            'analyticsSettings' => $settings->where('group', 'analytics'),
+            'generalSettings'   => $settings->where('group', 'general'),
         ]);
     }
 

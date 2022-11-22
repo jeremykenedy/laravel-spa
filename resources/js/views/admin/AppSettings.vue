@@ -608,6 +608,7 @@ export default {
       generalSettings: null,
       loading: false,
       activeTab: 'authentication',
+      appGaEnabled: GA_ENABLED, // eslint-disable-line
     };
   },
   computed: {
@@ -681,6 +682,17 @@ export default {
               timer: 5000,
               icon: 'success',
             });
+            this.track(
+              'App setting "' +
+                setting.name +
+                '" was updated from "' +
+                a.val +
+                '" to "' +
+                setting.val +
+                '"',
+              'app event',
+              'app setting updated',
+            );
           })
           .catch(({ response }) => {
             this.popToast({
@@ -694,6 +706,16 @@ export default {
     },
     changeTab(tab) {
       this.activeTab = tab;
+      this.track('clicked tab: ' + tab);
+    },
+    track(action, category = 'click event', label = 'clicked', value = 1) {
+      if (this.appGaEnabled) {
+        this.$gtag.event(action, {
+          event_category: category,
+          event_label: label,
+          value: value,
+        });
+      }
     },
   },
 };

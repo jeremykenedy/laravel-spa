@@ -254,6 +254,7 @@ import {
   // ChevronDownIcon,
   UserCircleIcon,
 } from '@heroicons/vue/24/outline';
+import { Switch } from '@headlessui/vue';
 
 export default {
   name: 'AdminNavBar',
@@ -268,6 +269,7 @@ export default {
     // ChevronDownIcon,
     UserCircleIcon,
     Bars3BottomLeftIcon,
+    Switch, // eslint-disable-line
   },
   props: {},
   setup() {
