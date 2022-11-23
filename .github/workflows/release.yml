@@ -1,4 +1,4 @@
-- name: Generate Release Notes
+name: Generate Release Notes
 
 steps:
   - name: Checkout
