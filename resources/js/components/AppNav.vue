@@ -81,7 +81,7 @@
           </router-link>
         </PopoverGroup>
         <div
-          v-if="authenticated"
+          v-if="authenticated && user"
           class="hidden items-center justify-end md:flex md:flex-1 lg:w-0"
         >
           <span
@@ -531,7 +531,7 @@ export default {
       this.errors = null;
       this.success = '';
       try {
-        await this.updateTheme({ theme_dark: !this.user.theme_dark }).then(
+        await this.updateTheme({ theme_dark: this.user.theme_dark }).then(
           (response) => {
             if (
               response &&

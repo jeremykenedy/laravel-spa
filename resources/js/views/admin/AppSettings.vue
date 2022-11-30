@@ -254,7 +254,7 @@
                 />
               </div>
 
-              <div class="setting-group">
+              <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableTwitterLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
                     <i
@@ -373,7 +373,7 @@
                 />
               </div>
 
-              <div class="setting-group">
+              <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableGoogleLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
                     <i
@@ -488,6 +488,955 @@
                 </div>
                 <div
                   v-if="setting.key == 'appGoogleRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableInstagramLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-instagram fa-fw text-yellow-600 dark:text-yellow-400"
+                    />
+                    Instagram
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableInstagramLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appInstagramId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appInstagramSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appInstagramRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appInstagramRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableGithubLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-github fa-fw text-gray-100 dark:text-gray-100"
+                    />
+                    Github
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableGithubLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appGithubId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appGithubSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appGithubRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appGithubRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableLinkedInLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-linkedin fa-fw text-blue-600 dark:text-blue-600"
+                    />
+                    LinkedIn
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableLinkedInLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appLinkedInId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appLinkedInSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appLinkedInRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appLinkedInRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableTwitchLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-twitch fa-fw text-blue-600 dark:text-blue-600"
+                    />
+                    Twitch
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableTwitchLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appTwitchId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appTwitchSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appTwitchRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appTwitchRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableYouTubeLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-youtube fa-fw text-red-500 dark:text-red-500"
+                    />
+                    YouTube
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableYouTubeLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appYouTubeId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appYouTubeSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appYouTubeRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appYouTubeRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableAppleLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-apple fa-fw text-white-500 dark:text-white-500"
+                    />
+                    Apple
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableAppleLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appAppleId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appAppleSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div v-if="setting.key == 'appAppleRedirect'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appAppleRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableMicrosoftLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-microsoft fa-fw text-blue-300 dark:text-blue-300"
+                    />
+                    Microsoft
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableMicrosoftLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appMicrosoftId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appMicrosoftSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appMicrosoftRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appMicrosoftRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableTikTokLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <i
+                      class="fa-brands fa-tiktok fa-fw text-pink-500 dark:text-pink-500"
+                    />
+                    TikTok
+                  </h4>
+                </div>
+
+                <div
+                  v-if="setting.key == 'enableTikTokLogin'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <div class="relative mb-1 flex items-center">
+                    <div
+                      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+                      @click="
+                        updateSetting(setting.val == '1' ? 0 : 1, setting)
+                      "
+                    >
+                      <span
+                        class="mr-3"
+                        :class="
+                          loading
+                            ? 'default disabled cursor-pointer'
+                            : 'cursor-pointer'
+                        "
+                      >
+                        <AppSwitch
+                          :enabled="
+                            setting.val && setting.val == 1 ? true : false
+                          "
+                          :enable-tooltip="true"
+                          tooltip-on="Enable"
+                          tooltip-off="Disable"
+                        />
+                        <span
+                          v-if="loading"
+                          class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
+                          style="left: -1.4em; top: 1.2em"
+                        />
+                      </span>
+                      <span>
+                        {{ setting.name }}
+                        {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div v-if="setting.key == 'appTikTokId'" class="ml-8 mr-5">
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appTikTokSecret'"
+                  class="ml-8 mr-5 mb-3"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+
+                <div
+                  v-if="setting.key == 'appTikTokRedirect'"
+                  class="ml-8 mr-5"
+                >
+                  <label
+                    class="m:w-3/12 mb-1 inline-flex w-10/12"
+                    :for="setting.key"
+                    >{{ setting.name }}:
+                  </label>
+                  <input
+                    :id="setting.key"
+                    type="text"
+                    :name="setting.key"
+                    :placeholder="setting.name"
+                    :disabled="!dataReady || loading"
+                    class="w-100 mb-3 w-full border-transparent border-b-slate-400 text-slate-800 shadow-sm outline-0 focus:outline-0 active:outline-0 dark:rounded dark:border-b-slate-300"
+                    :value="setting.val"
+                    @blur="updateSetting($event.target.value, setting)"
+                    @keyup.enter="$event.target.blur()"
+                  />
+                </div>
+                <div
+                  v-if="setting.key == 'appTikTokRedirect'"
                   class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
                 />
               </div>

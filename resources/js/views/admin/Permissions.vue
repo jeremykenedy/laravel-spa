@@ -570,10 +570,6 @@ export default {
           self.submitting = false;
         });
       self.submitting = false;
-
-      // HERE :: TODO
-      // console.log(key);
-      // console.log(row);
     },
     toggleLock(row, reset = false) {
       const found = this.rowsUnlocked.find((i) => i == row.id);

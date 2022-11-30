@@ -1,18 +1,19 @@
 <?php
 
 use App\Http\Controllers\AppSettingsController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\SocialiteController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\VerificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +32,15 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', RegisterController::class);
     Route::post('/forgot-password', ForgotPasswordController::class);
     Route::post('/reset-password', ResetPasswordController::class);
+    Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
+    Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
 });
 
 Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
 Route::post('/verify-resend', [VerificationController::class, 'resend']);
-Route::get('/user', UserController::class);
+Route::get('/user', [UserController::class, 'user']);
+Route::post('/user-by-token', [UserController::class, 'userByToken']);
+Route::get('/logins', [SocialiteController::class, 'logins']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'profile']);

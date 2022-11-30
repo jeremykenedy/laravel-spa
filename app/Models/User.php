@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\SocialiteProvider;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -76,5 +77,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/'.md5(Str::lower($this->email)).'.jpg?s=200&d=mp';
+    }
+
+    /**
+     * Get the socialite providers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function socialiteProviders()
+    {
+        return $this->hasMany(SocialiteProvider::class);
     }
 }

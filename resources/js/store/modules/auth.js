@@ -1,6 +1,8 @@
 import axios from 'axios';
+import Cookies from 'js-cookie';
 import router from '@/router';
-import toast from '@/store/toast';
+import toast from '@store/modules/toast';
+import * as types from '@store/mutation-types';
 
 export default {
   namespaced: true,
@@ -14,6 +16,20 @@ export default {
         moderator: false,
         editor: false,
         user: false,
+      },
+      token: Cookies.get('token'),
+      logins: {
+        facebook: false,
+        twitter: false,
+        instagram: false,
+        github: false,
+        youtube: false,
+        google: false,
+        linkedin: false,
+        twitch: false,
+        apple: false,
+        microsoft: false,
+        tiktok: false,
       },
     };
   },
@@ -35,12 +51,18 @@ export default {
     authenticated(state) {
       return state.authenticated;
     },
+    token(state) {
+      return state.token;
+    },
+    logins(state) {
+      return state.logins;
+    },
   },
   mutations: {
-    setAuthentication(state, value) {
+    SET_AUTHENTICATION(state, value = false) {
       state.authenticated = value;
     },
-    setUser(state, payload) {
+    SET_USER(state, payload = null) {
       state.user = payload;
       if (payload && payload.roles && payload.roles.length > 0) {
         payload.roles.forEach(function (role, index) {
@@ -70,12 +92,35 @@ export default {
         };
       }
     },
-    setTheme(state, payload) {
+    SET_THEME(state, payload = null) {
       if (payload) {
         document.documentElement.classList.add('dark');
       } else {
         document.documentElement.classList.remove('dark');
       }
+    },
+    SET_TOKEN(state, { token, remember }) {
+      state.token = token;
+      Cookies.set('token', token, { expires: remember ? 365 : null });
+    },
+    SET_LOGINS(state, payload = null) {
+      if (payload) {
+        state.logins = payload;
+      }
+    },
+    LOGOUT(state) {
+      state.authenticated = false;
+      state.user = null;
+      state.roles = {
+        superAdmin: false,
+        admin: false,
+        moderator: false,
+        editor: false,
+        user: false,
+      };
+      document.documentElement.classList.remove('dark');
+      state.token = null;
+      Cookies.remove('token');
     },
   },
   actions: {
@@ -105,23 +150,19 @@ export default {
         res.data.user &&
         res.data.user.id
       ) {
-        commit('setUser', res.data.user);
-        commit('setTheme', res.data.user.theme_dark);
-        commit('setAuthentication', true);
+        commit('SET_USER', res.data.user);
+        commit('SET_THEME', res.data.user.theme_dark);
+        commit('SET_AUTHENTICATION', true);
         return res;
       }
-      commit('setUser', null);
-      commit('setAuthentication', false);
-      commit('setTheme', null);
+      commit('LOGOUT');
       throw res.response;
     },
     async logout({ commit }) {
       await axios
         .post('/api/logout')
         .then((res) => {
-          commit('setUser', null);
-          commit('setTheme', null);
-          commit('setAuthentication', false);
+          commit('LOGOUT');
         })
         .catch((err) => {});
       router.push({ name: 'home' });
@@ -131,18 +172,32 @@ export default {
         .get('/api/user')
         .then((res) => {
           if (res && res.data && res.data.id) {
-            commit('setUser', res.data);
-            commit('setTheme', res.data.theme_dark);
-            commit('setAuthentication', true);
+            commit('SET_USER', res.data);
+            commit('SET_THEME', res.data.theme_dark);
+            commit('SET_AUTHENTICATION', true);
           } else {
-            commit('setUser', null);
-            commit('setAuthentication', false);
+            commit('LOGOUT');
           }
         })
         .catch((err) => {
-          commit('setUser', null);
-          commit('setTheme', null);
-          commit('setAuthentication', false);
+          commit('LOGOUT');
+          throw err.response;
+        });
+    },
+    async getUserByToken({ commit, dispatch }, payload) {
+      await axios
+        .post('/api/user-by-token', { token: payload.token })
+        .then((res) => {
+          if (res && res.data && res.data.id) {
+            commit('SET_USER', res.data);
+            commit('SET_THEME', res.data.theme_dark);
+            commit('SET_AUTHENTICATION', true);
+          } else {
+            commit('LOGOUT');
+          }
+        })
+        .catch((err) => {
+          commit('LOGOUT');
           throw err.response;
         });
     },
@@ -155,14 +210,12 @@ export default {
         res.data.user &&
         res.data.user.id
       ) {
-        commit('setUser', res.data.user);
-        commit('setTheme', res.data.user.theme_dark);
-        commit('setAuthentication', true);
+        commit('SET_USER', res.data.user);
+        commit('SET_THEME', res.data.user.theme_dark);
+        commit('SET_AUTHENTICATION', true);
         return res;
       }
-      commit('setUser', null);
-      commit('setAuthentication', false);
-      commit('setTheme', null);
+      // commit('LOGOUT');
       throw res.response;
     },
     async theme({ commit }, payload) {
@@ -174,14 +227,12 @@ export default {
         res.data.user &&
         res.data.user.id
       ) {
-        commit('setUser', res.data.user);
-        commit('setTheme', res.data.user.theme_dark);
-        commit('setAuthentication', true);
+        commit('SET_USER', res.data.user);
+        commit('SET_THEME', res.data.user.theme_dark);
+        commit('SET_AUTHENTICATION', true);
         return res;
       }
-      commit('setUser', null);
-      commit('setAuthentication', false);
-      commit('setTheme', null);
+      // commit('LOGOUT');
       throw res.response;
     },
     async password({ dispatch }, payload) {
@@ -243,6 +294,34 @@ export default {
       } catch (error) {
         throw error;
       }
+    },
+    async fetchOauthUrl(ctx, { provider }) {
+      try {
+        const response = await axios.post(`/api/oauth/${provider}`);
+        if (response && response.data && response.data.url) {
+          return response.data.url;
+        }
+        throw response;
+      } catch (error) {
+        throw error;
+      }
+    },
+    async saveToken({ commit, dispatch }, payload) {
+      commit('SET_TOKEN', payload);
+    },
+    async getLogins({ commit }) {
+      await axios
+        .get('/api/logins')
+        .then((res) => {
+          if (res && res.data && res.data.logins) {
+            commit('SET_LOGINS', res.data.logins);
+          } else {
+            throw res;
+          }
+        })
+        .catch((err) => {
+          throw err.response;
+        });
     },
   },
 };
