@@ -82,6 +82,7 @@ class SocialiteProvider extends Model
 
     /**
      * Get the user that owns the socialite provider.
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
