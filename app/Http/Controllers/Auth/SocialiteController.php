@@ -257,7 +257,7 @@ class SocialiteController extends Controller
         $enableMicrosoftLogin = $ps->firstWhere('key', 'enableMicrosoftLogin')->val;
         $enableTikTokLogin = $ps->firstWhere('key', 'enableTikTokLogin')->val;
 
-        $data =  [
+        $data = [
             'facebook'  => $enableFbLogin,
             'twitter'   => $enableTwitterLogin,
             'google'    => $enableGoogleLogin,
@@ -279,11 +279,11 @@ class SocialiteController extends Controller
     /**
      * Gets the social redirect.
      *
-     * @param string $provider The provider
-     * @param \Illuminate\Http\Request $request
+     * @param  string  $provider  The provider
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getSocialRedirect(String $provider, Request $request)
+    public function getSocialRedirect(string $provider, Request $request)
     {
         $providerKey = Config::get('services.'.$provider);
 
@@ -299,11 +299,11 @@ class SocialiteController extends Controller
     /**
      * Gets the social handle information from the provider.
      *
-     * @param string $provider The provider
-     * @param \Illuminate\Http\Request $request
+     * @param  string  $provider  The provider
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function handleSocialCallback(String $provider, Request $request)
+    public function handleSocialCallback(string $provider, Request $request)
     {
         $denied = $request->denied ? $request->denied : null;
         if ($denied != null || $denied != '') {
@@ -318,7 +318,6 @@ class SocialiteController extends Controller
 
         auth()->login($user);
 
-
         return view('socialite/callback', [
             'token'         => $token,
             'token_type'    => 'bearer',
@@ -328,15 +327,15 @@ class SocialiteController extends Controller
     /**
      * Find or create a user.
      *
-     * @param  string        $provider
-     * @param  SocialiteUser $user
+     * @param  string  $provider
+     * @param  SocialiteUser  $user
      * @return App\Models\User
      */
-    protected function findOrCreateUser(string $provider, SocialiteUser $user, bool $token = false): Array
+    protected function findOrCreateUser(string $provider, SocialiteUser $user, bool $token = false): array
     {
         $newToken = false;
         $existingUser = User::whereEmail($user->getEmail())->first();
-        if($token && $existingUser) {
+        if ($token && $existingUser) {
             $newToken = $existingUser->createToken($provider.'-token')->plainTextToken;
         }
         $oauthProvider = SocialiteProvider::where('provider', $provider)
@@ -354,8 +353,8 @@ class SocialiteController extends Controller
             ];
         }
 
-        $user =  $this->updateOrCreateUser($provider, $user, $existingUser);
-        $token =  $user->createToken($provider.'-token')->plainTextToken;
+        $user = $this->updateOrCreateUser($provider, $user, $existingUser);
+        $token = $user->createToken($provider.'-token')->plainTextToken;
 
         return [
             'user'  => $user,
@@ -366,13 +365,13 @@ class SocialiteController extends Controller
     /**
      * Create a new user.
      *
-     * @param  string        $provider
-     * @param  SocialiteUser $sUser
+     * @param  string  $provider
+     * @param  SocialiteUser  $sUser
      * @return App\Models\User
      */
     protected function updateOrCreateUser(string $provider, SocialiteUser $sUser, $existingUser = null): User
     {
-        if($existingUser) {
+        if ($existingUser) {
             $user = $existingUser;
         } else {
             $user = User::create([
@@ -383,7 +382,7 @@ class SocialiteController extends Controller
 
             $user->attachRole(config('roles.models.role')::whereName('User')->first());
 
-            if($sUser->getEmail()) {
+            if ($sUser->getEmail()) {
                 $user->email_verified_at = Carbon::now();
                 $user->save();
             }
