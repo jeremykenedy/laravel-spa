@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         $editorRole = config('roles.models.role')::whereName('Editor')->first();
         $userRole = config('roles.models.role')::whereName('User')->first();
 
-        if(config('users.seeders.superAdmin.enabled')) {
+        if (config('users.seeders.superAdmin.enabled')) {
             $seededSuperAdmin = config('users.seeders.superAdmin.email');
             $user = User::where('email', '=', $seededSuperAdmin)->first();
             if ($user === null) {
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
             }
         }
 
-        if(config('users.seeders.admin.enabled')) {
+        if (config('users.seeders.admin.enabled')) {
             $seededAdmin = config('users.seeders.admin.email');
             $user = User::where('email', '=', $seededAdmin)->first();
             if ($user === null) {
@@ -51,7 +51,7 @@ class UsersTableSeeder extends Seeder
             }
         }
 
-        if(config('users.seeders.user.enabled')) {
+        if (config('users.seeders.user.enabled')) {
             $seededUser = config('users.seeders.user.email');
             $user = User::where('email', '=', $seededUser)->first();
             if ($user === null) {
