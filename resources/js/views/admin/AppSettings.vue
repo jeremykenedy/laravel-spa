@@ -143,7 +143,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableFbLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-square-facebook fa-fw text-blue-600 dark:text-blue-600"
                     />
                     Facebook
@@ -257,7 +257,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableTwitterLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-twitter fa-fw text-blue-300 dark:text-blue-300"
                     />
                     Twitter
@@ -376,7 +376,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableGoogleLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-google fa-fw text-green-600 dark:text-green-500"
                     />
                     Google
@@ -495,7 +495,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableInstagramLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-instagram fa-fw text-yellow-600 dark:text-yellow-400"
                     />
                     Instagram
@@ -614,7 +614,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableGithubLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-github fa-fw text-gray-100 dark:text-gray-100"
                     />
                     Github
@@ -733,7 +733,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableLinkedInLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-linkedin fa-fw text-blue-600 dark:text-blue-600"
                     />
                     LinkedIn
@@ -852,7 +852,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableTwitchLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-twitch fa-fw text-blue-600 dark:text-blue-600"
                     />
                     Twitch
@@ -971,7 +971,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableYouTubeLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-youtube fa-fw text-red-500 dark:text-red-500"
                     />
                     YouTube
@@ -1090,7 +1090,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableAppleLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-apple fa-fw text-white-500 dark:text-white-500"
                     />
                     Apple
@@ -1206,7 +1206,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableMicrosoftLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-microsoft fa-fw text-blue-300 dark:text-blue-300"
                     />
                     Microsoft
@@ -1325,7 +1325,7 @@
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableTikTokLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
-                    <i
+                    <span
                       class="fa-brands fa-tiktok fa-fw text-pink-500 dark:text-pink-500"
                     />
                     TikTok

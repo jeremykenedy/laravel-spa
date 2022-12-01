@@ -78,7 +78,7 @@
                     :to="{ name: 'login' }"
                     class="text-sm font-bold text-blue-500 hover:underline"
                   >
-                    <i class="fa fa-reply fa-fw" /> Go back
+                    <span class="fa fa-reply fa-fw" /> Go back
                   </router-link>
                 </div>
               </div>
