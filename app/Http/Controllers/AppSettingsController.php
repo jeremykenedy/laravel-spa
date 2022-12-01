@@ -27,22 +27,12 @@ class AppSettingsController extends Controller
      */
     public function index()
     {
-        // $settings = Setting::all();
-
-        // return response()->json([
-        //     'authSettings'      => $settings->where('group', 'auth'),
-        //     'analyticsSettings' => $settings->where('group', 'analytics'),
-        //     'generalSettings'   => $settings->where('group', 'general'),
-        // ]);
-
-        $authSettings = Setting::whereGroup('auth')->get();
-        $analyticsSettings = Setting::whereGroup('analytics')->get();
-        $generalSettings = Setting::whereGroup('general')->get();
+        $settings = Setting::all();
 
         return response()->json([
-            'authSettings'      => $authSettings,
-            'analyticsSettings' => $analyticsSettings,
-            'generalSettings'   => $generalSettings,
+            'authSettings'      => $settings->where('group', 'auth')->values(),
+            'analyticsSettings' => $settings->where('group', 'analytics')->values(),
+            'generalSettings'   => $settings->where('group', 'general')->values(),
         ]);
     }
 
@@ -61,27 +51,5 @@ class AppSettingsController extends Controller
         return response()->json([
             'data'  => $setting,
         ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

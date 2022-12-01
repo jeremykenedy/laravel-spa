@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ProfileController extends Controller
 {
@@ -24,14 +25,12 @@ class ProfileController extends Controller
 
     public function theme(Request $request)
     {
-        $user = $request->user();
         $request->validate([
             'theme_dark'    => 'boolean',
         ]);
-        $user->update($request->only('theme_dark'));
 
         return response()->json([
-            'user'      => $user,
+            'user'      => tap($request->user())->update($request->only('theme_dark')),
             'message'   => 'theme updated successfully .',
         ], 200);
     }

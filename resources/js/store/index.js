@@ -1,9 +1,9 @@
 // import Vue from 'vue';
 import { createStore } from 'vuex';
 import sharedMutations from 'vuex-shared-mutations';
-import auth from '@/store/auth';
-import toast from '@/store/toast';
-import sidebar from '@/store/sidebar';
+import auth from '@store/modules/auth';
+import toast from '@store/modules/toast';
+import sidebar from '@store/modules/sidebar';
 
 export default createStore({
   state: {
@@ -22,7 +22,7 @@ export default createStore({
   },
   plugins: [
     sharedMutations({
-      predicate: ['setUser', 'setAuthentication', 'setTheme'],
+      predicate: ['SET_USER', 'SET_AUTHENTICATION', 'SET_THEME'],
     }),
   ],
 });

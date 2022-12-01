@@ -333,7 +333,6 @@ export default {
       this.loading = true;
       this.errors = null;
       this.success = '';
-      this.form.theme_dark = !this.form.theme_dark;
       try {
         await this.updateTheme(this.form).then((response) => {
           if (

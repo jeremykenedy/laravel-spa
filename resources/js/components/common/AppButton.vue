@@ -10,7 +10,7 @@
     <slot v-if="hasTextSlot" name="text" />
     <span v-else>
       {{ text }}
-      <i v-if="icon" class="fa-fw" :class="icon" />
+      <span v-if="icon" class="fa-fw" :class="icon" />
     </span>
   </button>
 </template>

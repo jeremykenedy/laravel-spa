@@ -7,7 +7,10 @@ module.exports = {
   extends: ["eslint:recommended", "plugin:vue/vue3-recommended", "plugin:vue/vue3-essential", "@vue/eslint-config-typescript/recommended", "@vue/eslint-config-prettier", "plugin:storybook/recommended"],
   parserOptions: {
     ecmaVersion: 13,
-    sourceType: "module"
+    sourceType: "module",
+    ecmaFeatures : {
+      jsx : false
+    }
   },
   plugins: ["vue", "html", "prettier"],
   rules: {
@@ -23,6 +26,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": 0,
     "vue/no-unused-components": 0,
     "vue/require-explicit-emits": 0,
-    "@typescript-eslint/no-this-alias": 0
+    "@typescript-eslint/no-this-alias": 0,
+    "no-undef": 0
   }
 };
