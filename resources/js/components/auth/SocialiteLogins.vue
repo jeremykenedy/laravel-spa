@@ -75,6 +75,7 @@ import * as Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import { mapGetters, mapActions } from 'vuex';
+import { track } from '@services/analytics';
 
 export default {
   name: 'SocialiteLogins',
@@ -119,7 +120,9 @@ export default {
       getUser: 'auth/getUser',
       getUserByToken: 'auth/getUserByToken',
     }),
+    track,
     async socialiteLogin(provider) {
+      this.track('Social Login Provider Clicked: ' + provider);
       this.loading = true;
       try {
         await axios.get('/sanctum/csrf-cookie').then((response) => {});
@@ -131,6 +134,11 @@ export default {
         );
         this.window = this.openWindow(url, this.authWindowTitle);
       } catch (e) {
+        this.track(
+          'Social Login Provider Failed to Login: ' + provider,
+          'error',
+          'auth-error',
+        );
         this.popToast({
           message: 'Failed to log in.',
           timer: 10000,
@@ -150,6 +158,11 @@ export default {
         timer: 2500,
         icon: 'success',
       });
+      self.track(
+        'Social Login Provider Logged in Successfully',
+        'login',
+        'social login success',
+      );
       await self.saveToken({ token: e.data.token }).then((response) => {
         self.getUserByToken({ token: e.data.token }).then(() => {
           setTimeout(function () {

@@ -1539,6 +1539,7 @@
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
+import { track } from '@services/analytics';
 
 export default {
   name: 'AppSettings',
@@ -1578,6 +1579,7 @@ export default {
     ...mapActions({
       popToast: 'toast/popToast',
     }),
+    track,
     async getAppSettings() {
       this.dataReady = false;
       await axios
@@ -1659,15 +1661,6 @@ export default {
     changeTab(tab) {
       this.activeTab = tab;
       this.track('clicked tab: ' + tab);
-    },
-    track(action, category = 'click event', label = 'clicked', value = 1) {
-      if (this.appGaEnabled) {
-        this.$gtag.event(action, {
-          event_category: category,
-          event_label: label,
-          value: value,
-        });
-      }
     },
   },
 };

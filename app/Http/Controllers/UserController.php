@@ -7,6 +7,15 @@ use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
+    }
+
     public function user(Request $request)
     {
         if (auth('sanctum')->check()) {

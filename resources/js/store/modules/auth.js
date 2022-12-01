@@ -2,7 +2,6 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import router from '@/router';
 import toast from '@store/modules/toast';
-import * as types from '@store/mutation-types';
 
 export default {
   namespaced: true,

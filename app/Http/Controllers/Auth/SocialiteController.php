@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Exceptions\EmailTakenException;
 use App\Exceptions\SocialProviderDeniedException;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
@@ -25,17 +24,23 @@ class SocialiteController extends Controller
 
     public function __construct()
     {
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
+
         $this->setupProviders();
     }
 
-    public function setupProviders()
+    protected function setupProviders()
     {
         $this->setProviderSettings();
         $this->setProviderConfigs();
         $this->setAppProvidersConfigs();
     }
 
-    public function setProviderSettings()
+    protected function setProviderSettings()
     {
         $this->providerSettings = Setting::where('group', 'auth')
                                 ->where(function ($query) {
@@ -96,7 +101,7 @@ class SocialiteController extends Controller
                                 })->get();
     }
 
-    public function setProviderConfigs()
+    protected function setProviderConfigs()
     {
         $appGithubId = $this->providerSettings->where('key', 'appGithubId')->first();
         $appGithubId = $appGithubId ? $appGithubId->val : null;
@@ -237,12 +242,12 @@ class SocialiteController extends Controller
         $this->providerConfigs = $providerConfigs;
     }
 
-    public function setAppProvidersConfigs()
+    protected function setAppProvidersConfigs()
     {
         config($this->providerConfigs);
     }
 
-    public function logins()
+    protected function logins()
     {
         $ps = $this->providerSettings;
         $enableFbLogin = $ps->firstWhere('key', 'enableFbLogin')->val;
@@ -354,7 +359,7 @@ class SocialiteController extends Controller
         }
 
         $user = $this->updateOrCreateUser($provider, $user, $existingUser);
-        $token = $user->createToken($provider.'-token')->plainTextToken;
+        $token = $existingUser->createToken($provider.'-token')->plainTextToken;
 
         return [
             'user'  => $user,

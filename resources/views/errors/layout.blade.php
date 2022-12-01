@@ -1,4 +1,3 @@
-{{-- Illuminate/Foundation/Exceptions/views --}}
 <!DOCTYPE html>
 <html lang="en">
 <head>

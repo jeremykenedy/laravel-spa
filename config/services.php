@@ -37,66 +37,66 @@ return [
     'twitch' => [
         'client_id'     => env('TWITCH_KEY'),
         'client_secret' => env('TWITCH_SECRET'),
-        'redirect'      => url('api/oauth/twitch/callback'),
+        'redirect'      => env('TWITCH_REDIRECT_URI'),
     ],
 
     'github' => [
         'client_id'     => env('GITHUB_KEY'),
         'client_secret' => env('GITHUB_SECRET'),
-        'redirect'      => url('api/oauth/github/callback'),
+        'redirect'      => env('GITHUB_REDIRECT_URI'),
     ],
 
     'tiktok' => [
         'client_id'     => env('TIKTOK_KEY'),
         'client_secret' => env('TIKTOK_SECRET'),
-        'redirect'      => url('api/oauth/tiktok/callback'),
+        'redirect'      => env('TIKTOK_REDIRECT_URI'),
     ],
 
     'facebook' => [
         'client_id'     => env('FACEBOOK_KEY'),
         'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect'      => url('api/oauth/facebook/callback'),
+        'redirect'      => env('FACEBOOK_REDIRECT_URI'),
     ],
 
     'google' => [
         'client_id'     => env('GOOGLE_KEY'),
         'client_secret' => env('GOOGLE_SECRET'),
-        'redirect'      => url('api/oauth/google/callback'),
+        'redirect'      => env('GOOGLEREDIRECT_URI'),
     ],
 
     'youtube' => [
         'client_id'     => env('YOUTUBE_KEY'),
         'client_secret' => env('YOUTUBE_SECRET'),
-        'redirect'      => url('api/oauth/youtube/callback'),
+        'redirect'      => env('YOUTUBE_REDIRECT_URI'),
     ],
 
     'instagram' => [
         'client_id'     => env('INSTAGRAM_KEY'),
         'client_secret' => env('INSTAGRAM_SECRET'),
-        'redirect'      => url('api/oauth/instagram/callback'),
+        'redirect'      => env('INSTAGRAM_REDIRECT_URI'),
     ],
 
     'microsoft' => [
         'client_id'     => env('MICROSOFT_CLIENT_ID'),
         'client_secret' => env('MICROSOFT_CLIENT_SECRET'),
-        'redirect'      => url('api/oauth/microsoft/callback'),
+        'redirect'      => env('MICROSOFT_REDIRECT_URI'),
     ],
 
     'apple' => [
         'client_id'     => env('APPLE_CLIENT_ID'),
         'client_secret' => env('APPLE_CLIENT_SECRET'),
-        'redirect'      => url('api/oauth/apple/callback'),
+        'redirect'      => env('APPLE_REDIRECT_URI'),
     ],
 
     'twitter' => [
         'client_id'     => env('TWITTER_CLIENT_ID'),
         'client_secret' => env('TWITTER_CLIENT_SECRET'),
-        'redirect'      => url('api/oauth/twitter/callback'),
+        'redirect'      => env('TWITTER_REDIRECT_URI'),
     ],
 
     'linkedin' => [
         'client_id'     => env('LINKEDIN_CLIENT_ID'),
         'client_secret' => env('LINKEDIN_CLIENT_SECRET'),
-        'redirect'      => url('api/oauth/linkedin/callback'),
+        'redirect'      => env('LINKEDIN_REDIRECT_URI'),
     ],
 ];

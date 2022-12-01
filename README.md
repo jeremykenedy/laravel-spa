@@ -19,24 +19,29 @@
 A Laravel 9 + Vite + Vue 3 + Tailwind CSS SPA Boilerplate
 
 ### Features
-This starter template that is built on:
-- Laravel 9
-- Sanctum
-- Vite
-- Vue 3
-- Tailwind CSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)
-- Vue Router
-- Vuex
-- Axios
-- Headless UI
-- Heroicons
-- Font Awesome 6
-- ESLint with Prettier
+##### This is built on:
+- [Laravel 9](https://laravel.com/docs/9.x)
+- [Sanctum](https://laravel.com/docs/9.x/sanctum)
+- [Socialite](https://laravel.com/docs/9.x/socialite)
+- [Vite](https://laravel.com/docs/9.x/vite)
+- [Vue 3](https://vuejs.org/)
+- [Tailwind CSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
+- [Vue Router](https://v3.router.vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Axios](https://axios-http.com/)
+- [Headless UI](https://headlessui.com/)
+- [Heroicons](https://heroicons.com/)
+- [Font Awesome 6](https://fontawesome.com/search)
+- [ESLint](https://eslint.org/) with [Prettier](https://prettier.io/docs/en/index.html)
+
+##### This features:
+- Users Area
 - Admin Area
 - Roles Management
 - Permissions Management
 - Users Managemenet
-- [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/)
+- Social Authentication
+- [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/v/next/)
 
 ### Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
