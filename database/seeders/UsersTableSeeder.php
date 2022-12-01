@@ -21,43 +21,49 @@ class UsersTableSeeder extends Seeder
         $editorRole = config('roles.models.role')::whereName('Editor')->first();
         $userRole = config('roles.models.role')::whereName('User')->first();
 
-        $seededSuperAdmin = 'superadmin@superadmin.com';
-        $user = User::where('email', '=', $seededSuperAdmin)->first();
-        if ($user === null) {
-            $user = User::updateOrCreate([
-                'name'                          => 'Rick Sanchez',
-                'email'                         => $seededSuperAdmin,
-                'password'                      => Hash::make('password'),
-                'email_verified_at'             => now(),
-                'theme_dark'                    => false,
-            ]);
-            $user->attachRole($superAdminRole);
+        if (config('users.seeders.superAdmin.enabled')) {
+            $seededSuperAdmin = config('users.seeders.superAdmin.email');
+            $user = User::where('email', '=', $seededSuperAdmin)->first();
+            if ($user === null) {
+                $user = User::updateOrCreate([
+                    'name'                          => config('users.seeders.superAdmin.name'),
+                    'email'                         => $seededSuperAdmin,
+                    'password'                      => Hash::make(config('users.seeders.superAdmin.password')),
+                    'email_verified_at'             => now(),
+                    'theme_dark'                    => false,
+                ]);
+                $user->attachRole($superAdminRole);
+            }
         }
 
-        $seededAdmin = 'admin@admin.com';
-        $user = User::where('email', '=', $seededAdmin)->first();
-        if ($user === null) {
-            $user = User::updateOrCreate([
-                'name'                          => 'Morty Smith',
-                'email'                         => $seededAdmin,
-                'password'                      => Hash::make('password'),
-                'email_verified_at'             => now(),
-                'theme_dark'                    => false,
-            ]);
-            $user->attachRole($adminRole);
+        if (config('users.seeders.admin.enabled')) {
+            $seededAdmin = config('users.seeders.admin.email');
+            $user = User::where('email', '=', $seededAdmin)->first();
+            if ($user === null) {
+                $user = User::updateOrCreate([
+                    'name'                          => config('users.seeders.admin.name'),
+                    'email'                         => $seededAdmin,
+                    'password'                      => Hash::make(config('users.seeders.admin.password')),
+                    'email_verified_at'             => now(),
+                    'theme_dark'                    => false,
+                ]);
+                $user->attachRole($adminRole);
+            }
         }
 
-        $seededUser = 'user@user.com';
-        $user = User::where('email', '=', $seededUser)->first();
-        if ($user === null) {
-            $user = User::updateOrCreate([
-                'name'                          => 'Beth Smith',
-                'email'                         => $seededUser,
-                'password'                      => Hash::make('password'),
-                'email_verified_at'             => now(),
-                'theme_dark'                    => false,
-            ]);
-            $user->attachRole($userRole);
+        if (config('users.seeders.user.enabled')) {
+            $seededUser = config('users.seeders.user.email');
+            $user = User::where('email', '=', $seededUser)->first();
+            if ($user === null) {
+                $user = User::updateOrCreate([
+                    'name'                          => config('users.seeders.user.name'),
+                    'email'                         => $seededUser,
+                    'password'                      => Hash::make(config('users.seeders.user.password')),
+                    'email_verified_at'             => now(),
+                    'theme_dark'                    => false,
+                ]);
+                $user->attachRole($userRole);
+            }
         }
     }
 }

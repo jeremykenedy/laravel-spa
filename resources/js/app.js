@@ -58,4 +58,6 @@ store.dispatch('auth/getUser').then(() => {
   }
 
   app.mount('#app');
+
+  store.dispatch('auth/getLogins').then(() => {});
 });

@@ -1,4 +1,4 @@
-# Laravel SPA
+# Laravel Auth SPA
 
 [![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=master)](https://github.styleci.io/repos/537735029?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
@@ -11,32 +11,45 @@
     - [Optionally Build Cache](#optionally-build-cache)
 - [Seeds](#seeds)
     - [Seeded Users](#seeded-users)
+- [Socialite](#socialite)
+    - [Get Socialite Login API Keys](#get-socialite-login-api-keys)
+    - [Add More Socialite Logins](#add-more-socialite-logins)
 - [Screenshots](#screenshots)
 - [File Tree](#file-tree)
 - [License](#license)
 
 ### About
-A Laravel 9 + Vite + Vue 3 + Tailwind CSS SPA Boilerplate
+A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate.
+Laravel 9 with user authentication, registration with email verification, 
+social media authentication, password recovery, user management, and roles/permissions 
+managemenet. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
+part of this repository it is a completely separated Vue 3 front end compiled using ViteJS.
 
-### Features
-This starter template that is built on:
-- Laravel 9
-- Sanctum
-- Vite
-- Vue 3
-- Tailwind CSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)
-- Vue Router
-- Vuex
-- Axios
-- Headless UI
-- Heroicons
-- Font Awesome 6
-- ESLint with Prettier
+### App Features
+##### Built on:
+- [Laravel 9](https://laravel.com/docs/9.x)
+- [Sanctum](https://laravel.com/docs/9.x/sanctum)
+- [Socialite](https://laravel.com/docs/9.x/socialite)
+- [Vite](https://laravel.com/docs/9.x/vite)
+- [Vue 3](https://vuejs.org/)
+- [Tailwind CSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
+- [Vue Router](https://v3.router.vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Axios](https://axios-http.com/)
+- [Headless UI](https://headlessui.com/)
+- [Heroicons](https://heroicons.com/)
+- [Font Awesome 6](https://fontawesome.com/search)
+- [ESLint](https://eslint.org/) with [Prettier](https://prettier.io/docs/en/index.html)
+
+##### Features:
+- Users Area
 - Admin Area
-- Roles Management
-- Permissions Management
 - Users Managemenet
-- [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/)
+- Manage Social Media Logins through GUI
+- [Roles Management](https://github.com/jeremykenedy/laravel-roles)
+- [Permissions Management](https://github.com/jeremykenedy/laravel-roles)
+- [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/v/next/)
+- [Social Authentication with Facebook, Twitter, Instagram, GitHub, TikTok, Google, YouTube, Microsoft, Twitch, and Apple](https://laravel.com/docs/9.x/socialite)
 
 ### Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
@@ -45,7 +58,7 @@ This starter template that is built on:
     * ```create database laravelSpa;```
     * ```\q```
 3. From the projects root run `cp .env.example .env`
-4. Configure your `.env` file
+4. Configure your `.env` file (IMPORTANT)
 5. Run `composer install` from the projects root folder
 6. From the projects root folder run `sudo chmod -R 755 ../laravel-spa`
 7. From the projects root folder run `php artisan key:generate`
@@ -55,6 +68,11 @@ This starter template that is built on:
 11. Compile the front end assets with [npm steps](#using-npm) or [yarn steps](#using-yarn).
 
 #### Build the Front End Assets with ViteJs
+##### IMPORTANT NOTE: If you are running this project in development mode you will need to update the following lines in [vite.config.ts](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts):
+* [Line 60](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts#L60) 
+* [Line 63](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts#L63)
+* [Line 66](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts#L66)
+
 ##### Using NPM:
 1. From the projects root folder run `npm install`
 2. From the projects root folder run `npm run dev` or `npm run build`
@@ -77,7 +95,25 @@ This starter template that is built on:
 
 |Email|Password|
 |:------------|:------------|
+|superadmin@superadmin.com|password|
+|admin@admin.com|password|
 |user@user.com|password|
+
+### Socialite
+
+#### Get Socialite Login API Keys:
+* [Facebook API](https://developers.facebook.com/)
+* [Twitter API](https://apps.twitter.com/)
+* [Google API](https://console.developers.google.com/)
+* [YouTube API](https://developers.google.com/youtube/v3/getting-started)
+* [GitHub API](https://github.com/settings/applications/new)
+* [Twitch API](https://dev.twitch.tv/docs/authentication/)
+* [Instagram API](https://instagram.com/developer/register/)
+* [TikTok API](https://developers.tiktok.com/)
+* [Apple API](https://socialiteproviders.com/Apple/#installation-basic-usage)
+
+#### Add More Socialite Logins
+* See full list of providers: [https://socialiteproviders.github.io](https://socialiteproviders.com/about/)
 
 ### Screenshots
 ![Home](https://laravel-spa.s3.us-west-2.amazonaws.com/home.png)
@@ -104,12 +140,14 @@ LaravelSpa
 ├── .gitattributes
 ├── .github
 │   └── workflows
+│       ├── changelog.yml
 │       ├── codeql.yml
 │       ├── dependency-review.yml
 │       ├── greetings.yml
 │       ├── laravel.yml
 │       ├── node.js.yml
 │       ├── php.yml
+│       ├── release.yml
 │       └── stale.yml
 ├── .gitignore
 ├── .npmrc
@@ -122,23 +160,26 @@ LaravelSpa
 │   ├── Console
 │   │   └── Kernel.php
 │   ├── Exceptions
-│   │   └── Handler.php
+│   │   ├── Handler.php
+│   │   └── SocialProviderDeniedException.php
 │   ├── Http
 │   │   ├── Controllers
 │   │   │   ├── AppSettingsController.php
-│   │   │   ├── AuthController.php
+│   │   │   ├── Auth
+│   │   │   │   ├── AuthController.php
+│   │   │   │   ├── ForgotPasswordController.php
+│   │   │   │   ├── PasswordController.php
+│   │   │   │   ├── RegisterController.php
+│   │   │   │   ├── ResetPasswordController.php
+│   │   │   │   ├── SocialiteController.php
+│   │   │   │   └── VerificationController.php
 │   │   │   ├── Controller.php
 │   │   │   ├── DashboardController.php
-│   │   │   ├── ForgotPasswordController.php
-│   │   │   ├── PasswordController.php
 │   │   │   ├── PermissionsController.php
 │   │   │   ├── ProfileController.php
-│   │   │   ├── RegisterController.php
-│   │   │   ├── ResetPasswordController.php
 │   │   │   ├── RolesController.php
 │   │   │   ├── UserController.php
-│   │   │   ├── UsersController.php
-│   │   │   └── VerificationController.php
+│   │   │   └── UsersController.php
 │   │   ├── Kernel.php
 │   │   ├── Middleware
 │   │   │   ├── Authenticate.php
@@ -175,16 +216,22 @@ LaravelSpa
 │   │   ├── Permission.php
 │   │   ├── Role.php
 │   │   ├── Setting.php
+│   │   ├── SocialiteProvider.php
 │   │   └── User.php
 │   ├── Notifications
 │   │   ├── ResetPasswordNotification.php
 │   │   └── VerifyEmailNotification.php
-│   └── Providers
-│       ├── AppServiceProvider.php
-│       ├── AuthServiceProvider.php
-│       ├── BroadcastServiceProvider.php
-│       ├── EventServiceProvider.php
-│       └── RouteServiceProvider.php
+│   ├── Providers
+│   │   ├── AppServiceProvider.php
+│   │   ├── AuthServiceProvider.php
+│   │   ├── BroadcastServiceProvider.php
+│   │   ├── EventServiceProvider.php
+│   │   ├── RouteServiceProvider.php
+│   │   └── ViewComposerServiceProvider.php
+│   └── View
+│       └── Composers
+│           ├── GaComposer.php
+│           └── GaEnabledComposer.php
 ├── artisan
 ├── bootstrap
 │   ├── app.php
@@ -212,6 +259,7 @@ LaravelSpa
 │   ├── sanctum.php
 │   ├── services.php
 │   ├── session.php
+│   ├── users.php
 │   └── view.php
 ├── database
 │   ├── .gitignore
@@ -231,7 +279,8 @@ LaravelSpa
 │   │   ├── 2019_12_14_000001_create_personal_access_tokens_table.php
 │   │   ├── 2021_04_26_093603_create_jobs_table.php
 │   │   ├── 2022_09_05_192055_update_users_table.php
-│   │   └── 2022_11_02_051027_update_settings_table.php
+│   │   ├── 2022_11_02_051027_update_settings_table.php
+│   │   └── 2022_11_28_073632_create_socialite_providers_table.php
 │   └── seeders
 │       ├── AppSettingsSeeder.php
 │       ├── ConnectRelationshipsSeeder.php
@@ -251,11 +300,11 @@ LaravelSpa
 │   ├── build
 │   │   ├── assets
 │   │   │   ├── 404.508db666.png
-│   │   │   ├── app-legacy.433c7c11.js
+│   │   │   ├── app-legacy.bd153b9f.js
 │   │   │   ├── app-legacy.c0ed8668.js
-│   │   │   ├── app.2bd2621f.css
-│   │   │   ├── app.3f641b8b.js
-│   │   │   ├── app.50bd7134.css
+│   │   │   ├── app.092af6b3.css
+│   │   │   ├── app.32dd3c38.js
+│   │   │   ├── app.a70dc797.css
 │   │   │   ├── fa-brands-400.b1d1c1b0.ttf
 │   │   │   ├── fa-brands-400.c61287c2.woff2
 │   │   │   ├── fa-regular-400.5da313b0.woff2
@@ -266,8 +315,8 @@ LaravelSpa
 │   │   │   ├── fa-v4compatibility.f46715c9.woff2
 │   │   │   ├── plugs.12bd3189.png
 │   │   │   ├── polyfills-legacy.06fde1ca.js
-│   │   │   ├── vendor-legacy.f28d9fab.js
-│   │   │   └── vendor.a027a23b.js
+│   │   │   ├── vendor-legacy.cb3b591e.js
+│   │   │   └── vendor.fc255866.js
 │   │   ├── manifest.json
 │   │   ├── webUpdateNoticeInjectScript.js
 │   │   ├── webUpdateNoticeInjectStyle.css
@@ -293,7 +342,8 @@ LaravelSpa
 │   └── web.config
 ├── resources
 │   ├── css
-│   │   └── app.css
+│   │   ├── app.css
+│   │   └── normalize.css
 │   ├── img
 │   │   ├── 404.png
 │   │   └── plugs.png
@@ -316,6 +366,8 @@ LaravelSpa
 │   │   │   │   ├── RolesTableRow.vue
 │   │   │   │   ├── UsersTable.vue
 │   │   │   │   └── UsersTableRow.vue
+│   │   │   ├── auth
+│   │   │   │   └── SocialiteLogins.vue
 │   │   │   ├── common
 │   │   │   │   ├── AppButton.vue
 │   │   │   │   ├── AppModal.vue
@@ -342,13 +394,16 @@ LaravelSpa
 │   │   │   ├── index.js
 │   │   │   └── routes.js
 │   │   ├── services
+│   │   │   ├── analytics.js
 │   │   │   ├── common.js
 │   │   │   └── users.js
 │   │   ├── store
-│   │   │   ├── auth.js
 │   │   │   ├── index.js
-│   │   │   ├── sidebar.js
-│   │   │   └── toast.js
+│   │   │   ├── modules
+│   │   │   │   ├── auth.js
+│   │   │   │   ├── sidebar.js
+│   │   │   │   └── toast.js
+│   │   │   └── mutation-types.js
 │   │   └── views
 │   │       ├── App.vue
 │   │       ├── Blank.vue
@@ -381,6 +436,11 @@ LaravelSpa
 │       ├── app.blade.php
 │       ├── emails
 │       │   └── exception.blade.php
+│       ├── errors
+│       │   └── layout.blade.php
+│       ├── socialite
+│       │   ├── callback.blade.php
+│       │   └── denied.blade.php
 │       └── welcome.blade.php
 ├── routes
 │   ├── api.php
@@ -394,7 +454,7 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-54 directories, 243 files
+61 directories, 260 files
 ```
 
 * Tree command can be installed using brew: `brew install tree`

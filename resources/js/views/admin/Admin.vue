@@ -147,7 +147,7 @@
                 />
                 <span
                   v-if="!loading"
-                  class="fa-brands fa-square-facebook fa-fw"
+                  class="fa-brands fa-square-facebook fa-fw fa-xs"
                   :class="
                     checkSettingEnabled('enableFbLogin')
                       ? 'text-blue-600 dark:text-blue-600'
@@ -157,7 +157,7 @@
                 </span>
                 <span
                   v-if="!loading"
-                  class="fa-brands fa-twitter fa-fw"
+                  class="fa-brands fa-twitter fa-fw fa-xs"
                   :class="
                     checkSettingEnabled('enableTwitterLogin')
                       ? 'text-blue-300 dark:text-blue-300'
@@ -165,12 +165,101 @@
                   "
                 >
                 </span>
+
                 <span
                   v-if="!loading"
-                  class="fa-brands fa-google fa-fw"
+                  class="fa-brands fa-instagram fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableInstagramLogin')
+                      ? 'text-green-300 dark:text-yellow-300'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-github fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableGitHubLogin')
+                      ? 'text-gray-300 dark:text-gray-300'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-youtube fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableYouTubeLogin')
+                      ? 'text-red-500 dark:text-red-500'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-google fa-fw fa-xs"
                   :class="
                     checkSettingEnabled('enableGoogleLogin')
                       ? 'text-green-300 dark:text-green-300'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-linkedin fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableLinkedInLogin')
+                      ? 'text-blur-700 dark:text-blur-700'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-twitch fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableTwitchLogin')
+                      ? 'text-blue-500 dark:text-blue-500'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-apple fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableAppleLogin')
+                      ? 'text-gray-800 dark:text-gray-200'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-microsoft fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableMicrosoftLogin')
+                      ? 'text-blue-300 dark:text-blue-300'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-tiktok fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableTikTokLogin')
+                      ? 'text-pink-300 dark:text-pink-300'
                       : 'text-gray-300 dark:text-gray-800'
                   "
                 >
@@ -494,5 +583,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.fa-xs {
+  font-size: 0.5em !important;
+}
+</style>
 <style lang="scss" scoped></style>
