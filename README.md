@@ -48,8 +48,8 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 - Manage Social Media Logins through GUI
 - [Roles Management](https://github.com/jeremykenedy/laravel-roles)
 - [Permissions Management](https://github.com/jeremykenedy/laravel-roles)
-- [Social Authentication](https://laravel.com/docs/9.x/socialite)
 - [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/v/next/)
+- [Social Authentication with Facebook, Twitter, Instagram, GitHub, TikTok, Google, YouTube, Microsoft, Twitch, and Apple](https://laravel.com/docs/9.x/socialite)
 
 ### Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
