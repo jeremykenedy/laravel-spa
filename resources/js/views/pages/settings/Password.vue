@@ -1,3 +1,4 @@
+Password.vue
 <template>
   <div
     class="rounded-t border-b p-4 font-semibold dark:border-gray-600 dark:bg-slate-800"

@@ -11,7 +11,7 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 import { track } from '@services/analytics';
 
 export default {
-  name: 'Blank',
+  name: 'AccountAdministration',
   components: {},
   props: {},
   setup() {
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      blank: 'Blank',
+      blank: 'AccountAdministration',
     };
   },
   computed: {

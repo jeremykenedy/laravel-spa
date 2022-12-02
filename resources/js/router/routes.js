@@ -6,9 +6,10 @@ import ForgotPassword from '@pages/ForgotPassword.vue';
 import ResetPassword from '@pages/ResetPassword.vue';
 import Register from '@pages/Register.vue';
 import VerifyEmail from '@pages/VerifyEmail.vue';
-import Settings from '@pages/Settings.vue';
-import Profile from '@pages/Profile.vue';
-import Password from '@pages/Password.vue';
+import Settings from '@pages/settings/Settings.vue';
+import Profile from '@pages/settings/Profile.vue';
+import Password from '@pages/settings/Password.vue';
+import Account from '@pages/settings/Account.vue';
 import NotFound from '@pages/NotFound.vue';
 
 import AdminLayout from '@/layouts/AdminLayout.vue';
@@ -133,6 +134,14 @@ export default [
       middleware: [auth],
     },
     children: [
+      {
+        path: 'account',
+        component: Account,
+        name: 'account',
+        meta: {
+          middleware: [auth],
+        },
+      },
       {
         path: 'profile',
         component: Profile,
