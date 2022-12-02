@@ -23,7 +23,6 @@
 # EthicalCheck generates security test report that includes all the tested endpoints, coverage graph, exceptions, and vulnerabilities.
 # Vulnerabilities are fully triaged, it contains CVSS score, severity, endpoint information, and OWASP tagging.
 
-
 # This is a starter workflow to help you get started with EthicalCheck Actions
 
 name: EthicalCheck-Workflow
@@ -33,9 +32,9 @@ on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   # Customize trigger events based on your DevSecOps processes.
   push:
-    branches: [ "master" ]
+    branches: ['master']
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
   schedule:
     - cron: '31 5 * * 0'
 
@@ -53,17 +52,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-       - name: EthicalCheck  Free & Automated API Security Testing Service
-         uses: apisec-inc/ethicalcheck-action@005fac321dd843682b1af6b72f30caaf9952c641
-         with:
+      - name: EthicalCheck  Free & Automated API Security Testing Service
+        uses: apisec-inc/ethicalcheck-action@005fac321dd843682b1af6b72f30caaf9952c641
+        with:
           # The OpenAPI Specification URL or Swagger Path or Public Postman collection URL.
-          oas-url: "http://netbanking.apisec.ai:8080/v2/api-docs"
+          oas-url: 'http://netbanking.apisec.ai:8080/v2/api-docs'
           # The email address to which the penetration test report will be sent.
-          email: "xxx@apisec.ai"
-          sarif-result-file: "ethicalcheck-results.sarif"
+          email: 'xxx@apisec.ai'
+          sarif-result-file: 'ethicalcheck-results.sarif'
 
-       - name: Upload sarif file to repository
-         uses: github/codeql-action/upload-sarif@v2
-         with:
+      - name: Upload sarif file to repository
+        uses: github/codeql-action/upload-sarif@v2
+        with:
           sarif_file: ./ethicalcheck-results.sarif
-

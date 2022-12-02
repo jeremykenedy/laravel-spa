@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Sanctum\PersonalAccessToken;
 
@@ -16,10 +17,18 @@ class UserController extends Controller
         }
     }
 
+    protected function relationships(User $user)
+    {
+        return $user->load([
+            // 'socialiteProviders',
+            // 'roles',
+        ]);
+    }
+
     public function user(Request $request)
     {
         if (auth('sanctum')->check()) {
-            return response()->json(auth('sanctum')->user());
+            return response()->json($this->relationships(auth('sanctum')->user()));
         }
     }
 
@@ -34,6 +43,6 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return response()->json($user);
+        return response()->json($this->relationships($user));
     }
 }
