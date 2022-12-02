@@ -3,7 +3,7 @@
 [![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=master)](https://github.styleci.io/repos/537735029?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
-#### Table of contents
+### Table of contents
 - [About](#about)
 - [Features](#features)
 - [Installation Instructions](#installation-instructions)
@@ -18,14 +18,14 @@
 - [File Tree](#file-tree)
 - [License](#license)
 
-### About
+## About
 A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate.
 Laravel 9 with user authentication, registration with email verification, 
 social media authentication, password recovery, user management, and roles/permissions 
 managemenet. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
 part of this repository it is a completely separated Vue 3 front end compiled using ViteJS.
 
-### App Features
+## App Features
 ##### Built on:
 - [Laravel 9](https://laravel.com/docs/9.x)
 - [Sanctum](https://laravel.com/docs/9.x/sanctum)
@@ -51,7 +51,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 - [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/v/next/)
 - [Social Authentication with Facebook, Twitter, Instagram, GitHub, TikTok, Google, YouTube, Microsoft, Twitch, and Apple](https://laravel.com/docs/9.x/socialite)
 
-### Installation Instructions
+## Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
 2. Create a MySQL database for the project
     * ```mysql -u root -p```, if using Vagrant: ```mysql -u homestead -psecret```
@@ -90,7 +90,8 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 
 ###### And thats it with the caveat of setting up and configuring your development environment.
 
-### Seeds
+## Seeds
+
 ##### Seeded Users
 
 |Email|Password|
@@ -99,7 +100,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 |admin@admin.com|password|
 |user@user.com|password|
 
-### Socialite
+## Socialite
 
 #### Get Socialite Login API Keys:
 * [Facebook API](https://developers.facebook.com/)
@@ -115,21 +116,34 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 #### Add More Socialite Logins
 * See full list of providers: [https://socialiteproviders.github.io](https://socialiteproviders.com/about/)
 
-### Screenshots
-![Home](https://laravel-spa.s3.us-west-2.amazonaws.com/home.png)
-![About](https://laravel-spa.s3.us-west-2.amazonaws.com/about.png)
-![Login](https://laravel-spa.s3.us-west-2.amazonaws.com/login.png)
-![Register](https://laravel-spa.s3.us-west-2.amazonaws.com/register.png)
-![Dashboard](https://laravel-spa.s3.us-west-2.amazonaws.com/dashboard.png)
-![Settings - Profile](https://laravel-spa.s3.us-west-2.amazonaws.com/profile1.png)
-![Settings - Password](https://laravel-spa.s3.us-west-2.amazonaws.com/profile2.png)
-![Profile Dark](https://laravel-spa.s3.us-west-2.amazonaws.com/profile3.png)
-![Forgot Password](https://laravel-spa.s3.us-west-2.amazonaws.com/forgot.png)
-![Reset Password](https://laravel-spa.s3.us-west-2.amazonaws.com/reset.png)
-![Mobile Menu](https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png)
-![Mobile Login](https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png)
+## Screenshots
 
-### File Tree
+<p float="left">
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/login-sm.png" title="Login Social Media" alt="Login Social Media" width="48%"/>
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/login-sm-tiktok.png" title="Login Social Media TikTok" alt="Login Social Media TikTok" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/register-sm-instagram.png" title="Register Social Media Instagram" alt="Register Social Media Instagram" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/register-sm.png" title="Register Social Media" alt="Register Social Media" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/dashboard-success-login-sm.png" title="Social User Dashboard" alt="Social User Dashboard" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-dashboard.png" title="Admin Dashboard Dark Mode" alt="Admin Dashboard Dark Mode" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-users.png" title="Admin Users Table" alt="Admin Users Table" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-roles.png" title="Admin Roles Table" alt="Admin Roles Table" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-permissions.png" title="Admin Permissions Table" alt="Admin Permissions Table" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-app-settings.png" title="Admin App Settings Dark Mode" alt="Admin App Settings Dark Mode" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/home.png" title="Home" alt="Home" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/about.png" title="About" alt="About" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/login.png" title="Login" alt="Login" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/register.png" title="Register" alt="Register" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/dashboard.png" title="Dashboard" alt="Dashboard" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile1.png" title="Settings - Profile" alt="Settings - Profile" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile2.png" title="Settings - Password" alt="Settings - Password" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile3.png" title="Profile Dark" alt="Profile Dark" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/forgot.png" title="Forgot Password" alt="Forgot Password" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/reset.png" title="Reset Password" alt="Reset Password" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="48%" />
+    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="48%" />
+</p>
+
+## File Tree
 ```
 LaravelSpa
 ├── .browserslistrc
@@ -460,5 +474,5 @@ LaravelSpa
 * Tree command can be installed using brew: `brew install tree`
 * File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests|.DS_Store|.env'`
 
-### License
+## License
 Laravel-Spa is licensed under the [MIT license](https://opensource.org/licenses/MIT). Enjoy!
