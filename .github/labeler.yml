@@ -1,0 +1,8 @@
+# Add 'repo' label to any root file changes
+repo:
+- '*'
+
+# Add 'frontend` label to any change to *.js files as long as the `app.js` hasn't changed
+frontend:
+- any: ['resources/js/**/*.js','resources/css/**/*.css']
+  all: ['!resources/js/app.js']
