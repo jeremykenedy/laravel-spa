@@ -322,5 +322,55 @@ export default {
           throw err.response;
         });
     },
+    async revokeProvider({ commit, dispatch }, payload) {
+      return await axios
+        .post('/api/oauth-revoke/' + payload.id)
+        .then((res) => {
+          if (
+            res.status &&
+            res.status == 200 &&
+            res.data &&
+            res.data.status &&
+            res.data.status == 'success' &&
+            res.data.user &&
+            res.data.user.id
+          ) {
+            commit('SET_USER', res.data.user);
+            return res;
+          } else {
+            throw res;
+          }
+        })
+        .catch((err) => {
+          throw err.response;
+        });
+    },
+
+    async deleteAccount({ commit, dispatch }, payload) {
+      return await axios
+        .delete('/api/account/' + payload.id + '/delete')
+        .then((res) => {
+          console.log(res);
+
+          if (
+            res.status &&
+            res.status == 200 &&
+            res.data &&
+            res.data.status &&
+            res.data.status == 'success' &&
+            !res.data.user
+          ) {
+            commit('LOGOUT');
+            router.push({ name: 'home' });
+
+            return res;
+          } else {
+            throw res;
+          }
+        })
+        .catch((err) => {
+          throw err.response;
+        });
+    },
   },
 };

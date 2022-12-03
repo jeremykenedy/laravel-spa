@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\PersonalAccessToken;
 
 class UserController extends Controller
@@ -17,21 +18,36 @@ class UserController extends Controller
         }
     }
 
-    protected function relationships(User $user)
+    /**
+     * Tap the guard we need
+     *
+     * @param  string $guard
+     * @return middleware guard
+     */
+    protected function guard($guard = 'web')
     {
-        return $user->load([
-            // 'socialiteProviders',
-            // 'roles',
-        ]);
+        return Auth::guard($guard);
     }
 
+    /**
+     * Retreive the user by sanctum middleware.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function user(Request $request)
     {
         if (auth('sanctum')->check()) {
-            return response()->json($this->relationships(auth('sanctum')->user()));
+            return response()->json(auth('sanctum')->user());
         }
     }
 
+    /**
+     * Retreive the user by sanctum authtoken.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function userByToken(Request $request)
     {
         $data = $request->validate([
@@ -43,6 +59,33 @@ class UserController extends Controller
 
         auth()->login($user);
 
-        return response()->json($this->relationships($user));
+        return response()->json($user);
+    }
+
+    /**
+     * Delete the users account.
+     *
+     * @param  \App\Models\User $user
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteUserAccount(User $user, Request $request)
+    {
+        $currentUser = auth('sanctum')->user();
+
+        if($currentUser->id != $user->id) {
+            abort(403);
+        }
+
+        // HERE :: TODO :: Trigger goodbye email.
+        // Do we do soft delete and restore user system? Maybe later like in the auth project.
+        $user->tokens()->delete();
+        $user->delete();
+        $this->guard()->logout();
+
+        return response()->json([
+            'status'    => 'success',
+            'user'      => null,
+        ]);
     }
 }

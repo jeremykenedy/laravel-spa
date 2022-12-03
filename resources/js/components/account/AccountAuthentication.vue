@@ -11,12 +11,12 @@
     </div>
     <div v-if="user && user.providers && user.providers.length > 0">
       <div
-        class="grid grid-cols-1 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-2 md:grid-cols-3"
+        class="grid grid-cols-1 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-2 lg:grid-cols-3"
       >
         <div
           v-for="provider in user.providers"
           :key="provider.id"
-          class="mb-5 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-900 dark:bg-gray-900"
+          class="mb-1 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-900 dark:bg-gray-900"
         >
           <div class="flex flex-col items-center pt-4 pb-4 pl-2 pr-2">
             <span class="fa-4x mb-2" :class="providerIcon(provider.provider)" />
@@ -70,7 +70,7 @@
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { track } from '@services/analytics';
 import { PowerIcon } from '@heroicons/vue/24/outline';
-import { parseDisplayDate } from '@services/common';
+import { parseDisplayDate, capitalizeFirstLetter } from '@services/common';
 
 export default {
   name: 'AccountAuthentication',
@@ -87,20 +87,13 @@ export default {
     };
   },
   computed: {
-    // ...mapState('sidebar', {
-    //   sideBarOpen: (state) => state.sideBarOpen,
-    //   fullScreenSideBarOpen: (state) => state.fullScreenSideBarOpen,
-    // }),
-    // ...mapState('auth', {
-    //   user: (state) => state.user,
-    //   roles: (state) => state.roles,
-    //   token: (state) => state.token,
-    //   logins: (state) => state.logins,
-    // }),
+    ...mapState('auth', {
+      user: (state) => state.user,
+    }),
     ...mapGetters({
-      authenticated: 'auth/authenticated',
-      user: 'auth/user',
-      roles: 'auth/roles',
+      // authenticated: 'auth/authenticated',
+      // user: 'auth/user',
+      // roles: 'auth/roles',
     }),
   },
   watch: {},
@@ -111,10 +104,30 @@ export default {
   methods: {
     ...mapActions({
       popToast: 'toast/popToast',
+      revokeProvider: 'auth/revokeProvider',
     }),
     track,
     parseDisplayDate,
+    capitalizeFirstLetter,
     providerIcon(provider) {
+      if (provider.toLowerCase() == 'apple') {
+        return 'fa-brands fa-apple text-gray-800 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'google') {
+        return 'fa-brands fa-google text-red-500 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'microsoft') {
+        return 'fa-brands fa-microsoft text-blue-300 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'tiktok') {
+        return 'fa-brands fa-tiktok text-pink-600 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'youtube') {
+        return 'fa-brands fa-youtube text-red-600 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'instagram') {
+        return 'fa-brands fa-instagram text-gray-800 dark:text-gray-200';
+      }
       if (provider.toLowerCase() == 'facebook') {
         return 'fa-brands fa-facebook text-blue-600 dark:text-gray-200';
       }
@@ -129,7 +142,60 @@ export default {
       }
       return 'fa-solid fa-plug-circle-check text-gray-600 dark:text-gray-200';
     },
-    triggerRevoke(provider) {},
+    triggerRevoke(provider) {
+      const self = this;
+      const title =
+        '<strong>Revoke ' +
+        self.capitalizeFirstLetter(provider.provider) +
+        '?</strong>';
+      const html =
+        'Are you sure you want to <strong>Revoke</strong><br>' +
+        self.capitalizeFirstLetter(provider.provider) +
+        ' Authentication?<br><br><small><span class="far fa-clock fa-fw fa-xs mr-1"></span>First Used: ' +
+        self.parseDisplayDate(provider.created_at) +
+        '</small><br><small><span class="far fa-clock fa-fw fa-xs mr-1"></span>Last Used: ' +
+        self.parseDisplayDate(provider.updated_at) +
+        '</small>';
+      const icon = 'warning';
+      const confirmButtonColor = '#FF0000';
+      const denyButtonColor = '#777777';
+      const confirmButtonText = 'Confirm Revoke';
+      const denyButtonText = 'Cancel';
+      self.$swal
+        .fire({
+          title: title,
+          icon: icon,
+          html: html,
+          showCancelButton: false,
+          showDenyButton: true,
+          confirmButtonColor: confirmButtonColor,
+          denyButtonColor: denyButtonColor,
+          confirmButtonText: confirmButtonText,
+          denyButtonText: denyButtonText,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            self
+              .revokeProvider(provider)
+              .then((response) => {
+                self.popToast({
+                  message: `Provider successfully revoked`,
+                  timer: 5000,
+                  icon: 'success',
+                });
+              })
+              .catch((err) => {
+                self.popToast({
+                  message: `Error revoking provider`,
+                  timer: 10000,
+                  icon: 'error',
+                });
+              });
+          } else if (result.isDenied) {
+            //
+          }
+        });
+    },
   },
 };
 </script>

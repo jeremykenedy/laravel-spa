@@ -4,14 +4,18 @@
   >
     Account
   </div>
-  <div class="bg-white p-4 dark:bg-slate-800">
+  <div class="rounded-b-lg bg-white p-4 dark:bg-slate-800">
     <!-- <Success v-if="success" :content="success" @close="success = null" /> -->
     <!-- <Errors v-if="errors" :content="errors" @close="errors = null" /> -->
-    <div class="border-b border-gray-200 dark:border-gray-700">
+    <div class="border-b-2 border-gray-200 dark:border-gray-700">
       <ul
-        class="flex flex-wrap justify-between text-center text-sm font-medium text-gray-500 dark:text-gray-400"
+        class="flex flex-wrap justify-evenly text-center text-sm font-medium text-gray-500 dark:text-gray-400"
       >
-        <li class="mr-2 cursor-pointer" @click="changeTab('authentication')">
+        <li
+          class="mr-2 cursor-pointer"
+          style="margin-top: 3px; margin-bottom: -2px"
+          @click="changeTab('authentication')"
+        >
           <span
             class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
             :class="
@@ -24,7 +28,13 @@
             Authentication
           </span>
         </li>
-        <li class="mr-2 cursor-pointer" @click="changeTab('data')">
+
+        <!--
+        <li
+          class="mr-2 cursor-pointer"
+          style="margin-top: 3px; margin-bottom: -2px"
+          @click="changeTab('data')"
+        >
           <span
             class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
             :class="
@@ -37,7 +47,12 @@
             Data
           </span>
         </li>
-        <li class="mr-2 cursor-pointer" @click="changeTab('privacy')">
+
+        <li
+          class="mr-2 cursor-pointer"
+          style="margin-top: 3px; margin-bottom: -2px"
+          @click="changeTab('privacy')"
+        >
           <span
             class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
             :class="
@@ -50,7 +65,13 @@
             Privacy
           </span>
         </li>
-        <li class="mr-2 cursor-pointer" @click="changeTab('administration')">
+        -->
+
+        <li
+          class="mr-2 cursor-pointer"
+          style="margin-top: 3px; margin-bottom: -2px"
+          @click="changeTab('administration')"
+        >
           <span
             class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
             :class="
@@ -66,7 +87,12 @@
       </ul>
     </div>
 
-    <div class="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
+    <div
+      class="rounded-b-lg bg-gray-50 p-4"
+      :class="
+        activeTab == 'administration' ? 'dark:bg-gray-900' : 'dark:bg-gray-800'
+      "
+    >
       <AccountAuthentication v-if="activeTab == 'authentication'" />
       <AccountData v-if="activeTab == 'data'" />
       <AccountPrivacy v-if="activeTab == 'privacy'" />

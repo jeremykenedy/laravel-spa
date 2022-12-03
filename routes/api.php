@@ -40,13 +40,14 @@ Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify
 Route::post('/verify-resend', [VerificationController::class, 'resend']);
 Route::get('/user', [UserController::class, 'user']);
 Route::post('/user-by-token', [UserController::class, 'userByToken']);
-Route::get('/logins', [SocialiteController::class, 'logins']);
+Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'profile']);
     Route::patch('/theme', [ProfileController::class, 'theme']);
     Route::patch('/password', PasswordController::class);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/oauth-revoke/{provider}', [SocialiteController::class, 'revokeSocialProvider']);
     Route::get('/users', [UsersController::class, 'users']);
     Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
     Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
@@ -65,4 +66,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
     Route::get('/app-settings', [AppSettingsController::class, 'index']);
     Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
+    Route::delete('/account/{user}/delete', [UserController::class, 'deleteUserAccount']);
 });

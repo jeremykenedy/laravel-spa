@@ -49,17 +49,17 @@ export default {
       let t = null;
       let buttonClasses = `
           bg-transparent
-          border
-          border-1
-          text-gray-500
-          hover:text-white
-          hover:bg-gray-500
+          border-transparent
+          text-gray-700
+          hover:text-gray-900
+          hover:bg-gray-100
           active:text-white
           active:bg-gray-500
           focus:text-white
           focus:bg-gray-500
-          dark:text-white
-          dark:hover:bg-gray-500
+          dark:text-gray-300
+          dark:hover:text-white
+          dark:hover:bg-transparent
           shadow-none
       `;
       if (this.primary) {
