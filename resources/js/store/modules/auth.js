@@ -350,8 +350,6 @@ export default {
       return await axios
         .delete('/api/account/' + payload.id + '/delete')
         .then((res) => {
-          console.log(res);
-
           if (
             res.status &&
             res.status == 200 &&

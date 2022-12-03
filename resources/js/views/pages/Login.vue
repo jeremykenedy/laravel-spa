@@ -85,10 +85,11 @@
 
             <div class="text-center lg:text-left">
               <AppButton
+                primary
                 :loading="loading"
                 :disabled="loading"
                 :text="loading ? 'Login' : 'Login'"
-                btn-class="leading-snug inline-block rounded bg-blue-600 px-7 py-3 text-sm font-medium uppercase leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
+                btn-class="leading-snug px-7 py-3 text-sm uppercase leading-snug shadow-md"
                 type="submit"
               >
                 <template #text>
