@@ -11,9 +11,6 @@ use Illuminate\Support\Facades\Config;
 use Laravel\Socialite\Facades\Socialite;
 use App\Traits\SocialiteProvidersTrait;
 
-use Auth;
-use Log;
-
 class SocialiteController extends Controller
 {
     use AuthenticatesUsers, SocialiteProvidersTrait;
