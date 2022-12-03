@@ -25,7 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'roles',
         'avatar',
-        'providers'
+        'providers',
     ];
 
     /**

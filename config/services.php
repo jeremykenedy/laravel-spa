@@ -150,9 +150,9 @@ return [
     ],
     'disqus' => [
         'enabled'       => env('DISQUS_ENABLED', false),
-        'client_id' => env('DISQUS_CLIENT_ID'),
+        'client_id'     => env('DISQUS_CLIENT_ID'),
         'client_secret' => env('DISQUS_CLIENT_SECRET'),
-        'redirect' => env('DISQUS_REDIRECT_URI'),
+        'redirect'      => env('DISQUS_REDIRECT_URI'),
     ],
     'atlassian' => [
         'enabled'       => env('ATLASSIAN_ENABLED', false),
@@ -176,7 +176,7 @@ return [
         'enabled'       => env('STRIPE_ENABLED', false),
         'client_id'     => env('STRIPE_CLIENT_ID'),
         'client_secret' => env('STRIPE_CLIENT_SECRET'),
-        'redirect'      => env('STRIPE_REDIRECT_URI')
+        'redirect'      => env('STRIPE_REDIRECT_URI'),
     ],
     'venmo' => [
         'enabled'       => env('VENMO_ENABLED', false),
@@ -206,7 +206,7 @@ return [
         'enabled'       => env('FITBIT_ENABLED', false),
         'client_id'     => env('FITBIT_CLIENT_ID'),
         'client_secret' => env('FITBIT_CLIENT_SECRET'),
-        'redirect'      => env('FITBIT_REDIRECT_URI')
+        'redirect'      => env('FITBIT_REDIRECT_URI'),
     ],
     'uber' => [
         'enabled'       => env('UBER_ENABLED', false),
@@ -218,8 +218,7 @@ return [
         'enabled'       => env('AMAZON_ENABLED', false),
         'client_id'     => env('AMAZON_SIGNIN_CLIENT_ID'),
         'client_secret' => env('AMAZON_SIGNIN_SECRET'),
-        'redirect'      => env('AMAZON_SIGNIN_REDIRECT_URI')
+        'redirect'      => env('AMAZON_SIGNIN_REDIRECT_URI'),
     ],
-
 
 ];
