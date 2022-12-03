@@ -19,9 +19,9 @@ class UserController extends Controller
     }
 
     /**
-     * Tap the guard we need
+     * Tap the guard we need.
      *
-     * @param  string $guard
+     * @param  string  $guard
      * @return middleware guard
      */
     protected function guard($guard = 'web')
@@ -65,7 +65,7 @@ class UserController extends Controller
     /**
      * Delete the users account.
      *
-     * @param  \App\Models\User $user
+     * @param  \App\Models\User  $user
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         $currentUser = auth('sanctum')->user();
 
-        if($currentUser->id != $user->id) {
+        if ($currentUser->id != $user->id) {
             abort(403);
         }
 

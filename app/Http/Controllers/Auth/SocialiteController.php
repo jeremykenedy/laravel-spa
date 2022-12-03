@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Exceptions\SocialProviderDeniedException;
 use App\Http\Controllers\Controller;
 use App\Models\SocialiteProvider;
+use App\Traits\SocialiteProvidersTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Laravel\Socialite\Facades\Socialite;
-use App\Traits\SocialiteProvidersTrait;
 
 class SocialiteController extends Controller
 {
@@ -94,7 +94,7 @@ class SocialiteController extends Controller
      * Revoke a social media login provider for
      * a user from the app and from the provider.
      *
-     * @param  \App\Models\SocialiteProvider $provider
+     * @param  \App\Models\SocialiteProvider  $provider
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -102,7 +102,7 @@ class SocialiteController extends Controller
     {
         $user = auth('sanctum')->user();
 
-        if($provider->user_id != $user->id) {
+        if ($provider->user_id != $user->id) {
             abort(403);
         }
 
