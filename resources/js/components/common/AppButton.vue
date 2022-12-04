@@ -124,13 +124,20 @@ export default {
         } else {
           buttonClasses = `
             bg-${t}-600
-            hover:bg-${t}-800
+            hover:bg-${t}-900
             text-white
             dark:text-white
             dark:bg-${t}-600
-            dark:hover:bg-${t}-500
+            dark:hover:bg-${t}-400
             border
             border-transparent
+            focus:shadow-lg
+            focus:outline-none
+            focus:ring-0
+            font-medium
+            transition
+            duration-150
+            ease-in-out
           `;
         }
       }

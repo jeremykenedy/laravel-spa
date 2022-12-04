@@ -12,8 +12,10 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\PersonalDataExport\ExportsPersonalData;
+use Spatie\PersonalDataExport\PersonalDataSelection;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements ExportsPersonalData, MustVerifyEmail
 {
     use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission;
 
@@ -59,6 +61,28 @@ class User extends Authenticatable implements MustVerifyEmail
         'theme_dark'        => 'boolean',
         'email_verified_at' => 'datetime',
     ];
+
+    public function selectPersonalData(PersonalDataSelection $personalData): void
+    {
+        $personalData
+            ->add('user.json', [
+                'name'              => $this->name,
+                'email'             => $this->email,
+                'theme'             => $this->theme_dark ? 'Dark' : 'Light',
+                'email_verified_at' => $this->email_verified_at,
+                // 'roles'             => $this->getRoles(),
+                'avatar'            => $this->avatar,
+            ]);
+        // ->addFile(storage_path("avatars/{$this->id}.jpg"))
+            // ->addFile('other-user-data.xml', 's3');
+    }
+
+    public function personalDataExportName(): string
+    {
+        $userName = Str::slug($this->name);
+
+        return "personal-data-{$userName}.zip";
+    }
 
     public function sendPasswordResetNotification($token)
     {

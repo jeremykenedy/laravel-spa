@@ -26,6 +26,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
+Route::post('/verify-resend', [VerificationController::class, 'resend']);
+Route::get('/user', [UserController::class, 'user']);
+Route::post('/user-by-token', [UserController::class, 'userByToken']);
+Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
 
 Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
@@ -35,12 +40,6 @@ Route::middleware('guest')->group(function () {
     Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
     Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
 });
-
-Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
-Route::post('/verify-resend', [VerificationController::class, 'resend']);
-Route::get('/user', [UserController::class, 'user']);
-Route::post('/user-by-token', [UserController::class, 'userByToken']);
-Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'profile']);
@@ -67,4 +66,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/app-settings', [AppSettingsController::class, 'index']);
     Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
     Route::delete('/account/{user}/delete', [UserController::class, 'deleteUserAccount']);
+    Route::post('/user/{user}/data', [UserController::class, 'exportUserPersonalData']);
 });

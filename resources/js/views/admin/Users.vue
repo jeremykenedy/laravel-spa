@@ -70,6 +70,7 @@
       @edit-user="editUser"
       @send-user-verification="sendUserVerification"
     />
+
     <UserFormModal
       :key="userFormKey"
       :showing-form="showCreateUserForm"

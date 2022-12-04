@@ -22,6 +22,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
+        "league/flysystem-aws-s3-v3": "^3.10",
         "nesbot/carbon": "^2.63",
         "qcod/laravel-settings": "^1.1",
         "socialiteproviders/37signals": "^4.1",
@@ -101,7 +102,8 @@
         "socialiteproviders/yahoo": "^4.1",
         "socialiteproviders/youtube": "^4.1",
         "socialiteproviders/zendesk": "^4.1",
-        "socialiteproviders/zoom": "^4.0"
+        "socialiteproviders/zoom": "^4.0",
+        "spatie/laravel-personal-data-export": "^4.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

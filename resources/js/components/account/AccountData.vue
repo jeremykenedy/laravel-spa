@@ -1,61 +1,34 @@
 <template>
-  <div>
-    <h1>
-      {{ blank }}
-    </h1>
+  <div class="">
+    <div
+      class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8"
+    >
+      <h2
+        class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl"
+      >
+        <span class="block">
+          Your Data <span class="text-indigo-600">On Demand</span></span
+        >
+        <span class="block text-gray-700 dark:text-gray-500"
+          >Download your user data.</span
+        >
+      </h2>
+      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+        <div class="inline-flex rounded-md shadow">
+          <UserDownloadData />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { mapState, mapActions, mapGetters } from 'vuex';
-import { track } from '@services/analytics';
+import UserDownloadData from '@components/users/UserDownloadData.vue';
 
 export default {
   name: 'AccountData',
-  components: {},
-  props: {},
-  setup() {
-    return {};
-  },
-  data() {
-    return {
-      blank: 'AccountData',
-    };
-  },
-  computed: {
-    ...mapState('sidebar', {
-      sideBarOpen: (state) => state.sideBarOpen,
-      fullScreenSideBarOpen: (state) => state.fullScreenSideBarOpen,
-    }),
-    ...mapState('auth', {
-      user: (state) => state.user,
-      roles: (state) => state.roles,
-      token: (state) => state.token,
-      logins: (state) => state.logins,
-    }),
-    ...mapGetters({
-      authenticated: 'auth/authenticated',
-      user: 'auth/user',
-      roles: 'auth/roles',
-    }),
-  },
-  watch: {},
-  created() {},
-  mounted() {},
-  beforeUnmount() {},
-  updated() {},
-  methods: {
-    ...mapActions({
-      popToast: 'toast/popToast',
-    }),
-    track,
+  components: {
+    UserDownloadData,
   },
 };
 </script>
-
-<style scoped>
-:deep() .text-white {
-  color: #ffffff !important;
-}
-</style>
-<style lang="scss" scoped></style>
