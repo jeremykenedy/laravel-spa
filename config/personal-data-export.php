@@ -33,7 +33,7 @@ return [
      * which will create the export.
      */
     'job' => [
-        'queue' => null,
+        'queue'      => null,
         'connection' => null,
     ],
 ];

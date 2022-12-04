@@ -62,7 +62,8 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
         'email_verified_at' => 'datetime',
     ];
 
-    public function selectPersonalData(PersonalDataSelection $personalData): void {
+    public function selectPersonalData(PersonalDataSelection $personalData): void
+    {
         $personalData
             ->add('user.json', [
                 'name'              => $this->name,
@@ -72,11 +73,12 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
                 // 'roles'             => $this->getRoles(),
                 'avatar'            => $this->avatar,
             ]);
-            // ->addFile(storage_path("avatars/{$this->id}.jpg"))
+        // ->addFile(storage_path("avatars/{$this->id}.jpg"))
             // ->addFile('other-user-data.xml', 's3');
     }
 
-    public function personalDataExportName(): string {
+    public function personalDataExportName(): string
+    {
         $userName = Str::slug($this->name);
 
         return "personal-data-{$userName}.zip";

@@ -72,7 +72,7 @@ class UserController extends Controller
      */
     public function exportUserPersonalData(User $user, Request $request)
     {
-        if (!auth('sanctum')->check()) {
+        if (! auth('sanctum')->check()) {
             abort(403);
         }
 
@@ -99,7 +99,7 @@ class UserController extends Controller
      */
     public function deleteUserAccount(User $user, Request $request)
     {
-        if (!auth('sanctum')->check()) {
+        if (! auth('sanctum')->check()) {
             abort(403);
         }
 
