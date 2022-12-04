@@ -1,3 +1,4 @@
+Password.vue
 <template>
   <div
     class="rounded-t border-b p-4 font-semibold dark:border-gray-600 dark:bg-slate-800"
@@ -17,7 +18,7 @@
           autocomplete="on"
           class="mt-3 ml-1 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
         />
-        <i
+        <span
           class="fa fa-fw ml-3"
           :class="showPassword ? 'fa-eye' : 'fa-eye-slash'"
           style="width: 1.45em"
@@ -35,7 +36,7 @@
           class="mt-3 ml-1 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
         />
 
-        <i
+        <span
           class="fa fa-fw ml-3"
           style="width: 1.45em"
           :class="showConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"

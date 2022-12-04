@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'roles',
         'avatar',
+        'providers',
     ];
 
     /**
@@ -77,6 +78,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getAvatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/'.md5(Str::lower($this->email)).'.jpg?s=200&d=mp';
+    }
+
+    public function getProvidersAttribute()
+    {
+        return $this->socialiteProviders;
     }
 
     /**

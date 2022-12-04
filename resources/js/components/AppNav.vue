@@ -79,6 +79,22 @@
               <InformationCircleIcon class="float-left mr-2 h-6 w-6" />
             </span>
           </router-link>
+
+          <router-link
+            v-slot="{ isActive }"
+            :to="{ name: 'terms' }"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
+            @click="closeDrop"
+          >
+            <span
+              :class="[
+                isActive &&
+                  'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+              ]"
+            >
+              <DocumentTextIcon class="float-left mr-2 h-6 w-6" />
+            </span>
+          </router-link>
         </PopoverGroup>
         <div
           v-if="authenticated && user"
@@ -346,6 +362,25 @@
                 </router-link>
               </div>
 
+              <div class="mb-6 text-left">
+                <router-link
+                  v-slot="{ isActive }"
+                  :to="{ name: 'terms' }"
+                  class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                  @click="close"
+                >
+                  <span
+                    :class="[
+                      isActive &&
+                        'text-gray-800 hover:text-gray-900 dark:text-gray-600',
+                    ]"
+                  >
+                    <DocumentTextIcon class="float-left mr-2 h-6 w-6" />
+                    Terms
+                  </span>
+                </router-link>
+              </div>
+
               <div class="mb-7 text-left">
                 <router-link
                   v-if="authenticated"
@@ -463,6 +498,7 @@ import {
   HomeIcon,
   BuildingLibraryIcon,
   InformationCircleIcon,
+  DocumentTextIcon,
   XMarkIcon,
   CogIcon,
   ArrowLeftOnRectangleIcon,
@@ -476,6 +512,7 @@ export default {
     HomeIcon,
     BuildingLibraryIcon,
     InformationCircleIcon,
+    DocumentTextIcon,
     Popover,
     PopoverButton,
     PopoverGroup,

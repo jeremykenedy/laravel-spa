@@ -40,6 +40,44 @@
         </div>
         <div class="my-1 w-full py-2 sm:flex sm:items-center">
           <label for="Email" class="w-4/12"> Theme </label>
+
+          <AppSwitch
+            :enabled="form.theme_dark"
+            @click="form.theme_dark = !form.theme_dark"
+          />
+          <div class="float-left ml-2 mt-1">
+            {{ form.theme_dark ? 'Dark' : 'Light' }}
+          </div>
+
+          <!--
+          <span
+            v-tippy="'Toggle Theme ' + (form.theme_dark ? 'Light' : 'Dark')"
+            class="mr-2"
+            :class="
+              loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
+            "
+            @click="form.theme_dark = !form.theme_dark"
+          >
+            <Switch
+              v-model="form.theme_dark"
+              :class="form.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
+              class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+            >
+              <span class="sr-only">Toggle Theme</span>
+              <span
+                aria-hidden="true"
+                :class="
+                  form.theme_dark
+                    ? 'translate-x-4 bg-gray-800'
+                    : 'translate-x-0 bg-white'
+                "
+                class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out"
+              />
+            </Switch>
+          </span>
+ -->
+          <!--
+
           <span
             class="cursor-pointer"
             @click="form.theme_dark = !form.theme_dark"
@@ -52,6 +90,8 @@
               {{ form.theme_dark ? 'Dark' : 'Light' }}
             </div>
           </span>
+
+ -->
         </div>
         <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-end">
           <div
@@ -153,3 +193,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+:deep() .text-white {
+  color: #ffffff !important;
+}
+</style>

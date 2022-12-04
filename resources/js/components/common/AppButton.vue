@@ -49,33 +49,41 @@ export default {
       let t = null;
       let buttonClasses = `
           bg-transparent
-          border
-          border-1
-          text-gray-500
-          hover:text-white
-          hover:bg-gray-500
+          border-transparent
+          hover:bg-gray-100
           active:text-white
           active:bg-gray-500
           focus:text-white
           focus:bg-gray-500
-          dark:text-white
-          dark:hover:bg-gray-500
+          dark:text-gray-300
+          dark:hover:text-white
+          dark:hover:bg-transparent
           shadow-none
+          focus:shadow-lg
+          focus:outline-none
+          focus:ring-0
+          font-medium
+          transition
+          duration-150
+          ease-in-out
       `;
       if (this.primary) {
         t = 'indigo';
-      }
-      if (this.secondary) {
+        buttonClasses = buttonClasses + ' text-white';
+      } else if (this.secondary) {
         t = 'slate';
-      }
-      if (this.accent) {
+        buttonClasses = buttonClasses + ' text-white';
+      } else if (this.accent) {
         t = 'teal';
-      }
-      if (this.success) {
+        buttonClasses = buttonClasses + ' text-white';
+      } else if (this.success) {
         t = 'green';
-      }
-      if (this.warning) {
+        buttonClasses = buttonClasses + ' text-white';
+      } else if (this.warning) {
         t = 'yellow';
+        buttonClasses = buttonClasses + ' text-white';
+      } else {
+        // buttonClasses = buttonClasses + ' text-gray-700 hover:text-gray-900';
       }
       if (this.danger) {
         t = 'red';
