@@ -19,6 +19,7 @@ class PersonalDataExportedNotification extends SpatiePersonalDataExportedNotific
         if (static::$toMailCallback) {
             return call_user_func(static::$toMailCallback, $notifiable, $downloadUrl);
         }
+
         return (new MailMessage)
             ->subject(trans('personal-data-exports.notifications.subject'))
             ->line(trans('personal-data-exports.notifications.instructions'))
