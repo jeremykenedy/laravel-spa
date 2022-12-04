@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\PersonalDataExportJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +64,33 @@ class UserController extends Controller
     }
 
     /**
+     * Process request to download user data.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportUserPersonalData(User $user, Request $request)
+    {
+        if (!auth('sanctum')->check()) {
+            abort(403);
+        }
+
+        $currentUser = auth('sanctum')->user();
+
+        if ($currentUser->id != $user->id) {
+            abort(403);
+        }
+
+        dispatch(new PersonalDataExportJob($currentUser));
+
+        return response()->json([
+            'status'    => 'success',
+            'user'      => null,
+        ]);
+    }
+
+    /**
      * Delete the users account.
      *
      * @param  \App\Models\User  $user
@@ -71,6 +99,10 @@ class UserController extends Controller
      */
     public function deleteUserAccount(User $user, Request $request)
     {
+        if (!auth('sanctum')->check()) {
+            abort(403);
+        }
+
         $currentUser = auth('sanctum')->user();
 
         if ($currentUser->id != $user->id) {
@@ -79,6 +111,7 @@ class UserController extends Controller
 
         // HERE :: TODO :: Trigger goodbye email.
         // Do we do soft delete and restore user system? Maybe later like in the auth project.
+
         $user->tokens()->delete();
         $user->delete();
         $this->guard()->logout();

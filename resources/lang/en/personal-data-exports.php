@@ -1,0 +1,10 @@
+<?php
+
+return [
+    'notifications' => [
+        'subject'           => 'Personal Data Download',
+        'instructions'      => 'Please click the button below to download a zip file containing all data we got for your account.',
+        'action'            => 'Download Zip File',
+        'deletion_message'  => 'This file will be deleted at :date.',
+    ],
+];

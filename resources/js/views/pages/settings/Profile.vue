@@ -24,7 +24,7 @@
             v-model="form.name"
             type="text"
             name="name"
-            class="mt-3 w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
+            class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
           />
         </div>
         <div
@@ -35,7 +35,7 @@
             v-model="form.email"
             type="email"
             name="email"
-            class="mt-3 w-full rounded-sm border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
+            class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:border-gray-600 dark:bg-slate-900 sm:mt-0 sm:w-8/12"
           />
         </div>
         <div class="my-1 w-full py-2 sm:flex sm:items-center">

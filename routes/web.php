@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::personalDataExports('personal-data-exports');
+
 Route::get('{path}', function () {
     return view('app');
 })->where('path', '.*');

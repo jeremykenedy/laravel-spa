@@ -65,6 +65,7 @@
       @edit-role="editRole"
       @delete-role="deleteRole"
     />
+
     <RoleFormModal
       :key="roleFormKey"
       :showing-form="showCreateRoleForm"

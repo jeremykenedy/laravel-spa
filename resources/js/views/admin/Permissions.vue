@@ -215,6 +215,7 @@
         </tfoot>
       </template>
     </v-client-table>
+    <!-- <AnimatedTableLoader v-if="!dataReady" /> -->
 
     <PermissionFormModal
       :key="permissionFormKey"
@@ -244,6 +245,7 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from '@heroicons/vue/24/outline';
+// import AnimatedTableLoader from '@components/loaders/AnimatedTableLoader.vue';
 
 export default {
   name: 'Permissions',
@@ -257,6 +259,7 @@ export default {
     TrashIcon,
     PerPage,
     Pagination,
+    // AnimatedTableLoader,
   },
   props: {
     showDownload: { type: Boolean, default: false },
