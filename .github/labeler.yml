@@ -6,3 +6,39 @@ repo:
 frontend:
   - any: ['resources/js/**/*.js', 'resources/css/**/*.css']
     all: ['!resources/js/app.js']
+
+backend:
+  - any: ['app/**/*.php']
+
+config:
+  - any: ['config/**/*.php', '.env.example']
+
+database:
+  - any: ['database/**/*.php']
+
+migrations:
+  - any: ['database/migrations/**/*.php']
+
+seeders:
+  - any: ['database/seeders/**/*.php']
+
+core-routing:
+  - any: ['routes/**/*.php']
+
+framework:
+  - any: ['bootstrap/**/*.php']
+
+tests:
+  - any: ['tests/**/*.php']
+
+storage:
+  - any: ['storage/**/*.*']
+
+workflow:
+  - any: ['.github/**/*.*']
+
+build:
+  - any: ['*.js', '*.yml', '*.json','*.ts','*.xml','*.travis']
+
+documentation:
+  - any: ['*.md', 'LICENSE', '.example']
