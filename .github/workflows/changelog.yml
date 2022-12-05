@@ -19,4 +19,4 @@ jobs:
           TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
           REGENERATE_COUNT: -1
           PULL_REQUEST: true
-          BRANCH: 'master'
+          BRANCH: 'dev'
