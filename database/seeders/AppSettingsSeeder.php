@@ -309,6 +309,27 @@ class AppSettingsSeeder extends Seeder
                 'val'       => config('services.google.ga'),
                 'group'     => 'analytics',
             ],
+
+            [
+                'name'      => 'Sentry.io Monitoring',
+                'key'       => 'enableSentryMonitoring',
+                'type'      => 'boolean',
+                'val'       => config('services.sentry.enabled'),
+                'group'     => 'monitoring',
+            ],
+            [
+                'name'      => 'Show exception Feedback form to user',
+                'key'       => 'enableSentryMonitoringFeedbakForm',
+                'type'      => 'boolean',
+                'val'       => config('services.sentry.feedback-enabled'),
+                'group'     => 'monitoring',
+            ],
+            [
+                'name'      => 'Sentry.io DSN (url)',
+                'key'       => 'sentryIoDSN',
+                'val'       => config('sentry.dsn'),
+                'group'     => 'monitoring',
+            ],
         ];
 
         $uniqueKeyOne = 'key';

@@ -12,14 +12,71 @@ import AppSwitch from '@components/common/AppSwitch.vue';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
 import VueGtag from 'vue-gtag-next';
+import * as Sentry from '@sentry/vue';
+import { BrowserTracing } from '@sentry/tracing';
 
 axios.defaults.withCredentials = true;
 
 const app = createApp(App);
 const APP_GA_TAG = GA_TAG; // eslint-disable-line
 const APP_GA_ENABLED = GA_ENABLED; // eslint-disable-line
+const VUE_APP_URL = APP_URL; // eslint-disable-line
+const VUE_SENTRY_DSN = SENTRY_DSN; // eslint-disable-line
+const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
+const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
 
+if (VUE_SENTRY_ENABLED) {
+  Sentry.init({
+    app,
+    dsn: VUE_SENTRY_DSN,
+    integrations: [
+      new BrowserTracing({
+        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+        tracePropagationTargets: ['localhost', VUE_APP_URL, /^\//],
+      }),
+    ],
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+    trackComponents: true,
+    hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
+    beforeBreadcrumb(breadcrumb, hint) {
+      return breadcrumb.category === 'ui.click' ? null : breadcrumb;
+    },
+    beforeSend(event, hint) {
+      // Check if it is an exception, and if so, show the report dialog
+      if (event.exception) {
+        if (VUE_SENTRY_FEEDBACK_ENABLED) {
+          Sentry.showReportDialog({ eventId: event.event_id });
+        }
+      }
+      return event;
+    },
+  });
+}
+store.dispatch('auth/getLogins').then(() => {});
 store.dispatch('auth/getUser').then(() => {
+  if (VUE_SENTRY_ENABLED) {
+    if (
+      store &&
+      store.state &&
+      store.state.auth &&
+      store.state.auth.user &&
+      store.state.auth.user.id &&
+      store.state.auth.user.name &&
+      store.state.auth.user.email &&
+      store.state.auth.authenticated
+    ) {
+      Sentry.setUser({
+        id: store.state.auth.user.id,
+        username: store.state.auth.user.name,
+        email: store.state.auth.user.email,
+      });
+    } else {
+      Sentry.setUser(null);
+    }
+  }
   app
     .use(store)
     .use(router)
@@ -58,6 +115,4 @@ store.dispatch('auth/getUser').then(() => {
   }
 
   app.mount('#app');
-
-  store.dispatch('auth/getLogins').then(() => {});
 });

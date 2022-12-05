@@ -41,6 +41,10 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             $this->sendEmail($e);
+
+            if (app()->bound('sentry') && config('services.sentry.enabled')) {
+                app('sentry')->captureException($e);
+            }
         });
     }
 

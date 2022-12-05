@@ -7,7 +7,7 @@ frontend-core:
 
 # Add 'frontend` label to any change to *.js files as long as the `app.js` hasn't changed
 frontend:
-  - any: ['resources/js/**/*.js','resources/css/**/*.css']
+  - any: ['resources/js/**/*.js', 'resources/css/**/*.css']
     all: ['!resources/js/app.js']
 
 backend:
@@ -26,7 +26,7 @@ controllers:
   - any: ['app/Http/Controllers/**/*.php']
 
 app-middleware:
-  - any: ['app/Http/Middleware/**/*.php','app/Http/Kernel.php']
+  - any: ['app/Http/Middleware/**/*.php', 'app/Http/Kernel.php']
 
 commands-and-crons:
   - any: ['app/Console/**/*.php']
@@ -38,7 +38,7 @@ app-resource-collections:
   - any: ['app/Http/Resources/**/*.php']
 
 config:
-  - any: ['config/**/*.php','.env.example']
+  - any: ['config/**/*.php', '.env.example']
 
 database:
   - any: ['database/**/*.php']
@@ -74,19 +74,31 @@ workflow:
   - any: ['.github/**/*.*']
 
 build:
-  - any: ['*.js','*.yml','*.json','*.ts','*.xml','*.travis']
+  - any: ['*.js', '*.yml', '*.json', '*.ts', '*.xml', '*.travis']
 
 linting:
-  - any: ['.browserslistrc','.eslintrc.js','.editorconfig','.prettierignore','prettierrc.json']
+  - any:
+      [
+        '.browserslistrc',
+        '.eslintrc.js',
+        '.editorconfig',
+        '.prettierignore',
+        'prettierrc.json',
+      ]
 
 documentation:
-  - any: ['*.md','LICENSE','.example']
+  - any: ['*.md', 'LICENSE', '.example']
 
 tailwindcss:
-  - any: ['tailwindcss-perspective.js','tailwind.config.js','resources/css/**/*.css']
+  - any:
+      [
+        'tailwindcss-perspective.js',
+        'tailwind.config.js',
+        'resources/css/**/*.css',
+      ]
 
 vite:
-  - any: ['vite.config.ts','tsconfig.vite-config.json','tsconfig.json']
+  - any: ['vite.config.ts', 'tsconfig.vite-config.json', 'tsconfig.json']
 
 vue-components:
   - any: ['resources/js/components/**/*.vue']

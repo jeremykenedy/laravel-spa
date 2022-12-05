@@ -51,7 +51,8 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 - [Permissions Management](https://github.com/jeremykenedy/laravel-roles)
 - [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/v/next/)
 - [Social Authentication with Facebook, Twitter, Instagram, GitHub, TikTok, Google, YouTube, Microsoft, Twitch, and Apple](https://laravel.com/docs/9.x/socialite)
-
+- [Optional Sentry.io Laravel Monitoring](https://docs.sentry.io/platforms/php/guides/laravel/)
+- [Optional Sentry.io VueJs Monitoring](https://docs.sentry.io/platforms/javascript/guides/vue/)
 
 ## Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
