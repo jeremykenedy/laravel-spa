@@ -9,34 +9,34 @@ trait AppSettingsTrait
     /**
      * Process the settings for additional app needs.
      *
-     * @param  \App\Models\Setting $setting
+     * @param  \App\Models\Setting  $setting
      * @return \App\Models\Setting
      */
     public function processSettingForAdditionalAppChanges(Setting $setting)
     {
-        if($setting->key == 'enableSentryMonitoring') {
+        if ($setting->key == 'enableSentryMonitoring') {
             $this->setEnv('SENTRY_IO_ENABLED', $setting->val, config('services.sentry.enabled'));
-            putenv("SENTRY_IO_ENABLED=".$setting->val);
-            config([ 'services.sentry.enabled' => $setting->val ]);
+            putenv('SENTRY_IO_ENABLED='.$setting->val);
+            config(['services.sentry.enabled' => $setting->val]);
         }
-        if($setting->key == 'sentryIoDSN') {
+        if ($setting->key == 'sentryIoDSN') {
             $this->setEnv('SENTRY_LARAVEL_DSN', $setting->val, config('sentry.dsn'));
-            putenv("SENTRY_LARAVEL_DSN=".$setting->val);
-            config([ 'sentry.dsn' => $setting->val ]);
+            putenv('SENTRY_LARAVEL_DSN='.$setting->val);
+            config(['sentry.dsn' => $setting->val]);
         }
-        if($setting->key == 'enableSentryMonitoringFeedbakForm') {
+        if ($setting->key == 'enableSentryMonitoringFeedbakForm') {
             $this->setEnv('SENTRY_IO_USER_FEEDBACK_ENABLED', $setting->val, config('services.sentry.feedback-enabled'));
-            putenv("SENTRY_IO_USER_FEEDBACK_ENABLED=".$setting->val);
-            config([ 'services.sentry.feedback-enabled' => $setting->val ]);
+            putenv('SENTRY_IO_USER_FEEDBACK_ENABLED='.$setting->val);
+            config(['services.sentry.feedback-enabled' => $setting->val]);
         }
     }
 
     /**
-     * Set .env variables directly to the file
+     * Set .env variables directly to the file.
      *
-     * @param string $key
-     * @param string|null $value
-     * @param string|null $configed
+     * @param  string  $key
+     * @param  string|null  $value
+     * @param  string|null  $configed
      */
     public function setEnv(string $key, $value, $configed = null)
     {
@@ -51,7 +51,7 @@ trait AppSettingsTrait
         ));
 
         if (file_exists(\App::getCachedConfigPath())) {
-            \Artisan::call("config:cache");
+            \Artisan::call('config:cache');
         }
     }
 }
