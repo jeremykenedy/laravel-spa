@@ -7,7 +7,6 @@
             class="r-2 flex h-20 w-20 w-0 flex-1 justify-start text-indigo-400 dark:text-indigo-200"
           />
         </div>
-
         <h2 class="text-lg font-semibold text-indigo-600 dark:text-gray-100">
           Vue Tailwind CSS
         </h2>

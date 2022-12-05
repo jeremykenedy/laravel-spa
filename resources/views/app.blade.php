@@ -21,6 +21,10 @@
         <div id="app"  v-cloak></div>
         <script> const GA_ENABLED="{{ $ga_enabled }}"</script>
         <script> const GA_TAG="{{ $ga_key }}"</script>
+        <script> const APP_URL="{{ config('app.url') }}"</script>
+        <script> const SENTRY_ENABLED="{{ config('services.sentry.enabled') }}"</script>
+        <script> const SENTRY_FEEDBACK_ENABLED="{{ config('services.sentry.feedback-enabled') }}"</script>
+        <script> const SENTRY_DSN="{{ config('sentry.dsn') }}"</script>
         @vite(['resources/js/app.js'])
     </body>
 </html>

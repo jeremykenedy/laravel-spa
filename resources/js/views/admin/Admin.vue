@@ -41,94 +41,7 @@
     <div class="-mx-3 mb-20 flex flex-wrap">
       <div
         v-if="authenticated && roles && roles.superAdmin"
-        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
-      >
-        <router-link :to="{ name: 'users' }">
-          <div
-            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
-          >
-            <span
-              class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300"
-            />
-            <div>
-              <p
-                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
-              >
-                <span
-                  v-if="loading"
-                  class="fas fa-circle-notch fa-spin fa-xs"
-                />
-                <span v-if="!loading">
-                  {{ users.length }}
-                </span>
-              </p>
-              <p class="text-gray-600 dark:text-gray-400">Registered Users</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-
-      <div
-        v-if="authenticated && roles && roles.superAdmin"
-        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
-      >
-        <router-link :to="{ name: 'roles' }">
-          <div
-            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
-          >
-            <span
-              class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
-            />
-            <div>
-              <p
-                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
-              >
-                <span
-                  v-if="loading"
-                  class="fas fa-circle-notch fa-spin fa-xs"
-                />
-                <span v-if="!loading">
-                  {{ rolesData.length }}
-                </span>
-              </p>
-              <p class="text-gray-600 dark:text-gray-400">Roles</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-
-      <div
-        v-if="authenticated && roles && roles.superAdmin"
-        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
-      >
-        <router-link :to="{ name: 'permissions' }">
-          <div
-            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
-          >
-            <span
-              class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
-            />
-            <div>
-              <p
-                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
-              >
-                <span
-                  v-if="loading"
-                  class="fas fa-circle-notch fa-spin fa-xs"
-                />
-                <span v-if="!loading">
-                  {{ permissionsData.length }}
-                </span>
-              </p>
-              <p class="text-gray-600 dark:text-gray-400">Permissions</p>
-            </div>
-          </div>
-        </router-link>
-      </div>
-
-      <div
-        v-if="authenticated && roles && roles.superAdmin"
-        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/4"
+        class="w-full px-3 md:w-2/3 xl:w-2/3"
       >
         <router-link :to="{ name: 'app-settings' }">
           <div
@@ -266,6 +179,195 @@
                 </span>
               </p>
               <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 md:w-1/3 xl:w-1/3"
+      >
+        <router-link :to="{ name: 'users' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-user fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span v-if="!loading">
+                  {{ users.length }}
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Registered Users</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/2"
+      >
+        <router-link :to="{ name: 'app-settings' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fa-brands fa-google fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span
+                  v-if="!loading"
+                  :class="analyticsEnabled ? 'text-yellow-500' : ''"
+                >
+                  {{ analyticsEnabled ? 'Enabled' : 'Disabled' }}
+                  <div
+                    style="
+                      font-size: 0.25em;
+                      line-height: 1;
+                      margin-left: 2px;
+                      margin-top: -4px;
+                      position: absolute;
+                    "
+                  >
+                    {{ analyticsTag }}
+                  </div>
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Google Analytics</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/2"
+      >
+        <router-link :to="{ name: 'app-settings' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <svg
+              class="css-1mxa28m e10nushx4 float-left mr-1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 65 65"
+              width="60"
+              height="65"
+              style="margin-top: -1px; margin-right: 5px"
+            >
+              <path
+                d="M29,2.26a4.67,4.67,0,0,0-8,0L14.42,13.53A32.21,32.21,0,0,1,32.17,40.19H27.55A27.68,27.68,0,0,0,12.09,17.47L6,28a15.92,15.92,0,0,1,9.23,12.17H4.62A.76.76,0,0,1,4,39.06l2.94-5a10.74,10.74,0,0,0-3.36-1.9l-2.91,5a4.54,4.54,0,0,0,1.69,6.24A4.66,4.66,0,0,0,4.62,44H19.15a19.4,19.4,0,0,0-8-17.31l2.31-4A23.87,23.87,0,0,1,23.76,44H36.07a35.88,35.88,0,0,0-16.41-31.8l4.67-8a.77.77,0,0,1,1.05-.27c.53.29,20.29,34.77,20.66,35.17a.76.76,0,0,1-.68,1.13H40.6q.09,1.91,0,3.81h4.78A4.59,4.59,0,0,0,50,39.43a4.49,4.49,0,0,0-.62-2.28Z"
+                transform="translate(11, 11)"
+                :fill="user.theme_dark ? '#ffffff' : '#362d59'"
+              ></path>
+            </svg>
+
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span
+                  v-if="!loading"
+                  :class="sentryEnabled ? 'text-red-500' : ''"
+                >
+                  {{ sentryEnabled ? 'Enabled' : 'Disabled' }}
+                  <div
+                    style="
+                      font-size: 0.25em;
+                      line-height: 1;
+                      margin-left: 1px;
+                      margin-top: -4px;
+                      position: absolute;
+                    "
+                  >
+                    {{ sentryDSN }}
+                    {{ sentryDSN && sentryFormEnabled ? ' / ' : '' }}
+                    {{ sentryFormEnabled ? 'Feedback Enabled' : '' }}
+                  </div>
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">
+                Setry.io Monitoring
+              </p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/2"
+      >
+        <router-link :to="{ name: 'roles' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span v-if="!loading">
+                  {{ rolesData.length }}
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Roles</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+
+      <div
+        v-if="authenticated && roles && roles.superAdmin"
+        class="w-full px-3 sm:w-1/2 lg:w-1/2 xl:w-1/2"
+      >
+        <router-link :to="{ name: 'permissions' }">
+          <div
+            class="mb-6 flex w-full items-center rounded-lg border bg-white p-6 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+          >
+            <span
+              class="fas fa-shield-alt fa-fw fa-3x text-gray-700 dark:text-gray-300"
+            />
+            <div>
+              <p
+                class="text-3xl font-semibold text-gray-700 dark:text-gray-300"
+              >
+                <span
+                  v-if="loading"
+                  class="fas fa-circle-notch fa-spin fa-xs"
+                />
+                <span v-if="!loading">
+                  {{ permissionsData.length }}
+                </span>
+              </p>
+              <p class="text-gray-600 dark:text-gray-400">Permissions</p>
             </div>
           </div>
         </router-link>
@@ -426,6 +528,14 @@ export default {
       rolesData: [],
       permissionsData: [],
       authSettings: [],
+      analyticsData: [],
+      monitoringData: [],
+      GA_TAG: GA_TAG, // eslint-disable-line
+      GA_ENABLED: GA_ENABLED, // eslint-disable-line
+      APP_URL: APP_URL, // eslint-disable-line
+      SENTRY_DSN: SENTRY_DSN, // eslint-disable-line
+      SENTRY_ENABLED: SENTRY_ENABLED, // eslint-disable-line
+      SENTRY_FEEDBACK_ENABLED: SENTRY_FEEDBACK_ENABLED, // eslint-disable-line
       // buyersData: {
       //   type: 'line',
       //   data: {
@@ -532,16 +642,56 @@ export default {
       }
       return greeting;
     },
+    analyticsEnabled() {
+      const found = this.analyticsData.find(
+        (obj) => obj.key == 'enableGoogleAnalytics',
+      );
+      if (found && found.val && found.val == 1) {
+        return true;
+      }
+      return false;
+    },
+    analyticsTag() {
+      const found = this.analyticsData.find(
+        (obj) => obj.key == 'appGoogleAnalyticsKey',
+      );
+      if (found && found.val && found.val != '') {
+        return null;
+        // return found.val;
+      }
+      return 'MISSING TAG ID';
+    },
+    sentryEnabled() {
+      const found = this.monitoringData.find(
+        (obj) => obj.key == 'enableSentryMonitoring',
+      );
+      if (found && found.val && found.val == 1) {
+        return true;
+      }
+      return false;
+    },
+    sentryFormEnabled() {
+      const found = this.monitoringData.find(
+        (obj) => obj.key == 'enableSentryMonitoringFeedbakForm',
+      );
+      if (found && found.val && found.val == 1) {
+        return true;
+      }
+      return false;
+    },
+    sentryDSN() {
+      const found = this.monitoringData.find((obj) => obj.key == 'sentryIoDSN');
+      if (found && found.val && found.val != '') {
+        return null;
+      }
+      return 'MISSING DSN (URL)';
+    },
   },
-  watch: {},
-  created() {},
   mounted() {
     this.getDashboardData();
     // new Chart(document.getElementById('buyers-chart'), this.buyersData);
     // new Chart(document.getElementById('reviews-chart'), this.reviewsData);
   },
-  beforeUnmount() {},
-  updated() {},
   methods: {
     ...mapActions({
       popToast: 'toast/popToast',
@@ -555,6 +705,8 @@ export default {
           this.rolesData = data.roles;
           this.authSettings = data.authSettings;
           this.permissionsData = data.permissions;
+          this.analyticsData = data.analytics;
+          this.monitoringData = data.monitoring;
           this.dataReady = true;
           this.loading = false;
         })
@@ -585,7 +737,7 @@ export default {
 
 <style scoped>
 .fa-xs {
-  font-size: 0.5em !important;
+  font-size: 0.75em !important;
 }
 </style>
 <style lang="scss" scoped></style>

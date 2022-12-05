@@ -27,6 +27,10 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'sentry' => [
+        'enabled'           => env('SENTRY_IO_ENABLED', 0),
+        'feedback-enabled'  => env('SENTRY_IO_USER_FEEDBACK_ENABLED', 0),
+    ],
     'twitch' => [
         'enabled'       => env('TWITCH_ENABLED', false),
         'client_id'     => env('TWITCH_KEY'),

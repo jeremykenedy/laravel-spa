@@ -51,7 +51,8 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 - [Permissions Management](https://github.com/jeremykenedy/laravel-roles)
 - [Google Analytics (optional)](https://matteo-gabriele.gitbook.io/vue-gtag/v/next/)
 - [Social Authentication with Facebook, Twitter, Instagram, GitHub, TikTok, Google, YouTube, Microsoft, Twitch, and Apple](https://laravel.com/docs/9.x/socialite)
-
+- [Optional Sentry.io Laravel Monitoring](https://docs.sentry.io/platforms/php/guides/laravel/)
+- [Optional Sentry.io VueJs Monitoring](https://docs.sentry.io/platforms/javascript/guides/vue/)
 
 ## Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
@@ -60,7 +61,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
     * ```create database laravelSpa;```
     * ```\q```
 3. From the projects root run `cp .env.example .env`
-4. Configure your `.env` file (IMPORTANT)
+4. Configure your `.env` file (VERY IMPORTANT)
 5. Run `composer install` from the projects root folder
 6. From the projects root folder run `sudo chmod -R 755 ../laravel-spa`
 7. From the projects root folder run `php artisan key:generate`
@@ -70,11 +71,6 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 11. Compile the front end assets with [npm steps](#using-npm) or [yarn steps](#using-yarn).
 
 #### Build the Front End Assets with ViteJs
-##### IMPORTANT NOTE: If you are running this project in development mode you will need to update the following lines in [vite.config.ts](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts):
-* [Line 60](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts#L60) 
-* [Line 63](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts#L63)
-* [Line 66](https://github.com/jeremykenedy/laravel-spa/blob/master/vite.config.ts#L66)
-
 ##### Using NPM:
 1. From the projects root folder run `npm install`
 2. From the projects root folder run `npm run dev` or `npm run build`
@@ -161,12 +157,18 @@ LaravelSpa
 ├── .eslintrc.js
 ├── .gitattributes
 ├── .github
+│   ├── FUNDING.yml
+│   ├── labeler.yml
 │   └── workflows
 │       ├── changelog.yml
 │       ├── codeql.yml
+│       ├── create-release.yml
 │       ├── dependency-review.yml
+│       ├── gitguardian.yml
 │       ├── greetings.yml
+│       ├── labeler.yml
 │       ├── laravel.yml
+│       ├── manual.yml
 │       ├── node.js.yml
 │       ├── php.yml
 │       ├── release.yml
@@ -176,6 +178,7 @@ LaravelSpa
 ├── .prettierignore
 ├── .styleci.yml
 ├── .travis.yml
+├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
 ├── app
@@ -232,6 +235,8 @@ LaravelSpa
 │   │       └── Users
 │   │           ├── RoleResource.php
 │   │           └── RolesCollection.php
+│   ├── Jobs
+│   │   └── PersonalDataExportJob.php
 │   ├── Mail
 │   │   └── ExceptionOccured.php
 │   ├── Models
@@ -241,6 +246,7 @@ LaravelSpa
 │   │   ├── SocialiteProvider.php
 │   │   └── User.php
 │   ├── Notifications
+│   │   ├── PersonalDataExportedNotification.php
 │   │   ├── ResetPasswordNotification.php
 │   │   └── VerifyEmailNotification.php
 │   ├── Providers
@@ -250,6 +256,9 @@ LaravelSpa
 │   │   ├── EventServiceProvider.php
 │   │   ├── RouteServiceProvider.php
 │   │   └── ViewComposerServiceProvider.php
+│   ├── Traits
+│   │   ├── AppSettingsTrait.php
+│   │   └── SocialiteProvidersTrait.php
 │   └── View
 │       └── Composers
 │           ├── GaComposer.php
@@ -276,9 +285,11 @@ LaravelSpa
 │   ├── hashing.php
 │   ├── logging.php
 │   ├── mail.php
+│   ├── personal-data-export.php
 │   ├── queue.php
 │   ├── roles.php
 │   ├── sanctum.php
+│   ├── sentry.php
 │   ├── services.php
 │   ├── session.php
 │   ├── users.php
@@ -312,6 +323,7 @@ LaravelSpa
 │       └── UsersTableSeeder.php
 ├── env.d.ts
 ├── license.svg
+├── package-lock.json
 ├── package.json
 ├── phpunit.xml
 ├── postcss.config.js
@@ -322,11 +334,11 @@ LaravelSpa
 │   ├── build
 │   │   ├── assets
 │   │   │   ├── 404.508db666.png
-│   │   │   ├── app-legacy.bd153b9f.js
+│   │   │   ├── app-legacy.75020f52.js
 │   │   │   ├── app-legacy.c0ed8668.js
-│   │   │   ├── app.092af6b3.css
-│   │   │   ├── app.32dd3c38.js
-│   │   │   ├── app.a70dc797.css
+│   │   │   ├── app.22138643.css
+│   │   │   ├── app.37f09a6f.js
+│   │   │   ├── app.55d6347f.css
 │   │   │   ├── fa-brands-400.b1d1c1b0.ttf
 │   │   │   ├── fa-brands-400.c61287c2.woff2
 │   │   │   ├── fa-regular-400.5da313b0.woff2
@@ -336,9 +348,9 @@ LaravelSpa
 │   │   │   ├── fa-v4compatibility.2ddb3b41.ttf
 │   │   │   ├── fa-v4compatibility.f46715c9.woff2
 │   │   │   ├── plugs.12bd3189.png
-│   │   │   ├── polyfills-legacy.06fde1ca.js
-│   │   │   ├── vendor-legacy.cb3b591e.js
-│   │   │   └── vendor.fc255866.js
+│   │   │   ├── polyfills-legacy.b89e66ae.js
+│   │   │   ├── vendor-legacy.db834e54.js
+│   │   │   └── vendor.8937e1a8.js
 │   │   ├── manifest.json
 │   │   ├── webUpdateNoticeInjectScript.js
 │   │   ├── webUpdateNoticeInjectStyle.css
@@ -381,6 +393,11 @@ LaravelSpa
 │   │   │   ├── PerPage.vue
 │   │   │   ├── Success.vue
 │   │   │   ├── VerifyNotice.vue
+│   │   │   ├── account
+│   │   │   │   ├── AccountAdministration.vue
+│   │   │   │   ├── AccountAuthentication.vue
+│   │   │   │   ├── AccountData.vue
+│   │   │   │   └── AccountPrivacy.vue
 │   │   │   ├── admin
 │   │   │   │   ├── AdminNavBar.vue
 │   │   │   │   ├── AdminSidebar.vue
@@ -392,15 +409,22 @@ LaravelSpa
 │   │   │   │   └── SocialiteLogins.vue
 │   │   │   ├── common
 │   │   │   │   ├── AppButton.vue
+│   │   │   │   ├── AppDeleteModal.vue
 │   │   │   │   ├── AppModal.vue
 │   │   │   │   ├── AppSwitch.vue
 │   │   │   │   ├── AppTable.vue
 │   │   │   │   └── AppToast.vue
+│   │   │   ├── form
+│   │   │   │   ├── AppSettingTextInput.vue
+│   │   │   │   └── AppSettingToggle.vue
+│   │   │   ├── loaders
+│   │   │   │   └── AnimatedTableLoader.vue
 │   │   │   ├── roles
 │   │   │   │   ├── PermissionFormModal.vue
 │   │   │   │   ├── RoleFormModal.vue
 │   │   │   │   └── RolesBadges.vue
 │   │   │   └── users
+│   │   │       ├── UserDownloadData.vue
 │   │   │       ├── UserForm.vue
 │   │   │       └── UserFormModal.vue
 │   │   ├── layouts
@@ -442,23 +466,32 @@ LaravelSpa
 │   │           ├── Home.vue
 │   │           ├── Login.vue
 │   │           ├── NotFound.vue
-│   │           ├── Password.vue
-│   │           ├── Profile.vue
 │   │           ├── Register.vue
 │   │           ├── ResetPassword.vue
-│   │           ├── Settings.vue
-│   │           └── VerifyEmail.vue
+│   │           ├── Terms.vue
+│   │           ├── VerifyEmail.vue
+│   │           ├── auth
+│   │           └── settings
+│   │               ├── Account.vue
+│   │               ├── Password.vue
+│   │               ├── Profile.vue
+│   │               └── Settings.vue
 │   ├── lang
 │   │   └── en
 │   │       ├── auth.php
 │   │       ├── pagination.php
 │   │       ├── passwords.php
+│   │       ├── personal-data-exports.php
 │   │       └── validation.php
 │   └── views
 │       ├── app.blade.php
 │       ├── emails
 │       │   └── exception.blade.php
 │       ├── errors
+│       │   ├── 401.blade.php
+│       │   ├── 403.blade.php
+│       │   ├── 500.blade.php
+│       │   ├── 503.blade.php
 │       │   └── layout.blade.php
 │       ├── socialite
 │       │   ├── callback.blade.php
@@ -476,7 +509,8 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-61 directories, 260 files
+68 directories, 290 files
+
 ```
 
 * Tree command can be installed using brew: `brew install tree`

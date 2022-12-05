@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
+use App\Traits\AppSettingsTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use QCod\Settings\Setting\Setting;
 
 class AppSettingsController extends Controller
 {
+    use AppSettingsTrait;
+
     public function __construct()
     {
         $this->middleware('auth:sanctum');
@@ -30,9 +33,10 @@ class AppSettingsController extends Controller
         $settings = Setting::all();
 
         return response()->json([
-            'authSettings'      => $settings->where('group', 'auth')->values(),
-            'analyticsSettings' => $settings->where('group', 'analytics')->values(),
-            'generalSettings'   => $settings->where('group', 'general')->values(),
+            'authSettings'          => $settings->where('group', 'auth')->values(),
+            'analyticsSettings'     => $settings->where('group', 'analytics')->values(),
+            'generalSettings'       => $settings->where('group', 'general')->values(),
+            'monitoringSettings'    => $settings->where('group', 'monitoring')->values(),
         ]);
     }
 
@@ -47,6 +51,8 @@ class AppSettingsController extends Controller
     {
         $setting->val = $request->val;
         $setting->save();
+
+        $this->processSettingForAdditionalAppChanges($setting);
 
         return response()->json([
             'data'  => $setting,
