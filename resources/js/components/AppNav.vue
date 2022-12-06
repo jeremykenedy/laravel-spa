@@ -109,7 +109,7 @@
             @click="toggleTheme()"
           >
             <Switch
-              v-model="user.theme_dark"
+              :default-checked="user.theme_dark"
               :class="user.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
               class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
             >
@@ -244,7 +244,7 @@
           >
             <AppButton
               primary
-              text="Sign up"
+              text="Sign Up"
               class="ml-8"
               :class="[isActive && 'opacity-60']"
             />
@@ -409,7 +409,7 @@
                 @click="toggleTheme()"
               >
                 <Switch
-                  v-model="user.theme_dark"
+                  :default-checked="user.theme_dark"
                   :class="user.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
                   class="relative inline-flex h-[18px] w-[30px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
                 >
@@ -434,8 +434,8 @@
             <div v-if="!authenticated">
               <router-link v-slot="{ isActive }" :to="{ name: 'register' }">
                 <AppButton
+                  primary
                   text="Sign up"
-                  type="button"
                   class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                   :class="[isActive && 'opacity-60']"
                   @click="close"
@@ -463,9 +463,10 @@
             </div>
             <div v-if="authenticated">
               <AppButton
+                primary
                 text="Logout"
                 type="button"
-                class="flex w-full items-center justify-center rounded-md border border-transparent bg-gray-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-gray-800"
+                class="flex w-full items-center justify-center px-4 py-2"
                 @click.prevent="logout(), closeDrop()"
               >
                 <template #text>
@@ -568,7 +569,7 @@ export default {
       this.errors = null;
       this.success = '';
       try {
-        await this.updateTheme({ theme_dark: this.user.theme_dark }).then(
+        await this.updateTheme({ theme_dark: !this.user.theme_dark }).then(
           (response) => {
             if (
               response &&

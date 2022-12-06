@@ -32,6 +32,7 @@ export default {
     success: { type: Boolean, default: false },
     warning: { type: Boolean, default: false },
     danger: { type: Boolean, default: false },
+    info: { type: Boolean, default: false },
   },
   setup() {
     return {};
@@ -73,8 +74,11 @@ export default {
       } else if (this.secondary) {
         t = 'slate';
         buttonClasses = buttonClasses + ' text-white';
+      } else if (this.info) {
+        t = 'blue';
+        buttonClasses = buttonClasses + ' text-white';
       } else if (this.accent) {
-        t = 'teal';
+        t = 'gray';
         buttonClasses = buttonClasses + ' text-white';
       } else if (this.success) {
         t = 'green';
@@ -83,7 +87,9 @@ export default {
         t = 'yellow';
         buttonClasses = buttonClasses + ' text-white';
       } else {
-        // buttonClasses = buttonClasses + ' text-gray-700 hover:text-gray-900';
+        buttonClasses =
+          buttonClasses +
+          ' text-gray-700 hover:text-gray-900 hover:bg-gray-500 hover:text-gray-100';
       }
       if (this.danger) {
         t = 'red';

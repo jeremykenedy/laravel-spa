@@ -23,6 +23,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
         "league/flysystem-aws-s3-v3": "^3.10",
+        "mtownsend/laravel-make-trait": "^1.4",
         "nesbot/carbon": "^2.63",
         "qcod/laravel-settings": "^1.1",
         "sentry/sentry-laravel": "^3.1",
