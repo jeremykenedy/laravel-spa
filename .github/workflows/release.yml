@@ -1,4 +1,7 @@
 name: Generate Release Notes
+on:
+  release:
+    types: [created, edited]
 
 steps:
   - name: Checkout
