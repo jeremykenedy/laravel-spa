@@ -79,10 +79,10 @@ export default {
     },
   },
   methods: {
-    closeModal: function () {
+    closeModal() {
       this.$emit('closeModal');
     },
-    confirmModal: function () {
+    confirmModal() {
       this.$emit('confirmModal');
     },
   },

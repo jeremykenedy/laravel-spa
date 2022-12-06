@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import router from '@/router';
 import toast from '@store/modules/toast';
+import router from '@/router';
 
 export default {
   namespaced: true,
@@ -30,6 +30,8 @@ export default {
         microsoft: false,
         tiktok: false,
       },
+      currentUserToken: null,
+      impersonatorToken: null,
     };
   },
   getters: {
@@ -56,6 +58,12 @@ export default {
     logins(state) {
       return state.logins;
     },
+    currentUserToken(state) {
+      return state.currentUserToken;
+    },
+    impersonatorToken(state) {
+      return state.impersonatorToken;
+    },
   },
   mutations: {
     SET_AUTHENTICATION(state, value = false) {
@@ -64,7 +72,7 @@ export default {
     SET_USER(state, payload = null) {
       state.user = payload;
       if (payload && payload.roles && payload.roles.length > 0) {
-        payload.roles.forEach(function (role, index) {
+        payload.roles.forEach((role, index) => {
           if (role.name == 'Super Admin') {
             state.roles.superAdmin = true;
           }
@@ -102,6 +110,10 @@ export default {
       state.token = token;
       Cookies.set('token', token, { expires: remember ? 365 : null });
     },
+    SET_WORKING_TOKENS(state, payload) {
+      state.currentUserToken = payload.currentUserToken;
+      state.impersonatorToken = payload.impersonatorToken;
+    },
     SET_LOGINS(state, payload = null) {
       if (payload) {
         state.logins = payload;
@@ -119,7 +131,10 @@ export default {
       };
       document.documentElement.classList.remove('dark');
       state.token = null;
+      state.currentUserToken = null;
+      state.impersonatorToken = null;
       Cookies.remove('token');
+      window.sessionStorage.clear();
     },
   },
   actions: {
@@ -128,9 +143,7 @@ export default {
         await axios.get('/sanctum/csrf-cookie');
         await axios
           .post('/api/login', payload)
-          .then((res) => {
-            return dispatch('getUser');
-          })
+          .then((res) => dispatch('getUser'))
           .catch((err) => {
             throw err.response;
           });
@@ -254,7 +267,7 @@ export default {
     },
     async verifyEmail({ dispatch }, payload) {
       const res = await axios.post(
-        '/api/verify-email/' + payload.id + '/' + payload.hash,
+        `/api/verify-email/${payload.id}/${payload.hash}`,
       );
       if (res.status != 200) throw res;
       dispatch('getUser');
@@ -324,7 +337,7 @@ export default {
     },
     async revokeProvider({ commit, dispatch }, payload) {
       return await axios
-        .post('/api/oauth-revoke/' + payload.id)
+        .post(`/api/oauth-revoke/${payload.id}`)
         .then((res) => {
           if (
             res.status &&
@@ -337,18 +350,16 @@ export default {
           ) {
             commit('SET_USER', res.data.user);
             return res;
-          } else {
-            throw res;
           }
+          throw res;
         })
         .catch((err) => {
           throw err.response;
         });
     },
-
     async deleteAccount({ commit, dispatch }, payload) {
       return await axios
-        .delete('/api/account/' + payload.id + '/delete')
+        .delete(`/api/account/${payload.id}/delete`)
         .then((res) => {
           if (
             res.status &&
@@ -362,11 +373,98 @@ export default {
             router.push({ name: 'home' });
 
             return res;
+          }
+          throw res;
+        })
+        .catch((err) => {
+          throw err.response;
+        });
+    },
+    async impersonateUser({ commit, dispatch }, payload) {
+      await axios
+        .get(`/api/impersonate/take/${payload.user.id}`)
+        .then((res) => {
+          if (res && res.data && res.data.data && res.data.data.token) {
+            commit('LOGOUT');
+            commit('SET_WORKING_TOKENS', {
+              currentUserToken: res.data.data.token,
+              impersonatorToken: res.data.data.impersonatorToken,
+            });
+            dispatch('getUserByToken', { token: res.data.data.token });
+            router.push({ name: 'home' });
+            dispatch(
+              'toast/popToast',
+              {
+                message: `Stealh mode activated. You are now acting as ${payload.user.name}`,
+                timer: 5000,
+                icon: 'success',
+              },
+              { root: true },
+            );
           } else {
-            throw res;
+            dispatch(
+              'toast/popToast',
+              {
+                message: 'An error occurred, you are still yourself.',
+                timer: 5000,
+                icon: 'error',
+              },
+              { root: true },
+            );
           }
         })
         .catch((err) => {
+          dispatch(
+            'toast/popToast',
+            {
+              message: 'An error occurred, you are still yourself.',
+              timer: 5000,
+              icon: 'error',
+            },
+            { root: true },
+          );
+          throw err.response;
+        });
+    },
+    async leaveImpersonatingUser({ commit, dispatch }, payload) {
+      await axios
+        .get(`/api/impersonate/leave`)
+        .then((res) => {
+          if (res && res.data && res.data.data && res.data.data.token) {
+            commit('LOGOUT');
+            dispatch('getUserByToken', { token: res.data.data.token });
+            router.push({ name: 'home' });
+            dispatch(
+              'toast/popToast',
+              {
+                message: `You wake up and realize it was all dream!`,
+                timer: 5000,
+                icon: 'success',
+              },
+              { root: true },
+            );
+          } else {
+            dispatch(
+              'toast/popToast',
+              {
+                message: 'An error occurred, you are still are not yourself!',
+                timer: 5000,
+                icon: 'error',
+              },
+              { root: true },
+            );
+          }
+        })
+        .catch((err) => {
+          dispatch(
+            'toast/popToast',
+            {
+              message: 'An error occurred, you are still yourself.',
+              timer: 5000,
+              icon: 'error',
+            },
+            { root: true },
+          );
           throw err.response;
         });
     },

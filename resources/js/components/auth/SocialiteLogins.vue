@@ -121,20 +121,18 @@ export default {
     }),
     track,
     async socialiteLogin(provider) {
-      this.track('Social Login Provider Clicked: ' + provider);
+      this.track(`Social Login Provider Clicked: ${provider}`);
       this.loading = true;
       try {
         await axios.get('/sanctum/csrf-cookie').then((response) => {});
-        const url = await this.fetchOauthUrl({ provider: provider }).then(
-          (response) => {
-            this.loading = false;
-            return response;
-          },
-        );
+        const url = await this.fetchOauthUrl({ provider }).then((response) => {
+          this.loading = false;
+          return response;
+        });
         this.window = this.openWindow(url, this.authWindowTitle);
       } catch (e) {
         this.track(
-          'Social Login Provider Failed to Login: ' + provider,
+          `Social Login Provider Failed to Login: ${provider}`,
           'error',
           'auth-error',
         );
@@ -153,7 +151,7 @@ export default {
         return;
       }
       self.popToast({
-        message: `Successfully logged in`,
+        message: 'Successfully logged in',
         timer: 2500,
         icon: 'success',
       });
@@ -164,7 +162,7 @@ export default {
       );
       await self.saveToken({ token: e.data.token }).then((response) => {
         self.getUserByToken({ token: e.data.token }).then(() => {
-          setTimeout(function () {
+          setTimeout(() => {
             self.$router.push({ name: 'dashboard' });
           }, 1);
         });
@@ -175,21 +173,24 @@ export default {
         options = url;
         url = '';
       }
-      options = { url, title, width: 600, height: 720, ...options };
+      options = {
+        url,
+        title,
+        width: 600,
+        height: 720,
+        ...options,
+      };
       const dualScreenLeft =
         window.screenLeft !== undefined
           ? window.screenLeft
           : window.screen.left;
       const dualScreenTop =
         window.screenTop !== undefined ? window.screenTop : window.screen.top;
-      const width =
-        window.innerWidth ||
-        document.documentElement.clientWidth ||
-        window.screen.width;
+      const width = window.innerWidth || document.documentElement.clientWidth;
+      window.screen.width;
       const height =
-        window.innerHeight ||
-        document.documentElement.clientHeight ||
-        window.screen.height;
+        window.innerHeight || document.documentElement.clientHeight;
+      window.screen.height;
 
       options.left = width / 2 - options.width / 2 + dualScreenLeft;
       options.top = height / 2 - options.height / 2 + dualScreenTop;

@@ -39,7 +39,7 @@ export default {
       if (currentYear == startYear) {
         return currentYear;
       }
-      return startYear + '-' + currentYear;
+      return `${startYear}-${currentYear}`;
     },
   },
   watch: {},

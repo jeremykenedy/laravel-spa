@@ -111,13 +111,13 @@ export default {
     lockJiggled: { type: Boolean, default: false },
     rolesData: {
       type: Array,
-      default: function () {
+      default() {
         return [];
       },
     },
     pagination: {
       type: Object,
-      default: function () {
+      default() {
         return {};
       },
     },

@@ -205,7 +205,7 @@ export default {
         }
         if (e.status === 401) {
           this.popToast({
-            message: `Invalid Email or Password`,
+            message: 'Invalid Email or Password',
             timer: 5000,
             icon: 'error',
           });

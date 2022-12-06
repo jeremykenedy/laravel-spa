@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     updateSetting(val) {
-      const setting = this.setting;
+      const { setting } = this;
       this.$emit('updateSetting', { val, setting });
     },
   },

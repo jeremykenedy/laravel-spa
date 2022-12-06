@@ -69,6 +69,7 @@
       @delete-user="deleteUser"
       @edit-user="editUser"
       @send-user-verification="sendUserVerification"
+      @impersonate-user-triggered="impersonateUserTriggered"
     />
 
     <UserFormModal
@@ -141,6 +142,7 @@ export default {
     ...mapActions({
       popToast: 'toast/popToast',
       verifyResend: 'auth/verifyResend',
+      impersonateUser: 'auth/impersonateUser',
     }),
     perPageChanged(value) {
       this.perPage = parseInt(value);
@@ -163,7 +165,7 @@ export default {
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Users`,
+            message: 'Error Getting Users',
             timer: 5000,
             icon: 'error',
           });
@@ -180,14 +182,14 @@ export default {
         .then(({ data }) => {
           this.users = this.users.map((u) => (u.id !== data.id ? u : data));
           this.popToast({
-            message: `Successfully Un-Verified!`,
+            message: 'Successfully Un-Verified!',
             timer: 5000,
             icon: 'warning',
           });
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Un-Verifying User`,
+            message: 'Error Un-Verifying User',
             timer: 5000,
             icon: 'error',
           });
@@ -203,14 +205,14 @@ export default {
         .then(({ data }) => {
           this.users = this.users.map((u) => (u.id !== data.id ? u : data));
           this.popToast({
-            message: `Successfully Verified!`,
+            message: 'Successfully Verified!',
             timer: 5000,
             icon: 'success',
           });
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Verifying User`,
+            message: 'Error Verifying User',
             timer: 5000,
             icon: 'error',
           });
@@ -219,18 +221,18 @@ export default {
     },
     async deleteUser(value) {
       await axios
-        .delete('/api/users/delete/user/' + value.id)
+        .delete(`/api/users/delete/user/${value.id}`)
         .then(({ data }) => {
           this.users = this.users.filter((u) => u.id != data.id);
           this.popToast({
-            message: `Successfully Deleted!`,
+            message: 'Successfully Deleted!',
             timer: 5000,
             icon: 'success',
           });
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Deleting User`,
+            message: 'Error Deleting User',
             timer: 5000,
             icon: 'error',
           });
@@ -240,14 +242,14 @@ export default {
     async getRoles() {
       this.rolesDataReady = false;
       await axios
-        .get(`/api/roles`)
+        .get('/api/roles')
         .then(({ data }) => {
           this.availableRoles = data.roles;
           this.rolesDataReady = true;
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Roles`,
+            message: 'Error Getting Roles',
             timer: 5000,
             icon: 'error',
           });
@@ -255,7 +257,7 @@ export default {
         });
     },
     triggerCreateUser() {
-      this.userFormKey = this.userFormKey + 1;
+      this.userFormKey += 1;
       this.creatingNewUser = true;
       this.showCreateUserForm = true;
       this.userEditing = null;
@@ -278,7 +280,7 @@ export default {
     jiggleTheLock() {
       const self = this;
       self.lockJigled = true;
-      setTimeout(function () {
+      setTimeout(() => {
         self.lockJigled = false;
       }, 1);
     },
@@ -288,7 +290,7 @@ export default {
       this.showCreateUserForm = false;
     },
     editUser(user) {
-      this.userFormKey = this.userFormKey + 1;
+      this.userFormKey += 1;
       this.userEditing = user;
       this.creatingNewUser = false;
       this.showCreateUserForm = true;
@@ -305,6 +307,19 @@ export default {
       } catch (e) {
         this.popToast({
           message: 'An errored, please try again later.',
+          timer: 5000,
+          icon: 'error',
+        });
+      }
+    },
+    async impersonateUserTriggered(user) {
+      try {
+        await this.impersonateUser({ user }).then((response) => {
+          //
+        });
+      } catch (e) {
+        this.popToast({
+          message: 'Unable To Impersonate User',
           timer: 5000,
           icon: 'error',
         });

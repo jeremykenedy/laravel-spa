@@ -45,7 +45,12 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 ##### Features:
 - Users Area
 - Admin Area
+- About Page
+- Terms Page
 - Users Managemenet
+- User Impersonation
+- User Data Download
+- User Account Self Deletion.
 - Manage Social Media Logins through GUI
 - [Roles Management](https://github.com/jeremykenedy/laravel-roles)
 - [Permissions Management](https://github.com/jeremykenedy/laravel-roles)
@@ -200,6 +205,7 @@ LaravelSpa
 │   │   │   │   └── VerificationController.php
 │   │   │   ├── Controller.php
 │   │   │   ├── DashboardController.php
+│   │   │   ├── ImpersonateController.php
 │   │   │   ├── PermissionsController.php
 │   │   │   ├── ProfileController.php
 │   │   │   ├── RolesController.php
@@ -227,6 +233,7 @@ LaravelSpa
 │   │   │   └── Users
 │   │   │       ├── CreateUserRequest.php
 │   │   │       ├── GetUserRolesRequest.php
+│   │   │       ├── ImpersonateUserRequest.php
 │   │   │       └── UpdateUserRequest.php
 │   │   └── Resources
 │   │       ├── Permissions
@@ -240,6 +247,7 @@ LaravelSpa
 │   ├── Mail
 │   │   └── ExceptionOccured.php
 │   ├── Models
+│   │   ├── Impersonation.php
 │   │   ├── Permission.php
 │   │   ├── Role.php
 │   │   ├── Setting.php
@@ -313,7 +321,8 @@ LaravelSpa
 │   │   ├── 2021_04_26_093603_create_jobs_table.php
 │   │   ├── 2022_09_05_192055_update_users_table.php
 │   │   ├── 2022_11_02_051027_update_settings_table.php
-│   │   └── 2022_11_28_073632_create_socialite_providers_table.php
+│   │   ├── 2022_11_28_073632_create_socialite_providers_table.php
+│   │   └── 2022_12_06_061947_create_impersonations_table.php
 │   └── seeders
 │       ├── AppSettingsSeeder.php
 │       ├── ConnectRelationshipsSeeder.php
@@ -334,11 +343,11 @@ LaravelSpa
 │   ├── build
 │   │   ├── assets
 │   │   │   ├── 404.508db666.png
-│   │   │   ├── app-legacy.75020f52.js
+│   │   │   ├── app-legacy.2a30880d.js
 │   │   │   ├── app-legacy.c0ed8668.js
-│   │   │   ├── app.22138643.css
-│   │   │   ├── app.37f09a6f.js
-│   │   │   ├── app.55d6347f.css
+│   │   │   ├── app.38340d06.css
+│   │   │   ├── app.3bc0086d.js
+│   │   │   ├── app.e2c78f8e.css
 │   │   │   ├── fa-brands-400.b1d1c1b0.ttf
 │   │   │   ├── fa-brands-400.c61287c2.woff2
 │   │   │   ├── fa-regular-400.5da313b0.woff2
@@ -349,8 +358,8 @@ LaravelSpa
 │   │   │   ├── fa-v4compatibility.f46715c9.woff2
 │   │   │   ├── plugs.12bd3189.png
 │   │   │   ├── polyfills-legacy.b89e66ae.js
-│   │   │   ├── vendor-legacy.db834e54.js
-│   │   │   └── vendor.8937e1a8.js
+│   │   │   ├── vendor-legacy.5f95acbe.js
+│   │   │   └── vendor.9ec326be.js
 │   │   ├── manifest.json
 │   │   ├── webUpdateNoticeInjectScript.js
 │   │   ├── webUpdateNoticeInjectStyle.css
@@ -509,7 +518,7 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-68 directories, 290 files
+68 directories, 294 files
 
 ```
 
