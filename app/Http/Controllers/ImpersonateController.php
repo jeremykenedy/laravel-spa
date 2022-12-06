@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Users\ImpersonateUserRequest;
-use App\Models\User;
 use App\Models\Impersonation;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-
 
 class ImpersonateController extends Controller
 {
@@ -28,11 +27,11 @@ class ImpersonateController extends Controller
         $impersonator = auth('sanctum')->user();
         $impersonatee = $user;
 
-        if($impersonatee && $impersonatee->id && ($impersonatee->id == $impersonator->id)) {
+        if ($impersonatee && $impersonatee->id && ($impersonatee->id == $impersonator->id)) {
             abort(418);
         }
 
-        if (!$impersonatee || !$impersonatee->canBeImpersonated() || !$impersonator->canImpersonate()) {
+        if (! $impersonatee || ! $impersonatee->canBeImpersonated() || ! $impersonator->canImpersonate()) {
             abort(403);
         }
 
@@ -47,8 +46,8 @@ class ImpersonateController extends Controller
         $this->logoutUser($impersonator);
 
         $data = [
-            "impersonatorToken" => $impersonatorToken,
-            "token"             => $impersonateeToken->plainTextToken,
+            'impersonatorToken' => $impersonatorToken,
+            'token'             => $impersonateeToken->plainTextToken,
         ];
 
         return response()->json([
@@ -69,7 +68,7 @@ class ImpersonateController extends Controller
         $this->logoutUser($impersonatedUser);
 
         $data = [
-            "token"         => $impersonatorToken,
+            'token'         => $impersonatorToken,
         ];
 
         return response()->json([

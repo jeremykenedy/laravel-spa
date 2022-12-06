@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use App\Models\User;
-use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class Impersonation extends Model
 {
