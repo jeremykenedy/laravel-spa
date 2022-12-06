@@ -7,11 +7,11 @@ import eslint from 'vite-plugin-eslint';
 import StylelintPlugin from 'vite-plugin-stylelint';
 import Inspect from 'vite-plugin-inspect';
 import legacy from '@vitejs/plugin-legacy';
-import sentryVitePlugin from "@sentry/vite-plugin";
+import sentryVitePlugin from '@sentry/vite-plugin';
 const fs = require('node:fs');
 
 export default ({ mode }) => {
-  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
   return defineConfig({
     plugins: [
@@ -58,8 +58,8 @@ export default ({ mode }) => {
       splitVendorChunkPlugin(),
       Inspect(),
       sentryVitePlugin({
-        include: ".",
-        ignore: ["node_modules", "vite.config.ts"],
+        include: '.',
+        ignore: ['node_modules', 'vite.config.ts'],
         silent: false,
         telemetry: true,
         sourceMapReference: false,
@@ -90,4 +90,4 @@ export default ({ mode }) => {
       },
     },
   });
-}
+};
