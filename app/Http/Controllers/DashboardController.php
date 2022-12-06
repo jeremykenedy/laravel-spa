@@ -39,11 +39,14 @@ class DashboardController extends Controller
             $data['users'] = User::all('id', 'name', 'email');
             $data['roles'] = new RolesCollection(config('roles.models.role')::all());
             $data['permissions'] = new RolesCollection(config('roles.models.permission')::all()); // TODO :: Change collection
+            $settings = Setting::where('group', 'auth')
+                            ->orWhere('group', 'analytics')
+                            ->orWhere('group', 'monitoring')
+                            ->get(['id', 'key', 'name', 'val', 'group']);
 
-            // FIX THESE
-            $data['authSettings'] = Setting::whereGroup('auth')->get(['id', 'key', 'name', 'val']);
-            $data['analytics'] = Setting::whereGroup('analytics')->get(['id', 'key', 'name', 'val']);
-            $data['monitoring'] = Setting::whereGroup('monitoring')->get(['id', 'key', 'name', 'val']);
+            $data['authSettings'] = $settings->where('group', 'auth')->values();
+            $data['analytics'] = $settings->where('group', 'analytics')->values();
+            $data['monitoring'] = $settings->where('group', 'monitoring')->values();
         }
 
         return $data;
