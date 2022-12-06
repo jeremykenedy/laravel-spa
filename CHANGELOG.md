@@ -1,5 +1,23 @@
 # CHANGELOG
 
+## [v3.3.8](https://github.com/jeremykenedy/laravel-spa/releases/tag/v3.3.8) - 2022-12-06 03:49:07
+
+- 9c22d32 WIP :: Changelog workflow
+
+## [v3.3.7](https://github.com/jeremykenedy/laravel-spa/releases/tag/v3.3.7) - 2022-12-06 03:45:36
+
+- 7bad79b Merge branch 'dev' of github.com:jeremykenedy/laravel-spa into dev
+ - 313641e docs(CHANGELOG): update release notes
+
+## [v3.3.5](https://github.com/jeremykenedy/laravel-spa/releases/tag/v3.3.5) - 2022-12-06 03:40:59
+
+## What's Changed
+* Dev by @jeremykenedy in https://github.com/jeremykenedy/laravel-spa/pull/41
+* WIP :: Changelog workflow by @jeremykenedy in https://github.com/jeremykenedy/laravel-spa/pull/42
+
+
+**Full Changelog**: https://github.com/jeremykenedy/laravel-spa/compare/v3.3.3...v3.3.5
+
 ## [v3.3.4](https://github.com/jeremykenedy/laravel-spa/releases/tag/v3.3.4) - 2022-12-06 03:34:37
 
 - eec03af WIP :: Changelog workflow
