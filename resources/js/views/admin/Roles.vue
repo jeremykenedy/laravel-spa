@@ -156,7 +156,7 @@ export default {
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Roles`,
+            message: 'Error Getting Roles',
             timer: 5000,
             icon: 'error',
           });
@@ -167,14 +167,14 @@ export default {
     async getPermissions() {
       this.permissionsDataReady = false;
       await axios
-        .get(`/api/permissions`)
+        .get('/api/permissions')
         .then(({ data }) => {
           this.availablePermissions = data.permissions;
           this.permissionsDataReady = true;
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Permissions`,
+            message: 'Error Getting Permissions',
             timer: 5000,
             icon: 'error',
           });
@@ -184,18 +184,18 @@ export default {
     },
     async deleteRole(value) {
       await axios
-        .delete('/api/roles/delete/role/' + value.id)
+        .delete(`/api/roles/delete/role/${value.id}`)
         .then(({ data }) => {
           this.rolesData = this.rolesData.filter((u) => u.id != data.id);
           this.popToast({
-            message: `Successfully Deleted Role!`,
+            message: 'Successfully Deleted Role!',
             timer: 5000,
             icon: 'success',
           });
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Deleting Role`,
+            message: 'Error Deleting Role',
             timer: 5000,
             icon: 'error',
           });
@@ -205,7 +205,7 @@ export default {
     jiggleTheLock() {
       const self = this;
       self.lockJigled = true;
-      setTimeout(function () {
+      setTimeout(() => {
         self.lockJigled = false;
       }, 1);
     },
@@ -215,7 +215,7 @@ export default {
       this.showCreateRoleForm = false;
     },
     editRole(role) {
-      this.roleFormKey = this.roleFormKey + 1;
+      this.roleFormKey += 1;
       this.roleEditing = role;
       this.creatingNewRole = false;
       this.showCreateRoleForm = true;
@@ -232,7 +232,7 @@ export default {
       this.closeRoleForm();
     },
     triggerCreateRole() {
-      this.roleFormKey = this.roleFormKey + 1;
+      this.roleFormKey += 1;
       this.creatingNewRole = true;
       this.showCreateRoleForm = true;
       this.roleEditing = null;

@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     viewBox() {
-      return '0 0 ' + this.w + ' ' + this.h;
+      return `0 0 ${this.w} ${this.h}`;
     },
   },
 };

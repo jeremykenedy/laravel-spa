@@ -39,7 +39,7 @@ export default ({ mode }) => {
       }),
       StylelintPlugin({
         fix: true,
-        quite: true,
+        quite: false,
         lintOnStart: false,
       }),
       eslint({

@@ -335,7 +335,7 @@ export default {
           self.form.roles.push(JSON_Obj[key].id);
         }
       }
-      setTimeout(function () {
+      setTimeout(() => {
         self.ready = true;
       }, 100);
     } else {
@@ -351,9 +351,8 @@ export default {
     parseDisplayDate(date) {
       if (date && date != true) {
         return moment(date).format('MMM Do YYYY, h:mma');
-      } else {
-        return moment(new Date()).format('MMM Do YYYY, h:mma');
       }
+      return moment(new Date()).format('MMM Do YYYY, h:mma');
     },
     async submit() {
       this.error = null;
@@ -372,7 +371,7 @@ export default {
         .then(({ data }) => {
           this.$emit('userCreated', data.user);
           this.popToast({
-            message: `User Successfully Created!`,
+            message: 'User Successfully Created!',
             timer: 5000,
             icon: 'success',
           });
@@ -380,7 +379,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             this.errors = errors;
             // this.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -389,7 +388,7 @@ export default {
             // });
           } else {
             this.popToast({
-              message: `Error Creating User`,
+              message: 'Error Creating User',
               timer: 5000,
               icon: 'error',
             });
@@ -400,7 +399,7 @@ export default {
     },
     async updateUser() {
       await axios
-        .patch('/api/users/update-user/' + this.user.id, this.form)
+        .patch(`/api/users/update-user/${this.user.id}`, this.form)
         .then(({ data }) => {
           this.$emit('userUpdated', data.user);
           this.popToast({
@@ -412,7 +411,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             this.errors = errors;
             // this.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -421,7 +420,7 @@ export default {
             // });
           } else {
             this.popToast({
-              message: `Error Updating User`,
+              message: 'Error Updating User',
               timer: 5000,
               icon: 'error',
             });

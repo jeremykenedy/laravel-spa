@@ -81,7 +81,7 @@ export default {
         .deleteAccount(this.user)
         .then((response) => {
           self.popToast({
-            message: `Account deleted successfully. We will miss you!`,
+            message: 'Account deleted successfully. We will miss you!',
             timer: 50000,
             icon: 'success',
           });
@@ -90,7 +90,7 @@ export default {
         })
         .catch((err) => {
           self.popToast({
-            message: `Error deleteding account`,
+            message: 'Error deleteding account',
             timer: 10000,
             icon: 'error',
           });

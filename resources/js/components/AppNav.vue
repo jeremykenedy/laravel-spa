@@ -100,6 +100,15 @@
           v-if="authenticated && user"
           class="hidden items-center justify-end md:flex md:flex-1 lg:w-0"
         >
+          <AppButton
+            v-if="isImpersonating"
+            v-tippy="'Return to your account'"
+            icon="fa-solid fa-user-secret"
+            class="float-right mr-4 h-3 w-3 rounded text-gray-500 hover:text-gray-800 focus:text-gray-800 active:text-gray-500"
+            style="background: transparent !important"
+            @click="leaveImpersonating"
+          />
+
           <span
             v-tippy="'Toggle Theme ' + (user.theme_dark ? 'Light' : 'Dark')"
             class="mr-2"
@@ -131,6 +140,23 @@
               @click="drop = !drop"
             >
               {{ user && user.name ? user.name : '' }}
+
+              <span
+                v-if="user.email_verified_at"
+                v-tippy="
+                  'User Verified on ' + parseDisplayDate(user.email_verified_at)
+                "
+                class="fa-solid fa-check-circle fa-xs text-green-500"
+                style="position: absolute; top: 12px; right: 38px"
+              />
+
+              <span
+                v-if="!user.email_verified_at"
+                v-tippy="'User Not Verified'"
+                class="fa-solid fa-times-circle fa-xs text-red-500"
+                style="position: absolute; top: 12px; right: 38px"
+              />
+
               <img
                 v-if="user && user.avatar"
                 :src="user.avatar"
@@ -400,6 +426,7 @@
                   </span>
                 </router-link>
               </div>
+
               <div
                 v-if="authenticated && user"
                 class="mr-2 mb-10"
@@ -429,6 +456,20 @@
                 >
                   Toggle Theme {{ user.theme_dark ? 'Light' : 'Dark' }}
                 </span>
+              </div>
+
+              <div
+                v-if="isImpersonating && authenticated"
+                class="mb-8 text-left"
+                style="margin-top: -0.5em"
+              >
+                <div
+                  class="cursor-pointer text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                  @click="leaveImpersonating(), close()"
+                >
+                  <span class="fa-solid fa-user-secret fa-fw mr-2 ml-1" />
+                  Return to your account
+                </div>
               </div>
             </div>
             <div v-if="!authenticated">
@@ -486,7 +527,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-
+import { parseDisplayDate } from '@services/common';
 import {
   Popover,
   PopoverButton,
@@ -527,9 +568,6 @@ export default {
     Switch, // eslint-disable-line
   },
   props: {},
-  setup() {
-    return {};
-  },
   data() {
     return {
       appName: 'Workflow',
@@ -545,19 +583,24 @@ export default {
       authenticated: 'auth/authenticated',
       user: 'auth/user',
       roles: 'auth/roles',
+      currentUserToken: 'auth/currentUserToken',
+      impersonatorToken: 'auth/impersonatorToken',
     }),
+    isImpersonating() {
+      if (this.currentUserToken && this.impersonatorToken) {
+        return true;
+      }
+      return false;
+    },
   },
-  watch: {},
-  created() {},
-  mounted() {},
-  beforeUnmount() {},
-  updated() {},
   methods: {
     ...mapActions({
       logout: 'auth/logout',
       updateTheme: 'auth/theme',
       popToast: 'toast/popToast',
+      leaveImpersonatingUser: 'auth/leaveImpersonatingUser',
     }),
+    parseDisplayDate,
     closeDrop() {
       this.drop = false;
     },
@@ -578,7 +621,7 @@ export default {
               response.data.user.id
             ) {
               this.popToast({
-                message: `Theme Saved`,
+                message: 'Theme Saved',
                 timer: 2000,
                 icon: 'success',
               });
@@ -588,12 +631,25 @@ export default {
       } catch (e) {
         this.errors = e.data;
         this.popToast({
-          message: `Error Updating Theme`,
+          message: 'Error Updating Theme',
           timer: 5000,
           icon: 'error',
         });
       }
       this.loading = false;
+    },
+    async leaveImpersonating() {
+      try {
+        await this.leaveImpersonatingUser().then((response) => {
+          //
+        });
+      } catch (e) {
+        this.popToast({
+          message: 'Unable To Return To Yourself',
+          timer: 5000,
+          icon: 'error',
+        });
+      }
     },
   },
 };

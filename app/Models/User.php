@@ -118,4 +118,20 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     {
         return $this->hasMany(SocialiteProvider::class);
     }
+
+    public function canImpersonate()
+    {
+        return $this->hasOneRole(config('roles.models.role')::whereName('Super Admin')->first('id')->id);
+    }
+
+    public function canBeImpersonated()
+    {
+        return !$this->hasOneRole(config('roles.models.role')::whereName('Super Admin')->first('id')->id);
+    }
+
+    public function isImpersonated()
+    {
+        $token = $this->currentAccessToken();
+        return $token->name == 'IMPERSONATION token';
+    }
 }

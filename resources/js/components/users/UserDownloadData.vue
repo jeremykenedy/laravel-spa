@@ -72,9 +72,7 @@ export default {
         .fire({
           title: 'Success!',
           icon: 'success',
-          html:
-            'Your data will be ready for download shortly. <br>A download link has been sent to your email <br>' +
-            this.user.email,
+          html: `Your data will be ready for download shortly. <br>A download link has been sent to your email <br>${this.user.email}`,
           showCancelButton: false,
           showDenyButton: false,
           confirmButtonColor: '#008000',

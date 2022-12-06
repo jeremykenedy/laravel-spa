@@ -144,18 +144,17 @@ export default {
     },
     triggerRevoke(provider) {
       const self = this;
-      const title =
-        '<strong>Revoke ' +
-        self.capitalizeFirstLetter(provider.provider) +
-        '?</strong>';
+      const title = '<strong>Revoke ';
+      `${self.capitalizeFirstLetter(provider.provider)}?</strong>`;
       const html =
         'Are you sure you want to <strong>Revoke</strong><br>' +
-        self.capitalizeFirstLetter(provider.provider) +
-        ' Authentication?<br><br><small><span class="far fa-clock fa-fw fa-xs mr-1"></span>First Used: ' +
-        self.parseDisplayDate(provider.created_at) +
-        '</small><br><small><span class="far fa-clock fa-fw fa-xs mr-1"></span>Last Used: ' +
-        self.parseDisplayDate(provider.updated_at) +
-        '</small>';
+        `${self.capitalizeFirstLetter(
+          provider.provider,
+        )} Authentication?<br><br><small><span class="far fa-clock fa-fw fa-xs mr-1"></span>First Used: ${self.parseDisplayDate(
+          provider.created_at,
+        )}</small><br><small><span class="far fa-clock fa-fw fa-xs mr-1"></span>Last Used: ${self.parseDisplayDate(
+          provider.updated_at,
+        )}</small>`;
       const icon = 'warning';
       const confirmButtonColor = '#FF0000';
       const denyButtonColor = '#777777';
@@ -163,15 +162,15 @@ export default {
       const denyButtonText = 'Cancel';
       self.$swal
         .fire({
-          title: title,
-          icon: icon,
-          html: html,
+          title,
+          icon,
+          html,
           showCancelButton: false,
           showDenyButton: true,
-          confirmButtonColor: confirmButtonColor,
-          denyButtonColor: denyButtonColor,
-          confirmButtonText: confirmButtonText,
-          denyButtonText: denyButtonText,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
         })
         .then((result) => {
           if (result.isConfirmed) {
@@ -179,14 +178,14 @@ export default {
               .revokeProvider(provider)
               .then((response) => {
                 self.popToast({
-                  message: `Provider successfully revoked`,
+                  message: 'Provider successfully revoked',
                   timer: 5000,
                   icon: 'success',
                 });
               })
               .catch((err) => {
                 self.popToast({
-                  message: `Error revoking provider`,
+                  message: 'Error revoking provider',
                   timer: 10000,
                   icon: 'error',
                 });

@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolesController;
@@ -67,4 +68,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
     Route::delete('/account/{user}/delete', [UserController::class, 'deleteUserAccount']);
     Route::post('/user/{user}/data', [UserController::class, 'exportUserPersonalData']);
+    Route::get('/impersonate/take/{user}', [ImpersonateController::class, 'impersonate'])->name('users.impersonate');
+    Route::get('/impersonate/leave', [ImpersonateController::class, 'leaveImpersonate'])->name('users.leaveImpersonate');
 });

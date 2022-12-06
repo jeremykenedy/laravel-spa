@@ -52,9 +52,7 @@ export default {
             popup: '',
           },
         })
-        .then((result) => {
-          return result;
-        });
+        .then((result) => result);
       this.clearToast();
     },
   },

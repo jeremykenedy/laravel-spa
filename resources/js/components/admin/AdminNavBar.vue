@@ -343,7 +343,7 @@ export default {
           ) {
             this.form.theme_dark = response.data.user.theme_dark;
             this.popToast({
-              message: `Theme Saved`,
+              message: 'Theme Saved',
               timer: 2000,
               icon: 'success',
             });
@@ -352,7 +352,7 @@ export default {
       } catch (e) {
         this.errors = e.data;
         this.popToast({
-          message: `Error Updating Theme`,
+          message: 'Error Updating Theme',
           timer: 5000,
           icon: 'error',
         });

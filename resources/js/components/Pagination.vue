@@ -90,7 +90,7 @@ export default {
     },
   },
   methods: {
-    change: function (page) {
+    change(page) {
       this.$emit('paginate', page);
     },
   },

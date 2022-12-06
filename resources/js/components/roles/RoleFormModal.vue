@@ -281,10 +281,8 @@ export default {
       if (self.role.name) {
         self.roleName = self.role.name;
       }
-      self.form.permissions = self.form.permissions.map(function (el) {
-        return el.id;
-      });
-      setTimeout(function () {
+      self.form.permissions = self.form.permissions.map((el) => el.id);
+      setTimeout(() => {
         self.ready = true;
       }, 100);
     } else {
@@ -300,9 +298,8 @@ export default {
     parseDisplayDate(date) {
       if (date && date != true) {
         return moment(date).format('MMM Do YYYY, h:mma');
-      } else {
-        return moment(new Date()).format('MMM Do YYYY, h:mma');
       }
+      return moment(new Date()).format('MMM Do YYYY, h:mma');
     },
     async submit() {
       this.error = null;
@@ -340,7 +337,7 @@ export default {
       if (!this.formValid()) {
         this.submitting = false;
         this.popToast({
-          message: `Error Validating Role`,
+          message: 'Error Validating Role',
           timer: 5000,
           icon: 'error',
         });
@@ -351,7 +348,7 @@ export default {
         .then(({ data }) => {
           this.$emit('roleCreated', data.role);
           this.popToast({
-            message: `Role Successfully Created!`,
+            message: 'Role Successfully Created!',
             timer: 5000,
             icon: 'success',
           });
@@ -359,7 +356,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             this.errors = errors;
             // this.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -368,7 +365,7 @@ export default {
             // });
           } else {
             this.popToast({
-              message: `Error Creating Role`,
+              message: 'Error Creating Role',
               timer: 5000,
               icon: 'error',
             });
@@ -382,14 +379,14 @@ export default {
       if (!this.formValid()) {
         this.submitting = false;
         this.popToast({
-          message: `Error Validating Role`,
+          message: 'Error Validating Role',
           timer: 5000,
           icon: 'error',
         });
         return;
       }
       await axios
-        .patch('/api/roles/update-role/' + self.role.id, self.form)
+        .patch(`/api/roles/update-role/${self.role.id}`, self.form)
         .then(({ data }) => {
           self.$emit('roleUpdated', data.role);
           self.popToast({
@@ -401,7 +398,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             self.errors = errors;
             // self.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -410,7 +407,7 @@ export default {
             // });
           } else {
             self.popToast({
-              message: `Error Updating Role`,
+              message: 'Error Updating Role',
               timer: 5000,
               icon: 'error',
             });

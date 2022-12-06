@@ -7,12 +7,8 @@ export default {
     };
   },
   getters: {
-    sideBarOpen: (state) => {
-      return state.sideBarOpen;
-    },
-    fullScreenSideBarOpen: (state) => {
-      return state.fullScreenSideBarOpen;
-    },
+    sideBarOpen: (state) => state.sideBarOpen,
+    fullScreenSideBarOpen: (state) => state.fullScreenSideBarOpen,
   },
   mutations: {
     toggleSidebar(state) {

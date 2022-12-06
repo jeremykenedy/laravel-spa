@@ -4,7 +4,20 @@ module.exports = {
     es6: true,
     node: true
   },
-  extends: ["eslint:recommended", "plugin:vue/vue3-recommended", "plugin:vue/vue3-essential", "@vue/eslint-config-typescript/recommended", "@vue/eslint-config-prettier", "plugin:storybook/recommended"],
+  extends: [
+    "eslint:recommended",
+    "plugin:vue/vue3-recommended",
+    "plugin:vue/vue3-essential",
+    "@vue/eslint-config-typescript/recommended",
+    "@vue/eslint-config-prettier",
+    "plugin:storybook/recommended"
+    // "airbnb-base"
+  ],
+  globals: {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "ga": true
+  },
   parserOptions: {
     ecmaVersion: 13,
     sourceType: "module",
@@ -13,6 +26,7 @@ module.exports = {
     }
   },
   plugins: ["vue", "html", "prettier"],
+  ignorePatterns: ["**/node_modules", "**/vendor"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
     "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off",

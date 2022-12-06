@@ -49,6 +49,7 @@
             @delete-user="deleteUser"
             @edit-user="editUser"
             @send-user-verification="sendUserVerification"
+            @impersonate-user-triggered="impersonateUserTriggered"
           />
         </template>
       </tbody>
@@ -87,13 +88,13 @@ export default {
     lockJiggled: { type: Boolean, default: false },
     users: {
       type: Array,
-      default: function () {
+      default() {
         return [];
       },
     },
     pagination: {
       type: Object,
-      default: function () {
+      default() {
         return {};
       },
     },
@@ -140,6 +141,9 @@ export default {
     },
     sendUserVerification(value) {
       this.$emit('sendUserVerification', value);
+    },
+    impersonateUserTriggered(value) {
+      this.$emit('impersonateUserTriggered', value);
     },
   },
 };

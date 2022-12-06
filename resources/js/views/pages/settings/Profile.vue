@@ -171,7 +171,7 @@ export default {
           ) {
             // this.success = 'Profile Updated Successfully'
             this.popToast({
-              message: `Profile Updated Successfully`,
+              message: 'Profile Updated Successfully',
               timer: 2000,
               icon: 'success',
             });
@@ -180,14 +180,14 @@ export default {
       } catch (e) {
         this.errors = e.data;
         this.popToast({
-          message: `Error Updating Profile`,
+          message: 'Error Updating Profile',
           timer: 5000,
           icon: 'error',
         });
       }
       this.loading = false;
     },
-    moment: function () {
+    moment() {
       return moment();
     },
   },

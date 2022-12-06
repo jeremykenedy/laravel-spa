@@ -175,6 +175,21 @@
           <span class="sr-only">Delete User</span>
         </template>
       </AppButton>
+
+      <AppButton
+        v-tippy="'Impersonate User'"
+        secondary
+        :disabled="locked"
+        :loading="!dataReady"
+        class="mr-2 px-1 py-1 text-sm"
+        @click="triggerImpersonateUser"
+      >
+        <template #text>
+          <UserCircleIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+          <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+          <span class="sr-only">Impersonate User</span>
+        </template>
+      </AppButton>
     </td>
   </tr>
 </template>
@@ -186,6 +201,7 @@ import {
   LockOpenIcon,
   PencilSquareIcon,
   TrashIcon,
+  UserCircleIcon,
 } from '@heroicons/vue/24/outline';
 import CircleSvg from '@components/CircleSvg.vue';
 import { mapActions } from 'vuex';
@@ -198,6 +214,7 @@ export default {
     CircleSvg,
     PencilSquareIcon,
     TrashIcon,
+    UserCircleIcon,
   },
   props: {
     user: { type: Object, required: true },
@@ -230,13 +247,17 @@ export default {
     roleClass(slug) {
       if (slug == 'admin') {
         return 'bg-orange-100 text-orange-800 dark:bg-orange-700 dark:text-gray-100';
-      } else if (slug == 'super.admin') {
+      }
+      if (slug == 'super.admin') {
         return 'bg-blue-100 text-blue-800 dark:bg-blue-700 dark:text-gray-100';
-      } else if (slug == 'user') {
+      }
+      if (slug == 'user') {
         return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-gray-100';
-      } else if (slug == 'editor') {
+      }
+      if (slug == 'editor') {
         return 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-gray-100';
-      } else if (slug == 'moderator') {
+      }
+      if (slug == 'moderator') {
         return 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-gray-100';
       }
       return 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-100';
@@ -247,13 +268,9 @@ export default {
     fireVerification() {
       const self = this;
       const verified = this.user.email_verified_at;
-      let title = '<strong>Verify ' + this.user.name + '?</strong>';
-      let html =
-        'Are you sure you want to <strong>Verify' +
-        this.user.name +
-        '</strong>?<small> (' +
-        this.user.email +
-        ')</small>';
+      let title = `<strong>Verify ${this.user.name}?</strong>`;
+      let html = 'Are you sure you want to <strong>Verify';
+      `${this.user.name}</strong>?<small> (${this.user.email})</small>`;
       let icon = 'warning';
       let confirmButtonColor = '#FF0000';
       let denyButtonColor = '#777777';
@@ -261,13 +278,9 @@ export default {
       let denyButtonText = 'Cancel';
 
       if (verified) {
-        title = '<strong>Un-Verify ' + this.user.name + '?</strong>';
-        html =
-          'Are you sure you want to <strong>Un-Verify' +
-          this.user.name +
-          '</strong>?<small> (' +
-          this.user.email +
-          ')</small>';
+        title = `<strong>Un-Verify ${this.user.name}?</strong>`;
+        html = 'Are you sure you want to <strong>Un-Verify';
+        `${this.user.name}</strong>?<small> (${this.user.email})</small>`;
         icon = 'warning';
         confirmButtonColor = '#FF0000';
         denyButtonColor = '#777777';
@@ -276,15 +289,15 @@ export default {
       }
       self.$swal
         .fire({
-          title: title,
-          icon: icon,
-          html: html,
+          title,
+          icon,
+          html,
           showCancelButton: false,
           showDenyButton: true,
-          confirmButtonColor: confirmButtonColor,
-          denyButtonColor: denyButtonColor,
-          confirmButtonText: confirmButtonText,
-          denyButtonText: denyButtonText,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
         })
         .then((result) => {
           if (result.isConfirmed) {
@@ -295,7 +308,7 @@ export default {
             }
           } else if (result.isDenied) {
             self.popToast({
-              message: `Cancelled`,
+              message: 'Cancelled',
               timer: 2000,
               icon: 'error',
             });
@@ -307,13 +320,9 @@ export default {
     },
     triggerDeleteUser() {
       const self = this;
-      const title = '<strong>Delete ' + this.user.name + '?</strong>';
-      const html =
-        'Are you sure you want to <strong>Delete' +
-        this.user.name +
-        '</strong>?<small> (' +
-        this.user.email +
-        ')</small><h6>This will delete the user.</h6>';
+      const title = `<strong>Delete ${this.user.name}?</strong>`;
+      const html = 'Are you sure you want to <strong>Delete';
+      `${this.user.name}</strong>?<small> (${this.user.email})</small><h6>This will delete the user.</h6>`;
       const icon = 'warning';
       const confirmButtonColor = '#FF0000';
       const denyButtonColor = '#777777';
@@ -321,22 +330,22 @@ export default {
       const denyButtonText = 'Cancel';
       self.$swal
         .fire({
-          title: title,
-          icon: icon,
-          html: html,
+          title,
+          icon,
+          html,
           showCancelButton: false,
           showDenyButton: true,
-          confirmButtonColor: confirmButtonColor,
-          denyButtonColor: denyButtonColor,
-          confirmButtonText: confirmButtonText,
-          denyButtonText: denyButtonText,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
         })
         .then((result) => {
           if (result.isConfirmed) {
             this.$emit('deleteUser', this.user);
           } else if (result.isDenied) {
             self.popToast({
-              message: `Cancelled`,
+              message: 'Cancelled',
               timer: 2000,
               icon: 'error',
             });
@@ -345,14 +354,9 @@ export default {
     },
     triggerUserConfirmEmail() {
       const self = this;
-      const title =
-        '<strong>Send ' + this.user.name + ' verification email</strong>';
-      const html =
-        'Are you sure you want to <strong>Send ' +
-        this.user.name +
-        '<small> (' +
-        this.user.email +
-        ')</small> a Verification Email</strong>?<h6>This will send the user an email.</h6>';
+      const title = `<strong>Send ${this.user.name} verification email</strong>`;
+      const html = 'Are you sure you want to <strong>Send ';
+      `${this.user.name}<small> (${this.user.email})</small> a Verification Email</strong>?<h6>This will send the user an email.</h6>`;
       const icon = 'info';
       const confirmButtonColor = '#10b981';
       const denyButtonColor = '#777777';
@@ -360,27 +364,30 @@ export default {
       const denyButtonText = 'Cancel';
       self.$swal
         .fire({
-          title: title,
-          icon: icon,
-          html: html,
+          title,
+          icon,
+          html,
           showCancelButton: false,
           showDenyButton: true,
-          confirmButtonColor: confirmButtonColor,
-          denyButtonColor: denyButtonColor,
-          confirmButtonText: confirmButtonText,
-          denyButtonText: denyButtonText,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
         })
         .then((result) => {
           if (result.isConfirmed) {
             this.$emit('sendUserVerification', this.user);
           } else if (result.isDenied) {
             self.popToast({
-              message: `Cancelled`,
+              message: 'Cancelled',
               timer: 2000,
               icon: 'error',
             });
           }
         });
+    },
+    triggerImpersonateUser() {
+      this.$emit('impersonateUserTriggered', this.user);
     },
   },
 };

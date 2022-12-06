@@ -119,7 +119,7 @@ export default {
             this.form.password = '';
             this.form.password_confirmation = '';
             this.popToast({
-              message: `Password Updated Successfully`,
+              message: 'Password Updated Successfully',
               timer: 2000,
               icon: 'success',
             });
@@ -127,7 +127,7 @@ export default {
         });
       } catch (e) {
         this.errors = e.data;
-        let msg = `Error Updating Password`;
+        let msg = 'Error Updating Password';
         if (e && e.response && e.response.data && e.response.data.message) {
           msg = e.response.data.message;
         }

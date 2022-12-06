@@ -70,25 +70,24 @@ export default {
       `;
       if (this.primary) {
         t = 'indigo';
-        buttonClasses = buttonClasses + ' text-white';
+        buttonClasses += ' text-white';
       } else if (this.secondary) {
         t = 'slate';
-        buttonClasses = buttonClasses + ' text-white';
+        buttonClasses += ' text-white';
       } else if (this.info) {
         t = 'blue';
-        buttonClasses = buttonClasses + ' text-white';
+        buttonClasses += ' text-white';
       } else if (this.accent) {
         t = 'gray';
-        buttonClasses = buttonClasses + ' text-white';
+        buttonClasses += ' text-white';
       } else if (this.success) {
         t = 'green';
-        buttonClasses = buttonClasses + ' text-white';
+        buttonClasses += ' text-white';
       } else if (this.warning) {
         t = 'yellow';
-        buttonClasses = buttonClasses + ' text-white';
+        buttonClasses += ' text-white';
       } else {
-        buttonClasses =
-          buttonClasses +
+        buttonClasses +=
           ' text-gray-700 hover:text-gray-900 hover:bg-gray-500 hover:text-gray-100';
       }
       if (this.danger) {

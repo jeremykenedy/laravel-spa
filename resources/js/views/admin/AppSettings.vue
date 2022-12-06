@@ -822,7 +822,7 @@ export default {
     async getAppSettings() {
       this.dataReady = false;
       await axios
-        .get(`/api/app-settings`)
+        .get('/api/app-settings')
         .then(({ data }) => {
           this.authSettings = data.authSettings;
           this.analyticsSettings = data.analyticsSettings;
@@ -832,7 +832,7 @@ export default {
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting App Settings`,
+            message: 'Error Getting App Settings',
             timer: 5000,
             icon: 'error',
           });
@@ -863,7 +863,7 @@ export default {
       if (newValue != a.val) {
         setting.val = newValue;
         await axios
-          .patch(`/api/app-settings/` + setting.id, setting)
+          .patch(`/api/app-settings/${setting.id}`, setting)
           .then(({ data }) => {
             const message = 'App Setting Updated';
             if (index !== -1) {
@@ -883,25 +883,19 @@ export default {
             }
             this.loading = false;
             this.popToast({
-              message: message,
+              message,
               timer: 5000,
               icon: 'success',
             });
             this.track(
-              'App setting "' +
-                setting.name +
-                '" was updated from "' +
-                a.val +
-                '" to "' +
-                setting.val +
-                '"',
+              `App setting "${setting.name}" was updated from "${a.val}" to "${setting.val}"`,
               'app event',
               'app setting updated',
             );
           })
           .catch(({ response }) => {
             this.popToast({
-              message: `Error Updating Setting`,
+              message: 'Error Updating Setting',
               timer: 5000,
               icon: 'error',
             });
@@ -911,14 +905,14 @@ export default {
     },
     changeTab(tab) {
       this.activeTab = tab;
-      this.track('clicked tab: ' + tab);
+      this.track(`clicked tab: ${tab}`);
     },
     appSettingUpdateTriggered(val) {
       this.updateSetting(val.val, val.setting);
     },
     throwTestError() {
       this.popToast({
-        message: `Sentry Test Error Triggered`,
+        message: 'Sentry Test Error Triggered',
         timer: 5000,
         icon: 'success',
       });

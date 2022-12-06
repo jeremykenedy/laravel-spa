@@ -191,11 +191,9 @@ export default {
     },
     triggerDeleteRole() {
       const self = this;
-      const title = '<strong>Delete ' + this.role.name + '?</strong>';
-      const html =
-        'Are you sure you want to <strong>Delete' +
-        this.role.name +
-        '</strong>?<h6>This will delete the role.</h6>';
+      const title = `<strong>Delete ${this.role.name}?</strong>`;
+      const html = 'Are you sure you want to <strong>Delete';
+      `${this.role.name}</strong>?<h6>This will delete the role.</h6>`;
       const icon = 'warning';
       const confirmButtonColor = '#FF0000';
       const denyButtonColor = '#777777';
@@ -203,22 +201,22 @@ export default {
       const denyButtonText = 'Cancel';
       self.$swal
         .fire({
-          title: title,
-          icon: icon,
-          html: html,
+          title,
+          icon,
+          html,
           showCancelButton: false,
           showDenyButton: true,
-          confirmButtonColor: confirmButtonColor,
-          denyButtonColor: denyButtonColor,
-          confirmButtonText: confirmButtonText,
-          denyButtonText: denyButtonText,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
         })
         .then((result) => {
           if (result.isConfirmed) {
             this.$emit('deleteRole', this.role);
           } else if (result.isDenied) {
             self.popToast({
-              message: `Cancelled`,
+              message: 'Cancelled',
               timer: 2000,
               icon: 'error',
             });

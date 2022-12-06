@@ -699,7 +699,7 @@ export default {
     async getDashboardData() {
       this.loading = true;
       await axios
-        .get(`/api/dashboard/data`)
+        .get('/api/dashboard/data')
         .then(({ data }) => {
           this.users = data.users;
           this.rolesData = data.roles;
@@ -712,7 +712,7 @@ export default {
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Users`,
+            message: 'Error Getting Users',
             timer: 5000,
             icon: 'error',
           });

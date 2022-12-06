@@ -232,19 +232,19 @@
 
 <script lang="ts">
 import moment from 'moment';
-import { ChevronRightIcon } from '@heroicons/vue/24/outline';
+import {
+  ChevronRightIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from '@heroicons/vue/24/outline';
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 import PermissionFormModal from '@components/roles/PermissionFormModal.vue';
 import CircleSvg from '@components/CircleSvg.vue';
 import Pagination from '@components/Pagination.vue';
 import PerPage from '@components/PerPage.vue';
-import {
-  LockClosedIcon,
-  LockOpenIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from '@heroicons/vue/24/outline';
 // import AnimatedTableLoader from '@components/loaders/AnimatedTableLoader.vue';
 
 export default {
@@ -386,14 +386,14 @@ export default {
     async getRoles() {
       this.rolesDataReady = false;
       await axios
-        .get(`/api/roles`)
+        .get('/api/roles')
         .then(({ data }) => {
           this.availableRoles = data.roles;
           this.rolesDataReady = true;
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Roles`,
+            message: 'Error Getting Roles',
             timer: 5000,
             icon: 'error',
           });
@@ -413,11 +413,11 @@ export default {
           delete data.data;
           this.pagination = data;
           this.dataReady = true;
-          this.permissionsTableKey = this.permissionsTableKey + 1;
+          this.permissionsTableKey += 1;
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Getting Permissions`,
+            message: 'Error Getting Permissions',
             timer: 5000,
             icon: 'error',
           });
@@ -428,10 +428,8 @@ export default {
     triggerDeletePermission(row) {
       const self = this;
       const title = '<strong>Delete Permission?</strong>';
-      const html =
-        'Are you sure you want to <strong>Delete' +
-        row.name +
-        '</strong>?<h6>This will delete the Permission.</h6>';
+      const html = 'Are you sure you want to <strong>Delete';
+      `${row.name}</strong>?<h6>This will delete the Permission.</h6>`;
       const icon = 'warning';
       const confirmButtonColor = '#FF0000';
       const denyButtonColor = '#777777';
@@ -439,22 +437,22 @@ export default {
       const denyButtonText = 'Cancel';
       self.$swal
         .fire({
-          title: title,
-          icon: icon,
-          html: html,
+          title,
+          icon,
+          html,
           showCancelButton: false,
           showDenyButton: true,
-          confirmButtonColor: confirmButtonColor,
-          denyButtonColor: denyButtonColor,
-          confirmButtonText: confirmButtonText,
-          denyButtonText: denyButtonText,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
         })
         .then((result) => {
           if (result.isConfirmed) {
             this.deletePermission(row);
           } else if (result.isDenied) {
             self.popToast({
-              message: `Cancelled`,
+              message: 'Cancelled',
               timer: 2000,
               icon: 'error',
             });
@@ -463,7 +461,7 @@ export default {
     },
     async deletePermission(value) {
       await axios
-        .delete('/api/permissions/delete/permission/' + value.id)
+        .delete(`/api/permissions/delete/permission/${value.id}`)
         .then(({ data }) => {
           this.permissionsData = this.permissionsData.filter(
             (u) => u.id != data.id,
@@ -475,14 +473,14 @@ export default {
           );
           this.rowsUnlocked = [];
           this.popToast({
-            message: `Successfully Deleted Permission!`,
+            message: 'Successfully Deleted Permission!',
             timer: 5000,
             icon: 'success',
           });
         })
         .catch(({ response }) => {
           this.popToast({
-            message: `Error Deleting Permission`,
+            message: 'Error Deleting Permission',
             timer: 5000,
             icon: 'error',
           });
@@ -495,7 +493,7 @@ export default {
       this.showCreatePermissionForm = false;
     },
     triggerEditPermission(permission) {
-      this.permissionFormKey = this.permissionFormKey + 1;
+      this.permissionFormKey += 1;
       this.permissionEditing = permission;
       this.creatingNewPermission = false;
       this.showCreatePermissionForm = true;
@@ -515,7 +513,7 @@ export default {
       this.closePermissionForm();
     },
     triggerCreatePermission() {
-      this.permissionFormKey = this.permissionFormKey + 1;
+      this.permissionFormKey += 1;
       this.creatingNewPermission = true;
       this.showCreatePermissionForm = true;
       this.permissionEditing = null;
@@ -537,14 +535,14 @@ export default {
       if (!this.inputValid(key, row)) {
         this.submitting = false;
         this.popToast({
-          message: `Error Validating Permission`,
+          message: 'Error Validating Permission',
           timer: 5000,
           icon: 'error',
         });
         return;
       }
       await axios
-        .patch('/api/permissions/update-permission/' + row.id, row)
+        .patch(`/api/permissions/update-permission/${row.id}`, row)
         .then(({ data }) => {
           self.permissionUpdated(data.permission);
           self.popToast({
@@ -556,7 +554,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             self.errors = errors;
             // self.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -565,7 +563,7 @@ export default {
             // });
           } else {
             self.popToast({
-              message: `Error Updating Permission`,
+              message: 'Error Updating Permission',
               timer: 5000,
               icon: 'error',
             });
@@ -579,12 +577,10 @@ export default {
       if (reset) {
         this.rowsUnlocked = [];
         this.rowsUnlocked.push(row.id);
+      } else if (found) {
+        this.rowsUnlocked = this.rowsUnlocked.filter((i) => i != row.id);
       } else {
-        if (found) {
-          this.rowsUnlocked = this.rowsUnlocked.filter((i) => i != row.id);
-        } else {
-          this.rowsUnlocked.push(row.id);
-        }
+        this.rowsUnlocked.push(row.id);
       }
     },
     locked(row) {

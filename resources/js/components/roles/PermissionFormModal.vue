@@ -259,10 +259,8 @@ export default {
       if (self.permission.name) {
         self.permissionName = self.permission.name;
       }
-      self.form.roles = self.form.roles.map(function (el) {
-        return el.id;
-      });
-      setTimeout(function () {
+      self.form.roles = self.form.roles.map((el) => el.id);
+      setTimeout(() => {
         self.ready = true;
       }, 100);
     } else {
@@ -278,9 +276,8 @@ export default {
     parseDisplayDate(date) {
       if (date && date != true) {
         return moment(date).format('MMM Do YYYY, h:mma');
-      } else {
-        return moment(new Date()).format('MMM Do YYYY, h:mma');
       }
+      return moment(new Date()).format('MMM Do YYYY, h:mma');
     },
     async submit() {
       this.error = null;
@@ -317,7 +314,7 @@ export default {
       if (!this.formValid()) {
         this.submitting = false;
         this.popToast({
-          message: `Error Validating Permission`,
+          message: 'Error Validating Permission',
           timer: 5000,
           icon: 'error',
         });
@@ -328,7 +325,7 @@ export default {
         .then(({ data }) => {
           this.$emit('permissionCreated', data.permission);
           this.popToast({
-            message: `Permission Successfully Created!`,
+            message: 'Permission Successfully Created!',
             timer: 5000,
             icon: 'success',
           });
@@ -336,7 +333,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             this.errors = errors;
             // this.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -345,7 +342,7 @@ export default {
             // });
           } else {
             this.popToast({
-              message: `Error Creating Permission`,
+              message: 'Error Creating Permission',
               timer: 5000,
               icon: 'error',
             });
@@ -359,7 +356,7 @@ export default {
       if (!this.formValid()) {
         this.submitting = false;
         this.popToast({
-          message: `Error Validating Permission`,
+          message: 'Error Validating Permission',
           timer: 5000,
           icon: 'error',
         });
@@ -367,7 +364,7 @@ export default {
       }
       await axios
         .patch(
-          '/api/permissions/update-permission/' + self.permission.id,
+          `/api/permissions/update-permission/${self.permission.id}`,
           self.form,
         )
         .then(({ data }) => {
@@ -381,7 +378,7 @@ export default {
         })
         .catch(({ response }) => {
           if (response.status === 422) {
-            const errors = response.data.errors;
+            const { errors } = response.data;
             self.errors = errors;
             // self.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -390,7 +387,7 @@ export default {
             // });
           } else {
             self.popToast({
-              message: `Error Updating Permission`,
+              message: 'Error Updating Permission',
               timer: 5000,
               icon: 'error',
             });

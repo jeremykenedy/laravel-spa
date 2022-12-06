@@ -161,7 +161,7 @@ export default {
           this.loading = false;
           this.success = response;
           this.popToast({
-            message: response + ' redirecting ...',
+            message: `${response} redirecting ...`,
             timer: 10000,
             icon: 'success',
           });
@@ -180,13 +180,13 @@ export default {
         } else if (e.response && e.response.status === 401) {
           this.errors = { message: e.response.data.message };
           this.popToast({
-            message: `Unauthorized`,
+            message: 'Unauthorized',
             timer: 10000,
             icon: 'error',
           });
         } else {
           this.popToast({
-            message: `An error occured`,
+            message: 'An error occured',
             timer: 10000,
             icon: 'error',
           });

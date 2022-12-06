@@ -140,7 +140,7 @@ export default {
     track,
     changeTab(tab) {
       this.activeTab = tab;
-      this.track('clicked tab: ' + tab);
+      this.track(`clicked tab: ${tab}`);
     },
   },
 };
