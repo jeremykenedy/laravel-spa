@@ -22,6 +22,7 @@
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.1",
+        "lcobucci/jwt": "^4.2",
         "league/flysystem-aws-s3-v3": "^3.10",
         "mtownsend/laravel-make-trait": "^1.4",
         "nesbot/carbon": "^2.63",
@@ -104,6 +105,7 @@
         "socialiteproviders/yahoo": "^4.1",
         "socialiteproviders/youtube": "^4.1",
         "socialiteproviders/zendesk": "^4.1",
+        "socialiteproviders/zoho": "^4.1",
         "socialiteproviders/zoom": "^4.0",
         "spatie/laravel-personal-data-export": "^4.2"
     },

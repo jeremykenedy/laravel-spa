@@ -542,6 +542,30 @@
                   @update-setting="appSettingUpdateTriggered"
                 />
                 <AppSettingTextInput
+                  v-if="setting.key == 'appAppleTeamId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appAppleKeyId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appAppleKeyId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appApplePrivateKey"
+                />
+                <AppSettingTextInput
                   v-if="setting.key == 'appAppleRedirect'"
                   class="ml-8 mr-5"
                   :setting="setting"
@@ -646,6 +670,174 @@
                   class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
                 />
               </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableZoHoLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fas fa-z fa-fw text-yellow-400 dark:text-yellow-300"
+                    />
+                    <img
+                      id="zoho"
+                      :src="zohoImgUrl"
+                      alt="Zoho"
+                      class=""
+                      style="
+                        width: 100%;
+                        max-width: 60px;
+                        margin: -10px 0 0 5px;
+                        display: inline-block;
+                      "
+                    />
+                    <span class="sr-only"> ZoHo </span>
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableZoHoLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appZoHoId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appZoHoSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appZoHoRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appZoHoRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableStackExchangeLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-stack-exchange fa-fw text-blue-400 dark:text-blue-400"
+                    />
+                    Stack Exchange
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableStackExchangeLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appStackExchangeId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appStackExchangeKey'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appStackExchangeSite'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appStackExchangeSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appStackExchangeRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appStackExchangeRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableGitLabLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-square-gitlab fa-fw text-orange-400 dark:text-orange-400"
+                    />
+                    GitLab
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableGitLabLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appGitLabId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appGitLabSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appGitLabRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appGitLabRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
             </div>
           </div>
         </div>
@@ -767,6 +959,8 @@ import axios from 'axios';
 import { track } from '@services/analytics';
 import AppSettingToggle from '@components/form/AppSettingToggle.vue';
 import AppSettingTextInput from '@components/form/AppSettingTextInput.vue';
+import zohoLight from '@img/vendor-logos/zoho-monocrome-white.png';
+import zohoDark from '@img/vendor-logos/zoho-monocrome-black.png';
 
 export default {
   name: 'AppSettings',
@@ -776,9 +970,6 @@ export default {
     AppSettingTextInput,
   },
   props: {},
-  setup() {
-    return {};
-  },
   data() {
     return {
       dataReady: false,
@@ -805,6 +996,13 @@ export default {
         return true;
       }
       return false;
+    },
+    zohoImgUrl() {
+      if (this.user && this.user.theme_dark) {
+        return zohoLight;
+      } else {
+        return zohoDark;
+      }
     },
   },
   watch: {},

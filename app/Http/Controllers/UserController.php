@@ -52,7 +52,7 @@ class UserController extends Controller
     public function userByToken(Request $request)
     {
         $data = $request->validate([
-            'token' => 'required|string',
+            'token' => 'required|string|min:40',
         ]);
 
         $token = PersonalAccessToken::findToken($data['token']);

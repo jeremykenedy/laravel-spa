@@ -33,6 +33,7 @@ export default {
     warning: { type: Boolean, default: false },
     danger: { type: Boolean, default: false },
     info: { type: Boolean, default: false },
+    transparent: { type: Boolean, default: false },
   },
   setup() {
     return {};
@@ -51,7 +52,7 @@ export default {
       let buttonClasses = `
           bg-transparent
           border-transparent
-          hover:bg-gray-100
+          hover:text-gray-400
           active:text-white
           active:bg-gray-500
           focus:text-white
@@ -86,6 +87,10 @@ export default {
       } else if (this.warning) {
         t = 'yellow';
         buttonClasses += ' text-white';
+      } else if (this.transparent) {
+        t = 'gray';
+        buttonClasses +=
+          'bg-transparent text-gray-500 hover:text-gray-800 focus:text-gray-800 active:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100';
       } else {
         buttonClasses +=
           ' text-gray-700 hover:text-gray-900 hover:bg-gray-500 hover:text-gray-100';
@@ -109,7 +114,7 @@ export default {
             text-white
             dark:text-white
             dark:bg-red-600
-            dark:hover:bg-red-500
+            dark:hover:bg-red-400
             border
             border-transparent
           `;
@@ -130,7 +135,6 @@ export default {
           buttonClasses = `
             bg-${t}-600
             hover:bg-${t}-900
-            text-white
             dark:text-white
             dark:bg-${t}-600
             dark:hover:bg-${t}-400

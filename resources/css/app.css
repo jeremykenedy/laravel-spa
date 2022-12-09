@@ -54,6 +54,15 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
 /* 1024 -1 so it doesnt show when it hits 1024px */
 @media only screen and (max-width: 1023px) {
   .overlay:after {
