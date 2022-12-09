@@ -8,7 +8,9 @@ use App\Models\SocialiteProvider;
 use App\Traits\SocialiteProvidersTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -77,12 +79,12 @@ class SocialiteController extends Controller
         }
 
         $socialUser = Socialite::driver($provider)->stateless()->user();
-        $userData = $this->findOrCreateUser($provider, $socialUser, true);
+        $userData = $this->findOrCreateUser($provider, $socialUser);
 
         $user = $userData['user'];
         $token = $userData['token'];
 
-        auth()->login($user);
+        Auth::login($user, true);
 
         return view('socialite/callback', [
             'token'         => $token,

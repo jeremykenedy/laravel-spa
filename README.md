@@ -106,15 +106,20 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 ## Socialite
 
 #### Get Socialite Login API Keys:
-* [Facebook API](https://developers.facebook.com/)
+* [Facebook API](https://developers.facebook.com/) (Will work with localhost)
 * [Twitter API](https://apps.twitter.com/)
-* [Google API](https://console.developers.google.com/)
-* [YouTube API](https://developers.google.com/youtube/v3/getting-started)
-* [GitHub API](https://github.com/settings/applications/new)
-* [Twitch API](https://dev.twitch.tv/docs/authentication/)
 * [Instagram API](https://instagram.com/developer/register/)
+* [GitHub API](https://github.com/settings/applications/new)
+* [YouTube API](https://developers.google.com/youtube/v3/getting-started)
+* [Google API](https://console.developers.google.com/)
+* [LinkedIn API](https://www.linkedin.com/developers/apps/)
+* [Twitch API](https://dev.twitch.tv/docs/authentication/)
+* [Microsoft API]()
 * [TikTok API](https://developers.tiktok.com/)
-* [Apple API](https://socialiteproviders.com/Apple/#installation-basic-usage)
+* [Apple API](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)
+* [ZoHo API](https://api-console.zoho.com/)
+* [StackExchange API](https://stackapps.com/apps/oauth/register/)
+* [GitLab API](https://gitlab.com/oauth/applications)
 
 #### Add More Socialite Logins
 * See full list of providers: [https://socialiteproviders.github.io](https://socialiteproviders.com/about/)

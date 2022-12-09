@@ -226,8 +226,8 @@ class AppSettingsSeeder extends Seeder
                 'group'     => 'auth',
             ],
             [
-                'key'       => 'appAppleId',
                 'name'      => 'App Apple Id',
+                'key'       => 'appAppleId',
                 'val'       => config('services.apple.client_id'),
                 'group'     => 'auth',
             ],
@@ -235,6 +235,24 @@ class AppSettingsSeeder extends Seeder
                 'name'      => 'App Apple Secret',
                 'key'       => 'appAppleSecret',
                 'val'       => config('services.apple.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Apple Team Id',
+                'key'       => 'appAppleTeamId',
+                'val'       => config('services.apple.team_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Apple Key Id',
+                'key'       => 'appAppleKeyId',
+                'val'       => config('services.apple.key_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Apple Private Key',
+                'key'       => 'appApplePrivateKey',
+                'val'       => config('services.apple.private_key'),
                 'group'     => 'auth',
             ],
             [
@@ -297,10 +315,102 @@ class AppSettingsSeeder extends Seeder
             ],
 
             [
+                'name'      => 'App ZoHo Login',
+                'key'       => 'enableZoHoLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.zoho.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App ZoHo Id',
+                'key'       => 'appZoHoId',
+                'val'       => config('services.zoho.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App ZoHo Secret',
+                'key'       => 'appZoHoSecret',
+                'val'       => config('services.zoho.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App ZoHo Redirect',
+                'key'       => 'appZoHoRedirect',
+                'val'       => url('api/oauth/zoho/callback'),
+                'group'     => 'auth',
+            ],
+
+            [
+                'name'      => 'App Stack Exchange Login',
+                'key'       => 'enableStackExchangeLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.stackexchange.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Stack Exchange Id',
+                'key'       => 'appStackExchangeId',
+                'val'       => config('services.stackexchange.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Stack Exchange Key',
+                'key'       => 'appStackExchangeKey',
+                'val'       => config('services.stackexchange.key'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Stack Exchange Site',
+                'key'       => 'appStackExchangeSite',
+                'val'       => config('services.stackexchange.site'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Stack Exchange Secret',
+                'key'       => 'appStackExchangeSecret',
+                'val'       => config('services.stackexchange.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Stack Exchange Redirect',
+                'key'       => 'appStackExchangeRedirect',
+                'val'       => url('api/oauth/stackexchange/callback'),
+                'group'     => 'auth',
+            ],
+
+            [
+                'name'      => 'App GitLab Login',
+                'key'       => 'enableGitLabLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.gitlab.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App GitLab Id',
+                'key'       => 'appGitLabId',
+                'val'       => config('services.gitlab.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App GitLab Secret',
+                'key'       => 'appGitLabSecret',
+                'val'       => config('services.gitlab.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App GitLab Redirect',
+                'key'       => 'appGitLabRedirect',
+                'val'       => url('api/oauth/gitlab/callback'),
+                'group'     => 'auth',
+            ],
+
+            // NEW_PROVIDER_PLUG :: Put New Provider HERE
+
+            [
                 'name'      => 'App Google Analytics',
                 'key'       => 'enableGoogleAnalytics',
                 'type'      => 'boolean',
-                'val'       => false,
+                'val'       => config('services.google.gaEnabled'),
                 'group'     => 'analytics',
             ],
             [

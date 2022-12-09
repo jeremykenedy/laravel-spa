@@ -104,7 +104,7 @@
             v-if="isImpersonating"
             v-tippy="'Return to your account'"
             icon="fa-solid fa-user-secret"
-            class="float-right mr-4 h-3 w-3 rounded text-gray-500 hover:text-gray-800 focus:text-gray-800 active:text-gray-500"
+            class="float-right mr-4 h-3 w-3 rounded"
             style="background: transparent !important"
             @click="leaveImpersonating"
           />
@@ -140,20 +140,21 @@
               @click="drop = !drop"
             >
               {{ user && user.name ? user.name : '' }}
-
+              <!--
               <span
                 v-if="user.email_verified_at"
                 v-tippy="
-                  'User Verified on ' + parseDisplayDate(user.email_verified_at)
+                  'Email Verified on ' +
+                  parseDisplayDate(user.email_verified_at)
                 "
                 class="fa-solid fa-check-circle fa-xs text-green-500"
                 style="position: absolute; top: 12px; right: 38px"
               />
-
+              -->
               <span
                 v-if="!user.email_verified_at"
-                v-tippy="'User Not Verified'"
-                class="fa-solid fa-times-circle fa-xs text-red-500"
+                v-tippy="'Email Not Verified'"
+                class="fa-solid fa-exclamation-circle fa-xs text-orange-600"
                 style="position: absolute; top: 12px; right: 38px"
               />
 

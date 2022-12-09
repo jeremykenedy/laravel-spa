@@ -2,70 +2,104 @@
   <div class="flex flex-wrap justify-around">
     <span
       v-if="logins.facebook == 1"
+      v-tippy="'Facebook'"
       class="fa-brands fa-square-facebook fa-3x mr-3 mb-2 cursor-pointer text-blue-500 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('facebook')"
     />
     <span
       v-if="logins.twitter == 1"
+      v-tippy="'Twitter'"
       class="fa-brands fa-twitter fa-3x mr-3 mb-2 cursor-pointer text-blue-300 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('twitter')"
     />
     <span
       v-if="logins.instagram == 1"
+      v-tippy="'Instagram'"
       class="fa-brands fa-instagram fa-3x mr-3 mb-2 cursor-pointer text-gray-700 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('instagram')"
     />
     <span
       v-if="logins.github == 1"
+      v-tippy="'GitHub'"
       class="fa-brands fa-github fa-3x mr-3 mb-2 cursor-pointer text-gray-800 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('github')"
     />
     <span
       v-if="logins.youtube == 1"
+      v-tippy="'YouTube'"
       class="fa-brands fa-youtube fa-3x mr-3 mb-2 cursor-pointer text-red-500 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('youtube')"
     />
     <span
       v-if="logins.google == 1"
+      v-tippy="'Google'"
       class="fa-brands fa-google fa-3x mr-3 mb-2 cursor-pointer text-red-500 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('google')"
     />
     <span
       v-if="logins.linkedin == 1"
+      v-tippy="'LinkedIn'"
       class="fa-brands fa-linkedin fa-3x mr-3 mb-2 cursor-pointer text-blue-700 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('linkedin')"
     />
     <span
       v-if="logins.twitch == 1"
+      v-tippy="'Twitch'"
       class="fa-brands fa-twitch fa-3x mr-3 mb-2 cursor-pointer text-blue-600 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('twitch')"
     />
     <span
       v-if="logins.apple == 1"
+      v-tippy="'Apple'"
       class="fa-brands fa-apple fa-3x mr-3 mb-2 cursor-pointer text-gray-800 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('apple')"
     />
     <span
       v-if="logins.microsoft == 1"
+      v-tippy="'Microsoft'"
       class="fa-brands fa-microsoft fa-3x mr-3 mb-2 cursor-pointer text-blue-300 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('microsoft')"
     />
     <span
       v-if="logins.tiktok == 1"
+      v-tippy="'TikTok'"
       class="fa-brands fa-tiktok fa-3x mr-3 mb-2 cursor-pointer text-pink-600 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('tiktok')"
     />
+    <span
+      v-if="logins.zoho == 1"
+      v-tippy="'Zoho'"
+      class="fas fa-z fa-3x mr-3 mb-2 cursor-pointer text-yellow-500 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('zoho')"
+    />
+    <span
+      v-if="logins.stackexchange == 1"
+      v-tippy="'StackExchange'"
+      class="fa-brands fa-stack-exchange fa-3x mr-3 mb-2 cursor-pointer text-blue-400 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('stackexchange')"
+    />
+    <span
+      v-if="logins.gitlab == 1"
+      v-tippy="'GitLab'"
+      class="fa-brands fa-square-gitlab fa-3x mr-3 mb-2 cursor-pointer text-orange-400 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('gitlab')"
+    />
+
+    <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
   </div>
 </template>
 
@@ -160,6 +194,7 @@ export default {
         'login',
         'social login success',
       );
+
       await self.saveToken({ token: e.data.token }).then((response) => {
         self.getUserByToken({ token: e.data.token }).then(() => {
           setTimeout(() => {
