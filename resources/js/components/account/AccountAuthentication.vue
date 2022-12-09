@@ -78,9 +78,6 @@ export default {
     PowerIcon,
   },
   props: {},
-  setup() {
-    return {};
-  },
   data() {
     return {
       blank: 'AccountAuthentication',
@@ -91,16 +88,11 @@ export default {
       user: (state) => state.user,
     }),
     ...mapGetters({
-      // authenticated: 'auth/authenticated',
-      // user: 'auth/user',
-      // roles: 'auth/roles',
+      authenticated: 'auth/authenticated',
+      user: 'auth/user',
+      roles: 'auth/roles',
     }),
   },
-  watch: {},
-  // created() {},
-  // mounted() {},
-  // beforeUnmount() {},
-  // updated() {},
   methods: {
     ...mapActions({
       popToast: 'toast/popToast',
@@ -140,6 +132,17 @@ export default {
       if (provider.toLowerCase() == 'linkedin') {
         return 'fa-brands fa-linkedin text-blue-900 dark:text-gray-200';
       }
+      if (provider.toLowerCase() == 'zoho') {
+        return 'fas fa-z text-yellow-500 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'stackexchange') {
+        return 'fa-brands fa-stack-exchange text-blue-400 dark:text-gray-200';
+      }
+      if (provider.toLowerCase() == 'gitlab') {
+        return 'fa-brands fa-square-gitlab text-orange-400 dark:text-gray-200';
+      }
+      // NEW_PROVIDER_PLUG :: Put New Provider HERE
+
       return 'fa-solid fa-plug-circle-check text-gray-600 dark:text-gray-200';
     },
     triggerRevoke(provider) {
@@ -198,10 +201,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-:deep() .text-white {
-  color: #ffffff !important;
-}
-</style>
-<style lang="scss" scoped></style>
