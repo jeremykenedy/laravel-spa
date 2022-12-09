@@ -13,9 +13,10 @@
         }}
       </div>
       <AppButton
+        primary
         :loading="loading"
         :disabled="sent"
-        btn-class="leading-snug inline-block rounded bg-blue-600 px-5 py-1 text-sm font-medium leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg "
+        btn-class="leading-snug inline-block px-5 py-1 text-xs font-medium"
         @click="resend"
       >
         <template #text>

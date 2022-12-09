@@ -118,6 +118,7 @@
                   class="mt-3 flex w-full items-center justify-between rounded sm:mt-0 sm:w-8/12"
                 >
                   <AppButton
+                    primary
                     :loading="loading"
                     :disabled="loading"
                     :text="loading ? 'Register' : 'Register'"
