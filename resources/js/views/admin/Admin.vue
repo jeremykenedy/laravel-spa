@@ -167,16 +167,72 @@
                 >
                 </span>
 
+                <!--
+                <span
+                  class="rounded-xl"
+                  :class="
+                    checkSettingEnabled('enableZoHoLogin')
+                      ? 'bg-yellow-300 dark:bg-yellow-600'
+                      : ''
+                  "
+                  style="
+                    height: 24px;
+                    display: inline-block;
+                    padding: 0 6px 0 0;
+                    margin: 0;
+                    line-height: 0.9;
+                  "
+                >
+                  <img
+                    v-if="!loading"
+                    id="zoho"
+                    :src="zohoImgUrl"
+                    alt="Zoho"
+                    class=""
+                    style="
+                      width: 100%;
+                      max-width: 60px;
+                      margin: -10px 0 0 5px;
+                      display: inline-block;
+                    "
+                  />
+                </span>
+                -->
+
                 <span
                   v-if="!loading"
-                  class="fa-brands fa-tiktok fa-fw fa-xs"
+                  class="fa fa-z fa-fw fa-xs"
                   :class="
-                    checkSettingEnabled('enableTikTokLogin')
-                      ? 'text-pink-300 dark:text-pink-300'
+                    checkSettingEnabled('enableZoHoLogin')
+                      ? 'text-yellow-600 dark:text-yellow-600'
                       : 'text-gray-300 dark:text-gray-800'
                   "
                 >
                 </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-stack-exchange fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableStackExchangeLogin')
+                      ? 'text-blue-400 dark:text-blue-400'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-square-gitlab fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableGitLabLogin')
+                      ? 'text-orange-400 dark:text-orange-400'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
               </p>
               <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>
             </div>
@@ -509,6 +565,8 @@ import axios from 'axios';
 // import Chart from 'chart.js';
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 import RolesBadges from '@components/roles/RolesBadges.vue';
+import zohoLight from '@img/vendor-logos/zoho-monocrome-white.png';
+import zohoDark from '@img/vendor-logos/zoho-monocrome-black.png';
 
 export default {
   name: 'Admin',
@@ -685,6 +743,13 @@ export default {
         return null;
       }
       return 'MISSING DSN (URL)';
+    },
+    zohoImgUrl() {
+      if (this.user && this.user.theme_dark) {
+        return zohoLight;
+      } else {
+        return zohoDark;
+      }
     },
   },
   mounted() {
