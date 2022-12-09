@@ -378,7 +378,6 @@ class AppSettingsSeeder extends Seeder
                 'group'     => 'auth',
             ],
 
-
             [
                 'name'      => 'App GitLab Login',
                 'key'       => 'enableGitLabLogin',

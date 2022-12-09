@@ -24,7 +24,7 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Set the private vars and the apps config dynamically
+     * Set the private vars and the apps config dynamically.
      */
     protected function setupProviders()
     {
@@ -34,7 +34,7 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Set the private var $providerSettings
+     * Set the private var $providerSettings.
      */
     protected function setProviderSettings()
     {
@@ -115,12 +115,12 @@ trait SocialiteProvidersTrait
                                             ->orWhere('key', 'appGitLabSecret')
                                             ->orWhere('key', 'appGitLabRedirect');
 
-                                            // NEW_PROVIDER_PLUG :: Put New Provider HERE
+                                    // NEW_PROVIDER_PLUG :: Put New Provider HERE
                                 })->get();
     }
 
     /**
-     * Set the private var $providerConfigs
+     * Set the private var $providerConfigs.
      */
     protected function setProviderConfigs()
     {
@@ -317,7 +317,7 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Set provider configs on the systems config dynamically
+     * Set provider configs on the systems config dynamically.
      */
     protected function setAppProvidersConfigs()
     {
@@ -325,8 +325,9 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * This is the list of logins enabled for the front end of the app
-     * @return Array
+     * This is the list of logins enabled for the front end of the app.
+     *
+     * @return array
      */
     protected function loginsList()
     {
@@ -416,7 +417,6 @@ trait SocialiteProvidersTrait
         if ($existingUser) {
             $user = $existingUser;
         } else {
-
             $email = $sUser->getEmail();
             if (! $email) {
                 $email = 'email_missing_'.str_random(20).'@'.str_random(20).'.example.org';
