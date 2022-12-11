@@ -29,6 +29,13 @@ export default {
         apple: false,
         microsoft: false,
         tiktok: false,
+        zoho: false,
+        stackexchange: false,
+        gitlab: false,
+        reddit: false,
+        snapchat: false,
+        meetup: false,
+        // NEW_PROVIDER_PLUG :: Put New Provider HERE
       },
       currentUserToken: null,
       impersonatorToken: null,

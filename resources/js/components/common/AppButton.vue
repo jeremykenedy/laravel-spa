@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button inline-flex items-center justify-center whitespace-nowrap rounded-md px-4 py-3 text-base font-medium leading-none shadow-sm"
+    class="button inline-flex items-center justify-center"
     :class="
       (loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass
     "
@@ -35,9 +35,6 @@ export default {
     info: { type: Boolean, default: false },
     transparent: { type: Boolean, default: false },
   },
-  setup() {
-    return {};
-  },
   data() {
     return {
       //
@@ -48,117 +45,135 @@ export default {
       return this.$slots.text;
     },
     btnClasses() {
-      let t = null;
       let buttonClasses = `
-          bg-transparent
-          border-transparent
-          hover:text-gray-400
-          active:text-white
-          active:bg-gray-500
-          focus:text-white
-          focus:bg-gray-500
-          dark:text-gray-300
-          dark:hover:text-white
-          dark:hover:bg-transparent
-          shadow-none
-          focus:shadow-lg
-          focus:outline-none
-          focus:ring-0
-          font-medium
-          transition
-          duration-150
-          ease-in-out
+        px-4
+        py-3
+        whitespace-nowrap
+        rounded
+        text-base
+        font-medium
+        leading-none
+        shadow-sm
+        transition
+        duration-150
+        ease-in-out
       `;
+
       if (this.primary) {
-        t = 'indigo';
-        buttonClasses += ' text-white';
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-indigo-600
+          hover:bg-indigo-900
+          dark:bg-indigo-600
+          dark:hover:bg-indigo-400
+          border-indigo-600
+          hover:border-indigo-900
+          dark:border-indigo-600
+          dark:hover:border-indigo-400
+          border-1
+          border
+        `;
       } else if (this.secondary) {
-        t = 'slate';
-        buttonClasses += ' text-white';
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-slate-600
+          hover:bg-slate-900
+          dark:bg-slate-600
+          dark:hover:bg-slate-400
+          border-slate-600
+          hover:border-slate-900
+          dark:border-slate-600
+          dark:hover:border-slate-400
+          border-1
+          border
+        `;
       } else if (this.info) {
-        t = 'blue';
-        buttonClasses += ' text-white';
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-blue-600
+          hover:bg-blue-900
+          dark:bg-blue-600
+          dark:hover:bg-blue-400
+          border-blue-600
+          hover:border-blue-900
+          dark:border-blue-600
+          dark:hover:border-blue-400
+          border-1
+          border
+        `;
       } else if (this.accent) {
-        t = 'gray';
-        buttonClasses += ' text-white';
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-teal-600
+          hover:bg-teal-900
+          dark:bg-teal-600
+          dark:hover:bg-teal-400
+          border-teal-600
+          hover:border-teal-900
+          dark:border-teal-600
+          dark:hover:border-teal-400
+          border-1
+          border
+        `;
       } else if (this.success) {
-        t = 'green';
-        buttonClasses += ' text-white';
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-green-600
+          hover:bg-green-900
+          dark:bg-green-600
+          dark:hover:bg-green-400
+          border-green-600
+          hover:border-green-900
+          dark:border-green-600
+          dark:hover:border-green-400
+          border-1
+          border
+        `;
       } else if (this.warning) {
-        t = 'yellow';
-        buttonClasses += ' text-white';
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-yellow-600
+          hover:bg-yellow-900
+          dark:bg-yellow-600
+          dark:hover:bg-yellow-400
+          border-yellow-600
+          hover:border-yellow-900
+          dark:border-yellow-600
+          dark:hover:border-yellow-400
+          border-1
+          border
+        `;
+      } else if (this.danger) {
+        buttonClasses += `
+          text-white
+          dark:text-white
+          bg-red-600
+          hover:bg-red-900
+          dark:bg-red-600
+          dark:hover:bg-red-400
+          border-red-600
+          hover:border-red-900
+          dark:border-red-600
+          dark:hover:border-red-400
+          border-1
+          border
+        `;
       } else if (this.transparent) {
-        t = 'gray';
-        buttonClasses +=
-          'bg-transparent text-gray-500 hover:text-gray-800 focus:text-gray-800 active:text-gray-500 dark:text-gray-200 dark:hover:text-gray-100';
+        // t = 'gray';
+        buttonClasses += '';
       } else {
-        buttonClasses +=
-          ' text-gray-700 hover:text-gray-900 hover:bg-gray-500 hover:text-gray-100';
-      }
-      if (this.danger) {
-        t = 'red';
-        if (this.outline) {
-          buttonClasses = `
-            bg-transparent
-            border
-            border-1
-            border-red-400
-            text-red-400
-            hover:text-white
-            hover:bg-red-700
-          `;
-        } else {
-          buttonClasses = `
-            bg-red-600
-            hover:bg-red-800
-            text-white
-            dark:text-white
-            dark:bg-red-600
-            dark:hover:bg-red-400
-            border
-            border-transparent
-          `;
-        }
-      }
-      if (t) {
-        if (this.outline) {
-          buttonClasses = `
-            bg-transparent
-            border
-            border-1
-            border-${t}-400
-            text-${t}-400
-            hover:text-white
-            hover:bg-${t}-700
-          `;
-        } else {
-          buttonClasses = `
-            bg-${t}-600
-            hover:bg-${t}-900
-            dark:text-white
-            dark:bg-${t}-600
-            dark:hover:bg-${t}-400
-            border
-            border-transparent
-            focus:shadow-lg
-            focus:outline-none
-            focus:ring-0
-            font-medium
-            transition
-            duration-150
-            ease-in-out
-          `;
-        }
+        buttonClasses += '';
       }
 
       return buttonClasses;
     },
   },
-  watch: {},
-  created() {},
-  mounted() {},
-  beforeUnmount() {},
-  updated() {},
   methods: {
     clickButton() {
       this.$emit('buttonClicked');
@@ -166,6 +181,3 @@ export default {
   },
 };
 </script>
-
-<style scoped></style>
-<style lang="scss" scoped></style>

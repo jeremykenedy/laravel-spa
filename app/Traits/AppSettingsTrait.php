@@ -60,6 +60,7 @@ trait AppSettingsTrait
             putenv('APPLE_REDIRECT_URI='.$setting->val);
             config(['services.apple.redirect' => $setting->val]);
         }
+
         if ($setting->key == 'appStackExchangeSite') {
             $this->setEnv('STACKEXCHANGE_CLIENT_SITE', $setting->val, config('services.stackexchange.site'));
             putenv('STACKEXCHANGE_CLIENT_SITE='.$setting->val);
@@ -85,6 +86,7 @@ trait AppSettingsTrait
             putenv('STACKEXCHANGE_REDIRECT_URI='.$setting->val);
             config(['services.stackexchange.redirect' => $setting->val]);
         }
+
         if ($setting->key == 'appGitLabId') {
             $this->setEnv('GITLAB_CLIENT_ID', $setting->val, config('services.gitlab.client_id'));
             putenv('GITLAB_CLIENT_ID='.$setting->val);
@@ -99,6 +101,64 @@ trait AppSettingsTrait
             $this->setEnv('GITLAB_REDIRECT_URI', $setting->val, config('services.gitlab.redirect'));
             putenv('GITLAB_REDIRECT_URI='.$setting->val);
             config(['services.gitlab.redirect' => $setting->val]);
+        }
+
+        if ($setting->key == 'appRedditId') {
+            $this->setEnv('REDDIT_CLIENT_ID', $setting->val, config('services.reddit.client_id'));
+            putenv('REDDIT_CLIENT_ID='.$setting->val);
+            config(['services.reddit.client_id' => $setting->val]);
+        }
+        if ($setting->key == 'appRedditSecret') {
+            $this->setEnv('REDDIT_CLIENT_SECRET', $setting->val, config('services.reddit.client_secret'));
+            putenv('REDDIT_CLIENT_SECRET='.$setting->val);
+            config(['services.reddit.client_secret' => $setting->val]);
+        }
+        if ($setting->key == 'appRedditResponseType') {
+            $this->setEnv('REDDIT_RESPONSE_TYPE', $setting->val, config('services.reddit.response_type'));
+            putenv('REDDIT_RESPONSE_TYPE='.$setting->val);
+            config(['services.reddit.response_type' => $setting->val]);
+        }
+        if ($setting->key == 'appRedditState') {
+            $this->setEnv('REDDIT_STATE', $setting->val, config('services.reddit.state'));
+            putenv('REDDIT_STATE='.$setting->val);
+            config(['services.reddit.state' => $setting->val]);
+        }
+        if ($setting->key == 'appRedditRedirect') {
+            $this->setEnv('REDDIT_REDIRECT_URI', $setting->val, config('services.reddit.redirect'));
+            putenv('REDDIT_REDIRECT_URI='.$setting->val);
+            config(['services.reddit.redirect' => $setting->val]);
+        }
+
+        if ($setting->key == 'appSnapchatId') {
+            $this->setEnv('SNAPCHAT_CLIENT_ID', $setting->val, config('services.snapchat.client_id'));
+            putenv('SNAPCHAT_CLIENT_ID='.$setting->val);
+            config(['services.snapchat.client_id' => $setting->val]);
+        }
+        if ($setting->key == 'appSnapchatSecret') {
+            $this->setEnv('SNAPCHAT_CLIENT_SECRET', $setting->val, config('services.snapchat.client_secret'));
+            putenv('SNAPCHAT_CLIENT_SECRET='.$setting->val);
+            config(['services.snapchat.client_secret' => $setting->val]);
+        }
+        if ($setting->key == 'appSnapchatRedirect') {
+            $this->setEnv('SNAPCHAT_REDIRECT_URI', $setting->val, config('services.snapchat.redirect'));
+            putenv('SNAPCHAT_REDIRECT_URI='.$setting->val);
+            config(['services.snapchat.redirect' => $setting->val]);
+        }
+
+        if ($setting->key == 'appMeetupId') {
+            $this->setEnv('MEETUP_CLIENT_ID', $setting->val, config('services.meetup.client_id'));
+            putenv('MEETUP_CLIENT_ID='.$setting->val);
+            config(['services.meetup.client_id' => $setting->val]);
+        }
+        if ($setting->key == 'appMeetupSecret') {
+            $this->setEnv('MEETUP_CLIENT_SECRET', $setting->val, config('services.meetup.client_secret'));
+            putenv('MEETUP_CLIENT_SECRET='.$setting->val);
+            config(['services.meetup.client_secret' => $setting->val]);
+        }
+        if ($setting->key == 'appMeetupRedirect') {
+            $this->setEnv('MEETUP_REDIRECT_URI', $setting->val, config('services.meetup.redirect'));
+            putenv('MEETUP_REDIRECT_URI='.$setting->val);
+            config(['services.meetup.redirect' => $setting->val]);
         }
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE

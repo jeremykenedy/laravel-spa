@@ -837,6 +837,160 @@
                 />
               </div>
 
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableRedditLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-square-reddit fa-fw text-orange-700 dark:text-orange-600"
+                    />
+                    Reddit
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableRedditLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditResponseType'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditState'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appRedditRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableSnapchatLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-square-snapchat fa-fw text-yellow-400 dark:text-yellow-400"
+                    />
+                    Snapchat
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableSnapchatLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appSnapchatId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appSnapchatSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appSnapchatRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appSnapchatRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableMeetupLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-meetup fa-fw text-red-400 dark:text-red-400"
+                    />
+                    Meetup
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableMeetupLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appMeetupId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appMeetupSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appMeetupRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appMeetupRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
               <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
             </div>
           </div>

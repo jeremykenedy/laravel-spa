@@ -404,6 +404,96 @@ class AppSettingsSeeder extends Seeder
                 'group'     => 'auth',
             ],
 
+            [
+                'name'      => 'App Reddit Login',
+                'key'       => 'enableRedditLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.reddit.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Reddit Id',
+                'key'       => 'appRedditId',
+                'val'       => config('services.reddit.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Reddit Secret',
+                'key'       => 'appRedditSecret',
+                'val'       => config('services.reddit.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Reddit Response Type',
+                'key'       => 'appRedditResponseType',
+                'val'       => config('services.reddit.response_type'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Reddit State',
+                'key'       => 'appRedditState',
+                'val'       => config('services.reddit.state'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Reddit Redirect',
+                'key'       => 'appRedditRedirect',
+                'val'       => url('api/oauth/reddit/callback'),
+                'group'     => 'auth',
+            ],
+
+            [
+                'name'      => 'App Snapchat Login',
+                'key'       => 'enableSnapchatLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.snapchat.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Snapchat Id',
+                'key'       => 'appSnapchatId',
+                'val'       => config('services.snapchat.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Snapchat Secret',
+                'key'       => 'appSnapchatSecret',
+                'val'       => config('services.snapchat.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Snapchat Redirect',
+                'key'       => 'appSnapchatRedirect',
+                'val'       => url('api/oauth/snapchat/callback'),
+                'group'     => 'auth',
+            ],
+
+            [
+                'name'      => 'App Meetup Login',
+                'key'       => 'enableMeetupLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.meetup.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Meetup Id',
+                'key'       => 'appMeetupId',
+                'val'       => config('services.meetup.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Meetup Secret',
+                'key'       => 'appMeetupSecret',
+                'val'       => config('services.meetup.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App Meetup Redirect',
+                'key'       => 'appMeetupRedirect',
+                'val'       => url('api/oauth/meetup/callback'),
+                'group'     => 'auth',
+            ],
+
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
             [

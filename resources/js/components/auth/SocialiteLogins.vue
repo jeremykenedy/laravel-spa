@@ -98,6 +98,27 @@
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('gitlab')"
     />
+    <span
+      v-if="logins.reddit == 1"
+      v-tippy="'GitLab'"
+      class="fa-brands fa-square-reddit fa-3x mr-3 mb-2 cursor-pointer text-orange-700 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('reddit')"
+    />
+    <span
+      v-if="logins.snapchat == 1"
+      v-tippy="'Snapchat'"
+      class="fa-brands fa-square-snapchat fa-3x mr-3 mb-2 cursor-pointer text-yellow-400 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('snapchat')"
+    />
+    <span
+      v-if="logins.meetup == 1"
+      v-tippy="'Meetup'"
+      class="fa-brands fa-meetup fa-3x mr-3 mb-2 cursor-pointer text-red-400 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('meetup')"
+    />
 
     <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
   </div>

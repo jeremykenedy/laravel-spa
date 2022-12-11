@@ -9,7 +9,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -113,8 +115,24 @@ trait SocialiteProvidersTrait
                                             ->orWhere('key', 'enableGitLabLogin')
                                             ->orWhere('key', 'appGitLabId')
                                             ->orWhere('key', 'appGitLabSecret')
-                                            ->orWhere('key', 'appGitLabRedirect');
+                                            ->orWhere('key', 'appGitLabRedirect')
 
+                                            ->orWhere('key', 'enableRedditLogin')
+                                            ->orWhere('key', 'appRedditId')
+                                            ->orWhere('key', 'appRedditSecret')
+                                            ->orWhere('key', 'appRedditResponseType')
+                                            ->orWhere('key', 'appRedditState')
+                                            ->orWhere('key', 'appRedditRedirect')
+
+                                            ->orWhere('key', 'enableSnapchatLogin')
+                                            ->orWhere('key', 'appSnapchatId')
+                                            ->orWhere('key', 'appSnapchatSecret')
+                                            ->orWhere('key', 'appSnapchatRedirect')
+
+                                            ->orWhere('key', 'enableMeetupLogin')
+                                            ->orWhere('key', 'appMeetupId')
+                                            ->orWhere('key', 'appMeetupSecret')
+                                            ->orWhere('key', 'appMeetupRedirect');
                                     // NEW_PROVIDER_PLUG :: Put New Provider HERE
                                 })->get();
     }
@@ -232,6 +250,31 @@ trait SocialiteProvidersTrait
         $appGitLabRedirect = $this->providerSettings->where('key', 'appGitLabRedirect')->first();
         $appGitLabRedirect = $appGitLabRedirect ? $appGitLabRedirect->val : null;
 
+        $appRedditId = $this->providerSettings->where('key', 'appRedditId')->first();
+        $appRedditId = $appRedditId ? $appRedditId->val : null;
+        $appRedditSecret = $this->providerSettings->where('key', 'appRedditSecret')->first();
+        $appRedditSecret = $appRedditSecret ? $appRedditSecret->val : null;
+        $appRedditRedirect = $this->providerSettings->where('key', 'appRedditRedirect')->first();
+        $appRedditRedirect = $appRedditRedirect ? $appRedditRedirect->val : null;
+        $appRedditResponseType = $this->providerSettings->where('key', 'appRedditResponseType')->first();
+        $appRedditResponseType = $appRedditResponseType ? $appRedditResponseType->val : null;
+        $appRedditState = $this->providerSettings->where('key', 'appRedditState')->first();
+        $appRedditState = $appRedditState ? $appRedditState->val : null;
+
+        $appSnapchatId = $this->providerSettings->where('key', 'appSnapchatId')->first();
+        $appSnapchatId = $appSnapchatId ? $appSnapchatId->val : null;
+        $appSnapchatSecret = $this->providerSettings->where('key', 'appSnapchatSecret')->first();
+        $appSnapchatSecret = $appSnapchatSecret ? $appSnapchatSecret->val : null;
+        $appSnapchatRedirect = $this->providerSettings->where('key', 'appSnapchatRedirect')->first();
+        $appSnapchatRedirect = $appSnapchatRedirect ? $appSnapchatRedirect->val : null;
+
+        $appMeetupId = $this->providerSettings->where('key', 'appMeetupId')->first();
+        $appMeetupId = $appMeetupId ? $appMeetupId->val : null;
+        $appMeetupSecret = $this->providerSettings->where('key', 'appMeetupSecret')->first();
+        $appMeetupSecret = $appMeetupSecret ? $appMeetupSecret->val : null;
+        $appMeetupRedirect = $this->providerSettings->where('key', 'appMeetupRedirect')->first();
+        $appMeetupRedirect = $appMeetupRedirect ? $appMeetupRedirect->val : null;
+
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
         $providerConfigs = [
@@ -310,6 +353,24 @@ trait SocialiteProvidersTrait
                 'client_secret' => $appGitLabSecret,
                 'redirect'      => $appGitLabRedirect,
             ],
+            'services.reddit' => [
+                'client_id'     => $appRedditId,
+                'client_secret' => $appRedditSecret,
+                'response_type' => $appRedditResponseType,
+                'state'         => $appRedditState,
+                'redirect'      => $appRedditRedirect,
+            ],
+            'services.snapchat' => [
+                'client_id'     => $appSnapchatId,
+                'client_secret' => $appSnapchatSecret,
+                'redirect'      => $appSnapchatRedirect,
+            ],
+            'services.meetup' => [
+                'client_id'     => $appMeetupId,
+                'client_secret' => $appMeetupSecret,
+                'redirect'      => $appMeetupRedirect,
+            ],
+
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
         ];
 
@@ -347,6 +408,9 @@ trait SocialiteProvidersTrait
         $enableZoHoLogin = $ps->firstWhere('key', 'enableZoHoLogin')->val;
         $enableStackExchangeLogin = $ps->firstWhere('key', 'enableStackExchangeLogin')->val;
         $enableGitLabLogin = $ps->firstWhere('key', 'enableGitLabLogin')->val;
+        $enableRedditLogin = $ps->firstWhere('key', 'enableRedditLogin')->val;
+        $enableSnapchatLogin = $ps->firstWhere('key', 'enableSnapchatLogin')->val;
+        $enableMeetupLogin = $ps->firstWhere('key', 'enableMeetupLogin')->val;
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
@@ -365,6 +429,9 @@ trait SocialiteProvidersTrait
             'zoho'          => $enableZoHoLogin,
             'stackexchange' => $enableStackExchangeLogin,
             'gitlab'        => $enableGitLabLogin,
+            'reddit'        => $enableRedditLogin,
+            'snapchat'      => $enableSnapchatLogin,
+            'meetup'        => $enableMeetupLogin,
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
         ];
@@ -396,6 +463,11 @@ trait SocialiteProvidersTrait
         }
 
         $existingUser = User::whereEmail($user->getEmail())->first();
+
+        if(!$existingUser) {
+            $existingUser = Auth::user();
+        }
+
         $user = $this->updateOrCreateUser($provider, $user, $existingUser);
         $token = $user->createToken($provider.'-token')->plainTextToken;
 
@@ -422,8 +494,14 @@ trait SocialiteProvidersTrait
                 $email = 'email_missing_'.str_random(20).'@'.str_random(20).'.example.org';
             }
 
+            $name = $sUser->getName();
+
+            if($provider == 'reddit') {
+                $name = $sUser->nickname;
+            }
+
             $user = User::create([
-                'name'              => $sUser->getName(),
+                'name'              => $name,
                 'email'             => $email,
                 'password'          => bcrypt(str_random(50)),
             ]);
