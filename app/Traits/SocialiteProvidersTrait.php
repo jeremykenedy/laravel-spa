@@ -464,7 +464,7 @@ trait SocialiteProvidersTrait
 
         $existingUser = User::whereEmail($user->getEmail())->first();
 
-        if(!$existingUser) {
+        if (! $existingUser) {
             $existingUser = Auth::user();
         }
 
@@ -496,7 +496,7 @@ trait SocialiteProvidersTrait
 
             $name = $sUser->getName();
 
-            if($provider == 'reddit') {
+            if ($provider == 'reddit') {
                 $name = $sUser->nickname;
             }
 
