@@ -106,20 +106,23 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 ## Socialite
 
 #### Get Socialite Login API Keys:
-* [Facebook API](https://developers.facebook.com/) (Will work with localhost)
+* [Facebook API](https://developers.facebook.com/) (Will work with local dev callback)
 * [Twitter API](https://apps.twitter.com/)
 * [Instagram API](https://instagram.com/developer/register/)
-* [GitHub API](https://github.com/settings/applications/new)
+* [GitHub API](https://github.com/settings/applications/new) (Will work with local dev callback)
 * [YouTube API](https://developers.google.com/youtube/v3/getting-started)
 * [Google API](https://console.developers.google.com/)
-* [LinkedIn API](https://www.linkedin.com/developers/apps/)
-* [Twitch API](https://dev.twitch.tv/docs/authentication/)
+* [LinkedIn API](https://www.linkedin.com/developers/apps/) (Will work with local dev callback)
+* [Twitch API](https://dev.twitch.tv/docs/authentication/) (Will work with local dev callback)
 * [Microsoft API]()
 * [TikTok API](https://developers.tiktok.com/)
 * [Apple API](https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple)
-* [ZoHo API](https://api-console.zoho.com/)
-* [StackExchange API](https://stackapps.com/apps/oauth/register/)
-* [GitLab API](https://gitlab.com/oauth/applications)
+* [ZoHo API](https://api-console.zoho.com/) (Will work with local dev callback)
+* [StackExchange API](https://stackapps.com/apps/oauth/register/) (Will work with local dev callback)
+* [GitLab API](https://gitlab.com/oauth/applications) (Will work with local dev callback)
+* [Reddit API](https://www.reddit.com/prefs/apps) [Register](https://docs.google.com/a/reddit.com/forms/d/e/1FAIpQLSezNdDNK1-P8mspSbmtC2r86Ee9ZRbC66u929cG2GX0T9UMyw/viewform) (Will work with local dev callback)
+* [Snapchat API](https://devportal.snap.com/manage/)
+* [Meetup API](https://www.meetup.com/api/oauth/list/)
 
 #### Add More Socialite Logins
 * See full list of providers: [https://socialiteproviders.github.io](https://socialiteproviders.com/about/)

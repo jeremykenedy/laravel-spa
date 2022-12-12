@@ -232,6 +232,39 @@
                 >
                 </span>
 
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-square-reddit fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableRedditLogin')
+                      ? 'text-orange-700 dark:text-orange-700'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-square-snapchat fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableSnapchatLogin')
+                      ? 'text-yellow-400 dark:text-yellow-400'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-meetup fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableMeetupLogin')
+                      ? 'text-red-400 dark:text-red-400'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
+
                 <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
               </p>
               <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>

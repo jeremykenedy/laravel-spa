@@ -32,14 +32,14 @@ Route::post('/verify-resend', [VerificationController::class, 'resend']);
 Route::get('/user', [UserController::class, 'user']);
 Route::post('/user-by-token', [UserController::class, 'userByToken']);
 Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
+Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
+Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
 
 Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', RegisterController::class);
     Route::post('/forgot-password', ForgotPasswordController::class);
     Route::post('/reset-password', ResetPasswordController::class);
-    Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
-    Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
 });
 
 Route::middleware('auth:sanctum')->group(function () {

@@ -146,6 +146,14 @@
                       class="fa-brands fa-square-facebook fa-fw text-blue-600 dark:text-blue-600"
                     />
                     Facebook
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://developers.facebook.com/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -192,6 +200,14 @@
                       class="fa-brands fa-twitter fa-fw text-blue-300 dark:text-blue-300"
                     />
                     Twitter
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://apps.twitter.com/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -238,6 +254,14 @@
                       class="fa-brands fa-google fa-fw text-green-600 dark:text-green-500"
                     />
                     Google
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://console.developers.google.com/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -284,6 +308,14 @@
                       class="fa-brands fa-instagram fa-fw text-yellow-600 dark:text-yellow-400"
                     />
                     Instagram
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://instagram.com/developer/register/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -330,6 +362,14 @@
                       class="fa-brands fa-github fa-fw text-gray-100 dark:text-gray-100"
                     />
                     Github
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://github.com/settings/applications/new"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -376,6 +416,14 @@
                       class="fa-brands fa-linkedin fa-fw text-blue-600 dark:text-blue-600"
                     />
                     LinkedIn
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://www.linkedin.com/developers/apps/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
 
@@ -423,6 +471,14 @@
                       class="fa-brands fa-twitch fa-fw text-blue-600 dark:text-blue-600"
                     />
                     Twitch
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://dev.twitch.tv/docs/authentication/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
 
@@ -470,6 +526,14 @@
                       class="fa-brands fa-youtube fa-fw text-red-500 dark:text-red-500"
                     />
                     YouTube
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://developers.google.com/youtube/v3/getting-started"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -516,6 +580,14 @@
                       class="fa-brands fa-apple fa-fw text-white-500 dark:text-white-500"
                     />
                     Apple
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://developer.okta.com/blog/2019/06/04/what-the-heck-is-sign-in-with-apple"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -586,6 +658,14 @@
                       class="fa-brands fa-microsoft fa-fw text-blue-300 dark:text-blue-300"
                     />
                     Microsoft
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href=""
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -632,6 +712,14 @@
                       class="fa-brands fa-tiktok fa-fw text-pink-500 dark:text-pink-500"
                     />
                     TikTok
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://developers.tiktok.com/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -690,6 +778,14 @@
                       "
                     />
                     <span class="sr-only"> ZoHo </span>
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://api-console.zoho.com/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -736,6 +832,14 @@
                       class="fa-brands fa-stack-exchange fa-fw text-blue-400 dark:text-blue-400"
                     />
                     Stack Exchange
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://stackapps.com/apps/oauth/register/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -798,6 +902,14 @@
                       class="fa-brands fa-square-gitlab fa-fw text-orange-400 dark:text-orange-400"
                     />
                     GitLab
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://gitlab.com/oauth/applications"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
                   </h4>
                 </div>
                 <AppSettingToggle
@@ -833,6 +945,184 @@
                 />
                 <div
                   v-if="setting.key == 'appGitLabRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableRedditLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-square-reddit fa-fw text-orange-700 dark:text-orange-600"
+                    />
+                    Reddit
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://www.reddit.com/prefs/apps"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableRedditLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditResponseType'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditState'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appRedditRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appRedditRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableSnapchatLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-square-snapchat fa-fw text-yellow-400 dark:text-yellow-400"
+                    />
+                    Snapchat
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://devportal.snap.com/manage/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableSnapchatLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appSnapchatId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appSnapchatSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appSnapchatRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appSnapchatRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableMeetupLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-meetup fa-fw text-red-400 dark:text-red-400"
+                    />
+                    Meetup
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://www.meetup.com/api/oauth/list/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableMeetupLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appMeetupId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appMeetupSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appMeetupRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appMeetupRedirect'"
                   class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
                 />
               </div>

@@ -122,13 +122,12 @@ return [
         'client_secret' => env('GITLAB_CLIENT_SECRET'),
         'redirect'      => env('GITLAB_REDIRECT_URI'),
     ],
-
-    // NEW_PROVIDER_PLUG :: Put New Provider HERE
-
     'reddit' => [
         'enabled'       => env('REDDIT_ENABLED', false),
         'client_id'     => env('REDDIT_CLIENT_ID'),
         'client_secret' => env('REDDIT_CLIENT_SECRET'),
+        'response_type' => env('REDDIT_RESPONSE_TYPE', 'code'),
+        'state'         => env('REDDIT_STATE', 'r@nd0m5tr1n6'),
         'redirect'      => env('REDDIT_REDIRECT_URI'),
     ],
     'snapchat' => [
@@ -143,6 +142,9 @@ return [
         'client_secret' => env('MEETUP_CLIENT_SECRET'),
         'redirect'      => env('MEETUP_REDIRECT_URI'),
     ],
+
+    // NEW_PROVIDER_PLUG :: Put New Provider HERE
+
     'bitbucket' => [
         'enabled'       => env('BITBUCKET_ENABLED', false),
         'client_id'     => env('BITBUCKET_CLIENT_ID'),
