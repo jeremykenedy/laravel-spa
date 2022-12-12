@@ -77,7 +77,7 @@
     "stylelint": "^14.15.0",
     "stylelint-webpack-plugin": "^3.3.0",
     "tailwindcss": "^3.1.8",
-    "tw-elements": "^1.0.0-alpha12",
+    "tw-elements": "^1.0.0-alpha13",
     "typescript": "^4.9.4",
     "universal-social-auth": "^0.2.6",
     "v-tables-3": "^0.4.7",
