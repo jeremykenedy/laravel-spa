@@ -71,7 +71,7 @@
     "postcss": "^8.4.16",
     "postcss-nesting": "^10.1.10",
     "prettier": "^2.8.1",
-    "prettier-plugin-tailwindcss": "^0.1.13",
+    "prettier-plugin-tailwindcss": "^0.2.1",
     "sass": "^1.54.8",
     "sass-loader": "^13.0.2",
     "stylelint": "^14.15.0",
