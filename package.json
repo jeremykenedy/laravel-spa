@@ -70,7 +70,7 @@
     "lodash": "^4.17.21",
     "postcss": "^8.4.16",
     "postcss-nesting": "^10.1.10",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.1",
     "prettier-plugin-tailwindcss": "^0.1.13",
     "sass": "^1.54.8",
     "sass-loader": "^13.0.2",
