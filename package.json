@@ -33,7 +33,7 @@
     "@babel/core": "^7.19.6",
     "@babel/eslint-parser": "^7.19.1",
     "@heroicons/vue": "^2.0.13",
-    "@plugin-web-update-notification/vite": "^0.4.2",
+    "@plugin-web-update-notification/vite": "^1.0.0",
     "@popperjs/core": "^2.11.6",
     "@rushstack/eslint-patch": "^1.1.4",
     "@sentry/vite-plugin": "^0.2.4",
