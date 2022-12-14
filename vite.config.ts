@@ -57,17 +57,29 @@ export default ({ mode }) => {
       }),
       splitVendorChunkPlugin(),
       Inspect(),
+
+      // process.env.VITE_SENTRY_IO_ENABLED
+
       sentryVitePlugin({
         include: '.',
         ignore: ['node_modules', 'vite.config.ts'],
         silent: false,
         telemetry: true,
         sourceMapReference: false,
+        sourceMaps: {
+          include: ['./public/build/assets'],
+          ignore: ['node_modules'],
+          urlPrefix: '~/assets'
+        },
+        deploy: {
+          env: process.env.VITE_APP_ENV,
+        },
         org: process.env.VITE_SENTRY_ORG,
         project: process.env.VITE_SENTRY_PROJECT,
         authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
       }),
     ],
+    sourcemap: true,
     server: {
       https: {
         key: fs.readFileSync(process.env.VITE_SERVER_HTTPS_KEY),

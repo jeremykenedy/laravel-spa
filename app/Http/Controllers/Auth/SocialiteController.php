@@ -8,8 +8,10 @@ use App\Models\SocialiteProvider;
 use App\Traits\SocialiteProvidersTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -59,8 +61,16 @@ class SocialiteController extends Controller
             abort(419);
         }
 
+        $state = Crypt::encrypt(config('app.key'));
+        $user = auth('sanctum')->user();
+
+        if($user) {
+            $token = $user->createToken($provider.'-user-token')->plainTextToken;
+            $state = Crypt::encrypt($token);
+        }
+
         return response()->json([
-            'url' => Socialite::driver($provider)->stateless()->redirect()->getTargetUrl(),
+            'url' => Socialite::driver($provider)->stateless()->with(['state' => $state])->redirect()->getTargetUrl(),
         ]);
     }
 
@@ -79,12 +89,35 @@ class SocialiteController extends Controller
         }
 
         $socialUser = Socialite::driver($provider)->stateless()->user();
-        $userData = $this->findOrCreateUser($provider, $socialUser);
+        $state = $request->state ? Crypt::decrypt($request->state) : null;
+        $userData = $this->findOrCreateUser($provider, $socialUser, $state);
 
         $user = $userData['user'];
         $token = $userData['token'];
 
-        Auth::login($user, true);
+        if($user) {
+            auth()->login($user);
+        }
+
+// Log::info('A');
+// Log::info($userData);
+
+if(!$userData) {
+// abort(401);
+$token = 'cannot_add';
+}
+
+
+        // if(!$token) {
+        //     abort(401);
+        //     return response()->json([
+        //         'code'      => 401,
+        //         'message'   => 'Unauthorized',
+        //     ], Response::HTTP_UNAUTHORIZED);
+        // }
+
+Log::info('B');
+
 
         return view('socialite/callback', [
             'token'         => $token,

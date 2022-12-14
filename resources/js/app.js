@@ -14,6 +14,7 @@ import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
 import VueGtag from 'vue-gtag-next';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
+import { loadEnv } from 'vite';
 
 axios.defaults.withCredentials = true;
 

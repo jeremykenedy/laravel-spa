@@ -327,17 +327,29 @@ export default {
     },
     async onMessage(e) {
       const self = this;
+
+      console.log(e);
+
       if (e.origin !== window.origin || !e.data.token) {
         return;
       }
-      self.popToast({
-        message: 'Successfully authorized provider',
-        timer: 2500,
-        icon: 'success',
-      });
-      self.getUser().then((response) => {
-        //
-      });
+
+      if (e.data.token && e.data.token == 'cannot_add') {
+        self.popToast({
+          message: 'Successfully authorized provider',
+          timer: 2500,
+          icon: 'success',
+        });
+      } else {
+        self.popToast({
+          message: 'Successfully authorized provider',
+          timer: 2500,
+          icon: 'success',
+        });
+        self.getUser().then((response) => {
+          //
+        });
+      }
     },
     openWindow(url, title, options = {}) {
       if (typeof url === 'object') {
