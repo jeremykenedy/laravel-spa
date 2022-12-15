@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
+use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -444,28 +445,44 @@ trait SocialiteProvidersTrait
      * @param  SocialiteUser  $user
      * @return App\Models\User
      */
-    protected function findOrCreateUser(string $provider, SocialiteUser $user): array
+    protected function findOrCreateUser(string $provider, SocialiteUser $user, string $state = null): array
     {
+        $existingUser = null;
+
+        if($state && $state != config('app.key')) {
+            $token = PersonalAccessToken::findToken($state);
+            if($token) {
+                $existingUser = $token->tokenable;
+            }
+        } else {
+            $existingUser = User::whereEmail($user->getEmail())->first();
+        }
+
         $oauthProvider = SocialiteProvider::where('provider', $provider)
             ->where('provider_user_id', $user->getId())
             ->first();
 
-        if ($oauthProvider) {
-            $oauthProvider->update([
-                'access_token'  => $user->token,
-                'refresh_token' => $user->refreshToken,
-            ]);
+        if(!$existingUser) {
+            if ($oauthProvider) {
+                $oauthProvider->update([
+                    'access_token'  => $user->token,
+                    'refresh_token' => $user->refreshToken,
+                ]);
 
-            return [
-                'user'  => $oauthProvider->user,
-                'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
-            ];
-        }
-
-        $existingUser = User::whereEmail($user->getEmail())->first();
-
-        if (! $existingUser) {
-            $existingUser = Auth::user();
+                return [
+                    'user'  => $oauthProvider->user,
+                    'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
+                ];
+            }
+        } else {
+            if ($oauthProvider) {
+                if($oauthProvider->user->id != $existingUser->id) {
+                    return [
+                        'user'  => null,
+                        'token' => null,
+                    ];
+                }
+            }
         }
 
         $user = $this->updateOrCreateUser($provider, $user, $existingUser);

@@ -328,16 +328,29 @@ export default {
     async onMessage(e) {
       const self = this;
       if (e.origin !== window.origin || !e.data.token) {
+        // self.popToast({
+        //   message: 'An Error Occurred',
+        //   timer: 5000,
+        //   icon: 'error',
+        // });
         return;
       }
-      self.popToast({
-        message: 'Successfully authorized provider',
-        timer: 2500,
-        icon: 'success',
-      });
-      self.getUser().then((response) => {
-        //
-      });
+      if (e.data.token && e.data.token == 'cannot_add') {
+        self.popToast({
+          message: 'Unable to authorize provider',
+          timer: 5000,
+          icon: 'error',
+        });
+      } else {
+        self.popToast({
+          message: 'Successfully authorized provider',
+          timer: 2500,
+          icon: 'success',
+        });
+        self.getUser().then((response) => {
+          //
+        });
+      }
     },
     openWindow(url, title, options = {}) {
       if (typeof url === 'object') {
