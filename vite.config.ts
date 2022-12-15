@@ -13,6 +13,29 @@ const fs = require('node:fs');
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
 
+  var SentryPlugin = null;
+
+  if (process.env.VITE_SENTRY_IO_ENABLED) {
+    SentryPlugin = sentryVitePlugin({
+      include: '.',
+      ignore: ['node_modules', 'vite.config.ts'],
+      silent: false,
+      telemetry: true,
+      sourceMapReference: false,
+      sourceMaps: {
+        include: ['./public/build/assets'],
+        ignore: ['node_modules'],
+        urlPrefix: '~/assets',
+      },
+      deploy: {
+        env: process.env.VITE_APP_ENV,
+      },
+      org: process.env.VITE_SENTRY_ORG,
+      project: process.env.VITE_SENTRY_PROJECT,
+      authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
+    });
+  }
+
   return defineConfig({
     plugins: [
       laravel({
@@ -57,16 +80,7 @@ export default ({ mode }) => {
       }),
       splitVendorChunkPlugin(),
       Inspect(),
-      sentryVitePlugin({
-        include: '.',
-        ignore: ['node_modules', 'vite.config.ts'],
-        silent: false,
-        telemetry: true,
-        sourceMapReference: false,
-        org: process.env.VITE_SENTRY_ORG,
-        project: process.env.VITE_SENTRY_PROJECT,
-        authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
-      }),
+      SentryPlugin,
     ],
     server: {
       https: {

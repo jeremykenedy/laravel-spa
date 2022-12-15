@@ -1,7 +1,7 @@
 <template>
   <AppButton
     primary
-    text="Download"
+    text="Process Download"
     :loading="loading"
     class="inline-flex items-center justify-center px-5 py-3"
     :icon="loading ? 'fa fa-circle-notch fa-spin' : 'fa fa-download'"
