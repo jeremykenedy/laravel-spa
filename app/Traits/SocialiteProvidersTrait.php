@@ -449,9 +449,9 @@ trait SocialiteProvidersTrait
     {
         $existingUser = null;
 
-        if($state && $state != config('app.key')) {
+        if ($state && $state != config('app.key')) {
             $token = PersonalAccessToken::findToken($state);
-            if($token) {
+            if ($token) {
                 $existingUser = $token->tokenable;
             }
         } else {
@@ -462,7 +462,7 @@ trait SocialiteProvidersTrait
             ->where('provider_user_id', $user->getId())
             ->first();
 
-        if(!$existingUser) {
+        if (! $existingUser) {
             if ($oauthProvider) {
                 $oauthProvider->update([
                     'access_token'  => $user->token,
@@ -476,7 +476,7 @@ trait SocialiteProvidersTrait
             }
         } else {
             if ($oauthProvider) {
-                if($oauthProvider->user->id != $existingUser->id) {
+                if ($oauthProvider->user->id != $existingUser->id) {
                     return [
                         'user'  => null,
                         'token' => null,
