@@ -30,7 +30,7 @@
     "vuex-shared-mutations": "^1.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.6",
+    "@babel/core": "^7.20.5",
     "@babel/eslint-parser": "^7.19.1",
     "@heroicons/vue": "^2.0.13",
     "@plugin-web-update-notification/vite": "^1.0.0",
