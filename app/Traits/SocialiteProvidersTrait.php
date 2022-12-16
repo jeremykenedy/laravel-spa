@@ -459,7 +459,7 @@ trait SocialiteProvidersTrait
             $existingUser = User::whereEmail($user->getEmail())->first();
         }
 
-        if(!$existingUser) {
+        if (! $existingUser) {
             $existingUser = auth('sanctum')->user();
         }
 
