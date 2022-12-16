@@ -64,7 +64,7 @@ class SocialiteController extends Controller
         $state = Crypt::encrypt(config('app.key'));
         $user = auth('sanctum')->user();
 
-        if($user) {
+        if ($user) {
             $token = $user->createToken($provider.'-user-token')->plainTextToken;
             $state = Crypt::encrypt($token);
         }
@@ -97,7 +97,7 @@ class SocialiteController extends Controller
         $user = $userData['user'];
         $token = $userData['token'];
 
-        if($user && $token) {
+        if ($user && $token) {
             auth()->login($user);
         } else {
             $token = 'cannot_add';
