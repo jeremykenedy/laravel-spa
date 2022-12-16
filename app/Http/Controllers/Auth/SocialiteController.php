@@ -70,7 +70,9 @@ class SocialiteController extends Controller
         }
 
         return response()->json([
-            'url' => Socialite::driver($provider)->stateless()->with(['state' => $state])->redirect()->getTargetUrl(),
+            'url' => Socialite::driver($provider)->stateless()->with([
+                'state' => $state,
+            ])->redirect()->getTargetUrl(),
         ]);
     }
 

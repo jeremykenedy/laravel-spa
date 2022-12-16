@@ -133,7 +133,7 @@ export default [
     path: '/settings',
     component: Settings,
     redirect: {
-      name: 'profile',
+      name: 'account',
     },
     name: 'settings',
     meta: {

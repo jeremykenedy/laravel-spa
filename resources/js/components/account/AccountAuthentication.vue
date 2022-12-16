@@ -105,7 +105,11 @@ import VueAxios from 'vue-axios';
 import { mapState, mapActions, mapGetters } from 'vuex';
 import { track } from '@services/analytics';
 import { PowerIcon } from '@heroicons/vue/24/outline';
-import { parseDisplayDate, capitalizeFirstLetter } from '@services/common';
+import {
+  parseDisplayDate,
+  capitalizeFirstLetter,
+  providerIcon,
+} from '@services/common';
 
 export default {
   name: 'AccountAuthentication',
@@ -179,69 +183,13 @@ export default {
     track,
     parseDisplayDate,
     capitalizeFirstLetter,
+    providerIcon,
     providerConnected(provider, user) {
       const found = user.providers.find((p) => p.provider == provider);
       if (found) {
         return found;
       }
       return false;
-    },
-    providerIcon(provider) {
-      if (provider.toLowerCase() == 'apple') {
-        return 'fa-brands fa-apple text-gray-800 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'twitter') {
-        return 'fa-brands fa-twitter text-blue-300 dark:text-blue-200';
-      }
-      if (provider.toLowerCase() == 'google') {
-        return 'fa-brands fa-google text-red-500 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'microsoft') {
-        return 'fa-brands fa-microsoft text-blue-300 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'tiktok') {
-        return 'fa-brands fa-tiktok text-pink-600 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'youtube') {
-        return 'fa-brands fa-youtube text-red-600 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'instagram') {
-        return 'fa-brands fa-instagram text-gray-800 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'facebook') {
-        return 'fa-brands fa-facebook text-blue-600 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'github') {
-        return 'fa-brands fa-github text-gray-700 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'twitch') {
-        return 'fa-brands fa-twitch text-blue-300 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'linkedin') {
-        return 'fa-brands fa-linkedin text-blue-900 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'zoho') {
-        return 'fas fa-z text-yellow-500 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'stackexchange') {
-        return 'fa-brands fa-stack-exchange text-blue-400 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'gitlab') {
-        return 'fa-brands fa-square-gitlab text-orange-400 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'reddit') {
-        return 'fa-brands fa-square-reddit text-orange-700 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'snapchat') {
-        return 'fa-brands fa-square-snapchat text-yellow-400 dark:text-gray-200';
-      }
-      if (provider.toLowerCase() == 'meetup') {
-        return 'fa-brands fa-meetup text-red-400 dark:text-gray-200';
-      }
-
-      // NEW_PROVIDER_PLUG :: Put New Provider HERE
-
-      return 'fa-solid fa-plug-circle-check text-gray-600 dark:text-gray-200';
     },
     triggerRevoke(provider) {
       const self = this;
