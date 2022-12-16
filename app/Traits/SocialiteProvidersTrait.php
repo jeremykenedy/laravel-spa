@@ -448,6 +448,7 @@ trait SocialiteProvidersTrait
     protected function findOrCreateUser(string $provider, SocialiteUser $user, string $state = null): array
     {
         $existingUser = null;
+        $token = null;
 
         if($state && $state != config('app.key')) {
             $token = PersonalAccessToken::findToken($state);
@@ -458,9 +459,14 @@ trait SocialiteProvidersTrait
             $existingUser = User::whereEmail($user->getEmail())->first();
         }
 
+        if(!$existingUser) {
+            $existingUser = auth('sanctum')->user();
+        }
+
         $oauthProvider = SocialiteProvider::where('provider', $provider)
             ->where('provider_user_id', $user->getId())
             ->first();
+
 
         if(!$existingUser) {
             if ($oauthProvider) {
