@@ -55,7 +55,7 @@
     "babel-loader": "^9.1.0",
     "chart.js": "^4.0.1",
     "core-js": "^3.25.5",
-    "eslint": "^8.29.0",
+    "eslint": "^8.30.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-html": "^7.1.0",
