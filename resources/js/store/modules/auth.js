@@ -35,6 +35,7 @@ export default {
         reddit: false,
         snapchat: false,
         meetup: false,
+        bitbucket: false,
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
       },
       currentUserToken: null,

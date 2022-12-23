@@ -142,15 +142,15 @@ return [
         'client_secret' => env('MEETUP_CLIENT_SECRET'),
         'redirect'      => env('MEETUP_REDIRECT_URI'),
     ],
-
-    // NEW_PROVIDER_PLUG :: Put New Provider HERE
-
     'bitbucket' => [
         'enabled'       => env('BITBUCKET_ENABLED', false),
         'client_id'     => env('BITBUCKET_CLIENT_ID'),
         'client_secret' => env('BITBUCKET_CLIENT_SECRET'),
         'redirect'      => env('BITBUCKET_REDIRECT_URI'),
     ],
+
+    // NEW_PROVIDER_PLUG :: Put New Provider HERE
+
     'trello' => [
         'enabled'       => env('TRELLO_ENABLED', false),
         'client_id'     => env('TRELLO_CLIENT_ID'),
@@ -240,5 +240,13 @@ return [
         'client_id'     => env('AMAZON_SIGNIN_CLIENT_ID'),
         'client_secret' => env('AMAZON_SIGNIN_SECRET'),
         'redirect'      => env('AMAZON_SIGNIN_REDIRECT_URI'),
+    ],
+    'keycloak' => [
+        'client_id'     => env('KEYCLOAK_ENABLED', false),
+        'client_id'     => env('KEYCLOAK_CLIENT_ID'),
+        'client_secret' => env('KEYCLOAK_CLIENT_SECRET'),
+        'redirect'      => env('KEYCLOAK_REDIRECT_URI'),
+        'base_url'      => env('KEYCLOAK_BASE_URL'),   // Specify your keycloak server URL here
+        'realms'        => env('KEYCLOAK_REALM')       // Specify your keycloak realm
     ],
 ];

@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Log;
 
 class ImpersonateController extends Controller
 {
+    public const IMPERSONATOR_TOKEN = 'IMPERSONATOR token';
+    public const IMPERSONATION_TOKEN = 'IMPERSONATION token';
+
     public function __construct()
     {
         $this->middleware('auth:sanctum');
@@ -22,6 +25,13 @@ class ImpersonateController extends Controller
         }
     }
 
+    /**
+     * Impersonate a user, store the token for returning.
+     *
+     * @param  \App\Http\Requests\Users\ImpersonateUserRequest $request
+     * @param  \App\Models\User $user
+     * @return \Illuminate\Http\Response
+     */
     public function impersonate(ImpersonateUserRequest $request, User $user)
     {
         $impersonator = auth('sanctum')->user();
@@ -35,8 +45,8 @@ class ImpersonateController extends Controller
             abort(403);
         }
 
-        $impersonatorToken = $impersonator->createToken('IMPERSONATOR token');
-        $impersonateeToken = $impersonatee->createToken('IMPERSONATION token');
+        $impersonatorToken = $impersonator->createToken(ImpersonateController::IMPERSONATOR_TOKEN);
+        $impersonateeToken = $impersonatee->createToken(ImpersonateController::IMPERSONATION_TOKEN);
 
         $impersonation = Impersonation::create([
             'user_id'                   => $impersonator->id,
@@ -57,13 +67,24 @@ class ImpersonateController extends Controller
         ], 200);
     }
 
+    /**
+     * Leave impersonating a user.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function leaveImpersonate()
     {
+        $impersonator = null;
         $impersonatedUser = auth('sanctum')->user();
-        $currentAccessToken = $impersonatedUser->tokens()->where('tokenable_type', 'App\\Models\\User')->where('tokenable_id', $impersonatedUser->id)->latest()->first();
+        $currentAccessToken = $impersonatedUser->tokens()->where('tokenable_type', 'App\\Models\\User')->where('tokenable_id', $impersonatedUser->id)->where('name', ImpersonateController::IMPERSONATION_TOKEN)->latest()->first();
         $impersonation = Impersonation::where('personal_access_token_id', $currentAccessToken->id)->first();
-        $impersonator = User::find($impersonation->user_id);
-        $impersonatorToken = $impersonator->createToken('API token')->plainTextToken;
+
+        if ($impersonation) {
+            $impersonator = User::find($impersonation->user_id);
+        }
+        if ($impersonator) {
+            $impersonatorToken = $impersonator->createToken('API token')->plainTextToken;
+        }
 
         $this->logoutUser($impersonatedUser);
 
@@ -78,6 +99,12 @@ class ImpersonateController extends Controller
         ], 200);
     }
 
+    /**
+     * Logout a user herlper function.
+     *
+     * @param  \App\Models\User $user
+     * @return void
+     */
     public function logoutUser($user)
     {
         $user->tokens()->delete();
@@ -85,6 +112,12 @@ class ImpersonateController extends Controller
         $this->guard()->logout();
     }
 
+    /**
+     * Access the web guard middleware
+     *
+     * @param  string $guard
+     * @return App\Http\Kernel::middlewareGroups['web']
+     */
     public function guard($guard = 'web')
     {
         return Auth::guard($guard);

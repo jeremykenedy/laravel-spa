@@ -133,7 +133,12 @@ trait SocialiteProvidersTrait
                                             ->orWhere('key', 'enableMeetupLogin')
                                             ->orWhere('key', 'appMeetupId')
                                             ->orWhere('key', 'appMeetupSecret')
-                                            ->orWhere('key', 'appMeetupRedirect');
+                                            ->orWhere('key', 'appMeetupRedirect')
+
+                                            ->orWhere('key', 'enableBitBucketLogin')
+                                            ->orWhere('key', 'appBitBucketId')
+                                            ->orWhere('key', 'appBitBucketSecret')
+                                            ->orWhere('key', 'appBitBucketRedirect');
                                     // NEW_PROVIDER_PLUG :: Put New Provider HERE
                                 })->get();
     }
@@ -276,6 +281,13 @@ trait SocialiteProvidersTrait
         $appMeetupRedirect = $this->providerSettings->where('key', 'appMeetupRedirect')->first();
         $appMeetupRedirect = $appMeetupRedirect ? $appMeetupRedirect->val : null;
 
+        $appBitBucketId = $this->providerSettings->where('key', 'appBitBucketId')->first();
+        $appBitBucketId = $appBitBucketId ? $appBitBucketId->val : null;
+        $appBitBucketSecret = $this->providerSettings->where('key', 'appBitBucketSecret')->first();
+        $appBitBucketSecret = $appBitBucketSecret ? $appBitBucketSecret->val : null;
+        $appBitBucketRedirect = $this->providerSettings->where('key', 'appBitBucketRedirect')->first();
+        $appBitBucketRedirect = $appBitBucketRedirect ? $appBitBucketRedirect->val : null;
+
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
         $providerConfigs = [
@@ -371,6 +383,11 @@ trait SocialiteProvidersTrait
                 'client_secret' => $appMeetupSecret,
                 'redirect'      => $appMeetupRedirect,
             ],
+            'services.bitbucket' => [
+                'client_id'     => $appBitBucketId,
+                'client_secret' => $appBitBucketSecret,
+                'redirect'      => $appBitBucketRedirect,
+            ],
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
         ];
@@ -412,6 +429,7 @@ trait SocialiteProvidersTrait
         $enableRedditLogin = $ps->firstWhere('key', 'enableRedditLogin')->val;
         $enableSnapchatLogin = $ps->firstWhere('key', 'enableSnapchatLogin')->val;
         $enableMeetupLogin = $ps->firstWhere('key', 'enableMeetupLogin')->val;
+        $enableBitBucketLogin = $ps->firstWhere('key', 'enableBitBucketLogin')->val;
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
@@ -433,6 +451,7 @@ trait SocialiteProvidersTrait
             'reddit'        => $enableRedditLogin,
             'snapchat'      => $enableSnapchatLogin,
             'meetup'        => $enableMeetupLogin,
+            'bitbucket'     => $enableBitBucketLogin,
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
         ];
@@ -445,49 +464,64 @@ trait SocialiteProvidersTrait
      * @param  SocialiteUser  $user
      * @return App\Models\User
      */
-    protected function findOrCreateUser(string $provider, SocialiteUser $user, string $state = null): array
+    protected function findOrCreateUser(string $provider, $user, string $state = null): array
     {
         $existingUser = null;
         $token = null;
+        $email = null;
+
+        if ($provider == 'twitter') {
+            $email = $user->email;
+            $providerId = $user->id;
+        } else {
+            $email = $user->getEmail();
+            $providerId = $user->getId();
+        }
+
+        $oauthProvider = SocialiteProvider::where('provider', $provider)
+            ->where('provider_user_id', $providerId)
+            ->first();
 
         if ($state && $state != config('app.key')) {
             $token = PersonalAccessToken::findToken($state);
             if ($token) {
                 $existingUser = $token->tokenable;
             }
-        } else {
-            $existingUser = User::whereEmail($user->getEmail())->first();
+            if ($existingUser && $existingUser->id && $oauthProvider && $oauthProvider->user_id && ($existingUser->id != $oauthProvider->user_id)) {
+                return [
+                    'user'  => null,
+                    'token' => null,
+                ];
+            }
+        }
+
+        if ($oauthProvider) {
+            return [
+                'user'  => $oauthProvider->user,
+                'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
+            ];
+        }
+
+        if (! $existingUser) {
+            $existingUser = User::whereEmail($email)->first();
         }
 
         if (! $existingUser) {
             $existingUser = auth('sanctum')->user();
         }
 
-        $oauthProvider = SocialiteProvider::where('provider', $provider)
-            ->where('provider_user_id', $user->getId())
-            ->first();
-
-        if (! $existingUser) {
-            if ($oauthProvider) {
+        if ($existingUser && $oauthProvider) {
+            if ($provider != 'twitter') {
                 $oauthProvider->update([
-                    'access_token'  => $user->token,
-                    'refresh_token' => $user->refreshToken,
+                    'access_token'  => $user->token ? $user->token : null,
+                    'refresh_token' => $user->refreshToken ? $user->refreshToken : null,
                 ]);
+            }
 
-                return [
-                    'user'  => $oauthProvider->user,
-                    'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
-                ];
-            }
-        } else {
-            if ($oauthProvider) {
-                if ($oauthProvider->user->id != $existingUser->id) {
-                    return [
-                        'user'  => null,
-                        'token' => null,
-                    ];
-                }
-            }
+            return [
+                'user'  => $oauthProvider->user,
+                'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
+            ];
         }
 
         $user = $this->updateOrCreateUser($provider, $user, $existingUser);
@@ -503,23 +537,50 @@ trait SocialiteProvidersTrait
      * Create a new user.
      *
      * @param  string  $provider
-     * @param  SocialiteUser  $sUser
+     * @param  $sUser
      * @return App\Models\User
      */
-    protected function updateOrCreateUser(string $provider, SocialiteUser $sUser, $existingUser = null): User
+    protected function updateOrCreateUser(string $provider, $sUser, $existingUser = null): User
     {
+        $user = null;
+        $pid = null;
+        $email = null;
+        $token = null;
+        $refreshToken = null;
+        $avatar = null;
+        $emailValid = true;
+
         if ($existingUser) {
             $user = $existingUser;
+            $email = $user->email;
+            if ($provider == 'twitter') {
+                $pid = $sUser->id;
+                $avatar = $sUser->profile_image_url;
+            } else {
+                $pid = $sUser->getId();
+            }
         } else {
-            $email = $sUser->getEmail();
-            if (! $email) {
-                $email = 'email_missing_'.str_random(20).'@'.str_random(20).'.example.org';
+            if ($provider == 'twitter') {
+                $pid = $sUser->id;
+                $email = $sUser->email;
+                $name = $sUser->name;
+                $avatar = $sUser->profile_image_url;
+            } else {
+                $pid = $sUser->getId();
+                $name = $sUser->getName();
+                $email = $sUser->getEmail();
+                $avatar = $sUser->getAvatar();
+                $token = $sUser->token;
+                $refreshToken = $sUser->refreshToken;
             }
 
-            $name = $sUser->getName();
-
             if ($provider == 'reddit') {
-                $name = $sUser->nickname;
+                $name = $sUser->getNickname();
+            }
+
+            if (! $email) {
+                $email = 'email_missing_'.str_random(20).'@'.str_random(20).'.example.org';
+                $emailValid = false;
             }
 
             $user = User::create([
@@ -530,7 +591,7 @@ trait SocialiteProvidersTrait
 
             $user->attachRole(config('roles.models.role')::whereName('User')->first());
 
-            if ($sUser->getEmail()) {
+            if ($user->email && $emailValid) {
                 event(new Registered($user));
                 // $user->email_verified_at = Carbon::now();
             }
@@ -538,13 +599,45 @@ trait SocialiteProvidersTrait
             $user->save();
         }
 
-        $user->socialiteProviders()->create([
+        $this->addSocialiteProviderToUser($user, [
             'provider'          => $provider,
-            'provider_user_id'  => $sUser->getId(),
-            'access_token'      => $sUser->token,
-            'refresh_token'     => $sUser->refreshToken,
+            'provider_user_id'  => $pid,
+            'access_token'      => $token,
+            'refresh_token'     => $refreshToken,
+            'avatar'            => $avatar,
         ]);
 
         return $user;
     }
+
+    /**
+     * Update or Create a Socialite Provider
+     *
+     * @param \App\Models\User   $user [description]
+     * @param array $data
+     * @return \App\Models\SocialiteProvider
+     */
+    public function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
+    {
+        $provider = SocialiteProvider::where('user_id', $user->id)
+                                ->where('provider', $data['provider'])
+                                ->where('provider_user_id', $data['provider_user_id'])->first();
+
+        if ($provider) {
+            return $provider->update([
+                'access_token'      => $data['access_token'],
+                'refresh_token'     => $data['refresh_token'],
+                'avatar'            => $data['avatar'],
+            ]);
+        }
+
+        return $user->socialiteProviders()->create([
+            'provider'          => $data['provider'],
+            'provider_user_id'  => $data['provider_user_id'],
+            'access_token'      => $data['access_token'],
+            'refresh_token'     => $data['refresh_token'],
+            'avatar'            => $data['avatar'],
+        ]);
+    }
+
 }

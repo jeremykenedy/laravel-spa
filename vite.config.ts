@@ -13,7 +13,7 @@ const fs = require('node:fs');
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   var SentryPlugin = null;
-  if (process.env.VITE_SENTRY_IO_ENABLED) {
+  if (process.env.VITE_SENTRY_IO_ENABLED == 1) {
     SentryPlugin = sentryVitePlugin({
       include: '.',
       ignore: ['node_modules', 'vite.config.ts'],

@@ -36,7 +36,7 @@ class EventServiceProvider extends ServiceProvider
             'SocialiteProviders\\Reddit\\RedditExtendSocialite@handle',
             'SocialiteProviders\\Snapchat\\SnapchatExtendSocialite@handle',
             'SocialiteProviders\\Meetup\\MeetupExtendSocialite@handle',
-            // 'SocialiteProviders\\Bitbucket\\BitbucketExtendSocialite@handle',
+            'SocialiteProviders\\Bitbucket\\BitbucketExtendSocialite@handle',
             // 'SocialiteProviders\\Trello\\TrelloExtendSocialite@handle',
             // 'SocialiteProviders\\Zoom\\ZoomExtendSocialite@handle',
             // 'SocialiteProviders\\MailChimp\\MailChimpExtendSocialite@handle',
@@ -53,6 +53,7 @@ class EventServiceProvider extends ServiceProvider
             // 'SocialiteProviders\\Uber\\UberExtendSocialite@handle',
             // 'SocialiteProviders\\Amazon\\AmazonExtendSocialite@handle',
             // 'SocialiteProviders\\ThirtySevenSignals\\ThirtySevenSignalsExtendSocialite@handle',
+            // 'SocialiteProviders\\Keycloak\\KeycloakExtendSocialite@handle',
         ],
     ];
 

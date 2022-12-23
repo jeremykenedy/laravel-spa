@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": "^8.0.2",
+        "abraham/twitteroauth": "^4.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
         "guzzlehttp/guzzle": "^7.2",
@@ -67,6 +68,7 @@
         "socialiteproviders/imgur": "^4.1",
         "socialiteproviders/instagram": "^4.1",
         "socialiteproviders/instagram-basic": "^4.1",
+        "socialiteproviders/keycloak": "^5.2",
         "socialiteproviders/linkedin": "^4.2",
         "socialiteproviders/mailchimp": "^4.1",
         "socialiteproviders/medium": "^4.1",

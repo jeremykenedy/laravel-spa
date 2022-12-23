@@ -1127,6 +1127,60 @@
                 />
               </div>
 
+              <div class="setting-group mb-3">
+                <div v-if="setting.key == 'enableMeetupLogin'">
+                  <h4 class="w-100 mb-3 text-xl font-semibold">
+                    <span
+                      class="fa-brands fa-bitbucket fa-fw text-blue-800 dark:text-blue-800"
+                    />
+                    BitBucket
+                    <a
+                      v-tippy="'Get Credentials'"
+                      href="https://developer.atlassian.com/console/myapps/"
+                      target="_blank"
+                      class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                    >
+                      <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                    </a>
+                  </h4>
+                </div>
+                <AppSettingToggle
+                  v-if="setting.key == 'enableBitBucketLogin'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appBitBucketId'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appBitBucketSecret'"
+                  class="ml-8 mr-5 mb-3"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <AppSettingTextInput
+                  v-if="setting.key == 'appBitBucketRedirect'"
+                  class="ml-8 mr-5"
+                  :setting="setting"
+                  :loading="loading"
+                  :disabled="!dataReady"
+                  @update-setting="appSettingUpdateTriggered"
+                />
+                <div
+                  v-if="setting.key == 'appBitBucketRedirect'"
+                  class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
+                />
+              </div>
+
               <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
             </div>
           </div>
