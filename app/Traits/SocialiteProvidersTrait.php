@@ -611,10 +611,10 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Update or Create a Socialite Provider
+     * Update or Create a Socialite Provider.
      *
-     * @param \App\Models\User   $user [description]
-     * @param array $data
+     * @param  \App\Models\User  $user  [description]
+     * @param  array  $data
      * @return \App\Models\SocialiteProvider
      */
     public function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
@@ -639,5 +639,4 @@ trait SocialiteProvidersTrait
             'avatar'            => $data['avatar'],
         ]);
     }
-
 }
