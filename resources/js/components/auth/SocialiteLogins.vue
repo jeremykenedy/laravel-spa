@@ -119,6 +119,13 @@
       :class="loading ? 'disabled opacity-40' : ''"
       @click="socialiteLogin('meetup')"
     />
+    <span
+      v-if="logins.bitbucket == 1"
+      v-tippy="'BitBucket'"
+      class="fa-brands fa-bitbucket fa-3x mr-3 mb-2 cursor-pointer text-blue-800 opacity-80 transition duration-300 hover:opacity-100"
+      :class="loading ? 'disabled opacity-40' : ''"
+      @click="socialiteLogin('bitbucket')"
+    />
 
     <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
   </div>
@@ -215,7 +222,7 @@ export default {
         'login',
         'social login success',
       );
-
+      await axios.get('/sanctum/csrf-cookie').then((response) => {});
       await self.saveToken({ token: e.data.token }).then((response) => {
         self.getUserByToken({ token: e.data.token }).then(() => {
           setTimeout(() => {

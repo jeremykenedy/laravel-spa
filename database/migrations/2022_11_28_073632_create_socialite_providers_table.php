@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('provider_user_id')->index();
             $table->longText('access_token')->nullable();
             $table->longText('refresh_token')->nullable();
+            $table->longText('avatar')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

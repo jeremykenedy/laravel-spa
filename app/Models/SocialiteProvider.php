@@ -64,6 +64,7 @@ class SocialiteProvider extends Model
         'provider_user_id',
         'access_token',
         'refresh_token',
+        'avatar',
     ];
 
     /**
@@ -78,6 +79,7 @@ class SocialiteProvider extends Model
         'provider_user_id'  => 'string',
         'access_token'      => 'string',
         'refresh_token'     => 'string',
+        'avatar'            => 'string',
     ];
 
     /**

@@ -494,6 +494,32 @@ class AppSettingsSeeder extends Seeder
                 'group'     => 'auth',
             ],
 
+            [
+                'name'      => 'App BitBucket Login',
+                'key'       => 'enableBitBucketLogin',
+                'type'      => 'boolean',
+                'val'       => config('services.bitbucket.enabled'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App BitBucket Id',
+                'key'       => 'appBitBucketId',
+                'val'       => config('services.bitbucket.client_id'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App BitBucket Secret',
+                'key'       => 'appBitBucketSecret',
+                'val'       => config('services.bitbucket.client_secret'),
+                'group'     => 'auth',
+            ],
+            [
+                'name'      => 'App BitBucket Redirect',
+                'key'       => 'appBitBucketRedirect',
+                'val'       => url('api/oauth/bitbucket/callback'),
+                'group'     => 'auth',
+            ],
+
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
             [

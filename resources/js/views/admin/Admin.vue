@@ -265,6 +265,16 @@
                 >
                 </span>
 
+                <span
+                  v-if="!loading"
+                  class="fa-brands fa-bitbucket fa-fw fa-xs"
+                  :class="
+                    checkSettingEnabled('enableBitBucketLogin')
+                      ? 'text-blue-800 dark:text-blue-800'
+                      : 'text-gray-300 dark:text-gray-800'
+                  "
+                >
+                </span>
                 <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
               </p>
               <p class="text-gray-600 dark:text-gray-400">Logins Enabled</p>
