@@ -80,6 +80,7 @@ export default ({ mode }) => {
       Inspect(),
       SentryPlugin,
     ],
+    sourcemap: true,
     server: {
       https: {
         key: fs.readFileSync(process.env.VITE_SERVER_HTTPS_KEY),
