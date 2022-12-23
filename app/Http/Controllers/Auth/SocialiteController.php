@@ -82,12 +82,12 @@ class SocialiteController extends Controller
 
         if ($provider == 'twitter') {
             $url = $this->twitterUserAuthenticationUrl($state);
-        } else if($provider == 'stackexchange') {
+        } elseif ($provider == 'stackexchange') {
             $url = $this->stackexchangeUserAuthenticationUrl($state);
         } else {
             $url = Socialite::driver($provider)->stateless()->with([
-                            'state' => $state,
-                        ])->redirect()->getTargetUrl();
+                'state' => $state,
+            ])->redirect()->getTargetUrl();
         }
 
         return response()->json([
@@ -112,7 +112,7 @@ class SocialiteController extends Controller
         if ($provider == 'twitter') {
             $socialUser = $this->twitterUserAuthentication($request);
             $state = $request->state ? Crypt::decrypt(Cache::pull($request->state)) : null;
-        } else if($provider == 'stackexchange') {
+        } elseif ($provider == 'stackexchange') {
             $socialUser = Socialite::driver($provider)->stateless()->user();
             $state = $request->state ? Crypt::decrypt(Cache::pull($request->state)) : null;
         } else {
@@ -145,19 +145,19 @@ class SocialiteController extends Controller
      */
     public function stackexchangeUserAuthenticationUrl($state = null)
     {
-        $consumerRedirect  = config('services.stackexchange.redirect');
+        $consumerRedirect = config('services.stackexchange.redirect');
 
         $tempId = str_random(40);
         Cache::put($tempId, $state, 60);
 
         $url = Socialite::driver('stackexchange')->stateless()->with([
-                        'state' => $state,
-                    ])
+            'state' => $state,
+        ])
                     ->scopes([])
                     ->redirect()
                     ->getTargetUrl();
 
-        return $url . '&state=' . $tempId;
+        return $url.'&state='.$tempId;
     }
 
     /**
@@ -170,13 +170,13 @@ class SocialiteController extends Controller
     {
         $consumerKey = config('services.twitter.client_id');
         $consumerSecret = config('services.twitter.client_secret');
-        $consumerRedirect  = config('services.twitter.redirect');
+        $consumerRedirect = config('services.twitter.redirect');
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret);
 
         $tempId = str_random(40);
         $requestToken = $connection->oauth('oauth/request_token', [
-            'oauth_callback' => $consumerRedirect . '?state=' . $tempId,
+            'oauth_callback' => $consumerRedirect.'?state='.$tempId,
         ]);
 
         Cache::put($tempId, $state, 60);
@@ -189,7 +189,7 @@ class SocialiteController extends Controller
     }
 
     /**
-     * Get Twitter user credentials from Oauth1.0
+     * Get Twitter user credentials from Oauth1.0.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
@@ -198,7 +198,7 @@ class SocialiteController extends Controller
     {
         $consumerKey = config('services.twitter.client_id');
         $consumerSecret = config('services.twitter.client_secret');
-        $consumerRedirect  = config('services.twitter.redirect');
+        $consumerRedirect = config('services.twitter.redirect');
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret, $request->oauth_token);
 
@@ -209,7 +209,7 @@ class SocialiteController extends Controller
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-        return $connection->get("account/verify_credentials", [
+        return $connection->get('account/verify_credentials', [
             'include_email'     => true,
             'skip_status'       => true,
             'include_entities'  => false,
