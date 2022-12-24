@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\PersonalAccessToken;
@@ -135,10 +136,10 @@ trait SocialiteProvidersTrait
                                             ->orWhere('key', 'appMeetupSecret')
                                             ->orWhere('key', 'appMeetupRedirect')
 
-                                            ->orWhere('key', 'enableBitBucketLogin')
-                                            ->orWhere('key', 'appBitBucketId')
-                                            ->orWhere('key', 'appBitBucketSecret')
-                                            ->orWhere('key', 'appBitBucketRedirect');
+                                            ->orWhere('key', 'enableAtlassianLogin')
+                                            ->orWhere('key', 'appAtlassianId')
+                                            ->orWhere('key', 'appAtlassianSecret')
+                                            ->orWhere('key', 'appAtlassianRedirect');
                                     // NEW_PROVIDER_PLUG :: Put New Provider HERE
                                 })->get();
     }
@@ -281,12 +282,12 @@ trait SocialiteProvidersTrait
         $appMeetupRedirect = $this->providerSettings->where('key', 'appMeetupRedirect')->first();
         $appMeetupRedirect = $appMeetupRedirect ? $appMeetupRedirect->val : null;
 
-        $appBitBucketId = $this->providerSettings->where('key', 'appBitBucketId')->first();
-        $appBitBucketId = $appBitBucketId ? $appBitBucketId->val : null;
-        $appBitBucketSecret = $this->providerSettings->where('key', 'appBitBucketSecret')->first();
-        $appBitBucketSecret = $appBitBucketSecret ? $appBitBucketSecret->val : null;
-        $appBitBucketRedirect = $this->providerSettings->where('key', 'appBitBucketRedirect')->first();
-        $appBitBucketRedirect = $appBitBucketRedirect ? $appBitBucketRedirect->val : null;
+        $appAtlassianId = $this->providerSettings->where('key', 'appAtlassianId')->first();
+        $appAtlassianId = $appAtlassianId ? $appAtlassianId->val : null;
+        $appAtlassianSecret = $this->providerSettings->where('key', 'appAtlassianSecret')->first();
+        $appAtlassianSecret = $appAtlassianSecret ? $appAtlassianSecret->val : null;
+        $appAtlassianRedirect = $this->providerSettings->where('key', 'appAtlassianRedirect')->first();
+        $appAtlassianRedirect = $appAtlassianRedirect ? $appAtlassianRedirect->val : null;
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
@@ -383,10 +384,10 @@ trait SocialiteProvidersTrait
                 'client_secret' => $appMeetupSecret,
                 'redirect'      => $appMeetupRedirect,
             ],
-            'services.bitbucket' => [
-                'client_id'     => $appBitBucketId,
-                'client_secret' => $appBitBucketSecret,
-                'redirect'      => $appBitBucketRedirect,
+            'services.atlassian' => [
+                'client_id'     => $appAtlassianId,
+                'client_secret' => $appAtlassianSecret,
+                'redirect'      => $appAtlassianRedirect,
             ],
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
@@ -429,29 +430,29 @@ trait SocialiteProvidersTrait
         $enableRedditLogin = $ps->firstWhere('key', 'enableRedditLogin')->val;
         $enableSnapchatLogin = $ps->firstWhere('key', 'enableSnapchatLogin')->val;
         $enableMeetupLogin = $ps->firstWhere('key', 'enableMeetupLogin')->val;
-        $enableBitBucketLogin = $ps->firstWhere('key', 'enableBitBucketLogin')->val;
+        $enableAtlassianLogin = $ps->firstWhere('key', 'enableAtlassianLogin')->val;
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
 
         return [
-            'facebook'      => $enableFbLogin,
-            'twitter'       => $enableTwitterLogin,
-            'google'        => $enableGoogleLogin,
-            'instagram'     => $enableInstagramLogin,
-            'github'        => $enableGitHubLogin,
-            'youtube'       => $enableYouTubeLogin,
-            'linkedin'      => $enableLinkedInLogin,
-            'twitch'        => $enableTwitchLogin,
-            'apple'         => $enableAppleLogin,
-            'microsoft'     => $enableMicrosoftLogin,
-            'tiktok'        => $enableTikTokLogin,
-            'zoho'          => $enableZoHoLogin,
-            'stackexchange' => $enableStackExchangeLogin,
-            'gitlab'        => $enableGitLabLogin,
-            'reddit'        => $enableRedditLogin,
-            'snapchat'      => $enableSnapchatLogin,
-            'meetup'        => $enableMeetupLogin,
-            'bitbucket'     => $enableBitBucketLogin,
+            'facebook'          => $enableFbLogin,
+            'twitter'           => $enableTwitterLogin,
+            'google'            => $enableGoogleLogin,
+            'instagram'         => $enableInstagramLogin,
+            'github'            => $enableGitHubLogin,
+            'youtube'           => $enableYouTubeLogin,
+            'linkedin'          => $enableLinkedInLogin,
+            'twitch'            => $enableTwitchLogin,
+            'apple'             => $enableAppleLogin,
+            'microsoft'         => $enableMicrosoftLogin,
+            'tiktok'            => $enableTikTokLogin,
+            'zoho'              => $enableZoHoLogin,
+            'stackexchange'     => $enableStackExchangeLogin,
+            'gitlab'            => $enableGitLabLogin,
+            'reddit'            => $enableRedditLogin,
+            'snapchat'          => $enableSnapchatLogin,
+            'meetup'            => $enableMeetupLogin,
+            'atlassian'         => $enableAtlassianLogin,
 
             // NEW_PROVIDER_PLUG :: Put New Provider HERE
         ];
@@ -617,7 +618,7 @@ trait SocialiteProvidersTrait
      * @param  array  $data
      * @return \App\Models\SocialiteProvider
      */
-    public function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
+    protected function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
     {
         $provider = SocialiteProvider::where('user_id', $user->id)
                                 ->where('provider', $data['provider'])
@@ -638,5 +639,44 @@ trait SocialiteProvidersTrait
             'refresh_token'     => $data['refresh_token'],
             'avatar'            => $data['avatar'],
         ]);
+    }
+
+    /**
+     * Generate a random string for temp Id.
+     *
+     * @param  int  $depth
+     * @return string
+     */
+    protected function generateTempId($depth = 40)
+    {
+        return str_random($depth);
+    }
+
+    /**
+     * Cache the current state and modify the url with a random string to be the key for the return user.
+     * Not all providers return the state and this will allow us to do so..
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    protected function cacheStatePutKeyInUrl($url = null, $state = null)
+    {
+        $tempId = $this->generateTempId();
+        $this->tempStoreStateInCache($tempId, $state);
+
+        return $url.'&state='.$tempId;
+    }
+
+    /**
+     * Cache the state temporarily to pick up on callback.
+     *
+     * @param  string  $tempId
+     * @param  string  $state
+     * @param  int  $seconds
+     * @return void
+     */
+    protected function tempStoreStateInCache($tempId, $state, $seconds = 60)
+    {
+        Cache::put($tempId, $state, $seconds);
     }
 }

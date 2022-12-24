@@ -36,6 +36,7 @@ export default {
         snapchat: false,
         meetup: false,
         bitbucket: false,
+        atlassian: false,
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
       },
       currentUserToken: null,

@@ -161,20 +161,20 @@ trait AppSettingsTrait
             config(['services.meetup.redirect' => $setting->val]);
         }
 
-        if ($setting->key == 'appBitBucketId') {
-            $this->setEnv('BITBUCKET_CLIENT_ID', $setting->val, config('services.bitbucket.client_id'));
-            putenv('BITBUCKET_CLIENT_ID='.$setting->val);
-            config(['services.bitbucket.client_id' => $setting->val]);
+        if ($setting->key == 'appAtlassianId') {
+            $this->setEnv('ATLASSIAN_CLIENT_ID', $setting->val, config('services.atlassian.client_id'));
+            putenv('ATLASSIAN_CLIENT_ID='.$setting->val);
+            config(['services.atlassian.client_id' => $setting->val]);
         }
-        if ($setting->key == 'appBitBucketSecret') {
-            $this->setEnv('BITBUCKET_CLIENT_SECRET', $setting->val, config('services.bitbucket.client_secret'));
-            putenv('BITBUCKET_CLIENT_SECRET='.$setting->val);
-            config(['services.bitbucket.client_secret' => $setting->val]);
+        if ($setting->key == 'appAtlassianSecret') {
+            $this->setEnv('ATLASSIAN_CLIENT_SECRET', $setting->val, config('services.atlassian.client_secret'));
+            putenv('ATLASSIAN_CLIENT_SECRET='.$setting->val);
+            config(['services.atlassian.client_secret' => $setting->val]);
         }
-        if ($setting->key == 'appBitBucketRedirect') {
-            $this->setEnv('BITBUCKET_REDIRECT_URI', $setting->val, config('services.bitbucket.redirect'));
-            putenv('BITBUCKET_REDIRECT_URI='.$setting->val);
-            config(['services.bitbucket.redirect' => $setting->val]);
+        if ($setting->key == 'appAtlassianRedirect') {
+            $this->setEnv('ATLASSIAN_REDIRECT_URI', $setting->val, config('services.atlassian.redirect'));
+            putenv('ATLASSIAN_REDIRECT_URI='.$setting->val);
+            config(['services.atlassian.redirect' => $setting->val]);
         }
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE

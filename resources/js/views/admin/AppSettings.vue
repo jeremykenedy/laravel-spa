@@ -1128,12 +1128,12 @@
               </div>
 
               <div class="setting-group mb-3">
-                <div v-if="setting.key == 'enableMeetupLogin'">
+                <div v-if="setting.key == 'enableAtlassianLogin'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
                     <span
-                      class="fa-brands fa-bitbucket fa-fw text-blue-800 dark:text-blue-800"
+                      class="fa-brands fa-atlassian fa-fw text-blue-800 dark:text-blue-800"
                     />
-                    BitBucket
+                    Atlassian
                     <a
                       v-tippy="'Get Credentials'"
                       href="https://developer.atlassian.com/console/myapps/"
@@ -1145,14 +1145,14 @@
                   </h4>
                 </div>
                 <AppSettingToggle
-                  v-if="setting.key == 'enableBitBucketLogin'"
+                  v-if="setting.key == 'enableAtlassianLogin'"
                   class="ml-8 mr-5 mb-3"
                   :setting="setting"
                   :loading="loading"
                   @update-setting="appSettingUpdateTriggered"
                 />
                 <AppSettingTextInput
-                  v-if="setting.key == 'appBitBucketId'"
+                  v-if="setting.key == 'appAtlassianId'"
                   class="ml-8 mr-5"
                   :setting="setting"
                   :loading="loading"
@@ -1160,7 +1160,7 @@
                   @update-setting="appSettingUpdateTriggered"
                 />
                 <AppSettingTextInput
-                  v-if="setting.key == 'appBitBucketSecret'"
+                  v-if="setting.key == 'appAtlassianSecret'"
                   class="ml-8 mr-5 mb-3"
                   :setting="setting"
                   :loading="loading"
@@ -1168,7 +1168,7 @@
                   @update-setting="appSettingUpdateTriggered"
                 />
                 <AppSettingTextInput
-                  v-if="setting.key == 'appBitBucketRedirect'"
+                  v-if="setting.key == 'appAtlassianRedirect'"
                   class="ml-8 mr-5"
                   :setting="setting"
                   :loading="loading"
@@ -1176,7 +1176,7 @@
                   @update-setting="appSettingUpdateTriggered"
                 />
                 <div
-                  v-if="setting.key == 'appBitBucketRedirect'"
+                  v-if="setting.key == 'appAtlassianRedirect'"
                   class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
                 />
               </div>

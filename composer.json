@@ -15,7 +15,7 @@
         "abraham/twitteroauth": "^4.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^3.0",
-        "guzzlehttp/guzzle": "^7.2",
+        "guzzlehttp/guzzle": "^7.5",
         "jeremykenedy/laravel-exception-notifier": "^3.1",
         "jeremykenedy/laravel-roles": "^9.0",
         "laravel/framework": "^9.2",

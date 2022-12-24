@@ -67,7 +67,13 @@ class SocialiteController extends Controller
         if (empty($providerKey)) {
             abort(419);
         }
+
+        $url = null;
+        $token = null;
+        $state = null;
         $user = null;
+        $scopes = [];
+        $with = [];
 
         if (auth('sanctum')->check()) {
             $user = auth('sanctum')->user();
@@ -80,14 +86,44 @@ class SocialiteController extends Controller
             $state = Crypt::encrypt(config('app.key'));
         }
 
+        $with = ['state' => $state];
+
+        // https://developers.facebook.com/docs/instagram-basic-display-api/guides/getting-access-tokens-and-permissions/
+        if ($provider == 'instagram') {
+            $scopes = ['user_profile'];
+            $with += ['response_type' => 'code'];
+        }
+
+        // https://docs.snap.com/snap-kit/login-kit/Tutorials/web#understand-scopes
+        if ($provider == 'snapchat') {
+            $scopes = [
+                'https://auth.snapchat.com/oauth2/api/user.display_name',
+                'https://auth.snapchat.com/oauth2/api/user.external_id',
+                'https://auth.snapchat.com/oauth2/api/user.bitmoji.avatar',
+            ];
+            $with += ['response_type' => 'code'];
+        }
+
+        if ($provider == 'tiktok') {
+            $scopes = [
+                'user.info.basic',
+            ];
+            $with += ['response_type' => 'code'];
+        }
+
         if ($provider == 'twitter') {
             $url = $this->twitterUserAuthenticationUrl($state);
-        } elseif ($provider == 'stackexchange') {
-            $url = $this->stackexchangeUserAuthenticationUrl($state);
         } else {
-            $url = Socialite::driver($provider)->stateless()->with([
-                'state' => $state,
-            ])->redirect()->getTargetUrl();
+            $url = Socialite::driver($provider)
+                        ->stateless()
+                        ->with($with)
+                        ->setScopes($scopes)
+                        ->redirect()
+                        ->getTargetUrl();
+        }
+
+        if ($provider == 'stackexchange') {
+            $url = $this->cacheStatePutKeyInUrl($url, $state);
         }
 
         return response()->json([
@@ -138,29 +174,6 @@ class SocialiteController extends Controller
     }
 
     /**
-     * Get Stack Echange Oauth2 URL with local app identifier if user logged in.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
-    public function stackexchangeUserAuthenticationUrl($state = null)
-    {
-        $consumerRedirect = config('services.stackexchange.redirect');
-
-        $tempId = str_random(40);
-        Cache::put($tempId, $state, 60);
-
-        $url = Socialite::driver('stackexchange')->stateless()->with([
-            'state' => $state,
-        ])
-                    ->scopes([])
-                    ->redirect()
-                    ->getTargetUrl();
-
-        return $url.'&state='.$tempId;
-    }
-
-    /**
      * Get Twitter Oauth1.0 Url built with identifier if user is present.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -174,12 +187,12 @@ class SocialiteController extends Controller
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret);
 
-        $tempId = str_random(40);
+        $tempId = $this->generateTempId();
         $requestToken = $connection->oauth('oauth/request_token', [
             'oauth_callback' => $consumerRedirect.'?state='.$tempId,
         ]);
 
-        Cache::put($tempId, $state, 60);
+        $this->tempStoreStateInCache($tempId, $state);
 
         $url = $connection->url('oauth/authorize', [
             'oauth_token' => $requestToken['oauth_token'],

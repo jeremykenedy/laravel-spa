@@ -59,13 +59,13 @@ export default ({ mode }) => {
         },
       }),
       StylelintPlugin({
-        fix: true,
+        fix: false,
         quite: false,
         lintOnStart: false,
       }),
       eslint({
         cache: true,
-        fix: true,
+        fix: false,
         lintOnStart: false,
         emitWarning: true,
         emitError: true,
