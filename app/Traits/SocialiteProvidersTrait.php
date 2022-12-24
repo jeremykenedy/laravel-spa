@@ -612,10 +612,10 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Update or Create a Socialite Provider
+     * Update or Create a Socialite Provider.
      *
-     * @param \App\Models\User   $user [description]
-     * @param array $data
+     * @param  \App\Models\User  $user  [description]
+     * @param  array  $data
      * @return \App\Models\SocialiteProvider
      */
     protected function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
@@ -642,8 +642,9 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Generate a random string for temp Id
-     * @param  integer $depth
+     * Generate a random string for temp Id.
+     *
+     * @param  int  $depth
      * @return string
      */
     protected function generateTempId($depth = 40)
@@ -667,11 +668,11 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Cache the state temporarily to pick up on callback
+     * Cache the state temporarily to pick up on callback.
      *
      * @param  string  $tempId
      * @param  string  $state
-     * @param  integer $seconds
+     * @param  int  $seconds
      * @return void
      */
     protected function tempStoreStateInCache($tempId, $state, $seconds = 60)
