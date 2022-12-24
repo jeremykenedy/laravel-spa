@@ -267,9 +267,9 @@
 
                 <span
                   v-if="!loading"
-                  class="fa-brands fa-bitbucket fa-fw fa-xs"
+                  class="fa-brands fa-atlassian fa-fw fa-xs"
                   :class="
-                    checkSettingEnabled('enableBitBucketLogin')
+                    checkSettingEnabled('enableAtlassianLogin')
                       ? 'text-blue-800 dark:text-blue-800'
                       : 'text-gray-300 dark:text-gray-800'
                   "

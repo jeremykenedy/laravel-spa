@@ -45,9 +45,9 @@ return [
     ],
     'instagram' => [
         'enabled'       => env('INSTAGRAM_ENABLED', false),
-        'client_id'     => env('INSTAGRAM_KEY'),
-        'client_secret' => env('INSTAGRAM_SECRET'),
-        'redirect'      => env('INSTAGRAM_REDIRECT_URI'),
+        'client_id'     => env('INSTAGRAMBASIC_CLIENT_ID'),
+        'client_secret' => env('INSTAGRAMBASIC_CLIENT_SECRET'),
+        'redirect'      => env('INSTAGRAMBASIC_REDIRECT_URI'),
     ],
     'github' => [
         'enabled'       => env('GITHUB_ENABLED', false),
@@ -142,11 +142,11 @@ return [
         'client_secret' => env('MEETUP_CLIENT_SECRET'),
         'redirect'      => env('MEETUP_REDIRECT_URI'),
     ],
-    'bitbucket' => [
-        'enabled'       => env('BITBUCKET_ENABLED', false),
-        'client_id'     => env('BITBUCKET_CLIENT_ID'),
-        'client_secret' => env('BITBUCKET_CLIENT_SECRET'),
-        'redirect'      => env('BITBUCKET_REDIRECT_URI'),
+    'atlassian' => [
+        'enabled'       => env('ATLASSIAN_ENABLED', false),
+        'client_id'     => env('ATLASSIAN_CLIENT_ID'),
+        'client_secret' => env('ATLASSIAN_CLIENT_SECRET'),
+        'redirect'      => env('ATLASSIAN_REDIRECT_URI'),
     ],
 
     // NEW_PROVIDER_PLUG :: Put New Provider HERE
@@ -175,12 +175,7 @@ return [
         'client_secret' => env('DISQUS_CLIENT_SECRET'),
         'redirect'      => env('DISQUS_REDIRECT_URI'),
     ],
-    'atlassian' => [
-        'enabled'       => env('ATLASSIAN_ENABLED', false),
-        'client_id'     => env('ATLASSIAN_CLIENT_ID'),
-        'client_secret' => env('ATLASSIAN_CLIENT_SECRET'),
-        'redirect'      => env('ATLASSIAN_REDIRECT_URI'),
-    ],
+
     'patreon' => [
         'enabled'       => env('PATREON_ENABLED', false),
         'client_id'     => env('PATREON_CLIENT_ID'),

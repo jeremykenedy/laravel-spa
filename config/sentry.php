@@ -48,7 +48,7 @@ return [
         'default_integrations' => true,
 
         // Indicates that requests without a matching route should be traced
-        'missing_routes' => false,
+        'missing_routes' => true,
     ],
 
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#send-default-pii

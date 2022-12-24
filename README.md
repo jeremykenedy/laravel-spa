@@ -123,7 +123,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 * [Reddit API](https://www.reddit.com/prefs/apps) [Register](https://docs.google.com/a/reddit.com/forms/d/e/1FAIpQLSezNdDNK1-P8mspSbmtC2r86Ee9ZRbC66u929cG2GX0T9UMyw/viewform) (Will work with local dev callback)
 * [Snapchat API](https://devportal.snap.com/manage/)
 * [Meetup API](https://www.meetup.com/api/oauth/list/)
-* [BitBucket](https://developer.atlassian.com/console/myapps/)
+* [Atlassian](https://developer.atlassian.com/console/myapps/)
 
 #### Add More Socialite Logins
 * See full list of providers: [https://socialiteproviders.github.io](https://socialiteproviders.com/about/)

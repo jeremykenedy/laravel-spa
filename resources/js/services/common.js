@@ -88,6 +88,9 @@ export function providerIcon(provider = null) {
   if (provider.toLowerCase() == 'bitbucket') {
     return 'fa-brands fa-bitbucket text-blue-800 dark:text-gray-200';
   }
+  if (provider.toLowerCase() == 'atlassian') {
+    return 'fa-brands fa-atlassian text-blue-800 dark:text-gray-200';
+  }
 
   // NEW_PROVIDER_PLUG :: Put New Provider HERE
 

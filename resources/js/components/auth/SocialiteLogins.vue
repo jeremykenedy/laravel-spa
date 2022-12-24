@@ -120,11 +120,11 @@
       @click="socialiteLogin('meetup')"
     />
     <span
-      v-if="logins.bitbucket == 1"
-      v-tippy="'BitBucket'"
-      class="fa-brands fa-bitbucket fa-3x mr-3 mb-2 cursor-pointer text-blue-800 opacity-80 transition duration-300 hover:opacity-100"
+      v-if="logins.atlassian == 1"
+      v-tippy="'Atlassian'"
+      class="fa-brands fa-atlassian fa-3x mr-3 mb-2 cursor-pointer text-blue-800 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''"
-      @click="socialiteLogin('bitbucket')"
+      @click="socialiteLogin('atlassian')"
     />
 
     <!-- NEW_PROVIDER_PLUG :: Put New Provider HERE -->
