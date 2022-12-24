@@ -86,29 +86,29 @@ class SocialiteController extends Controller
             $state = Crypt::encrypt(config('app.key'));
         }
 
-        $with = [ 'state' => $state ];
+        $with = ['state' => $state];
 
-        # https://developers.facebook.com/docs/instagram-basic-display-api/guides/getting-access-tokens-and-permissions/
+        // https://developers.facebook.com/docs/instagram-basic-display-api/guides/getting-access-tokens-and-permissions/
         if ($provider == 'instagram') {
             $scopes = ['user_profile'];
-            $with += [ 'response_type' => 'code' ];
+            $with += ['response_type' => 'code'];
         }
 
-        # https://docs.snap.com/snap-kit/login-kit/Tutorials/web#understand-scopes
+        // https://docs.snap.com/snap-kit/login-kit/Tutorials/web#understand-scopes
         if ($provider == 'snapchat') {
             $scopes = [
                 'https://auth.snapchat.com/oauth2/api/user.display_name',
                 'https://auth.snapchat.com/oauth2/api/user.external_id',
                 'https://auth.snapchat.com/oauth2/api/user.bitmoji.avatar',
             ];
-            $with += [ 'response_type' => 'code' ];
+            $with += ['response_type' => 'code'];
         }
 
         if ($provider == 'tiktok') {
             $scopes = [
                 'user.info.basic',
             ];
-            $with += [ 'response_type' => 'code' ];
+            $with += ['response_type' => 'code'];
         }
 
         if ($provider == 'twitter') {
