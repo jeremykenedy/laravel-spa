@@ -10,7 +10,7 @@ echo "Deployment started ..."
 git reset --hard
 
 # # Pull the latest version of the app
-git pull origin production
+# git pull origin production
 
 
 ls -la
