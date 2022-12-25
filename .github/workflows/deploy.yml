@@ -9,9 +9,6 @@ on:
   pull_request:
     branches:
       - production
-
-# Authenticate to the the server via ssh
-# and run our deployment script
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,7 +21,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: 'cd '${{ secrets.SPAPATH }}' && ./.scripts/deploy.sh'
-
-
-
+          script: cd ${{ secrets.SPAPATH }} && ./.scripts/deploy.sh
