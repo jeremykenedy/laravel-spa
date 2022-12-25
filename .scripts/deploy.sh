@@ -10,10 +10,7 @@ echo "Deployment started ..."
 git reset --hard
 
 # # Pull the latest version of the app
-# git pull origin production
-
-
-ls -la
+git pull origin production
 
 # # Install composer dependencies
 # composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
