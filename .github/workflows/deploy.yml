@@ -21,4 +21,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
-          script: "cd /usr/share/nginx/laravel-spa && ls -la && ./.scripts/deploy.sh"
+          script: "cd /usr/share/nginx/laravel-spa && ./.scripts/deploy.sh"
