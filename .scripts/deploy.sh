@@ -27,7 +27,7 @@ echo "Deployment started ..."
 # # Run database migrations
 # php artisan migrate --force
 
-touch hello.txt
+# touch hello.txt
 
 # # Exit maintenance mode
 # php artisan up
