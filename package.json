@@ -54,7 +54,7 @@
     "axios": "^1.2.1",
     "babel-loader": "^9.1.0",
     "chart.js": "^4.1.1",
-    "core-js": "^3.25.5",
+    "core-js": "^3.27.0",
     "eslint": "^8.30.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
