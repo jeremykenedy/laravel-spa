@@ -12,7 +12,7 @@ const fs = require('node:fs');
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
-  var SentryPlugin = null;
+  let SentryPlugin = null;
   if (process.env.VITE_SENTRY_IO_ENABLED == 1) {
     SentryPlugin = sentryVitePlugin({
       include: '.',
@@ -59,13 +59,13 @@ export default ({ mode }) => {
         },
       }),
       StylelintPlugin({
-        fix: false,
+        fix: true,
         quite: false,
         lintOnStart: false,
       }),
       eslint({
         cache: true,
-        fix: false,
+        fix: true,
         lintOnStart: false,
         emitWarning: true,
         emitError: true,
