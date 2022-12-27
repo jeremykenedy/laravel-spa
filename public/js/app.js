@@ -33865,7 +33865,7 @@ let __WEBPACK_AMD_DEFINE_RESULT__;/**
       if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
         throw new TypeError(FUNC_ERROR_TEXT);
       }
-      var memoized = function() {
+      const memoized = function() {
         const args = arguments,
             key = resolver ? resolver.apply(this, args) : args[0],
             cache = memoized.cache;
