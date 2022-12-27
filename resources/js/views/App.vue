@@ -1,6 +1,7 @@
 <template>
   <div class="min-h-screen bg-white dark:bg-slate-800">
     <div id="top_border" />
+    <OctoCat v-if="showOctoCat" />
     <VerifyNotice
       v-if="
         $route.name !== 'home' &&
@@ -31,12 +32,14 @@ import { mapGetters, mapActions } from 'vuex';
 import AppNav from '@components/AppNav.vue';
 import AppFooter from '@components/AppFooter.vue';
 import VerifyNotice from '@components/VerifyNotice.vue';
+import OctoCat from '@components/OctoCat.vue';
 
 export default {
   components: {
     AppNav,
     VerifyNotice,
     AppFooter,
+    OctoCat,
   },
   computed: {
     ...mapGetters({
@@ -54,6 +57,16 @@ export default {
         this.currentRouteName == 'settings' ||
         this.currentRouteName == 'users' ||
         this.currentRouteName == 'app-settings'
+      ) {
+        return true;
+      }
+      return false;
+    },
+    showOctoCat() {
+      if (
+        this.currentRouteName == 'home' ||
+        this.currentRouteName == 'about' ||
+        this.currentRouteName == 'terms'
       ) {
         return true;
       }
