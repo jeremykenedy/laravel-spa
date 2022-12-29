@@ -5,11 +5,11 @@ echo "Deployment started ..."
 
 # # Enter maintenance mode or return true
 # # if already is in maintenance mode
-(php artisan down) || true
+php artisan down
 
 # git reset --hard
 
-echo 'Hellooo'
+# echo 'Hellooo'
 
 
 # # Pull the latest version of the app
