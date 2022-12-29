@@ -9,7 +9,7 @@ echo "Deployment started ..."
 
 # git reset --hard
 
-touch helloJeremy.txt
+echo 'Hellooo'
 
 # # Pull the latest version of the app
 # git pull origin production
