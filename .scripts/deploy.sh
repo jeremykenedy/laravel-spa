@@ -21,6 +21,8 @@ composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 # # Clear the old cache
 # php artisan clear-compiled
 
+php artisan config:cache
+
 # # Recreate cache
 # php artisan optimize
 
