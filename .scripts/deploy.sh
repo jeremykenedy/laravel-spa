@@ -2,32 +2,15 @@
 set -e
 
 echo "Deployment started ... ..."
-
-# # Enter maintenance mode or return true
-# # if already is in maintenance mode
-php artisan down
-
+(php artisan down) || true
 git reset --hard
-
-# echo 'Hellooo'
-
-
-# # Pull the latest version of the app
 git pull origin production
-
-# # Install composer dependencies
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-
-# # Clear the old cache
-# php artisan clear-compiled
-
+php artisan clear-compiled
 php artisan config:cache
-
-# # Recreate cache
-# php artisan optimize
-
-# # Compile npm assets
-# npm run prod
+php artisan optimize
+npm run install
+npm run build
 
 # # Run database migrations
 # php artisan migrate --force
