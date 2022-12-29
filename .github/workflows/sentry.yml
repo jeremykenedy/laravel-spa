@@ -1,7 +1,5 @@
-# https://github.com/marketplace/actions/sentry-release
-#
-- name: Create Sentry Release
 - uses: actions/checkout@v2
+- name: Create Sentry Release
   uses: getsentry/action-release@v1.2.1
   env:
     SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
