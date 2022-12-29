@@ -3,6 +3,7 @@ set -e
 
 echo "Deployment started ... ..."
 (php artisan down) || true
+export NODE_OPTIONS=--max-old-space-size=8192
 git reset --hard
 git pull origin production
 composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
@@ -14,8 +15,6 @@ npm run build
 
 # # Run database migrations
 # php artisan migrate --force
-
-
 
 # # Exit maintenance mode
 php artisan up
