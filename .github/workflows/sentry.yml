@@ -1,0 +1,12 @@
+# https://github.com/marketplace/actions/sentry-release
+#
+- name: Create Sentry Release
+- uses: actions/checkout@v2
+  uses: getsentry/action-release@v1.2.1
+  env:
+    SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+    SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+    SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+    # SENTRY_URL: https://sentry.io/
+  with:
+    environment: production
