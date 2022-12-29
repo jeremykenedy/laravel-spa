@@ -24,6 +24,7 @@ const VUE_APP_URL = APP_URL; // eslint-disable-line
 const VUE_SENTRY_DSN = SENTRY_DSN; // eslint-disable-line
 const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
 const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
+const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
 
 if (VUE_SENTRY_ENABLED) {
   Sentry.init({
@@ -41,6 +42,7 @@ if (VUE_SENTRY_ENABLED) {
     tracesSampleRate: 1.0,
     trackComponents: true,
     hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
+    environment: VUE_ENVIRONMENT,
     beforeBreadcrumb(breadcrumb, hint) {
       return breadcrumb.category === 'ui.click' ? null : breadcrumb;
     },
