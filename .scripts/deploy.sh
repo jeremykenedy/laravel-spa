@@ -11,6 +11,7 @@ echo "Deployment started ..."
 
 echo 'Hellooo'
 
+
 # # Pull the latest version of the app
 # git pull origin production
 
