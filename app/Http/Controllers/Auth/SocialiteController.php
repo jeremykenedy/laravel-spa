@@ -117,7 +117,7 @@ class SocialiteController extends Controller
             $url = Socialite::driver($provider)
                         ->stateless()
                         ->with($with)
-                        ->setScopes($scopes)
+                        ->scopes($scopes)
                         ->redirect()
                         ->getTargetUrl();
         }

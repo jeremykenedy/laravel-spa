@@ -22,5 +22,3 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
-
-
