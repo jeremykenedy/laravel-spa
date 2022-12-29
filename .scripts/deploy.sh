@@ -2,7 +2,6 @@
 set -e
 
 echo "Deployment started ... ..."
-cd ../
 (php artisan down) || true
 git reset --hard
 git pull origin production
