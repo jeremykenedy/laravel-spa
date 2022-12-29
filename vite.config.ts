@@ -13,6 +13,8 @@ const fs = require('node:fs');
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   let SentryPlugin = null;
+  let devServer = null;
+
   if (process.env.VITE_SENTRY_IO_ENABLED == 1) {
     SentryPlugin = sentryVitePlugin({
       include: '.',
@@ -32,6 +34,22 @@ export default ({ mode }) => {
       project: process.env.VITE_SENTRY_PROJECT,
       authToken: process.env.VITE_SENTRY_AUTH_TOKEN,
     });
+  }
+
+  if (process.env.VITE_SERVER_ENABLED && !process.env.VITE_SERVER_SECURE) {
+    devServer = {
+      host: process.env.VITE_SERVER_HOST,
+    }
+  }
+
+  if (process.env.VITE_SERVER_ENABLED && process.env.VITE_SERVER_SECURE) {
+    devServer = {
+      https: {
+        key: fs.readFileSync(process.env.VITE_SERVER_HTTPS_KEY),
+        cert: fs.readFileSync(process.env.VITE_SERVER_HTTPS_CERT),
+      },
+      host: process.env.VITE_SERVER_HOST,
+    }
   }
 
   return defineConfig({
@@ -81,13 +99,7 @@ export default ({ mode }) => {
       SentryPlugin,
     ],
     sourcemap: true,
-    server: {
-      https: {
-        key: fs.readFileSync(process.env.VITE_SERVER_HTTPS_KEY),
-        cert: fs.readFileSync(process.env.VITE_SERVER_HTTPS_CERT),
-      },
-      host: process.env.VITE_SERVER_HOST,
-    },
+    server: devServer,
     resolve: {
       alias: {
         '~': path.resolve(__dirname, 'node_modules'),
