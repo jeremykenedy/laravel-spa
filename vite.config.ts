@@ -36,13 +36,13 @@ export default ({ mode }) => {
     });
   }
 
-  if (process.env.VITE_SERVER_ENABLED && !process.env.VITE_SERVER_SECURE) {
+  if (process.env.VITE_SERVER_ENABLED == true && process.env.VITE_SERVER_SECURE == false) {
     devServer = {
       host: process.env.VITE_SERVER_HOST,
     }
   }
 
-  if (process.env.VITE_SERVER_ENABLED && process.env.VITE_SERVER_SECURE) {
+  if (process.env.VITE_SERVER_ENABLED == true && process.env.VITE_SERVER_SECURE -- true) {
     devServer = {
       https: {
         key: fs.readFileSync(process.env.VITE_SERVER_HTTPS_KEY),
