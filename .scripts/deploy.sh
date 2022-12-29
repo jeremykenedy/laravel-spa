@@ -12,13 +12,7 @@ php artisan config:cache
 php artisan optimize
 npm install
 npm run build
-
-# # Run database migrations
-# php artisan migrate --force
-
-# # Exit maintenance mode
+php artisan migrate --force
+php artisan db:seed
 php artisan up
-
 echo "Deployment finished Successfully!"
-
-
