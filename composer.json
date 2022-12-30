@@ -27,6 +27,7 @@
         "league/flysystem-aws-s3-v3": "^3.10",
         "mtownsend/laravel-make-trait": "^1.4",
         "nesbot/carbon": "^2.63",
+        "pusher/pusher-php-server": "^7.2",
         "qcod/laravel-settings": "^1.1",
         "sentry/sentry-laravel": "^3.1",
         "socialiteproviders/37signals": "^4.1",
