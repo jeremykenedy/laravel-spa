@@ -38,6 +38,12 @@
                   </h2>
                 </div>
                 <div v-if="user.providers.length > 0">
+                  <hr class="mx-auto mb-3 w-10" />
+                  <h3 class="mb-5 text-center">
+                    {{ user.providers.length }} Application
+                    {{ user.providers.length != 1 ? 's' : '' }} integrated into
+                    your account
+                  </h3>
                   <div
                     class="grid grid-cols-2 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
                   >

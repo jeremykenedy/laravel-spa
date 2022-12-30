@@ -556,6 +556,31 @@ class AppSettingsSeeder extends Seeder
                 'val'       => config('sentry.dsn'),
                 'group'     => 'monitoring',
             ],
+
+            [
+                'name'      => 'App Name',
+                'key'       => 'appName',
+                'val'       => config('app.name'),
+                'group'     => 'app-meta',
+            ],
+            [
+                'name'      => 'Author',
+                'key'       => 'author',
+                'val'       => 'Jeremy Edgar Kenedy',
+                'group'     => 'app-meta',
+            ],
+            [
+                'name'      => 'Description',
+                'key'       => 'description',
+                'val'       => 'A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate with user authentication, registration, email verification, social media authentication, password recovery, user management, and roles/permissions management. Uses TailwindCSS. While the front end is part of this repository it is a completely separated Vue 3 front end.',
+                'group'     => 'app-meta',
+            ],
+            [
+                'name'      => 'Keywords',
+                'key'       => 'keywords',
+                'val'       => 'framework,laravel,vite,vue3,spa,tailwindcss,auth,authentication,socialite,oauth2',
+                'group'     => 'app-meta',
+            ],
         ];
 
         $uniqueKeyOne = 'key';

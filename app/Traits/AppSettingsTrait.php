@@ -176,6 +176,26 @@ trait AppSettingsTrait
             putenv('ATLASSIAN_REDIRECT_URI='.$setting->val);
             config(['services.atlassian.redirect' => $setting->val]);
         }
+        if ($setting->key == 'appName') {
+            $this->setEnv('APP_NAME', "'".$setting->val."'", "'".config('app.name')."'");
+            putenv('APP_NAME='.$setting->val);
+            config(['app.name' => $setting->val]);
+        }
+        if ($setting->key == 'author') {
+            $this->setEnv('APP_AUTHOR', "'".$setting->val."'", "'".config('settings.author')."'");
+            putenv('APP_AUTHOR='.$setting->val);
+            config(['settings.author' => $setting->val]);
+        }
+        if ($setting->key == 'description') {
+            $this->setEnv('APP_DESC', "'".$setting->val."'", "'".config('settings.description')."'");
+            putenv('APP_DESC='.$setting->val);
+            config(['settings.description' => $setting->val]);
+        }
+        if ($setting->key == 'keywords') {
+            $this->setEnv('APP_KEYWORDS', "'".$setting->val."'", "'".config('settings.keywords')."'");
+            putenv('APP_KEYWORDS='.$setting->val);
+            config(['settings.keywords' => $setting->val]);
+        }
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
     }
