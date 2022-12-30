@@ -14,6 +14,7 @@ import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
 import VueGtag from 'vue-gtag-next';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
+import { registerSW } from 'virtual:pwa-register';
 
 axios.defaults.withCredentials = true;
 
@@ -25,6 +26,10 @@ const VUE_SENTRY_DSN = SENTRY_DSN; // eslint-disable-line
 const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
 const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
 const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
+
+const updateSW = registerSW({
+  onOfflineReady() {},
+});
 
 if (VUE_SENTRY_ENABLED) {
   Sentry.init({
