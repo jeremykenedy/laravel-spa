@@ -8,6 +8,9 @@ import StylelintPlugin from 'vite-plugin-stylelint';
 import Inspect from 'vite-plugin-inspect';
 import legacy from '@vitejs/plugin-legacy';
 import sentryVitePlugin from '@sentry/vite-plugin';
+import Pages from 'vite-plugin-pages';
+import generateSitemap from 'vite-plugin-pages-sitemap';
+import { VitePWA } from 'vite-plugin-pwa';
 const fs = require('node:fs');
 
 export default ({ mode }) => {
@@ -103,6 +106,58 @@ export default ({ mode }) => {
       splitVendorChunkPlugin(),
       Inspect(),
       SentryPlugin,
+      Pages({
+        onRoutesGenerated: async (routes) => {
+          generateSitemap({
+            hostname: process.env.VITE_APP_NAME,
+            routes: [...routes],
+            readable: true,
+            exclude: ['/private'],
+            allowRobots: false,
+            filename: 'sitemap',
+          });
+        },
+      }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        workbox: {
+          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          cleanupOutdatedCaches: true,
+          sourcemap: true,
+        },
+        includeAssets: [
+          'favicon.ico',
+          'apple-touch-icon.png',
+          'masked-icon.svg',
+        ],
+        manifest: {
+          name: process.env.VITE_APP_NAME,
+          short_name: process.env.VITE_APP_SHORT_NAME,
+          description: process.env.VITE_APP_DESC,
+          theme_color: '#ffffff',
+          icons: [
+            {
+              src: 'pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+            {
+              src: 'pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+          ],
+        },
+        devOptions: {
+          enabled: true,
+        },
+      }),
     ],
     sourcemap: true,
     server: devServer,

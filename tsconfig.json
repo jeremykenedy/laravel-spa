@@ -5,7 +5,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./resources/js/*"]
-    }
+    },
+    "types": ["vite-plugin-pwa/client"]
   },
 
   "references": [
