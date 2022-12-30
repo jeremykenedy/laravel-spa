@@ -49,88 +49,32 @@
         <ul
           class="-mb-px flex flex-wrap text-center text-sm font-medium text-gray-500 dark:text-gray-400"
         >
-          <li class="mr-2 cursor-pointer" @click="changeTab('authentication')">
+          <li
+            v-for="(tab, index) in tabs"
+            :key="tab.name + '_' + index"
+            class="mr-2 cursor-pointer"
+            @click="changeTab(tab.name)"
+          >
             <span
               class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
               :class="
-                activeTab == 'authentication'
+                activeTab == tab.name
                   ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
                   : ''
               "
             >
               <span
-                class="fa-solid fa-circle-user fa-fw fa-1x mr-3"
+                class="fa-fw fa-1x mr-3"
+                :class="tab.icon"
                 style="margin-top: 2px"
               />
-              Authentication
-            </span>
-          </li>
-          <li class="mr-2 cursor-pointer" @click="changeTab('analytics')">
-            <span
-              class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
-              :class="
-                activeTab == 'analytics'
-                  ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
-                  : ''
-              "
-            >
-              <span
-                class="fa-solid fa-chart-simple fa-fw fa-1x mr-3"
-                style="margin-top: 2px"
-              />
-              Analytics
-            </span>
-          </li>
-          <!--
-          <li class="mr-2 cursor-pointer" @click="changeTab('general')">
-            <span
-              class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
-              :class="
-                activeTab == 'general'
-                  ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
-                  : ''
-              "
-            >
-              <svg
-                aria-hidden="true"
-                class="mr-2 h-5 w-5 text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300"
-                :class="
-                  activeTab == 'general'
-                    ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
-                    : ''
-                "
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z"
-                ></path></svg
-              >General
-            </span>
-          </li>
-          -->
-
-          <li class="mr-2 cursor-pointer" @click="changeTab('monitoring')">
-            <span
-              class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
-              :class="
-                activeTab == 'monitoring'
-                  ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
-                  : ''
-              "
-            >
-              <span
-                class="fa-solid fa-shield-halved fa-fw fa-1x mr-3"
-                style="margin-top: 2px"
-              />
-              Monitoring
+              {{ tab.name }}
             </span>
           </li>
         </ul>
       </div>
       <div class="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
-        <div v-if="activeTab == 'authentication'">
+        <div v-if="activeTab == 'Authentication'">
           <h3 class="text-2xl font-semibold">Authentication Settings</h3>
           <hr class="mt-3 w-10 pb-4" />
           <div>
@@ -1186,7 +1130,7 @@
           </div>
         </div>
 
-        <div v-if="activeTab == 'analytics'">
+        <div v-if="activeTab == 'Analytics'">
           <h3 class="text-2xl font-semibold">Analytics Settings</h3>
           <hr class="mt-3 w-10 pb-4" />
           <div
@@ -1222,12 +1166,12 @@
           </div>
         </div>
 
-        <div v-if="activeTab == 'general'">
+        <div v-if="activeTab == 'General'">
           <h3 class="text-2xl font-semibold">General Settings</h3>
           <hr class="mt-3 w-10 pb-4" />
         </div>
 
-        <div v-if="activeTab == 'monitoring'">
+        <div v-if="activeTab == 'Monitoring'">
           <h3 class="text-2xl font-semibold">Monitoring Settings</h3>
           <hr class="mt-3 w-10 pb-4" />
           <div
@@ -1291,6 +1235,48 @@
             </div>
           </div>
         </div>
+
+        <div v-if="activeTab == 'App Meta'">
+          <h3 class="text-2xl font-semibold">App Meta Settings</h3>
+          <hr class="mt-3 w-10 pb-4" />
+          <div
+            v-for="setting in metaSettings"
+            :key="'monitoring_settings_' + setting.id"
+            class="mb-3"
+          >
+            <div class="setting-group mb-3">
+              <AppSettingTextInput
+                v-if="setting.key == 'appName'"
+                class="ml-8 mr-5"
+                :setting="setting"
+                :loading="loading"
+                :disabled="!dataReady"
+                @update-setting="appSettingUpdateTriggered"
+              />
+
+              <AppSettingTextInput
+                v-if="setting.key == 'author'"
+                class="ml-8 mr-5"
+                :setting="setting"
+                :loading="loading"
+                :disabled="!dataReady"
+                @update-setting="appSettingUpdateTriggered"
+              />
+
+              <AppSettingTextarea
+                v-if="setting.key == 'description'"
+                class="ml-8 mr-5"
+                :setting="setting"
+                :loading="loading"
+                :disabled="!dataReady"
+                @update-setting="appSettingUpdateTriggered"
+              />
+              <!--
+                keywords
+               -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1303,6 +1289,7 @@ import axios from 'axios';
 import { track } from '@services/analytics';
 import AppSettingToggle from '@components/form/AppSettingToggle.vue';
 import AppSettingTextInput from '@components/form/AppSettingTextInput.vue';
+import AppSettingTextarea from '@components/form/AppSettingTextarea.vue';
 import zohoLight from '@img/vendor-logos/zoho-monocrome-white.png';
 import zohoDark from '@img/vendor-logos/zoho-monocrome-black.png';
 
@@ -1312,6 +1299,7 @@ export default {
     ChevronRightIcon,
     AppSettingToggle,
     AppSettingTextInput,
+    AppSettingTextarea,
   },
   props: {},
   data() {
@@ -1321,9 +1309,17 @@ export default {
       analyticsSettings: null,
       generalSettings: null,
       monitoringSettings: null,
+      metaSettings: null,
       loading: false,
-      activeTab: 'authentication',
+      activeTab: 'Authentication',
       appGaEnabled: GA_ENABLED, // eslint-disable-line
+      tabs: [
+        { name: 'Authentication', icon: 'fa-solid fa-circle-user' },
+        { name: 'Analytics', icon: 'fa-solid fa-chart-simple' },
+        { name: 'Monitoring', icon: 'fa-solid fa-shield-halved' },
+        // { name: 'General', icon: 'fa-solid fa-shield-halved' },
+        { name: 'App Meta', icon: 'fa-solid fa-server' },
+      ],
     };
   },
   computed: {
@@ -1370,6 +1366,7 @@ export default {
           this.analyticsSettings = data.analyticsSettings;
           this.generalSettings = data.generalSettings;
           this.monitoringSettings = data.monitoringSettings;
+          this.metaSettings = data.metaSettings;
           this.dataReady = true;
         })
         .catch(({ response }) => {
@@ -1401,6 +1398,10 @@ export default {
           .map((o) => o.name)
           .indexOf(setting.name);
       }
+      if (setting && setting.group && setting.group == 'app-meta') {
+        // index = this.metaSettings.indexOf(setting);
+        index = this.metaSettings.map((o) => o.name).indexOf(setting.name);
+      }
       const a = setting;
       if (newValue != a.val) {
         setting.val = newValue;
@@ -1421,6 +1422,9 @@ export default {
               if (setting && setting.group && setting.group == 'monitoring') {
                 this.monitoringSettings[index] = data.data;
                 // message = message + '. Reloading App.';
+              }
+              if (setting && setting.group && setting.group == 'app-meta') {
+                this.metaSettings[index] = data.data;
               }
             }
             this.loading = false;

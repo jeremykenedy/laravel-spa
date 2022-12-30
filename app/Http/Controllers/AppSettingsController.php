@@ -37,6 +37,7 @@ class AppSettingsController extends Controller
             'analyticsSettings'     => $settings->where('group', 'analytics')->values(),
             'generalSettings'       => $settings->where('group', 'general')->values(),
             'monitoringSettings'    => $settings->where('group', 'monitoring')->values(),
+            'metaSettings'          => $settings->where('group', 'app-meta')->values(),
         ]);
     }
 
