@@ -6,9 +6,7 @@
     "paths": {
       "@/*": ["./resources/js/*"]
     },
-    "types": [
-      "vite-plugin-pwa/client"
-    ]
+    "types": ["vite-plugin-pwa/client"]
   },
 
   "references": [
