@@ -108,6 +108,25 @@
       <router-link
         v-if="authenticated && roles && roles.superAdmin"
         v-slot="{ isActive }"
+        :to="{ name: 'phpinfo' }"
+        @click="toggleSidebar"
+      >
+        <div
+          class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
+          :class="
+            isActive
+              ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
+              : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
+          "
+        >
+          <ShieldExclamationIcon class="mr-2 h-6 w-6" />
+          <span class="">Server Info</span>
+        </div>
+      </router-link>
+
+      <router-link
+        v-if="authenticated && roles && roles.superAdmin"
+        v-slot="{ isActive }"
         :to="{ name: 'app-settings' }"
         @click="toggleSidebar"
       >

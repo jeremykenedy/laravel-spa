@@ -56,7 +56,8 @@ export default {
         this.currentRouteName == 'permissions' ||
         this.currentRouteName == 'settings' ||
         this.currentRouteName == 'users' ||
-        this.currentRouteName == 'app-settings'
+        this.currentRouteName == 'app-settings' ||
+        this.currentRouteName == 'phpinfo'
       ) {
         return true;
       }

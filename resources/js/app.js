@@ -15,6 +15,7 @@ import VueGtag from 'vue-gtag-next';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
 import { registerSW } from 'virtual:pwa-register';
+import VueSecureHTML from 'vue-html-secure';
 
 axios.defaults.withCredentials = true;
 
@@ -101,6 +102,7 @@ store.dispatch('auth/getUser').then(() => {
         allowHTML: true,
       },
     })
+    .use(VueSecureHTML)
     .component('AppButton', AppButton)
     .component('AppToast', AppToast)
     .component('AppSwitch', AppSwitch);
