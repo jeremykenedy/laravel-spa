@@ -25,11 +25,10 @@ class ServerInfoController extends Controller
         phpinfo();
         $pinfo = ob_get_contents();
         ob_end_clean();
-        $pinfo = preg_replace( '%^.*<body>(.*)</body>.*$%ms','$1',$pinfo);
+        $pinfo = preg_replace('%^.*<body>(.*)</body>.*$%ms', '$1', $pinfo);
 
         return response()->json([
             'info'  => $pinfo,
         ]);
-
     }
 }

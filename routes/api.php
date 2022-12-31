@@ -13,9 +13,9 @@ use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ServerInfoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\ServerInfoController;
 use Illuminate\Support\Facades\Route;
 
 /*
