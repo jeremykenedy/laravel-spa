@@ -13,6 +13,7 @@ use App\Http\Controllers\ImpersonateController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\ServerInfoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -70,4 +71,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/{user}/data', [UserController::class, 'exportUserPersonalData']);
     Route::get('/impersonate/take/{user}', [ImpersonateController::class, 'impersonate'])->name('users.impersonate');
     Route::get('/impersonate/leave', [ImpersonateController::class, 'leaveImpersonate'])->name('users.leaveImpersonate');
+    Route::get('/server-info', [ServerInfoController::class, 'index']);
 });

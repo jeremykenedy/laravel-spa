@@ -1,5 +1,5 @@
 <template>
-  <div id="roles" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
+  <div class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <nav class="mb-6 text-sm font-semibold" aria-label="Breadcrumb">
       <ol class="inline-flex list-none p-0">
         <li class="flex items-center">

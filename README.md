@@ -172,12 +172,14 @@ LaravelSpa
 ├── .gitattributes
 ├── .github
 │   ├── FUNDING.yml
+│   ├── dependabot.yml
 │   ├── labeler.yml
 │   └── workflows
 │       ├── changelog.yml
 │       ├── codeql.yml
 │       ├── create-release.yml
 │       ├── dependency-review.yml
+│       ├── deploy.yml
 │       ├── gitguardian.yml
 │       ├── greetings.yml
 │       ├── labeler.yml
@@ -186,10 +188,13 @@ LaravelSpa
 │       ├── node.js.yml
 │       ├── php.yml
 │       ├── release.yml
+│       ├── sentry.yml
 │       └── stale.yml
 ├── .gitignore
 ├── .npmrc
 ├── .prettierignore
+├── .scripts
+│   └── deploy.sh
 ├── .styleci.yml
 ├── .travis.yml
 ├── CHANGELOG.md
@@ -204,6 +209,7 @@ LaravelSpa
 │   ├── Http
 │   │   ├── Controllers
 │   │   │   ├── AppSettingsController.php
+│   │   │   ├── AppleSocialController.php
 │   │   │   ├── Auth
 │   │   │   │   ├── AuthController.php
 │   │   │   │   ├── ForgotPasswordController.php
@@ -218,6 +224,7 @@ LaravelSpa
 │   │   │   ├── PermissionsController.php
 │   │   │   ├── ProfileController.php
 │   │   │   ├── RolesController.php
+│   │   │   ├── ServerInfoController.php
 │   │   │   ├── UserController.php
 │   │   │   └── UsersController.php
 │   │   ├── Kernel.php
@@ -273,6 +280,8 @@ LaravelSpa
 │   │   ├── EventServiceProvider.php
 │   │   ├── RouteServiceProvider.php
 │   │   └── ViewComposerServiceProvider.php
+│   ├── Services
+│   │   └── AppleToken.php
 │   ├── Traits
 │   │   ├── AppSettingsTrait.php
 │   │   └── SocialiteProvidersTrait.php
@@ -309,6 +318,7 @@ LaravelSpa
 │   ├── sentry.php
 │   ├── services.php
 │   ├── session.php
+│   ├── settings.php
 │   ├── users.php
 │   └── view.php
 ├── database
@@ -351,28 +361,38 @@ LaravelSpa
 │   ├── .htaccess
 │   ├── build
 │   │   ├── assets
-│   │   │   ├── 404.508db666.png
-│   │   │   ├── app-legacy.2a30880d.js
-│   │   │   ├── app-legacy.c0ed8668.js
-│   │   │   ├── app.38340d06.css
-│   │   │   ├── app.3bc0086d.js
-│   │   │   ├── app.e2c78f8e.css
-│   │   │   ├── fa-brands-400.b1d1c1b0.ttf
-│   │   │   ├── fa-brands-400.c61287c2.woff2
-│   │   │   ├── fa-regular-400.5da313b0.woff2
-│   │   │   ├── fa-regular-400.d7b19fe2.ttf
-│   │   │   ├── fa-solid-900.8f06540f.woff2
-│   │   │   ├── fa-solid-900.e4f6a7e9.ttf
-│   │   │   ├── fa-v4compatibility.2ddb3b41.ttf
-│   │   │   ├── fa-v4compatibility.f46715c9.woff2
-│   │   │   ├── plugs.12bd3189.png
-│   │   │   ├── polyfills-legacy.b89e66ae.js
-│   │   │   ├── vendor-legacy.5f95acbe.js
-│   │   │   └── vendor.9ec326be.js
+│   │   │   ├── 404-508db666.png
+│   │   │   ├── app-3ff86421.css
+│   │   │   ├── app-b80d281f.js
+│   │   │   ├── app-f9cfb835.css
+│   │   │   ├── app-legacy-5eb64e32.js
+│   │   │   ├── app-legacy-6399fae7.js
+│   │   │   ├── fa-brands-400-b1d1c1b0.ttf
+│   │   │   ├── fa-brands-400-c61287c2.woff2
+│   │   │   ├── fa-regular-400-5da313b0.woff2
+│   │   │   ├── fa-regular-400-d7b19fe2.ttf
+│   │   │   ├── fa-solid-900-8f06540f.woff2
+│   │   │   ├── fa-solid-900-e4f6a7e9.ttf
+│   │   │   ├── fa-v4compatibility-2ddb3b41.ttf
+│   │   │   ├── fa-v4compatibility-f46715c9.woff2
+│   │   │   ├── plugs-12bd3189.png
+│   │   │   ├── polyfills-legacy-6af2eb34.js
+│   │   │   ├── vendor-2bff8d29.js
+│   │   │   ├── vendor-legacy-f27d3422.js
+│   │   │   ├── workbox-window.prod.es5-eba8f0a2.js
+│   │   │   ├── workbox-window.prod.es5-legacy-ab6aa431.js
+│   │   │   ├── zoho-monocrome-black-8bba680d.png
+│   │   │   └── zoho-monocrome-white-cf507b60.png
 │   │   ├── manifest.json
-│   │   ├── webUpdateNoticeInjectScript.js
-│   │   ├── webUpdateNoticeInjectStyle.css
-│   │   └── web_version_by_plugin.json
+│   │   ├── manifest.webmanifest
+│   │   ├── pluginWebUpdateNotice
+│   │   │   ├── webUpdateNoticeInjectScript.global.js
+│   │   │   ├── webUpdateNoticeInjectStyle.css
+│   │   │   └── web_version_by_plugin.json
+│   │   ├── sw.js
+│   │   ├── sw.js.map
+│   │   ├── workbox-3625d7b0.js
+│   │   └── workbox-3625d7b0.js.map
 │   ├── css
 │   │   └── app.css
 │   ├── favicon.ico
@@ -398,7 +418,10 @@ LaravelSpa
 │   │   └── normalize.css
 │   ├── img
 │   │   ├── 404.png
-│   │   └── plugs.png
+│   │   ├── plugs.png
+│   │   └── vendor-logos
+│   │       ├── zoho-monocrome-black.png
+│   │       └── zoho-monocrome-white.png
 │   ├── js
 │   │   ├── app.js
 │   │   ├── bootstrap.js
@@ -407,6 +430,7 @@ LaravelSpa
 │   │   │   ├── AppNav.vue
 │   │   │   ├── CircleSvg.vue
 │   │   │   ├── Errors.vue
+│   │   │   ├── OctoCat.vue
 │   │   │   ├── Pagination.vue
 │   │   │   ├── PerPage.vue
 │   │   │   ├── Success.vue
@@ -434,6 +458,7 @@ LaravelSpa
 │   │   │   │   └── AppToast.vue
 │   │   │   ├── form
 │   │   │   │   ├── AppSettingTextInput.vue
+│   │   │   │   ├── AppSettingTextarea.vue
 │   │   │   │   └── AppSettingToggle.vue
 │   │   │   ├── loaders
 │   │   │   │   └── AnimatedTableLoader.vue
@@ -475,6 +500,7 @@ LaravelSpa
 │   │       │   ├── Admin.vue
 │   │       │   ├── AppSettings.vue
 │   │       │   ├── Permissions.vue
+│   │       │   ├── PhpInfo.vue
 │   │       │   ├── Roles.vue
 │   │       │   └── Users.vue
 │   │       └── pages
@@ -527,7 +553,7 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-68 directories, 294 files
+72 directories, 316 files
 
 ```
 

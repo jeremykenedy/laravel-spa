@@ -19,6 +19,7 @@ import Users from '@/views/admin/Users.vue';
 import Roles from '@/views/admin/Roles.vue';
 import Permissions from '@/views/admin/Permissions.vue';
 import AppSettings from '@/views/admin/AppSettings.vue';
+import PhpInfo from '@/views/admin/PhpInfo.vue';
 
 import auth from '@/middleware/auth';
 import guest from '@/middleware/guest';
@@ -73,6 +74,11 @@ export default [
         path: 'permissions',
         name: 'permissions',
         component: Permissions,
+      },
+      {
+        path: 'phpinfo',
+        name: 'phpinfo',
+        component: PhpInfo,
       },
       {
         path: 'app-settings',
