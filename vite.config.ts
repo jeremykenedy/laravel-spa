@@ -22,7 +22,7 @@ export default ({ mode }) => {
     SentryPlugin = sentryVitePlugin({
       include: '.',
       ignore: ['node_modules', 'vite.config.ts'],
-      silent: false,
+      silent: true,
       telemetry: true,
       sourceMapReference: false,
       sourceMaps: {
