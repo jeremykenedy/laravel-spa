@@ -119,7 +119,7 @@
               : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
           "
         >
-          <ShieldExclamationIcon class="mr-2 h-6 w-6" />
+          <ServerStackIcon class="mr-2 h-6 w-6" />
           <span class="">Server Info</span>
         </div>
       </router-link>
@@ -270,6 +270,7 @@ import {
   ShieldCheckIcon,
   ShieldExclamationIcon,
   CogIcon,
+  ServerStackIcon,
 } from '@heroicons/vue/24/outline';
 
 export default {
@@ -279,6 +280,7 @@ export default {
     BuildingLibraryIcon,
     ShieldCheckIcon,
     ShieldExclamationIcon,
+    ServerStackIcon,
     CogIcon,
   },
   props: {
