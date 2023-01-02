@@ -11,12 +11,21 @@ import sentryVitePlugin from '@sentry/vite-plugin';
 import Pages from 'vite-plugin-pages';
 import generateSitemap from 'vite-plugin-pages-sitemap';
 import { VitePWA } from 'vite-plugin-pwa';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
+import viteImagemin from 'vite-plugin-imagemin';
+import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
+import { visualizer } from 'rollup-plugin-visualizer';
+const routes = () =>
+  import(/* webpackChunkName: "jsRoutes" */ 'resources/js/router/routes.js');
+
 const fs = require('node:fs');
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   let SentryPlugin = null;
   let devServer = null;
+  let VisualizerPlugin = null;
+  let InspectPlugin = null;
 
   if (process.env.VITE_SENTRY_IO_ENABLED == 1) {
     SentryPlugin = sentryVitePlugin({
@@ -61,8 +70,106 @@ export default ({ mode }) => {
     };
   }
 
+  if (process.env.VITE_APP_ENV == 'local') {
+    VisualizerPlugin = visualizer({
+      emitFile: true,
+      filename: 'js-bundle-stats.html',
+    });
+    InspectPlugin = Inspect();
+  }
+
   return defineConfig({
+    build: {
+      chunkSizeWarningLimit: 1600,
+    },
     plugins: [
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon-32x32.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-192x192.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-512x512.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/apple-touch-icon.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon-16x16.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/favicon-32x32.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-192x192.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-512x512.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/apple-touch-icon.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/favicon-16x16.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '',
+          },
+        ],
+      }),
+      viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 20,
+        },
+        pngquant: {
+          quality: [0.8, 0.9],
+          speed: 4,
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox',
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: false,
+            },
+          ],
+        },
+      }),
       laravel({
         input: ['resources/css/app.css', 'resources/js/app.js'],
         refresh: true,
@@ -104,6 +211,7 @@ export default ({ mode }) => {
         polyfills: true,
       }),
       splitVendorChunkPlugin(),
+      chunkSplitPlugin(),
       Inspect(),
       SentryPlugin,
       Pages({
@@ -112,9 +220,9 @@ export default ({ mode }) => {
             hostname: process.env.VITE_APP_NAME,
             routes: [...routes],
             readable: true,
-            exclude: ['/private'],
+            exclude: ['/admin'],
             allowRobots: false,
-            filename: 'sitemap',
+            filename: 'sitemap.xml',
           });
         },
       }),
@@ -128,7 +236,8 @@ export default ({ mode }) => {
         includeAssets: [
           'favicon.ico',
           'apple-touch-icon.png',
-          'masked-icon.svg',
+          'favicon-16x16.png',
+          'favicon-32x32.png',
         ],
         manifest: {
           name: process.env.VITE_APP_NAME,
@@ -137,17 +246,17 @@ export default ({ mode }) => {
           theme_color: '#ffffff',
           icons: [
             {
-              src: 'pwa-192x192.png',
+              src: 'android-chrome-192x192.png',
               sizes: '192x192',
               type: 'image/png',
             },
             {
-              src: 'pwa-512x512.png',
+              src: 'android-chrome-512x512.png',
               sizes: '512x512',
               type: 'image/png',
             },
             {
-              src: 'pwa-512x512.png',
+              src: 'android-chrome-512x512.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable',
@@ -158,6 +267,8 @@ export default ({ mode }) => {
           enabled: true,
         },
       }),
+      InspectPlugin,
+      VisualizerPlugin,
     ],
     sourcemap: true,
     server: devServer,
