@@ -52,7 +52,7 @@
 <script lang="ts">
 import axios from 'axios';
 import { ChevronRightIcon } from '@heroicons/vue/24/outline';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'PhpInfo',
@@ -62,6 +62,13 @@ export default {
       dataReady: false,
       info: null,
     };
+  },
+  computed: {
+    ...mapGetters({
+      authenticated: 'auth/authenticated',
+      user: 'auth/user',
+      roles: 'auth/roles',
+    }),
   },
   mounted() {
     this.getServerInfo();
