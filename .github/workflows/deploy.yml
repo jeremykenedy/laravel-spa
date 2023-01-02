@@ -7,21 +7,26 @@ on:
     branches:
       - production
   pull_request:
+    types: [approved]
+    branches:
+      - production
+  pull_request_review:
+    types: [submitted]
     branches:
       - production
 
 jobs:
   approved:
     if: github.event.review.state == 'approved'
-    deploy:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: Deploy to server
-          uses: appleboy/ssh-action@master
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            port: ${{ secrets.PORT }}
-            key: ${{ secrets.SSHKEY }}
-            script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This PR was approved"
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
