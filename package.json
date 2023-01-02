@@ -94,6 +94,6 @@
     "vue-content-loader": "^2.0.1",
     "vue-gtag-next": "^1.14.0",
     "vue-sweetalert2": "^5.0.5",
-    "vue-tippy": "^6.0.0-alpha.65"
+    "vue-tippy": "^6.0.0"
   }
 }
