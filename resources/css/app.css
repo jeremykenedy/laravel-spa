@@ -494,7 +494,7 @@ video {
 .php-info a:link {
   color: #009;
   text-decoration: none;
-  background-color: #ffffff;
+  @apply bg-white;
 }
 .php-info a:hover {
   text-decoration: underline;
@@ -503,7 +503,10 @@ video {
   border-collapse: collapse;
   border: 0;
   width: 100%;
-  box-shadow: 1px 2px 3px #ccc;
+  @apply shadow-md;
+}
+.php-info table:first-of-type {
+  @apply shadow-none;
 }
 .php-info .center {
   text-align: center;
@@ -515,42 +518,55 @@ video {
 .php-info .center th {
   text-align: center !important;
 }
-.php-info td {
-  border: 1px solid #666;
-  font-size: 75%;
-  vertical-align: baseline;
-  padding: 4px 5px;
-}
+.php-info td,
 .php-info th {
-  border: 1px solid #666;
   font-size: 75%;
   vertical-align: baseline;
   padding: 4px 5px;
 }
+.php-info table:first-of-type .h td,
+.php-info table:first-of-type .h th {
+  @apply rounded;
+}
+.php-info .h td .p {
+  line-height: 2;
+  @apply ml-1 cursor-default;
+}
+
 .php-info h1 {
-  font-size: 150%;
+  font-size: 2.4em;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Nunito,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-weight: 300;
 }
 .php-info h2 {
   font-size: 125%;
+  font-weight: bold;
 }
 .php-info .p {
   text-align: left;
 }
 .php-info .e {
-  background-color: #ccf;
+  /*background-color: #ccf;*/
   width: 50px;
   font-weight: bold;
+  @apply bg-indigo-200;
 }
 .php-info .h {
-  background-color: #99c;
+  /*background-color: #99c;*/
+  @apply bg-indigo-300;
   font-weight: bold;
+  @apply bg-transparent;
 }
 .php-info .v {
-  background-color: #ddd;
+  /*background-color: #ddd;*/
   max-width: 50px;
   overflow-x: auto;
   word-wrap: break-word;
+  @apply bg-gray-200;
 }
+
 .php-info .v i {
   color: #999;
 }
@@ -560,7 +576,18 @@ video {
 }
 .php-info hr {
   width: 100%;
-  background-color: #ccc;
+  /*background-color: #ccc;*/
   border: 0;
   height: 1px;
+}
+
+.dark .php-info .e {
+  @apply bg-slate-900;
+}
+.dark .php-info .h {
+  /*@apply bg-slate-700;*/
+  @apply bg-transparent;
+}
+.dark .php-info .v {
+  @apply bg-gray-600;
 }
