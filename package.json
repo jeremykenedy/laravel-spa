@@ -57,7 +57,7 @@
     "chart.js": "^4.1.1",
     "core-js": "^3.27.1",
     "cross-env": "^7.0.3",
-    "eslint": "^8.30.0",
+    "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-html": "^7.1.0",
@@ -86,7 +86,7 @@
     "v-tables-3": "^0.4.7",
     "vite": "^4.0.2",
     "vite-plugin-eslint": "^1.8.1",
-    "vite-plugin-inspect": "^0.7.10",
+    "vite-plugin-inspect": "^0.7.12",
     "vite-plugin-pages": "^0.28.0",
     "vite-plugin-pages-sitemap": "^1.4.5",
     "vite-plugin-pwa": "^0.14.0",
@@ -94,6 +94,6 @@
     "vue-content-loader": "^2.0.1",
     "vue-gtag-next": "^1.14.0",
     "vue-sweetalert2": "^5.0.5",
-    "vue-tippy": "^6.0.0-alpha.65"
+    "vue-tippy": "^6.0.0"
   }
 }
