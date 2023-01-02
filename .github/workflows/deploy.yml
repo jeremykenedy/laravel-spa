@@ -7,12 +7,20 @@ on:
     branches:
       - production
   pull_request:
+    types: [approved]
     branches:
       - production
+  pull_request_review:
+    types: [submitted]
+    branches:
+      - production
+
 jobs:
-  deploy:
+  approved:
+    if: github.event.review.state == 'approved'
     runs-on: ubuntu-latest
     steps:
+      - run: echo "This PR was approved"
       - uses: actions/checkout@v2
       - name: Deploy to server
         uses: appleboy/ssh-action@master
