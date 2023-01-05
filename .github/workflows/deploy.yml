@@ -5,15 +5,15 @@ name: Deploy
 on:
   push:
     branches:
-      - production
+      - released
   pull_request:
     types: [approved]
     branches:
-      - production
+      - released
   pull_request_review:
     types: [submitted]
     branches:
-      - production
+      - released
 
 jobs:
   approved:
