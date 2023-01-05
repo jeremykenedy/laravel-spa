@@ -13,11 +13,12 @@ deployGit() {
     git fetch --all
     git fetch --tags
     git checkout $BRANCH
-    # git reset --hard
+    git reset --hard
     git pull origin $BRANCH
 }
 
 deployComposer() {
+    rm composer.lock
     composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
     composer update --no-dev --no-interaction --prefer-dist --optimize-autoloader
 }
