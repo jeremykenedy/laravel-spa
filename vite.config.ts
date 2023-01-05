@@ -227,6 +227,8 @@ export default ({ mode }) => {
         },
       }),
       VitePWA({
+        mode: (process.env.VITE_APP_ENV).toLowerCase() == 'production' ? 'production' : 'development',
+        base: '/',
         registerType: 'autoUpdate',
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
@@ -264,7 +266,9 @@ export default ({ mode }) => {
           ],
         },
         devOptions: {
-          enabled: true,
+          enabled: (process.env.VITE_APP_ENV).toLowerCase() == 'production' ? false : true,
+          type: 'module',
+          navigateFallback: 'index.html',
         },
       }),
       InspectPlugin,

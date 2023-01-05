@@ -59,8 +59,9 @@ const AppSettings = () =>
   import(
     /* webpackChunkName: "js/AppSettingsPage" */ '@/views/admin/AppSettings.vue'
   );
-const PhpInfo = () =>
-  import(/* webpackChunkName: "js/PhpInfoPage" */ '@/views/admin/PhpInfo.vue');
+// const PhpInfo = () =>
+// import(/* webpackChunkName: "js/PhpInfoPage" */ '@/views/admin/PhpInfo.vue');
+import { defineAsyncComponent } from 'vue';
 
 import auth from '@/middleware/auth';
 import guest from '@/middleware/guest';
@@ -120,7 +121,9 @@ export default [
       {
         path: 'phpinfo',
         name: 'phpinfo',
-        component: PhpInfo,
+        component: defineAsyncComponent(() =>
+          import('@/views/admin/PhpInfo.vue'),
+        ),
       },
       {
         path: 'app-settings',
