@@ -3,6 +3,8 @@
   "scripts": {
     "dev": "vite --mode=development",
     "build": "vite build",
+    "preview": "vite preview",
+    "optimize": "vite optimize",
     "lint": "eslint --fix resources/js/ --ext .js,.vue",
     "clean": "prettier .  --write"
   },
