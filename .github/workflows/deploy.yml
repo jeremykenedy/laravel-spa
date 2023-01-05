@@ -16,18 +16,18 @@ on:
       - released
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
-    - run: echo "This PR was approved"
-    - uses: actions/checkout@v2
-    - name: Deploy to server
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        port: ${{ secrets.PORT }}
-        key: ${{ secrets.SSHKEY }}
-        script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSHKEY }}
+          script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
 
 # jobs:
 #   approved:
