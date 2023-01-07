@@ -15,7 +15,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import viteImagemin from 'vite-plugin-imagemin';
 import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import { visualizer } from 'rollup-plugin-visualizer';
-import { createHtmlPlugin } from 'vite-plugin-html'
+import { createHtmlPlugin } from 'vite-plugin-html';
 import manifestSRI from 'vite-plugin-manifest-sri';
 
 const routes = () =>
@@ -106,8 +106,10 @@ export default ({ mode }) => {
               const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
 
               for (const moduleId of idsToHandle) {
-                const { isEntry, dynamicImporters, importers } = getModuleInfo(moduleId);
-                if (isEntry || dynamicImporters.length > 0) dependentEntryPoints.push(moduleId);
+                const { isEntry, dynamicImporters, importers } =
+                  getModuleInfo(moduleId);
+                if (isEntry || dynamicImporters.length > 0)
+                  dependentEntryPoints.push(moduleId);
 
                 // The Set iterator is intelligent enough to iterate over elements that
                 // are added during iteration
@@ -116,7 +118,9 @@ export default ({ mode }) => {
 
               // If there is a unique entry, we put it into a chunk based on the entry name
               if (dependentEntryPoints.length === 1) {
-                return `${dependentEntryPoints[0].split('/').slice(-1)[0].split('.')[0]}.strings.${language}`;
+                return `${
+                  dependentEntryPoints[0].split('/').slice(-1)[0].split('.')[0]
+                }.strings.${language}`;
               }
               // For multiple entries, we put it into a "shared" chunk
               if (dependentEntryPoints.length > 1) {
@@ -224,10 +228,17 @@ export default ({ mode }) => {
       }),
       laravel({
         input: ['resources/css/app.css', 'resources/js/app.js'],
-        refresh: [{
-            paths: ['resources/views/**', 'resources/css/**', 'resources/js/**', 'app/View/Components/**'],
-            config: { delay: 300 }
-        }],
+        refresh: [
+          {
+            paths: [
+              'resources/views/**',
+              'resources/css/**',
+              'resources/js/**',
+              'app/View/Components/**',
+            ],
+            config: { delay: 300 },
+          },
+        ],
       }),
       manifestSRI(),
       vue({
