@@ -28,7 +28,6 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
-
 # jobs:
 #   approved:
 #     if: github.event.review.state == 'approved'

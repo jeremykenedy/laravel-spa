@@ -1,0 +1,29 @@
+{
+  "name": "Laravel Secrets",
+  "short_name": "Vue Spa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en",
+  "scope": "/",
+  "description": "A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate with user authentication, registration, email verification, social media authentication, password recovery, user management, and roles/permissions management. Uses TailwindCSS. While the front end is part of this repository it is a completely separated Vue 3 front end.",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

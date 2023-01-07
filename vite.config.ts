@@ -1,4 +1,4 @@
-import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite';
+import { defineConfig, splitVendorChunkPlugin, loadEnv, Plugin } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
@@ -15,6 +15,9 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import viteImagemin from 'vite-plugin-imagemin';
 import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import { visualizer } from 'rollup-plugin-visualizer';
+import { createHtmlPlugin } from 'vite-plugin-html'
+import manifestSRI from 'vite-plugin-manifest-sri';
+
 const routes = () =>
   import(/* webpackChunkName: "jsRoutes" */ 'resources/js/router/routes.js');
 
@@ -79,8 +82,57 @@ export default ({ mode }) => {
   }
 
   return defineConfig({
+    optimizeDeps: {
+      include: ['esm-dep > cjs-dep'],
+      force: true,
+    },
     build: {
+      ssr: false,
+      minify: 'terser',
+      reportCompressedSize: true,
       chunkSizeWarningLimit: 1600,
+      manifest: true,
+      sourcemap: true,
+      rollupOptions: {
+        output: {
+          manualChunks(id, { getModuleInfo }) {
+            const match = /.*\.strings\.(\w+)\.js/.exec(id);
+            if (match) {
+              const language = match[1]; // e.g. "en"
+              const dependentEntryPoints = [];
+
+              // we use a Set here so we handle each module at most once. This
+              // prevents infinite loops in case of circular dependencies
+              const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
+
+              for (const moduleId of idsToHandle) {
+                const { isEntry, dynamicImporters, importers } = getModuleInfo(moduleId);
+                if (isEntry || dynamicImporters.length > 0) dependentEntryPoints.push(moduleId);
+
+                // The Set iterator is intelligent enough to iterate over elements that
+                // are added during iteration
+                for (const importerId of importers) idsToHandle.add(importerId);
+              }
+
+              // If there is a unique entry, we put it into a chunk based on the entry name
+              if (dependentEntryPoints.length === 1) {
+                return `${dependentEntryPoints[0].split('/').slice(-1)[0].split('.')[0]}.strings.${language}`;
+              }
+              // For multiple entries, we put it into a "shared" chunk
+              if (dependentEntryPoints.length > 1) {
+                return `shared.strings.${language}`;
+              }
+            }
+          },
+          globals: {
+            vue: 'Vue',
+          },
+        },
+        external: ['Vue'],
+      },
+      modulePreload: {
+        polyfill: true,
+      },
     },
     plugins: [
       viteStaticCopy({
@@ -172,8 +224,12 @@ export default ({ mode }) => {
       }),
       laravel({
         input: ['resources/css/app.css', 'resources/js/app.js'],
-        refresh: true,
+        refresh: [{
+            paths: ['resources/views/**', 'resources/css/**', 'resources/js/**', 'app/View/Components/**'],
+            config: { delay: 300 }
+        }],
       }),
+      manifestSRI(),
       vue({
         template: {
           transformAssetUrls: {
@@ -212,8 +268,6 @@ export default ({ mode }) => {
       }),
       splitVendorChunkPlugin(),
       chunkSplitPlugin(),
-      Inspect(),
-      SentryPlugin,
       Pages({
         onRoutesGenerated: async (routes) => {
           generateSitemap({
@@ -227,9 +281,12 @@ export default ({ mode }) => {
         },
       }),
       VitePWA({
-        mode: (process.env.VITE_APP_ENV).toLowerCase() == 'production' ? 'production' : 'development',
-        base: '/',
-        registerType: 'autoUpdate',
+        mode:
+          process.env.VITE_APP_ENV.toLowerCase() == 'production'
+            ? 'production'
+            : 'development',
+        // base: '/',
+        // registerType: 'autoUpdate',
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
           cleanupOutdatedCaches: true,
@@ -266,11 +323,19 @@ export default ({ mode }) => {
           ],
         },
         devOptions: {
-          enabled: (process.env.VITE_APP_ENV).toLowerCase() == 'production' ? false : true,
+          enabled:
+            process.env.VITE_APP_ENV.toLowerCase() == 'production'
+              ? false
+              : true,
           type: 'module',
           navigateFallback: 'index.html',
         },
       }),
+      createHtmlPlugin({
+        minify: true,
+        entry: 'resources/js/app.js',
+      }),
+      SentryPlugin,
       InspectPlugin,
       VisualizerPlugin,
     ],

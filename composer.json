@@ -21,7 +21,7 @@
         "jeremykenedy/laravel-blocker": "^3.4",
         "jeremykenedy/laravel-exception-notifier": "^3.1",
         "jeremykenedy/laravel-https": "^1.5",
-        "jeremykenedy/laravel-logger": "^6.0",
+        "jeremykenedy/laravel-logger": "^7.0.1",
         "jeremykenedy/laravel-roles": "^9.0",
         "laravel/framework": "^9.2",
         "laravel/sanctum": "^3.0",
