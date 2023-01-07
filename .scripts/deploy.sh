@@ -7,8 +7,12 @@ deployStart() {
     echo "Deployment started ... ..."
     (php artisan down) || true
     export NODE_OPTIONS=--max-old-space-size=8192
-    rm composer.lock
-    rm package-lock.json
+    if [ -f "composer.lock" ] ; then
+        rm "composer.lock"
+    fi
+    if [ -f "package-lock.json" ] ; then
+        rm "package-lock.json"
+    fi
 }
 
 deployGit() {
