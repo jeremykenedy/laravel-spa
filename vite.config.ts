@@ -17,6 +17,8 @@ import { chunkSplitPlugin } from 'vite-plugin-chunk-split';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import manifestSRI from 'vite-plugin-manifest-sri';
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 
 const routes = () =>
   import(/* webpackChunkName: "jsRoutes" */ 'resources/js/router/routes.js');
@@ -83,8 +85,12 @@ export default ({ mode }) => {
 
   return defineConfig({
     optimizeDeps: {
-      include: ['esm-dep > cjs-dep'],
       force: true,
+      esbuildOptions:{
+        plugins:[
+          esbuildCommonjs()
+        ]
+      },
     },
     build: {
       ssr: false,
@@ -292,12 +298,16 @@ export default ({ mode }) => {
         },
       }),
       VitePWA({
+        srcDir: 'public',
+        filename: 'sw.ts',
         mode:
           process.env.VITE_APP_ENV.toLowerCase() == 'production'
             ? 'production'
             : 'development',
         // base: '/',
-        // registerType: 'autoUpdate',
+        registerType: 'promptForUpdate',
+        injectRegister: 'auto',
+        strategies: 'injectManifest',
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
           cleanupOutdatedCaches: true,
@@ -346,6 +356,7 @@ export default ({ mode }) => {
         minify: true,
         entry: 'resources/js/app.js',
       }),
+      viteCommonjs(),
       SentryPlugin,
       InspectPlugin,
       VisualizerPlugin,

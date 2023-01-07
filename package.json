@@ -38,6 +38,7 @@
     "@babel/core": "^7.20.5",
     "@babel/eslint-parser": "^7.19.1",
     "@heroicons/vue": "^2.0.13",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@plugin-web-update-notification/vite": "^1.0.0",
     "@popperjs/core": "^2.11.6",
     "@rushstack/eslint-patch": "^1.1.4",
