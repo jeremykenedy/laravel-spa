@@ -7,6 +7,8 @@ deployStart() {
     echo "Deployment started ... ..."
     (php artisan down) || true
     export NODE_OPTIONS=--max-old-space-size=8192
+    rm composer.lock
+    rm package-lock.json
 }
 
 deployGit() {
@@ -18,7 +20,6 @@ deployGit() {
 }
 
 deployComposer() {
-    rm composer.lock
     composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
     composer update --no-dev --no-interaction --prefer-dist --optimize-autoloader
 }
@@ -35,7 +36,6 @@ deployMigrationsAndSeeds() {
 }
 
 deployFrontEnd() {
-    rm package-lock.json
     npm install
     npm update
     npm run clean
