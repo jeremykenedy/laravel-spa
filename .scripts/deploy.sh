@@ -35,6 +35,7 @@ deployMigrationsAndSeeds() {
 }
 
 deployFrontEnd() {
+    rm package-lock.json
     npm install
     npm update
     npm run clean
