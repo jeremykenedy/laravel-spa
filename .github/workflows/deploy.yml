@@ -16,11 +16,9 @@ on:
       - released
 
 jobs:
-  approved:
-    if: github.event.review.state == 'approved'
+  build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This PR was approved"
       - uses: actions/checkout@v2
       - name: Deploy to server
         uses: appleboy/ssh-action@master
@@ -30,3 +28,18 @@ jobs:
           port: ${{ secrets.PORT }}
           key: ${{ secrets.SSHKEY }}
           script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
+# jobs:
+#   approved:
+#     if: github.event.review.state == 'approved'
+#     runs-on: ubuntu-latest
+#     steps:
+#       - run: echo "This PR was approved"
+#       - uses: actions/checkout@v2
+#       - name: Deploy to server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.HOST }}
+#           username: ${{ secrets.USERNAME }}
+#           port: ${{ secrets.PORT }}
+#           key: ${{ secrets.SSHKEY }}
+#           script: cd ${{ secrets.SPAPATH }} && bash .scripts/deploy.sh
