@@ -12,13 +12,10 @@ class AppleTokenTest extends TestCase
     /** @test */
     public function it_is_permitted_for_apple()
     {
-        $this->assertTrue(true);
+        $token = app(Configuration::class)
+            ->parser()
+            ->parse(app(AppleToken::class)->generate());
 
-        // Awaiting Apple Approval
-        // $token = app(Configuration::class)
-        //     ->parser()
-        //     ->parse(app(AppleToken::class)->generate());
-
-        // $this->assertTrue($token->isPermittedFor('https://appleid.apple.com'));
+        $this->assertTrue($token->isPermittedFor('https://appleid.apple.com'));
     }
 }
