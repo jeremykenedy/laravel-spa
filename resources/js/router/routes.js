@@ -1,25 +1,67 @@
-import Home from '@pages/Home.vue';
-import About from '@pages/About.vue';
-import Terms from '@pages/Terms.vue';
-import Dashboard from '@pages/Dashboard.vue';
-import Login from '@pages/Login.vue';
-import ForgotPassword from '@pages/ForgotPassword.vue';
-import ResetPassword from '@pages/ResetPassword.vue';
-import Register from '@pages/Register.vue';
-import VerifyEmail from '@pages/VerifyEmail.vue';
-import Settings from '@pages/settings/Settings.vue';
-import Profile from '@pages/settings/Profile.vue';
-import Password from '@pages/settings/Password.vue';
-import Account from '@pages/settings/Account.vue';
-import NotFound from '@pages/NotFound.vue';
+// general routes
+const Home = () =>
+  import(/* webpackChunkName: "js/HomePage" */ '@pages/Home.vue');
+const About = () =>
+  import(/* webpackChunkName: "js/AboutPage" */ '@pages/About.vue');
+const Terms = () =>
+  import(/* webpackChunkName: "js/TermsPage" */ '@pages/Terms.vue');
+const Dashboard = () =>
+  import(/* webpackChunkName: "js/DashboardPage" */ '@pages/Dashboard.vue');
+const Login = () =>
+  import(/* webpackChunkName: "js/LoginPage" */ '@pages/Login.vue');
+const ForgotPassword = () =>
+  import(
+    /* webpackChunkName: "js/ForgotPasswordPage" */ '@pages/ForgotPassword.vue'
+  );
+const ResetPassword = () =>
+  import(
+    /* webpackChunkName: "js/ResetPasswordPage" */ '@pages/ResetPassword.vue'
+  );
+const Register = () =>
+  import(/* webpackChunkName: "js/RegisterPage" */ '@pages/Register.vue');
+const VerifyEmail = () =>
+  import(/* webpackChunkName: "js/VerifyEmailPage" */ '@pages/VerifyEmail.vue');
 
-import AdminLayout from '@/layouts/AdminLayout.vue';
-import Admin from '@/views/admin/Admin.vue';
-import Users from '@/views/admin/Users.vue';
-import Roles from '@/views/admin/Roles.vue';
-import Permissions from '@/views/admin/Permissions.vue';
-import AppSettings from '@/views/admin/AppSettings.vue';
-import PhpInfo from '@/views/admin/PhpInfo.vue';
+const Settings = () =>
+  import(
+    /* webpackChunkName: "js/SettingsPage" */ '@pages/settings/Settings.vue'
+  );
+const Profile = () =>
+  import(
+    /* webpackChunkName: "js/ProfilePage" */ '@pages/settings/Profile.vue'
+  );
+const Password = () =>
+  import(
+    /* webpackChunkName: "js/PasswordPage" */ '@pages/settings/Password.vue'
+  );
+const Account = () =>
+  import(
+    /* webpackChunkName: "js/AccountPage" */ '@pages/settings/Account.vue'
+  );
+const NotFound = () =>
+  import(/* webpackChunkName: "js/NotFoundPage" */ '@pages/NotFound.vue');
+
+const AdminLayout = () =>
+  import(
+    /* webpackChunkName: "js/AdminLayoutPage" */ '@/layouts/AdminLayout.vue'
+  );
+const Admin = () =>
+  import(/* webpackChunkName: "js/AdminPage" */ '@/views/admin/Admin.vue');
+const Users = () =>
+  import(/* webpackChunkName: "js/UsersPage" */ '@/views/admin/Users.vue');
+const Roles = () =>
+  import(/* webpackChunkName: "js/RolesPage" */ '@/views/admin/Roles.vue');
+const Permissions = () =>
+  import(
+    /* webpackChunkName: "js/PermissionsPage" */ '@/views/admin/Permissions.vue'
+  );
+const AppSettings = () =>
+  import(
+    /* webpackChunkName: "js/AppSettingsPage" */ '@/views/admin/AppSettings.vue'
+  );
+// const PhpInfo = () =>
+// import(/* webpackChunkName: "js/PhpInfoPage" */ '@/views/admin/PhpInfo.vue');
+import { defineAsyncComponent } from 'vue';
 
 import auth from '@/middleware/auth';
 import guest from '@/middleware/guest';
@@ -30,6 +72,7 @@ import roleUser from '@/middleware/roleUser';
 export default [
   {
     path: '/',
+    // component: () => Home,
     component: Home,
     name: 'home',
   },
@@ -78,7 +121,9 @@ export default [
       {
         path: 'phpinfo',
         name: 'phpinfo',
-        component: PhpInfo,
+        component: defineAsyncComponent(() =>
+          import('@/views/admin/PhpInfo.vue'),
+        ),
       },
       {
         path: 'app-settings',

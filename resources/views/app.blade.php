@@ -20,9 +20,10 @@
         <meta name="author" content="{{ config('settings.author') }}">
         <link rel="icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-        <link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF">
+        <link rel="mask-icon" href="/favicon-32x32.png" color="#FFFFFF">
         <meta name="theme-color" content="#ffffff">
         @vite(['resources/css/app.css'])
+        @laravelPWA
     </head>
     <body class="bg-gray-50 h-screen antialiased leading-none font-sans overflow-x-hidden overflow-y-auto">
         <div id="app"  v-cloak></div>
