@@ -86,10 +86,8 @@ export default ({ mode }) => {
   return defineConfig({
     optimizeDeps: {
       force: true,
-      esbuildOptions:{
-        plugins:[
-          esbuildCommonjs()
-        ]
+      esbuildOptions: {
+        plugins: [esbuildCommonjs()],
       },
     },
     build: {
