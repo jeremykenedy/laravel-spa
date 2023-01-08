@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode=development",
     "build": "vite build",
     "lint": "eslint --fix resources/js/ --ext .js,.vue",
     "clean": "prettier .  --write"
@@ -21,6 +21,7 @@
     "moment": "^2.29.4",
     "save-dev": "^0.0.1-security",
     "vform": "^2.1.2",
+    "vite-plugin-static-copy": "^0.13.0",
     "vue": "^3.2.38",
     "vue-axios": "^3.5.2",
     "vue-html-secure": "^1.0.10",
@@ -75,6 +76,7 @@
     "postcss-nesting": "^10.1.10",
     "prettier": "^2.8.1",
     "prettier-plugin-tailwindcss": "^0.2.1",
+    "rollup-plugin-visualizer": "^5.9.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.0.2",
     "stylelint": "^14.16.1",
@@ -85,7 +87,9 @@
     "universal-social-auth": "^0.2.6",
     "v-tables-3": "^0.4.7",
     "vite": "^4.0.2",
+    "vite-plugin-chunk-split": "^0.4.7",
     "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-inspect": "^0.7.12",
     "vite-plugin-pages": "^0.28.0",
     "vite-plugin-pages-sitemap": "^1.4.5",
