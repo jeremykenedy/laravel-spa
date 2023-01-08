@@ -19,11 +19,23 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import manifestSRI from 'vite-plugin-manifest-sri';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
+import { ViteMinifyPlugin } from 'vite-plugin-minify'
+import { dependencies } from './package.json';
 
 const routes = () =>
   import(/* webpackChunkName: "jsRoutes" */ 'resources/js/router/routes.js');
 
 const fs = require('node:fs');
+
+function renderChunks(deps: Record<string, string>) {
+  let chunks = {};
+  Object.keys(deps).forEach((key) => {
+    if (['vue', 'vue-router', 'vue-loader'].includes(key)) return;
+    chunks[key] = [key];
+  });
+  return chunks;
+}
+
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
@@ -141,6 +153,9 @@ export default ({ mode }) => {
       modulePreload: {
         polyfill: true,
       },
+      commonjsOptions: {
+          include: [/node_modules/]
+      },
     },
     plugins: [
       viteStaticCopy({
@@ -244,7 +259,6 @@ export default ({ mode }) => {
           },
         ],
       }),
-      manifestSRI(),
       vue({
         template: {
           transformAssetUrls: {
@@ -350,9 +364,14 @@ export default ({ mode }) => {
           navigateFallback: 'index.html',
         },
       }),
+      manifestSRI(),
       createHtmlPlugin({
         minify: true,
         entry: 'resources/js/app.js',
+      }),
+      ViteMinifyPlugin({
+        minifyCSS: true,
+        removeComments: true,
       }),
       viteCommonjs(),
       SentryPlugin,
