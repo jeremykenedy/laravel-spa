@@ -237,7 +237,7 @@ return [
         'redirect'      => env('AMAZON_SIGNIN_REDIRECT_URI'),
     ],
     'keycloak' => [
-        'client_id'     => env('KEYCLOAK_ENABLED', false),
+        'enabled'       => env('KEYCLOAK_ENABLED', false),
         'client_id'     => env('KEYCLOAK_CLIENT_ID'),
         'client_secret' => env('KEYCLOAK_CLIENT_SECRET'),
         'redirect'      => env('KEYCLOAK_REDIRECT_URI'),

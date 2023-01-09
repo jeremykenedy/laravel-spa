@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Setting;
+use Illuminate\Support\Facades\Artisan;
 
 trait AppSettingsTrait
 {
@@ -196,6 +197,18 @@ trait AppSettingsTrait
             putenv('APP_KEYWORDS='.$setting->val);
             config(['settings.keywords' => $setting->val]);
         }
+        if ($setting->key == 'enableKonamiAsteroids') {
+            $this->setEnv('KONAMI_ASTEROIDS_ENABLED', $setting->val, config('settings.enableKonamiAsteroids'));
+            putenv('KONAMI_ASTEROIDS_ENABLED='.$setting->val);
+            config(['settings.enableKonamiAsteroids' => $setting->val]);
+        }
+        if ($setting->key == 'enableKonamiToasty') {
+            $this->setEnv('KONAMI_TOASTY_ENABLED', $setting->val, config('settings.enableKonamiToasty'));
+            putenv('KONAMI_TOASTY_ENABLED='.$setting->val);
+            config(['settings.enableKonamiToasty' => $setting->val]);
+        }
+
+        Artisan::call('config:cache');
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
     }
