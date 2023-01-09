@@ -34,6 +34,10 @@
         <script> const SENTRY_FEEDBACK_ENABLED="{{ config('services.sentry.feedback-enabled') }}"</script>
         <script> const SENTRY_DSN="{{ config('sentry.dsn') }}"</script>
         <script> const ENVIRONMENT="{{ config('app.env') }}"</script>
+        <script> const KONAMI_TOASTY_ENABLED="{{ config('settings.enableKonamiToasty') }}"</script>
         @vite(['resources/js/app.js'])
+        @if(config('settings.enableKonamiAsteroids'))
+            <script type="text/javascript" src="/js/s-code.min.js"></script>
+        @endif
     </body>
 </html>

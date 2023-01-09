@@ -1277,6 +1277,79 @@
             </div>
           </div>
         </div>
+
+        <div v-if="activeTab == 'Secrets'">
+          <h3 class="text-2xl font-semibold">Secret Settings</h3>
+          <hr class="mt-3 w-10 pb-4" />
+          <div
+            v-for="setting in secretSettings"
+            :key="'monitoring_settings_' + setting.id"
+            class="mb-3"
+          >
+            <div class="setting-group mb-3">
+              <div v-if="setting.key == 'enableKonamiAsteroids'">
+                <h4 class="w-100 mb-3 text-xl font-semibold">
+                  <span
+                    class="fa-solid fa-egg fa-fw text-green-300 dark:text-green-300"
+                  />
+                  App Hidden Features
+                  <a
+                    v-tippy="
+                      'Up, Up, Down, Down, Left, Right, Left, Right, a, b'
+                    "
+                    href="https://en.wikipedia.org/wiki/Konami_Code"
+                    target="_blank"
+                    class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
+                  >
+                    <span class="fa-solid fa-circle-info fa-fw fa-sm" />
+                  </a>
+                </h4>
+              </div>
+
+              <AppSettingToggle
+                v-if="setting.key == 'enableKonamiAsteroids'"
+                class="ml-8 mr-5 mb-3"
+                :setting="setting"
+                :loading="loading"
+                @update-setting="appSettingUpdateTriggered"
+              />
+
+              <AppSettingToggle
+                v-if="setting.key == 'enableKonamiToasty'"
+                class="ml-8 mr-5 mb-3"
+                :setting="setting"
+                :loading="loading"
+                @update-setting="appSettingUpdateTriggered"
+              />
+              <!--
+              <AppSettingToggle
+                v-if="setting.key == 'enableSentryMonitoringFeedbakForm'"
+                class="ml-8 mr-5 mb-3"
+                :setting="setting"
+                :loading="loading"
+                @update-setting="appSettingUpdateTriggered"
+              />
+
+              <AppSettingTextInput
+                v-if="setting.key == 'sentryIoDSN'"
+                class="ml-8 mr-5"
+                :setting="setting"
+                :loading="loading"
+                :disabled="!dataReady"
+                @update-setting="appSettingUpdateTriggered"
+              />
+
+              <AppButton
+                v-if="setting.key == 'sentryIoDSN' && sentryEnabled"
+                secondary
+                text="Throw Test Error"
+                class="ml-8 mr-5 mb-3 mt-4"
+                @click="throwTestError"
+              />
+               -->
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1310,6 +1383,7 @@ export default {
       generalSettings: null,
       monitoringSettings: null,
       metaSettings: null,
+      secretSettings: null,
       loading: false,
       activeTab: 'Authentication',
       appGaEnabled: GA_ENABLED, // eslint-disable-line
@@ -1319,6 +1393,7 @@ export default {
         { name: 'Monitoring', icon: 'fa-solid fa-shield-halved' },
         // { name: 'General', icon: 'fa-solid fa-shield-halved' },
         { name: 'App Meta', icon: 'fa-solid fa-server' },
+        { name: 'Secrets', icon: 'fa-solid fa-egg' },
       ],
     };
   },
@@ -1367,6 +1442,7 @@ export default {
           this.generalSettings = data.generalSettings;
           this.monitoringSettings = data.monitoringSettings;
           this.metaSettings = data.metaSettings;
+          this.secretSettings = data.secretSettings;
           this.dataReady = true;
         })
         .catch(({ response }) => {
@@ -1402,6 +1478,12 @@ export default {
         // index = this.metaSettings.indexOf(setting);
         index = this.metaSettings.map((o) => o.name).indexOf(setting.name);
       }
+
+      if (setting && setting.group && setting.group == 'secrets') {
+        // index = this.secretSettings.indexOf(setting);
+        index = this.secretSettings.map((o) => o.name).indexOf(setting.name);
+      }
+
       const a = setting;
       if (newValue != a.val) {
         setting.val = newValue;
@@ -1425,6 +1507,9 @@ export default {
               }
               if (setting && setting.group && setting.group == 'app-meta') {
                 this.metaSettings[index] = data.data;
+              }
+              if (setting && setting.group && setting.group == 'secrets') {
+                this.secretSettings[index] = data.data;
               }
             }
             this.loading = false;

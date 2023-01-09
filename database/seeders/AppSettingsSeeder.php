@@ -581,6 +581,22 @@ class AppSettingsSeeder extends Seeder
                 'val'       => 'framework,laravel,vite,vue3,spa,tailwindcss,auth,authentication,socialite,oauth2',
                 'group'     => 'app-meta',
             ],
+
+            [
+                'name'      => 'Konami Asteroids',
+                'key'       => 'enableKonamiAsteroids',
+                'type'      => 'boolean',
+                'val'       => config('settings.enableKonamiAsteroids'),
+                'group'     => 'secrets',
+            ],
+            [
+                'name'      => 'Konami Toasty',
+                'key'       => 'enableKonamiToasty',
+                'type'      => 'boolean',
+                'val'       => config('settings.enableKonamiToasty'),
+                'group'     => 'secrets',
+            ],
+
         ];
 
         $uniqueKeyOne = 'key';

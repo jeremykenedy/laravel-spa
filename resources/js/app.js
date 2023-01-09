@@ -16,6 +16,8 @@ import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
 import { registerSW } from 'virtual:pwa-register';
 import VueSecureHTML from 'vue-html-secure';
+import KonamiCode from 'vue-konami-code';
+import toasty from 'toasty';
 
 axios.defaults.withCredentials = true;
 
@@ -27,6 +29,7 @@ const VUE_SENTRY_DSN = SENTRY_DSN; // eslint-disable-line
 const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
 const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
 const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
+const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED; // eslint-disable-line
 
 const updateSW = registerSW({
   onOfflineReady() {},
@@ -56,7 +59,7 @@ if (VUE_SENTRY_ENABLED) {
       // Check if it is an exception, and if so, show the report dialog
       if (event.exception) {
         if (VUE_SENTRY_FEEDBACK_ENABLED) {
-          // Sentry.showReportDialog({ eventId: event.event_id });
+          Sentry.showReportDialog({ eventId: event.event_id });
         }
       }
       return event;
@@ -105,10 +108,17 @@ store.dispatch('auth/getUser').then(() => {
     .use(VueSecureHTML)
     .component('AppButton', AppButton)
     .component('AppToast', AppToast)
+    // .component('AppTable', AppTable)
     .component('AppSwitch', AppSwitch);
-  // .component('AppTable', AppTable)
 
-  if (APP_GA_ENABLED) {
+  if (VUE_TOASTY_ENABLED == 1) {
+    app.use(KonamiCode, {
+      callback: function () {
+        toasty().trigger();
+      },
+    });
+  }
+  if (APP_GA_ENABLED == 1) {
     app.use(VueGtag, {
       property: {
         id: APP_GA_TAG,

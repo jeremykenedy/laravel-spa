@@ -19,7 +19,7 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 import manifestSRI from 'vite-plugin-manifest-sri';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
-import { ViteMinifyPlugin } from 'vite-plugin-minify'
+import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { dependencies } from './package.json';
 
 const routes = () =>
@@ -35,7 +35,6 @@ function renderChunks(deps: Record<string, string>) {
   });
   return chunks;
 }
-
 
 export default ({ mode }) => {
   process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
@@ -154,7 +153,7 @@ export default ({ mode }) => {
         polyfill: true,
       },
       commonjsOptions: {
-          include: [/node_modules/]
+        include: [/node_modules/],
       },
     },
     plugins: [
@@ -215,6 +214,10 @@ export default ({ mode }) => {
           {
             src: 'resources/img/favicon/favicon.ico',
             dest: '',
+          },
+          {
+            src: 'resources/js/services/s-code.min.js',
+            dest: '../js/',
           },
         ],
       }),
