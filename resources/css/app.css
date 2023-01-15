@@ -591,3 +591,7 @@ video {
 .dark .php-info .v {
   @apply bg-gray-600;
 }
+.github-buttons .gh-button {
+  @apply inline-block;
+  @apply m-1;
+}

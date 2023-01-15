@@ -18,6 +18,7 @@ import { registerSW } from 'virtual:pwa-register';
 import VueSecureHTML from 'vue-html-secure';
 import KonamiCode from 'vue-konami-code';
 import toasty from 'toasty';
+import { asteroids } from '@services/asteroids';
 
 axios.defaults.withCredentials = true;
 
@@ -30,12 +31,13 @@ const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
 const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
 const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
 const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED; // eslint-disable-line
+const VUE_ASTEROIDS_ENABLED = KONAMI_ASTEROIDS_ENABLED; // eslint-disable-line
 
 const updateSW = registerSW({
   onOfflineReady() {},
 });
 
-if (VUE_SENTRY_ENABLED) {
+if (VUE_SENTRY_ENABLED == 1) {
   Sentry.init({
     app,
     dsn: VUE_SENTRY_DSN,
@@ -68,7 +70,7 @@ if (VUE_SENTRY_ENABLED) {
 }
 store.dispatch('auth/getLogins').then(() => {});
 store.dispatch('auth/getUser').then(() => {
-  if (VUE_SENTRY_ENABLED) {
+  if (VUE_SENTRY_ENABLED == 1) {
     if (
       store &&
       store.state &&
@@ -114,24 +116,37 @@ store.dispatch('auth/getUser').then(() => {
   if (VUE_TOASTY_ENABLED == 1) {
     app.use(KonamiCode, {
       callback: function () {
-        toasty().trigger();
-      },
-    });
-  }
-  if (APP_GA_ENABLED == 1) {
-    app.use(VueGtag, {
-      property: {
-        id: APP_GA_TAG,
-        // params: {
-        //   user_id: "12345",
-        //   send_page_view: true,
-        //   linker: {
-        //     domain: ['example.com']
-        //   }
-        // }
+        if (VUE_TOASTY_ENABLED == 1) {
+          toasty().trigger();
+        }
       },
     });
   }
 
+  if (APP_GA_ENABLED == 1) {
+    let UID = null;
+    if (
+      store &&
+      store.state &&
+      store.state.auth &&
+      store.state.auth.user &&
+      store.state.auth.user.id &&
+      store.state.auth.authenticated
+    ) {
+      UID = store.state.auth.user.id;
+    }
+    app.use(VueGtag, {
+      property: {
+        id: APP_GA_TAG,
+        params: {
+          user_id: UID,
+          send_page_view: true,
+          linker: {
+            domain: [VUE_APP_URL],
+          },
+        },
+      },
+    });
+  }
   app.mount('#app');
 });

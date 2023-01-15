@@ -1,13 +1,13 @@
 'use strict';
 (() => {
-  var b = 'pluginWebUpdateNotice',
+  const b = 'pluginWebUpdateNotice',
     p = 'web_version_by_plugin';
-  var m = 'plugin_web_update_notice',
+  const m = 'plugin_web_update_notice',
     _ = 'plugin-web-update-notice-anchor',
     E = 'plugin-web-update-notice-refresh-btn',
     w = 'plugin-web-update-notice-dismiss-btn',
     N = 'web_update_check_dismiss_version_';
-  var L = {
+  const L = {
       zh_CN: {
         title: '\u53D1\u73B0\u65B0\u7248\u672C',
         description:
@@ -30,7 +30,7 @@
       },
     },
     l = L;
-  var T = !1,
+  let T = !1,
     f = '',
     s = '';
   function C(i, t) {
@@ -62,7 +62,7 @@
               document.body.dispatchEvent(
                 new CustomEvent(m, { detail: i, bubbles: !0 }),
               );
-              let c = localStorage.getItem(`${N}${e}`) === 'true';
+              const c = localStorage.getItem(`${N}${e}`) === 'true';
               !T && !a && !c && x(i);
             }
           })
@@ -74,7 +74,7 @@
           });
       };
     o(), setInterval(o, n || 10 * 60 * 1e3);
-    let r = C(o, 5e3);
+    const r = C(o, 5e3);
     window.addEventListener('visibilitychange', () => {
       document.visibilityState === 'visible' && r();
     }),
@@ -128,7 +128,7 @@
         u = '';
       if (n) u = n;
       else {
-        let S = t?.title ?? d(s, 'title', e),
+        const S = t?.title ?? d(s, 'title', e),
           I = t?.description ?? d(s, 'description', e),
           g = t?.buttonText ?? d(s, 'buttonText', e),
           h = t?.dismissButtonText ?? d(s, 'dismissButtonText', e),

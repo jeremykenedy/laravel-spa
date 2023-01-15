@@ -1,7 +1,16 @@
 <template>
   <div class="min-h-screen bg-white dark:bg-slate-800">
     <div id="top_border" />
-    <OctoCat v-if="showOctoCat" />
+    <OctoCat
+      v-if="showOctoCat"
+      repo="jeremykenedy/laravel-spa"
+      position="right-top"
+      animated-eye
+      animated-ear
+      animated-arm
+      show-face
+      :dark-mode="darkMode"
+    />
     <VerifyNotice
       v-if="
         $route.name !== 'home' &&
@@ -43,8 +52,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      authenticated: 'auth/authenticated',
-      user: 'auth/user',
+      darkMode: 'auth/darkMode',
     }),
     currentRouteName() {
       return this.$route.name;

@@ -21,6 +21,7 @@ import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { dependencies } from './package.json';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 const routes = () =>
   import(/* webpackChunkName: "jsRoutes" */ 'resources/js/router/routes.js');
@@ -78,11 +79,12 @@ export default ({ mode }) => {
     process.env.VITE_SERVER_SECURE == true
   ) {
     devServer = {
+      host: process.env.VITE_SERVER_HOST,
+      hmr: process.env.VITE_SERVER_HOST,
       https: {
         key: fs.readFileSync(process.env.VITE_SERVER_HTTPS_KEY),
         cert: fs.readFileSync(process.env.VITE_SERVER_HTTPS_CERT),
       },
-      host: process.env.VITE_SERVER_HOST,
     };
   }
 
@@ -103,7 +105,7 @@ export default ({ mode }) => {
     },
     build: {
       ssr: false,
-      minify: 'terser',
+      minify: 'esnext',
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1600,
       manifest: true,
@@ -250,17 +252,25 @@ export default ({ mode }) => {
       }),
       laravel({
         input: ['resources/css/app.css', 'resources/js/app.js'],
-        refresh: [
-          {
-            paths: [
-              'resources/views/**',
-              'resources/css/**',
-              'resources/js/**',
-              'app/View/Components/**',
-            ],
-            config: { delay: 300 },
-          },
-        ],
+        refresh: true,
+        // refresh: [
+        //   {
+        //     paths: [
+        //       'resources/views/**',
+        //       'resources/css/**',
+        //       'resources/js/**',
+        //       'resources/js/**/*',
+        //       'resources/js/components/**/*',
+        //       'resources/js/views/**/*',
+        //       'resources/js/views/admin/**/*',
+        //       'resources/js/views/pages/**/*',
+        //       'resources/img/**',
+        //       'app/View/Components/**',
+        //     ],
+        //     config: { delay: 0 },
+        //   },
+        // ],
+        valetTls: process.env.VITE_SERVER_HOST,
       }),
       vue({
         template: {
@@ -319,7 +329,7 @@ export default ({ mode }) => {
           process.env.VITE_APP_ENV.toLowerCase() == 'production'
             ? 'production'
             : 'development',
-        // base: '/',
+        base: process.env.VITE_SERVER_HOST,
         registerType: 'promptForUpdate',
         injectRegister: 'auto',
         strategies: 'injectManifest',
@@ -377,6 +387,7 @@ export default ({ mode }) => {
         removeComments: true,
       }),
       viteCommonjs(),
+      // basicSsl(),
       SentryPlugin,
       InspectPlugin,
       VisualizerPlugin,
