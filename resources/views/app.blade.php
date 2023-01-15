@@ -36,7 +36,7 @@
             const VULTR_REFERRAL_LINK="{{ config('settings.vultrReferralLink') }}"
         </script>
         @vite(['resources/css/app.css'])
-        {{-- @laravelPWA --}}
+        @laravelPWA
     </head>
     <body class="bg-gray-50 h-screen antialiased leading-none font-sans overflow-x-hidden overflow-y-auto">
         <div id="app"  v-cloak></div>
