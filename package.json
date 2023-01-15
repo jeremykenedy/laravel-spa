@@ -6,7 +6,8 @@
     "preview": "vite preview",
     "optimize": "vite optimize",
     "lint": "eslint --fix resources/js/ --ext .js,.vue",
-    "clean": "prettier .  --write"
+    "clean": "prettier .  --write",
+    "prod": "node --max_old_space_size=16384 ./node_modules/vite/bin/vite.js optimize && ./node_modules/vite/bin/vite.js build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.2.0",

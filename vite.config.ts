@@ -295,71 +295,71 @@ export default ({ mode }) => {
           });
         },
       }),
-      // VitePWA({
-      //   srcDir: 'public',
-      //   filename: 'sw.ts',
-      //   mode:
-      //     process.env.VITE_APP_ENV.toLowerCase() == 'production'
-      //       ? 'production'
-      //       : 'development',
-      //   base: process.env.VITE_SERVER_HOST,
-      //   registerType: 'promptForUpdate',
-      //   injectRegister: 'auto',
-      //   strategies: 'injectManifest',
-      //   workbox: {
-      //     globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-      //     cleanupOutdatedCaches: true,
-      //     sourcemap: true,
-      //   },
-      //   includeAssets: [
-      //     'favicon.ico',
-      //     'apple-touch-icon.png',
-      //     'favicon-16x16.png',
-      //     'favicon-32x32.png',
-      //   ],
-      //   manifest: {
-      //     name: process.env.VITE_APP_NAME,
-      //     short_name: process.env.VITE_APP_SHORT_NAME,
-      //     description: process.env.VITE_APP_DESC,
-      //     theme_color: '#ffffff',
-      //     icons: [
-      //       {
-      //         src: 'android-chrome-192x192.png',
-      //         sizes: '192x192',
-      //         type: 'image/png',
-      //       },
-      //       {
-      //         src: 'android-chrome-512x512.png',
-      //         sizes: '512x512',
-      //         type: 'image/png',
-      //       },
-      //       {
-      //         src: 'android-chrome-512x512.png',
-      //         sizes: '512x512',
-      //         type: 'image/png',
-      //         purpose: 'any maskable',
-      //       },
-      //     ],
-      //   },
-      //   devOptions: {
-      //     enabled:
-      //       process.env.VITE_APP_ENV.toLowerCase() == 'production'
-      //         ? false
-      //         : true,
-      //     type: 'module',
-      //     navigateFallback: 'index.html',
-      //   },
-      // }),
-      // webUpdateNotice({
-      //   logVersion: true,
-      //   logHash: true,
-      //   checkInterval: 0.5 * 60 * 1000,
-      //   notificationProps: {
-      //     title: 'system update',
-      //     description: 'System update, please refresh the page',
-      //     buttonText: 'refresh',
-      //   },
-      // }),
+      VitePWA({
+        srcDir: 'public',
+        filename: 'sw.ts',
+        mode:
+          process.env.VITE_APP_ENV.toLowerCase() == 'production'
+            ? 'production'
+            : 'development',
+        base: process.env.VITE_SERVER_HOST,
+        registerType: 'promptForUpdate',
+        injectRegister: 'auto',
+        strategies: 'injectManifest',
+        workbox: {
+          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+          cleanupOutdatedCaches: true,
+          sourcemap: true,
+        },
+        includeAssets: [
+          'favicon.ico',
+          'apple-touch-icon.png',
+          'favicon-16x16.png',
+          'favicon-32x32.png',
+        ],
+        manifest: {
+          name: process.env.VITE_APP_NAME,
+          short_name: process.env.VITE_APP_SHORT_NAME,
+          description: process.env.VITE_APP_DESC,
+          theme_color: '#ffffff',
+          icons: [
+            {
+              src: 'android-chrome-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: 'android-chrome-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+            {
+              src: 'android-chrome-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+          ],
+        },
+        devOptions: {
+          enabled:
+            process.env.VITE_APP_ENV.toLowerCase() == 'production'
+              ? false
+              : true,
+          type: 'module',
+          navigateFallback: 'index.html',
+        },
+      }),
+      webUpdateNotice({
+        logVersion: true,
+        logHash: true,
+        checkInterval: 0.5 * 60 * 1000,
+        notificationProps: {
+          title: 'system update',
+          description: 'System update, please refresh the page',
+          buttonText: 'refresh',
+        },
+      }),
       manifestSRI(),
       createHtmlPlugin({
         minify: true,
@@ -371,9 +371,9 @@ export default ({ mode }) => {
       }),
       viteCommonjs(),
       // basicSsl(),
-      // SentryPlugin,
-      // InspectPlugin,
-      // VisualizerPlugin,
+      SentryPlugin,
+      InspectPlugin,
+      VisualizerPlugin,
     ],
     sourcemap: true,
     server: devServer,
