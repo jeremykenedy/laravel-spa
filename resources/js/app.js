@@ -14,7 +14,7 @@ import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
 import VueGtag from 'vue-gtag-next';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
-// import { registerSW } from 'virtual:pwa-register';
+import { registerSW } from 'virtual:pwa-register';
 import VueSecureHTML from 'vue-html-secure';
 import KonamiCode from 'vue-konami-code';
 import toasty from 'toasty';
@@ -33,9 +33,9 @@ const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
 const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED; // eslint-disable-line
 const VUE_ASTEROIDS_ENABLED = KONAMI_ASTEROIDS_ENABLED; // eslint-disable-line
 
-// const updateSW = registerSW({
-//   onOfflineReady() {},
-// });
+const updateSW = registerSW({
+  onOfflineReady() {},
+});
 
 if (VUE_SENTRY_ENABLED == 1) {
   Sentry.init({
