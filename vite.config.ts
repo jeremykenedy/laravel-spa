@@ -112,39 +112,39 @@ export default ({ mode }) => {
       sourcemap: true,
       rollupOptions: {
         output: {
-          manualChunks(id, { getModuleInfo }) {
-            const match = /.*\.strings\.(\w+)\.js/.exec(id);
-            if (match) {
-              const language = match[1]; // e.g. "en"
-              const dependentEntryPoints = [];
+          // manualChunks(id, { getModuleInfo }) {
+          //   const match = /.*\.strings\.(\w+)\.js/.exec(id);
+          //   if (match) {
+          //     const language = match[1]; // e.g. "en"
+          //     const dependentEntryPoints = [];
 
-              // we use a Set here so we handle each module at most once. This
-              // prevents infinite loops in case of circular dependencies
-              const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
+          //     // we use a Set here so we handle each module at most once. This
+          //     // prevents infinite loops in case of circular dependencies
+          //     const idsToHandle = new Set(getModuleInfo(id).dynamicImporters);
 
-              for (const moduleId of idsToHandle) {
-                const { isEntry, dynamicImporters, importers } =
-                  getModuleInfo(moduleId);
-                if (isEntry || dynamicImporters.length > 0)
-                  dependentEntryPoints.push(moduleId);
+          //     for (const moduleId of idsToHandle) {
+          //       const { isEntry, dynamicImporters, importers } =
+          //         getModuleInfo(moduleId);
+          //       if (isEntry || dynamicImporters.length > 0)
+          //         dependentEntryPoints.push(moduleId);
 
-                // The Set iterator is intelligent enough to iterate over elements that
-                // are added during iteration
-                for (const importerId of importers) idsToHandle.add(importerId);
-              }
+          //       // The Set iterator is intelligent enough to iterate over elements that
+          //       // are added during iteration
+          //       for (const importerId of importers) idsToHandle.add(importerId);
+          //     }
 
-              // If there is a unique entry, we put it into a chunk based on the entry name
-              if (dependentEntryPoints.length === 1) {
-                return `${
-                  dependentEntryPoints[0].split('/').slice(-1)[0].split('.')[0]
-                }.strings.${language}`;
-              }
-              // For multiple entries, we put it into a "shared" chunk
-              if (dependentEntryPoints.length > 1) {
-                return `shared.strings.${language}`;
-              }
-            }
-          },
+          //     // If there is a unique entry, we put it into a chunk based on the entry name
+          //     if (dependentEntryPoints.length === 1) {
+          //       return `${
+          //         dependentEntryPoints[0].split('/').slice(-1)[0].split('.')[0]
+          //       }.strings.${language}`;
+          //     }
+          //     // For multiple entries, we put it into a "shared" chunk
+          //     if (dependentEntryPoints.length > 1) {
+          //       return `shared.strings.${language}`;
+          //     }
+          //   }
+          // },
           globals: {
             vue: 'Vue',
           },
@@ -253,24 +253,7 @@ export default ({ mode }) => {
       laravel({
         input: ['resources/css/app.css', 'resources/js/app.js'],
         refresh: true,
-        // refresh: [
-        //   {
-        //     paths: [
-        //       'resources/views/**',
-        //       'resources/css/**',
-        //       'resources/js/**',
-        //       'resources/js/**/*',
-        //       'resources/js/components/**/*',
-        //       'resources/js/views/**/*',
-        //       'resources/js/views/admin/**/*',
-        //       'resources/js/views/pages/**/*',
-        //       'resources/img/**',
-        //       'app/View/Components/**',
-        //     ],
-        //     config: { delay: 0 },
-        //   },
-        // ],
-        valetTls: process.env.VITE_SERVER_HOST,
+        // valetTls: process.env.VITE_SERVER_HOST,
       }),
       vue({
         template: {
@@ -278,16 +261,6 @@ export default ({ mode }) => {
             base: null,
             includeAbsolute: false,
           },
-        },
-      }),
-      webUpdateNotice({
-        logVersion: true,
-        logHash: true,
-        checkInterval: 0.5 * 60 * 1000,
-        notificationProps: {
-          title: 'system update',
-          description: 'System update, please refresh the page',
-          buttonText: 'refresh',
         },
       }),
       StylelintPlugin({
@@ -304,93 +277,103 @@ export default ({ mode }) => {
         failOnWarning: false,
         failOnError: true,
       }),
-      legacy({
-        targets: ['defaults', 'not IE 11'],
-        polyfills: true,
-      }),
+      // legacy({
+      //   targets: ['defaults', 'not IE 11'],
+      //   polyfills: true,
+      // }),
       splitVendorChunkPlugin(),
-      chunkSplitPlugin(),
-      Pages({
-        onRoutesGenerated: async (routes) => {
-          generateSitemap({
-            hostname: process.env.VITE_APP_NAME,
-            routes: [...routes],
-            readable: true,
-            exclude: ['/admin'],
-            allowRobots: false,
-            filename: 'sitemap.xml',
-          });
-        },
-      }),
-      VitePWA({
-        srcDir: 'public',
-        filename: 'sw.ts',
-        mode:
-          process.env.VITE_APP_ENV.toLowerCase() == 'production'
-            ? 'production'
-            : 'development',
-        base: process.env.VITE_SERVER_HOST,
-        registerType: 'promptForUpdate',
-        injectRegister: 'auto',
-        strategies: 'injectManifest',
-        workbox: {
-          globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
-          cleanupOutdatedCaches: true,
-          sourcemap: true,
-        },
-        includeAssets: [
-          'favicon.ico',
-          'apple-touch-icon.png',
-          'favicon-16x16.png',
-          'favicon-32x32.png',
-        ],
-        manifest: {
-          name: process.env.VITE_APP_NAME,
-          short_name: process.env.VITE_APP_SHORT_NAME,
-          description: process.env.VITE_APP_DESC,
-          theme_color: '#ffffff',
-          icons: [
-            {
-              src: 'android-chrome-192x192.png',
-              sizes: '192x192',
-              type: 'image/png',
-            },
-            {
-              src: 'android-chrome-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-            },
-            {
-              src: 'android-chrome-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable',
-            },
-          ],
-        },
-        devOptions: {
-          enabled:
-            process.env.VITE_APP_ENV.toLowerCase() == 'production'
-              ? false
-              : true,
-          type: 'module',
-          navigateFallback: 'index.html',
-        },
-      }),
-      manifestSRI(),
-      createHtmlPlugin({
-        minify: true,
-        entry: 'resources/js/app.js',
-      }),
-      ViteMinifyPlugin({
-        minifyCSS: true,
-        removeComments: true,
-      }),
-      viteCommonjs(),
+      // chunkSplitPlugin(),
+      // Pages({
+      //   onRoutesGenerated: async (routes) => {
+      //     generateSitemap({
+      //       hostname: process.env.VITE_APP_NAME,
+      //       routes: [...routes],
+      //       readable: true,
+      //       exclude: ['/admin'],
+      //       allowRobots: false,
+      //       filename: 'sitemap.xml',
+      //     });
+      //   },
+      // }),
+      // VitePWA({
+      //   srcDir: 'public',
+      //   filename: 'sw.ts',
+      //   mode:
+      //     process.env.VITE_APP_ENV.toLowerCase() == 'production'
+      //       ? 'production'
+      //       : 'development',
+      //   base: process.env.VITE_SERVER_HOST,
+      //   registerType: 'promptForUpdate',
+      //   injectRegister: 'auto',
+      //   strategies: 'injectManifest',
+      //   workbox: {
+      //     globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+      //     cleanupOutdatedCaches: true,
+      //     sourcemap: true,
+      //   },
+      //   includeAssets: [
+      //     'favicon.ico',
+      //     'apple-touch-icon.png',
+      //     'favicon-16x16.png',
+      //     'favicon-32x32.png',
+      //   ],
+      //   manifest: {
+      //     name: process.env.VITE_APP_NAME,
+      //     short_name: process.env.VITE_APP_SHORT_NAME,
+      //     description: process.env.VITE_APP_DESC,
+      //     theme_color: '#ffffff',
+      //     icons: [
+      //       {
+      //         src: 'android-chrome-192x192.png',
+      //         sizes: '192x192',
+      //         type: 'image/png',
+      //       },
+      //       {
+      //         src: 'android-chrome-512x512.png',
+      //         sizes: '512x512',
+      //         type: 'image/png',
+      //       },
+      //       {
+      //         src: 'android-chrome-512x512.png',
+      //         sizes: '512x512',
+      //         type: 'image/png',
+      //         purpose: 'any maskable',
+      //       },
+      //     ],
+      //   },
+      //   devOptions: {
+      //     enabled:
+      //       process.env.VITE_APP_ENV.toLowerCase() == 'production'
+      //         ? false
+      //         : true,
+      //     type: 'module',
+      //     navigateFallback: 'index.html',
+      //   },
+      // }),
+      // webUpdateNotice({
+      //   logVersion: true,
+      //   logHash: true,
+      //   checkInterval: 0.5 * 60 * 1000,
+      //   notificationProps: {
+      //     title: 'system update',
+      //     description: 'System update, please refresh the page',
+      //     buttonText: 'refresh',
+      //   },
+      // }),
+      // manifestSRI(),
+      // createHtmlPlugin({
+      //   minify: true,
+      //   entry: 'resources/js/app.js',
+      // }),
+      // ViteMinifyPlugin({
+      //   minifyCSS: true,
+      //   removeComments: true,
+      // }),
+      // viteCommonjs(),
       // basicSsl(),
-      SentryPlugin,
-      InspectPlugin,
-      VisualizerPlugin,
+      // SentryPlugin,
+      // InspectPlugin,
+      // VisualizerPlugin,
     ],
     sourcemap: true,
     server: devServer,
