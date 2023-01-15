@@ -172,111 +172,111 @@ export default ({ mode }) => {
           },
         },
       }),
-      // StylelintPlugin({
-      //   fix: true,
-      //   quite: false,
-      //   lintOnStart: false,
-      // }),
-      // eslint({
-      //   cache: true,
-      //   fix: true,
-      //   lintOnStart: false,
-      //   emitWarning: true,
-      //   emitError: true,
-      //   failOnWarning: false,
-      //   failOnError: true,
-      // }),
-      // viteStaticCopy({
-      //   targets: [
-      //     {
-      //       src: 'resources/img/favicon/favicon.ico',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon-32x32.png',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/android-chrome-192x192.png',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/android-chrome-512x512.png',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/apple-touch-icon.png',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon-16x16.png',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon.ico',
-      //       dest: '../',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon.ico',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon-32x32.png',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/android-chrome-192x192.png',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/android-chrome-512x512.png',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/apple-touch-icon.png',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon-16x16.png',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/img/favicon/favicon.ico',
-      //       dest: '',
-      //     },
-      //     {
-      //       src: 'resources/js/services/s-code.min.js',
-      //       dest: '../js/',
-      //     },
-      //   ],
-      // }),
-      // viteImagemin({
-      //   gifsicle: {
-      //     optimizationLevel: 7,
-      //     interlaced: false,
-      //   },
-      //   optipng: {
-      //     optimizationLevel: 7,
-      //   },
-      //   mozjpeg: {
-      //     quality: 20,
-      //   },
-      //   pngquant: {
-      //     quality: [0.8, 0.9],
-      //     speed: 4,
-      //   },
-      //   svgo: {
-      //     plugins: [
-      //       {
-      //         name: 'removeViewBox',
-      //       },
-      //       {
-      //         name: 'removeEmptyAttrs',
-      //         active: false,
-      //       },
-      //     ],
-      //   },
-      // }),
+      StylelintPlugin({
+        fix: true,
+        quite: false,
+        lintOnStart: false,
+      }),
+      eslint({
+        cache: true,
+        fix: true,
+        lintOnStart: false,
+        emitWarning: true,
+        emitError: true,
+        failOnWarning: false,
+        failOnError: true,
+      }),
+      viteStaticCopy({
+        targets: [
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon-32x32.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-192x192.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-512x512.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/apple-touch-icon.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon-16x16.png',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '../',
+          },
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/favicon-32x32.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-192x192.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/android-chrome-512x512.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/apple-touch-icon.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/favicon-16x16.png',
+            dest: '',
+          },
+          {
+            src: 'resources/img/favicon/favicon.ico',
+            dest: '',
+          },
+          {
+            src: 'resources/js/services/s-code.min.js',
+            dest: '../js/',
+          },
+        ],
+      }),
+      viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false,
+        },
+        optipng: {
+          optimizationLevel: 7,
+        },
+        mozjpeg: {
+          quality: 20,
+        },
+        pngquant: {
+          quality: [0.8, 0.9],
+          speed: 4,
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox',
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: false,
+            },
+          ],
+        },
+      }),
       // legacy({
       //   targets: ['defaults', 'not IE 11'],
       //   polyfills: true,
