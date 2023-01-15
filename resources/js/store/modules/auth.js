@@ -41,6 +41,7 @@ export default {
       },
       currentUserToken: null,
       impersonatorToken: null,
+      darkMode: false,
     };
   },
   getters: {
@@ -73,13 +74,26 @@ export default {
     impersonatorToken(state) {
       return state.impersonatorToken;
     },
+    darkMode(state) {
+      return state.darkMode;
+    },
   },
   mutations: {
     SET_AUTHENTICATION(state, value = false) {
       state.authenticated = value;
     },
     SET_USER(state, payload = null) {
+      const APP_GA_ENABLED = GA_ENABLED; // eslint-disable-line
+      const APP_GA_TAG = GA_TAG; // eslint-disable-line
       state.user = payload;
+      if (state && state.user && state.user.id && APP_GA_ENABLED == 1) {
+        // gtag('config', APP_GA_TAG, {
+        //   user_id: state.user.id,
+        // });
+        gtag('set', {
+          user_id: state.user.id,
+        });
+      }
       if (payload && payload.roles && payload.roles.length > 0) {
         payload.roles.forEach((role, index) => {
           if (role.name == 'Super Admin') {
@@ -111,8 +125,10 @@ export default {
     SET_THEME(state, payload = null) {
       if (payload) {
         document.documentElement.classList.add('dark');
+        state.darkMode = true;
       } else {
         document.documentElement.classList.remove('dark');
+        state.darkMode = false;
       }
     },
     SET_TOKEN(state, { token, remember }) {

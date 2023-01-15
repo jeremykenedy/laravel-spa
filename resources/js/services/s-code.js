@@ -1,4 +1,5 @@
 /* eslint-disable */
+// prettier-ignore
 
 // THE KONAMI CODE
 /*

@@ -6,4 +6,6 @@ return [
     'keywords'              => env('APP_KEYWORDS', 'framework,laravel,vite,vue3,spa,tailwindcss,auth,authentication,socialite,oauth2'),
     'enableKonamiAsteroids' => env('KONAMI_ASTEROIDS_ENABLED', false),
     'enableKonamiToasty'    => env('KONAMI_TOASTY_ENABLED', false),
+    'vultrReferralEnabled'  => env('VULTR_REFERRAL_ENABLED', false),
+    'vultrReferralLink'     => env('VULTR_REFERRAL_LINK', null),
 ];

@@ -1,4 +1,5 @@
 /* eslint-disable */
+// prettier-ignore
 
 // Copyright 2006 Google Inc.
 //

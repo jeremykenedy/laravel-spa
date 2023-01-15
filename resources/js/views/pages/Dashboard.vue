@@ -98,6 +98,19 @@
             </div>
           </div>
         </div>
+
+        <div class="mt-3 mb-5 p-5 text-center">
+          <GHButtons
+            show-follow
+            show-star
+            show-fork
+            show-issue
+            show-watch
+            show-download
+            show-count
+            show-tips
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -108,12 +121,14 @@ import { mapState, mapActions, mapGetters } from 'vuex';
 import RolesBadges from '@components/roles/RolesBadges.vue';
 import { greeting, providerIcon, parseDisplayDate } from '@services/common';
 import { PowerIcon } from '@heroicons/vue/24/outline';
+import GHButtons from '@components/GHButtons.vue';
 
 export default {
   name: 'Dashboard',
   components: {
     RolesBadges,
     PowerIcon,
+    GHButtons,
   },
   data() {
     return {};

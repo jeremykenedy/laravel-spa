@@ -574,12 +574,12 @@
                   @update-setting="appSettingUpdateTriggered"
                 />
                 <AppSettingTextInput
-                  v-if="setting.key == 'appAppleKeyId'"
+                  v-if="setting.key == 'appApplePrivateKey'"
                   class="ml-8 mr-5"
                   :setting="setting"
                   :loading="loading"
                   :disabled="!dataReady"
-                  @update-setting="appApplePrivateKey"
+                  @update-setting="appSettingUpdateTriggered"
                 />
                 <AppSettingTextInput
                   v-if="setting.key == 'appAppleRedirect'"
@@ -1306,47 +1306,51 @@
                 </h4>
               </div>
 
-              <AppSettingToggle
-                v-if="setting.key == 'enableKonamiAsteroids'"
-                class="ml-8 mr-5 mb-3"
-                :setting="setting"
-                :loading="loading"
-                @update-setting="appSettingUpdateTriggered"
-              />
+              <div class="relative flex items-center">
+                <div class="mr-3 w-full sm:flex sm:items-center">
+                  <AppSettingToggle
+                    v-if="setting.key == 'enableKonamiAsteroids'"
+                    class="ml-8 mr-5 mb-3 cursor-pointer"
+                    :setting="setting"
+                    :loading="loading"
+                    @update-setting="appSettingUpdateTriggered"
+                  />
+                  <AppButton
+                    v-if="setting.key == 'enableKonamiAsteroids'"
+                    v-tippy="'Trigger Hidden Konami Asteroids Code'"
+                    :disabled="loading"
+                    accent
+                    outline
+                    icon="fa-solid fa-gamepad"
+                    btn-class="px-2 py-1"
+                    style="margin-top: -5px"
+                    @click="triggerEasterEgg('asteroids')"
+                  />
+                </div>
+              </div>
 
-              <AppSettingToggle
-                v-if="setting.key == 'enableKonamiToasty'"
-                class="ml-8 mr-5 mb-3"
-                :setting="setting"
-                :loading="loading"
-                @update-setting="appSettingUpdateTriggered"
-              />
-              <!--
-              <AppSettingToggle
-                v-if="setting.key == 'enableSentryMonitoringFeedbakForm'"
-                class="ml-8 mr-5 mb-3"
-                :setting="setting"
-                :loading="loading"
-                @update-setting="appSettingUpdateTriggered"
-              />
-
-              <AppSettingTextInput
-                v-if="setting.key == 'sentryIoDSN'"
-                class="ml-8 mr-5"
-                :setting="setting"
-                :loading="loading"
-                :disabled="!dataReady"
-                @update-setting="appSettingUpdateTriggered"
-              />
-
-              <AppButton
-                v-if="setting.key == 'sentryIoDSN' && sentryEnabled"
-                secondary
-                text="Throw Test Error"
-                class="ml-8 mr-5 mb-3 mt-4"
-                @click="throwTestError"
-              />
-               -->
+              <div class="relative flex items-center">
+                <div class="mr-3 w-full sm:flex sm:items-center">
+                  <AppSettingToggle
+                    v-if="setting.key == 'enableKonamiToasty'"
+                    class="ml-8 mr-5 mb-3"
+                    :setting="setting"
+                    :loading="loading"
+                    @update-setting="appSettingUpdateTriggered"
+                  />
+                  <AppButton
+                    v-if="setting.key == 'enableKonamiToasty'"
+                    v-tippy="'Trigger Hidden Konami Toasty Code'"
+                    :disabled="loading"
+                    accent
+                    outline
+                    icon="fa-solid fa-play"
+                    btn-class="px-2 py-1"
+                    style="margin-top: -5px"
+                    @click="triggerEasterEgg('toasty')"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1365,6 +1369,8 @@ import AppSettingTextInput from '@components/form/AppSettingTextInput.vue';
 import AppSettingTextarea from '@components/form/AppSettingTextarea.vue';
 import zohoLight from '@img/vendor-logos/zoho-monocrome-white.png';
 import zohoDark from '@img/vendor-logos/zoho-monocrome-black.png';
+import { asteroids } from '@services/asteroids';
+import toasty from 'toasty';
 
 export default {
   name: 'AppSettings',
@@ -1549,6 +1555,15 @@ export default {
       });
       throw new Error('Sentry Test Error');
     },
+    triggerEasterEgg(egg = null) {
+      if (egg == 'asteroids') {
+        this.asteroids();
+      } else if (egg == 'toasty') {
+        this.toasty().trigger();
+      }
+    },
+    asteroids,
+    toasty,
   },
 };
 </script>

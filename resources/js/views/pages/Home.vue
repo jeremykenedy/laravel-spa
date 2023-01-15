@@ -14,26 +14,43 @@
     >
       Thank you for being a member!
     </h4>
-    <p class="text-2xl text-slate-500 dark:text-slate-300">
+    <p class="mb-2 text-2xl text-slate-500 dark:text-slate-300">
       Laravel / Vite / Vue3 / TailwindCSS
     </p>
+
+    <div class="mb-5 p-5">
+      <GHButtons
+        show-star
+        show-fork
+        show-watch
+        show-download
+        show-count
+        show-tips
+      />
+    </div>
+
+    <VultrReferral />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/24/outline';
+import GHButtons from '@components/GHButtons.vue';
+import VultrReferral from '@components/VultrReferral.vue';
 
 export default {
   name: 'Home',
-  components: { ChatBubbleLeftEllipsisIcon },
-  props: {},
-  setup() {
-    return {};
+  components: {
+    ChatBubbleLeftEllipsisIcon,
+    GHButtons,
+    VultrReferral,
   },
+  props: {},
   data() {
     return {
-      //
+      VULTR_REFERRAL_ENABLED: VULTR_REFERRAL_ENABLED, // eslint-disable-line
+      VULTR_REFERRAL_LINK: VULTR_REFERRAL_LINK, // eslint-disable-line
     };
   },
   computed: {
@@ -42,14 +59,5 @@ export default {
       user: 'auth/user',
     }),
   },
-  watch: {},
-  created() {},
-  mounted() {},
-  beforeUnmount() {},
-  updated() {},
-  methods: {},
 };
 </script>
-
-<style scoped></style>
-<style lang="scss" scoped></style>
