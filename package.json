@@ -64,7 +64,7 @@
     "autoprefixer": "^10.4.8",
     "axios": "^1.2.3",
     "babel-loader": "^9.1.0",
-    "chart.js": "^4.1.1",
+    "chart.js": "^4.2.0",
     "core-js": "^3.27.2",
     "cross-env": "^7.0.3",
     "easter-egg-collection": "^1.4.56",
