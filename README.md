@@ -197,7 +197,6 @@ LaravelSpa
 │   └── deploy.sh
 ├── .styleci.yml
 ├── .travis.yml
-├── CHANGELOG.md
 ├── LICENSE
 ├── README.md
 ├── app
@@ -229,6 +228,7 @@ LaravelSpa
 │   │   │   └── UsersController.php
 │   │   ├── Kernel.php
 │   │   ├── Middleware
+│   │   │   ├── AddContentSecurityPolicyHeaders.php
 │   │   │   ├── Authenticate.php
 │   │   │   ├── EncryptCookies.php
 │   │   │   ├── PreventRequestsDuringMaintenance.php
@@ -291,11 +291,61 @@ LaravelSpa
 │           └── GaEnabledComposer.php
 ├── artisan
 ├── bootstrap
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
 │   ├── app.php
-│   └── cache
-│       ├── .gitignore
-│       ├── packages.php
-│       └── services.php
+│   ├── apple-touch-icon.png
+│   ├── cache
+│   │   ├── .gitignore
+│   │   ├── packages.php
+│   │   ├── routes-v7.php
+│   │   └── services.php
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon.ico
+│   └── ssr
+│       ├── android-chrome-192x192.png
+│       ├── android-chrome-512x512.png
+│       ├── app2.mjs
+│       ├── apple-touch-icon.png
+│       ├── assets
+│       │   ├── About-8055ba51.mjs
+│       │   ├── Account-db07883a.mjs
+│       │   ├── Admin-1aef526f.mjs
+│       │   ├── AdminLayout-b06d3e9f.mjs
+│       │   ├── AppSettings-493dc486.mjs
+│       │   ├── Dashboard-00d0a96f.mjs
+│       │   ├── Errors-cfd7b346.mjs
+│       │   ├── ForgotPassword-ca93934f.mjs
+│       │   ├── Home-092f52e0.mjs
+│       │   ├── Login-3d895534.mjs
+│       │   ├── NotFound-52f67599.mjs
+│       │   ├── Password-0f549b05.mjs
+│       │   ├── Permissions-d779932d.mjs
+│       │   ├── PhpInfo-c54b8303.mjs
+│       │   ├── Profile-8dc4ce3e.mjs
+│       │   ├── Register-c8d7fa41.mjs
+│       │   ├── ResetPassword-4e7ca3b7.mjs
+│       │   ├── Roles-53fcb449.mjs
+│       │   ├── RolesBadges-5ee6b7bc.mjs
+│       │   ├── Settings-a3568c63.mjs
+│       │   ├── SocialiteLogins-6af0e372.mjs
+│       │   ├── Success-4b3d058c.mjs
+│       │   ├── Terms-3b1605fc.mjs
+│       │   ├── Users-fcead5b0.mjs
+│       │   ├── VerifyEmail-3b245fb1.mjs
+│       │   ├── default.css_vue_type_style_index_0_src_true_lang-6d22712f.mjs
+│       │   ├── workbox-window.prod.es5-77e1b1e1.mjs
+│       │   └── zoho-monocrome-black-b48ed5c0.mjs
+│       ├── favicon-16x16.png
+│       ├── favicon-32x32.png
+│       ├── favicon.ico
+│       ├── js-bundle-stats.html
+│       ├── manifest.webmanifest
+│       └── pluginWebUpdateNotice
+│           ├── webUpdateNoticeInjectScript.global.js
+│           ├── webUpdateNoticeInjectStyle.css
+│           └── web_version_by_plugin.json
 ├── composer.json
 ├── composer.lock
 ├── config
@@ -309,6 +359,10 @@ LaravelSpa
 │   ├── exceptions.php
 │   ├── filesystems.php
 │   ├── hashing.php
+│   ├── laravel-https.php
+│   ├── laravel-logger.php
+│   ├── laravel-page-speed.php
+│   ├── laravelpwa.php
 │   ├── logging.php
 │   ├── mail.php
 │   ├── personal-data-export.php
@@ -359,43 +413,34 @@ LaravelSpa
 ├── prettierrc.json
 ├── public
 │   ├── .htaccess
-│   ├── build
-│   │   ├── assets
-│   │   │   ├── 404-508db666.png
-│   │   │   ├── app-3ff86421.css
-│   │   │   ├── app-b80d281f.js
-│   │   │   ├── app-f9cfb835.css
-│   │   │   ├── app-legacy-5eb64e32.js
-│   │   │   ├── app-legacy-6399fae7.js
-│   │   │   ├── fa-brands-400-b1d1c1b0.ttf
-│   │   │   ├── fa-brands-400-c61287c2.woff2
-│   │   │   ├── fa-regular-400-5da313b0.woff2
-│   │   │   ├── fa-regular-400-d7b19fe2.ttf
-│   │   │   ├── fa-solid-900-8f06540f.woff2
-│   │   │   ├── fa-solid-900-e4f6a7e9.ttf
-│   │   │   ├── fa-v4compatibility-2ddb3b41.ttf
-│   │   │   ├── fa-v4compatibility-f46715c9.woff2
-│   │   │   ├── plugs-12bd3189.png
-│   │   │   ├── polyfills-legacy-6af2eb34.js
-│   │   │   ├── vendor-2bff8d29.js
-│   │   │   ├── vendor-legacy-f27d3422.js
-│   │   │   ├── workbox-window.prod.es5-eba8f0a2.js
-│   │   │   ├── workbox-window.prod.es5-legacy-ab6aa431.js
-│   │   │   ├── zoho-monocrome-black-8bba680d.png
-│   │   │   └── zoho-monocrome-white-cf507b60.png
-│   │   ├── manifest.json
-│   │   ├── manifest.webmanifest
-│   │   ├── pluginWebUpdateNotice
-│   │   │   ├── webUpdateNoticeInjectScript.global.js
-│   │   │   ├── webUpdateNoticeInjectStyle.css
-│   │   │   └── web_version_by_plugin.json
-│   │   ├── sw.js
-│   │   ├── sw.js.map
-│   │   ├── workbox-3625d7b0.js
-│   │   └── workbox-3625d7b0.js.map
+│   ├── android-chrome-192x192.png
+│   ├── android-chrome-512x512.png
+│   ├── apple-touch-icon.png
 │   ├── css
 │   │   └── app.css
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
 │   ├── favicon.ico
+│   ├── images
+│   │   └── icons
+│   │       ├── icon-128x128.png
+│   │       ├── icon-144x144.png
+│   │       ├── icon-152x152.png
+│   │       ├── icon-192x192.png
+│   │       ├── icon-384x384.png
+│   │       ├── icon-512x512.png
+│   │       ├── icon-72x72.png
+│   │       ├── icon-96x96.png
+│   │       ├── splash-1125x2436.png
+│   │       ├── splash-1242x2208.png
+│   │       ├── splash-1242x2688.png
+│   │       ├── splash-1536x2048.png
+│   │       ├── splash-1668x2224.png
+│   │       ├── splash-1668x2388.png
+│   │       ├── splash-2048x2732.png
+│   │       ├── splash-640x1136.png
+│   │       ├── splash-750x1334.png
+│   │       └── splash-828x1792.png
 │   ├── index.php
 │   ├── js
 │   │   ├── app.js
@@ -408,9 +453,12 @@ LaravelSpa
 │   │   ├── resources_js_Views_ResetPassword_vue.js
 │   │   ├── resources_js_Views_Settings_vue.js
 │   │   ├── resources_js_Views_VerifyEmail_vue.js
-│   │   └── resources_js_Views_Welcome_vue.js
+│   │   ├── resources_js_Views_Welcome_vue.js
+│   │   └── s-code.min.js
 │   ├── mix-manifest.json
 │   ├── robots.txt
+│   ├── serviceworker.js
+│   ├── sw.ts
 │   └── web.config
 ├── resources
 │   ├── css
@@ -418,8 +466,17 @@ LaravelSpa
 │   │   └── normalize.css
 │   ├── img
 │   │   ├── 404.png
+│   │   ├── favicon
+│   │   │   ├── android-chrome-192x192.png
+│   │   │   ├── android-chrome-512x512.png
+│   │   │   ├── apple-touch-icon.png
+│   │   │   ├── favicon-16x16.png
+│   │   │   ├── favicon-32x32.png
+│   │   │   └── favicon.ico
 │   │   ├── plugs.png
 │   │   └── vendor-logos
+│   │       ├── vultr-1.webp
+│   │       ├── vultr-2.png
 │   │       ├── zoho-monocrome-black.png
 │   │       └── zoho-monocrome-white.png
 │   ├── js
@@ -428,13 +485,19 @@ LaravelSpa
 │   │   ├── components
 │   │   │   ├── AppFooter.vue
 │   │   │   ├── AppNav.vue
+│   │   │   ├── BmcButtons.vue
 │   │   │   ├── CircleSvg.vue
 │   │   │   ├── Errors.vue
+│   │   │   ├── GHButton.vue
+│   │   │   ├── GHButtons.vue
 │   │   │   ├── OctoCat.vue
 │   │   │   ├── Pagination.vue
+│   │   │   ├── PatreonButton.vue
 │   │   │   ├── PerPage.vue
+│   │   │   ├── ReloadPrompt.vue
 │   │   │   ├── Success.vue
 │   │   │   ├── VerifyNotice.vue
+│   │   │   ├── VultrReferral.vue
 │   │   │   ├── account
 │   │   │   │   ├── AccountAdministration.vue
 │   │   │   │   ├── AccountAuthentication.vue
@@ -484,7 +547,11 @@ LaravelSpa
 │   │   │   └── routes.js
 │   │   ├── services
 │   │   │   ├── analytics.js
+│   │   │   ├── asteroids.js
 │   │   │   ├── common.js
+│   │   │   ├── excanvas.js
+│   │   │   ├── s-code.js
+│   │   │   ├── s-code.min.js
 │   │   │   └── users.js
 │   │   ├── store
 │   │   │   ├── index.js
@@ -553,12 +620,12 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-72 directories, 316 files
+75 directories, 380 files
 
 ```
 
 * Tree command can be installed using brew: `brew install tree`
-* File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests|.DS_Store|.env'`
+* File tree generated using command `tree -a -I '.git|node_modules|vendor|build|storage|tests|.DS_Store|.env'`
 
 ## License
 Laravel-Spa is licensed under the [MIT license](https://opensource.org/licenses/MIT). Enjoy!

@@ -199,6 +199,40 @@
     </github-button>
 
     <github-button
+      v-if="showSponsor && ghUser"
+      v-tippy="showTips ? 'Sponsor @' + ghUser + ' on GitHub' : null"
+      :href="
+        ghBaseUrl +
+        '/sponsors/' +
+        ghUser +
+        '?frequency=' +
+        frequency +
+        '&sponsor=' +
+        ghUser
+      "
+      :data-icon="sponsorIcon"
+      :data-size="size"
+      :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
+      class="gh-button"
+      @click="
+        track(
+          'Clicked ' +
+            sponsorTitle +
+            ' ' +
+            ghBaseUrl +
+            '/sponsors/' +
+            ghUser +
+            '?frequency=' +
+            frequency +
+            '&sponsor=' +
+            ghUser,
+        )
+      "
+    >
+      {{ sponsorTitle }}
+    </github-button>
+
+    <github-button
       v-if="showDownload && ghUser && ghRepo"
       v-tippy="
         showTips
@@ -271,6 +305,7 @@ export default {
     showFork: { type: Boolean, default: false },
     showIssue: { type: Boolean, default: false },
     showWatch: { type: Boolean, default: false },
+    showSponsor: { type: Boolean, default: false },
     showDownload: { type: Boolean, default: false },
     followTitle: { type: String, default: 'Follow @' },
     starIcon: { type: String, default: 'octicon-star' },
@@ -283,6 +318,9 @@ export default {
     watchTitle: { type: String, default: 'Watch' },
     downloadIcon: { type: String, default: 'octicon-download' },
     downloadTitle: { type: String, default: 'Download' },
+    sponsorTitle: { type: String, default: 'Sponsor' },
+    sponsorIcon: { type: String, default: 'octicon-heart' },
+    frequency: { type: String, default: 'recurring' }, // one-time
   },
   computed: {
     ...mapGetters({

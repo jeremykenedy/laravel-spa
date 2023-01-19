@@ -106,6 +106,7 @@
             show-fork
             show-issue
             show-watch
+            show-sponsor
             show-download
             show-count
             show-tips
