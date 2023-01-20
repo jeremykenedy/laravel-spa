@@ -201,31 +201,14 @@
     <github-button
       v-if="showSponsor && ghUser"
       v-tippy="showTips ? 'Sponsor @' + ghUser + ' on GitHub' : null"
-      :href="
-        ghBaseUrl +
-        '/sponsors/' +
-        ghUser +
-        '?frequency=' +
-        frequency +
-        '&sponsor=' +
-        ghUser
-      "
+      :href="ghBaseUrl + 'sponsors/' + ghUser"
       :data-icon="sponsorIcon"
       :data-size="size"
       :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
       class="gh-button"
       @click="
         track(
-          'Clicked ' +
-            sponsorTitle +
-            ' ' +
-            ghBaseUrl +
-            '/sponsors/' +
-            ghUser +
-            '?frequency=' +
-            frequency +
-            '&sponsor=' +
-            ghUser,
+          'Clicked ' + sponsorTitle + ' ' + ghBaseUrl + 'sponsors/' + ghUser,
         )
       "
     >
