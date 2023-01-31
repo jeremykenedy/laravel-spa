@@ -83,7 +83,7 @@
     "lodash": "^4.17.21",
     "nodemon": "^2.0.20",
     "postcss": "^8.4.20",
-    "postcss-nesting": "^11.0.0",
+    "postcss-nesting": "^11.0.1",
     "prettier": "^2.8.2",
     "prettier-plugin-tailwindcss": "^0.2.2",
     "rollup-plugin-visualizer": "^5.9.0",
