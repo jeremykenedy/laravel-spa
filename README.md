@@ -11,8 +11,12 @@
 [![Sponsor me on GitHub](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jeremykenedy)
 [![Buy me a Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jeremykenedy)
 [![Vultr](https://img.shields.io/badge/Vultr-007BFC.svg?style=flat&logo=vultr)](https://www.vultr.com/?ref=9338425-8H)
+[![App Version](https://img.shields.io/github/v/tag/jeremykenedy/laravel-spa.svg?sort=semver&label=App%20Version)](https://github.com/jeremykenedy/laravel-spa/releases)
 [![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
 
+<iframe src="https://ghbtns.com/github-btn.html?user=jeremykenedy&repo=laravel-spa&type=star&count=true" frameborder="0" scrolling="0" title="GitHub"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=jeremykenedy&repo=laravel-spa&type=fork&count=true" frameborder="0" scrolling="0" width="150" height="20" title="Fork on GitHub"></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=jeremykenedy&type=follow&count=true" frameborder="0" scrolling="0" width="170" height="20" title="Follow on GitHub"></iframe>
 [![Follow on Twitter](https://img.shields.io/twitter/follow/developernator?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=developernator)
 
 > This project costs me $22/month to be hosted on [Vultr](https://www.vultr.com/?ref=9338425-8H).<br>
