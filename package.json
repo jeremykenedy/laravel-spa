@@ -27,7 +27,7 @@
     "toasty": "^6.0.3",
     "vform": "^2.1.2",
     "vite-plugin-static-copy": "^0.13.0",
-    "vue": "^3.2.38",
+    "vue": "^3.2.47",
     "vue-axios": "^3.5.2",
     "vue-github-button": "^3.1.0",
     "vue-html-secure": "^1.0.10",
