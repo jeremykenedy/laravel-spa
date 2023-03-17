@@ -3,10 +3,10 @@ name: Sentry Release
 on:
   push:
     branches:
-      - production
+      - released
   pull_request:
     branches:
-      - production
+      - released
 jobs:
   deploy:
     runs-on: ubuntu-latest
