@@ -1,8 +1,25 @@
 # Laravel Auth SPA
 
-[![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=released)](https://github.styleci.io/repos/537735029?branch=master)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=released&style=flat)](https://github.styleci.io/repos/537735029?branch=master)
+[![CodeQL](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
+[![GitGuardian scan](https://github.com/jeremykenedy/laravel-spa/actions/workflows/gitguardian.yml/badge.svg)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/gitguardian.yml)
+[![Composer Install](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml/badge.svg)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
+[![MadeWithVueJs.com shield](https://madewithvuejs.com/storage/repo-shields/4106-shield.svg)](https://madewithvuejs.com/p/laravel-auth-spa/shield-link)
+[![App Version](https://img.shields.io/github/v/tag/jeremykenedy/laravel-spa.svg?sort=semver&label=App%20Version)](https://github.com/jeremykenedy/laravel-spa/releases)
+[![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
+
+[![Sponsor me on GitHub](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jeremykenedy)
+[![Sponsor me on Patreon](https://img.shields.io/static/v1?label=patreon&message=%E2%9D%A4&logo=Patreon&color=F35B49&style=flat)](https://patreon.com/jeremykenedy)
+[![Buy me a Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jeremykenedy)
+[![Vultr](https://img.shields.io/badge/Vultr-007BFC.svg?style=flat&logo=vultr)](https://www.vultr.com/?ref=9338425-8H)
+[![GitHub Stars](https://img.shields.io/github/stars/jeremykenedy/laravel-spa?style=social)](https://github.com/jeremykenedy/laravel-spa/stargazers)
+[![Follow on GitHub](https://img.shields.io/github/followers/jeremykenedy?style=social)](https://github.com/jeremykenedy)
+[![Follow on Twitter](https://img.shields.io/twitter/follow/developernator?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=developernator)
+
+> This project costs me $22/month to be hosted on [Vultr](https://www.vultr.com/?ref=9338425-8H).<br>
+> Please consider [supporting my work](https://patreon.com/jeremykenedy) if you use & find it useful. ❤️
 
 ### Table of contents
 - [About](#about)
@@ -20,20 +37,20 @@
 - [License](#license)
 
 ## About
-A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate.
-Laravel 9 with user authentication, registration with email verification, 
+A Laravel + Socialite + Vite + Vue 3 + TailwindCSS SPA Boilerplate.
+Laravel with user authentication, registration with email verification, 
 social media authentication, password recovery, user management, and roles/permissions 
-managemenet. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
+management. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
 part of this repository it is a completely separated Vue 3 front end compiled using ViteJS.
 
 ## App Features
 ##### Built on:
-- [Laravel 9](https://laravel.com/docs/9.x)
+- [Laravel](https://laravel.com/docs/9.x)
 - [Sanctum](https://laravel.com/docs/9.x/sanctum)
 - [Socialite](https://laravel.com/docs/9.x/socialite)
 - [Vite](https://laravel.com/docs/9.x/vite)
 - [Vue 3](https://vuejs.org/)
-- [Tailwind CSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
+- [TailwindCSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
 - [Vue Router](https://v3.router.vuejs.org/)
 - [Vuex](https://vuex.vuejs.org/)
 - [Axios](https://axios-http.com/)
@@ -199,6 +216,7 @@ LaravelSpa
 ├── .travis.yml
 ├── LICENSE
 ├── README.md
+├── SECURITY.md
 ├── app
 │   ├── Console
 │   │   └── Kernel.php
@@ -404,7 +422,6 @@ LaravelSpa
 │       ├── RolesTableSeeder.php
 │       └── UsersTableSeeder.php
 ├── env.d.ts
-├── license.svg
 ├── package-lock.json
 ├── package.json
 ├── phpunit.xml
@@ -620,7 +637,7 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-75 directories, 380 files
+76 directories, 380 files
 
 ```
 
