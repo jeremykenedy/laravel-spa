@@ -109,7 +109,7 @@ export default ({ mode }) => {
       reportCompressedSize: true,
       chunkSizeWarningLimit: 1600,
       manifest: true,
-      sourcemap: true,
+      sourcemap: process.env.VITE_APP_ENV == 'local' ? true : false,
       rollupOptions: {
         output: {
           manualChunks(id, { getModuleInfo }) {
@@ -159,6 +159,33 @@ export default ({ mode }) => {
       },
     },
     plugins: [
+      laravel({
+        input: ['resources/css/app.css', 'resources/js/app.js'],
+        refresh: true,
+        // valetTls: process.env.VITE_SERVER_HOST,
+      }),
+      vue({
+        template: {
+          transformAssetUrls: {
+            base: null,
+            includeAbsolute: false,
+          },
+        },
+      }),
+      StylelintPlugin({
+        fix: true,
+        quite: false,
+        lintOnStart: false,
+      }),
+      eslint({
+        cache: true,
+        fix: true,
+        lintOnStart: false,
+        emitWarning: true,
+        emitError: true,
+        failOnWarning: false,
+        failOnError: true,
+      }),
       viteStaticCopy({
         targets: [
           {
@@ -250,60 +277,6 @@ export default ({ mode }) => {
           ],
         },
       }),
-      laravel({
-        input: ['resources/css/app.css', 'resources/js/app.js'],
-        refresh: true,
-        // refresh: [
-        //   {
-        //     paths: [
-        //       'resources/views/**',
-        //       'resources/css/**',
-        //       'resources/js/**',
-        //       'resources/js/**/*',
-        //       'resources/js/components/**/*',
-        //       'resources/js/views/**/*',
-        //       'resources/js/views/admin/**/*',
-        //       'resources/js/views/pages/**/*',
-        //       'resources/img/**',
-        //       'app/View/Components/**',
-        //     ],
-        //     config: { delay: 0 },
-        //   },
-        // ],
-        valetTls: process.env.VITE_SERVER_HOST,
-      }),
-      vue({
-        template: {
-          transformAssetUrls: {
-            base: null,
-            includeAbsolute: false,
-          },
-        },
-      }),
-      webUpdateNotice({
-        logVersion: true,
-        logHash: true,
-        checkInterval: 0.5 * 60 * 1000,
-        notificationProps: {
-          title: 'system update',
-          description: 'System update, please refresh the page',
-          buttonText: 'refresh',
-        },
-      }),
-      StylelintPlugin({
-        fix: true,
-        quite: false,
-        lintOnStart: false,
-      }),
-      eslint({
-        cache: true,
-        fix: true,
-        lintOnStart: false,
-        emitWarning: true,
-        emitError: true,
-        failOnWarning: false,
-        failOnError: true,
-      }),
       legacy({
         targets: ['defaults', 'not IE 11'],
         polyfills: true,
@@ -377,6 +350,16 @@ export default ({ mode }) => {
           navigateFallback: 'index.html',
         },
       }),
+      webUpdateNotice({
+        logVersion: true,
+        logHash: true,
+        checkInterval: 0.5 * 60 * 1000,
+        notificationProps: {
+          title: 'system update',
+          description: 'System update, please refresh the page',
+          buttonText: 'refresh',
+        },
+      }),
       manifestSRI(),
       createHtmlPlugin({
         minify: true,
@@ -387,10 +370,10 @@ export default ({ mode }) => {
         removeComments: true,
       }),
       viteCommonjs(),
-      // basicSsl(),
       SentryPlugin,
       InspectPlugin,
       VisualizerPlugin,
+      // basicSsl(),
     ],
     sourcemap: true,
     server: devServer,

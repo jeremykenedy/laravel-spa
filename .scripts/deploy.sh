@@ -6,7 +6,7 @@ deployStart() {
     set -e
     echo "Deployment started ... ..."
     (php artisan down) || true
-    export NODE_OPTIONS=--max-old-space-size=8192
+    export NODE_OPTIONS=--max-old-space-size=16384
     if [ -f "composer.lock" ] ; then
         rm "composer.lock"
     fi

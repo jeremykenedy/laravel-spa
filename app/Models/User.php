@@ -74,7 +74,7 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
                 'avatar'            => $this->avatar,
             ]);
         // ->addFile(storage_path("avatars/{$this->id}.jpg"))
-            // ->addFile('other-user-data.xml', 's3');
+        // ->addFile('other-user-data.xml', 's3');
     }
 
     public function personalDataExportName(): string

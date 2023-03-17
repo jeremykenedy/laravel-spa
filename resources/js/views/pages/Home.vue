@@ -17,19 +17,26 @@
     <p class="mb-2 text-2xl text-slate-500 dark:text-slate-300">
       Laravel / Vite / Vue3 / TailwindCSS
     </p>
-
-    <div class="mb-5 p-5">
+    <div v-if="enableGhButtons" class="mb-3 p-5">
       <GHButtons
         show-star
         show-fork
         show-watch
+        show-sponsor
         show-download
         show-count
         show-tips
       />
     </div>
-
-    <VultrReferral />
+    <div v-if="enableVultrReferral" class="mb-3">
+      <VultrReferral />
+    </div>
+    <div v-if="enableBmcButtons" class="mb-3 pb-3">
+      <BmcButtons />
+    </div>
+    <div v-if="enablePatreonButton" class="mb-1">
+      <PatreonButton />
+    </div>
   </div>
 </template>
 
@@ -37,6 +44,8 @@
 import { mapGetters } from 'vuex';
 import { ChatBubbleLeftEllipsisIcon } from '@heroicons/vue/24/outline';
 import GHButtons from '@components/GHButtons.vue';
+import BmcButtons from '@components/BmcButtons.vue';
+import PatreonButton from '@components/PatreonButton.vue';
 import VultrReferral from '@components/VultrReferral.vue';
 
 export default {
@@ -44,9 +53,16 @@ export default {
   components: {
     ChatBubbleLeftEllipsisIcon,
     GHButtons,
+    BmcButtons,
     VultrReferral,
+    PatreonButton,
   },
-  props: {},
+  props: {
+    enableGhButtons: { type: Boolean, default: true },
+    enableVultrReferral: { type: Boolean, default: true },
+    enableBmcButtons: { type: Boolean, default: true },
+    enablePatreonButton: { type: Boolean, default: true },
+  },
   data() {
     return {
       VULTR_REFERRAL_ENABLED: VULTR_REFERRAL_ENABLED, // eslint-disable-line
