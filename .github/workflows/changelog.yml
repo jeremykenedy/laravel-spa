@@ -1,10 +1,10 @@
-name: Generate Changelog
+name: Build Changelog
 on:
   release:
     types: [created, edited]
 
 jobs:
-  generate-changelog:
+  build-changelog:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
