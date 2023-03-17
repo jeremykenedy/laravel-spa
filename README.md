@@ -7,7 +7,16 @@
 [![Composer Install](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml/badge.svg)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
 [![MadeWithVueJs.com shield](https://madewithvuejs.com/storage/repo-shields/4106-shield.svg)](https://madewithvuejs.com/p/laravel-auth-spa/shield-link)
+[![Support me on Patreon](https://img.shields.io/static/v1?label=patreon&message=%E2%9D%A4&logo=Patreon&color=F35B49&style=flat)](https://patreon.com/jeremykenedy)
+[![Sponsor me on GitHub](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jeremykenedy)
+[![Buy me a Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jeremykenedy)
+[![Vultr](https://img.shields.io/badge/Vultr-007BFC.svg?style=flat&logo=vultr)](https://www.vultr.com/?ref=9338425-8H)
 [![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
+
+[![Follow on Twitter](https://img.shields.io/twitter/follow/developernator?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=developernator)
+
+> This project costs me $22/month to be hosted on [Vultr](https://www.vultr.com/?ref=9338425-8H).<br>
+> Please consider [supporting my work](https://patreon.com/jeremykenedy) if you use & find it useful. ❤️
 
 ### Table of contents
 - [About](#about)
@@ -25,20 +34,20 @@
 - [License](#license)
 
 ## About
-A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate.
-Laravel 9 with user authentication, registration with email verification, 
+A Laravel + Socialite + Vite + Vue 3 + TailwindCSS SPA Boilerplate.
+Laravel with user authentication, registration with email verification, 
 social media authentication, password recovery, user management, and roles/permissions 
-managemenet. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
+management. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
 part of this repository it is a completely separated Vue 3 front end compiled using ViteJS.
 
 ## App Features
 ##### Built on:
-- [Laravel 9](https://laravel.com/docs/9.x)
+- [Laravel](https://laravel.com/docs/9.x)
 - [Sanctum](https://laravel.com/docs/9.x/sanctum)
 - [Socialite](https://laravel.com/docs/9.x/socialite)
 - [Vite](https://laravel.com/docs/9.x/vite)
 - [Vue 3](https://vuejs.org/)
-- [Tailwind CSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
+- [TailwindCSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
 - [Vue Router](https://v3.router.vuejs.org/)
 - [Vuex](https://vuex.vuejs.org/)
 - [Axios](https://axios-http.com/)
