@@ -10,8 +10,7 @@
 [![Support me on Patreon](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Djeremykenedy%26type%3Dpatrons&style=flat)](https://patreon.com/jeremykenedy)
 [![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
 
-> This project costs me $22/mo to be hosted on [Vultr](https://www.vultr.com/?ref=9338425-8H).
-
+> This project costs me $22/mo to be hosted on [Vultr](https://www.vultr.com/?ref=9338425-8H).<br>
 > Please consider [supporting my work](https://patreon.com/jeremykenedy) if you use & find it useful. ❤️
 
 ### Table of contents
