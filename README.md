@@ -1,8 +1,9 @@
 # Laravel Auth SPA
 
 [![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=released)](https://github.styleci.io/repos/537735029?branch=master)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
+![CodeQL](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml/badge.svg?branch=master)
+[![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat-square)](https://opensource.org/licenses/MIT)
 
 ### Table of contents
 - [About](#about)
@@ -199,6 +200,7 @@ LaravelSpa
 ├── .travis.yml
 ├── LICENSE
 ├── README.md
+├── SECURITY.md
 ├── app
 │   ├── Console
 │   │   └── Kernel.php
@@ -404,7 +406,6 @@ LaravelSpa
 │       ├── RolesTableSeeder.php
 │       └── UsersTableSeeder.php
 ├── env.d.ts
-├── license.svg
 ├── package-lock.json
 ├── package.json
 ├── phpunit.xml
@@ -620,7 +621,7 @@ LaravelSpa
 ├── tsconfig.vite-config.json
 └── vite.config.ts
 
-75 directories, 380 files
+76 directories, 380 files
 
 ```
 
