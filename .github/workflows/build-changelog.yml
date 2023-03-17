@@ -12,10 +12,10 @@ jobs:
           fetch-depth: 0
       - uses: mikepenz/release-changelog-builder-action@{latest-release}
         with:
-          owner: "jeremykenedy"
-          repo: "laravel-spa"
-          ignorePreReleases: "false"
-          fetchReleaseInformation: "true"
+          owner: 'jeremykenedy'
+          repo: 'laravel-spa'
+          ignorePreReleases: 'false'
+          fetchReleaseInformation: 'true'
           token: ${{ secrets.GITHUB_TOKEN }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
