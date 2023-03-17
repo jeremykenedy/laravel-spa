@@ -20,4 +20,4 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
           # SENTRY_URL: https://sentry.io/
         with:
-          environment: released
+          environment: production
