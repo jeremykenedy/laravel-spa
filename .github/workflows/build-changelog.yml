@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: mikepenz/release-changelog-builder-action@{latest-release}
+      - uses: mikepenz/release-changelog-builder-action@v3
         with:
           owner: 'jeremykenedy'
           repo: 'laravel-spa'
