@@ -6,6 +6,7 @@
 [![GitGuardian scan](https://github.com/jeremykenedy/laravel-spa/actions/workflows/gitguardian.yml/badge.svg)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/gitguardian.yml)
 [![Composer Install](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml/badge.svg)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
+[![MadeWithVueJs.com shield](https://madewithvuejs.com/storage/repo-shields/4106-shield.svg)](https://madewithvuejs.com/p/laravel-auth-spa/shield-link)
 [![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
 
 ### Table of contents
