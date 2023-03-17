@@ -12,7 +12,6 @@ jobs:
           fetch-depth: 0
       - uses: mikepenz/release-changelog-builder-action@{latest-release}
         with:
-          configuration: "configuration.json"
           owner: "jeremykenedy"
           repo: "laravel-spa"
           ignorePreReleases: "false"
