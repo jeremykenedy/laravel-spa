@@ -96,7 +96,7 @@
     "typescript": "^5.0.2",
     "universal-social-auth": "^0.2.6",
     "v-tables-3": "^0.4.7",
-    "vite": "^4.0.2",
+    "vite": "^4.2.3",
     "vite-plugin-chunk-split": "^0.4.7",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-html": "^3.2.0",
