@@ -26,7 +26,7 @@
     "terser": "^5.17.7",
     "toasty": "^6.0.3",
     "vform": "^2.1.2",
-    "vite-plugin-static-copy": "^0.13.0",
+    "vite-plugin-static-copy": "^0.16.0",
     "vue": "^3.3.4",
     "vue-axios": "^3.5.2",
     "vue-github-button": "^3.1.0",
