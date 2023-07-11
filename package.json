@@ -55,7 +55,7 @@
     "@tailwindcss/typography": "^0.5.9",
     "@types/node": "^20.1.4",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
-    "@vitejs/plugin-legacy": "^4.0.1",
+    "@vitejs/plugin-legacy": "^4.1.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/compiler-sfc": "^3.2.47",
     "@vue/eslint-config-prettier": "^7.0.0",
