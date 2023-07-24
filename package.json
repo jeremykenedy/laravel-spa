@@ -23,7 +23,7 @@
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.29.4",
     "save-dev": "^0.0.1-security",
-    "terser": "^5.17.7",
+    "terser": "^5.19.2",
     "toasty": "^6.0.3",
     "vform": "^2.1.2",
     "vite-plugin-static-copy": "^0.16.0",
