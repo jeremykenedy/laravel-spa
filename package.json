@@ -87,7 +87,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.5",
     "rollup-plugin-visualizer": "^5.9.0",
-    "sass": "^1.62.0",
+    "sass": "^1.64.2",
     "sass-loader": "^13.2.1",
     "stylelint": "^15.10.1",
     "stylelint-webpack-plugin": "^4.1.0",
