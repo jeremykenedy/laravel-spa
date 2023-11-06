@@ -75,7 +75,7 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-storybook": "^0.6.11",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^9.18.1",
     "html-webpack-plugin": "^5.5.0",
     "js-cookie": "^3.0.5",
     "laravel-mix": "^6.0.49",
