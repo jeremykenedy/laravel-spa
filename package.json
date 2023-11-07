@@ -105,7 +105,7 @@
     "vite-plugin-manifest-sri": "^0.1.0",
     "vite-plugin-minify": "^1.5.2",
     "vite-plugin-pages": "^0.29.0",
-    "vite-plugin-pages-sitemap": "^1.4.5",
+    "vite-plugin-pages-sitemap": "^1.6.1",
     "vite-plugin-pwa": "^0.16.6",
     "vite-plugin-stylelint": "^4.1.8",
     "vue-content-loader": "^2.0.1",
