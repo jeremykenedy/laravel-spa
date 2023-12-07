@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.15",
+    "@babel/eslint-parser": "^7.23.3",
     "@heroicons/vue": "^2.0.14",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@plugin-web-update-notification/vite": "^1.6.4",
