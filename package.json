@@ -44,7 +44,7 @@
     "@heroicons/vue": "^2.0.14",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@plugin-web-update-notification/vite": "^1.6.4",
-    "@popperjs/core": "^2.11.6",
+    "@popperjs/core": "^2.11.8",
     "@rushstack/eslint-patch": "^1.1.4",
     "@sentry/vite-plugin": "^0.4.0",
     "@tailwindcss/aspect-ratio": "^0.4.1",
@@ -111,6 +111,6 @@
     "vue-content-loader": "^2.0.1",
     "vue-gtag-next": "^1.14.0",
     "vue-sweetalert2": "^5.0.5",
-    "vue-tippy": "^6.0.0"
+    "vue-tippy": "^6.4.1"
   }
 }
