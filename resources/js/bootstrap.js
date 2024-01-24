@@ -1,4 +1,4 @@
-import loadash from 'lodash';
+import lodash from 'lodash';
 
 import * as Popper from '@popperjs/core';
 
@@ -10,7 +10,7 @@ import * as Popper from '@popperjs/core';
 
 import axios from 'axios';
 
-window._ = loadash;
+window._ = lodash;
 window.Popper = Popper;
 window.axios = axios;
 
