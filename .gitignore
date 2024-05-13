@@ -41,3 +41,6 @@ yarn-error.log
 docker-compose.override.yml
 composer.lock
 npm-bundle-stats.html
+
+#vscode
+.history
