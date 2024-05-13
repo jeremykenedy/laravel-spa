@@ -1,0 +1,16 @@
+{
+  "code": "Crypto-integration",
+  "name": "Crypto Module",
+  "author": "Danial Sanae",
+  "type": "module",
+  "description": "Starter Package For Crypto Exchanger",
+  "namespace": "Modules\\Crypto",
+  "provider": "CryptoCartServiceProvider",
+  "version": "1.0",
+  "load_order": "0",
+  "folder": "Crypto",
+  "autoload": "psr-4",
+  "icon": "fa fa-clone",
+  "require": {
+  }
+}
