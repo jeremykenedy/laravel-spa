@@ -18,7 +18,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "@headlessui/vue": "^1.7.13",
     "@sentry/tracing": "^7.76.0",
-    "@sentry/vue": "^7.60.1",
+    "@sentry/vue": "^8.33.1",
     "@vueform/multiselect": "^2.6.6",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.29.4",
