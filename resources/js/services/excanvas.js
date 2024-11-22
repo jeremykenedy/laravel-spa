@@ -846,6 +846,15 @@ if (!document.createElement('canvas').getContext) {
       const w2 = sw / 2;
       const h2 = sh / 2;
 
+      function escapeHtml(unsafe) {
+        return unsafe
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
       const vmlStr = [];
 
       const W = 10;
@@ -928,7 +937,7 @@ if (!document.createElement('canvas').getContext) {
       vmlStr.push(
         ' ">',
         '<g_vml_:image src="',
-        image.src,
+        escapeHtml(image.src),
         '"',
         ' style="width:',
         Z * dw,
