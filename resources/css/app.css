@@ -1,0 +1,640 @@
+@import '@css/normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
+
+/*@import "tailwindcss";
+@import "tailwindcss/theme.css";
+@import "tailwindcss/preflight.css" ;
+@import "tailwindcss/utilities.css";*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.quicksand-font {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nunito-quicksand-font {
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title,
+.leckerli-one-regular {
+  font-family: "Leckerli One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
+}
+
+html,
+body {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  line-height: 1.5;
+}
+body {
+  margin: 0;
+}
+
+ul,
+li,
+ol,
+dd,
+div,
+a,
+span,
+p,
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.overlay {
+  position: relative;
+}
+
+img {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+/* 1024 -1 so it doesnt show when it hits 1024px */
+@media only screen and (max-width: 1023px) {
+  .overlay:after {
+    content: ' ';
+    z-index: 29;
+    display: block;
+    height: 100%;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+    position: fixed;
+  }
+}
+
+.disabled {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+#top_border {
+  height: 2px;
+  @apply border-t-2 border-slate-500;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  width: 100%;
+}
+a {
+  background-color: transparent;
+  color: inherit;
+  text-decoration: inherit;
+}
+[hidden] {
+  display: none;
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+  border: 0 solid #e2e8f0;
+}
+svg,
+video {
+  display: block;
+  vertical-align: middle;
+}
+video {
+  max-width: 100%;
+  height: auto;
+}
+.bg-white {
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+}
+.bg-gray-100 {
+  --bg-opacity: 1;
+  background-color: #f7fafc;
+  background-color: rgba(247, 250, 252, var(--bg-opacity));
+}
+.border-gray-200 {
+  --border-opacity: 1;
+  border-color: #edf2f7;
+  border-color: rgba(237, 242, 247, var(--border-opacity));
+}
+.border-t {
+  border-top-width: 1px;
+}
+.flex {
+  display: flex;
+}
+.grid {
+  display: grid;
+}
+.hidden {
+  display: none;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.h-8 {
+  height: 2rem;
+}
+.h-16 {
+  height: 4rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+}
+.leading-7 {
+  line-height: 1.75rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.ml-12 {
+  margin-left: 3rem;
+}
+.-mt-px {
+  margin-top: -1px;
+}
+.max-w-6xl {
+  max-width: 72rem;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
+.overflow-hidden {
+  overflow: hidden;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.pt-8 {
+  padding-top: 2rem;
+}
+.fixed {
+  position: fixed;
+}
+.relative {
+  position: relative;
+}
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.shadow {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.text-center {
+  text-align: center;
+}
+.text-gray-200 {
+  --text-opacity: 1;
+  color: #edf2f7;
+  color: rgba(237, 242, 247, var(--text-opacity));
+}
+.text-gray-300 {
+  --text-opacity: 1;
+  color: #e2e8f0;
+  color: rgba(226, 232, 240, var(--text-opacity));
+}
+.text-gray-400 {
+  --text-opacity: 1;
+  color: #cbd5e0;
+  color: rgba(203, 213, 224, var(--text-opacity));
+}
+.text-gray-500 {
+  --text-opacity: 1;
+  color: #a0aec0;
+  color: rgba(160, 174, 192, var(--text-opacity));
+}
+.text-gray-600 {
+  --text-opacity: 1;
+  color: #718096;
+  color: rgba(113, 128, 150, var(--text-opacity));
+}
+.text-gray-700 {
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
+}
+.text-gray-900 {
+  --text-opacity: 1;
+  color: #1a202c;
+  color: rgba(26, 32, 44, var(--text-opacity));
+}
+.underline {
+  text-decoration: underline;
+}
+.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-8 {
+  width: 2rem;
+}
+.w-auto {
+  width: auto;
+}
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+@media (min-width: 640px) {
+  .sm\:rounded-lg {
+    border-radius: 0.5rem;
+  }
+  .sm\:block {
+    display: block;
+  }
+  .sm\:items-center {
+    align-items: center;
+  }
+  .sm\:justify-start {
+    justify-content: flex-start;
+  }
+  .sm\:justify-between {
+    justify-content: space-between;
+  }
+  .sm\:h-20 {
+    height: 5rem;
+  }
+  .sm\:ml-0 {
+    margin-left: 0;
+  }
+  .sm\:px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  .sm\:pt-0 {
+    padding-top: 0;
+  }
+  .sm\:text-left {
+    text-align: left;
+  }
+  .sm\:text-right {
+    text-align: right;
+  }
+}
+@media (min-width: 768px) {
+  .md\:border-t-0 {
+    border-top-width: 0;
+  }
+  .md\:border-l {
+    border-left-width: 1px;
+  }
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+/*
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-gray-800 {
+    --bg-opacity: 1;
+    background-color: #2d3748;
+    background-color: rgba(45, 55, 72, var(--bg-opacity));
+  }
+  .dark\:bg-gray-900 {
+    --bg-opacity: 1;
+    background-color: #1a202c;
+    background-color: rgba(26, 32, 44, var(--bg-opacity));
+  }
+  .dark\:border-gray-700 {
+    --border-opacity: 1;
+    border-color: #4a5568;
+    border-color: rgba(74, 85, 104, var(--border-opacity));
+  }
+  .dark\:text-white {
+    --text-opacity: 1;
+    color: #fff;
+    color: rgba(255, 255, 255, var(--text-opacity));
+  }
+  .dark\:text-gray-400 {
+    --text-opacity: 1;
+    color: #cbd5e0;
+    color: rgba(203, 213, 224, var(--text-opacity));
+  }
+}*/
+
+@layer base {
+  .border,
+  .border-b,
+  .border-t,
+  .border-l,
+  .border-r {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+}
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+/*Sweet Alert overrides*/
+.swal2-popup.swal2-modal {
+  @apply rounded-lg;
+}
+.swal2-confirm {
+  @apply rounded-md;
+}
+.dark .swal2-popup.swal2-toast {
+  @apply bg-slate-900;
+}
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-success
+  [class^='swal2-success-circular-line'][class$='right'],
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-success
+  [class^='swal2-success-circular-line'][class$='left'],
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-error
+  [class^='swal2-error-circular-line'][class$='right'],
+.dark
+  .swal2-popup.swal2-toast
+  .swal2-error
+  [class^='swal2-error-circular-line'][class$='left'] {
+  @apply bg-slate-900 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-title {
+  @apply text-green-500 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-timer-progress-bar {
+  @apply bg-green-500 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-title {
+  @apply text-red-500 !important;
+}
+.dark .swal2-popup.swal2-toast.swal2-icon-error .swal2-timer-progress-bar {
+  @apply bg-red-500 !important;
+}
+
+/*Vue Tables 3 overrides*/
+.VueTables.VueTables--client {
+  /*@apply p-0 rounded shadow;*/
+}
+.VueTables .VueTables__search {
+  @apply mb-3 rounded border py-2 px-2 text-gray-600 shadow dark:text-gray-200;
+}
+.VueTables .VueTables__search .VueTables__search__input {
+  @apply ml-3 rounded border-0 bg-gray-200 text-sm text-gray-600 shadow dark:bg-slate-900 dark:text-gray-200;
+}
+.VueTables .table-responsive.VueTables__wrapper {
+  @apply rounded border-0 bg-gray-50 shadow dark:bg-slate-700;
+}
+.VueTables .table-responsive {
+  overflow: hidden !important;
+  overflow-x: auto !important;
+}
+.VueTables table {
+  @apply w-full rounded;
+}
+.VueTables .table-responsive.VueTables__wrapper tr,
+.VueTables .table-responsive.VueTables__wrapper th,
+.VueTables .table-responsive.VueTables__wrapper td {
+  @apply border-0 bg-transparent;
+}
+.VueTables .table-responsive.VueTables__wrapper th {
+  @apply bg-transparent px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider !important;
+  white-space: nowrap;
+}
+.VueTables .table-responsive.VueTables__wrapper thead tr {
+  @apply border-b-2 border-gray-300 bg-gray-200 text-gray-600 dark:border-gray-500 dark:bg-slate-900 dark:text-gray-200;
+}
+.VueTables .table-responsive.VueTables__wrapper tbody tr {
+  /*@apply bg-gray-100 text-gray-900 dark:bg-slate-700 dark:text-gray-100*/
+}
+.VueTables .table-responsive.VueTables__wrapper tbody td {
+  @apply border-b border-gray-300 px-5 py-5 text-sm dark:border-gray-500;
+}
+.VueTables .table-responsive.VueTables__wrapper tbody tr:last-child td {
+  /*@apply border-0*/
+}
+.VueTables .vue-pagination {
+  @apply w-full py-4 text-center;
+}
+.VueTables .vue-pagination ul {
+  @apply flex content-center justify-center;
+}
+.VueTables .VuePagination {
+  display: none !important;
+}
+
+.VueTables .table-responsive.VueTables__wrapper + p {
+  display: none !important;
+}
+
+.php-info pre {
+  margin: 0;
+  font-family: monospace;
+}
+.php-info a:link {
+  color: #009;
+  text-decoration: none;
+  @apply bg-white;
+}
+.php-info a:hover {
+  text-decoration: underline;
+}
+.php-info table {
+  border-collapse: collapse;
+  border: 0;
+  width: 100%;
+  @apply shadow-md;
+}
+.php-info table:first-of-type {
+  @apply shadow-none;
+}
+.php-info .center {
+  text-align: center;
+}
+.php-info .center table {
+  margin: 1em auto;
+  text-align: left;
+}
+.php-info .center th {
+  text-align: center !important;
+}
+.php-info td,
+.php-info th {
+  font-size: 75%;
+  vertical-align: baseline;
+  padding: 4px 5px;
+}
+.php-info table:first-of-type .h td,
+.php-info table:first-of-type .h th {
+  @apply rounded;
+}
+.php-info .h td .p {
+  line-height: 2;
+  @apply ml-1 cursor-default;
+}
+
+.php-info h1 {
+  font-size: 2.4em;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Nunito,
+    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
+    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-weight: 300;
+}
+.php-info h2 {
+  font-size: 125%;
+  font-weight: bold;
+}
+.php-info .p {
+  text-align: left;
+}
+.php-info .e {
+  /*background-color: #ccf;*/
+  width: 50px;
+  font-weight: bold;
+  @apply bg-indigo-200;
+}
+.php-info .h {
+  /*background-color: #99c;*/
+  @apply bg-indigo-300;
+  font-weight: bold;
+  @apply bg-transparent;
+}
+.php-info .v {
+  /*background-color: #ddd;*/
+  max-width: 50px;
+  overflow-x: auto;
+  word-wrap: break-word;
+  @apply bg-gray-200;
+}
+
+.php-info .v i {
+  color: #999;
+}
+.php-info img {
+  float: right;
+  border: 0;
+}
+.php-info hr {
+  width: 100%;
+  /*background-color: #ccc;*/
+  border: 0;
+  height: 1px;
+}
+
+.dark .php-info .e {
+  @apply bg-slate-900;
+}
+.dark .php-info .h {
+  /*@apply bg-slate-700;*/
+  @apply bg-transparent;
+}
+.dark .php-info .v {
+  @apply bg-gray-600;
+}
+.github-buttons .gh-button {
+  @apply inline-block;
+  @apply m-1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
