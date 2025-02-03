@@ -31,4 +31,16 @@ class ProfileController extends Controller
 
         return $this->successResponse($user, 'User found');
     }
+
+    public function darkModeToggle(Request $request)
+    {
+        $user = Auth::user();
+        $user->theme_dark = !$user->theme_dark;
+
+        if ($user->save()) {
+            return $this->successResponse($user->theme_dark, 'Mode Switched');;
+        }
+        return response()->json(['status' => 403, 'success' => false]);
+    }
+
 }

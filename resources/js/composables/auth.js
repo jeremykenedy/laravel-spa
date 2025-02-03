@@ -43,20 +43,21 @@ export default function useAuth() {
 
     const submitLogin = async () => {
         if (processing.value) return
-
         processing.value = true
         validationErrors.value = {}
-
         await axios.post('/login', loginForm)
             .then(async response => {
                 await authStore.getUser()
                 // await authStore.dispatch('auth/getUser')
                 await loginUser()
                 swal({
+                    toast: true,
                     icon: 'success',
-                    title: 'Login successfully',
+                    timer: 3000,
+                    timerProgressBar: true,
                     showConfirmButton: false,
-                    timer: 1500
+                    title: 'Signed in successfully',
+                    position: 'bottom-end',
                 })
                 await router.push({ name: 'admin.index' })
             })
@@ -192,6 +193,15 @@ export default function useAuth() {
             })
     }
 
+    const impersonateUser = async () => {
+
+        //
+    }
+
+    const leaveImpersonatingUser = async () => {
+        //
+    }
+
     return {
         loginForm,
         registerForm,
@@ -206,6 +216,8 @@ export default function useAuth() {
         user,
         getUser,
         logout,
-        getAbilities
+        getAbilities,
+        impersonateUser,
+        leaveImpersonatingUser
     }
 }

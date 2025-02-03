@@ -5,6 +5,36 @@ import {ref} from "vue";
 export const useAuthStore = defineStore('auth', () => {
   const authenticated = ref(false)
   const user = ref({})
+  const socials = ref({
+      facebook: false,
+      twitter: false,
+      instagram: false,
+      github: false,
+      youtube: false,
+      google: false,
+      linkedin: false,
+      twitch: false,
+      apple: false,
+      microsoft: false,
+      tiktok: false,
+      zoho: false,
+      stackexchange: false,
+      gitlab: false,
+      reddit: false,
+      snapchat: false,
+      meetup: false,
+      bitbucket: false,
+      atlassian: false,
+      // NEW_PROVIDER_PLUG :: Put New Provider HERE
+  });
+
+  state: () => {
+    return {
+      currentUserToken: null,
+      impersonatorToken: null,
+      darkMode: false,
+    }
+  }
 
   const login = (() => {
     return axios.get('/api/user').then(({data}) => {
@@ -22,6 +52,13 @@ export const useAuthStore = defineStore('auth', () => {
         user.value = data.data
         authenticated.value = true
         // router.push({name: 'dashboard'})
+        if (user.value.theme_dark) {
+          document.documentElement.className = 'dark';
+          localStorage.setItem("data-theme", "dark");
+        } else {
+          document.documentElement.className = 'light';
+          localStorage.setItem("data-theme", "light");
+        }
       } else {
         user.value = {}
         authenticated.value = false

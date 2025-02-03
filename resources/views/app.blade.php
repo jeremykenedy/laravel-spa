@@ -55,7 +55,7 @@
         </script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased" id="app">
+    <body class="font-sans antialiased bg-white dark:bg-slate-800" id="app">
         <router-view></router-view>
     </body>
 </html>

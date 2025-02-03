@@ -148,7 +148,8 @@
 
     <github-button v-if="showSponsor && ghUser" v-tippy="showTips ? 'Sponsor @' + ghUser + ' on GitHub' : null"
       :href="ghBaseUrl + 'sponsors/' + ghUser" :data-icon="sponsorIcon" :data-size="size"
-      :aria-label="'Sponsor @' + ghUser + ' on GitHub'" class="gh-button" @click="
+      :data-color-scheme="darkTheme ? darkVariant : lightVariant" :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
+      class="gh-button" @click="
         track(
           'Clicked ' + sponsorTitle + ' ' + ghBaseUrl + 'sponsors/' + ghUser,
         )

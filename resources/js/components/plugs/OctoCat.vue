@@ -86,7 +86,7 @@ export default {
     },
     bgColorDark: {
       type: String,
-      default: '#ffffff',
+      default: '#64748B',
     },
     colorDark: {
       type: String,

@@ -1,6 +1,11 @@
 @import '@css/normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
 
+@import '~/tippy.js/dist/tippy.css';
+@import '~/tippy.js/themes/material.css';
+@import '~/tippy.js/animations/perspective.css';
+@import '~/sweetalert2/dist/sweetalert2.min.css';
+
 /*@import "tailwindcss";
 @import "tailwindcss/theme.css";
 @import "tailwindcss/preflight.css" ;
@@ -9,6 +14,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 .quicksand-font {
   font-family: "Quicksand", serif;
@@ -637,4 +644,12 @@ video {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.rounded {
+  border-radius: 5px;
+}
+
+.rounded-full {
+  border-radius: 50px;
 }
