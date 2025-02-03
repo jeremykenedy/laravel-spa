@@ -75,7 +75,7 @@ const { loginForm, validationErrors, processing, submitLogin } = useAuth();
 
 <script>
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
-import CircleSvg from '@components/CircleSvg.vue';
+import CircleSvg from '@components/common/CircleSvg.vue';
 // import SocialiteLogins from '@components/auth/SocialiteLogins.vue';
 import loginImg from '@img/login.png';
 

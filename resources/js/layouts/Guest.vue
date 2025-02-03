@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Navbar from '@components/Nav.vue';
+import Navbar from '@components/includes/Nav.vue';
 import OctoCat from '@components/plugs/OctoCat.vue';
 
 export default {

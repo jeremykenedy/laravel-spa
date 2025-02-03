@@ -17,7 +17,7 @@ export default {
   props: {
     stroke: {
       type: String,
-      default: '#fff',
+      default: '#ffffff',
     },
     w: {
       type: Number,

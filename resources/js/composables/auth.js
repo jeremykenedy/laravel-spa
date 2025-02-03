@@ -12,6 +12,7 @@ let user = reactive({
 export default function useAuth() {
     const authStore = useAuthStore();
     const processing = ref(false)
+    const success = ref(false)
     const validationErrors = ref({})
     const router = useRouter()
     const swal = inject('$swal')
@@ -71,21 +72,27 @@ export default function useAuth() {
 
     const submitRegister = async () => {
         if (processing.value) return
-
         processing.value = true
         validationErrors.value = {}
-
         await axios.post('/register', registerForm)
             .then(async response => {
+                await authStore.getUser()
                 // await store.dispatch('auth/getUser')
-                // await loginUser()
+                await loginUser()
                 swal({
+                    toast: true,
                     icon: 'success',
-                    title: 'Registration successfully',
+                    timer: 3000,
+                    timerProgressBar: true,
                     showConfirmButton: false,
-                    timer: 1500
+                    title: 'Registered successfully',
+                    position: 'bottom-end',
                 })
-                await router.push({ name: 'auth.login' })
+
+                // TODO :: WORK HERE
+
+                await router.push({ name: 'admin.index' })
+                // await router.push({ name: 'auth.login' })
             })
             .catch(error => {
                 if (error.response?.data) {
@@ -105,10 +112,14 @@ export default function useAuth() {
             .then(async response => {
                 swal({
                     icon: 'success',
-                    title: 'We have emailed your password reset link! Please check your mail inbox.',
+                    toast: true,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    title: 'We have emailed your password reset link! Please check your email inbox.',
                     showConfirmButton: false,
-                    timer: 1500
+                    position: 'bottom-end',
                 })
+                success.value = true
                 // await router.push({ name: 'admin.index' })
             })
             .catch(error => {
@@ -116,7 +127,11 @@ export default function useAuth() {
                     validationErrors.value = error.response.data.errors
                 }
             })
-            .finally(() => processing.value = false)
+            .finally(() => processing.value = false);
+    }
+
+    const dismissSuccess = async () => {
+        success.value = false;
     }
 
     const submitResetPassword = async () => {
@@ -218,6 +233,8 @@ export default function useAuth() {
         logout,
         getAbilities,
         impersonateUser,
-        leaveImpersonatingUser
+        leaveImpersonatingUser,
+        success,
+        dismissSuccess
     }
 }
