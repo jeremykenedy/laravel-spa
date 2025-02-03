@@ -1,3 +1,24 @@
+### OSX Vendor Configs ###
+.DS_Store
+*._DS_Store
+._.DS_Store
+*._
+._*
+._.*
+
+### Windows Vendor Configs ###
+Thumbs.db
+
+### Editor Configs ###
+*.sublime-workspace
+.idea/*
+/.idea/*
+.phpintel/*
+/.phpintel/*
+/.vscode
+/.notes/*
+
+### Assets ###
 /node_modules
 /public/build
 /public/hot
@@ -12,9 +33,11 @@ Homestead.yaml
 auth.json
 npm-debug.log
 yarn-error.log
-/.idea
-/.vscode
-package-lock.json
+/storage/debugbar
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/testing/*
+/storage/framework/views/*
+docker-compose.override.yml
 composer.lock
-yarn.lock
-/storage/media-library/temp
+npm-bundle-stats.html
