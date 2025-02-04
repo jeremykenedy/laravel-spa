@@ -57,7 +57,7 @@
                     autocomplete="current-password" :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
-                  <div v-for="message in validationErrors?.password" class="text-xs text-red-500">
+                  <div v-for="message in validationErrors?.password" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
                 </div>
@@ -75,7 +75,7 @@
                     type="password_confirmation" name="password_confirmation"
                     :class="{ 'border-red-500': validationErrors?.password }" :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
-                  <div v-for="message in validationErrors?.password_confirmation" class="text-xs text-red-500">
+                  <div v-for="message in validationErrors?.password_confirmation" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
                 </div>

@@ -7,7 +7,7 @@
         </div>
         <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
           <form @submit.prevent="submitLogin">
-            <div class="mb-6 md:mt-16 lg:mt-12">
+            <div class="mb-7 md:mt-16 lg:mt-12">
               <label for="email" class="text-small mb-2 inline-block hidden"
                 :class="{ 'text-red-500': validationErrors?.email }">
                 {{ $t('email') }}
@@ -16,11 +16,11 @@
                 class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                 :class="{ 'border-red-500': validationErrors?.email }" :disabled="processing.value"
                 :placeholder="$t('email')" />
-              <div v-for="message in validationErrors?.email" class="mt-1 text-sm text-red-500">
+              <div v-for="message in validationErrors?.email" class="mt-1 text-sm text-red-500 absolute">
                 {{ message }}
               </div>
             </div>
-            <div class="mb-6">
+            <div class="mb-7">
               <label for="password" class="text-small mb-2 inline-block hidden"
                 :class="{ 'text-red-500': validationErrors?.password }">
                 {{ $t('password') }}
@@ -29,7 +29,7 @@
                 class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
                 :class="{ 'border-red-500': validationErrors?.password }" :disabled="processing.value"
                 :placeholder="$t('password')" />
-              <div v-if="validationErrors?.password">
+              <div v-if="validationErrors?.password" class="absolute">
                 <div v-for="message in validationErrors?.password" class="mt-1 text-sm text-red-500">
                   {{ message }}
                 </div>

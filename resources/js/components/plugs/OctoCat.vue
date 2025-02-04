@@ -1,8 +1,7 @@
 <template>
   <a v-if="octocatEnabled" :href="url" :target="blankAttr" :rel="relAttr" class="github-corner" :class="position"
     aria-label="View on GitHub" @click="track(`OctoCat clicked`)">
-    <svg xmlns="http://www.w3.org/2000/svg" :style="svgStyle" viewBox="0 0 250 250" :fill="color" height="80"
-      width="80">
+    <svg xmlns="http://www.w3.org/2000/svg" :style="svgStyle" viewBox="0 0 250 250" :fill="color" height="80" width="80">
       <path d="m249.578,250.294C163.683,162.067 87.406,88.123 -0.422,0.294 H 249.578z"></path>
       <path fill="currentColor"
         d="m194.579,71.296c-2,-4 -5.003,-7.999 -9.003,-11.999 -3.999,-3.999 -7.999,-7.003 -11.999,-9.003 -4,-14 -8.997,-16.998 -8.997,-16.998 -8,3.999 -11.005,8.999 -11.005,10.999 -6,0 -10.997,2.001 -15.997,7.001 -16,16 -10.002,29.997 -2.002,40.997 -3,0 -6.999,0.999 -10.999,4.999 L 113.579,109.297c-2,1 -5.999,-1.001 -5.999,-1.001 l 26.996,26.996c0,0 -1.999,-3.998 0,-4.998 l 14.001,-14.001c2,-3 3.002,-5.995 3.002,-7.995 11,8 23.997,14.998 40.997,-2.001 5,-5 7,-9.997 7,-15.997 -0.903,-9.744 -2.806,-14.230 -4.998,-19z">
@@ -13,7 +12,7 @@
       <path fill="currentColor" :class="animatedEar ? 'octo-ear' : ''"
         d="m210.616,77.354c0,0 -2.997,-5 -15.997,-7 -0.014,-0.028 0.007,0.014 0,0 -0.007,-0.014 -3.990,0.468 -3.990,0.468 l 5.446,19.797 3.572,-1.284c2.015,-1.004 6.983,-3.016 10.968,-11.981z"
         style="transform-origin: 170px 100px"></path>
-      <path v-if="showFace" :fill="darkMode ? faceColorDark : faceColor" class="octo-face"
+      <path v-if="showFace" :fill="isDarkMode ? faceColorDark : faceColor" class="octo-face"
         d="m157.893,66.610c-3.695,-3.732 -7.911,-5.499 -12.189,-5.109 -4.402,0.402 -7.139,2.856 -7.874,3.598 -7.076,7.147 -5.830,16.656 3.507,26.774 1.749,1.898 3.654,3.889 5.663,5.918 1.988,2.008 3.993,3.970 5.960,5.829 11.661,11.032 19.883,7.516 24.726,2.623 4.699,-4.747 6.925,-12.647 -0.935,-20.588 -0.193,-0.195 -0.515,-0.479 -1.318,-1.179 -1.714,-1.495 -4.904,-4.280 -7.845,-7.250 -3.247,-3.280 -6.325,-6.797 -8.162,-8.899 -0.857,-0.980 -1.279,-1.464 -1.531,-1.718z">
       </path>
       <path v-if="showFace" fill="currentColor"
@@ -97,16 +96,34 @@ export default {
       default: '#ffffff',
     },
   },
+  mounted() {
+    if (this.user && this.user.id) {
+      localStorage.setItem("data-theme", this.user.theme_dark)
+      if (this.user.theme_dark) {
+        this.darkMode = 'dark'
+      } else {
+        this.darkMode = 'light'
+      }
+    } else {
+      this.darkMode = localStorage.getItem("data-theme")
+    }
+    window.addEventListener('theme-localstorage-changed', (event) => {
+      this.darkMode = event.detail.storage;
+    });
+  },
   computed: {
-    ...mapState(useAuthStore, ['user', 'authenticated']),
-    octocatEnabled() {
-      return OCTOCAT_ENABLED;
-    },
-    darkMode() {
-      if (this.user && this.user.theme_dark) {
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
+    isDarkMode() {
+      if (this.darkMode == 'dark') {
         return true;
       }
       return false;
+    },
+    octocatEnabled() {
+      return OCTOCAT_ENABLED;
     },
     url() {
       return `${OCTOCAT_BASE_URL}/${OCTOCAT_USERNAME}/${OCTOCAT_REPO}`;
@@ -143,8 +160,8 @@ export default {
           break;
       }
       return {
-        fill: this.darkMode ? this.bgColorDark : this.bgColor,
-        color: this.darkMode ? this.colorDark : this.color,
+        fill: this.isDarkMode ? this.bgColorDark : this.bgColor,
+        color: this.isDarkMode ? this.colorDark : this.color,
         position: 'absolute',
         border: 0,
         ...positionStyles,
@@ -156,6 +173,11 @@ export default {
     relAttr() {
       return this.blank ? 'noopener noreferrer' : null;
     },
+  },
+  data() {
+    return {
+      darkMode: false,
+    };
   },
   methods: {
     track,

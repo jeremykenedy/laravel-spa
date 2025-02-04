@@ -1,7 +1,7 @@
 <template>
   <div v-if="ghBbuttonEnable" class="github-buttons">
     <github-button v-if="showFollow && ghUser" :href="ghBaseUrl + ghUser"
-      :data-color-scheme="darkTheme ? darkVariant : lightVariant" :data-size="size" :data-show-count="showCountString"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-size="size" :data-show-count="showCountString"
       :aria-label="followTitle + ghUser + ' on ' + serviceName" class="gh-button"
       @click="track('Clicked ' + followTitle + ghUser + ' on ' + serviceName)">
       {{ followTitle }}{{ ghUser }}
@@ -16,7 +16,7 @@
       ' on ' +
       serviceName
       : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo" :data-color-scheme="darkTheme ? darkVariant : lightVariant"
+      " :href="ghBaseUrl + ghUser + '/' + ghRepo" :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :data-icon="starIcon" :data-size="size" :data-show-count="showCountString" :aria-label="starTitle +
         ' ' +
         ghBaseUrl +
@@ -26,18 +26,18 @@
         ' on ' +
         serviceName
         " class="gh-button" @click="
-          track(
-            'Clicked ' +
-            starTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-          )
-          ">
+    track(
+      'Clicked ' +
+      starTitle +
+      ' ' +
+      ghBaseUrl +
+      ghUser +
+      '/' +
+      ghRepo +
+      ' on ' +
+      serviceName,
+    )
+    ">
       {{ starTitle }}
     </github-button>
     <github-button v-if="showFork && ghUser && ghRepo" v-tippy="showTips
@@ -50,8 +50,9 @@
       ' on ' +
       serviceName
       : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/fork'" :data-color-scheme="darkTheme ? darkVariant : lightVariant"
-      :data-icon="forkIcon" :data-size="size" :data-show-count="showCountString" :aria-label="forkTitle +
+      " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/fork'"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="forkIcon" :data-size="size"
+      :data-show-count="showCountString" :aria-label="forkTitle +
         ' ' +
         ghBaseUrl +
         ghUser +
@@ -60,18 +61,18 @@
         ' on ' +
         serviceName
         " class="gh-button" @click="
-          track(
-            'Clicked ' +
-            forkTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-          )
-          ">
+    track(
+      'Clicked ' +
+      forkTitle +
+      ' ' +
+      ghBaseUrl +
+      ghUser +
+      '/' +
+      ghRepo +
+      ' on ' +
+      serviceName,
+    )
+    ">
       {{ forkTitle }}
     </github-button>
     <github-button v-if="showIssue && ghUser && ghRepo" v-tippy="showTips
@@ -86,7 +87,7 @@
       serviceName
       : null
       " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/issues'"
-      :data-color-scheme="darkTheme ? darkVariant : lightVariant" :data-icon="issueIcon" :data-size="size"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="issueIcon" :data-size="size"
       :data-show-count="showCountString" :aria-label="issueTitle +
         ' ' +
         ghBaseUrl +
@@ -96,18 +97,18 @@
         ' on ' +
         serviceName
         " class="gh-button" @click="
-          track(
-            'Clicked ' +
-            issueTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-          )
-          ">
+    track(
+      'Clicked ' +
+      issueTitle +
+      ' ' +
+      ghBaseUrl +
+      ghUser +
+      '/' +
+      ghRepo +
+      ' on ' +
+      serviceName,
+    )
+    ">
       {{ issueTitle }}
     </github-button>
     <github-button v-if="showWatch && ghUser && ghRepo" v-tippy="showTips
@@ -121,7 +122,7 @@
       serviceName
       : null
       " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/subscription'"
-      :data-color-scheme="darkTheme ? darkVariant : lightVariant" :data-icon="watchIcon" :data-size="size"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="watchIcon" :data-size="size"
       :data-show-count="showCountString" :aria-label="watchTitle +
         ' ' +
         ghBaseUrl +
@@ -131,24 +132,24 @@
         ' on ' +
         serviceName
         " class="gh-button" @click="
-          track(
-            'Clicked ' +
-            watchTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-          )
-          ">
+    track(
+      'Clicked ' +
+      watchTitle +
+      ' ' +
+      ghBaseUrl +
+      ghUser +
+      '/' +
+      ghRepo +
+      ' on ' +
+      serviceName,
+    )
+    ">
       {{ watchTitle }}
     </github-button>
 
     <github-button v-if="showSponsor && ghUser" v-tippy="showTips ? 'Sponsor @' + ghUser + ' on GitHub' : null"
       :href="ghBaseUrl + 'sponsors/' + ghUser" :data-icon="sponsorIcon" :data-size="size"
-      :data-color-scheme="darkTheme ? darkVariant : lightVariant" :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
       class="gh-button" @click="
         track(
           'Clicked ' + sponsorTitle + ' ' + ghBaseUrl + 'sponsors/' + ghUser,
@@ -168,7 +169,7 @@
       serviceName
       : null
       " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/archive/HEAD.zip'"
-      :data-color-scheme="darkTheme ? darkVariant : lightVariant" :data-icon="downloadIcon" :data-size="size"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="downloadIcon" :data-size="size"
       :data-show-count="showCountString" :aria-label="downloadTitle +
         ' ' +
         ghBaseUrl +
@@ -178,18 +179,18 @@
         ' directly from ' +
         serviceName
         " class="gh-button" @click="
-          track(
-            'Clicked ' +
-            downloadTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' directly from ' +
-            serviceName,
-          )
-          ">
+    track(
+      'Clicked ' +
+      downloadTitle +
+      ' ' +
+      ghBaseUrl +
+      ghUser +
+      '/' +
+      ghRepo +
+      ' directly from ' +
+      serviceName,
+    )
+    ">
       {{ downloadTitle }}
     </github-button>
   </div>
@@ -234,10 +235,28 @@ export default {
     sponsorIcon: { type: String, default: 'octicon-heart' },
     frequency: { type: String, default: 'recurring' }, // one-time
   },
+  mounted() {
+    if (this.user && this.user.id) {
+      localStorage.setItem("data-theme", this.user.theme_dark)
+      if (this.user.theme_dark) {
+        this.darkMode = 'dark'
+      } else {
+        this.darkMode = 'light'
+      }
+    } else {
+      this.darkMode = localStorage.getItem("data-theme")
+    }
+    window.addEventListener('theme-localstorage-changed', (event) => {
+      this.darkMode = event.detail.storage;
+    });
+  },
   computed: {
-    ...mapState(useAuthStore, ['user', 'authenticated']),
-    darkTheme() {
-      if (this.user && this.user.theme_dark) {
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
+    isDarkMode() {
+      if (this.darkMode == 'dark') {
         return true;
       }
       return false;
@@ -258,11 +277,18 @@ export default {
       return GH_BUTTONS_REPO;
     },
   },
+  data() {
+    return {
+      darkMode: false,
+    };
+  },
   methods: {
     track,
   },
 };
 </script>
 
-<style scoped></style>
-<style lang="scss" scoped></style>
+<style scoped>
+</style>
+<style lang="scss" scoped>
+</style>

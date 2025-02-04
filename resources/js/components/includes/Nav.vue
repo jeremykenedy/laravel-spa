@@ -406,6 +406,17 @@ export default {
             } else {
                 this.darkMode = 'dark';
             }
+
+            localStorage.setItem('theme', this.darkMode)
+
+            window.dispatchEvent(new CustomEvent('theme-localstorage-changed', {
+                detail: {
+                    storage: localStorage.getItem('theme')
+                }
+            }));
+
+            // HERE
+
         },
         parseDisplayDate,
         closeDrop() {
