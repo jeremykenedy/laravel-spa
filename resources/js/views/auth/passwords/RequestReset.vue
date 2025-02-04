@@ -13,7 +13,7 @@
               </span>
               <CheckCircleIcon class="h-20 w-20 mx-auto" />
               <p class="font-semibold">
-                {{ $t('send_email_succes') }}
+                {{ $t('send_email_success') }}
               </p>
             </div>
             <form class="mx-auto w-full md:w-10/12 md:p-4" @submit.prevent="submitForgotPassword">
@@ -78,13 +78,6 @@ export default {
   },
   props: {
     useSuccess: { type: Boolean, default: true },
-  },
-  methods: {
-    closeSuccess() {
-
-      alert('gotcha');
-
-    },
   },
 };
 </script>

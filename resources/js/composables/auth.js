@@ -76,23 +76,33 @@ export default function useAuth() {
         validationErrors.value = {}
         await axios.post('/register', registerForm)
             .then(async response => {
-                await authStore.getUser()
-                // await store.dispatch('auth/getUser')
-                await loginUser()
-                swal({
-                    toast: true,
-                    icon: 'success',
-                    timer: 3000,
-                    timerProgressBar: true,
-                    showConfirmButton: false,
-                    title: 'Registered successfully',
-                    position: 'bottom-end',
-                })
-
-                // TODO :: WORK HERE
-
-                await router.push({ name: 'admin.index' })
-                // await router.push({ name: 'auth.login' })
+                await axios.post('/login', {
+                        email: registerForm.email,
+                        password: registerForm.password,
+                        remember: false
+                    })
+                    .then(async response => {
+                        await authStore.getUser()
+                        // await authStore.dispatch('auth/getUser')
+                        await loginUser()
+                        swal({
+                            toast: true,
+                            icon: 'success',
+                            timer: 8000,
+                            timerProgressBar: true,
+                            showConfirmButton: false,
+                            title: 'Registered successfully',
+                            text: 'Welcome to your new account!',
+                            position: 'bottom-end',
+                        })
+                        await router.push({ name: 'admin.index' })
+                    })
+                    .catch(error => {
+                        if (error.response?.data) {
+                            validationErrors.value = error.response.data.errors
+                        }
+                    })
+                    .finally(() => processing.value = false)
             })
             .catch(error => {
                 if (error.response?.data) {

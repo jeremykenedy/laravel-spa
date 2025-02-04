@@ -25,7 +25,8 @@
     "reset_your_password": "Reset Your Password",
     "send_password_reset_link": "Send Password Reset Link",
     "send_email": "Send Email",
-    "send_email_succes": "Password Reset Email Sent",
+    "send_email_success": "Password Reset Email Sent",
+    "password_reset_success": "Password Reset Successfully",
     "go_back": "Go back",
     "settings": "Settings",
     "profile": "Profile",
@@ -43,5 +44,6 @@
     "failed_to_verify_email": "Failed to verify email.",
     "verify_email_address": "We sent you an email with an the verification link.",
     "signin": "Sign In",
+    "signup": "Sign Up",
     "alreadymember": "Already a member?"
 }

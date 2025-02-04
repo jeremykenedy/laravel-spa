@@ -13,7 +13,7 @@
           A better way to single page app
         </p>
         <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-300 lg:mx-auto">
-          A Laravel 9, Vite 3, Vue 3 SPA (w/ Vue Router), Tailwind CSS (w/ Forms
+          A Laravel, Vite, Vue SPA (w/ Vue Router), Tailwind CSS (w/ Forms
           Plugin & Aspect Ratio Plugin), Axios, Headless UI, Heroicons, eslint,
           &amp; TypeScript starter template.
         </p>
@@ -45,6 +45,8 @@ import {
   BoltIcon,
   ChatBubbleBottomCenterTextIcon,
   GlobeAltIcon,
+  CircleStackIcon,
+  ShieldCheckIcon,
   ScaleIcon,
   InformationCircleIcon,
 } from '@heroicons/vue/24/outline';
@@ -54,6 +56,8 @@ export default {
   components: {
     BoltIcon,
     ChatBubbleBottomCenterTextIcon,
+    CircleStackIcon,
+    ShieldCheckIcon,
     GlobeAltIcon,
     ScaleIcon,
     InformationCircleIcon,
@@ -63,7 +67,13 @@ export default {
     return {
       features: [
         {
-          name: 'Vue 3',
+          name: 'Laravel',
+          description:
+            'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.Laravel is a web application framework with expressive, elegant syntax.',
+          icon: ChatBubbleBottomCenterTextIcon,
+        },
+        {
+          name: 'Vue',
           description:
             'Vue (pronounced /vjuː/, like view) is a JavaScript framework for building user interfaces. It builds on top of standard HTML, CSS, and JavaScript and provides a declarative and component-based programming model that helps you efficiently develop user interfaces, be they simple or complex.',
           icon: GlobeAltIcon,
@@ -81,10 +91,16 @@ export default {
           icon: BoltIcon,
         },
         {
-          name: 'Laravel 9',
+          name: 'Pinia',
           description:
-            'Laravel is a web application framework with expressive, elegant syntax. We’ve already laid the foundation — freeing you to create without sweating the small things.Laravel is a web application framework with expressive, elegant syntax.',
-          icon: ChatBubbleBottomCenterTextIcon,
+            'The intuitive store for Vue.js. Type Safe, Extensible, and Modular by design. Forget you are even using a store. Stores are as familiar as components. API designed to let you write well organized stores.',
+          icon: CircleStackIcon,
+        },
+        {
+          name: 'Heroicons',
+          description:
+            'Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.',
+          icon: ShieldCheckIcon,
         },
       ],
     };

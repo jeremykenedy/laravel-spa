@@ -93,17 +93,12 @@ export default function useProfile() {
         }
     }
 
-    const updateTheme = async () => {
-        //
-    }
-
     return {
         profile,
         getProfile,
         updateProfile,
         validationErrors,
         isLoading,
-        updateTheme,
         toggleThemeMode
     }
 }

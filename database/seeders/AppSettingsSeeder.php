@@ -572,7 +572,7 @@ class AppSettingsSeeder extends Seeder
             [
                 'name'      => 'Description',
                 'key'       => 'description',
-                'val'       => 'A Laravel 9 + Socialite + Vite + Vue 3 + Tailwind CSS SPA Boilerplate with user authentication, registration, email verification, social media authentication, password recovery, user management, and roles/permissions management. Uses TailwindCSS. While the front end is part of this repository it is a completely separated Vue 3 front end.',
+                'val'       => 'A Laravel + Socialite + Vite + Vue + Tailwind CSS SPA Boilerplate with user authentication, registration, email verification, social media authentication, password recovery, user management, and roles/permissions management. Uses TailwindCSS. While the front end is part of this repository it is a completely separated Vue front end.',
                 'group'     => 'app-meta',
             ],
             [

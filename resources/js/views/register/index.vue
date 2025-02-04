@@ -4,13 +4,9 @@
       <div class="flex-1">
         <div class="w-auto rounded border">
           <div class="border-b px-4 py-3 font-semibold text-gray-600">{{ $t('register') }}</div>
-
           <div class="rounded bg-white p-4 dark:bg-slate-800">
-            <!-- <errors v-if="errors && useInlineMessage" :content="form.errors" type="error" @close="errors = null" /> -->
-
-
+            <!-- <Errors v-if="errors && useInlineMessage" :content="form.errors" type="error" @close="errors = null" /> -->
             <form class="mx-auto w-full rounded md:w-10/12 md:p-4" @submit.prevent="submitRegister">
-
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label for="name" class="w-4/12" :class="validationErrors?.name
                   ? 'text-red-500'
@@ -27,7 +23,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label for="email" class="w-4/12" :class="validationErrors?.email
                   ? 'text-red-500'
@@ -44,7 +39,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label for="password" class="w-4/12" :class="validationErrors?.password
                   ? 'text-red-500'
@@ -62,7 +56,6 @@
                   </div>
                 </div>
               </div>
-
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label for="Password confirm" class="w-4/12" :class="validationErrors?.password
                   ? 'text-red-500'
@@ -71,16 +64,15 @@
                   {{ $t('confirm_password') }}
                 </label>
                 <div class="sm:mt-0 sm:w-8/12">
-                  <input v-model="registerForm.password_confirmation" id="password_confirmation"
-                    type="password_confirmation" name="password_confirmation"
-                    :class="{ 'border-red-500': validationErrors?.password }" :disabled="processing.value"
+                  <input v-model="registerForm.password_confirmation" id="password_confirmation" type="password"
+                    name="password_confirmation" :class="{ 'border-red-500': validationErrors?.password }"
+                    :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
                   <div v-for="message in validationErrors?.password_confirmation" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
                 </div>
               </div>
-
               <div class="my-1 w-full rounded py-2 sm:flex sm:items-center sm:justify-end">
                 <div class="mt-3 flex w-full items-center justify-between rounded sm:mt-0 sm:w-8/12">
                   <AppButton primary :loading="processing.value" :disabled="processing.value"
