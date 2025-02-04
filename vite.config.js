@@ -1,10 +1,12 @@
-import { defineConfig } from 'vite';
+import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { imagetools } from 'vite-imagetools'
+import { manualChunksPlugin } from 'vite-plugin-webpackchunkname'
+import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 
 export default defineConfig({
   plugins: [
@@ -45,10 +47,38 @@ export default defineConfig({
         retention: 172800
       }
     }),
+    viteCommonjs(),
+    splitVendorChunkPlugin(),
+    manualChunksPlugin(),
   ],
-  build: {
-    chunkSizeWarningLimit: 1600,
-  },
+    build: {
+      reportCompressedSize: true,
+      chunkSizeWarningLimit: 1600,
+      // manifest: "manifest.json",
+      // sourcemap: process.env.VITE_APP_ENV == 'local' ? true : false,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              const modulePath = id.split('node_modules/')[1];
+              const topLevelFolder = modulePath.split('/')[0];
+              if (topLevelFolder !== '.pnpm') {
+                return topLevelFolder;
+              }
+              const scopedPackageName = modulePath.split('/')[1];
+              const chunkName = scopedPackageName.split('@')[scopedPackageName.startsWith('@') ? 1 : 0];
+              return chunkName;
+            }
+          }
+        }
+      },
+      modulePreload: {
+        polyfill: true,
+      },
+      commonjsOptions: {
+        include: [/node_modules/],
+      },
+    },
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'node_modules'),
