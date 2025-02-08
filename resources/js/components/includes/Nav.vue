@@ -34,7 +34,7 @@
               isActive &&
               'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
             ]">
-              <HomeIcon class="float-left mr-2 h-6 w-6" />
+              <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" />
             </span>
           </router-link>
 
@@ -170,7 +170,7 @@
                         isActive &&
                         'text-gray-800 hover:text-gray-900 dark:text-gray-600',
                       ]">
-                        <HomeIcon class="float-left mr-2 h-6 w-6" /> Dashboard
+                        <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" /> Dashboard
                       </span>
                     </router-link>
                   </div>
@@ -269,7 +269,6 @@ import { parseDisplayDate } from '@services/common';
 import { mapStores, mapState, mapActions } from 'pinia';
 import { useAuthStore } from "@store/auth";
 import useAuth from '@composables/auth'
-import useProfile from "@composables/profile";
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import {
   Popover,
