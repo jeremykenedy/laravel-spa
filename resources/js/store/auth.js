@@ -5,6 +5,8 @@ import {ref} from "vue";
 export const useAuthStore = defineStore('auth', () => {
   const authenticated = ref(false)
   const user = ref({})
+  const currentUserToken = ref(null)
+  const impersonatorToken = ref(null)
   const socials = ref({
       facebook: false,
       twitter: false,
@@ -27,14 +29,6 @@ export const useAuthStore = defineStore('auth', () => {
       atlassian: false,
       // NEW_PROVIDER_PLUG :: Put New Provider HERE
   });
-
-  state: () => {
-    return {
-      currentUserToken: null,
-      impersonatorToken: null,
-      darkMode: false,
-    }
-  }
 
   const login = (() => {
     return axios.get('/api/user').then(({data}) => {
@@ -74,7 +68,15 @@ export const useAuthStore = defineStore('auth', () => {
     authenticated.value = false
   })
 
-  return {authenticated, user, login, getUser, logout}
+  return {
+    authenticated,
+    user,
+    login,
+    getUser,
+    logout,
+    currentUserToken,
+    impersonatorToken
+  }
 }, {
   persist: true
 })

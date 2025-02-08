@@ -49,56 +49,11 @@ export default function useProfile() {
             .finally(() => isLoading.value = false)
     }
 
-    const toggleThemeMode = async () => {
-        if (isLoading.value) return;
-        isLoading.value = true;
-        if (store.authenticated && store.user && store.user.id) {
-            axios.post('/api/toggle-dark-mode')
-                .then(({data}) => {
-                    if (data.success) {
-                        store.user.theme_dark = data.data
-                        if (store.user.theme_dark) {
-                          document.documentElement.className = 'dark';
-                          localStorage.setItem("data-theme", "dark");
-                        } else {
-                          document.documentElement.className = 'light';
-                          localStorage.setItem("data-theme", "light");
-                        }
-                        Swal.fire({
-                            toast: true,
-                            icon: 'success',
-                            timer: 3000,
-                            timerProgressBar: true,
-                            showConfirmButton: false,
-                            title: (store.user.theme_dark ? 'Dark' : 'Light') + ' Mode Activated',
-                            position: 'bottom-end',
-                        })
-                    }
-                })
-                .catch(error => {
-                    if (error.response?.data) {
-                        validationErrors.value = error.response.data.errors
-                    }
-                })
-                .finally(() => isLoading.value = false)
-        } else {
-            if (localStorage.getItem("data-theme") == 'dark') {
-                document.documentElement.className = 'light';
-                localStorage.setItem("data-theme", "light");
-            } else {
-                document.documentElement.className = 'dark';
-                localStorage.setItem("data-theme", "dark");
-            }
-            isLoading.value = false;
-        }
-    }
-
     return {
         profile,
         getProfile,
         updateProfile,
         validationErrors,
         isLoading,
-        toggleThemeMode
     }
 }

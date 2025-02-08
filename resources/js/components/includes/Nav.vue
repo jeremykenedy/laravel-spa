@@ -67,20 +67,7 @@
             icon="fa-solid fa-user-secret" warning class="float-right mr-4 h-3 w-3 rounded"
             @click="leaveImpersonatingUser" />
 
-          <span v-if="authenticated && user" v-tippy="'Switch Theme to ' + (isDarkTheme ? 'Light' : 'Dark') + ' Mode'"
-            class="mr-4" :class="loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
-              " @click="toggleDarkMode()">
-            <Switch :default-checked="isDarkTheme" :class="isDarkTheme ? 'bg-gray-500' : 'bg-gray-400'"
-              class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              style="margin-top: 5px;">
-              <span class="sr-only">Toggle Theme</span>
-              <span aria-hidden="true" :class="isDarkTheme
-                ? 'translate-x-4 bg-gray-800'
-                : 'translate-x-0 bg-white'
-                "
-                class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out" />
-            </Switch>
-          </span>
+          <ToggleDarkMode v-if="authenticated && user" />
 
           <div v-if="authenticated && user" ref="dropMenu" class="relative">
             <div @click="drop = !drop"
@@ -113,19 +100,7 @@
 
         <div v-if="!authenticated" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
 
-          <span v-tippy="'Switch Theme to ' + (isDarkTheme ? 'Light' : 'Dark') + ' Mode'" class="mr-8" :class="loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
-            " @click="toggleDarkMode()">
-            <Switch :default-checked="isDarkTheme" :class="isDarkTheme ? 'bg-gray-500' : 'bg-gray-400'"
-              class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-              style="margin-top: 5px;">
-              <span class="sr-only">Toggle Theme</span>
-              <span aria-hidden="true" :class="isDarkTheme
-                ? 'translate-x-4 bg-gray-800'
-                : 'translate-x-0 bg-white'
-                "
-                class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out" />
-            </Switch>
-          </span>
+          <ToggleDarkMode />
 
           <router-link v-slot="{ isActive }" :to="{ name: 'auth.login' }"
             class="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
@@ -228,24 +203,14 @@
                     </router-link>
                   </div>
 
-                  <div class="mr-2 mb-7 w-full float-left"
-                    :class="loading ? 'default disabled cursor-pointer' : 'cursor-pointer'" @click="toggleDarkMode()">
-                    <Switch :default-checked="isDarkTheme" :class="isDarkTheme ? 'bg-gray-500' : 'bg-gray-400'"
-                      class="float-left relative inline-flex h-[18px] w-[30px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                      <span class="sr-only">Toggle Theme</span>
-                      <span aria-hidden="true" :class="isDarkTheme
-                        ? 'translate-x-3 bg-gray-800'
-                        : 'translate-x-0 bg-white'
-                        "
-                        class="pointer-events-none inline-block h-[14px] w-[14px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out" />
-                    </Switch>
+                  <div class="mr-2 mb-7 w-full float-left">
+                    <ToggleDarkMode class="float-left mr-0" />
                     <div
-                      class="ml-2 text-base font-medium float-left text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
-                      style="margin-top: -3px;">
-                      Toggle Theme {{ isDarkTheme ? 'Light' : 'Dark' }}
+                      class="ml-3 text-base font-medium float-left text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                      style="margin-top: 3px;">
+                      {{ darkMode ? 'Disable' : 'Enable' }} Dark Mode
                     </div>
                   </div>
-
                 </div>
 
                 <div v-if="!authenticated">
@@ -302,9 +267,10 @@
 import { ref } from 'vue';
 import { parseDisplayDate } from '@services/common';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from "@store/auth";
 import useAuth from '@composables/auth'
 import useProfile from "@composables/profile";
+import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import {
   Popover,
   PopoverButton,
@@ -341,22 +307,24 @@ export default {
     ArrowRightOnRectangleIcon,
     ChevronDownIcon,
     UserCircleIcon,
-    Switch, // eslint-disable-line
+    Switch,
+    ToggleDarkMode,
   },
   mounted() {
     if (this.user && this.user.id) {
-      localStorage.setItem("data-theme", this.user.theme_dark)
       if (this.user.theme_dark) {
-        this.darkMode = 'dark';
+        this.theme = 'dark';
       } else {
-        this.darkMode = 'light';
+        this.theme = 'light';
       }
     } else {
-      this.darkMode = localStorage.getItem("data-theme");
+      this.theme = localStorage.getItem("data-theme");
     }
+    window.addEventListener('theme-localstorage-changed', (event) => {
+      this.theme = event.detail.storage;
+    });
   },
   computed: {
-    // ...mapStores(auth),
     ...mapState(useAuthStore, [
       'user',
       'authenticated',
@@ -370,47 +338,29 @@ export default {
     appName() {
       return APP_NAME;
     },
-    isDarkTheme() {
-      if (this.darkMode == 'dark') {
-        return true;
-      } else {
-        return false;
-      }
-    },
     isImpersonating() {
       if (this.currentUserToken && this.impersonatorToken) {
         return true;
       }
       return false;
     },
+    darkMode() {
+      if (this.theme == 'dark') {
+        return true;
+      }
+      return false
+    },
   },
   data() {
     return {
-      // logo: "https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=600",
       drop: false,
       errors: null,
       success: '',
-      loading: false,
-      darkMode: false,
+      theme: null,
     };
   },
   methods: {
     ...mapActions(useAuth, ['logout', 'leaveImpersonatingUser']),
-    ...mapActions(useProfile, ['updateTheme', 'toggleThemeMode']),
-    toggleDarkMode() {
-      this.toggleThemeMode();
-      if (this.darkMode == 'dark') {
-        this.darkMode = 'light';
-      } else {
-        this.darkMode = 'dark';
-      }
-      localStorage.setItem('theme', this.darkMode)
-      window.dispatchEvent(new CustomEvent('theme-localstorage-changed', {
-        detail: {
-          storage: localStorage.getItem('theme')
-        }
-      }));
-    },
     parseDisplayDate,
     closeDrop() {
       this.drop = false;
@@ -420,10 +370,4 @@ export default {
     },
   },
 };
-
 </script>
-
-<style scoped>
-</style>
-<style lang="scss" scoped>
-</style>

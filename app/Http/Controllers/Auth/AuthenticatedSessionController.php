@@ -37,15 +37,18 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
-//        $token = $request->session()->regenerate();
         $token = $request->user()->createToken($request->userAgent())->plainTextToken;
 
-        activity()
-            ->performedOn($request->user())
-            ->causedBy(auth()->user())
-            ->event('login')
-            ->withProperties(['ip' => $request->ip()])
-            ->log('User login successfully');
+        try {
+            activity()
+                ->performedOn($request->user())
+                ->causedBy(auth()->user())
+                ->event('login')
+                ->withProperties(['ip' => $request->ip()])
+                ->log('User login successfully');
+        } catch (Exception $e) {
+            //
+        }
 
         if ($request->wantsJson()) {
             return response()->json(['user' => $request->user(), 'token' => $token]);
@@ -62,12 +65,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function logout(Request $request)
     {
-        activity()
-            ->performedOn($request->user())
-            ->causedBy(auth()->user())
-            ->event('logout')
-            ->withProperties(['ip' => $request->ip()])
-            ->log('User logout successfully');
+        try {
+            activity()
+                ->performedOn($request->user())
+                ->causedBy(auth()->user())
+                ->event('logout')
+                ->withProperties(['ip' => $request->ip()])
+                ->log('User logout successfully');
+        } catch (Exception $e) {
+            //
+        }
 
         Auth::guard('web')->logout();
 

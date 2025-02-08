@@ -34,7 +34,7 @@
 <script>
 import { track } from '@services/analytics';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from "@store/auth";
 
 export default {
   name: 'OctoCat',
