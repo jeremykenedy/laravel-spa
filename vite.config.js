@@ -7,6 +7,10 @@ import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { imagetools } from 'vite-imagetools'
 import { manualChunksPlugin } from 'vite-plugin-webpackchunkname'
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import { ViteMinifyPlugin } from 'vite-plugin-minify';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import manifestSRI from 'vite-plugin-manifest-sri';
+import legacy from '@vitejs/plugin-legacy';
 
 export default defineConfig({
   plugins: [
@@ -47,38 +51,51 @@ export default defineConfig({
         retention: 172800
       }
     }),
+    legacy({
+      targets: ['defaults', 'not IE 11'],
+      polyfills: true,
+    }),
+    manifestSRI(),
+    createHtmlPlugin({
+      minify: true,
+      entry: path.resolve(__dirname, 'resources/js/app.js'),
+    }),
+    ViteMinifyPlugin({
+      minifyCSS: true,
+      removeComments: true,
+    }),
     viteCommonjs(),
     splitVendorChunkPlugin(),
     manualChunksPlugin(),
   ],
-    build: {
-      reportCompressedSize: true,
-      chunkSizeWarningLimit: 1600,
-      // manifest: "manifest.json",
-      // sourcemap: process.env.VITE_APP_ENV == 'local' ? true : false,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              const modulePath = id.split('node_modules/')[1];
-              const topLevelFolder = modulePath.split('/')[0];
-              if (topLevelFolder !== '.pnpm') {
-                return topLevelFolder;
-              }
-              const scopedPackageName = modulePath.split('/')[1];
-              const chunkName = scopedPackageName.split('@')[scopedPackageName.startsWith('@') ? 1 : 0];
-              return chunkName;
+  build: {
+    reportCompressedSize: true,
+    chunkSizeWarningLimit: 1600,
+    // manifest: "manifest.json",
+    // sourcemap: process.env.VITE_APP_ENV == 'local' ? true : false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            const modulePath = id.split('node_modules/')[1];
+            const topLevelFolder = modulePath.split('/')[0];
+            if (topLevelFolder !== '.pnpm') {
+              return topLevelFolder;
             }
+            const scopedPackageName = modulePath.split('/')[1];
+            const chunkName = scopedPackageName.split('@')[scopedPackageName.startsWith('@') ? 1 : 0];
+            return chunkName;
           }
         }
-      },
-      modulePreload: {
-        polyfill: true,
-      },
-      commonjsOptions: {
-        include: [/node_modules/],
-      },
+      }
     },
+    modulePreload: {
+      polyfill: true,
+    },
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
+  },
   resolve: {
     alias: {
       '~': path.resolve(__dirname, 'node_modules'),
