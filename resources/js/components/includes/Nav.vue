@@ -27,7 +27,7 @@
 
           <!-- TODO: ADMIN/KIOSK ROUTER LINK HERE -->
 
-          <router-link v-if="authenticated && user" v-slot="{ isActive }" :to="{ name: 'admin.index' }"
+          <router-link v-if="authenticated && user" v-slot="{ isActive }" :to="{ name: 'dashboard' }"
             class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
             @click="closeDrop">
             <span :class="[
@@ -92,7 +92,7 @@
                 class="flex cursor-pointer items-center rounded-b hover:rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-600 hover:text-white"
                 @click.prevent="logout(), closeDrop()">
                 <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6"></ArrowRightOnRectangleIcon>
-                Logout
+                {{ $t('logout') }}
               </div>
             </div>
           </div>
@@ -184,7 +184,7 @@
                         'text-gray-800 hover:text-gray-900 dark:text-gray-600',
                       ]">
                         <InformationCircleIcon class="float-left mr-2 h-6 w-6" />
-                        About
+                        {{ $t('about') }}
                       </span>
                     </router-link>
                   </div>
@@ -198,7 +198,7 @@
                         'text-gray-800 hover:text-gray-900 dark:text-gray-600',
                       ]">
                         <DocumentTextIcon class="float-left mr-2 h-6 w-6" />
-                        Terms
+                        {{ $t('terms') }}
                       </span>
                     </router-link>
                   </div>
@@ -208,7 +208,7 @@
                     <div
                       class="ml-3 text-base font-medium float-left text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
                       style="margin-top: 3px;">
-                      {{ darkMode ? 'Disable' : 'Enable' }} Dark Mode
+                      {{ darkMode ? $t('disable') : $t('enable') }} {{ $t('dark_mode') }}
                     </div>
                   </div>
                 </div>
@@ -221,7 +221,7 @@
                   </router-link>
 
                   <p class="mt-6 text-center text-base font-medium text-gray-500">
-                    Existing customer?
+                    {{ $t('existing_customer') }}?
                     {{ ' ' }}
                     <router-link v-slot="{ isActive }" :to="{ name: 'auth.login' }"
                       class="whitespace-nowrap text-base font-medium text-indigo-500 hover:text-indigo-900 dark:text-indigo-300 dark:hover:text-indigo-400"
@@ -230,7 +230,7 @@
                         isActive &&
                         'text-indigo-800 hover:text-indigo-900 dark:text-indigo-500 dark:hover:text-indigo-500',
                       ]">
-                        Sign in
+                        {{ $t('signin') }}
                       </span>
                     </router-link>
                   </p>
@@ -246,7 +246,7 @@
                     @click.prevent="logout(), closeDrop()">
                     <template #text>
                       <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6"></ArrowRightOnRectangleIcon>
-                      Logout
+                      {{ $t('logout') }}
                     </template>
                   </AppButton>
                 </div>

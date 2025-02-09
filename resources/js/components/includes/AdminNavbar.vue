@@ -31,7 +31,7 @@
         <!-- && roles && (roles.admin || roles.superAdmin) -->
 
         <div as="nav" class="ml-5 space-x-10 hidden md:flex">
-          <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'admin.index' }"
+          <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'dashboard' }"
             class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
             @click="closeDrop">
             <span :class="[
@@ -125,13 +125,13 @@
           </span>
         </router-link>
          -->
-        <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'admin.index' }">
+        <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'dashboard' }">
           <span class="flex items-center rounded-t p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white" :class="isActive
             ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
             : 'text-gray-700'
             ">
             <HomeIcon class="mr-2 h-6 w-6" />
-            Dashboard
+            {{ $t('dashboard') }}
           </span>
         </router-link>
         <!--
@@ -150,7 +150,7 @@
           class="flex cursor-pointer items-center rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-800 hover:text-white"
           @click.prevent="logout()">
           <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6"></ArrowRightOnRectangleIcon>
-          Logout
+          {{ $t('logout') }}
         </div>
 
       </div>

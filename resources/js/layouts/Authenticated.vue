@@ -17,10 +17,8 @@
 </template>
 
 <script>
-import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { mapState } from 'pinia';
 import { useSideBarStore } from "@store/sidebar";
-import useAuth from '@composables/auth'
 import AdminNavbar from "@components/includes/AdminNavbar.vue";
 import AdminSidebar from "@components/includes/AdminSidebar.vue";
 import AppFooter from "@components/includes/AppFooter.vue";
@@ -35,14 +33,6 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
-    ...mapState(useAuth, [
-      'processing',
-      'getAbilities',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
     ...mapState(useSideBarStore, [
       'sideBarOpenGetter',
       'fullScreenSideBarOpenGetter'

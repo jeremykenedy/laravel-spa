@@ -60,7 +60,7 @@ export default function useAuth() {
                   title: 'Signed in successfully',
                   position: 'bottom-end',
               })
-              await router.push({ name: 'admin.index' })
+              await router.push({ name: 'dashboard' })
           })
           .catch(error => {
               if (error.response?.data) {
@@ -95,7 +95,7 @@ export default function useAuth() {
                           text: 'Welcome to your new account!',
                           position: 'bottom-end',
                       })
-                      await router.push({ name: 'admin.index' })
+                      await router.push({ name: 'dashboard' })
                   })
                   .catch(error => {
                       if (error.response?.data) {
@@ -130,7 +130,7 @@ export default function useAuth() {
                   position: 'bottom-end',
               })
               success.value = true
-              // await router.push({ name: 'admin.index' })
+              // await router.push({ name: 'dashboard' })
           })
           .catch(error => {
               if (error.response?.data) {

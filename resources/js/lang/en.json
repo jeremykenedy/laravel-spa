@@ -45,5 +45,17 @@
     "verify_email_address": "We sent you an email with an the verification link.",
     "signin": "Sign In",
     "signup": "Sign Up",
-    "alreadymember": "Already a member?"
+    "alreadymember": "Already a member?",
+    "about": "About",
+    "terms": "Terms",
+    "dashboard": "Dashboard",
+    "settings": "Settings",
+    "users": "Users",
+    "permissions": "Permissions",
+    "dark_mode": "Dark Mode",
+    "enable": "Enable",
+    "disable": "Disable",
+    "existing_customer": "Existing customer",
+    "browser_sessions": "Browser Sessions",
+    "activity_logs": "Activity Logs"
 }
