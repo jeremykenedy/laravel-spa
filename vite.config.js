@@ -11,8 +11,17 @@ import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import manifestSRI from 'vite-plugin-manifest-sri';
 import legacy from '@vitejs/plugin-legacy';
+import viteEsLintPlugin from 'vite-plugin-eslint';
+import StylelintPlugin from 'vite-plugin-stylelint';
+import { esbuildCommonjs } from '@originjs/vite-plugin-commonjs';
 
 export default defineConfig({
+  optimizeDeps: {
+    force: true,
+    esbuildOptions: {
+      plugins: [esbuildCommonjs()],
+    },
+  },
   plugins: [
     laravel({
       input: [
@@ -63,6 +72,21 @@ export default defineConfig({
     ViteMinifyPlugin({
       minifyCSS: true,
       removeComments: true,
+    }),
+    StylelintPlugin({
+      fix: true,
+      quite: false,
+      lintOnStart: true,
+    }),
+    viteEsLintPlugin({
+      include: '/.(js|vue)$/',
+      cache: true,
+      fix: true,
+      lintOnStart: false,
+      emitWarning: true,
+      emitError: true,
+      failOnWarning: false,
+      failOnError: true,
     }),
     viteCommonjs(),
     splitVendorChunkPlugin(),
