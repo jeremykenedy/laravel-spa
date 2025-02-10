@@ -13,11 +13,10 @@ import ability from './services/ability';
 import vSelect from "vue-select";
 import useAuth from './composables/auth';
 import i18n from "./plugins/i18n";
+import VueAwesomePaginate from "vue-awesome-paginate";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-select/dist/vue-select.css';
-
-import VueAwesomePaginate from "vue-awesome-paginate";
 import "vue-awesome-paginate/dist/style.css";
 
 const pinia = createPinia();
@@ -35,7 +34,6 @@ const app = createApp({
     useAuth().getUser()
   }
 });
-
 app.use(pinia)
 app.use(router)
 app.use(VueSweetalert2)

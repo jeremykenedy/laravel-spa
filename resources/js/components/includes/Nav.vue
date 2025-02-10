@@ -60,6 +60,29 @@
             </span>
           </router-link>
 
+          <router-link v-slot="{ isActive }" :to="{ name: 'pricing' }"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
+            @click="closeDrop">
+            <span :class="[
+              isActive &&
+              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+            ]">
+              <BuildingStorefrontIcon class="float-left mr-2 h-6 w-6" />
+            </span>
+          </router-link>
+
+          <router-link v-slot="{ isActive }" :to="{ name: 'support' }"
+            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
+            @click="closeDrop">
+            <span :class="[
+              isActive &&
+              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+            ]">
+              <ChatBubbleLeftEllipsisIcon class="float-left mr-2 h-6 w-6" />
+            </span>
+          </router-link>
+
+
         </PopoverGroup>
 
         <div v-if="authenticated" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
@@ -203,6 +226,34 @@
                     </router-link>
                   </div>
 
+                  <div class="mb-6 text-left">
+                    <router-link v-slot="{ isActive }" :to="{ name: 'pricing' }"
+                      class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                      @click="close">
+                      <span :class="[
+                        isActive &&
+                        'text-gray-800 hover:text-gray-900 dark:text-gray-600',
+                      ]">
+                        <BuildingStorefrontIcon class="float-left mr-2 h-6 w-6" />
+                        {{ $t('pricing') }}
+                      </span>
+                    </router-link>
+                  </div>
+
+                  <div class="mb-6 text-left">
+                    <router-link v-slot="{ isActive }" :to="{ name: 'support' }"
+                      class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
+                      @click="close">
+                      <span :class="[
+                        isActive &&
+                        'text-gray-800 hover:text-gray-900 dark:text-gray-600',
+                      ]">
+                        <ChatBubbleLeftEllipsisIcon class="float-left mr-2 h-6 w-6" />
+                        {{ $t('support') }}
+                      </span>
+                    </router-link>
+                  </div>
+
                   <div class="mr-2 mb-7 w-full float-left">
                     <ToggleDarkMode class="float-left mr-0" />
                     <div
@@ -288,6 +339,8 @@ import {
   ArrowRightOnRectangleIcon,
   ChevronDownIcon,
   UserCircleIcon,
+  BuildingStorefrontIcon,
+  ChatBubbleLeftEllipsisIcon,
 } from '@heroicons/vue/24/outline';
 
 export default {
@@ -308,6 +361,8 @@ export default {
     UserCircleIcon,
     Switch,
     ToggleDarkMode,
+    BuildingStorefrontIcon,
+    ChatBubbleLeftEllipsisIcon,
   },
   mounted() {
     if (this.user && this.user.id) {

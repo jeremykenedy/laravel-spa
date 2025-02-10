@@ -113,6 +113,46 @@
         </div>
       </router-link>
 
+      <div class="text-xs/6 font-semibold text-indigo-200 px-1 pt-5">
+        External Resources
+      </div>
+
+      <a href="https://heroicons.com/" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <!-- <svg viewBox="0 0 210 190" fill="none" aria-hidden="true" class="h-7"><path fill-rule="evenodd" clip-rule="evenodd" d="m78.091 0 5.967 5.676c15.038 14.306 35.323 23.067 57.663 23.067.356 0 .711-.002 1.065-.006l6.363-.08 1.988 6.072a102.026 102.026 0 0 1 5.045 31.782c0 47.391-32.269 87.19-75.928 98.477l-2.163.559-2.163-.559C32.27 153.701 0 113.902 0 66.511c0-11.085 1.769-21.772 5.045-31.782l1.988-6.072 6.363.08c.354.004.71.006 1.065.006 22.34 0 42.625-8.761 57.664-23.067L78.09 0ZM19.846 46.033a84.814 84.814 0 0 0-2.492 20.478c0 38.459 25.662 70.919 60.737 81.006 35.075-10.087 60.738-42.547 60.738-81.006 0-7.071-.866-13.93-2.493-20.478-22.009-1.16-42.166-9.387-58.245-22.453-16.079 13.066-36.235 21.293-58.245 22.453Z" fill="#8B5CF6"></path></svg> -->
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">H</span>
+        <span class="truncate">Heroicons</span>
+      </a>
+
+      <a href="https://tailwindui.com/" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">UI</span>
+        <span class="truncate">Tailwind UI</span>
+      </a>
+
+      <a href="https://tailwindcss.com/docs/styling-with-utility-classes" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">T</span>
+        <span class="truncate">Tailwind CSS</span>
+      </a>
+
+      <a href="https://vuejs.org/guide/introduction.html" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">V</span>
+        <span class="truncate">Vue.js</span>
+      </a>
+
+      <a href="https://pinia.vuejs.org/core-concepts/" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">P</span>
+        <span class="truncate">Pinia</span>
+      </a>
+
+      <a href="https://laravel.com/docs/11.x/readme" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">L</span>
+        <span class="truncate">Laravel</span>
+      </a>
+
+      <a href="https://herd.laravel.com/docs/macos/getting-started/installation" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
+        <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">LH</span>
+        <span class="truncate">Laravel Herd</span>
+      </a>
+
     </div>
 
   </div>

@@ -8,6 +8,8 @@ const PostsEdit  = ()  => import(/* webpackChunkName: "js/PostsEdit" */ '@admin/
 const Home  = ()  => import(/* webpackChunkName: "js/HomePage" */ '@home/index.vue');
 const About  = ()  => import(/* webpackChunkName: "js/AboutPage" */ '@misc/about.vue');
 const Terms  = ()  => import(/* webpackChunkName: "js/TermsPage" */ '@misc/terms.vue');
+const Pricing  = ()  => import(/* webpackChunkName: "js/PricingPage" */ '@misc/pricing.vue');
+const Support  = ()  => import(/* webpackChunkName: "js/SupportPage" */ '@misc/support.vue');
 const Posts  = ()  => import(/* webpackChunkName: "js/PostsPage" */ '@posts/index.vue');
 const Login  = ()  => import(/* webpackChunkName: "js/LoginPage" */ '@login/Login.vue');
 const Register  = ()  => import(/* webpackChunkName: "js/RegisterPage" */ '@register/index.vue');
@@ -72,6 +74,16 @@ export default [
         path: '/terms',
         name: 'terms',
         component: Terms,
+      },
+      {
+        path: '/pricing',
+        name: 'pricing',
+        component: Pricing,
+      },
+      {
+        path: '/support',
+        name: 'support',
+        component: Support,
       },
       {
         path: 'posts',
