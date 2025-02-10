@@ -17,6 +17,9 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-select/dist/vue-select.css';
 
+import VueAwesomePaginate from "vue-awesome-paginate";
+import "vue-awesome-paginate/dist/style.css";
+
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 
@@ -48,6 +51,7 @@ app.use(VueTippy, {
     allowHTML: true,
   },
 })
+app.use(VueAwesomePaginate)
 app.use(i18n)
 app.use(abilitiesPlugin, ability)
 app.component('AppButton', AppButton)

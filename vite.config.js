@@ -1,7 +1,7 @@
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import laravel, { refreshPaths } from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
-import path from 'path';
+import path, { resolve, dirname } from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { imagetools } from 'vite-imagetools'
@@ -60,10 +60,10 @@ export default defineConfig({
         retention: 172800
       }
     }),
-    legacy({
-      targets: ['defaults', 'not IE 11'],
-      polyfills: true,
-    }),
+    // legacy({
+    //   targets: ['defaults', 'not IE 11'],
+    //   polyfills: true,
+    // }),
     manifestSRI(),
     createHtmlPlugin({
       minify: true,

@@ -56,5 +56,7 @@
     "disable": "Disable",
     "existing_customer": "Existing customer",
     "browser_sessions": "Browser Sessions",
-    "activity_logs": "Activity Logs"
+    "activity_logs": "Activity Logs",
+    "ip_address": "IP Address",
+    "browser_sessions_note": "If necessary, you may logout of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password."
 }

@@ -61,7 +61,7 @@ export default [
       {
         path: '/',
         name: 'home',
-        component: Login,
+        component: Home,
       },
       {
         path: '/about',
