@@ -27,61 +27,51 @@
 
           <!-- TODO: ADMIN/KIOSK ROUTER LINK HERE -->
 
-          <router-link v-if="authenticated && user" v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            v-if="authenticated && user"
+            routeName="dashboard"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <BuildingLibraryIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
-          <router-link v-slot="{ isActive }" :to="{ name: 'about' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <InformationCircleIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            routeName="about"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <InformationCircleIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
-          <router-link v-slot="{ isActive }" :to="{ name: 'terms' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <DocumentTextIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            routeName="terms"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <DocumentTextIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
-          <router-link v-slot="{ isActive }" :to="{ name: 'pricing' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <BuildingStorefrontIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            routeName="pricing"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <BuildingStorefrontIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
-          <router-link v-slot="{ isActive }" :to="{ name: 'support' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <ChatBubbleLeftEllipsisIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
-
+          <NavLink
+            routeName="support"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <ChatBubbleLeftEllipsisIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
         </PopoverGroup>
 
@@ -321,6 +311,7 @@ import { mapStores, mapState, mapActions } from 'pinia';
 import { useAuthStore } from "@store/auth";
 import useAuth from '@composables/auth'
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
+import NavLink from '@components/includes/NavLink.vue';
 import {
   Popover,
   PopoverButton,
@@ -363,6 +354,7 @@ export default {
     ToggleDarkMode,
     BuildingStorefrontIcon,
     ChatBubbleLeftEllipsisIcon,
+    NavLink,
   },
   mounted() {
     if (this.user && this.user.id) {
