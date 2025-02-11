@@ -62,6 +62,8 @@
         "@fortawesome/free-solid-svg-icons": "^6.7.2",
         "@fortawesome/vue-fontawesome": "^3.0.8",
         "@headlessui/vue": "^1.7.23",
+        "@sentry/tracing": "^7.120.3",
+        "@sentry/vue": "^9.0.0",
         "@tailwindcss/vite": "^4.0.1",
         "axios": "^1.7.9",
         "js-cookie": "^3.0.5",

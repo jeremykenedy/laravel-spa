@@ -142,6 +142,7 @@ export default defineConfig({
       '@store': path.resolve(__dirname, 'resources/js/store'),
       '@services': path.resolve(__dirname, 'resources/js/services'),
       '@router': path.resolve(__dirname, 'resources/js/router'),
+      '@routes': path.resolve(__dirname, 'resources/js/routes'),
       '@components': path.resolve(__dirname, 'resources/js/components'),
       '@composables': path.resolve(__dirname, 'resources/js/composables'),
       vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),

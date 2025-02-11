@@ -8,6 +8,15 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        @if($ga_enabled)
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{$ga_key}}"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '{{ $ga_key }}');
+            </script>
+        @endif
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -29,6 +38,8 @@
             window.config = @json($config);
         </script>
         <script>
+            const GA_ENABLED="{{ $ga_enabled }}"
+            const GA_TAG="{{ $ga_key }}"
             const APP_URL="{{ config('app.url') }}"
             const APP_NAME="{{ config('app.name') }}"
             const SENTRY_ENABLED="{{ config('services.sentry.enabled') }}"
@@ -53,9 +64,12 @@
             const OCTOCAT_USERNAME="{{ config('settings.octocat.username') }}"
             const OCTOCAT_REPO="{{ config('settings.octocat.repo') }}"
         </script>
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css'])
     </head>
-    <body class="font-sans antialiased bg-white dark:bg-slate-800" id="app">
-        <router-view></router-view>
+    <body class="bg-gray-50 h-screen antialiased leading-none font-sans overflow-x-hidden overflow-y-auto">
+        <div id="app" v-cloak>
+            <router-view></router-view>
+        </div>
+        @vite(['resources/js/app.js'])
     </body>
 </html>
