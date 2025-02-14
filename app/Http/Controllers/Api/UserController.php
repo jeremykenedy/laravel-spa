@@ -7,18 +7,42 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
+    }
+
+    /**
+     * Tap the guard we need.
+     *
+     * @param  string  $guard
+     * @return middleware guard
+     */
+    protected function guard($guard = 'web')
+    {
+        return Auth::guard($guard);
+    }
+
     /**
      * Display a listing of the resource.
      *
-     * @return AnonymousResourceCollection
+     * @param  \Illuminate\Http\Request  $request
      */
-    public function index()
+    public function index(Request $request)
     {
         $orderColumn = request('order_column', 'created_at');
         if (!in_array($orderColumn, ['id', 'name', 'created_at'])) {

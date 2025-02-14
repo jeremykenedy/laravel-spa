@@ -3,120 +3,86 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Access\AuthorizationException;
-use App\Http\Requests\StoreRoleRequest;
-use App\Http\Resources\RoleResource;
-use Spatie\Permission\Models\Role;
+use App\Http\Requests\Roles\CreateRoleRequest;
+use App\Http\Requests\Roles\UpdateRoleRequest;
+use App\Http\Requests\Roles\GetUserRolesRequest;
+use App\Http\Resources\Roles\RolesCollection;
+use App\Models\Role;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-     */
-    public function index()
+    public function __construct()
     {
-        $orderColumn = request('order_column', 'created_at');
-        if (!in_array($orderColumn, ['id', 'name', 'created_at'])) {
-            $orderColumn = 'created_at';
-        }
-        $orderDirection = request('order_direction', 'desc');
-        if (!in_array($orderDirection, ['asc', 'desc'])) {
-            $orderDirection = 'desc';
-        }
-        $roles = Role::
-            when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
-            })
-            ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%'.request('search_title').'%');
-            })
-            ->when(request('search_global'), function ($query) {
-                $query->where(function($q) {
-                    $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%'.request('search_global').'%');
+        $this->middleware('auth:sanctum');
+        // $this->middleware('role:superadmin');
 
-                });
-            })
-            ->orderBy($orderColumn, $orderDirection)
-            ->paginate(50);
-
-        return RoleResource::collection($roles);
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return RoleResource
-     */
-    public function store(StoreRoleRequest $request)
+    public function roles(GetUserRolesRequest $request)
     {
-        $this->authorize('role-create');
+        return new RolesCollection(Role::all());
+    }
 
-        $role = new Role();
-        $role->name = $request->name;
-        $role->guard_name = 'web';
+    public function rolesComplete(GetUserRolesRequest $request)
+    {
+        $per = 10;
 
-        if ($role->save()) {
-            return new RoleResource($role);
+        if ($request->has('per')) {
+            $per = $request->input('per');
         }
 
-        return response()->json(['status' => 405, 'success' => false]);
-
+        return response()->json(Role::with([
+            'users:name,id,email',
+            'permissions:id,name',
+        ])->paginate($per));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return RoleResource
-     */
-    public function show(Role $role)
+    public function createRole(CreateRoleRequest $request)
     {
-        $this->authorize('role-edit');
+        $validated = $request->validated();
 
-        return new RoleResource($role);
-    }
+        $role = Role::create([
+            'name'          => $validated['name'],
+            'slug'          => $validated['slug'],
+            'description'   => $validated['description'],
+            'level'         => $validated['level'],
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Role $role
-     * @param StoreRoleRequest $request
-     * @return RoleResource
-     * @throws AuthorizationException
-     */
-    public function update(Role $role, StoreRoleRequest $request)
-    {
-        $this->authorize('role-edit');
+        if ($role) {
+            $role->syncPermissions($validated['permissions']);
 
-        $role->name = $request->name;
-
-        if ($role->save()) {
-            return new RoleResource($role);
+            return response()->json([
+                'role'  => $role,
+            ]);
         }
-
-        return response()->json(['status' => 405, 'success' => false]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Role $role)
+    public function updateRole(UpdateRoleRequest $request, Role $role)
     {
-        $this->authorize('role-delete');
+        $request->validate([
+            'slug' => 'required|string|unique:roles,slug,'.$role->id,
+        ]);
+
+        $validated = $request->validated();
+        $role->update($request->only('name', 'slug', 'description', 'level'));
+        $role->syncPermissions($validated['permissions']);
+
+        return response()->json([
+            'role'  => $role,
+        ]);
+    }
+
+    public function deleteRole(Request $request, Role $role)
+    {
         $role->delete();
 
-        return response()->noContent();
-    }
-
-    public function getList()
-    {
-        return RoleResource::collection(Role::all());
+        return response()->json($role);
     }
 }

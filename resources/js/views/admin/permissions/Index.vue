@@ -1,185 +1,498 @@
 <template>
-    <div class="row justify-content-center my-2">
-        <div class="col-md-12">
-            <div class="card border-0">
-                <div class="card-header bg-transparent">
-                    <h5 class="float-start">Permissions</h5>
-                    <router-link v-if="can('permission-create')" :to="{ name: 'permissions.create' }" class="btn btn-primary btn-sm float-end">
-                        Create Permission
-                    </router-link>
-                </div>
-                <div class="card-body shadow-sm">
-                    <div class="mb-4">
-                        <input v-model="search_global" type="text" placeholder="Search..."
-                               class="form-control w-25">
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <input v-model="search_id" type="text"
-                                           class="inline-block mt-1 form-control"
-                                           placeholder="Filter by ID">
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <input v-model="search_title" type="text"
-                                           class="inline-block mt-1 form-control"
-                                           placeholder="Filter by Title">
-                                </th>
-                                <th class="px-6 py-3 text-start"></th>
-                                <th class="px-6 py-3 text-start"></th>
-                            </tr>
-                            <tr>
-                                <th class="px-6 py-3 text-start">
-                                    <div class="flex flex-row"
-                                         @click="updateOrdering('id')">
-                                        <div class="font-medium text-uppercase"
-                                             :class="{ 'font-bold text-blue-600': orderColumn === 'id' }">
-                                            ID
-                                        </div>
-                                        <div class="select-none">
-                                <span :class="{
-                                  'text-blue-600': orderDirection === 'asc' && orderColumn === 'id',
-                                  'hidden': orderDirection !== '' && orderDirection !== 'asc' && orderColumn === 'id',
-                                }">&uarr;</span>
-                                            <span :class="{
-                                  'text-blue-600': orderDirection === 'desc' && orderColumn === 'id',
-                                  'hidden': orderDirection !== '' && orderDirection !== 'desc' && orderColumn === 'id',
-                                }">&darr;</span>
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="px-6 py-3 text-left">
-                                    <div class="flex flex-row"
-                                         @click="updateOrdering('name')">
-                                        <div class="font-medium text-uppercase"
-                                             :class="{ 'font-bold text-blue-600': orderColumn === 'name' }">
-                                            Title
-                                        </div>
-                                        <div class="select-none">
-                                <span :class="{
-                                  'text-blue-600': orderDirection === 'asc' && orderColumn === 'name',
-                                  'hidden': orderDirection !== '' && orderDirection !== 'asc' && orderColumn === 'name',
-                                }">&uarr;</span>
-                                            <span :class="{
-                                  'text-blue-600': orderDirection === 'desc' && orderColumn === 'name',
-                                  'hidden': orderDirection !== '' && orderDirection !== 'desc' && orderColumn === 'name',
-                                }">&darr;</span>
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    <div class="flex flex-row items-center justify-between cursor-pointer"
-                                         @click="updateOrdering('created_at')">
-                                        <div class="leading-4 font-medium text-gray-500 uppercase tracking-wider"
-                                             :class="{ 'font-bold text-blue-600': orderColumn === 'created_at' }">
-                                            Created at
-                                        </div>
-                                        <div class="select-none">
-                                <span :class="{
-                                  'text-blue-600': orderDirection === 'asc' && orderColumn === 'created_at',
-                                  'hidden': orderDirection !== '' && orderDirection !== 'asc' && orderColumn === 'created_at',
-                                }">&uarr;</span>
-                                            <span :class="{
-                                  'text-blue-600': orderDirection === 'desc' && orderColumn === 'created_at',
-                                  'hidden': orderDirection !== '' && orderDirection !== 'desc' && orderColumn === 'created_at',
-                                }">&darr;</span>
-                                        </div>
-                                    </div>
-                                </th>
-                                <th class="px-6 py-3 bg-gray-50 text-left">
-                                    Actions
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr v-for="post in permissions.data" :key="post.id">
-                                <td class="px-6 py-4 text-sm">
-                                    {{ post.id }}
-                                </td>
-                                <td class="px-6 py-4 text-sm">
-                                    {{ post.name }}
-                                </td>
-                                <td class="px-6 py-4 text-sm">
-                                    {{ post.created_at }}
-                                </td>
-                                <td class="px-6 py-4 text-sm">
-                                    <router-link v-if="can('permission-edit')"
-                                                 :to="{ name: 'permissions.edit', params: { id: post.id } }" class="badge bg-primary">Edit
-                                    </router-link>
-                                    <a href="#" v-if="can('permission-delete')" @click.prevent="deletePermission(post.id)"
-                                       class="ms-2 badge bg-danger">Delete</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <Pagination :data="permissions" :limit="3"
-                                @pagination-change-page="page => getPermissions(page, search_id, search_title, search_global, orderColumn, orderDirection)"
-                                class="mt-4"/>
-                </div>
-            </div>
-        </div>
+  <div
+    id="permissions"
+    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
+  >
+    <nav class="mb-6 text-sm font-semibold float-left ml-2 mt-2" aria-label="Breadcrumb">
+      <ol class="inline-flex list-none p-0">
+        <li class="flex items-center">
+          <router-link
+            v-if="authenticated && (userIs('admin') || userIs('superadmin'))"
+            v-slot="{ isActive }"
+            :to="{ name: 'dashboard' }"
+            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
+          >
+            Dashboard
+          </router-link>
+        </li>
+        <li class="flex items-center">
+          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
+        </li>
+        <li class="flex items-center">
+          <router-link
+            v-if="authenticated && (userIs('admin') || userIs('superadmin'))"
+            v-slot="{ isActive }"
+            :to="{ name: 'permissions.index' }"
+            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
+          >
+            <span
+              :class="[
+                isActive &&
+                  'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+              ]"
+            >
+              Permissions
+            </span>
+          </router-link>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="flex justify-end">
+      <AppButton
+        v-tippy="'Create Permission'"
+        secondary
+        :disabled="showCreatePermissionForm || !dataReady"
+        class="mb-2 px-2 py-2 text-sm font-medium"
+        @click="triggerCreatePermission"
+      >
+        <template #text>
+          <span v-if="dataReady" class="fas fa-plus fa-fw ml-2 mr-2" />
+          <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+          <span class="sr-only">Create New Permission</span>
+        </template>
+      </AppButton>
     </div>
+
+    <easy-data-table
+      v-if="dataReady"
+      :headers="tableHeaders"
+      :items="permissionsData"
+      ref="permissionsTable"
+      :key="permissionsTableKey"
+      :loading="!dataReady"
+      no-hover
+      body-item-class-name="text-xs"
+    >
+      <template #item-name="item">
+        <input
+          v-model="item.name"
+          v-tippy="'Edit Permission Name'"
+          type="text"
+          class="rounded border-0 bg-transparent text-sm"
+          :class="locked(item) ? 'disabled' : ''"
+          :readonly="locked(item)"
+          @blur="update('name', item)"
+        />
+      </template>
+      <template #item-slug="item">
+        <input
+          v-model="item.slug"
+          v-tippy="'Edit Permission Slug'"
+          type="text"
+          class="rounded border-0 bg-transparent text-sm"
+          :class="locked(item) ? 'disabled' : ''"
+          :readonly="locked(item)"
+          @blur="update('slug', item)"
+        />
+      </template>
+      <template #item-description="item">
+        <input
+          v-model="item.description"
+          v-tippy="'Edit Permission Description'"
+          type="text"
+          class="rounded border-0 bg-transparent text-sm"
+          :class="locked(item) ? 'disabled' : ''"
+          :readonly="locked(item)"
+          @blur="update('description', item)"
+        />
+      </template>
+      <template #item-created_at="item">
+        <span class="text-xs">
+          {{ item.created_at ? parseDisplayDate(item.created_at) : null }}
+        </span>
+      </template>
+      <template #item-updated_at="item">
+        <span class="text-xs">
+          {{ item.updated_at ? parseDisplayDate(item.updated_at) : null }}
+        </span>
+      </template>
+      <template #item-actions="item">
+        <div class="text-nowrap">
+          <AppButton
+            :loading="!dataReady"
+            class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
+            :btn-class="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            "
+            :btn-hover-class="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            "
+            :btn-class-dark="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            "
+            :btn-hover-class-dark="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            "
+            @click="toggleLock(item, false)"
+          >
+            <template #text>
+              <LockClosedIcon
+                v-if="locked(item) && dataReady"
+                class="ml-2 mr-2 mt-0 h-4 w-4"
+              />
+              <LockOpenIcon
+                v-if="!locked(item) && dataReady"
+                class="ml-2 mr-2 mt-0 h-4 w-4"
+              />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+              <span class="sr-only"
+                >{{ locked(item) ? 'Unlock' : 'Lock' }} User Settings</span
+              >
+            </template>
+          </AppButton>
+
+          <AppButton
+            v-tippy="'Edit Permission'"
+            warning
+            :disabled="locked(item)"
+            :loading="!dataReady"
+            class="mr-2 px-1 py-1 text-sm"
+            @click="triggerEditPermission(item)"
+          >
+            <template #text>
+              <PencilSquareIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+              <span class="sr-only">Edit Permission</span>
+            </template>
+          </AppButton>
+
+          <AppButton
+            v-tippy="'Delete Permission'"
+            danger
+            :disabled="locked(item)"
+            :loading="!dataReady"
+            class="mr-2 px-1 py-1 text-sm"
+            @click="triggerDeletePermission(item)"
+          >
+            <template #text>
+              <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+              <span class="sr-only">Delete Permission</span>
+            </template>
+          </AppButton>
+        </div>
+      </template>
+    </easy-data-table>
+
+    <PermissionFormModal
+      :key="permissionFormKey"
+      :showing-form="showCreatePermissionForm"
+      :permission="permissionEditing"
+      :new-permission="creatingNewPermission"
+      :available-roles="availableRoles"
+      @close-modal="closePermissionForm"
+      @permission-created="permissionCreated"
+      @permission-updated="permissionUpdated"
+    />
+
+  </div>
 </template>
 
-<script setup>
-    import {ref, onMounted, watch} from "vue";
-    import usePermissions from "@/composables/permissions";
-    import {useAbility} from '@casl/vue';
+<script>
+import { mapStores, mapState, mapActions } from 'pinia';
+import { useAuthStore } from "@store/auth";
+import usePermissions from "@composables/permissions";
+import moment from 'moment';
+import axios from 'axios';
+import CircleSvg from '@components/common/CircleSvg.vue';
+import { useToastStore } from "@store/toast";
+import PermissionFormModal from '@components/roles/PermissionFormModal.vue';
 
-    const search_id = ref('')
-    const search_title = ref('')
-    const search_global = ref('')
-    const orderColumn = ref('created_at')
-    const orderDirection = ref('desc')
-    const {permissions, getPermissions, deletePermission} = usePermissions()
-    const {can} = useAbility()
-    onMounted(() => {
-        getPermissions()
-    })
-    const updateOrdering = (column) => {
-        orderColumn.value = column;
-        orderDirection.value = (orderDirection.value === 'asc') ? 'desc' : 'asc';
-        getPermissions(
-            1,
-            search_id.value,
-            search_title.value,
-            search_global.value,
-            orderColumn.value,
-            orderDirection.value
-        );
-    }
-    watch(search_id, (current, previous) => {
-        getPermissions(
-            1,
-            current,
-            search_title.value,
-            search_global.value
-        )
-    })
-    watch(search_title, (current, previous) => {
-        getPermissions(
-            1,
-            search_id.value,
-            current,
-            search_global.value
-        )
-    })
-    watch(search_global, _.debounce((current, previous) => {
-        getPermissions(
-            1,
-            search_id.value,
-            search_title.value,
-            current
-        )
-    }, 200))
+import {
+  ChevronRightIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from '@heroicons/vue/24/outline';
 
+export default {
+  name: 'Permissions',
+  components: {
+    ChevronRightIcon,
+    LockClosedIcon,
+    LockOpenIcon,
+    PencilSquareIcon,
+    TrashIcon,
+    CircleSvg,
+    PermissionFormModal,
+    EasyDataTable: window['vue3-easy-data-table'],
+  },
+  computed: {
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
+    currentRouteName() {
+      return this.$route.name;
+    },
+    appName() {
+      return APP_NAME;
+    },
+  },
+  mounted() {
+    this.getPermissions();
+    this.getRoles();
+  },
+  data() {
+    return {
+      dataReady: false,
+      permissionsData: null,
+      pagination: {},
+      perPage: 25,
+      showCreatePermissionForm: false,
+      permissionEditing: null,
+      creatingNewPermission: false,
+      permissionFormKey: 432489,
+      tableHeaders: [
+        { text: "ID", value: "id", sortable: true },
+        { text: "NAME", value: "name", sortable: true, width: 150},
+        { text: "SLUG", value: "slug", sortable: true, width: 100},
+        { text: "DESCRIPTION", value: "description", width: 150},
+        { text: "ROLES", value: "roles.length", sortable: true},
+        { text: "USERS", value: "users.length", sortable: true},
+        { text: "CREATED AT", value: "created_at", sortable: true, width: 140},
+        { text: "UPDATED AT", value: "updated_at", sortable: true, width: 140},
+        { text: "ACTIONS", value: "actions"},
+      ],
+      rowsUnlocked: [],
+      availableRoles: [],
+      rolesDataReady: false,
+      permissionsTableKey: 432876,
+    };
+  },
+  methods: {
+    ...mapActions(useAuthStore, [
+      'userIs',
+      'userCan',
+    ]),
+    ...mapActions(useToastStore, [
+      'popToast',
+    ]),
+    perPageChanged(value) {
+      this.perPage = parseInt(value);
+      this.pagination.current_page = 1;
+      this.getPermissions();
+    },
+    async getRoles() {
+      this.rolesDataReady = false;
+      await axios
+        .get('/api/roles')
+        .then(({ data }) => {
+          this.availableRoles = data.roles;
+          this.rolesDataReady = true;
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: 'Error Getting Roles',
+            timer: 5000,
+            icon: 'error',
+          });
+          this.rolesDataReady = true;
+        });
+    },
+    async getPermissions(updatedPage = null) {
+      if (updatedPage) {
+        this.pagination.current_page = updatedPage;
+      }
+      await axios
+        .get(
+          `/api/permissions-paginated?page=${this.pagination.current_page}&per=${this.perPage}`,
+        )
+        .then(({ data }) => {
+          this.permissionsData = data.data;
+          delete data.data;
+          this.pagination = data;
+          this.dataReady = true;
+          this.permissionsTableKey += 1;
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: 'Error Getting Permissions',
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+      this.dataReady = true;
+    },
+    triggerDeletePermission(row) {
+      const self = this;
+      const title = '<strong>Delete Permission?</strong>';
+      const html = 'Are you sure you want to <strong>Delete';
+      `${row.name}</strong>?<h6>This will delete the Permission.</h6>`;
+      const icon = 'warning';
+      const confirmButtonColor = '#FF0000';
+      const denyButtonColor = '#777777';
+      const confirmButtonText = 'Delete';
+      const denyButtonText = 'Cancel';
+      self.$swal
+        .fire({
+          title,
+          icon,
+          html,
+          showCancelButton: false,
+          showDenyButton: true,
+          confirmButtonColor,
+          denyButtonColor,
+          confirmButtonText,
+          denyButtonText,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.deletePermission(row);
+          } else if (result.isDenied) {
+            self.popToast({
+              message: 'Cancelled',
+              timer: 2000,
+              icon: 'error',
+            });
+          }
+        });
+    },
+    async deletePermission(value) {
+      await axios
+        .delete(`/api/permissions/delete/permission/${value.id}`)
+        .then(({ data }) => {
+          this.permissionsData = this.permissionsData.filter(
+            (u) => u.id != data.id,
+          );
+          this.rowsUnlocked = this.rowsUnlocked.filter((i) => i != value.id);
+          this.pagination.total = this.pagination.total - 1;
+          this.getPermissions(
+            this.pagination.current_page ? this.pagination.current_page : null,
+          );
+          this.rowsUnlocked = [];
+          this.popToast({
+            message: 'Successfully Deleted Permission!',
+            timer: 5000,
+            icon: 'success',
+          });
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: 'Error Deleting Permission',
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+    },
+    closePermissionForm() {
+      this.permissionEditing = null;
+      this.creatingNewPermission = false;
+      this.showCreatePermissionForm = false;
+    },
+    triggerEditPermission(permission) {
+      this.permissionFormKey += 1;
+      this.permissionEditing = permission;
+      this.creatingNewPermission = false;
+      this.showCreatePermissionForm = true;
+    },
+    permissionUpdated(data) {
+      this.permissionsData = this.permissionsData.map((u) =>
+        u.id !== data.id ? u : data,
+      );
+      this.rowsUnlocked = [];
+      this.getPermissions(); // Realign just in case.
+      this.closePermissionForm();
+    },
+    permissionCreated(data) {
+      this.permissionsData.push(data);
+      this.rowsUnlocked = [];
+      this.getPermissions(); // Realign just in case.
+      this.closePermissionForm();
+    },
+    triggerCreatePermission() {
+      this.permissionFormKey += 1;
+      this.creatingNewPermission = true;
+      this.showCreatePermissionForm = true;
+      this.permissionEditing = null;
+    },
+    parseDisplayDate(date) {
+      return moment(date).format('MMM Do YYYY, h:mma');
+    },
+    inputValid(key, row) {
+      if (row[key] == '' || row[key] == null || row[key].length == 0) {
+        return false;
+      }
+      if (row[key].length > 0) {
+        return true;
+      }
+      return false;
+    },
+    async update(key, row) {
+      const self = this;
+      if (!this.inputValid(key, row)) {
+        this.submitting = false;
+        this.popToast({
+          message: 'Error Validating Permission',
+          timer: 5000,
+          icon: 'error',
+        });
+        return;
+      }
+      await axios
+        .patch(`/api/permissions/update-permission/${row.id}`, row)
+        .then(({ data }) => {
+          self.permissionUpdated(data.permission);
+          self.popToast({
+            message: `Permission ${data.permission.name} Successfully Updated!`,
+            timer: 5000,
+            icon: 'success',
+          });
+          self.submitting = false;
+        })
+        .catch(({ response }) => {
+          if (response.status === 422) {
+            const { errors } = response.data;
+            self.errors = errors;
+            self.popToast({
+              message: Object.values(errors).flat().toString(),
+              timer: 5000,
+              icon: 'error',
+            });
+          } else {
+            self.popToast({
+              message: 'Error Updating Permission',
+              timer: 5000,
+              icon: 'error',
+            });
+          }
+          self.submitting = false;
+        });
+      self.submitting = false;
+    },
+    toggleLock(row, reset = false) {
+      const found = this.rowsUnlocked.find((i) => i == row.id);
+      if (reset) {
+        this.rowsUnlocked = [];
+        this.rowsUnlocked.push(row.id);
+      } else if (found) {
+        this.rowsUnlocked = this.rowsUnlocked.filter((i) => i != row.id);
+      } else {
+        this.rowsUnlocked.push(row.id);
+      }
+    },
+    locked(row) {
+      const found = this.rowsUnlocked.find((obj) => obj == row.id);
+      if (found) {
+        return false;
+      }
+      return true;
+    },
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
+<style lang="scss" scoped></style>

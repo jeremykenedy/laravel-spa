@@ -43,7 +43,6 @@
         "stylelint-webpack-plugin": "^5.0.1",
         "tailwindcss": "^3.4.17",
         "tw-elements": "^2.0.0",
-        "v-tables-3": "^0.4.7",
         "vite": "^6.0.11",
         "vite-imagetools": "^7.0.5",
         "vue-gtag-next": "^1.14.0",
@@ -65,6 +64,7 @@
         "@sentry/tracing": "^7.120.3",
         "@sentry/vue": "^9.0.0",
         "@tailwindcss/vite": "^4.0.1",
+        "@vueform/multiselect": "^2.6.11",
         "axios": "^1.7.9",
         "js-cookie": "^3.0.5",
         "laravel-vue-pagination": "^4.1.1",
@@ -93,6 +93,7 @@
         "vue-router": "^4.5.0",
         "vue-select": "^4.0.0-beta.5",
         "vue-sweetalert2": "^5.0.11",
+        "vue3-easy-data-table": "^1.5.47",
         "vue3-konami-code": "^1.0.0"
     }
 }

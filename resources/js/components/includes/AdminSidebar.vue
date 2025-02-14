@@ -123,6 +123,7 @@
         </template>
       </AdminSidebarLink>
 
+      <!--
       <AdminSidebarLink
         v-if="authenticated && user"
         url="https://tailwindui.com"
@@ -188,6 +189,18 @@
           <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">LH</span>
         </template>
       </AdminSidebarLink>
+
+      <AdminSidebarLink
+        v-if="authenticated && user"
+        url="https://hc200ok.github.io/vue3-easy-data-table-doc/getting-started.html"
+        text="Vue3 Table"
+        @nav-clicked="toggleSidebar"
+      >
+        <template #icon>
+          <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">VT</span>
+        </template>
+      </AdminSidebarLink>
+      -->
     </div>
 
   </div>
@@ -251,12 +264,10 @@ export default {
     ...mapActions(useAuth, [
       'logout',
     ]),
-
     ...mapActions(useAuthStore, [
       'userIs',
       'userCan',
     ]),
-
     ...mapActions(useSideBarStore, [
       'toggleSidebar',
       'toggleFullScreenSidebar',

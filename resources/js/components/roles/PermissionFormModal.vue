@@ -140,12 +140,13 @@
 <script lang="ts">
 import AppModal from '@components/common/AppModal.vue';
 import axios from 'axios';
-import { mapActions } from 'vuex';
+import { mapActions } from 'pinia';
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import clonedeep from 'lodash.clonedeep';
 import moment from 'moment';
 import Multiselect from '@vueform/multiselect';
-import Errors from '@components/Errors.vue';
+import Errors from '@components/common/Errors.vue';
+import { useToastStore } from "@store/toast";
 
 export default {
     name: 'PermissionFormModal',
@@ -213,9 +214,9 @@ export default {
     beforeUnmount() { },
     updated() { },
     methods: {
-        ...mapActions({
-            popToast: 'toast/popToast',
-        }),
+        ...mapActions(useToastStore, [
+          'popToast',
+        ]),
         parseDisplayDate(date) {
             if (date && date != true) {
                 return moment(date).format('MMM Do YYYY, h:mma');

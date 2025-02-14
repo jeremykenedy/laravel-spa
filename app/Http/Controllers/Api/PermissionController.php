@@ -3,136 +3,112 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePermissionRequest;
-use App\Http\Resources\PermissionResource;
+use App\Http\Requests\Permissions\CreatePermissionRequest;
+use App\Http\Requests\Permissions\GetPermissionsRequest;
+use App\Http\Requests\Permissions\UpdatePermissionRequest;
+use App\Http\Resources\Permissions\PermissionsCollection;
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\JsonResponse;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class PermissionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-     */
-    public function index()
+    public function __construct()
     {
-        $orderColumn = request('order_column', 'created_at');
-        if (!in_array($orderColumn, ['id', 'name', 'created_at'])) {
-            $orderColumn = 'created_at';
-        }
-        $orderDirection = request('order_direction', 'desc');
-        if (!in_array($orderDirection, ['asc', 'desc'])) {
-            $orderDirection = 'desc';
-        }
-        $permissions = Permission::
-        when(request('search_id'), function ($query) {
-            $query->where('id', request('search_id'));
-        })
-            ->when(request('search_title'), function ($query) {
-                $query->where('name', 'like', '%' . request('search_title') . '%');
-            })
-            ->when(request('search_global'), function ($query) {
-                $query->where(function ($q) {
-                    $q->where('id', request('search_global'))
-                        ->orWhere('name', 'like', '%' . request('search_global') . '%');
+        $this->middleware('auth:sanctum');
+        // $this->middleware('role:superadmin');
 
-                });
-            })
-            ->orderBy($orderColumn, $orderDirection)
-            ->paginate(50);
-
-        return PermissionResource::collection($permissions);
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param StorePermissionRequest $request
-     * @return PermissionResource
-     * @throws AuthorizationException
-     */
-    public function store(StorePermissionRequest $request)
+    public function permissions(GetPermissionsRequest $request)
     {
-        $this->authorize('permission-create');
+        return new PermissionsCollection(config('roles.models.permission')::all());
+    }
 
-        $permission = new Permission();
-        $permission->name = $request->name;
-        $permission->guard_name = 'web';
+    public function permissionsPaginated(GetPermissionsRequest $request)
+    {
+        $per = 10;
 
-        if ($permission->save()) {
-            return new PermissionResource($permission);
+        if ($request->has('per')) {
+            $per = $request->input('per');
         }
 
-        return response()->json(['status' => 405, 'success' => false]);
-
+        return response()->json(Permission::with([
+            'users:name,id,email',
+            'roles:id,name',
+        ])->paginate($per));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return PermissionResource
-     */
-    public function show(Permission $permission)
+    public function createPermission(CreatePermissionRequest $request)
     {
-        $this->authorize('permission-edit');
+        $validated = $request->validated();
 
-        return new PermissionResource($permission);
-    }
+        $permission = Permission::create([
+            'name'          => $validated['name'],
+            'slug'          => $validated['slug'],
+            'description'   => $validated['description'],
+            'model'         => $validated['model'],
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param Permission $permission
-     * @param StorePermissionRequest $request
-     * @return JsonResponse|PermissionResource
-     * @throws AuthorizationException
-     */
-    public function update(Permission $permission, StorePermissionRequest $request)
-    {
-        $this->authorize('permission-edit');
-
-        $permission->name = $request->name;
-
-        if ($permission->save()) {
-            return new PermissionResource($permission);
+        if ($permission) {
+            $permission->roles()->sync($validated['roles']);
         }
 
-        return response()->json(['status' => 405, 'success' => false]);
+        $permission->load([
+            'users:name,id,email',
+            'roles:id,name',
+        ]);
+
+        return response()->json([
+            'permission'  => $permission,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Permission $permission)
+    public function updatePermission(UpdatePermissionRequest $request, Permission $permission)
     {
-        $this->authorize('permission-delete');
+        $request->validate([
+            'slug' => 'required|string|unique:permissions,slug,'.$permission->id,
+        ]);
+
+        $validated = $request->validated();
+        $permission->update($request->only('name', 'slug', 'description', 'model'));
+
+        if ($permission) {
+            $roles = $validated['roles'];
+            $rolesSync = collect([]);
+            if (count($roles) > 0) {
+                if (is_array($roles[0])) {
+                    foreach ($roles as $key => $role) {
+                        $rolesSync->push($role['id']);
+                    }
+                } else {
+                    $rolesSync = $roles;
+                }
+            }
+            $permission->roles()->sync($rolesSync);
+        }
+
+        $permission->load([
+            'users:name,id,email',
+            'roles:id,name',
+        ]);
+
+        return response()->json([
+            'permission'  => $permission,
+        ]);
+    }
+
+    public function deletePermission(Request $request, Permission $permission)
+    {
         $permission->delete();
 
-        return response()->noContent();
-    }
-
-    public function getRolePermissions($id)
-    {
-        $permissions = Role::findById($id, 'web')->permissions;
-        return PermissionResource::collection($permissions);
-    }
-
-    public function updateRolePermissions(Request $request)
-    {
-        $this->authorize('role-edit');
-
-        $permissions = json_decode($request->permissions, true);
-        $permissions_where = Permission::whereIn('id', $permissions)->get();
-        $role = Role::findById($request->role_id, 'web');
-        $role->syncPermissions($permissions_where);
-        return PermissionResource::collection($permissions_where);
+        return response()->json($permission);
     }
 }

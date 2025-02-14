@@ -16,15 +16,36 @@ use Illuminate\Support\Facades\Route;
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
 
-Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::apiResource('users', UserController::class);
+Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
+
+    // Route::group(['middleware' => ['role:admin']], function() {
+        Route::apiResource('users', UserController::class);
+    // });
+
+
+
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);
-    Route::apiResource('roles', RoleController::class);
-    Route::get('role-list', [RoleController::class, 'getList']);
-    Route::get('role-permissions/{id}', [PermissionController::class, 'getRolePermissions']);
-    Route::put('/role-permissions', [PermissionController::class, 'updateRolePermissions']);
-    Route::apiResource('permissions', PermissionController::class);
+
+
+    // Route::apiResource('roles', RoleController::class);
+    // Route::get('role-list', [RoleController::class, 'getList']);
+    // Route::get('role-permissions/{id}', [PermissionController::class, 'getRolePermissions']);
+    // Route::put('/role-permissions', [PermissionController::class, 'updateRolePermissions']);
+    // Route::apiResource('permissions', PermissionController::class);
+
+    Route::get('/roles', [RoleController::class, 'roles']);
+    Route::delete('/roles/delete/role/{role}', [RoleController::class, 'deleteRole']);
+    Route::patch('/roles/update-role/{role}', [RoleController::class, 'updateRole']);
+    Route::get('/roles-complete', [RoleController::class, 'rolesComplete']);
+    Route::post('/roles/create-role', [RoleController::class, 'createRole']);
+
+    Route::get('/permissions', [PermissionController::class, 'permissions']);
+    Route::get('/permissions-paginated', [PermissionController::class, 'permissionsPaginated']);
+    Route::delete('/permissions/delete/permission/{permission}', [PermissionController::class, 'deletePermission']);
+    Route::patch('/permissions/update-permission/{permission}', [PermissionController::class, 'updatePermission']);
+    Route::post('/permissions/create-permission', [PermissionController::class, 'createPermission']);
+
     Route::get('category-list', [CategoryController::class, 'getList']);
     Route::get('/user', [ProfileController::class, 'user']);
     Route::put('/user', [ProfileController::class, 'update']);

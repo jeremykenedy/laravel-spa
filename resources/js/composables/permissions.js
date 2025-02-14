@@ -31,12 +31,14 @@ export default function usePermissions() {
                 permissions.value = response.data;
             })
     }
+
     const getAllPermissions = async () => {
         axios.get('/api/permissions/')
             .then(response => {
                 allPermission.value = response.data.data;
             })
     }
+
     const getPermission = async (id) => {
         axios.get('/api/permissions/' + id)
             .then(response => {

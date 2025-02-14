@@ -66,7 +66,7 @@
         </script>
         @vite(['resources/css/app.css'])
     </head>
-    <body class="bg-gray-50 h-screen antialiased leading-none font-sans overflow-x-hidden overflow-y-auto">
+    <body class="bg-gray-50 dark:bg-gray-800 h-screen antialiased leading-none font-sans overflow-x-hidden overflow-y-auto">
         <div id="app" v-cloak>
             <router-view></router-view>
         </div>

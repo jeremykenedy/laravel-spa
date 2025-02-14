@@ -124,7 +124,6 @@
         "spatie/laravel-activitylog": "^4.9",
         "spatie/laravel-html": "^3.11",
         "spatie/laravel-medialibrary": "^11.9.2",
-        "spatie/laravel-permission": "^6.9",
         "spatie/laravel-personal-data-export": "^4.3",
         "spatie/laravel-sitemap": "^7.3"
     },

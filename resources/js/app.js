@@ -15,8 +15,6 @@ import vSelect from "vue-select";
 import useAuth from './composables/auth';
 import i18n from "./plugins/i18n";
 import VueAwesomePaginate from "vue-awesome-paginate";
-
-import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
 import VueSecureHTML from 'vue-html-secure';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
@@ -24,11 +22,16 @@ import VueGtag from 'vue-gtag-next';
 import KonamiCode from "vue3-konami-code"
 import toasty from 'toasty';
 import { asteroidsjs } from '@services/asteroids';
+import Vue3EasyDataTable from 'vue3-easy-data-table';
+import swal from 'sweetalert2';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import 'vue-select/dist/vue-select.css';
 import "vue-awesome-paginate/dist/style.css";
+import 'vue3-easy-data-table/dist/style.css';
+
+window.Swal = swal;
 
 const APP_GA_TAG = GA_TAG; // eslint-disable-line
 const APP_GA_ENABLED = GA_ENABLED; // eslint-disable-line
@@ -76,7 +79,6 @@ app.use(VueTippy, {
   },
 })
 app.use(VueSecureHTML)
-app.use(ClientTable, {}, 'tailwind')
 app.use(VueAwesomePaginate)
 app.use(i18n)
 app.use(abilitiesPlugin, ability)
@@ -90,6 +92,7 @@ app.use(KonamiCode, {
     }
   }
 });
+app.component('EasyDataTable', Vue3EasyDataTable)
 app.component('AppButton', AppButton)
 app.component('Pagination', Bootstrap5Pagination)
 app.component("v-select", vSelect)
