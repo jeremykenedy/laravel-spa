@@ -28,6 +28,7 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
      */
     protected $appends = [
         'roles',
+        'permissions',
         'avatar',
         'providers',
     ];
@@ -104,6 +105,11 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     public function getRolesAttribute()
     {
         return $this->getRoles();
+    }
+
+    public function getPermissionsAttribute()
+    {
+        return $this->getPermissions();
     }
 
     public function getAvatarAttribute()

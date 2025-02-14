@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { track } from '@services/analytics';
 
 export default {

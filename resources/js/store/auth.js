@@ -68,6 +68,30 @@ export const useAuthStore = defineStore('auth', () => {
     authenticated.value = false
   })
 
+  function userIs(role) {
+    if (!this.user || !this.user.id || !this.user.roles || this.user.roles.length <= 0) {
+      return false;
+    }
+    for (var i = 0; i < this.user.roles.length; i++) {
+        if ((this.user.roles[i].slug.toLowerCase() == role.toLowerCase()) || (this.user.roles[i].name.toLowerCase() == role.toLowerCase())) {
+          return true;
+        }
+    }
+    return false;
+  }
+
+  function userCan(permission) {
+    if (!this.user || !this.user.id || !this.user.permissions || this.user.permissions.length <= 0) {
+      return false;
+    }
+    for (var i = 0; i < this.user.permissions.length; i++) {
+        if ((this.user.permissions[i].slug.toLowerCase() == permission.toLowerCase()) || (this.user.permissions[i].name.toLowerCase() == permission.toLowerCase())) {
+          return true;
+        }
+    }
+    return false;
+  }
+
   return {
     authenticated,
     user,
@@ -75,7 +99,9 @@ export const useAuthStore = defineStore('auth', () => {
     getUser,
     logout,
     currentUserToken,
-    impersonatorToken
+    impersonatorToken,
+    userIs,
+    userCan,
   }
 }, {
   persist: true
