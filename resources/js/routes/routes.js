@@ -1,4 +1,5 @@
-import {useAuthStore} from "@/store/auth";
+import { guest, requireLogin, superAdmin, admin } from "@routes/middleware";
+
 const AuthenticatedLayout = () => import(/* webpackChunkName: "js/AuthenticatedLayout" */ '@layouts/Authenticated.vue')
 const GuestLayout = ()  => import(/* webpackChunkName: "js/GuestLayout" */ '@layouts/Guest.vue');
 const PostsIndex  = ()  => import(/* webpackChunkName: "js/PostsIndex" */ '@admin/posts/Index.vue');
@@ -28,28 +29,6 @@ const EditUser  = ()  => import(/* webpackChunkName: "js/EditUserPage" */ '@admi
 const BrowserSessions  = ()  => import(/* webpackChunkName: "js/BrowserSessionsPage" */ '@admin/browser-sessions/Index.vue');
 const ActivityLogs  = ()  => import(/* webpackChunkName: "js/ActivityLogsPage" */ '@admin/activity-log/Index.vue');
 const NotFound  = ()  => import(/* webpackChunkName: "js/NotFoundPage" */ '@errors/404.vue');
-
-function requireLogin(to, from, next) {
-  const auth = useAuthStore()
-  let isLogin = false;
-  isLogin = !!auth.authenticated;
-  if (isLogin) {
-    next()
-  } else {
-    next('/login')
-  }
-}
-
-function guest(to, from, next) {
-  const auth = useAuthStore()
-  let isLogin;
-  isLogin = !!auth.authenticated;
-  if (isLogin) {
-    next('/')
-  } else {
-    next()
-  }
-}
 
 export default [
   {
@@ -185,30 +164,35 @@ export default [
         name: 'permissions.index',
         path: 'permissions',
         component: Permissions,
+        beforeEnter: superAdmin,
         meta: { breadCrumb: 'Permissions' }
       },
       {
         name: 'roles.index',
         path: 'roles',
         component: Roles,
+        beforeEnter: superAdmin,
         meta: { breadCrumb: 'Roles' }
       },
       {
         name: 'users.index',
         path: 'users',
         component: Users,
+        beforeEnter: superAdmin,
         meta: { breadCrumb: 'Users' }
       },
       {
         name: 'users.create',
         path: 'users/create',
         component: CreateUser,
+        beforeEnter: superAdmin,
         meta: { breadCrumb: 'Add New' }
       },
       {
         name: 'users.edit',
         path: 'users/edit/:id',
         component: EditUser,
+        beforeEnter: superAdmin,
         meta: { breadCrumb: 'User Edit' }
       },
       {
