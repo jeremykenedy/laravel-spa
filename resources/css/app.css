@@ -1,10 +1,8 @@
 @import '@css/normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
-
 @import '~/tippy.js/dist/tippy.css';
 @import '~/tippy.js/themes/material.css';
 @import '~/tippy.js/animations/perspective.css';
-@import '~/sweetalert2/dist/sweetalert2.min.css';
 
 /*@import "tailwindcss";
 @import "tailwindcss/theme.css";
@@ -673,6 +671,25 @@ video {
   --easy-table-rows-per-page-selector-z-index: 1;
 }
 
+.vue3-easy-data-table .vue3-easy-data-table__main {
+  border-radius: 5px 5px 0 0;
+}
+
+.vue3-easy-data-table .vue3-easy-data-table__footer {
+  border-radius: 0 0 5px 5px;
+}
+
+.vue3-easy-data-table {
+  --easy-table-header-background-color: #f1f1f1;;
+  --easy-table-body-row-background-color: #f1f1f1;
+  --easy-table-body-row-hover-font-color: #f1f1f1;
+  --easy-table-footer-background-color: #f1f1f1;
+  --easy-table-scrollbar-track-color: #f1f1f1;
+  --easy-table-scrollbar-color: #f1f1f1;
+  --easy-table-scrollbar-corner-color: #f1f1f1;
+  --easy-table-loading-mask-background-color: #f1f1f1;
+}
+
 .dark .vue3-easy-data-table {
   --easy-table-row-border: 1px solid #445269;
   --easy-table-header-font-color: #c1cad4;
@@ -687,7 +704,30 @@ video {
   --easy-table-footer-font-color: #c0c7d2;
   --easy-table-scrollbar-track-color: #2d3a4f;
   --easy-table-scrollbar-color: #2d3a4f;
-  --easy-table-scrollbar-thumb-color: #4c5d7a;;
+  --easy-table-scrollbar-thumb-color: #4c5d7a;
   --easy-table-scrollbar-corner-color: #2d3a4f;
   --easy-table-loading-mask-background-color: #2d3a4f;
+}
+
+.vue3-easy-data-table .vue3-easy-data-table__header,
+.vue3-easy-data-table .vue3-easy-data-table__header tr,
+.vue3-easy-data-table .vue3-easy-data-table__header th {
+  background: #cfcece !important;
+}
+
+.dark .vue3-easy-data-table .vue3-easy-data-table__header,
+.dark .vue3-easy-data-table .vue3-easy-data-table__header tr,
+.dark .vue3-easy-data-table .vue3-easy-data-table__header th {
+  background: #364762 !important;
+}
+
+.multiselect {
+  @apply border-gray-600;
+}
+.dark .multiselect {
+  @apply border-gray-900;
+}
+
+:root[class~="dark"] div:where(.swal2-container) div:where(.swal2-popup){
+  @apply bg-gray-800 text-gray-200
 }

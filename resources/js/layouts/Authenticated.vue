@@ -7,7 +7,9 @@
         ">
         <AdminNavbar />
         <div class="mb-20 bg-white dark:bg-slate-800">
-          <router-view />
+          <Suspense>
+            <router-view />
+          </Suspense>
         </div>
         <AppFooter class="sticky top-[100vh] w-full" footer-class="border-slate-900/5 dark:border-slate-700"
           border-class="" />

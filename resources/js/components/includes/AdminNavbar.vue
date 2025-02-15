@@ -124,9 +124,11 @@
             Admin
           </span>
         </router-link>
-         -->
+        -->
+
         <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'dashboard' }">
-          <span class="flex items-center rounded-t p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white" :class="isActive
+          <span class="flex items-center rounded-t p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white"
+            :class="currentRouteName == 'dashboard'
             ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
             : 'text-gray-700'
             ">
@@ -134,6 +136,7 @@
             {{ $t('dashboard') }}
           </span>
         </router-link>
+
         <!--
         <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'settings' }">
           <span class="flex items-center p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white" :class="isActive
@@ -193,10 +196,6 @@ export default {
     ToggleDarkMode,
     ArrowRightOnRectangleIcon,
   },
-  props: {},
-  setup() {
-    return {};
-  },
   data() {
     return {
       dropDownOpen: false,
@@ -219,11 +218,6 @@ export default {
       return this.$route.name;
     },
   },
-  watch: {},
-  created() { },
-  mounted() { },
-  beforeUnmount() { },
-  updated() { },
   methods: {
     ...mapActions(useAuth, [
       'logout',

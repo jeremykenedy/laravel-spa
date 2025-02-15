@@ -11,7 +11,11 @@
               {{ greeting() }},
               {{ user && user.name ? user.name : 'Registered User' }}!
             </h1>
-            <!-- HERE -->
+            <div v-if="user && user.roles" class="mb-6 text-center">
+              <hr class="mx-auto mb-3 w-10" />
+              <h2 class="mb-5">{{ $t('your_roles') }}</h2>
+              <RolesBadges :roles="user.roles" />
+            </div>
           </div>
         </div>
         <div class="mt-3 mb-5 p-5 text-center">
@@ -27,17 +31,14 @@
 import { mapStores, mapState, mapActions } from 'pinia';
 import { useAuthStore } from "@store/auth";
 import GHButtons from '@components/plugs/GHButtons.vue';
+import RolesBadges from '@components/roles/RolesBadges.vue';
 import { greeting, providerIcon } from '@services/common';
 
 export default {
   name: 'Dashboard',
   components: {
-    GHButtons
-  },
-  data() {
-    return {
-      //
-    };
+    GHButtons,
+    RolesBadges,
   },
   computed: {
     ...mapState(useAuthStore, [
@@ -56,7 +57,3 @@ export default {
   },
 };
 </script>
-
-
-<style scoped>
-</style>
