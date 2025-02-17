@@ -1,7 +1,7 @@
 <template>
   <div v-if="roles">
     <span v-for="(role, index) in roles" :value="role" :key="role.id"
-      class="mr-2 cursor-default rounded px-2.5 py-0.5 text-sm font-medium" :class="badgeClass(role, index)">
+      class="mr-2 cursor-default rounded px-2.5 py-0.5 text-xs font-medium" :class="badgeClass(role, index)">
       {{ role.name }}
     </span>
   </div>

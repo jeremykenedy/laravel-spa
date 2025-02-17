@@ -3,11 +3,11 @@
 use App\Http\Controllers\Api\ActivityLogController;
 use App\Http\Controllers\Api\BrowserSessionController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\PermissionController;
+use App\Http\Controllers\Api\PermissionsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ProfileController;
-use App\Http\Controllers\Api\RoleController;
-use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\RolesController;
+use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Http\Request;
@@ -39,17 +39,26 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
     });
 
     Route::group(['middleware' => ['role:superadmin']], function() {
-        Route::apiResource('users', UserController::class);
-        Route::get('/roles', [RoleController::class, 'roles']);
-        Route::delete('/roles/delete/role/{role}', [RoleController::class, 'deleteRole']);
-        Route::patch('/roles/update-role/{role}', [RoleController::class, 'updateRole']);
-        Route::get('/roles-complete', [RoleController::class, 'rolesComplete']);
-        Route::post('/roles/create-role', [RoleController::class, 'createRole']);
-        Route::get('/permissions', [PermissionController::class, 'permissions']);
-        Route::get('/permissions-paginated', [PermissionController::class, 'permissionsPaginated']);
-        Route::delete('/permissions/delete/permission/{permission}', [PermissionController::class, 'deletePermission']);
-        Route::patch('/permissions/update-permission/{permission}', [PermissionController::class, 'updatePermission']);
-        Route::post('/permissions/create-permission', [PermissionController::class, 'createPermission']);
+
+        // Route::apiResource('users', UsersController::class);
+
+        Route::get('/users', [UsersController::class, 'users']);
+        Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
+        Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
+        Route::post('/users/create-user', [UsersController::class, 'createUser']);
+        Route::patch('/users/update-user/{user}', [UsersController::class, 'updateUser']);
+
+
+        Route::get('/roles', [RolesController::class, 'roles']);
+        Route::delete('/roles/delete/role/{role}', [RolesController::class, 'deleteRole']);
+        Route::patch('/roles/update-role/{role}', [RolesController::class, 'updateRole']);
+        Route::get('/roles-complete', [RolesController::class, 'rolesComplete']);
+        Route::post('/roles/create-role', [RolesController::class, 'createRole']);
+        Route::get('/permissions', [PermissionsController::class, 'permissions']);
+        Route::get('/permissions-paginated', [PermissionsController::class, 'permissionsPaginated']);
+        Route::delete('/permissions/delete/permission/{permission}', [PermissionsController::class, 'deletePermission']);
+        Route::patch('/permissions/update-permission/{permission}', [PermissionsController::class, 'updatePermission']);
+        Route::post('/permissions/create-permission', [PermissionsController::class, 'createPermission']);
     });
 });
 

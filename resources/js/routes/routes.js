@@ -24,8 +24,6 @@ const EditCategory  = ()  => import(/* webpackChunkName: "js/EditCategoryPage" *
 const Permissions  = ()  => import(/* webpackChunkName: "js/PermissionsPage" */ '@admin/permissions/Index.vue');
 const Roles  = ()  => import(/* webpackChunkName: "js/RolesPage" */ '@admin/roles/Index.vue');
 const Users  = ()  => import(/* webpackChunkName: "js/UsersPage" */ '@admin/users/Index.vue');
-const CreateUser  = ()  => import(/* webpackChunkName: "js/CreateUserPage" */ '@admin/users/Create.vue');
-const EditUser  = ()  => import(/* webpackChunkName: "js/EditUserPage" */ '@admin/users/Edit.vue');
 const BrowserSessions  = ()  => import(/* webpackChunkName: "js/BrowserSessionsPage" */ '@admin/browser-sessions/Index.vue');
 const ActivityLogs  = ()  => import(/* webpackChunkName: "js/ActivityLogsPage" */ '@admin/activity-log/Index.vue');
 const NotFound  = ()  => import(/* webpackChunkName: "js/NotFoundPage" */ '@errors/404.vue');
@@ -101,6 +99,9 @@ export default [
       },
     ]
   },
+
+  // TODO :: ADMIN
+
   {
     path: '/dashboard',
     component: AuthenticatedLayout,
@@ -180,20 +181,6 @@ export default [
         component: Users,
         beforeEnter: superAdmin,
         meta: { breadCrumb: 'Users' }
-      },
-      {
-        name: 'users.create',
-        path: 'users/create',
-        component: CreateUser,
-        beforeEnter: superAdmin,
-        meta: { breadCrumb: 'Add New' }
-      },
-      {
-        name: 'users.edit',
-        path: 'users/edit/:id',
-        component: EditUser,
-        beforeEnter: superAdmin,
-        meta: { breadCrumb: 'User Edit' }
       },
       {
         name: 'browser_sessions.index',

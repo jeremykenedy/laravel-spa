@@ -1,5 +1,8 @@
 <template>
   <AppModal :show-modal="showingForm" @close-modal="closeModal">
+
+
+
     <template #title>
       {{ newUser ? 'Create User' : 'Editing User ' + userName }}
     </template>
@@ -92,8 +95,8 @@
             <div class="mt-2 whitespace-nowrap text-xs">
               {{
                 form && form.email_verified_at
-                ? parseDisplayDate(form.email_verified_at)
-                : 'Not Verified'
+                  ? parseDisplayDate(form.email_verified_at)
+                  : 'Not Verified'
               }}
             </div>
           </div>
@@ -103,9 +106,9 @@
           <div class="flex-item relative mb-3 ml-3 flex-auto">
             <div class="my-1 mr-3 w-full py-2 sm:flex sm:items-center">
               <span :class="loading || submitting
-                    ? 'default disabled cursor-pointer'
-                    : 'cursor-pointer'
-                  " @click="form.theme_dark = !form.theme_dark">
+                ? 'default disabled cursor-pointer'
+                : 'cursor-pointer'
+                " @click="form.theme_dark = !form.theme_dark">
                 <span class="fa-solid fa-fw fa-2x float-left mr-4 text-slate-600 dark:text-gray-300"
                   :class="form.theme_dark ? 'fa-toggle-on' : 'fa-toggle-off'" />
                 <span v-if="loading"
@@ -151,24 +154,22 @@
       <hr />
       <div style="width: 100%">
         <AppButton v-if="changed" :disabled="loading || submitting || !changed"
-          class="float-left border border-green-800 bg-transparent bg-transparent text-sm font-medium text-green-800 text-white shadow-md transition duration-150 ease-in-out hover:border-green-900 hover:bg-green-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:border-green-800 dark:hover:bg-green-800"
+          class="float-left border border-green-800 bg-transparent text-sm font-medium text-green-800 text-white shadow-md transition duration-150 ease-in-out hover:border-green-900 hover:bg-green-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:border-green-800 dark:hover:bg-green-800"
           @click="submit">
           <template #text>
             {{
               newUser
-              ? submitting
-                ? 'Creating'
-                : 'Create'
-              : submitting
-                ? 'Updating'
-                : 'Update'
+                ? submitting
+                  ? 'Creating'
+                  : 'Create'
+                : submitting
+                  ? 'Updating'
+                  : 'Update'
             }}
             <span v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
           </template>
         </AppButton>
-        <AppButton :disabled="loading || submitting"
-          class="float-right border border-gray-700 bg-transparent bg-transparent text-sm font-medium text-gray-700 text-white shadow-md transition duration-150 ease-in-out hover:border-gray-700 hover:bg-gray-700 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:bg-gray-700"
-          @click="closeModal">
+        <AppButton :disabled="loading || submitting" class="float-right" secondary @click="closeModal">
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}
           </template>
@@ -179,14 +180,16 @@
 </template>
 
 <script lang="ts">
-import AppModal from '@components/common/AppModal.vue';
+import { mapStores, mapState, mapActions } from 'pinia';
+import { useAuthStore } from "@store/auth";
+import { useToastStore } from "@store/toast";
 import axios from 'axios';
-import { mapActions } from 'vuex';
-import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import clonedeep from 'lodash.clonedeep';
 import moment from 'moment';
+import AppModal from '@components/common/AppModal.vue';
 import Multiselect from '@vueform/multiselect';
-import Errors from '@components/Errors.vue';
+import Errors from '@components/common/Errors.vue';
+import { UserCircleIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'UserFormModal',
@@ -204,8 +207,17 @@ export default {
     availableRoles: { type: Array, default: null },
     useInlineMessage: { type: Boolean, default: true },
   },
-  setup() {
-    return {};
+  computed: {
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
+    currentRouteName() {
+      return this.$route.name;
+    },
+    appName() {
+      return APP_NAME;
+    },
   },
   data() {
     return {
@@ -237,7 +249,6 @@ export default {
       immediate: false,
     },
   },
-  created() { },
   mounted() {
     const self = this;
     if (self.user) {
@@ -259,100 +270,98 @@ export default {
       self.ready = true;
     }
   },
-  beforeUnmount() { },
-  updated() { },
   methods: {
-    ...mapActions({
-      popToast: 'toast/popToast',
-    }),
+    ...mapActions(useToastStore, [
+      'popToast',
+    ]),
     parseDisplayDate(date) {
       if (date && date != true) {
         return moment(date).format('MMM Do YYYY, h:mma');
       }
       return moment(new Date()).format('MMM Do YYYY, h:mma');
     },
-    async submit() {
-      this.error = null;
-      this.submitting = true;
-      if (this.newUser) {
-        await this.createUser();
-      }
-      if (!this.newUser) {
-        await this.updateUser();
-      }
-      this.submitting = false;
-    },
-    async createUser() {
-      await axios
-        .post('/api/users/create-user', this.form)
-        .then(({ data }) => {
-          this.$emit('userCreated', data.user);
-          this.popToast({
-            message: 'User Successfully Created!',
-            timer: 5000,
-            icon: 'success',
-          });
-          this.submitting = false;
-        })
-        .catch(({ response }) => {
-          if (response.status === 422) {
-            const { errors } = response.data;
-            this.errors = errors;
-            // this.popToast({
-            //   message: Object.values(errors).flat().toString(),
-            //   timer: 5000,
-            //   icon: 'error',
-            // });
-          } else {
-            this.popToast({
-              message: 'Error Creating User',
-              timer: 5000,
-              icon: 'error',
-            });
-          }
-          this.submitting = false;
-        });
-      this.submitting = false;
-    },
-    async updateUser() {
-      await axios
-        .patch(`/api/users/update-user/${this.user.id}`, this.form)
-        .then(({ data }) => {
-          this.$emit('userUpdated', data.user);
-          this.popToast({
-            message: `User ${data.user.name} Successfully Updated!`,
-            timer: 5000,
-            icon: 'success',
-          });
-          this.submitting = false;
-        })
-        .catch(({ response }) => {
-          if (response.status === 422) {
-            const { errors } = response.data;
-            this.errors = errors;
-            // this.popToast({
-            //   message: Object.values(errors).flat().toString(),
-            //   timer: 5000,
-            //   icon: 'error',
-            // });
-          } else {
-            this.popToast({
-              message: 'Error Updating User',
-              timer: 5000,
-              icon: 'error',
-            });
-          }
-          this.submitting = false;
-        });
-      this.submitting = false;
-    },
-    toggleUserVerified() {
-      if (this.form.email_verified_at) {
-        this.form.email_verified_at = null;
-      } else {
-        this.form.email_verified_at = true;
-      }
-    },
+    // async submit() {
+    //   this.error = null;
+    //   this.submitting = true;
+    //   if (this.newUser) {
+    //     await this.createUser();
+    //   }
+    //   if (!this.newUser) {
+    //     await this.updateUser();
+    //   }
+    //   this.submitting = false;
+    // },
+    // async createUser() {
+    //   await axios
+    //     .post('/api/users/create-user', this.form)
+    //     .then(({ data }) => {
+    //       this.$emit('userCreated', data.user);
+    //       this.popToast({
+    //         message: 'User Successfully Created!',
+    //         timer: 5000,
+    //         icon: 'success',
+    //       });
+    //       this.submitting = false;
+    //     })
+    //     .catch(({ response }) => {
+    //       if (response.status === 422) {
+    //         const { errors } = response.data;
+    //         this.errors = errors;
+    //         // this.popToast({
+    //         //   message: Object.values(errors).flat().toString(),
+    //         //   timer: 5000,
+    //         //   icon: 'error',
+    //         // });
+    //       } else {
+    //         this.popToast({
+    //           message: 'Error Creating User',
+    //           timer: 5000,
+    //           icon: 'error',
+    //         });
+    //       }
+    //       this.submitting = false;
+    //     });
+    //   this.submitting = false;
+    // },
+    // async updateUser() {
+    //   await axios
+    //     .patch(`/api/users/update-user/${this.user.id}`, this.form)
+    //     .then(({ data }) => {
+    //       this.$emit('userUpdated', data.user);
+    //       this.popToast({
+    //         message: `User ${data.user.name} Successfully Updated!`,
+    //         timer: 5000,
+    //         icon: 'success',
+    //       });
+    //       this.submitting = false;
+    //     })
+    //     .catch(({ response }) => {
+    //       if (response.status === 422) {
+    //         const { errors } = response.data;
+    //         this.errors = errors;
+    //         // this.popToast({
+    //         //   message: Object.values(errors).flat().toString(),
+    //         //   timer: 5000,
+    //         //   icon: 'error',
+    //         // });
+    //       } else {
+    //         this.popToast({
+    //           message: 'Error Updating User',
+    //           timer: 5000,
+    //           icon: 'error',
+    //         });
+    //       }
+    //       this.submitting = false;
+    //     });
+    //   this.submitting = false;
+    // },
+    // toggleUserVerified() {
+    //   if (this.form.email_verified_at) {
+    //     this.form.email_verified_at = null;
+    //   } else {
+    //     this.form.email_verified_at = true;
+    //   }
+    // },
     closeModal() {
       this.$emit('closeModal');
     },
@@ -360,8 +369,7 @@ export default {
 };
 </script>
 
-<style src="@vueform/multiselect/themes/default.css">
-</style>
+<style src="@vueform/multiselect/themes/default.css"></style>
 <style scoped>
 :deep() .multiselect-option {
   background: transparent;

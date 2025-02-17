@@ -22,7 +22,7 @@
                 : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
                 " />
             <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300">
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300">
               <span class="fas fa-lock" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'
                 " />
             </span>
@@ -39,7 +39,7 @@
                 : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
                 " />
             <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
               <span class="fas fa-code" :class="errors && errors.slug ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
@@ -56,7 +56,7 @@
                 : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
                 " />
             <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
               <span class="fas fa-pencil" :class="errors && errors.description
                 ? 'text-red-600'
                 : 'text-slate-300'

@@ -11,7 +11,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class RoleController extends Controller
+class RolesController extends Controller
 {
     public function __construct()
     {

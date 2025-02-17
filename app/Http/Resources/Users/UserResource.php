@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Roles;
+namespace App\Http\Resources\Users;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoleResource extends JsonResource
+class UserResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,13 @@ class RoleResource extends JsonResource
         return [
             'id'            => $this->id,
             'name'          => $this->name,
-            'value'         => $this->id,
-            'created_at'    => $this->created_at->toDateString(),
+            'email'         => $this->email,
+            'role_id'       => $this->roles,
+            'roles'         => $this->roles,
+            'permissions'   => $this->permissions,
+            'created_at'    => $this->created_at->toDateString()
             'updated_at'    => $this->created_at->toDateString()
+            'deleted_at'    => $this->created_at->toDateString()
         ];
     }
 }

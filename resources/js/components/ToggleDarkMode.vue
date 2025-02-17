@@ -10,6 +10,10 @@
         : 'translate-x-0 bg-white'
         "
         class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out" />
+
+      <SunIcon v-if="!darkMode" class="text-white h-4 w-4" />
+      <MoonIcon v-if="darkMode" class="absolute h-4 w-4 text-gray-800" style="left: -1px" />
+
     </Switch>
   </span>
 </template>
@@ -19,10 +23,16 @@ import { mapState, mapActions } from 'pinia';
 import useDarkMode from "@composables/darkmode";
 import { useAuthStore } from "@store/auth";
 import { Switch } from '@headlessui/vue';
+import {
+  SunIcon,
+  MoonIcon,
+} from '@heroicons/vue/24/outline';
 
 export default {
   name: 'ToggleDarkMode',
   components: {
+    SunIcon,
+    MoonIcon,
     Switch,
   },
   mounted() {
