@@ -13,7 +13,7 @@
                 {{ $t('email') }}
               </label>
               <input id="email" v-model="loginForm.email" type="email" autofocus autocomplete="username"
-                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none dark:text-gray-100 dark:bg-gray-800"
                 :class="{ 'border-red-500': validationErrors?.email }" :disabled="processing.value"
                 :placeholder="$t('email')" />
               <div v-for="message in validationErrors?.email" class="mt-1 text-sm text-red-500 absolute">
@@ -26,7 +26,7 @@
                 {{ $t('password') }}
               </label>
               <input id="password" v-model="loginForm.password" type="password" autocomplete="current-password"
-                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none"
+                class="form-control m-0 block w-full rounded border border-solid border-gray-300 bg-white bg-clip-padding px-4 py-2 text-xl font-normal text-gray-700 transition ease-in-out focus:border-blue-600 focus:bg-white focus:text-gray-700 focus:outline-none dark:text-gray-100 dark:bg-gray-800"
                 :class="{ 'border-red-500': validationErrors?.password }" :disabled="processing.value"
                 :placeholder="$t('password')" />
               <div v-if="validationErrors?.password" class="absolute">
@@ -39,13 +39,13 @@
             <div class="mb-6 flex items-center justify-between">
               <div class="form-group form-check">
                 <input id="flexCheckIndeterminate" name="remember" type="checkbox"
-                  class="form-check-input float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none"
+                  class="form-check-input float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none dark:bg-gray-800"
                   v-model="loginForm.remember" />
-                <label class="form-check-label inline-block cursor-pointer text-gray-800 dark:text-gray-100"
+                <label class="form-check-label inline-block cursor-pointer text-gray-800 dark:text-gray-100 mt-1"
                   for="flexCheckIndeterminate">{{ $t('remember_me') }}</label>
               </div>
               <router-link :to="{ name: 'auth.forgot-password' }"
-                class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100">
+                class="text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100 mb-2">
                 {{ $t('forgot_password') }}
               </router-link>
             </div>

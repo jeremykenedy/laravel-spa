@@ -15,13 +15,12 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-
 class UsersController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('role:superadmin');
+        // $this->middleware('role:superadmin');
 
         try {
             ob_start('ob_gzhandler');
@@ -43,17 +42,12 @@ class UsersController extends Controller
 
     public function users(Request $request)
     {
-        $per = 10;
+        $per = 25;
         $sortBy = 'id';
         $sortType = 'asc';
 
         if ($request->has('per')) {
             $per = $request->input('per');
-
-            if (strtolower($per) == 'all') {
-                $per = 1000000000000;
-            }
-
         }
 
         if ($request->has('sortBy')) {
@@ -64,7 +58,14 @@ class UsersController extends Controller
             $sortType = $request->input('sortType');
         }
 
-        return response()->json(User::orderBy($sortBy, $sortType)->paginate($per));
+        $query = User::orderBy($sortBy, $sortType);
+
+        if ($request->has('search') && ($request->input('search')) != 'null') {
+            $query->where('name', 'LIKE', '%'. $request->input('search') .'%')
+                ->orWhere('email', 'LIKE', '%'. $request->input('search') .'%');
+        }
+
+        return response()->json($query->paginate($per));
     }
 
     public function toggleVerify(Request $request)
@@ -86,7 +87,7 @@ class UsersController extends Controller
     {
         $validated = $request->validated();
 
-        $email_verified_at = false;
+        $email_verified_at = null;
         if ($validated['email_verified_at']) {
             $email_verified_at = now();
         }
@@ -102,6 +103,9 @@ class UsersController extends Controller
         if ($user) {
             $user->syncRoles($validated['roles']);
 
+            // Careful: Using this will not auto-detach roles for users.
+            // $user->syncPermissions($request->validated('permissions'));
+
             // event(new Registered($user));
 
             return response()->json([
@@ -116,18 +120,57 @@ class UsersController extends Controller
             'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
 
-        $validated = $request->validated();
-        $user->update($request->only('name', 'email', 'theme_dark', 'email_verified_at'));
-        $user->syncRoles($validated['roles']);
+        if ($request->email_verified_at == true) {
+            $email_verified_at = now();
+        } elseif ($request->email_verified_at == false) {
+            $email_verified_at = null;
+        } else {
+            $email_verified_at = $user->email_verified_at;
+        }
+
+        $user->update($request->only([
+            'name',
+            'email',
+            'theme_dark',
+        ]));
+
+        $user->update([
+            'email_verified_at' => $email_verified_at,
+        ]);
+
+        if ($request->validated(['password'])) {
+            $user->update([
+                'password' => $request->validated(['password']),
+            ]);
+        }
+
+        $user->syncRoles($request->validated('roles'));
+
+        // Careful: Using this will not auto-detach roles for users.
+        // $user->syncPermissions($request->validated('permissions'));
 
         return response()->json([
             'user'  => $user,
         ]);
     }
 
+    public function restorUser(Request $request, User $user)
+    {
+        $user->restore();
+
+        return response()->json($user);
+    }
+
     public function deleteUser(Request $request, User $user)
     {
         $user->delete();
+
+        return response()->json($user);
+    }
+
+    public function destroyUser(Request $request, User $user)
+    {
+        $user->forceDelete();
 
         return response()->json($user);
     }

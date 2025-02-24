@@ -443,6 +443,26 @@ video {
 .dark .swal2-popup.swal2-toast {
   @apply bg-slate-900;
 }
+
+.swal2-success-fix,
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.dark .swal2-success-fix,
+.dark .swal2-success-circular-line-left,
+.dark .swal2-success-circular-line-right {
+  background-color: rgb(15, 23, 42) !important;
+}
+
+
+.swal2-icon.swal2-success::before,
+.swal2-success.animate::after,
+.swal2-icon.swal2-success .fix{
+   background-color: rgb(22 22 22) !important;
+}
+
 .dark
   .swal2-popup.swal2-toast
   .swal2-success

@@ -10,11 +10,17 @@ use App\Http\Controllers\Api\RolesController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
 Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
+Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
+Route::get('category-list', [CategoryController::class, 'getList']);
+Route::get('get-posts', [PostController::class, 'getPosts']);
+Route::get('get-category-posts/{id}', [PostController::class, 'getCategoryByPosts']);
+Route::get('get-post/{id}', [PostController::class, 'getPost']);
 
 Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
 
@@ -37,18 +43,14 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
             ->values()
             ->toArray();
     });
+    Route::post('/verify-resend', [VerificationController::class, 'resend']);
 
     Route::group(['middleware' => ['role:superadmin']], function() {
-
-        // Route::apiResource('users', UsersController::class);
-
         Route::get('/users', [UsersController::class, 'users']);
         Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
         Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
         Route::post('/users/create-user', [UsersController::class, 'createUser']);
         Route::patch('/users/update-user/{user}', [UsersController::class, 'updateUser']);
-
-
         Route::get('/roles', [RolesController::class, 'roles']);
         Route::delete('/roles/delete/role/{role}', [RolesController::class, 'deleteRole']);
         Route::patch('/roles/update-role/{role}', [RolesController::class, 'updateRole']);
@@ -61,8 +63,3 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
         Route::post('/permissions/create-permission', [PermissionsController::class, 'createPermission']);
     });
 });
-
-Route::get('category-list', [CategoryController::class, 'getList']);
-Route::get('get-posts', [PostController::class, 'getPosts']);
-Route::get('get-category-posts/{id}', [PostController::class, 'getCategoryByPosts']);
-Route::get('get-post/{id}', [PostController::class, 'getPost']);

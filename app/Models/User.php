@@ -6,7 +6,10 @@ use App\Models\SocialiteProvider;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
@@ -19,7 +22,7 @@ use Spatie\PersonalDataExport\PersonalDataSelection;
 
 class User extends Authenticatable implements ExportsPersonalData, MustVerifyEmail
 {
-     use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission, LogsActivity;
+     use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission, LogsActivity, Prunable, SoftDeletes;
 
     /**
      * The accessors to append to the model's array.
@@ -42,8 +45,8 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
         'name',
         'email',
         'password',
-        'text',
         'theme_dark',
+        'email_verified_at',
     ];
 
     /**
@@ -152,7 +155,17 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->logOnly(['name', 'text']);
+            ->logOnly(['name', 'email']);
         // Chain fluent methods for configuration options
+    }
+
+    protected function pruning(): void
+    {
+        // ... Things to do before pruning the users.
+    }
+
+    public function prunable(): Builder
+    {
+        return static::where('created_at', '<=', now()->subMonth(3));
     }
 }

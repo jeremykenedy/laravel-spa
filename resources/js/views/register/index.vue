@@ -17,23 +17,23 @@
                 <div class="sm:mt-0 sm:w-8/12">
                   <input v-model="registerForm.name" type="text" name="name" id="name" autocomplete="name"
                     :class="{ 'border-red-500': validationErrors?.name }" :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
+                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200" />
                   <div v-for="message in validationErrors?.name" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
                 </div>
               </div>
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
-                <label for="email" class="w-4/12" :class="validationErrors?.email
+                <label for="email" class="w-4/12 dark:text-gray-200" :class="validationErrors?.email
                   ? 'text-red-500'
-                  : 'text-gray-700 dark:text-gray-200'
+                  : 'text-gray-700 dark:text-gray-200 '
                   ">
                   {{ $t('email') }}
                 </label>
                 <div class="sm:mt-0 sm:w-8/12">
                   <input v-model="registerForm.email" type="email" id="email" name="email" autocomplete="username"
                     :class="{ 'border-red-500': validationErrors?.email }" :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
+                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200" />
                   <div v-for="message in validationErrors?.email" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
@@ -50,7 +50,7 @@
                   <input v-model="registerForm.password" type="password" id="password" name="password"
                     autocomplete="current-password" :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
+                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200" />
                   <div v-for="message in validationErrors?.password" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
@@ -67,7 +67,7 @@
                   <input v-model="registerForm.password_confirmation" id="password_confirmation" type="password"
                     name="password_confirmation" :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
-                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none" />
+                    class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200" />
                   <div v-for="message in validationErrors?.password_confirmation" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>

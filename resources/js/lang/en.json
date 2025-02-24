@@ -57,6 +57,11 @@
     "dark_mode": "Dark Mode",
     "enable": "Enable",
     "disable": "Disable",
+    "toggle_theme_light": "Toggle Theme Light",
+    "toggle_theme_dark": "Toggle Theme Dark",
+    "toggle_theme": "Toggle Theme",
+    "light": "Light",
+    "dark": "Dark",
     "existing_customer": "Existing customer",
     "browser_sessions": "Browser Sessions",
     "activity_logs": "Activity Logs",
@@ -67,5 +72,12 @@
     "no_records_found": "No Records Found",
     "posts": "Posts",
     "categories": "Categories",
-    "your_roles": "Your Roles"
+    "your_roles": "Your Roles",
+    "edit_user": "Edit User",
+    "delete_user": "Delete User",
+    "impersonate_user": "Impersonate User",
+    "create_user": "Create User",
+    "create_new_user": "Create New User",
+    "search_users": "Search Users",
+    "user_settings": "User Settings"
 }

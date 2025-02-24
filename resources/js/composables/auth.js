@@ -224,6 +224,12 @@ export default function useAuth() {
       //
   }
 
+  const verifyResend = async (payload) => {
+    const res = await axios.post('/api/verify-resend', payload);
+    if (res.status != 200) throw res;
+    return res;
+  }
+
   return {
       loginForm,
       registerForm,
@@ -242,6 +248,7 @@ export default function useAuth() {
       impersonateUser,
       leaveImpersonatingUser,
       success,
-      dismissSuccess
+      dismissSuccess,
+      verifyResend
   }
 }

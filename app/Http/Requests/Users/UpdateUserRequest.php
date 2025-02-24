@@ -24,10 +24,11 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'              => 'required|min:3|max:255',
-            // 'email'             => 'required|email|unique:users,email,'.$user->id,
-            'password'          => 'nullable|min:6|max:255|confirmed',
+            'name'              => 'required|string|min:3|max:255',
+            // 'email'             => 'required|string|email|max:255|unique:users,email,'.$user->id,
+            'password'          => 'nullable|string|min:6|max:255|confirmed',
             'roles'             => 'present|array',
+            'permissions'       => 'present|array',
             'theme_dark'        => 'nullable|boolean',
             'email_verified_at' => 'nullable',
         ];

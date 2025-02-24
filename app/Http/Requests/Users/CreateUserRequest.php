@@ -28,6 +28,7 @@ class CreateUserRequest extends FormRequest
             'email'             => 'required|email|unique:users,email',
             'password'          => 'required|min:6|max:255|confirmed',
             'roles'             => 'present|array',
+            'permissions'       => 'present|array',
             'theme_dark'        => 'nullable|boolean',
             'email_verified_at' => 'nullable|boolean',
         ];
