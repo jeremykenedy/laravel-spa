@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ActivityLogResource;
+use App\Http\Resources\ActivityLogs\ActivityLogResource;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Resources\PostResource;
+use App\Http\Requests\Posts\StorePostRequest;
+use App\Http\Resources\Posts\PostResource;
 use App\Models\Category;
 use App\Models\Post;
 
@@ -44,9 +44,10 @@ class PostController extends Controller
 
                 });
             })
-            ->when(!auth()->user()->hasPermissionTo('post-all'), function ($query) {
+            ->when(!auth()->user()->hasPermission('Can Edit Articles'), function ($query) {
                 $query->where('user_id', auth()->id());
             })
+
             ->orderBy($orderColumn, $orderDirection)
             ->paginate(50);
         return PostResource::collection($posts);
@@ -74,7 +75,8 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $this->authorize('post-edit');
-        if ($post->user_id !== auth()->user()->id && !auth()->user()->hasPermissionTo('post-all')) {
+
+        if ($post->user_id !== auth()->user()->id && !auth()->user()->hasPermission('Can View Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {
             return new PostResource($post);
@@ -84,7 +86,9 @@ class PostController extends Controller
     public function update(Post $post, StorePostRequest $request)
     {
         $this->authorize('post-edit');
-        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermissionTo('post-all')) {
+
+// HERE
+        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('Can Edit Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {
             $post->update($request->validated());
@@ -98,7 +102,8 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $this->authorize('post-delete');
-        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermissionTo('post-all')) {
+
+        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('Can Delete Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only delete your own posts']);
         } else {
             $post->delete();
