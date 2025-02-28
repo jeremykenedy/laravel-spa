@@ -7,8 +7,10 @@ use App\Http\Controllers\Api\PermissionsController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\RolesController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\ImpersonateController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\VerificationController;
 use Illuminate\Http\Request;
@@ -21,6 +23,7 @@ Route::get('category-list', [CategoryController::class, 'getList']);
 Route::get('get-posts', [PostController::class, 'getPosts']);
 Route::get('get-category-posts/{id}', [PostController::class, 'getCategoryByPosts']);
 Route::get('get-post/{id}', [PostController::class, 'getPost']);
+Route::post('/user-by-token', [UserController::class, 'userByToken']);
 
 Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
 
@@ -44,6 +47,8 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
             ->toArray();
     });
     Route::post('/verify-resend', [VerificationController::class, 'resend']);
+    Route::post('/impersonate/take/{user}', [ImpersonateController::class, 'impersonate'])->name('users.impersonate');
+    Route::post('/impersonate/leave', [ImpersonateController::class, 'leaveImpersonate'])->name('users.leaveImpersonate');
 
     Route::group(['middleware' => ['role:superadmin']], function() {
         Route::get('/users', [UsersController::class, 'users']);
@@ -61,5 +66,6 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
         Route::delete('/permissions/delete/permission/{permission}', [PermissionsController::class, 'deletePermission']);
         Route::patch('/permissions/update-permission/{permission}', [PermissionsController::class, 'updatePermission']);
         Route::post('/permissions/create-permission', [PermissionsController::class, 'createPermission']);
+
     });
 });

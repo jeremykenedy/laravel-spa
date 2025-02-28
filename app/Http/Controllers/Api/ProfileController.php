@@ -29,6 +29,8 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
+\Log::info($user);
+
         return $this->successResponse($user, 'User found');
     }
 

@@ -1,12 +1,15 @@
 import {defineStore} from 'pinia'
 import axios from 'axios';
 import {ref} from "vue";
+import useDarkMode from "@composables/darkmode";
+import Cookies from 'js-cookie';
 
 export const useAuthStore = defineStore('auth', () => {
   const authenticated = ref(false)
   const user = ref({})
   const currentUserToken = ref(null)
   const impersonatorToken = ref(null)
+  const token = Cookies.get('token')
   const socials = ref({
       facebook: false,
       twitter: false,
@@ -63,9 +66,42 @@ export const useAuthStore = defineStore('auth', () => {
     })
   })
 
+  const getUserByToken = async (payload) => {
+    await axios.post('/api/user-by-token', { token: payload.token })
+      .then(async res => {
+        if (res && res.data && res.data.id) {
+          const u = res.data
+          user.value = u;
+          authenticated.value = true;
+          if (u.theme_dark) {
+            document.documentElement.className = 'dark';
+            localStorage.setItem("data-theme", "dark");
+          } else {
+            document.documentElement.className = 'light';
+            localStorage.setItem("data-theme", "light");
+          }
+        } else {
+          user.value = {}
+          authenticated.value = false
+        }
+      })
+      .catch((err) => {
+        user.value = {}
+        authenticated.value = false
+        throw err.response;
+      });
+  }
+
   const logout = (() => {
+    Cookies.remove('token');
     user.value = {}
     authenticated.value = false
+  })
+
+  const setWorkingToken = ((payload) => {
+    Cookies.set('token', payload.token, { expires: 365 });
+    currentUserToken.value = payload.token;
+    impersonatorToken.value = payload.impersonatorToken.plainTextToken;
   })
 
   function userIs(role) {
@@ -97,9 +133,11 @@ export const useAuthStore = defineStore('auth', () => {
     user,
     login,
     getUser,
+    getUserByToken,
     logout,
     currentUserToken,
     impersonatorToken,
+    setWorkingToken,
     userIs,
     userCan,
   }

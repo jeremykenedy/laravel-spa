@@ -87,7 +87,6 @@ class PostController extends Controller
     {
         $this->authorize('post-edit');
 
-// HERE
         if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('Can Edit Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {

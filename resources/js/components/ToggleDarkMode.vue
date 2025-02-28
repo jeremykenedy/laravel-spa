@@ -1,18 +1,18 @@
 <template>
-  <span v-tippy="'Switch Theme to ' + (darkMode ? 'Light' : 'Dark') + ' Mode'" class="mr-8"
+  <span v-tippy="'Switch Theme to ' + (isDarkMode ? 'Light' : 'Dark') + ' Mode'" class="mr-8"
     :class="isLoading.value ? 'default disabled cursor-pointer' : 'cursor-pointer'" @click="switchDarkMode()">
-    <Switch :default-checked="darkMode" :class="darkMode ? 'bg-gray-500' : 'bg-gray-400'"
+    <Switch :default-checked="isDarkMode" :class="isDarkMode ? 'bg-gray-500' : 'bg-gray-400'"
       class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       style="margin-top: 5px;">
       <span class="sr-only">Toggle Theme</span>
-      <span aria-hidden="true" :class="darkMode
+      <span aria-hidden="true" :class="isDarkMode
         ? 'translate-x-4 bg-gray-800'
         : 'translate-x-0 bg-white'
         "
         class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out" />
 
-      <SunIcon v-if="!darkMode" class="text-white h-4 w-4" />
-      <MoonIcon v-if="darkMode" class="absolute h-4 w-4 text-gray-800" style="left: -1px" />
+      <SunIcon v-if="!isDarkMode" class="text-white h-4 w-4" />
+      <MoonIcon v-if="isDarkMode" class="absolute h-4 w-4 text-gray-800" style="left: -1px" />
 
     </Switch>
   </span>
@@ -46,6 +46,13 @@ export default {
     ...mapState(useDarkMode, [
       'isLoading',
     ]),
+    isDarkMode() {
+      if(this.user && this.user.id) {
+        return this.user.theme_dark;
+      } else {
+        return this.darkMode;
+      }
+    },
   },
   data() {
     return {

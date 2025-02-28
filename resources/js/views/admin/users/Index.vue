@@ -205,13 +205,25 @@
             </template>
           </AppButton>
 
-
+          <AppButton
+            v-if="user.id != item.id"
+            v-tippy="$t('impersonate_user')"
+            secondary
+            :disabled="locked(item)"
+            :loading="!dataReady"
+            class="mr-2 px-1 py-1 text-sm"
+            @click="triggerImpersonateUser(item)"
+          >
+            <template #text>
+              <UserCircleIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
+              <span class="sr-only">{{ $t('impersonate_user') }}</span>
+            </template>
+          </AppButton>
 
         </div>
       </template>
     </easy-data-table>
-
-
 
     <!--
     <UsersTable :users="users"
@@ -364,10 +376,10 @@ export default {
       'userIs',
       'userCan',
       'getUser',
-      // 'impersonateUser',
     ]),
     ...mapActions(useAuth, [
       'verifyResend',
+      'impersonateUser',
     ]),
     ...mapActions(useToastStore, [
       'popToast',
@@ -717,22 +729,19 @@ export default {
           this.dataReady = true;
         });
     },
-
-
-
-    // async impersonateUserTriggered(user) {
-    //   try {
-    //     await this.impersonateUser({ user }).then((response) => {
-    //       //
-    //     });
-    //   } catch (e) {
-    //     this.popToast({
-    //       message: 'Unable To Impersonate User',
-    //       timer: 5000,
-    //       icon: 'error',
-    //     });
-    //   }
-    // },
+    async triggerImpersonateUser(user) {
+      try {
+        await this.impersonateUser({ user }).then((response) => {
+          this.$router.push({ name: 'home' });
+        });
+      } catch (e) {
+        this.popToast({
+          message: 'Unable To Impersonate User',
+          timer: 5000,
+          icon: 'error',
+        });
+      }
+    },
   },
 };
 </script>

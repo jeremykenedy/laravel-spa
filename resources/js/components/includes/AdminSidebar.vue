@@ -243,7 +243,6 @@ export default {
   computed: {
     ...mapState(useAuth, [
       'processing',
-      'getAbilities',
     ]),
     ...mapState(useAuthStore, [
       'user',
