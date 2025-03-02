@@ -79,5 +79,8 @@
     "create_user": "Create User",
     "create_new_user": "Create New User",
     "search_users": "Search Users",
-    "user_settings": "User Settings"
+    "user_settings": "User Settings",
+    "not_verified": "Not Verified",
+    "leave_impersonating": "Leave Impersonating",
+    "return_to_your_account": "Return to your account"
 }

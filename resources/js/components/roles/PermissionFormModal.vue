@@ -109,7 +109,8 @@
     <template #footer>
       <div style="width: 100%">
         <AppButton v-if="changed" :disabled="loading || submitting || !changed"
-          class="float-left border border-green-800 bg-transparent text-sm font-medium text-green-800 dark:text-white shadow-md transition duration-150 ease-in-out hover:border-green-900 hover:bg-green-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:border-green-800 dark:hover:bg-green-800"
+          primary
+          class="float-left"
           @click="submit">
           <template #text>
             {{
@@ -125,7 +126,8 @@
           </template>
         </AppButton>
         <AppButton :disabled="loading || submitting"
-          class="float-right border border-gray-700 bg-transparent text-sm font-medium text-gray-700 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 shadow-md transition duration-150 ease-in-out hover:border-gray-900 hover:bg-gray-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg"
+          class="float-right"
+          secondary
           @click="closeModal">
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}

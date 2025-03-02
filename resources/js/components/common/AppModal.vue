@@ -22,16 +22,20 @@
                         <slot v-if="hasFooterSlot" name="footer" />
                     </div>
                     <div v-else class="flex items-center justify-end rounded-b border-t border-solid border-slate-200 p-6">
-                        <button
-                            class="mr-1 mb-1 rounded border border-solid border-red-500 bg-transparent px-6 py-3 text-sm font-bold uppercase text-red-500 outline-none transition-all duration-150 ease-linear hover:bg-red-500 hover:text-white focus:outline-none active:bg-red-600"
-                            type="button" @click="closeModal()">
-                            Close
-                        </button>
-                        <button
-                            class="background-transparent mr-1 mb-1 px-6 py-2 text-sm font-bold uppercase text-red-500 outline-none transition-all duration-150 ease-linear focus:outline-none"
-                            type="button" @click="confirmModal()">
-                            Confirm
-                        </button>
+                      <AppButton
+                        v-if="showConfirmButton"
+                        secondary
+                        class="mr-1 mb-1"
+                        :text="closeText"
+                        @click.prevent="closeModal()"
+                      />
+                      <AppButton
+                        v-if="showCloseButton"
+                        success
+                        class="mr-1 mb-1"
+                        :text="confirmText"
+                        @click.prevent="confirmModal()"
+                      />
                     </div>
                 </div>
             </div>
@@ -50,6 +54,10 @@ export default {
             type: String,
             default: 'min-w-[96%] sm:min-w-[60%] lg:min-w-[50%]',
         },
+        showConfirmButton: { type: Boolean, default: true },
+        showCloseButton: { type: Boolean, default: true },
+        confirmText: { type: String, default: 'Confirm' },
+        closeText: { type: String, default: 'Close' },
     },
     data() {
         return {};

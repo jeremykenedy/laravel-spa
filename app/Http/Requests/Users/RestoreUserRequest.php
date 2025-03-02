@@ -4,7 +4,7 @@ namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ImpersonateUserRequest extends FormRequest
+class RestoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +13,6 @@ class ImpersonateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('impersonate.users');
+        return $this->user()->hasPermission('restore.users');
     }
 }

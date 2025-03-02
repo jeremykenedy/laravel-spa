@@ -131,7 +131,10 @@
           </div>
         </div>
 
-        <div class="relative mb-3 flex w-full flex-wrap items-stretch">
+        <div
+          v-if="authenticated && user && userCan('edit.roles') && userCan('view.roles')"
+          class="relative mb-3 flex w-full flex-wrap items-stretch"
+        >
           <div class="flex-item relative flex-auto">
             <h6>User Roles</h6>
             <Multiselect v-model="form.roles" :options="availableRoles" track-by="id" label="name" mode="tags"
@@ -139,7 +142,7 @@
           </div>
         </div>
 
-        <div v-if="enablePermissons" class="relative mb-3 flex w-full flex-wrap items-stretch">
+        <div v-if="enablePermissons && authenticated && user && userCan('edit.permissions') && userCan('view.permissions')" class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative flex-auto">
             <h6>User Permissions</h6>
             <Multiselect v-model="form.permissions" :options="availablePermissions" track-by="id" label="name"
@@ -177,7 +180,8 @@
       <hr />
       <div style="width: 100%">
         <AppButton v-if="changed" :disabled="loading || submitting || !changed"
-          class="float-left border border-green-800 bg-transparent text-sm font-medium text-white shadow-md transition duration-150 ease-in-out hover:border-green-900 hover:bg-green-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:border-green-800 dark:hover:bg-green-800"
+          class="float-left"
+          primary
           @click="submit">
           <template #text>
             {{
@@ -193,7 +197,8 @@
           </template>
         </AppButton>
         <AppButton :disabled="loading || submitting"
-          class="float-right border border-gray-700 bg-transparent text-sm font-medium text-gray-700 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-200 shadow-md transition duration-150 ease-in-out hover:border-gray-900 hover:bg-gray-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg"
+          class="float-right"
+          secondary
           @click="closeModal">
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}
@@ -243,7 +248,7 @@ export default {
     showingForm: { type: Boolean, default: false },
     newUser: { type: Boolean, default: true },
     loading: { type: Boolean, default: false },
-    user: { type: Object, default: null },
+    userEditing: { type: Object, default: null },
     availableRoles: { type: Array, default: null },
     availablePermissions: { type: Array, default: null },
     useInlineMessage: { type: Boolean, default: true },
@@ -251,7 +256,7 @@ export default {
   },
   computed: {
     ...mapState(useAuthStore, [
-      // 'user',
+      'user',
       'authenticated',
     ]),
     currentRouteName() {
@@ -293,20 +298,20 @@ export default {
   },
   mounted() {
     const self = this;
-    if (self.user) {
-      self.form = clonedeep(self.user);
-      if (self.user.name) {
-        self.userName = self.user.name;
+    if (self.userEditing) {
+      self.form = clonedeep(self.userEditing);
+      if (self.userEditing.name) {
+        self.userName = self.userEditing.name;
       }
-      if (self.user.roles) {
-        const JSON_Obj = self.user.roles;
+      if (self.userEditing.roles) {
+        const JSON_Obj = self.userEditing.roles;
         self.form.roles = [];
         for (const key in JSON_Obj) {
           self.form.roles.push(JSON_Obj[key].id);
         }
       }
-      if (self.user.permissions) {
-        const JSON_Obj = self.user.permissions;
+      if (self.userEditing.permissions) {
+        const JSON_Obj = self.userEditing.permissions;
         self.form.permissions = [];
         for (const key in JSON_Obj) {
           self.form.permissions.push(JSON_Obj[key].id);
@@ -320,6 +325,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(useAuthStore, [
+      'userIs',
+      'userCan',
+    ]),
     ...mapActions(useToastStore, [
       'popToast',
     ]),
@@ -381,9 +390,9 @@ export default {
           });
           this.submitting = false;
         })
-        .catch(({ response }) => {
-          if (response.status === 422) {
-            const { errors } = response.data;
+        .catch(({ res }) => {
+          if (res.status === 422) {
+            const { errors } = res.data;
             this.errors = errors;
             // this.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -402,11 +411,8 @@ export default {
       this.submitting = false;
     },
     async updateUser() {
-
-console.log(this.form.permissions);
-
       await axios
-        .patch(`/api/users/update-user/${this.user.id}`, this.form)
+        .patch(`/api/users/update-user/${this.userEditing.id}`, this.form)
         .then(({ data }) => {
           this.$emit('userUpdated', data.user);
           this.popToast({
@@ -416,9 +422,9 @@ console.log(this.form.permissions);
           });
           this.submitting = false;
         })
-        .catch(({ response }) => {
-          if (response.status === 422) {
-            const { errors } = response.data;
+        .catch(({ err }) => {
+          if (err && err.status === 422) {
+            const { errors } = err.data;
             this.errors = errors;
             this.popToast({
               message: Object.values(errors).flat().toString(),

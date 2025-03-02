@@ -26,7 +26,6 @@ Route::get('get-post/{id}', [PostController::class, 'getPost']);
 Route::post('/user-by-token', [UserController::class, 'userByToken']);
 
 Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
-
     Route::apiResource('posts', PostController::class);
     Route::apiResource('categories', CategoryController::class);
     Route::get('category-list', [CategoryController::class, 'getList']);
@@ -36,26 +35,14 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
     Route::get('browser-sessions', [BrowserSessionController::class, 'index']);
     Route::post('logout-other-devices', [BrowserSessionController::class, 'logoutOtherDevices']);
     Route::get('activity-logs', ActivityLogController::class);
-    Route::get('abilities', function(Request $request) {
-        return $request->user()->roles()->with('permissions')
-            ->get()
-            ->pluck('permissions')
-            ->flatten()
-            ->pluck('name')
-            ->unique()
-            ->values()
-            ->toArray();
-    });
     Route::post('/verify-resend', [VerificationController::class, 'resend']);
     Route::post('/impersonate/take/{user}', [ImpersonateController::class, 'impersonate'])->name('users.impersonate');
     Route::post('/impersonate/leave', [ImpersonateController::class, 'leaveImpersonate'])->name('users.leaveImpersonate');
-
-    Route::group(['middleware' => ['role:superadmin']], function() {
-        Route::get('/users', [UsersController::class, 'users']);
-        Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
-        Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
-        Route::post('/users/create-user', [UsersController::class, 'createUser']);
-        Route::patch('/users/update-user/{user}', [UsersController::class, 'updateUser']);
+    Route::get('/users', [UsersController::class, 'users']);
+    Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
+    Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
+    Route::post('/users/create-user', [UsersController::class, 'createUser']);
+    Route::patch('/users/update-user/{user}', [UsersController::class, 'updateUser']);
         Route::get('/roles', [RolesController::class, 'roles']);
         Route::delete('/roles/delete/role/{role}', [RolesController::class, 'deleteRole']);
         Route::patch('/roles/update-role/{role}', [RolesController::class, 'updateRole']);
@@ -67,5 +54,7 @@ Route::group(['middleware' => ['auth:sanctum', 'forceHTTPS']], function() {
         Route::patch('/permissions/update-permission/{permission}', [PermissionsController::class, 'updatePermission']);
         Route::post('/permissions/create-permission', [PermissionsController::class, 'createPermission']);
 
+    Route::group(['middleware' => ['role:superadmin']], function() {
+        // Things should be done using checks within the requests
     });
 });

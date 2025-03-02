@@ -13,7 +13,7 @@ class UpdatePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasOneRole(config('roles.models.role')::whereSlug('superadmin')->first('id')->id);
+        return $this->user()->hasPermission('update.permissions');
     }
 
     /**

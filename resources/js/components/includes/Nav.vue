@@ -76,10 +76,8 @@
         </PopoverGroup>
 
         <div v-if="authenticated" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          <AppButton v-if="authenticated && user && isImpersonating" v-tippy="'Return to your account'"
-            icon="fa-solid fa-user-secret" warning class="float-right mr-4 h-3 w-3 rounded"
-            @click="triggerLeaveImpersonatingUser()" />
 
+          <LeaveImpersonation classes="float-right mr-4" />
           <ToggleDarkMode v-if="authenticated && user" />
 
           <div v-if="authenticated && user" ref="dropMenu" class="relative">
@@ -278,10 +276,12 @@
                 </div>
 
                 <div v-if="authenticated && user">
-                  <AppButton v-if="authenticated && user && isImpersonating" v-tippy="'Return to your account'"
-                    type="button" icon="fa-solid fa-user-secret" warning
-                    class="flex w-full items-center justify-center px-4 py-4 mb-5" text-after="Leave Impersonating"
-                    @click.prevent="triggerLeaveImpersonatingUser(), closeDrop()" />
+
+                  <LeaveImpersonation
+                    full
+                    classes="mb-5"
+                    @clicked="closeDrop()"
+                  />
 
                   <AppButton primary text="Logout" type="button" class="flex w-full items-center justify-center px-4 py-2"
                     @click.prevent="logout(), closeDrop()">
@@ -309,10 +309,10 @@ import { ref } from 'vue';
 import { parseDisplayDate } from '@services/common';
 import { mapStores, mapState, mapActions } from 'pinia';
 import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
 import useAuth from '@composables/auth'
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import NavLink from '@components/includes/NavLink.vue';
+import LeaveImpersonation from '@components/common/LeaveImpersonation.vue';
 import {
   Popover,
   PopoverButton,
@@ -356,6 +356,7 @@ export default {
     BuildingStorefrontIcon,
     ChatBubbleLeftEllipsisIcon,
     NavLink,
+    LeaveImpersonation,
   },
   mounted() {
     if (this.user && this.user.id) {
@@ -375,8 +376,6 @@ export default {
     ...mapState(useAuthStore, [
       'user',
       'authenticated',
-      'impersonatorToken',
-      'currentUserToken',
     ]),
     ...mapState(useAuth, ['processing']),
     currentRouteName() {
@@ -384,12 +383,6 @@ export default {
     },
     appName() {
       return APP_NAME;
-    },
-    isImpersonating() {
-      if (this.currentUserToken && this.impersonatorToken) {
-        return true;
-      }
-      return false;
     },
     darkMode() {
       if (this.theme == 'dark') {
@@ -409,10 +402,6 @@ export default {
   methods: {
     ...mapActions(useAuth, [
       'logout',
-      'leaveImpersonatingUser',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
     ]),
     parseDisplayDate,
     closeDrop() {
@@ -420,19 +409,6 @@ export default {
     },
     openDrop() {
       this.drop = true;
-    },
-    async triggerLeaveImpersonatingUser() {
-      try {
-        await this.leaveImpersonatingUser().then((response) => {
-          this.$router.push({ name: 'users.index' });
-        });
-      } catch (e) {
-        this.popToast({
-          message: 'An error occurred, you are still are not yourself!',
-          timer: 5000,
-          icon: 'error',
-        });
-      }
     },
   },
 };

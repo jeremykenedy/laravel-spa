@@ -26,7 +26,10 @@
       </ol>
     </nav>
 
-    <AppButton v-tippy="'Create User'" :disabled="showCreateUserForm || !dataReady"
+    <AppButton
+      v-if="authenticated && user && (userIs('superadmin') || userCan('create.users'))"
+      v-tippy="$t('create_new_user')"
+      :disabled="showCreateUserForm || !dataReady"
       class="float-right mb-2 px-2 py-2 text-sm font-medium" secondary @click="triggerCreateUser">
       <template #text>
         <UserPlusIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
@@ -35,7 +38,10 @@
       </template>
     </AppButton>
 
-    <div class="mt-2 grid grid-cols-1 float-left clear-both mb-4 w-full sm:w-6/12 lg:w-4/12">
+    <div
+      v-if="authenticated && user && (userIs('superadmin') || userCan('view.users'))"
+      class="mt-2 grid grid-cols-1 float-left clear-both mb-4 w-full sm:w-6/12 lg:w-4/12"
+    >
       <input v-model="search_global" type="text" name="search_users" id="search_users"
         class="col-start-1 row-start-1 block w-full rounded-md placeholder:text-gray-400 pl-9 dark:bg-gray-900 dark:text-gray-200 border-0"
         :placeholder="$t('search_users')+'...'"
@@ -46,7 +52,7 @@
     </div>
 
     <easy-data-table
-      v-if="dataReady"
+      v-if="dataReady && (authenticated && user && (userIs('superadmin') || userCan('view.users')))"
       v-model:server-options="paginationOptions"
       :headers="tableHeaders"
       :items="users"
@@ -118,40 +124,59 @@
       </template>
 
       <template #item-email_verified_at="item" class="whitespace-nowrap">
-        <span class="text-xs">
-          {{ item.email_verified_at ? parseDisplayDate(item.email_verified_at) : null }}
-        </span>
-        <AppButton
-          v-if="!item.email_verified_at"
-          v-tippy="'Send ' + item.name +' email to verify'"
-          :loading="!dataReady"
-          class="ml-2 inline-block rounded bg-transparent px-1 py-2 text-xs font-medium leading-snugtext-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
-          btn-class="text-yellow-700 dark:text-yellow-400 dark:bg-transparent hover:bg-gray-200"
-          btn-class-dark="bg-transparent dark:bg-transparent dark:hover:bg-gray-900"
-          @click="triggerUserConfirmEmail(item)"
-        >
-          <template #text>
-            <EnvelopeIcon class="ml-2 mr-2 mt-0 h-5 w-5" />
-          </template>
-        </AppButton>
+        <div class="text-xs text-center">
+          {{ item.email_verified_at ? parseDisplayDate(item.email_verified_at) : $t('not_verified') }}
+        </div>
+        <div class="ml-auto mr-auto text-center">
+          <div class="text-center ml-auto mr-auto">
+            <AppButton
+              v-tippy="item.email_verified_at ? 'Toggle to unverified' : 'Toggle to verified'"
+              :loading="!dataReady"
+              class="p-0 mr-1"
+            >
+              <template #text>
+                <i
+                  v-tippy="item.email_verified_at ? 'Toggle to unverified' : 'Toggle to verified'"
+                  class="fa-solid text-center fa-1x"
+                  :class="item.email_verified_at ? 'fa-square-check text-green-500' : 'fa-square-xmark text-red-500'"
+                  @click.prevent="toggleVerify(item)"
+                />
+              </template>
+            </AppButton>
+
+            <AppButton
+              v-if="!item.email_verified_at"
+              v-tippy="'Send ' + item.name +' email to verify'"
+              :loading="!dataReady"
+              @click="triggerUserConfirmEmail(item)"
+            >
+              <template #text>
+                <EnvelopeIcon class="mt-0 h-4 w-4 text-gray-700 dark:text-gray-400" />
+              </template>
+            </AppButton>
+
+          </div>
+
+        </div>
       </template>
 
       <template #item-created_at="item">
-        <span class="text-xs">
+        <div class="text-xs text-center">
           {{ item.created_at ? parseDisplayDate(item.created_at) : null }}
-        </span>
+        </div>
       </template>
 
       <template #item-updated_at="item">
-        <span class="text-xs">
+        <div class="text-xs text-center">
           {{ item.updated_at ? parseDisplayDate(item.updated_at) : null }}
-        </span>
+        </div>
       </template>
 
       <template #item-actions="item">
         <div class="whitespace-nowrap">
-
-          <AppButton :loading="!dataReady"
+          <AppButton
+            v-if="authenticated && user && (userIs('superadmin') || userCan('edit.users'))"
+            :loading="!dataReady"
             class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
             :btn-class="locked(item)
               ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
@@ -176,6 +201,7 @@
           </AppButton>
 
           <AppButton
+            v-if="authenticated && user && (userIs('superadmin') || userCan('edit.users'))"
             v-tippy="$t('edit_user')"
             warning
             :disabled="locked(item)"
@@ -191,6 +217,7 @@
           </AppButton>
 
           <AppButton
+            v-if="authenticated && user && (userIs('superadmin') || userCan('delete.users'))"
             v-tippy="$t('delete_user')"
             danger
             :disabled="locked(item)"
@@ -205,22 +232,13 @@
             </template>
           </AppButton>
 
-          <AppButton
-            v-if="user.id != item.id"
-            v-tippy="$t('impersonate_user')"
-            secondary
-            :disabled="locked(item)"
+          <ImpersonateUser
+            v-if="(user.id != item.id) && (authenticated && user && (userIs('superadmin') || userCan('impersonate.users')))"
+            :person="item"
             :loading="!dataReady"
+            :disabled="!dataReady || locked(item)"
             class="mr-2 px-1 py-1 text-sm"
-            @click="triggerImpersonateUser(item)"
-          >
-            <template #text>
-              <UserCircleIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
-              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
-              <span class="sr-only">{{ $t('impersonate_user') }}</span>
-            </template>
-          </AppButton>
-
+          />
         </div>
       </template>
     </easy-data-table>
@@ -242,7 +260,7 @@
     />
     -->
 
-    <UserFormModal :key="userFormKey" :showing-form="showCreateUserForm" :user="userEditing" :new-user="creatingNewUser"
+    <UserFormModal :key="userFormKey" :showing-form="showCreateUserForm" :user-editing="userEditing" :new-user="creatingNewUser"
       :available-roles="availableRoles" :available-permissions="availablePermissions" @close-modal="closeUserForm"
       @user-created="userCreated" @user-updated="userUpdated" />
 
@@ -260,6 +278,7 @@ import CircleSvg from '@components/common/CircleSvg.vue';
 import PerPage from '@components/common/PerPage.vue';
 import RolesBadges from '@components/roles/RolesBadges.vue';
 import { inputNotEmpty, validateEmail, parseDisplayDate } from "@services/utilities";
+import ImpersonateUser from '@components/common/ImpersonateUser.vue';
 
 import {
   ChevronRightIcon,
@@ -296,6 +315,7 @@ export default {
     MagnifyingGlassIcon,
     EnvelopeIcon,
     EasyDataTable: window['vue3-easy-data-table'],
+    ImpersonateUser,
   },
   watch: {
     paginationOptions: {
@@ -407,62 +427,69 @@ export default {
     },
     async getUsers() {
       this.loading = true;
-      await axios
-        .get(
-          `/api/users?page=${this.paginationOptions.page}&per=${this.paginationOptions.rowsPerPage}&sortBy=${this.paginationOptions.sortBy}&sortType=${this.paginationOptions.sortType}&search=${this.search_global}`,
-        )
-        .then(({ data }) => {
-          this.usersLength = data.total;
-          this.paginationOptions.page = data.current_page;
-          this.users = data.data;
-          delete data.data;
-          this.dataReady = true;
-          this.loading = false;
-        })
-        .catch(({ response }) => {
-          this.popToast({
-            message: 'Error Getting Users',
-            timer: 5000,
-            icon: 'error',
+      if(this.authenticated && this.user && this.userCan('view.users')) {
+        await axios
+          .get(
+            `/api/users?page=${this.paginationOptions.page}&per=${this.paginationOptions.rowsPerPage}&sortBy=${this.paginationOptions.sortBy}&sortType=${this.paginationOptions.sortType}&search=${this.search_global}`,
+          )
+          .then(({ data }) => {
+            this.usersLength = data.total;
+            this.paginationOptions.page = data.current_page;
+            this.users = data.data;
+            delete data.data;
+            this.dataReady = true;
+            this.loading = false;
+          })
+          .catch(({ response }) => {
+            this.popToast({
+              message: 'Error Getting Users',
+              timer: 5000,
+              icon: 'error',
+            });
+            this.loading = false;
+            this.dataReady = true;
           });
-          this.loading = false;
-          this.dataReady = true;
-        });
+      }
       this.dataReady = true;
     },
     async getRoles() {
       this.rolesDataReady = false;
-      await axios
-        .get('/api/roles')
-        .then(({ data }) => {
-          this.availableRoles = data.roles;
-          this.rolesDataReady = true;
-        })
-        .catch(({ response }) => {
-          this.popToast({
-            message: 'Error Getting Roles',
-            timer: 5000,
-            icon: 'error',
+      if(this.authenticated && this.user && this.userCan('view.roles')) {
+        await axios
+          .get('/api/roles')
+          .then(({ data }) => {
+            this.availableRoles = data.roles;
+          })
+          .catch(({ response }) => {
+            this.popToast({
+              message: 'Error Getting Roles',
+              timer: 5000,
+              icon: 'error',
+            });
           });
-          this.rolesDataReady = true;
-        });
+      }
+      this.rolesDataReady = true;
     },
     async getPermissions() {
       this.permissionsDataReady = false;
-      await axios
-        .get('/api/permissions')
-        .then(({ data }) => {
-          this.availablePermissions = data.permissions;
-          this.permissionsDataReady = true;
-        })
-        .catch(({ response }) => {
-          this.popToast({
-            message: 'Error Getting Permissions',
-            timer: 5000,
-            icon: 'error',
+
+      if(this.authenticated && this.user && this.userCan('view.permissions')) {
+        await axios
+          .get('/api/permissions')
+          .then(({ data }) => {
+            this.availablePermissions = data.permissions;
+            this.permissionsDataReady = true;
+          })
+          .catch(({ response }) => {
+            this.popToast({
+              message: 'Error Getting Permissions',
+              timer: 5000,
+              icon: 'error',
+            });
+            this.permissionsDataReady = true;
           });
-          this.permissionsDataReady = true;
-        });
+      }
+
       this.permissionsDataReady = true;
     },
     async update(key, row) {
@@ -645,53 +672,85 @@ export default {
           }
         });
     },
-
-    // async confirmUnVerifyUser(value) {
-    //   await axios
-    //     .post('/api/users/toggle-verify', {
-    //       action: 'unVerifyUser',
-    //       user: value,
-    //     })
-    //     .then(({ data }) => {
-    //       this.users = this.users.map((u) => (u.id !== data.id ? u : data));
-    //       this.popToast({
-    //         message: 'Successfully Un-Verified!',
-    //         timer: 5000,
-    //         icon: 'warning',
-    //       });
-    //     })
-    //     .catch(({ response }) => {
-    //       this.popToast({
-    //         message: 'Error Un-Verifying User',
-    //         timer: 5000,
-    //         icon: 'error',
-    //       });
-    //       this.dataReady = true;
-    //     });
-    // },
-    // async confirmVerifyUser(value) {
-    //   await axios
-    //     .post('/api/users/toggle-verify', {
-    //       action: 'confirmVerifyUser',
-    //       user: value,
-    //     })
-    //     .then(({ data }) => {
-    //       this.users = this.users.map((u) => (u.id !== data.id ? u : data));
-    //       this.popToast({
-    //         message: 'Successfully Verified!',
-    //         timer: 5000,
-    //         icon: 'success',
-    //       });
-    //     })
-    //     .catch(({ response }) => {
-    //       this.popToast({
-    //         message: 'Error Verifying User',
-    //         timer: 5000,
-    //         icon: 'error',
-    //       });
-    //       this.dataReady = true;
-    //     });
-    // },
+    toggleVerify(user) {
+      const self = this;
+      const title = '<strong>Toggle Verfification</strong>';
+      const html = `Are you sure you want to <strong> ${user.email_verified_at ? 'Un-Verify' : 'Verify'}</strong> ${user.name}?`;
+      const icon = 'warning';
+      const confirmButtonText = 'Confirm';
+      const denyButtonText = 'Cancel';
+      self.$swal
+        .fire({
+          title,
+          icon,
+          html,
+          showCancelButton: false,
+          showDenyButton: true,
+          confirmButtonText,
+          denyButtonText,
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            if (user.email_verified_at) {
+              self.confirmUnVerifyUser(user);
+            } else {
+              self.confirmVerifyUser(user);
+            }
+          } else if (result.isDenied) {
+            self.popToast({
+              message: 'Cancelled',
+              timer: 2000,
+              icon: 'error',
+            });
+          }
+        });
+    },
+    async confirmVerifyUser(value) {
+      await axios
+        .post('/api/users/toggle-verify', {
+          action: 'confirmVerifyUser',
+          user: value,
+        })
+        .then(({ data }) => {
+          this.users = this.users.map((u) => (u.id !== data.id ? u : data));
+          this.popToast({
+            message: 'Successfully Verified!',
+            timer: 5000,
+            icon: 'success',
+          });
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: 'Error Verifying User',
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+    },
+    async confirmUnVerifyUser(value) {
+      await axios
+        .post('/api/users/toggle-verify', {
+          action: 'unVerifyUser',
+          user: value,
+        })
+        .then(({ data }) => {
+          this.users = this.users.map((u) => (u.id !== data.id ? u : data));
+          this.popToast({
+            message: 'Successfully Un-Verified!',
+            timer: 5000,
+            icon: 'warning',
+          });
+        })
+        .catch(({ response }) => {
+          this.popToast({
+            message: 'Error Un-Verifying User',
+            timer: 5000,
+            icon: 'error',
+          });
+          this.dataReady = true;
+        });
+    },
     async sendUserVerification(user) {
       try {
         await this.verifyResend({ id: user.id }).then((response) => {
@@ -729,19 +788,6 @@ export default {
           this.dataReady = true;
         });
     },
-    async triggerImpersonateUser(user) {
-      try {
-        await this.impersonateUser({ user }).then((response) => {
-          this.$router.push({ name: 'home' });
-        });
-      } catch (e) {
-        this.popToast({
-          message: 'Unable To Impersonate User',
-          timer: 5000,
-          icon: 'error',
-        });
-      }
-    },
   },
 };
 </script>
@@ -754,9 +800,5 @@ button:focus,
 option:focus {
   outline: none !important;
   border: none !important;
-}
-.filter-menu {
-/*  position: absolute;*/
-/*  top:45px;*/
 }
 </style>

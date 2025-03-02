@@ -179,7 +179,7 @@ export default [
         name: 'users.index',
         path: 'users',
         component: Users,
-        beforeEnter: superAdmin,
+        beforeEnter: admin,
         meta: { breadCrumb: 'Users' }
       },
       {

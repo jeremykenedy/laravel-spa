@@ -99,7 +99,7 @@
           </span>
         </div>
         -->
-
+        <LeaveImpersonation classes="mr-4 mt-1" />
         <div class="my-1 mr-5 mt-2 w-full py-2 sm:flex sm:items-center">
           <ToggleDarkMode class="m-0" />
         </div>
@@ -170,6 +170,7 @@ import useAuth from '@composables/auth'
 import useProfile from "@composables/profile";
 import { parseDisplayDate } from '@services/common';
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
+import LeaveImpersonation from '@components/common/LeaveImpersonation.vue';
 import {
   Bars3Icon,
   XMarkIcon,
@@ -195,6 +196,7 @@ export default {
     DocumentTextIcon,
     ToggleDarkMode,
     ArrowRightOnRectangleIcon,
+    LeaveImpersonation,
   },
   data() {
     return {

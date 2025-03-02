@@ -11,26 +11,26 @@ export const useAuthStore = defineStore('auth', () => {
   const impersonatorToken = ref(null)
   const token = Cookies.get('token')
   const socials = ref({
-      facebook: false,
-      twitter: false,
-      instagram: false,
-      github: false,
-      youtube: false,
-      google: false,
-      linkedin: false,
-      twitch: false,
-      apple: false,
-      microsoft: false,
-      tiktok: false,
-      zoho: false,
-      stackexchange: false,
-      gitlab: false,
-      reddit: false,
-      snapchat: false,
-      meetup: false,
-      bitbucket: false,
-      atlassian: false,
-      // NEW_PROVIDER_PLUG :: Put New Provider HERE
+    facebook: false,
+    twitter: false,
+    instagram: false,
+    github: false,
+    youtube: false,
+    google: false,
+    linkedin: false,
+    twitch: false,
+    apple: false,
+    microsoft: false,
+    tiktok: false,
+    zoho: false,
+    stackexchange: false,
+    gitlab: false,
+    reddit: false,
+    snapchat: false,
+    meetup: false,
+    bitbucket: false,
+    atlassian: false,
+    // NEW_PROVIDER_PLUG :: Put New Provider HERE
   });
 
   const login = (() => {
@@ -109,9 +109,9 @@ export const useAuthStore = defineStore('auth', () => {
       return false;
     }
     for (var i = 0; i < this.user.roles.length; i++) {
-        if ((this.user.roles[i].slug.toLowerCase() == role.toLowerCase()) || (this.user.roles[i].name.toLowerCase() == role.toLowerCase())) {
-          return true;
-        }
+      if ((this.user.roles[i].slug.toLowerCase() == role.toLowerCase()) || (this.user.roles[i].name.toLowerCase() == role.toLowerCase())) {
+        return true;
+      }
     }
     return false;
   }
@@ -121,9 +121,9 @@ export const useAuthStore = defineStore('auth', () => {
       return false;
     }
     for (var i = 0; i < this.user.permissions.length; i++) {
-        if ((this.user.permissions[i].slug.toLowerCase() == permission.toLowerCase()) || (this.user.permissions[i].name.toLowerCase() == permission.toLowerCase())) {
-          return true;
-        }
+      if ((this.user.permissions[i].slug.toLowerCase() == permission.toLowerCase()) || (this.user.permissions[i].name.toLowerCase() == permission.toLowerCase())) {
+        return true;
+      }
     }
     return false;
   }

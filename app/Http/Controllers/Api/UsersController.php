@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+
+use App\Http\Requests\Users\ViewUserRequest;
 use App\Http\Requests\Users\CreateUserRequest;
+use App\Http\Requests\Users\VerifyUserRequest;
+use App\Http\Requests\Users\DeleteUserRequest;
+use App\Http\Requests\Users\RestoreUserRequest;
 use App\Http\Requests\Users\GetUserRolesRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
 use App\Http\Resources\Users\UsersCollection;
@@ -40,7 +45,7 @@ class UsersController extends Controller
         return Auth::guard($guard);
     }
 
-    public function users(Request $request)
+    public function users(ViewUserRequest $request)
     {
         $per = 25;
         $sortBy = 'id';
@@ -68,7 +73,7 @@ class UsersController extends Controller
         return response()->json($query->paginate($per));
     }
 
-    public function toggleVerify(Request $request)
+    public function toggleVerify(VerifyUserRequest $request)
     {
         $data = $request->all();
         $user = User::findOrFail($data['user']['id']);
@@ -154,21 +159,21 @@ class UsersController extends Controller
         ]);
     }
 
-    public function restorUser(Request $request, User $user)
+    public function restorUser(RestoreUserRequest $request, User $user)
     {
         $user->restore();
 
         return response()->json($user);
     }
 
-    public function deleteUser(Request $request, User $user)
+    public function deleteUser(DeleteUserRequest $request, User $user)
     {
         $user->delete();
 
         return response()->json($user);
     }
 
-    public function destroyUser(Request $request, User $user)
+    public function destroyUser(DeleteUserRequest $request, User $user)
     {
         $user->forceDelete();
 
