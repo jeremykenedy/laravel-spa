@@ -82,5 +82,12 @@
     "user_settings": "User Settings",
     "not_verified": "Not Verified",
     "leave_impersonating": "Leave Impersonating",
-    "return_to_your_account": "Return to your account"
+    "return_to_your_account": "Return to your account",
+    "create_role": "Create Role",
+    "create_new_role": "Create New Role",
+    "create_post": "Create Post",
+    "create_new_post": "Create New Post",
+    "search_posts": "Search Posts",
+    "no_posts": "There are no posts ",
+    "delete_post": "Delete Post"
 }

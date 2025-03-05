@@ -7,7 +7,7 @@
           <button
             class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
             :class="sideBarOpenGetter ? 'bg-slate-100 text-gray-900 dark:text-gray-100' : ''
-              " @click="toggleSidebarTrigger()">
+              " @click.prevent="toggleSidebarTrigger()">
             <span v-if="!sideBarOpenGetter" class="sr-only">Open menu</span>
             <span v-if="sideBarOpenGetter" class="sr-only">CLose menu</span>
             <Bars3Icon v-if="!sideBarOpenGetter" class="h-6 w-6" aria-hidden="true" />
@@ -19,7 +19,7 @@
           <div class="mr-4 flex items-center">
             <button
               class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
-              @click="toggleFullScreenSidebarTrigger()">
+              @click.prevent="toggleFullScreenSidebarTrigger()">
               <span v-if="!fullScreenSideBarOpenGetter" class="sr-only">Open menu</span>
               <span v-if="fullScreenSideBarOpenGetter" class="sr-only">CLose menu</span>
               <Bars3Icon v-if="!fullScreenSideBarOpenGetter" class="h-6 w-6" aria-hidden="true" />
@@ -28,52 +28,45 @@
           </div>
         </div>
 
-        <!-- && roles && (roles.admin || roles.superAdmin) -->
-
         <div as="nav" class="ml-5 space-x-10 hidden md:flex">
-          <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
 
-          <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'home' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <HomeIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            v-if="authenticated"
+            routeName="dashboard"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <BuildingLibraryIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
-          <router-link v-slot="{ isActive }" :to="{ name: 'about' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <InformationCircleIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            routeName="home"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <HomeIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
 
-          <router-link v-slot="{ isActive }" :to="{ name: 'terms' }"
-            class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-            @click="closeDrop">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              <DocumentTextIcon class="float-left mr-2 h-6 w-6" />
-            </span>
-          </router-link>
+          <NavLink
+            routeName="about"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <InformationCircleIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
+
+          <NavLink
+            routeName="terms"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <DocumentTextIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
+
         </div>
       </div>
 
@@ -132,7 +125,7 @@
             ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
             : 'text-gray-700'
             ">
-            <HomeIcon class="mr-2 h-6 w-6" />
+            <BuildingLibraryIcon class="mr-2 h-6 w-6" />
             {{ $t('dashboard') }}
           </span>
         </router-link>
@@ -171,6 +164,7 @@ import useProfile from "@composables/profile";
 import { parseDisplayDate } from '@services/common';
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import LeaveImpersonation from '@components/common/LeaveImpersonation.vue';
+import NavLink from '@components/includes/NavLink.vue';
 import {
   Bars3Icon,
   XMarkIcon,
@@ -197,6 +191,7 @@ export default {
     ToggleDarkMode,
     ArrowRightOnRectangleIcon,
     LeaveImpersonation,
+    NavLink,
   },
   data() {
     return {

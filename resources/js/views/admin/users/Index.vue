@@ -27,7 +27,7 @@
     </nav>
 
     <AppButton
-      v-if="authenticated && user && (userIs('superadmin') || userCan('create.users'))"
+      v-if="authenticated && user && userCan('create.users')"
       v-tippy="$t('create_new_user')"
       :disabled="showCreateUserForm || !dataReady"
       class="float-right mb-2 px-2 py-2 text-sm font-medium" secondary @click="triggerCreateUser">
@@ -52,7 +52,7 @@
     </div>
 
     <easy-data-table
-      v-if="dataReady && (authenticated && user && (userIs('superadmin') || userCan('view.users')))"
+      v-if="dataReady && authenticated && user && userCan('view.users')"
       v-model:server-options="paginationOptions"
       :headers="tableHeaders"
       :items="users"
@@ -132,14 +132,15 @@
             <AppButton
               v-tippy="item.email_verified_at ? 'Toggle to unverified' : 'Toggle to verified'"
               :loading="!dataReady"
+              :disabled="locked(item)"
               class="p-0 mr-1"
+              @click.prevent="toggleVerify(item)"
             >
               <template #text>
                 <i
-                  v-tippy="item.email_verified_at ? 'Toggle to unverified' : 'Toggle to verified'"
+                  v-tippy="locked(item) ? (item.email_verified_at ? 'Verified' : 'Un-Verified') : null"
                   class="fa-solid text-center fa-1x"
                   :class="item.email_verified_at ? 'fa-square-check text-green-500' : 'fa-square-xmark text-red-500'"
-                  @click.prevent="toggleVerify(item)"
                 />
               </template>
             </AppButton>
@@ -148,6 +149,7 @@
               v-if="!item.email_verified_at"
               v-tippy="'Send ' + item.name +' email to verify'"
               :loading="!dataReady"
+              :disabled="locked(item)"
               @click="triggerUserConfirmEmail(item)"
             >
               <template #text>
@@ -242,23 +244,6 @@
         </div>
       </template>
     </easy-data-table>
-
-    <!--
-    <UsersTable :users="users"
-      :pagination="pagination"
-      :per-page="perPage"
-      :data-ready="dataReady"
-      :available-roles="availableRoles"
-      :lock-jiggled="lockJigled"
-      @get-users="getUsers"
-      @confirm-un-verify-user="confirmUnVerifyUser"
-      @confirm-verify-user="confirmVerifyUser"
-      @delete-user="deleteUser"
-      @edit-user="triggerEditUser"
-      @send-user-verification="sendUserVerification"
-      @impersonate-user-triggered="impersonateUserTriggered"
-    />
-    -->
 
     <UserFormModal :key="userFormKey" :showing-form="showCreateUserForm" :user-editing="userEditing" :new-user="creatingNewUser"
       :available-roles="availableRoles" :available-permissions="availablePermissions" @close-modal="closeUserForm"

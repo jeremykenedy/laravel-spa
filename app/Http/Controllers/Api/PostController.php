@@ -7,19 +7,30 @@ use App\Http\Requests\Posts\StorePostRequest;
 use App\Http\Resources\Posts\PostResource;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $per = 50;
+
+        if ($request->has('per')) {
+            $per = $request->input('per');
+        }
+
         $orderColumn = request('order_column', 'created_at');
+
         if (!in_array($orderColumn, ['id', 'title', 'created_at'])) {
             $orderColumn = 'created_at';
         }
+
         $orderDirection = request('order_direction', 'desc');
+
         if (!in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
+
         $posts = Post::with('media')
             ->whereHas('categories', function ($query) {
                 if (request('search_category')) {
@@ -49,7 +60,8 @@ class PostController extends Controller
             })
 
             ->orderBy($orderColumn, $orderDirection)
-            ->paginate(50);
+            ->paginate($per);
+
         return PostResource::collection($posts);
     }
 

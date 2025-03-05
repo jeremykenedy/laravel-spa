@@ -38,6 +38,16 @@
           </NavLink>
 
           <NavLink
+            v-if="authenticated && user"
+            routeName="home"
+            @nav-clicked="closeDrop"
+          >
+            <template #iconBefore>
+              <HomeIcon class="h-6 w-6" />
+            </template>
+          </NavLink>
+
+          <NavLink
             routeName="about"
             @nav-clicked="closeDrop"
           >

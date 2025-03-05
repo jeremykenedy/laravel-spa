@@ -1,9 +1,9 @@
 <template>
-  <router-link v-slot="{ isActive }" :to="{ name: routeName }"
+  <router-link :to="{ name: routeName }"
     class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
     @click.prevent="navClicked()">
     <span :class="[
-      isActive &&
+      currentRouteName == routeName &&
       'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
     ]">
       <slot v-if="hasIconBeforeSlot" name="iconBefore" />
@@ -23,6 +23,9 @@ export default {
     text: { type: String, default: null },
   },
   computed: {
+    currentRouteName() {
+      return this.$route.name;
+    },
     hasIconBeforeSlot() {
       return this.$slots.iconBefore;
     },

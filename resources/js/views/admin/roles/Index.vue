@@ -26,12 +26,12 @@
     </nav>
 
     <div class="flex justify-end">
-      <AppButton v-tippy="'Create Role'" :disabled="showCreateRoleForm || !dataReady" secondary
+      <AppButton v-tippy="$t('create_role')" :disabled="showCreateRoleForm || !dataReady" secondary
         class="float-right mb-2 px-2 py-2 text-sm font-medium" @click="triggerCreateRole">
         <template #text>
           <span v-if="dataReady" class="fas fa-plus fa-fw ml-2 mr-2" />
           <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
-          <span class="sr-only">Create New Role</span>
+          <span class="sr-only">{{ $t('create_new_role') }}</span>
         </template>
       </AppButton>
     </div>
