@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+
+use App\Http\Requests\Posts\DeletePostRequest;
+use App\Http\Requests\Posts\ShowPostRequest;
 use App\Http\Requests\Posts\StorePostRequest;
+use App\Http\Requests\Posts\UpdatePostRequest;
+
 use App\Http\Resources\Posts\PostResource;
 use App\Models\Category;
 use App\Models\Post;
@@ -67,8 +72,6 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $this->authorize('post-create');
-
         $validatedData = $request->validated();
         $validatedData['user_id'] = auth()->id();
         $post = Post::create($validatedData);
@@ -84,10 +87,8 @@ class PostController extends Controller
         return new PostResource($post);
     }
 
-    public function show(Post $post)
+    public function show(ShowPostRequest $request, Post $post)
     {
-        $this->authorize('post-edit');
-
         if ($post->user_id !== auth()->user()->id && !auth()->user()->hasPermission('Can View Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {
@@ -95,10 +96,8 @@ class PostController extends Controller
         }
     }
 
-    public function update(Post $post, StorePostRequest $request)
+    public function update(StorePostRequest $request, Post $post)
     {
-        $this->authorize('post-edit');
-
         if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('Can Edit Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {
@@ -110,12 +109,14 @@ class PostController extends Controller
         }
     }
 
-    public function destroy(Post $post)
+    public function destroy(DeletePostRequest $request, Post $post)
     {
-        $this->authorize('post-delete');
-
-        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('Can Delete Articles')) {
-            return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only delete your own posts']);
+        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('delete.articles')) {
+            return response()->json([
+                'status'    => 405,
+                'success'   => false,
+                'message'   => 'You can only delete your own posts'
+            ]);
         } else {
             $post->delete();
             return response()->noContent();
@@ -125,8 +126,8 @@ class PostController extends Controller
     public function getPosts()
     {
         $posts = Post::with('categories')->with('media')->latest()->paginate();
-        return PostResource::collection($posts);
 
+        return PostResource::collection($posts);
     }
 
     public function getCategoryByPosts($id)

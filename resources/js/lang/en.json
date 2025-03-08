@@ -89,5 +89,6 @@
     "create_new_post": "Create New Post",
     "search_posts": "Search Posts",
     "no_posts": "There are no posts ",
-    "delete_post": "Delete Post"
+    "delete_post": "Delete Post",
+    "edit_post": "Edit Post"
 }

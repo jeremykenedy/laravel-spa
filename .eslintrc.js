@@ -26,7 +26,7 @@ module.exports = {
     }
   },
   parser: "babel-eslint",
-  plugins: ["vue", "html", "prettier"],
+  plugins: ["js", "vue", "html", "prettier"],
   ignorePatterns: ["**/node_modules", "**/vendor"],
   rules: {
     "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",

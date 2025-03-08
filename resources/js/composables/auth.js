@@ -155,22 +155,22 @@ export default function useAuth() {
   }
 
   const logout = async () => {
-      if (processing.value) return
-      processing.value = true
-      await axios.post('/logout')
-          .then(async response => {
-              user.name = ''
-              user.email = ''
-              authStore.logout()
-              await authStore.getUser()
-          })
-          .catch(error => {
-            toast.error('An error occurred.');
-          })
-          .finally(() => {
-              processing.value = false
-              // Cookies.remove('loggedIn')
-          })
+    if (processing.value) return
+    processing.value = true
+    await axios.post('/logout')
+      .then(async response => {
+        user.name = ''
+        user.email = ''
+        authStore.logout()
+        await authStore.getUser()
+      })
+      .catch(error => {
+        toast.error('An error occurred.');
+      })
+      .finally(() => {
+        processing.value = false
+        // Cookies.remove('loggedIn')
+      })
   }
 
   const impersonateUser = async (payload) => {

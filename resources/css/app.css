@@ -751,3 +751,78 @@ video {
 :root[class~="dark"] div:where(.swal2-container) div:where(.swal2-popup){
   @apply bg-gray-800 text-gray-200
 }
+
+
+.title-filter {
+  background: #fff;
+  position: absolute;
+  top: 32px;
+  z-index: 10000;
+  left: -40px;
+  border: none;
+  border-radius: 5px;
+  min-height: 42px;
+}
+
+.dark .title-filter,
+.dark .vs__dropdown-toggle {
+  background: #222;
+}
+
+.categories-filter {
+  background: #fff;
+  position: absolute;
+  top: 32px;
+  width: 150px;
+  z-index: 9999;
+  left: -90px;
+  border-radius: 5px;
+}
+
+.categories-filter .vs__dropdown-toggle {
+  border: none;
+  border-radius: 5px;
+  min-height: 42px;
+}
+
+.filterbutton {
+  padding: 0;
+  width: 25px;
+}
+
+.filter-column {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+}
+
+/*.slider {
+  position: absolute;
+  width: 40px;
+  top: 58px;
+  z-index: 9999;
+}
+*/
+.inactive-filter {
+  color: transparent;
+}
+
+.inactive-filter:hover {
+  color: #333;
+}
+
+.active-filter,
+.active-filter:hover {
+  color: #333;
+}
+
+
+.dark .inactive-filter:hover {
+  color: #888;
+}
+
+.dark .active-filter,
+.dark .active-filter:hover {
+  color: #fff;
+}
