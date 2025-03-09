@@ -53,7 +53,6 @@
       </ol>
     </nav>
 
-
     <router-link v-if="userCan('create.articles')" :to="{ name: 'posts.create' }" class="float-right mb-2 ml-2">
       <AppButton v-tippy="$t('create_post')" secondary class="px-2 py-2 text-sm font-medium">
         <template #text>

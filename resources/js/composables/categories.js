@@ -52,10 +52,7 @@ export default function useCategories() {
         return axios.post('/api/categories', category)
             .then(response => {
                 router.push({name: 'categories.index'})
-                swal({
-                    icon: 'success',
-                    title: 'Category saved successfully'
-                })
+                toast.success('Category saved successfully');
                 return response;
             })
             .catch(error => {
@@ -75,10 +72,7 @@ export default function useCategories() {
         return axios.put('/api/categories/' + category.id, category)
             .then(response => {
                 router.push({name: 'categories.index'})
-                swal({
-                    icon: 'success',
-                    title: 'Category updated successfully'
-                })
+                toast.success('Category updated successfully');
                 return response;
             })
             .catch(error => {
