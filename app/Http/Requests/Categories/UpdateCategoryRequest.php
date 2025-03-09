@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Posts;
+namespace App\Http\Requests\Categories;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest
+class UpdateCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return $this->user()->hasPermission('create.articles');
+        return $this->user()->hasPermission('edit.categories');
     }
 
     /**
@@ -19,12 +19,11 @@ class StorePostRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => 'required',
-            'content' => 'required',
-            'categories' => 'required'
+            'name' => 'required|max:255',
+            // 'name' => 'required|string|max:255|unique:categories,name,'.$category->id,
         ];
     }
 }

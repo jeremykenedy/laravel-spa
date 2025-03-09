@@ -79,6 +79,30 @@ class PermissionsTableSeeder extends Seeder
                 'model'       => 'Permission',
             ],
             [
+                'name'        => 'Can View Categories',
+                'slug'        => 'view.categories',
+                'description' => 'Can view categories',
+                'model'       => 'Permission',
+            ],
+            [
+                'name'        => 'Can Create Categories',
+                'slug'        => 'create.categories',
+                'description' => 'Can create new categories',
+                'model'       => 'Permission',
+            ],
+            [
+                'name'        => 'Can Edit Categories',
+                'slug'        => 'edit.categories',
+                'description' => 'Can edit categories',
+                'model'       => 'Permission',
+            ],
+            [
+                'name'        => 'Can Delete Categories',
+                'slug'        => 'delete.categories',
+                'description' => 'Can delete categories',
+                'model'       => 'Permission',
+            ],
+            [
                 'name'        => 'Can View Roles',
                 'slug'        => 'view.roles',
                 'description' => 'Can view roles',

@@ -63,6 +63,9 @@
             const OCTOCAT_BASE_URL="{{ config('settings.octocat.base_url') }}"
             const OCTOCAT_USERNAME="{{ config('settings.octocat.username') }}"
             const OCTOCAT_REPO="{{ config('settings.octocat.repo') }}"
+            const TINY_MCE_KEY="{{ config('settings.tinymce.key') }}"
+            const CK_EDITOR_KEY="{{ config('settings.ckeditor.key') }}"
+            const OPEN_AI_KEY="{{ config('settings.open_ai.key') }}"
         </script>
         @vite(['resources/css/app.css'])
     </head>

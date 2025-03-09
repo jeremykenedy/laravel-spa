@@ -1,7 +1,9 @@
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
+import { useToastStore } from "@store/toast";
 
 export default function useCategories() {
+    const toast = useToastStore();
     const categories = ref([])
     const categoryList = ref([])
     const category = ref({
@@ -21,7 +23,7 @@ export default function useCategories() {
         order_column = 'created_at',
         order_direction = 'desc'
     ) => {
-        axios.get('/api/categories?page=' + page +
+        return axios.get('/api/categories?page=' + page +
             '&search_id=' + search_id +
             '&search_title=' + search_title +
             '&search_global=' + search_global +
@@ -29,13 +31,15 @@ export default function useCategories() {
             '&order_direction=' + order_direction)
             .then(response => {
                 categories.value = response.data;
+                return response.data;
             })
     }
 
     const getCategory = async (id) => {
-        axios.get('/api/categories/' + id)
+        return axios.get('/api/categories/' + id)
             .then(response => {
                 category.value = response.data.data;
+                return response.data.data;
             })
     }
 
@@ -45,13 +49,14 @@ export default function useCategories() {
         isLoading.value = true
         validationErrors.value = {}
 
-        axios.post('/api/categories', category)
+        return axios.post('/api/categories', category)
             .then(response => {
                 router.push({name: 'categories.index'})
                 swal({
                     icon: 'success',
                     title: 'Category saved successfully'
                 })
+                return response;
             })
             .catch(error => {
                 if (error.response?.data) {
@@ -67,13 +72,14 @@ export default function useCategories() {
         isLoading.value = true
         validationErrors.value = {}
 
-        axios.put('/api/categories/' + category.id, category)
+        return axios.put('/api/categories/' + category.id, category)
             .then(response => {
                 router.push({name: 'categories.index'})
                 swal({
                     icon: 'success',
                     title: 'Category updated successfully'
                 })
+                return response;
             })
             .catch(error => {
                 if (error.response?.data) {
@@ -83,43 +89,41 @@ export default function useCategories() {
             .finally(() => isLoading.value = false)
     }
 
-    const deleteCategory = async (id) => {
-        swal({
-            title: 'Are you sure?',
-            text: 'You won\'t be able to revert this action!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete it!',
-            confirmButtonColor: '#ef4444',
-            timer: 20000,
-            timerProgressBar: true,
-            reverseButtons: true
-        })
-            .then(result => {
-                if (result.isConfirmed) {
-                    axios.delete('/api/categories/' + id)
-                        .then(response => {
-                            getCategories()
-                            router.push({name: 'categories.index'})
-                            swal({
-                                icon: 'success',
-                                title: 'Category deleted successfully'
-                            })
-                        })
-                        .catch(error => {
-                            swal({
-                                icon: 'error',
-                                title: 'Something went wrong'
-                            })
-                        })
-                }
+    const deleteCategory = async (item) => {
+
+      return swal({
+        title: `<strong>Delete ${item.name}?</strong>`,
+        icon: 'warning',
+        html: `Are you sure you want to <strong>Delete</strong> <em>${item.name}</em>?<br><br><h6>This will delete the category.<br>You won't be able to revert this action!</h6>`,
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        confirmButtonColor: '#FF0000',
+        denyButtonText: 'Cancel',
+        denyButtonColor: '#777777',
+        timer: 20000,
+        timerProgressBar: true,
+        reverseButtons: true
+      })
+      .then(result => {
+        if (result.isConfirmed) {
+          return axios.delete('/api/categories/' + item.id)
+            .then(response => {
+              router.push({name: 'categories.index'})
+              toast.success('Category deleted successfully');
+              return getCategories();
             })
+            .catch(error => {
+              toast.error('Something went wrong');
+            })
+        }
+      })
     }
 
     const getCategoryList = async () => {
-        axios.get('/api/category-list')
+        return axios.get('/api/category-list')
             .then(response => {
                 categoryList.value = response.data.data;
+                return response.data.data;
             })
     }
 

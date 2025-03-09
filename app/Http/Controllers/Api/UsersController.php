@@ -122,7 +122,7 @@ class UsersController extends Controller
     public function updateUser(UpdateUserRequest $request, User $user)
     {
         $request->validate([
-            'email' => 'required|email|unique:users,email,'.$user->id,
+            'email' => 'required|email|max:255|unique:users,email,'.$user->id,
         ]);
 
         if ($request->email_verified_at == true) {

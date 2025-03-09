@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
 use App\Http\Requests\Posts\DeletePostRequest;
 use App\Http\Requests\Posts\ShowPostRequest;
 use App\Http\Requests\Posts\StorePostRequest;
 use App\Http\Requests\Posts\UpdatePostRequest;
-
+use App\Http\Requests\Posts\RestorePostRequest;
 use App\Http\Resources\Posts\PostResource;
 use App\Models\Category;
 use App\Models\Post;
@@ -16,6 +15,17 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+
+        try {
+            ob_start('ob_gzhandler');
+        } catch (\Exception $e) {
+            //
+        }
+    }
+
     public function index(Request $request)
     {
         $per = 50;
@@ -37,31 +47,34 @@ class PostController extends Controller
         }
 
         $posts = Post::with('media')
-            ->whereHas('categories', function ($query) {
+            ->when(request('search_category'), function ($query) {
                 if (request('search_category')) {
-                    $categories = explode(",", request('search_category'));
-                    $query->whereIn('id', $categories);
+                    return $query->where(function ($q) {
+                        return $q->whereHas('categories', function ($q1) {
+                            $categories = explode(",", request('search_category'));
+                            $q1->whereIn('id', $categories);
+                        });
+                    });
                 }
             })
             ->when(request('search_id'), function ($query) {
-                $query->where('id', request('search_id'));
+                return $query->where('id', request('search_id'));
             })
             ->when(request('search_title'), function ($query) {
-                $query->where('title', 'like', '%' . request('search_title') . '%');
+                return $query->where('title', 'like', '%' . request('search_title') . '%');
             })
             ->when(request('search_content'), function ($query) {
-                $query->where('content', 'like', '%' . request('search_content') . '%');
+                return $query->where('content', 'like', '%' . request('search_content') . '%');
             })
             ->when(request('search_global'), function ($query) {
-                $query->where(function ($q) {
-                    $q->where('id', request('search_global'))
+                return $query->where(function ($q) {
+                    return $q->where('id', request('search_global'))
                         ->orWhere('title', 'like', '%' . request('search_global') . '%')
                         ->orWhere('content', 'like', '%' . request('search_global') . '%');
-
                 });
             })
             ->when(!auth()->user()->hasPermission('Can Edit Articles'), function ($query) {
-                $query->where('user_id', auth()->id());
+                return $query->where('user_id', auth()->id());
             })
 
             ->orderBy($orderColumn, $orderDirection)
@@ -121,6 +134,20 @@ class PostController extends Controller
             $post->delete();
             return response()->noContent();
         }
+    }
+
+    public function restorePost(RestorePostRequest $request, Post $post)
+    {
+        $post->restore();
+
+        return response()->json($post);
+    }
+
+    public function destroyPost(DeletePostRequest $request, Post $post)
+    {
+        $post->forceDelete();
+
+        return response()->json($post);
     }
 
     public function getPosts()

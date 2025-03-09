@@ -69,14 +69,12 @@ export default function usePosts() {
         })
         .then(response => {
             router.push({name: 'posts.index'})
-            swal({
-                icon: 'success',
-                title: 'Post saved successfully'
-            })
+            toast.success('Post created successfully');
         })
         .catch(error => {
             if (error.response?.data) {
                 validationErrors.value = error.response.data.errors
+                toast.error('Something went wrong');
             }
         })
         .finally(() => isLoading.value = false)
@@ -91,15 +89,13 @@ export default function usePosts() {
       axios.put('/api/posts/' + post.id, post)
       .then(response => {
           router.push({name: 'posts.index'})
-          swal({
-              icon: 'success',
-              title: 'Post updated successfully'
-          })
+          toast.success('Post updated successfully');
       })
       .catch(error => {
           if (error.response?.data) {
               validationErrors.value = error.response.data.errors
           }
+          toast.error('Something went wrong');
       })
       .finally(() => isLoading.value = false)
     };

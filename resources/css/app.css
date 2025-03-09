@@ -826,3 +826,19 @@ video {
 .dark .active-filter:hover {
   color: #fff;
 }
+
+.dark .editor-container .ck.ck-content.ck-editor__editable {
+  @apply dark:bg-gray-900 dark:text-gray-100 border-none;
+}
+
+.vs__dropdown-toggle .vs__selected {
+  @apply text-sm px-3
+}
+
+.dark .vs__dropdown-toggle .vs__selected {
+  @apply dark:bg-gray-800 dark:text-gray-100
+}
+
+.vs__dropdown-toggle .vs__selected .vs__deselect {
+  @apply bg-gray-100 rounded-full p-1 ml-2
+}

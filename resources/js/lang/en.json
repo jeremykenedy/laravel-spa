@@ -90,5 +90,14 @@
     "search_posts": "Search Posts",
     "no_posts": "There are no posts ",
     "delete_post": "Delete Post",
-    "edit_post": "Edit Post"
+    "edit_post": "Edit Post",
+    "create_category": "Create Category",
+    "create_new_category": "Create New Category",
+    "no_categories": "No Categories",
+    "search_categories": "Search Categories",
+    "edit_category": "Edit Category",
+    "delete_category": "Delete Category",
+    "clear": "Clear",
+    "save": "Save",
+    "cancelled": "Cancelled"
 }

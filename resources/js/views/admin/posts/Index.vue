@@ -25,7 +25,7 @@
       </ol>
     </nav>
 
-    <NoRecordsCTA v-if="startPosts == 0 && dataReady" :text="$t('no_posts')">
+    <NoRecordsCTA v-if="startAmount == 0 && dataReady" :text="$t('no_posts')">
       <template #action>
         <router-link v-if="userCan('create.articles')" :to="{ name: 'posts.create' }" class="float-right mb-2">
           <AppButton v-tippy="$t('create_post')" secondary class="px-5 py-2 font-medium">
@@ -38,7 +38,7 @@
       </template>
     </NoRecordsCTA>
 
-    <div v-if="startPosts > 0 && posts && posts.data">
+    <div v-if="startAmount > 0 && items && items.data">
       <router-link v-if="userCan('create.articles')" :to="{ name: 'posts.create' }" class="float-right mb-2">
         <AppButton v-tippy="$t('create_post')" secondary class="px-2 py-2 text-sm font-medium">
           <template #text>
@@ -47,6 +47,7 @@
           </template>
         </AppButton>
       </router-link>
+
       <div v-if="userCan('view.articles')"
         class="mt-2 grid grid-cols-1 float-left clear-both mb-4 w-full sm:w-6/12 lg:w-4/12">
         <input v-model="search_global" type="text" name="search_posts" id="search_posts"
@@ -56,8 +57,8 @@
           class="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-600 sm:size-4" />
       </div>
 
-      <EasyDataTable v-model:server-options="paginationOptions" :headers="tableHeaders" :items="posts.data"
-        :rows-items="perPage" :loading='!dataReady' :key="postsTableKey" :server-items-length="postsLength"
+      <EasyDataTable v-model:server-options="paginationOptions" :headers="tableHeaders" :items="items.data"
+        :rows-items="perPage" :loading='!dataReady' :key="itemsTableKey" :server-items-length="itemsLength"
         ref="postsTable" no-hover must-sort body-item-class-name="text-xs" class="clear-both z-50" fixed-header>
 
         <template #header-id="header">
@@ -170,6 +171,7 @@
             </AppButton>
           </div>
         </template>
+
       </EasyDataTable>
     </div>
   </div>
@@ -209,8 +211,8 @@ const search_global = ref('');
 const orderColumn = ref('id');
 const orderDirection = ref('desc');
 const dataReady = ref(false);
-const postsTableKey = ref(43298654);
-const postsLength = ref(0);
+const itemsTableKey = ref(43298654);
+const itemsLength = ref(0);
 const paginationOptions = ref({
   page: 1,
   rowsPerPage: 25,
@@ -219,7 +221,8 @@ const paginationOptions = ref({
 });
 const showNameFilter = ref(false);
 const showCategoriesFilter = ref(false);
-const startPosts = ref(0);
+const startAmount = ref(0);
+const items = computed(() => { return posts.value; })
 
 const perPage = [
   10, 25, 50, 100, 500, 1000, 10000
@@ -240,7 +243,7 @@ const tableHeaders = ref([
 
 onMounted(() => {
   getPosts().then((ref) => {
-    startPosts.value = ref.data.length;
+    startAmount.value = ref.data.length;
     dataReady.value = true;
   })
   getCategoryList();
@@ -256,7 +259,7 @@ const triggerDeletePost = async (post) => {
       search_global.value = '';
       orderColumn.value = 'id';
       orderDirection.value = 'desc';
-      startPosts.value = ref.data.length;
+      startAmount.value = ref.data.length;
     }
   })
 };
@@ -332,7 +335,7 @@ watch(search_global, _.debounce((current) => {
 }, 200));
 
 watch(posts, (current) => {
-  postsLength.value = current.data.length;
+  itemsLength.value = current.data.length;
 }, { deep: true });
 
 watch(paginationOptions, (current) => {

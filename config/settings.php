@@ -112,4 +112,25 @@ return [
      */
     'showRouteHttpMethod' => env('SHOW_ROUTE_HTTP_METHOD', 1),
 
+    /*
+     * Tiny MCE Editor Key
+     */
+    'tinymce' => [
+        'key' => env('TINY_MCE_KEY', null),
+    ],
+
+    /*
+     * CK Editor Key
+     */
+    'ckeditor' => [
+        'key' => env('CK_EDITOR_KEY', null),
+    ],
+
+    /*
+     * OpenAI Key
+     */
+    'open_ai' => [
+        'key' => env('OPEN_AI_KEY', null),
+    ],
+
 ];

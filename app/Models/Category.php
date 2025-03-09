@@ -11,7 +11,9 @@ class Category extends Model
 {
     use HasFactory, LogsActivity;
 
-    protected $fillable = ['name', 'text'];
+    protected $fillable = [
+        'name',
+    ];
 
     public function getActivitylogOptions(): LogOptions
     {

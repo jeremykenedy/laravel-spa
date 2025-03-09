@@ -43,6 +43,9 @@ const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-l
 const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
 const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED; // eslint-disable-line
 const VUE_ASTEROIDS_ENABLED = KONAMI_ASTEROIDS_ENABLED; // eslint-disable-line
+const VUE_TINY_MCE_KEY = TINY_MCE_KEY; // eslint-disable-line
+const VUE_CK_EDITOR_KEY = CK_EDITOR_KEY; // eslint-disable-line
+const VUE_OPEN_AI_KEY = OPEN_AI_KEY; // eslint-disable-line
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);

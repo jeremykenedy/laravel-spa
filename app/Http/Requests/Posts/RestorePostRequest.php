@@ -4,14 +4,14 @@ namespace App\Http\Requests\Posts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePostRequest extends FormRequest
+class RestorePostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return $this->user()->hasPermission('create.articles');
+        return $this->user()->hasPermission('restore.articles');
     }
 
     /**
@@ -19,12 +19,10 @@ class StorePostRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'title' => 'required',
-            'content' => 'required',
-            'categories' => 'required'
+            //
         ];
     }
 }

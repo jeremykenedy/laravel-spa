@@ -1,148 +1,174 @@
 <template>
-  <form @submit.prevent="submitForm">
-    <div class="row my-5">
-      <div class="col-md-8">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body">
+  <div id="create_post" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
+    <nav class="mb-6 mt-2 ml-2 text-sm font-semibold float-left" aria-label="Breadcrumb">
+      <ol class="inline-flex list-none p-0">
+        <li class="flex items-center">
+          <router-link v-slot="{ isActive }" :to="{ name: 'dashboard' }"
+            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
+            {{ $t('dashboard') }}
+          </router-link>
+        </li>
+        <li class="flex items-center">
+          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
+        </li>
+        <li class="flex items-center">
+          <router-link v-slot="{ isActive }" :to="{ name: 'posts.index' }"
+            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
+            <span :class="[
+              isActive &&
+              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+            ]">
+              {{ $t('posts') }}
+            </span>
+          </router-link>
+        </li>
+        <li class="flex items-center">
+          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
+        </li>
+        <li class="flex items-center">
+          <router-link v-slot="{ isActive }" :to="{ name: 'posts.create' }"
+            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
+            <span :class="[
+              isActive &&
+              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+            ]">
+              {{ $t('create_post') }}
+            </span>
+          </router-link>
+        </li>
+      </ol>
+    </nav>
 
-            <div class="mb-3">
-              <label for="post-title" class="form-label">
-                Title
-              </label>
-              <input v-model="post.title" id="post-title" type="text" class="form-control">
-              <div class="text-danger mt-1">
-                {{ errors.title }}
-              </div>
-              <div class="text-danger mt-1">
-                <div v-for="message in validationErrors?.title">
-                  {{ message }}
+    <AppButton v-tippy="$t('cancel')" secondary @click.prevent="cancelForm"
+      class="px-2 py-2 text-sm font-medium float-right mb-2 ml-2">
+      <template #text>
+        <span class="fas fa-reply fa-fw ml-2 mr-2" />
+        <span class="sr-only">{{ $t('cancel') }}</span>
+      </template>
+    </AppButton>
+    <AppButton v-tippy="$t('clear')" warning @click.prevent="clearForm"
+      class="px-2 py-2 text-sm font-medium float-right mb-2 ml-2">
+      <template #text>
+        <span class="fas fa-close fa-fw ml-2 mr-2" />
+        <span class="sr-only">{{ $t('clear') }}</span>
+      </template>
+    </AppButton>
+    <AppButton v-tippy="$t('save')" primary submit @click.prevent="submitForm"
+      class="px-2 py-2 text-sm font-medium float-right mb-2 ml-2">
+      <template #text>
+        <span class="fas fa-save fa-fw ml-2 mr-2" />
+        <span class="sr-only">{{ $t('save') }}</span>
+      </template>
+    </AppButton>
+
+    <div class="clear-both">
+      <form @submit.prevent="submitForm">
+        <div class="space-y-12">
+          <div class="pb-12">
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+              <div class="col-span-full">
+                <label for="post-title" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Title</label>
+                <div class="mt-2">
+                  <input v-model="post.title" type="text" name="post-title" id="post-title"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 dark:outline outline-1 dark:bg-gray-900 dark:border-none dark:text-gray-100 dark:outline-0 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></input>
+                </div>
+                <div class="text-red-500 dark:text-red-400 mt-1 text-sm font-bold">
+                  {{ errors.title }}
+                </div>
+                <div class="text-red-500 dark:text-red-400 mt-1 text-sm font-bold">
+                  <div v-for="message in validationErrors?.title">
+                    {{ message }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- Content -->
-            <div class="mb-3">
-              <label for="post-content" class="form-label">
-                Content
-              </label>
 
-              <textarea v-model="post.content"></textarea>
+              <div class="col-span-full">
+                <label for="categories"
+                  class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Categories</label>
+                <div class="mt-2 grid grid-cols-1">
+                  <v-select multiple v-model="post.categories" :options="categoryList" :reduce="category => category.id"
+                    label="name" placeholder="Select category" id="categories" name="categories" />
+                </div>
 
-              <!-- <TextEditorComponent v-model="post.content" /> -->
-
-
-              <div class="text-danger mt-1">
-                {{ errors.content }}
-              </div>
-              <div class="text-danger mt-1">
-                <div v-for="message in validationErrors?.content">
-                  {{ message }}
+                <div class="text-red-500 dark:text-red-400 mt-1 text-sm font-bold">
+                  {{ errors.categories }}
+                </div>
+                <div class="text-red-500 dark:text-red-400 mt-1 text-sm font-bold">
+                  <div v-for="message in validationErrors?.categories">
+                    {{ message }}
+                  </div>
                 </div>
               </div>
+
+              <div class="col-span-full">
+                <label for="about" class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Content</label>
+                <div class="mt-2">
+                  <TextEditorComponent v-model="post.content" />
+                </div>
+                <div class="text-red-500 dark:text-red-400 mt-1 text-sm font-bold">
+                  <div v-for="message in validationErrors?.content">
+                    {{ message }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-span-full rounded">
+                <label for="cover-photo"
+                  class="block text-sm/6 font-medium text-gray-900 dark:text-gray-300">Thumbnail</label>
+                <DropZone v-model="post.thumbnail" />
+                <div class="text-red-500 dark:text-red-400 mt-1 text-sm font-bold">
+                  <div v-for="message in validationErrors?.thumbnail">
+                    {{ message }}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card border-0 shadow-sm">
-          <div class="card-body">
-            <h6>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-              </svg> Action
-            </h6>
-            <div class="mt-3 text-center">
-              <button :disabled="isLoading" class="btn btn btn-outline-primary me-2">
-                <div v-show="isLoading" class=""></div>
-                <span v-if="isLoading">Processing...</span>
-                <span v-else>Save Draft</span>
-              </button>
 
-
-              <button :disabled="isLoading" class="btn btn-primary">
-                <div v-show="isLoading" class=""></div>
-                <span v-if="isLoading">Processing...</span>
-                <span v-else>Publish</span>
-              </button>
-
-
-
-
-            </div>
-            <h6 class="mt-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                  d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-              </svg> Category
-            </h6>
-            <!-- Category -->
-            <div class="mb-3">
-              <v-select multiple v-model="post.categories" :options="categoryList" :reduce="category => category.id"
-                label="name" class="form-control" placeholder="Select category" />
-              <div class="text-danger mt-1">
-                {{ errors.categories }}
-              </div>
-              <div class="text-danger mt-1">
-                <div v-for="message in validationErrors?.categories">
-                  {{ message }}
-                </div>
-              </div>
-            </div>
-            <!--                        <div class="mb-3">
-                            <h6 class="mt-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-                                </svg> Thumbnail
-                            </h6>
-                            <input @change="post.thumbnail = $event.target.files[0]" type="file" class="form-control"
-                                   id="thumbnail"/>
-                            <div class="text-danger mt-1">
-                                <div v-for="message in validationErrors?.thumbnail">
-                                    {{ message }}
-                                </div>
-                            </div>
-                        </div>-->
-            <div class="mb-3">
-              <h6 class="mt-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd"
-                    d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
-                </svg> Thumbnail
-              </h6>
-              <DropZone v-model="post.thumbnail" />
-              <div class="text-danger mt-1">
-                <div v-for="message in validationErrors?.thumbnail">
-                  {{ message }}
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="mt-8 flex items-center justify-center gap-x-6 actions">
+          <AppButton secondary @click.prevent="cancelForm">
+            <template #text>
+              {{ $t('cancel') }}
+            </template>
+          </AppButton>
+          <AppButton warning @click.prevent="clearForm">
+            <template #text>
+              {{ $t('clear') }}
+            </template>
+          </AppButton>
+          <AppButton primary submit @click.prevent="submitForm" class="px-5">
+            <template #text>
+              {{ $t('save') }}
+            </template>
+          </AppButton>
         </div>
-      </div>
+      </form>
     </div>
-
-
-
-
-  </form>
-
-  <button type="submit" @click.prevent="submitForm">
-
-    Send it
-  </button>
-
+  </div>
 </template>
 <script setup>
-import { onMounted, reactive, ref } from "vue";
-import TextEditorComponent from "@/components/TextEditorComponent.vue";
-import DropZone from "@/components/DropZone.vue";
+import { computed, onMounted, watch, reactive, ref } from "vue";
+import TextEditorComponent from "@/components/common/TextEditorComponent.vue";
+import DropZone from "@/components/common/DropZone.vue";
 import useCategories from "@/composables/categories";
 import usePosts from "@/composables/posts";
+import { useAuthStore } from "@store/auth";
+import { useToastStore } from "@store/toast";
+import { useRoute, useRouter } from "vue-router";
 import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules"
+import {
+  MagnifyingGlassIcon,
+  ChevronRightIcon,
+  TrashIcon,
+  FunnelIcon,
+  PencilIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from '@heroicons/vue/24/outline';
 
 defineRule('required', required)
 defineRule('min', min);
@@ -162,7 +188,12 @@ const { value: title } = useField('title', null, { initialValue: '' });
 const { value: content } = useField('content', null, { initialValue: '' });
 const { value: categories } = useField('categories', null, { initialValue: '', label: 'category' });
 const { categoryList, getCategoryList } = useCategories()
-const { storePost, validationErrors, isLoading } = usePosts()
+const { storePost, validationErrors, isLoading, deletePost } = usePosts()
+const { userCan, userIs, user, authenticated } = useAuthStore();
+const { popToast, success, error } = useToastStore();
+const toast = useToastStore();
+const router = useRouter();
+
 const post = reactive({
   title,
   content,
@@ -173,11 +204,23 @@ const post = reactive({
 const thefile = ref('')
 
 function submitForm() {
-
   storePost(post)
   // validate().then(form => {
   //   if (form.valid) storePost(post)
   // })
+}
+
+function clearForm() {
+  post.title = '';
+  post.content = '';
+  post.categories = null;
+  post.thumbnail = '';
+  success('Cleared');
+}
+
+function cancelForm() {
+  success('Cancelled');
+  router.push({ name: 'posts.index' });
 }
 
 onMounted(() => {

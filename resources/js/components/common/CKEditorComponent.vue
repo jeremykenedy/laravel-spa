@@ -1,16 +1,31 @@
+<template>
+  <CKEditor :editor="ClassicEditor" v-model="editorData" :model-value="props.modelValue" :config="editorConfig" />
+</template>
+
 <script setup>
-import { onBeforeMount, onMounted, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, watch, reactive, ref } from "vue";
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { component as CKEditor } from '@ckeditor/ckeditor5-vue';
-
 const props = defineProps({
   modelValue: String
 })
-
-const emit = defineEmits(['update:modelValue'])
+const editorData = ref(props.modelValue || '');
+const appName = computed(() => { return APP_NAME; });
+const ckeKey = computed(() => { return CK_EDITOR_KEY; });
+const emit = defineEmits(['update:modelValue']);
 
 const editorConfig = ref({
-  toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
+  toolbar: [
+    'heading',
+    '|',
+    'bold',
+    'italic',
+    'link',
+    'bulletedList',
+    'numberedList',
+    'blockQuote',
+  ],
+  licenseKey: ckeKey,
   heading: {
     options: [
       { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
@@ -20,22 +35,14 @@ const editorConfig = ref({
   }
 })
 
-const editorData = ref(props.modelValue || '')
-
 onMounted(() => {
-
+  //
 })
 
 watch(editorData, () => {
-  console.log('sdddss')
   emit('update:modelValue', editorData.value)
 })
 </script>
-
-<template>
-  <CKEditor :editor="ClassicEditor" v-model="editorData" :model-value="props.modelValue" :config="editorConfig">
-  </CKEditor>
-</template>
 
 <style>
 .ck-editor__editable {
