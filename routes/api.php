@@ -1,56 +1,52 @@
 <?php
 
-use App\Http\Controllers\AppSettingsController;
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\AppSettingsController;
+use App\Http\Controllers\Admin\ServerInfoController;
+use App\Http\Controllers\Api\ActivityLogController;
+use App\Http\Controllers\Api\BrowserSessionController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\PermissionsController;
+use App\Http\Controllers\Api\PostController;
+use App\Http\Controllers\Api\ProfileController;
+use App\Http\Controllers\Api\RolesController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\PasswordController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ImpersonateController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerificationController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ImpersonateController;
-use App\Http\Controllers\PermissionsController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\ServerInfoController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UsersController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
-Route::group(['middleware' => ['forceHTTPS', 'activity']], function () {
+Route::group(['middleware' => ['forceHTTPS']], function() {
+    Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
+    Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
     Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
-    Route::post('/verify-resend', [VerificationController::class, 'resend']);
-    Route::get('/user', [UserController::class, 'user']);
+    Route::get('category-list', [CategoryController::class, 'getList']);
+    Route::get('get-posts', [PostController::class, 'getPosts']);
+    Route::get('get-category-posts/{id}', [PostController::class, 'getCategoryByPosts']);
+    Route::get('get-post/{id}', [PostController::class, 'getPost']);
     Route::post('/user-by-token', [UserController::class, 'userByToken']);
+
+
     Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
     Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
     Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
 
-    Route::middleware('guest')->group(function () {
-        Route::post('/login', [AuthController::class, 'login']);
-        Route::post('/register', RegisterController::class);
-        Route::post('/forgot-password', ForgotPasswordController::class);
-        Route::post('/reset-password', ResetPasswordController::class);
-    });
-
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::patch('/profile', [ProfileController::class, 'profile']);
-        Route::patch('/theme', [ProfileController::class, 'theme']);
-        Route::patch('/password', PasswordController::class);
-        Route::post('/logout', [AuthController::class, 'logout']);
-        Route::post('/oauth-revoke/{provider}', [SocialiteController::class, 'revokeSocialProvider']);
+    Route::group(['middleware' => ['auth:sanctum']], function() {
+        Route::apiResource('posts', PostController::class);
+        Route::apiResource('categories', CategoryController::class);
+        Route::get('category-list', [CategoryController::class, 'getList']);
+        Route::get('/user', [ProfileController::class, 'user']);
+        Route::put('/user', [ProfileController::class, 'update']);
+        Route::post('/toggle-dark-mode', [ProfileController::class, 'darkModeToggle']);
+        Route::get('browser-sessions', [BrowserSessionController::class, 'index']);
+        Route::post('logout-other-devices', [BrowserSessionController::class, 'logoutOtherDevices']);
+        Route::get('activity-logs', ActivityLogController::class);
+        Route::post('/verify-resend', [VerificationController::class, 'resend']);
+        Route::post('/impersonate/take/{user}', [ImpersonateController::class, 'impersonate'])->name('users.impersonate');
+        Route::post('/impersonate/leave', [ImpersonateController::class, 'leaveImpersonate'])->name('users.leaveImpersonate');
         Route::get('/users', [UsersController::class, 'users']);
         Route::post('/users/toggle-verify', [UsersController::class, 'toggleVerify']);
         Route::delete('/users/delete/user/{user}', [UsersController::class, 'deleteUser']);
@@ -66,13 +62,13 @@ Route::group(['middleware' => ['forceHTTPS', 'activity']], function () {
         Route::delete('/permissions/delete/permission/{permission}', [PermissionsController::class, 'deletePermission']);
         Route::patch('/permissions/update-permission/{permission}', [PermissionsController::class, 'updatePermission']);
         Route::post('/permissions/create-permission', [PermissionsController::class, 'createPermission']);
-        Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
+        Route::get('/server-info', [ServerInfoController::class, 'index']);
         Route::get('/app-settings', [AppSettingsController::class, 'index']);
         Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
-        Route::delete('/account/{user}/delete', [UserController::class, 'deleteUserAccount']);
-        Route::post('/user/{user}/data', [UserController::class, 'exportUserPersonalData']);
-        Route::get('/impersonate/take/{user}', [ImpersonateController::class, 'impersonate'])->name('users.impersonate');
-        Route::get('/impersonate/leave', [ImpersonateController::class, 'leaveImpersonate'])->name('users.leaveImpersonate');
-        Route::get('/server-info', [ServerInfoController::class, 'index']);
+
+        Route::group(['middleware' => ['role:superadmin']], function() {
+            // Things should be done using checks within the requests
+        });
     });
+
 });

@@ -1,31 +1,70 @@
 @import '@css/normalize.css';
-
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
-/*@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');*/
-/*@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700');*/
-
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Quicksand:wght@300..700&display=swap');
 @import '~/tippy.js/dist/tippy.css';
 @import '~/tippy.js/themes/material.css';
 @import '~/tippy.js/animations/perspective.css';
-@import '~/sweetalert2/dist/sweetalert2.min.css';
+
+/*@import "tailwindcss";
+@import "tailwindcss/theme.css";
+@import "tailwindcss/preflight.css" ;
+@import "tailwindcss/utilities.css";*/
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+.quicksand-font {
+  font-family: "Quicksand", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.nunito-quicksand-font {
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.title,
+.leckerli-one-regular {
+  font-family: "Leckerli One", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important; /* 2 */
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; /* 3 */
+}
+
+html,
+body {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Nunito,
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
     Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   line-height: 1.5;
-}
-body {
   margin: 0;
-  font-family: 'Nunito', sans-serif;
-  /*font-family: 'Nunito', sans-serif;*/
-  /*font-family: Poppins, sans-serif;*/
+  background-color: #fff;
+}
+
+html.dark,
+.dark body  {
+  @apply bg-gray-800;
 }
 
 ul,
@@ -36,14 +75,17 @@ div,
 a,
 span,
 p,
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h6,
-* {
-  font-family: 'Nunito', sans-serif;
+h6 {
+  font-family: 'Quicksand', sans-serif;
 }
 
 body::-webkit-scrollbar {
@@ -401,6 +443,26 @@ video {
 .dark .swal2-popup.swal2-toast {
   @apply bg-slate-900;
 }
+
+.swal2-success-fix,
+.swal2-success-circular-line-left,
+.swal2-success-circular-line-right {
+  background-color: rgb(255, 255, 255) !important;
+}
+
+.dark .swal2-success-fix,
+.dark .swal2-success-circular-line-left,
+.dark .swal2-success-circular-line-right {
+  background-color: rgb(15, 23, 42) !important;
+}
+
+
+.swal2-icon.swal2-success::before,
+.swal2-success.animate::after,
+.swal2-icon.swal2-success .fix{
+   background-color: rgb(22 22 22) !important;
+}
+
 .dark
   .swal2-popup.swal2-toast
   .swal2-success
@@ -594,4 +656,189 @@ video {
 .github-buttons .gh-button {
   @apply inline-block;
   @apply m-1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.rounded {
+  border-radius: 5px;
+}
+
+.rounded-full {
+  border-radius: 50px;
+}
+
+.vue3-easy-data-table {
+  --easy-table-border: none;
+  --easy-table-header-font-size: 14px;
+  --easy-table-header-item-padding: 10px 15px;
+  --easy-table-body-row-height: 50px;
+  --easy-table-body-row-font-size: 14px;
+  --easy-table-body-item-padding: 10px 15px;
+  --easy-table-footer-font-size: 14px;
+  --easy-table-footer-padding: 0px 10px;
+  --easy-table-footer-height: 50px;
+  --easy-table-rows-per-page-selector-width: 70px;
+  --easy-table-rows-per-page-selector-option-padding: 10px;
+  --easy-table-rows-per-page-selector-z-index: 1;
+}
+
+.vue3-easy-data-table .vue3-easy-data-table__main {
+  border-radius: 5px 5px 0 0;
+}
+
+.vue3-easy-data-table .vue3-easy-data-table__footer {
+  border-radius: 0 0 5px 5px;
+}
+
+.vue3-easy-data-table {
+  --easy-table-header-background-color: #f1f1f1;;
+  --easy-table-body-row-background-color: #f1f1f1;
+  --easy-table-body-row-hover-font-color: #f1f1f1;
+  --easy-table-footer-background-color: #f1f1f1;
+  --easy-table-scrollbar-track-color: #f1f1f1;
+  --easy-table-scrollbar-color: #f1f1f1;
+  --easy-table-scrollbar-corner-color: #f1f1f1;
+  --easy-table-loading-mask-background-color: #f1f1f1;
+}
+
+.dark .vue3-easy-data-table {
+  --easy-table-row-border: 1px solid #445269;
+  --easy-table-header-font-color: #c1cad4;
+  --easy-table-header-background-color: #2d3a4f;
+  --easy-table-body-even-row-font-color: #fff;
+  --easy-table-body-even-row-background-color: #4c5d7a;
+  --easy-table-body-row-font-color: #c0c7d2;
+  --easy-table-body-row-background-color: #2d3a4f;
+  --easy-table-body-row-hover-font-color: #2d3a4f;
+  --easy-table-body-row-hover-background-color: #eee;
+  --easy-table-footer-background-color: #2d3a4f;
+  --easy-table-footer-font-color: #c0c7d2;
+  --easy-table-scrollbar-track-color: #2d3a4f;
+  --easy-table-scrollbar-color: #2d3a4f;
+  --easy-table-scrollbar-thumb-color: #4c5d7a;
+  --easy-table-scrollbar-corner-color: #2d3a4f;
+  --easy-table-loading-mask-background-color: #2d3a4f;
+}
+
+.vue3-easy-data-table .vue3-easy-data-table__header,
+.vue3-easy-data-table .vue3-easy-data-table__header tr,
+.vue3-easy-data-table .vue3-easy-data-table__header th {
+  background: #cfcece !important;
+}
+
+.dark .vue3-easy-data-table .vue3-easy-data-table__header,
+.dark .vue3-easy-data-table .vue3-easy-data-table__header tr,
+.dark .vue3-easy-data-table .vue3-easy-data-table__header th {
+  background: #364762 !important;
+}
+
+.multiselect {
+  @apply border-gray-600;
+}
+.dark .multiselect {
+  @apply border-gray-900;
+}
+
+:root[class~="dark"] div:where(.swal2-container) div:where(.swal2-popup){
+  @apply bg-gray-800 text-gray-200
+}
+
+
+.title-filter {
+  background: #fff;
+  position: absolute;
+  top: 32px;
+  z-index: 10000;
+  left: -40px;
+  border: none;
+  border-radius: 5px;
+  min-height: 42px;
+}
+
+.dark .title-filter,
+.dark .vs__dropdown-toggle {
+  background: #222;
+}
+
+.categories-filter {
+  background: #fff;
+  position: absolute;
+  top: 32px;
+  width: 150px;
+  z-index: 9999;
+  left: -90px;
+  border-radius: 5px;
+}
+
+.categories-filter .vs__dropdown-toggle {
+  border: none;
+  border-radius: 5px;
+  min-height: 42px;
+}
+
+.filterbutton {
+  padding: 0;
+  width: 25px;
+}
+
+.filter-column {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+}
+
+/*.slider {
+  position: absolute;
+  width: 40px;
+  top: 58px;
+  z-index: 9999;
+}
+*/
+.inactive-filter {
+  color: transparent;
+}
+
+.inactive-filter:hover {
+  color: #333;
+}
+
+.active-filter,
+.active-filter:hover {
+  color: #333;
+}
+
+
+.dark .inactive-filter:hover {
+  color: #888;
+}
+
+.dark .active-filter,
+.dark .active-filter:hover {
+  color: #fff;
+}
+
+.dark .editor-container .ck.ck-content.ck-editor__editable {
+  @apply dark:bg-gray-900 dark:text-gray-100 border-none;
+}
+
+.vs__dropdown-toggle .vs__selected {
+  @apply text-sm px-3
+}
+
+.dark .vs__dropdown-toggle .vs__selected {
+  @apply dark:bg-gray-800 dark:text-gray-100
+}
+
+.vs__dropdown-toggle .vs__selected .vs__deselect {
+  @apply bg-gray-100 rounded-full p-1 ml-2
 }

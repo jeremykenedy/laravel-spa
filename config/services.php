@@ -15,22 +15,41 @@ return [
     */
 
     'mailgun' => [
-        'domain'   => env('MAILGUN_DOMAIN'),
-        'secret'   => env('MAILGUN_SECRET'),
+        'domain' => env('MAILGUN_DOMAIN'),
+        'secret' => env('MAILGUN_SECRET'),
         'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+        'scheme' => 'https',
     ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
+
     'ses' => [
-        'key'    => env('AWS_ACCESS_KEY_ID'),
+        'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+
+    'resend' => [
+        'key' => env('RESEND_KEY'),
+    ],
+
+    'slack' => [
+        'notifications' => [
+            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
+            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+        ],
+    ],
+
     'sentry' => [
         'enabled'           => env('SENTRY_IO_ENABLED', 0),
         'feedback-enabled'  => env('SENTRY_IO_USER_FEEDBACK_ENABLED', 0),
+        'rate'              => env('SENTRY_TRACES_SAMPLE_RATE', 1.0),
+        // Set sentry.rate to 1.0 to capture 100% of transactions for performance monitoring.
+        // It is recommended adjusting this value in production
     ],
+
     'facebook' => [
         'enabled'       => env('FACEBOOK_ENABLED', false),
         'client_id'     => env('FACEBOOK_KEY'),
@@ -148,9 +167,6 @@ return [
         'client_secret' => env('ATLASSIAN_CLIENT_SECRET'),
         'redirect'      => env('ATLASSIAN_REDIRECT_URI'),
     ],
-
-    // NEW_PROVIDER_PLUG :: Put New Provider HERE
-
     'trello' => [
         'enabled'       => env('TRELLO_ENABLED', false),
         'client_id'     => env('TRELLO_CLIENT_ID'),
@@ -244,4 +260,7 @@ return [
         'base_url'      => env('KEYCLOAK_BASE_URL'),   // Specify your keycloak server URL here
         'realms'        => env('KEYCLOAK_REALM'),       // Specify your keycloak realm
     ],
+
+    // NEW_PROVIDER_PLUG :: Put New Provider HERE
+
 ];

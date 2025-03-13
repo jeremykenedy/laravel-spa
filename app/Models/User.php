@@ -6,18 +6,23 @@ use App\Models\SocialiteProvider;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 use Spatie\PersonalDataExport\ExportsPersonalData;
 use Spatie\PersonalDataExport\PersonalDataSelection;
 
 class User extends Authenticatable implements ExportsPersonalData, MustVerifyEmail
 {
-    use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission;
+     use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission, LogsActivity, Prunable, SoftDeletes;
 
     /**
      * The accessors to append to the model's array.
@@ -26,6 +31,7 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
      */
     protected $appends = [
         'roles',
+        'permissions',
         'avatar',
         'providers',
     ];
@@ -33,19 +39,20 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
         'theme_dark',
+        'email_verified_at',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * The attributes that should be hidden for serialization.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -53,14 +60,18 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * Get the attributes that should be cast.
      *
-     * @var array
+     * @return array<string, string>
      */
-    protected $casts = [
-        'theme_dark'        => 'boolean',
-        'email_verified_at' => 'datetime',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'theme_dark'        => 'boolean',
+            'email_verified_at' => 'datetime',
+            'password'          => 'hashed',
+        ];
+    }
 
     public function selectPersonalData(PersonalDataSelection $personalData): void
     {
@@ -99,6 +110,11 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
         return $this->getRoles();
     }
 
+    public function getPermissionsAttribute()
+    {
+        return $this->getPermissions();
+    }
+
     public function getAvatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/'.md5(Str::lower($this->email)).'.jpg?s=200&d=mp';
@@ -134,5 +150,22 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
         $token = $this->currentAccessToken();
 
         return $token->name == 'IMPERSONATION token';
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'email']);
+        // Chain fluent methods for configuration options
+    }
+
+    protected function pruning(): void
+    {
+        // ... Things to do before pruning the users.
+    }
+
+    public function prunable(): Builder
+    {
+        return static::where('created_at', '<=', now()->subMonth(3));
     }
 }

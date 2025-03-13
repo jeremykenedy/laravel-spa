@@ -13,7 +13,7 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasOneRole(config('roles.models.role')::whereName('Super Admin')->first('id')->id);
+        return $this->user()->hasPermission('edit.roles');
     }
 
     /**

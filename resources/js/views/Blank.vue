@@ -6,48 +6,50 @@
   </div>
 </template>
 
-<script lang="ts">
-import { mapState, mapActions, mapGetters } from 'vuex';
+<script>
+
+import { watch, ref, watchEffect } from 'vue'
+import { mapStores, mapState, mapActions } from 'pinia';
+import { useAuthStore } from "@store/auth";
+import useAuth from '@composables/auth'
+import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { track } from '@services/analytics';
 
 export default {
   name: 'Blank',
-  components: {},
+  components: {
+    ArrowRightOnRectangleIcon
+  },
   props: {},
   setup() {
     return {};
   },
   data() {
     return {
-      blank: 'Blank',
+      //
     };
   },
   computed: {
-    ...mapState('sidebar', {
-      sideBarOpen: (state) => state.sideBarOpen,
-      fullScreenSideBarOpen: (state) => state.fullScreenSideBarOpen,
-    }),
-    ...mapState('auth', {
-      user: (state) => state.user,
-      roles: (state) => state.roles,
-      token: (state) => state.token,
-      logins: (state) => state.logins,
-    }),
-    ...mapGetters({
-      authenticated: 'auth/authenticated',
-      user: 'auth/user',
-      roles: 'auth/roles',
-    }),
+    ...mapState(useAuth, [
+      'processing',
+    ]),
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
   },
   watch: {},
-  created() {},
-  mounted() {},
-  beforeUnmount() {},
-  updated() {},
+  created() { },
+  mounted() { },
+  beforeUnmount() { },
+  updated() { },
   methods: {
-    ...mapActions({
-      popToast: 'toast/popToast',
-    }),
+    ...mapActions(useAuth, [
+      'logout',
+    ]),
+    clickButton() {
+      this.$emit('buttonClicked');
+    },
     track,
   },
 };
@@ -58,4 +60,5 @@ export default {
   color: #ffffff !important;
 }
 </style>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

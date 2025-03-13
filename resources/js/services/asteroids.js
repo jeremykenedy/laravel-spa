@@ -1,8 +1,8 @@
 /* eslint-disable */
 // prettier-ignore
 
-// import { asteroids } from '@services/asteroids';
-export function asteroids() {
+// import { asteroidsjs } from '@services/asteroids';
+export function asteroidsjs(toastyEnabled = false) {
   function t() {
     function t(t, e) {
       'Object' == typeof t
@@ -14,6 +14,7 @@ export function asteroids() {
     }
     window.ASTEROIDS ||
       (window.ASTEROIDS = {
+        totalEnemies: 0,
         enemiesKilled: 0,
         startedPlaying: new Date().getTime(),
       }),
@@ -148,6 +149,7 @@ export function asteroids() {
       o = document.documentElement.clientWidth,
       a = document.documentElement.clientHeight;
     n && ((o = document.body.clientWidth), (a = document.body.clientHeight));
+    let didKill = false;
     let h = [
         [-15, -10],
         [-15, 10],
@@ -184,7 +186,7 @@ export function asteroids() {
       for (var t, e = 0; (t = i.enemies[e]); e++) k(t, 'ASTEROIDSYEAHENEMY');
       const s = document.body.getElementsByTagName('*');
       let n;
-      for (i.enemies = [], e = 0; (n = s[e]); e++)
+      for (i.enemies = [], e = 0; (n = s[e]); e++) {
         -1 == P(l, n.tagName.toUpperCase()) &&
           'g_vml_' != n.prefix &&
           b(n) &&
@@ -194,6 +196,8 @@ export function asteroids() {
           i.enemies.push(n),
           I(n, 'ASTEROIDSYEAHENEMY'),
           n.aAdded || ((n.aAdded = !0), i.totalEnemies++));
+          window.ASTEROIDS.totalEnemies = i.totalEnemies;
+      }
     }
     function m(t) {
       return 0.0174532925 * t;
@@ -705,9 +709,15 @@ export function asteroids() {
           try {
             this.dying[r].parentNode && window.ASTEROIDS.enemiesKilled++,
               this.dying[r].parentNode.removeChild(this.dying[r]);
+            if (window.ASTEROIDS.enemiesKilled >= window.ASTEROIDS.totalEnemies - (toastyEnabled ? 1 : 0)) {
+              setTimeout(function () {
+                alert('\nAll your base are belong to us!\n\nYour Score: '+ (10 * window.ASTEROIDS.enemiesKilled) + '\n\nGame over');
+                location.reload();
+              }, 1000);
+            }
           } catch (t) {}
         T(), (this.dying = []);
-      }
+      } e
       for (r = this.particles.length - 1; r >= 0; r--)
         this.particles[r].pos.add(
           this.particles[r].dir.mulNew(400 * e * Math.random()),

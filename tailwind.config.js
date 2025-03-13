@@ -1,8 +1,18 @@
-module.exports = {
-  content: ['./resources/**/*.blade.php', './resources/**/*.{html,js,ts,vue}'],
+import defaultTheme from 'tailwindcss/defaultTheme';
+
+export default {
+  content: [
+    './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
+    './storage/framework/views/*.php',
+    './resources/**/*.blade.php',
+    './resources/**/*.{html,js,ts,vue}',
+  ],
   darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         primary: {
           DEFAULT: '#0fa968',
@@ -33,7 +43,6 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/line-clamp'),
+    require('@tailwindcss/aspect-ratio')
   ],
 };

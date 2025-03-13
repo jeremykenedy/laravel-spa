@@ -1,152 +1,105 @@
-import { createApp } from 'vue';
-import App from '@views/App.vue';
-import router from '@router';
-import store from '@store';
-import axios from 'axios';
+import './bootstrap';
+
+import { createApp, ref, watchEffect } from 'vue';
+import { createPinia, storeToRefs } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { Bootstrap5Pagination } from 'laravel-vue-pagination';
+import router from '@routes';
+import { useAuthStore } from "@store/auth";
 import VueSweetalert2 from 'vue-sweetalert2';
 import { plugin as VueTippy } from 'vue-tippy';
 import AppButton from '@components/common/AppButton.vue';
-import AppToast from '@components/common/AppToast.vue';
 import AppSwitch from '@components/common/AppSwitch.vue';
-// import AppTable from '@components/common/AppTable.vue';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import { ServerTable, ClientTable, EventBus } from 'v-tables-3';
-import VueGtag from 'vue-gtag-next';
+import { abilitiesPlugin } from '@casl/vue';
+import ability from './services/ability';
+import vSelect from "vue-select";
+import useAuth from './composables/auth';
+import i18n from "./plugins/i18n";
+import VueAwesomePaginate from "vue-awesome-paginate";
+import VueSecureHTML from 'vue-html-secure';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
-import { registerSW } from 'virtual:pwa-register';
-import VueSecureHTML from 'vue-html-secure';
-import KonamiCode from 'vue-konami-code';
+import VueGtag from 'vue-gtag-next';
+import KonamiCode from "vue3-konami-code"
 import toasty from 'toasty';
-import { asteroids } from '@services/asteroids';
+import { asteroidsjs } from '@services/asteroids';
+import Vue3EasyDataTable from 'vue3-easy-data-table';
+import swal from 'sweetalert2';
 
-axios.defaults.withCredentials = true;
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import 'vue-select/dist/vue-select.css';
+import "vue-awesome-paginate/dist/style.css";
+import 'vue3-easy-data-table/dist/style.css';
 
-const app = createApp(App);
+window.Swal = swal;
+
 const APP_GA_TAG = GA_TAG; // eslint-disable-line
 const APP_GA_ENABLED = GA_ENABLED; // eslint-disable-line
 const VUE_APP_URL = APP_URL; // eslint-disable-line
 const VUE_SENTRY_DSN = SENTRY_DSN; // eslint-disable-line
 const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
+const VUE_SENTRY_RATE = SENTRY_RATE; // eslint-disable-line
 const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
 const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
 const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED; // eslint-disable-line
 const VUE_ASTEROIDS_ENABLED = KONAMI_ASTEROIDS_ENABLED; // eslint-disable-line
+const VUE_TINY_MCE_KEY = TINY_MCE_KEY; // eslint-disable-line
+const VUE_CK_EDITOR_KEY = CK_EDITOR_KEY; // eslint-disable-line
+const VUE_OPEN_AI_KEY = OPEN_AI_KEY; // eslint-disable-line
 
-const updateSW = registerSW({
-  onOfflineReady() {},
-});
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
-if (VUE_SENTRY_ENABLED == 1) {
-  Sentry.init({
-    app,
-    dsn: VUE_SENTRY_DSN,
-    integrations: [
-      new BrowserTracing({
-        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-        tracePropagationTargets: ['localhost', VUE_APP_URL, /^\//],
-      }),
-    ],
-    // Set tracesSampleRate to 1.0 to capture 100%
-    // of transactions for performance monitoring.
-    // We recommend adjusting this value in production
-    tracesSampleRate: 1.0,
-    trackComponents: true,
-    hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
-    environment: VUE_ENVIRONMENT,
-    beforeBreadcrumb(breadcrumb, hint) {
-      return breadcrumb.category === 'ui.click' ? null : breadcrumb;
-    },
-    beforeSend(event, hint) {
-      // Check if it is an exception, and if so, show the report dialog
-      if (event.exception) {
-        if (VUE_SENTRY_FEEDBACK_ENABLED) {
-          Sentry.showReportDialog({ eventId: event.event_id });
-        }
-      }
-      return event;
-    },
-  });
-}
-store.dispatch('auth/getLogins').then(() => {});
-store.dispatch('auth/getUser').then(() => {
-  if (VUE_SENTRY_ENABLED == 1) {
-    if (
-      store &&
-      store.state &&
-      store.state.auth &&
-      store.state.auth.user &&
-      store.state.auth.user.id &&
-      store.state.auth.user.name &&
-      store.state.auth.user.email &&
-      store.state.auth.authenticated
-    ) {
-      Sentry.setUser({
-        id: store.state.auth.user.id,
-        username: store.state.auth.user.name,
-        email: store.state.auth.user.email,
-      });
+const app = createApp({
+  setup() {
+    if (localStorage.getItem("data-theme") == 'dark') {
+      document.documentElement.className = 'dark';
     } else {
-      Sentry.setUser(null);
+      localStorage.setItem("data-theme", "light");
     }
+  },
+  created() {
+    useAuthStore().getLogins()
+    useAuth().getUser()
   }
-  app
-    .use(store)
-    .use(router)
-    .use(VueSweetalert2)
-    .use(ClientTable, {}, 'tailwind')
-    .use(VueTippy, {
-      directive: 'tippy', // => v-tippy
-      component: 'tippy', // => <tippy/>
-      componentSingleton: 'tippy-singleton', // => <tippy-singleton/>,
-      defaultProps: {
-        arrow: true,
-        theme: 'material',
-        animation: 'perspective',
-        placement: 'auto-end',
-        allowHTML: true,
-      },
-    })
-    .use(VueSecureHTML)
-    .component('AppButton', AppButton)
-    .component('AppToast', AppToast)
-    // .component('AppTable', AppTable)
-    .component('AppSwitch', AppSwitch);
-
-  if (VUE_TOASTY_ENABLED == 1) {
-    app.use(KonamiCode, {
-      callback: function () {
-        if (VUE_TOASTY_ENABLED == 1) {
-          toasty().trigger();
-        }
-      },
-    });
-  }
-
-  if (APP_GA_ENABLED == 1) {
-    let UID = null;
-    if (
-      store &&
-      store.state &&
-      store.state.auth &&
-      store.state.auth.user &&
-      store.state.auth.user.id &&
-      store.state.auth.authenticated
-    ) {
-      UID = store.state.auth.user.id;
-    }
-    app.use(VueGtag, {
-      property: {
-        id: APP_GA_TAG,
-        params: {
-          user_id: UID,
-          send_page_view: true,
-          linker: {
-            domain: [VUE_APP_URL],
-          },
-        },
-      },
-    });
-  }
-  app.mount('#app');
 });
+app.use(pinia)
+
+const store = useAuthStore()
+const { user, authenticated } = storeToRefs(store)
+
+app.use(router)
+app.use(VueSweetalert2)
+app.use(VueTippy, {
+  directive: 'tippy', // => v-tippy
+  component: 'tippy', // => <tippy/>
+  componentSingleton: 'tippy-singleton', // => <tippy-singleton/>,
+  defaultProps: {
+    arrow: true,
+    theme: 'material',
+    animation: 'perspective',
+    placement: 'auto-end',
+    allowHTML: true,
+  },
+})
+app.use(VueSecureHTML)
+app.use(VueAwesomePaginate)
+app.use(i18n)
+app.use(abilitiesPlugin, ability)
+app.use(KonamiCode, {
+  onKonamiCodeEntered: function() {
+    if (VUE_TOASTY_ENABLED == 1) {
+      toasty().trigger();
+    }
+    if (VUE_ASTEROIDS_ENABLED == 1) {
+      asteroidsjs(VUE_TOASTY_ENABLED);
+    }
+  }
+});
+app.component('EasyDataTable', Vue3EasyDataTable)
+app.component('AppButton', AppButton)
+app.component('Pagination', Bootstrap5Pagination)
+app.component("v-select", vSelect)
+app.component('AppSwitch', AppSwitch)
+app.mount('#app')

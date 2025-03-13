@@ -208,7 +208,7 @@ trait AppSettingsTrait
             config(['settings.enableKonamiToasty' => $setting->val]);
         }
 
-        Artisan::call('config:cache');
+        // Artisan::call('config:cache');
 
         // NEW_PROVIDER_PLUG :: Put New Provider HERE
     }

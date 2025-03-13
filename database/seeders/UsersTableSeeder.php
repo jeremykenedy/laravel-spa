@@ -65,5 +65,12 @@ class UsersTableSeeder extends Seeder
                 $user->attachRole($userRole);
             }
         }
+
+        // \App\Models\User::factory(10)->create();
+        // User::factory(10)->create();
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }

@@ -56,11 +56,9 @@ return [
     |
     */
 
-    // jeremykenedy\LaravelRoles\Models\Role::class
-    // jeremykenedy\LaravelRoles\Models\Permission::class
     'models' => [
-        'role'          => env('ROLES_DEFAULT_ROLE_MODEL', \App\Models\Role::class),
-        'permission'    => env('ROLES_DEFAULT_PERMISSION_MODEL', \App\Models\Permission::class),
+        'role'          => env('ROLES_DEFAULT_ROLE_MODEL', App\Models\Role::class),
+        'permission'    => env('ROLES_DEFAULT_PERMISSION_MODEL', App\Models\Permission::class),
         'defaultUser'   => env('ROLES_DEFAULT_USER_MODEL', config('auth.providers.users.model')),
     ],
 
@@ -144,7 +142,7 @@ return [
     'rolesGuiEnabled'               => env('ROLES_GUI_ENABLED', false),
 
     // Enable `auth` middleware
-    'rolesGuiAuthEnabled'           => env('ROLES_GUI_AUTH_ENABLED', true),
+    'rolesGuiAuthEnabled'           => env('ROLES_GUI_AUTH_ENABLED', false),
 
     // Enable Roles GUI middleware
     'rolesGuiMiddlewareEnabled'     => env('ROLES_GUI_MIDDLEWARE_ENABLED', true),

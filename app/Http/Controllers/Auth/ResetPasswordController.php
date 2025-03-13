@@ -3,35 +3,69 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\PasswordReset;
+use App\Notifications\SendPasswordResetEmail;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
 {
-    public function __invoke(Request $request)
-    {
-        $request->validate([
-            'token'    => 'required',
-            'email'    => 'required|email',
-            'password' => 'required|min:8|confirmed',
-        ]);
+    /*
+    |--------------------------------------------------------------------------
+    | Password Reset Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller is responsible for handling password reset requests
+    | and uses a simple trait to include this behavior. You're free to
+    | explore this trait and override any methods you wish to tweak.
+    |
+    */
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function ($user, $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password),
-                ])->setRememberToken(Str::random(60));
-                $user->save();
-                event(new PasswordReset($user));
+    use ResetsPasswords;
+
+    /**
+     * Where to redirect users after resetting their password.
+     *
+     * @var string
+     */
+    protected $redirectTo = RouteServiceProvider::HOME;
+
+    /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function reset(Request $request)
+    {
+        $request->validate($this->rules(), $this->validationErrorMessages());
+
+        $response = $this->broker()->reset(
+            $this->credentials($request), function ($user, $password) {
+                $this->resetPassword($user, $password);
             }
         );
 
-        return response()->json([
-            'message' => 'Password successfully reset!',
-        ], 200);
+        if ($response == Password::PASSWORD_RESET) {
+            $this->sendPasswordChangedEmail(User::whereEmail($request->email)->first());
+
+            return $this->sendResetResponse($request, $response);
+        }
+
+        return $this->sendResetFailedResponse($request, $response);
     }
+
+    /**
+     * Send Password Changed Email via Notify.
+     *
+     * @param  array  $user
+     * @return void
+     */
+    public function sendPasswordChangedEmail(User $user)
+    {
+        $user->notify(new SendPasswordResetEmail($user));
+    }
+
 }

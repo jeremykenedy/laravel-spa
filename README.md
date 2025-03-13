@@ -1,4 +1,4 @@
-# Laravel Auth SPA
+# Laravel Auth SPA Boilerplate
 
 [![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=released&style=flat)](https://github.styleci.io/repos/537735029?branch=master)
 [![CodeQL](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml)
@@ -9,17 +9,6 @@
 [![MadeWithVueJs.com shield](https://madewithvuejs.com/storage/repo-shields/4106-shield.svg)](https://madewithvuejs.com/p/laravel-auth-spa/shield-link)
 [![App Version](https://img.shields.io/github/v/tag/jeremykenedy/laravel-spa.svg?sort=semver&label=App%20Version)](https://github.com/jeremykenedy/laravel-spa/releases)
 [![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
-
-[![Sponsor me on GitHub](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&color=%23fe8e86)](https://github.com/sponsors/jeremykenedy)
-[![Sponsor me on Patreon](https://img.shields.io/static/v1?label=patreon&message=%E2%9D%A4&logo=Patreon&color=F35B49&style=flat)](https://patreon.com/jeremykenedy)
-[![Buy me a Coffee](https://img.shields.io/badge/Buy_Me_A_Coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/jeremykenedy)
-[![Vultr](https://img.shields.io/badge/Vultr-007BFC.svg?style=flat&logo=vultr)](https://www.vultr.com/?ref=9338425-8H)
-[![GitHub Stars](https://img.shields.io/github/stars/jeremykenedy/laravel-spa?style=social)](https://github.com/jeremykenedy/laravel-spa/stargazers)
-[![Follow on GitHub](https://img.shields.io/github/followers/jeremykenedy?style=social)](https://github.com/jeremykenedy)
-[![Follow on Twitter](https://img.shields.io/twitter/follow/developernator?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=developernator)
-
-> This project costs me $22/month to be hosted on [Vultr](https://www.vultr.com/?ref=9338425-8H).<br>
-> Please consider [supporting my work](https://patreon.com/jeremykenedy) if you use & find it useful. ❤️
 
 ### Table of contents
 - [About](#about)
@@ -38,22 +27,23 @@
 
 ## About
 A Laravel + Socialite + Vite + Vue 3 + TailwindCSS SPA Boilerplate.
-Laravel with user authentication, registration with email verification, 
-social media authentication, password recovery, user management, and roles/permissions 
-management. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is 
+Laravel with user authentication, registration with email verification,
+social media authentication, password recovery, user management, and roles/permissions
+management. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is
 part of this repository it is a completely separated Vue 3 front end compiled using ViteJS.
 
 ## App Features
 ##### Built on:
-- [Laravel](https://laravel.com/docs/9.x)
-- [Sanctum](https://laravel.com/docs/9.x/sanctum)
-- [Socialite](https://laravel.com/docs/9.x/socialite)
+- [Laravel 11.x](https://github.com/laravel/laravel)
+- [Laravel Sanctum](https://laravel.com/docs/11.x/sanctum)
+- [Socialite](https://laravel.com/docs/11.x/socialite)
 - [Vite](https://laravel.com/docs/9.x/vite)
-- [Vue 3](https://vuejs.org/)
+- [Vue 3](https://github.com/vuejs/vue)
 - [TailwindCSS (w/ `@tailwindcss/forms` and `@tailwindcss/aspect-ratio`)](https://tailwindcss.com/)
-- [Vue Router](https://v3.router.vuejs.org/)
-- [Vuex](https://vuex.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [Pinia](https://pinia.vuejs.org/)
 - [Axios](https://axios-http.com/)
+- [Vue I18n](https://vue-i18n.intlify.dev)
 - [Headless UI](https://headlessui.com/)
 - [Heroicons](https://heroicons.com/)
 - [Font Awesome 6](https://fontawesome.com/search)
@@ -75,6 +65,29 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 - [Social Authentication with Facebook, Twitter, Instagram, GitHub, TikTok, Google, YouTube, Microsoft, Twitch, and Apple](https://laravel.com/docs/9.x/socialite)
 - [Optional Sentry.io Laravel Monitoring](https://docs.sentry.io/platforms/php/guides/laravel/)
 - [Optional Sentry.io VueJs Monitoring](https://docs.sentry.io/platforms/javascript/guides/vue/)
+
+The following Sanctum features are implemented in this Vue SPA:
+
+- ✅ Laravel 11
+- ✅ Vue 3
+- ✅ VueRouter
+- ✅ Pinia
+- ✅ Vue I18n Multi-Language
+- ✅ Login
+- ✅ Password Reset
+- ✅ Registration
+- ✅ Admin Panel
+- ✅ Profile Management
+- ✅ User Management
+- ✅ Roles Management
+- ✅ Permissions Management
+- ✅ Password Change
+- ✅ E-Mail Verification
+- ✅ Posts Management
+- ✅ Frontend Blog
+- ✅ TailwindCSS
+- ✅ Browser Sessions - Other Device Logout
+- ✅ User Activity Logs
 
 ## Installation Instructions
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`

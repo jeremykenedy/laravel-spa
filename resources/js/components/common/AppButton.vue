@@ -1,16 +1,11 @@
 <template>
-  <button
-    class="button inline-flex items-center justify-center"
-    :class="
-      (loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass
-    "
-    :disabled="loading || disabled"
-    @click="clickButton"
-  >
+  <button class="button inline-flex items-center justify-center" :class="(loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass
+    " :disabled="loading || disabled" @click="clickButton">
     <slot v-if="hasTextSlot" name="text" />
     <span v-else>
       {{ text }}
       <span v-if="icon" class="fa-fw" :class="icon" />
+      {{ textAfter }}
     </span>
   </button>
 </template>
@@ -23,6 +18,7 @@ export default {
     loading: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     text: { type: String, default: '' },
+    textAfter: { type: String, default: '' },
     icon: { type: String, default: null },
     btnClass: { type: String, default: '' },
     primary: { type: Boolean, default: false },
@@ -43,6 +39,9 @@ export default {
   computed: {
     hasTextSlot() {
       return this.$slots.text;
+    },
+    hasTextAfterSlot() {
+      return this.$slots.textAfter;
     },
     btnClasses() {
       let buttonClasses = `

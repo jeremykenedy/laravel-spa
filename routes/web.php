@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,8 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::personalDataExports('personal-data-exports');
+Route::post('login', [AuthenticatedSessionController::class, 'login']);
+Route::post('register', [AuthenticatedSessionController::class, 'register']);
+Route::post('logout', [AuthenticatedSessionController::class, 'logout']);
 
-Route::get('{path}', function () {
-    return view('app');
-})->where('path', '.*');
+Route::view('/{any?}', 'app')
+    ->name('dashboard')
+    ->where('any', '.*');
+

@@ -3,151 +3,89 @@
     <template #title>
       {{ newUser ? 'Create User' : 'Editing User ' + userName }}
     </template>
+
     <template #body>
-      <Errors
-        v-if="errors && useInlineMessage"
-        :content="errors"
-        :errors="errors"
-        container-class="w-100 mb-5"
-        type="error"
-        @close="errors = null"
-      />
+      <!-- <Errors v-if="errors && !isObjEmpty(errors) && useInlineMessage" :content="errors" container-class="w-100 mb-5" type="error" @close="errors = {}" /> -->
+
       <form @submit.prevent>
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 mr-2">
-            <img
-              v-if="form && form.avatar"
-              :src="form.avatar"
-              :alt="form.name"
-              class="float-left ml-2 mr-2 mt-1 h-10 w-10 rounded-full"
-            />
-            <UserCircleIcon
-              v-else
-              class="float-left ml-2 mr-2 mt-1 h-10 w-10 text-gray-500"
-            />
+            <img v-if="form && form.avatar" :src="form.avatar" :alt="form.name"
+              class="float-left ml-2 mr-2 mt-1 h-10 w-10 rounded-full" />
+            <UserCircleIcon v-else class="float-left ml-2 mr-2 mt-1 h-10 w-10 text-gray-500" />
           </div>
           <div class="flex-item relative mb-3 flex-auto">
-            <input
-              id="name"
-              v-model="form.name"
-              type="text"
-              placeholder="Name"
-              name="name"
-              class="relative w-full rounded border bg-white bg-white px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="
-                errors && errors.name
-                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
-                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-              "
-            />
-            <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
-            >
-              <span
-                class="fas fa-user"
-                :class="
-                  errors && errors.name ? 'text-red-600' : 'text-slate-300'
+            <input id="name" v-model="form.name" type="text" placeholder="Name" name="name"
+              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              :class="errors && errors.name
+                ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
+                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
                 "
               />
+            <span
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300">
+              <span class="fas fa-user" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
 
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 flex-auto">
-            <input
-              id="email"
-              v-model="form.email"
-              type="text"
-              placeholder="E-mail"
-              name="email"
-              class="relative w-full rounded border bg-white bg-white px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="
-                errors && errors.email
-                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-              "
-            />
-            <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
-            >
-              <span
-                class="fas fa-envelope"
-                :class="
-                  errors && errors.email ? 'text-red-600' : 'text-slate-300'
-                "
+            <input id="email" v-model="form.email" type="text" placeholder="E-mail" name="email"
+              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              :class="errors && errors.email
+                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'"
               />
+            <span
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
+              <span class="fas fa-envelope" :class="errors && errors.email ? 'text-red-600' : 'text-slate-300'
+                " />
             </span>
           </div>
         </div>
 
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 flex-auto">
-            <input
-              id="password"
-              v-model="form.password"
-              type="password"
-              placeholder="Password"
-              name="password"
+            <input id="password" v-model="form.password" type="password" placeholder="Password" name="password"
               autocomplete="on"
-              class="relative w-full rounded border bg-white bg-white px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="
-                errors && errors.password
-                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-              "
-            />
+              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              :class="errors && errors.password
+                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+                " />
             <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
-            >
-              <span
-                class="fas fa-user-shield"
-                :class="
-                  errors && errors.email ? 'text-red-600' : 'text-slate-300'
-                "
-              />
-            </span>
-          </div>
-        </div>
-        <div class="relative mb-3 flex w-full flex-wrap items-stretch">
-          <div class="flex-item relative mb-3 flex-auto">
-            <input
-              id="password_confirmation"
-              v-model="form.password_confirmation"
-              type="password"
-              placeholder="Password Confirmation"
-              name="password_confirmation"
-              autocomplete="on"
-              class="relative w-full rounded border bg-white bg-white px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="
-                errors && errors.password
-                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
-                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-              "
-            />
-            <span
-              class="absolute absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
-            >
-              <span
-                class="fas fa-user-shield"
-                :class="
-                  errors && errors.email ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
+              <span class="fas fa-user-shield" :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'
+                " />
             </span>
           </div>
         </div>
 
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
-          <div class="flex-item relative mb-3 ml-2 flex-auto">
+          <div class="flex-item relative mb-3 flex-auto">
+            <input id="password_confirmation" v-model="form.password_confirmation" type="password"
+              placeholder="Password Confirmation" name="password_confirmation" autocomplete="on"
+              class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
+              :class="errors && errors.password
+                ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
+                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+                " />
+            <span
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
+              <span class="fas fa-user-shield" :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'
+                " />
+            </span>
+          </div>
+        </div>
+
+        <div class="relative flex w-full flex-wrap items-stretch">
+          <div class="flex-item relative ml-2 flex-auto">
             <h6 class="text-xs uppercase">
               Verified:
-              <AppButton
-                :disabled="loading || submitting"
-                class="float-right ml-3 mb-2 bg-yellow-600 px-1 py-0 text-sm font-medium leading-snug leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 hover:shadow-lg focus:shadow-lg active:shadow-lg dark:bg-yellow-500 dark:hover:bg-yellow-600"
-                style="width: 80px"
-                @click="toggleUserVerified"
-              >
+              <AppButton :disabled="loading || submitting"
+                class="float-right ml-3 mb-2 bg-yellow-600 px-1 py-0 text-sm font-medium leading-snug text-white shadow-md transition duration-150 ease-in-out hover:bg-yellow-500 hover:shadow-lg focus:shadow-lg active:shadow-lg dark:bg-yellow-500 dark:hover:bg-yellow-600"
+                style="width: 80px" @click="toggleUserVerified">
                 <template #text>
                   {{ form && form.email_verified_at ? 'Un-Verify' : 'Verify' }}
                 </template>
@@ -166,44 +104,55 @@
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 ml-3 flex-auto">
             <div class="my-1 mr-3 w-full py-2 sm:flex sm:items-center">
-              <span
-                :class="
-                  loading || submitting
-                    ? 'default disabled cursor-pointer'
-                    : 'cursor-pointer'
-                "
-                @click="form.theme_dark = !form.theme_dark"
-              >
-                <span
-                  class="fa-solid fa-fw fa-2x float-left mr-4 text-slate-600 dark:text-gray-300"
-                  :class="form.theme_dark ? 'fa-toggle-on' : 'fa-toggle-off'"
-                />
-                <span
-                  v-if="loading"
-                  class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
-                  style="left: -1.4em; top: 1.2em"
-                />
-                <span class="mt-1 inline-block text-sm">
+              <div :class="loading || submitting
+                ? 'default disabled cursor-pointer'
+                : 'cursor-pointer'
+                " @click="form.theme_dark = !form.theme_dark">
+
+                <Switch :default-checked="form.theme_dark" :class="form.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
+                  class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 float-left"
+                  style="margin-top: 5px;">
+                  <span class="sr-only">Toggle Theme</span>
+                  <span aria-hidden="true" :class="form.theme_dark
+                    ? 'translate-x-4 bg-gray-800'
+                    : 'translate-x-0 bg-white'
+                    "
+                    class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out" />
+
+                  <SunIcon v-if="!form.theme_dark" class="text-white h-4 w-4" />
+                  <MoonIcon v-if="form.theme_dark" class="absolute h-4 w-4 text-gray-800" style="left: -1px" />
+                </Switch>
+
+                <div class="inline-flex text-sm ml-4 mt-1">
                   {{ form.theme_dark ? 'Dark Theme' : 'Light Theme' }}
-                </span>
-              </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="relative mb-3 flex w-full flex-wrap items-stretch">
+        <div
+          v-if="authenticated && user && userCan('edit.roles') && userCan('view.roles')"
+          class="relative mb-3 flex w-full flex-wrap items-stretch"
+        >
           <div class="flex-item relative flex-auto">
             <h6>User Roles</h6>
-            <Multiselect
-              v-model="form.roles"
-              :options="availableRoles"
-              track-by="id"
-              label="name"
-              mode="tags"
-              placeholder="Select user roles"
-            />
+            <Multiselect v-model="form.roles" :options="availableRoles" track-by="id" label="name" mode="tags"
+              placeholder="Select user roles" class="dark:bg-gray-900 dark:text-gray-300" />
           </div>
         </div>
+
+        <div v-if="enablePermissons && authenticated && user && userCan('edit.permissions') && userCan('view.permissions')" class="relative mb-3 flex w-full flex-wrap items-stretch">
+          <div class="flex-item relative flex-auto">
+            <h6>User Permissions</h6>
+            <Multiselect v-model="form.permissions" :options="availablePermissions" track-by="id" label="name"
+              class="dark:bg-gray-900 dark:text-gray-300" mode="tags" placeholder="Select role permissions" />
+          </div>
+        </div>
+
+        <p v-if="enablePermissons" class="italic">Note: It is best practice to create a role with attached permissions rather than assign a
+          permission
+          directly.</p>
 
         <div class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative flex-auto text-xs uppercase">
@@ -223,17 +172,17 @@
             </div>
           </div>
         </div>
+
       </form>
     </template>
+
     <template #footer>
       <hr />
       <div style="width: 100%">
-        <AppButton
-          v-if="changed"
-          :disabled="loading || submitting || !changed"
-          class="float-left border border-green-800 bg-transparent bg-transparent text-sm font-medium text-green-800 text-white shadow-md transition duration-150 ease-in-out hover:border-green-900 hover:bg-green-900 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:border-green-800 dark:hover:bg-green-800"
-          @click="submit"
-        >
+        <AppButton v-if="changed" :disabled="loading || submitting || !changed"
+          class="float-left"
+          primary
+          @click="submit">
           <template #text>
             {{
               newUser
@@ -241,35 +190,48 @@
                   ? 'Creating'
                   : 'Create'
                 : submitting
-                ? 'Updating'
-                : 'Update'
+                  ? 'Updating'
+                  : 'Update'
             }}
             <span v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
           </template>
         </AppButton>
-        <AppButton
-          :disabled="loading || submitting"
-          class="float-right border border-gray-700 bg-transparent bg-transparent text-sm font-medium text-gray-700 text-white shadow-md transition duration-150 ease-in-out hover:border-gray-700 hover:bg-gray-700 hover:text-white hover:shadow-lg focus:shadow-lg active:shadow-lg dark:hover:bg-gray-700"
-          @click="closeModal"
-        >
+        <AppButton :disabled="loading || submitting"
+          class="float-right"
+          secondary
+          @click="closeModal">
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}
           </template>
         </AppButton>
       </div>
     </template>
+
   </AppModal>
 </template>
 
 <script lang="ts">
-import AppModal from '@components/common/AppModal.vue';
+import { mapStores, mapState, mapActions } from 'pinia';
+import { useAuthStore } from "@store/auth";
+import { useToastStore } from "@store/toast";
 import axios from 'axios';
-import { mapActions } from 'vuex';
-import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import clonedeep from 'lodash.clonedeep';
 import moment from 'moment';
+import AppModal from '@components/common/AppModal.vue';
 import Multiselect from '@vueform/multiselect';
-import Errors from '@components/Errors.vue';
+import Errors from '@components/common/Errors.vue';
+import { Switch } from '@headlessui/vue';
+import {
+  isEmpty,
+  validateEmail,
+  parseDisplayDate,
+  isObjEmpty,
+} from "@services/utilities";
+import {
+  UserCircleIcon,
+  SunIcon,
+  MoonIcon,
+} from '@heroicons/vue/24/outline';
 
 export default {
   name: 'UserFormModal',
@@ -278,17 +240,31 @@ export default {
     UserCircleIcon,
     Multiselect,
     Errors,
+    SunIcon,
+    MoonIcon,
+    Switch,
   },
   props: {
     showingForm: { type: Boolean, default: false },
     newUser: { type: Boolean, default: true },
     loading: { type: Boolean, default: false },
-    user: { type: Object, default: null },
+    userEditing: { type: Object, default: null },
     availableRoles: { type: Array, default: null },
+    availablePermissions: { type: Array, default: null },
     useInlineMessage: { type: Boolean, default: true },
+    enablePermissons: { type: Boolean, default: false }, // Careful: Using this will not auto-detach roles for users. // You must also update UsersController.php
   },
-  setup() {
-    return {};
+  computed: {
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
+    currentRouteName() {
+      return this.$route.name;
+    },
+    appName() {
+      return APP_NAME;
+    },
   },
   data() {
     return {
@@ -299,6 +275,7 @@ export default {
         password: null,
         password_confirmation: null,
         roles: [],
+        permissions: [],
         theme_dark: false,
         email_verified_at: null,
       },
@@ -308,7 +285,6 @@ export default {
       ready: false,
     };
   },
-  computed: {},
   watch: {
     form: {
       handler(newValue, oldValue) {
@@ -320,19 +296,25 @@ export default {
       immediate: false,
     },
   },
-  created() {},
   mounted() {
     const self = this;
-    if (self.user) {
-      self.form = clonedeep(self.user);
-      if (self.user.name) {
-        self.userName = self.user.name;
+    if (self.userEditing) {
+      self.form = clonedeep(self.userEditing);
+      if (self.userEditing.name) {
+        self.userName = self.userEditing.name;
       }
-      if (self.user.roles) {
-        const JSON_Obj = self.user.roles;
+      if (self.userEditing.roles) {
+        const JSON_Obj = self.userEditing.roles;
         self.form.roles = [];
         for (const key in JSON_Obj) {
           self.form.roles.push(JSON_Obj[key].id);
+        }
+      }
+      if (self.userEditing.permissions) {
+        const JSON_Obj = self.userEditing.permissions;
+        self.form.permissions = [];
+        for (const key in JSON_Obj) {
+          self.form.permissions.push(JSON_Obj[key].id);
         }
       }
       setTimeout(() => {
@@ -342,17 +324,48 @@ export default {
       self.ready = true;
     }
   },
-  beforeUnmount() {},
-  updated() {},
   methods: {
-    ...mapActions({
-      popToast: 'toast/popToast',
-    }),
-    parseDisplayDate(date) {
-      if (date && date != true) {
-        return moment(date).format('MMM Do YYYY, h:mma');
+    ...mapActions(useAuthStore, [
+      'userIs',
+      'userCan',
+    ]),
+    ...mapActions(useToastStore, [
+      'popToast',
+    ]),
+    isEmpty,
+    isObjEmpty,
+    validateEmail,
+    parseDisplayDate,
+    toggleUserVerified() {
+      if (this.form.email_verified_at) {
+        this.form.email_verified_at = null;
+      } else {
+        this.form.email_verified_at = true;
       }
-      return moment(new Date()).format('MMM Do YYYY, h:mma');
+    },
+    closeModal() {
+      this.$emit('closeModal');
+    },
+    async checkEmail() {
+      const emailEmpty = this.isEmpty(this.form.email);
+      if (emailEmpty) {
+        this.popToast({
+          message: 'Email is required',
+          timer: 5000,
+          icon: 'error',
+        });
+        this.errors.email = true;
+      } else {
+        const emailValid = await this.validateEmail(this.form.email, true)
+        if(!emailValid) {
+          this.popToast({
+            message:'Email is invalid',
+            timer: 5000,
+            icon: 'error',
+          });
+          this.errors.email = true;
+        }
+      }
     },
     async submit() {
       this.error = null;
@@ -377,9 +390,9 @@ export default {
           });
           this.submitting = false;
         })
-        .catch(({ response }) => {
-          if (response.status === 422) {
-            const { errors } = response.data;
+        .catch(({ res }) => {
+          if (res.status === 422) {
+            const { errors } = res.data;
             this.errors = errors;
             // this.popToast({
             //   message: Object.values(errors).flat().toString(),
@@ -399,7 +412,7 @@ export default {
     },
     async updateUser() {
       await axios
-        .patch(`/api/users/update-user/${this.user.id}`, this.form)
+        .patch(`/api/users/update-user/${this.userEditing.id}`, this.form)
         .then(({ data }) => {
           this.$emit('userUpdated', data.user);
           this.popToast({
@@ -409,15 +422,15 @@ export default {
           });
           this.submitting = false;
         })
-        .catch(({ response }) => {
-          if (response.status === 422) {
-            const { errors } = response.data;
+        .catch(({ err }) => {
+          if (err && err.status === 422) {
+            const { errors } = err.data;
             this.errors = errors;
-            // this.popToast({
-            //   message: Object.values(errors).flat().toString(),
-            //   timer: 5000,
-            //   icon: 'error',
-            // });
+            this.popToast({
+              message: Object.values(errors).flat().toString(),
+              timer: 5000,
+              icon: 'error',
+            });
           } else {
             this.popToast({
               message: 'Error Updating User',
@@ -428,17 +441,7 @@ export default {
           this.submitting = false;
         });
       this.submitting = false;
-    },
-    toggleUserVerified() {
-      if (this.form.email_verified_at) {
-        this.form.email_verified_at = null;
-      } else {
-        this.form.email_verified_at = true;
-      }
-    },
-    closeModal() {
-      this.$emit('closeModal');
-    },
+    }
   },
 };
 </script>
@@ -449,6 +452,7 @@ export default {
   background: transparent;
   color: #777;
 }
+
 :deep() .multiselect-option.is-pointed {
   background: #10b981;
   color: #ffffff;
