@@ -27,6 +27,8 @@ const Users  = ()  => import(/* webpackChunkName: "js/UsersPage" */ '@admin/user
 const BrowserSessions  = ()  => import(/* webpackChunkName: "js/BrowserSessionsPage" */ '@admin/browser-sessions/Index.vue');
 const ActivityLogs  = ()  => import(/* webpackChunkName: "js/ActivityLogsPage" */ '@admin/activity-log/Index.vue');
 const NotFound  = ()  => import(/* webpackChunkName: "js/NotFoundPage" */ '@errors/404.vue');
+const PhpInfo  = ()  => import(/* webpackChunkName: "js/PhpInfo" */ '@admin/PhpInfo.vue');
+const AppSettings  = ()  => import(/* webpackChunkName: "js/AppSettings" */ '@admin/AppSettings.vue');
 
 export default [
   {
@@ -193,6 +195,18 @@ export default [
         path: 'activity-log-logs',
         component: ActivityLogs,
         meta: { breadCrumb: 'Activity Logs' }
+      },
+      {
+        path: 'phpinfo',
+        name: 'phpinfo',
+        component: PhpInfo,
+        beforeEnter: superAdmin,
+      },
+      {
+        path: 'app-settings',
+        name: 'app-settings',
+        component: AppSettings,
+        beforeEnter: superAdmin,
       },
     ]
   },

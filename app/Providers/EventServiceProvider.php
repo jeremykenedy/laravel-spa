@@ -19,26 +19,26 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            // 'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
-            // 'SocialiteProviders\\Twitter\\TwitterExtendSocialite@handle',
-            // 'SocialiteProviders\\Instagram\\InstagramExtendSocialite@handle',
-            // // 'SocialiteProviders\\InstagramBasic\\InstagramBasicExtendSocialite@handle',
-            // 'SocialiteProviders\\GitHub\\GitHubExtendSocialite@handle',
-            // 'SocialiteProviders\\YouTube\\YouTubeExtendSocialite@handle',
-            // 'SocialiteProviders\\Google\\GoogleExtendSocialite@handle',
-            // 'SocialiteProviders\\LinkedIn\\LinkedInExtendSocialite@handle',
-            // 'SocialiteProviders\\Twitch\\TwitchExtendSocialite@handle',
-            // 'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
-            // 'SocialiteProviders\\Microsoft\\MicrosoftExtendSocialite@handle',
-            // 'SocialiteProviders\\TikTok\\TikTokExtendSocialite@handle',
-            // 'SocialiteProviders\\Zoho\\ZohoExtendSocialite@handle',
-            // 'SocialiteProviders\\StackExchange\\StackExchangeExtendSocialite@handle',
-            // 'SocialiteProviders\\GitLab\\GitLabExtendSocialite@handle',
-            // 'SocialiteProviders\\Reddit\\RedditExtendSocialite@handle',
-            // 'SocialiteProviders\\Snapchat\\SnapchatExtendSocialite@handle',
-            // 'SocialiteProviders\\Meetup\\MeetupExtendSocialite@handle',
-            // // 'SocialiteProviders\\Bitbucket\\BitbucketExtendSocialite@handle',
-            // 'SocialiteProviders\\Atlassian\\AtlassianExtendSocialite@handle',
+            'SocialiteProviders\\Facebook\\FacebookExtendSocialite@handle',
+            'SocialiteProviders\\Twitter\\TwitterExtendSocialite@handle',
+            'SocialiteProviders\\Instagram\\InstagramExtendSocialite@handle',
+            // 'SocialiteProviders\\InstagramBasic\\InstagramBasicExtendSocialite@handle',
+            'SocialiteProviders\\GitHub\\GitHubExtendSocialite@handle',
+            'SocialiteProviders\\YouTube\\YouTubeExtendSocialite@handle',
+            'SocialiteProviders\\Google\\GoogleExtendSocialite@handle',
+            'SocialiteProviders\\LinkedIn\\LinkedInExtendSocialite@handle',
+            'SocialiteProviders\\Twitch\\TwitchExtendSocialite@handle',
+            'SocialiteProviders\\Apple\\AppleExtendSocialite@handle',
+            'SocialiteProviders\\Microsoft\\MicrosoftExtendSocialite@handle',
+            'SocialiteProviders\\TikTok\\TikTokExtendSocialite@handle',
+            'SocialiteProviders\\Zoho\\ZohoExtendSocialite@handle',
+            'SocialiteProviders\\StackExchange\\StackExchangeExtendSocialite@handle',
+            'SocialiteProviders\\GitLab\\GitLabExtendSocialite@handle',
+            'SocialiteProviders\\Reddit\\RedditExtendSocialite@handle',
+            'SocialiteProviders\\Snapchat\\SnapchatExtendSocialite@handle',
+            'SocialiteProviders\\Meetup\\MeetupExtendSocialite@handle',
+            // 'SocialiteProviders\\Bitbucket\\BitbucketExtendSocialite@handle',
+            'SocialiteProviders\\Atlassian\\AtlassianExtendSocialite@handle',
 
             // 'SocialiteProviders\\Trello\\TrelloExtendSocialite@handle',
             // 'SocialiteProviders\\Zoom\\ZoomExtendSocialite@handle',
@@ -66,6 +66,8 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        parent::boot();
+
         //
     }
 

@@ -19,91 +19,73 @@
     </div>
 
     <div class="mb-4 px-4">
-      <AdminSidebarLink
-        v-if="authenticated && user"
-        routeName="dashboard"
-        :text="$t('dashboard')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user" routeName="dashboard" :text="$t('dashboard')"
+        @nav-clicked="toggleSidebar">
         <template #icon>
           <BuildingLibraryIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user && (userIs('superadmin') || userCan('view.users'))"
-        routeName="users.index"
-        :text="$t('users')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user && (userIs('superadmin') || userCan('view.users'))"
+        routeName="users.index" :text="$t('users')" @nav-clicked="toggleSidebar">
         <template #icon>
           <UsersIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user && userIs('superadmin')"
-        routeName="permissions.index"
-        :text="$t('permissions')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user && userIs('superadmin')" routeName="permissions.index"
+        :text="$t('permissions')" @nav-clicked="toggleSidebar">
         <template #icon>
           <ShieldCheckIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user && userIs('superadmin')"
-        routeName="roles.index"
-        :text="$t('roles')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user && userIs('superadmin')" routeName="roles.index" :text="$t('roles')"
+        @nav-clicked="toggleSidebar">
         <template #icon>
           <ShieldExclamationIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user && userIs('superadmin')"
-        routeName="posts.index"
-        :text="$t('posts')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user && (userIs('superadmin') || userIs('admin'))" routeName="posts.index"
+        :text="$t('posts')" @nav-clicked="toggleSidebar">
         <template #icon>
           <PencilIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user && userIs('superadmin')"
-        routeName="categories.index"
-        :text="$t('categories')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user && userIs('superadmin')" routeName="categories.index"
+        :text="$t('categories')" @nav-clicked="toggleSidebar">
         <template #icon>
           <TagIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user"
-        routeName="browser_sessions.index"
-        :text="$t('browser_sessions')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user" routeName="browser_sessions.index" :text="$t('browser_sessions')"
+        @nav-clicked="toggleSidebar">
         <template #icon>
           <GlobeAltIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
-      <AdminSidebarLink
-        v-if="authenticated && user"
-        routeName="activity_log.index"
-        :text="$t('activity_logs')"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user" routeName="activity_log.index" :text="$t('activity_logs')"
+        @nav-clicked="toggleSidebar">
         <template #icon>
           <LifebuoyIcon class="h-6 w-6" />
+        </template>
+      </AdminSidebarLink>
+
+      <AdminSidebarLink v-if="authenticated && user && userIs('superadmin')" routeName="phpinfo" :text="$t('server_info')"
+        @nav-clicked="toggleSidebar">
+        <template #icon>
+          <ServerStackIcon class="h-6 w-6" />
+        </template>
+      </AdminSidebarLink>
+
+      <AdminSidebarLink v-if="authenticated && user && userIs('superadmin')" routeName="app-settings"
+        :text="$t('app_settings')" @nav-clicked="toggleSidebar">
+        <template #icon>
+          <CogIcon class="h-6 w-6" />
         </template>
       </AdminSidebarLink>
 
@@ -111,17 +93,15 @@
         External Resources
       </div>
 
-      <AdminSidebarLink
-        v-if="authenticated && user"
-        url="https://heroicons.com"
-        text="Heroicons"
-        @nav-clicked="toggleSidebar"
-      >
+      <AdminSidebarLink v-if="authenticated && user" url="https://heroicons.com" text="Heroicons"
+        @nav-clicked="toggleSidebar">
         <template #icon>
           <!-- <svg viewBox="0 0 210 190" fill="none" aria-hidden="true" class="h-7"><path fill-rule="evenodd" clip-rule="evenodd" d="m78.091 0 5.967 5.676c15.038 14.306 35.323 23.067 57.663 23.067.356 0 .711-.002 1.065-.006l6.363-.08 1.988 6.072a102.026 102.026 0 0 1 5.045 31.782c0 47.391-32.269 87.19-75.928 98.477l-2.163.559-2.163-.559C32.27 153.701 0 113.902 0 66.511c0-11.085 1.769-21.772 5.045-31.782l1.988-6.072 6.363.08c.354.004.71.006 1.065.006 22.34 0 42.625-8.761 57.664-23.067L78.09 0ZM19.846 46.033a84.814 84.814 0 0 0-2.492 20.478c0 38.459 25.662 70.919 60.737 81.006 35.075-10.087 60.738-42.547 60.738-81.006 0-7.071-.866-13.93-2.493-20.478-22.009-1.16-42.166-9.387-58.245-22.453-16.079 13.066-36.235 21.293-58.245 22.453Z" fill="#8B5CF6"></path></svg> -->
-          <span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">H</span>
+          <span
+            class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3">H</span>
         </template>
       </AdminSidebarLink>
+
 
       <!--
       <AdminSidebarLink
@@ -201,6 +181,7 @@
         </template>
       </AdminSidebarLink>
       -->
+
     </div>
 
   </div>

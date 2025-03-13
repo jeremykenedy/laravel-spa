@@ -99,5 +99,7 @@
     "delete_category": "Delete Category",
     "clear": "Clear",
     "save": "Save",
-    "cancelled": "Cancelled"
+    "cancelled": "Cancelled",
+    "app_settings": "App Settings",
+    "server_info": "Server Info"
 }

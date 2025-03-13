@@ -9,6 +9,7 @@ import { useAuthStore } from "@store/auth";
 import VueSweetalert2 from 'vue-sweetalert2';
 import { plugin as VueTippy } from 'vue-tippy';
 import AppButton from '@components/common/AppButton.vue';
+import AppSwitch from '@components/common/AppSwitch.vue';
 import { abilitiesPlugin } from '@casl/vue';
 import ability from './services/ability';
 import vSelect from "vue-select";
@@ -59,6 +60,7 @@ const app = createApp({
     }
   },
   created() {
+    useAuthStore().getLogins()
     useAuth().getUser()
   }
 });
@@ -99,4 +101,5 @@ app.component('EasyDataTable', Vue3EasyDataTable)
 app.component('AppButton', AppButton)
 app.component('Pagination', Bootstrap5Pagination)
 app.component("v-select", vSelect)
+app.component('AppSwitch', AppSwitch)
 app.mount('#app')

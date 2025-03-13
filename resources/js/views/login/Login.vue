@@ -8,8 +8,7 @@
         <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
           <form @submit.prevent="submitLogin">
             <div class="mb-7 md:mt-16 lg:mt-12">
-              <label for="email" class="text-small mb-2 inline-block hidden"
-                :class="{ 'text-red-500': validationErrors?.email }">
+              <label for="email" class="text-small mb-2 hidden" :class="{ 'text-red-500': validationErrors?.email }">
                 {{ $t('email') }}
               </label>
               <input id="email" v-model="loginForm.email" type="email" autofocus autocomplete="username"
@@ -21,7 +20,7 @@
               </div>
             </div>
             <div class="mb-7">
-              <label for="password" class="text-small mb-2 inline-block hidden"
+              <label for="password" class="text-small mb-2 hidden"
                 :class="{ 'text-red-500': validationErrors?.password }">
                 {{ $t('password') }}
               </label>
@@ -60,6 +59,16 @@
                   {{ $t('login') }}
                 </template>
               </AppButton>
+
+              <div v-if="socialLoginsEnabled" class="mt-5">
+                <div
+                  class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300">
+                  <p class="mx-4 mb-0 text-center font-semibold dark:text-gray-400 cursor-default">Or</p>
+                </div>
+                <h3 class="mb-3 font-bold text-gray-700">Login with</h3>
+                <SocialiteLogins />
+              </div>
+
             </div>
           </form>
         </div>
@@ -69,14 +78,28 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watch, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import useAuth from '@composables/auth'
+import { useAuthStore } from "@store/auth";
+import { useToastStore } from "@store/toast";
+const { userCan, userIs, user, authenticated, socials } = useAuthStore();
+const { popToast, success, error } = useToastStore();
+const toast = useToastStore();
+const router = useRouter();
 const { loginForm, validationErrors, processing, submitLogin } = useAuth();
+const socialLoginsEnabled = computed(() => {
+  if (Object.values(socials).find((v) => v == '1')) {
+    return true;
+  }
+  return false;
+})
 </script>
 
 <script>
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import CircleSvg from '@components/common/CircleSvg.vue';
-// import SocialiteLogins from '@components/auth/SocialiteLogins.vue';
+import SocialiteLogins from '@components/auth/SocialiteLogins.vue';
 import loginImg from '@img/login.png';
 
 export default {
@@ -84,7 +107,7 @@ export default {
   components: {
     ArrowRightOnRectangleIcon,
     CircleSvg,
-    // SocialiteLogins,
+    SocialiteLogins,
   },
   props: {
     showSmLogin: { type: Boolean, default: true },

@@ -162,6 +162,12 @@ class PermissionsTableSeeder extends Seeder
                 'description' => 'Can restore permissions',
                 'model'       => 'Permission',
             ],
+            [
+                'name'        => 'Super Admin Permissions',
+                'slug'        => 'super.admin',
+                'description' => 'Can do it all',
+                'model'       => 'Permission',
+            ],
         ];
 
         /*

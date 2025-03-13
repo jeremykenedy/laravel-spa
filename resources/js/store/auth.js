@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('auth', () => {
   const user = ref({})
   const currentUserToken = ref(null)
   const impersonatorToken = ref(null)
-  const token = Cookies.get('token')
+  const token = ref(Cookies.get('token'));
   const socials = ref({
     facebook: false,
     twitter: false,
@@ -41,6 +41,31 @@ export const useAuthStore = defineStore('auth', () => {
       user.value = {}
       authenticated.value = false
     })
+  })
+
+  const fetchOauthUrl = ( async (provider) => {
+      try {
+        const response = await axios.post(`/api/oauth/${provider.provider}`);
+        if (response && response.data && response.data.url) {
+          return response.data.url;
+        }
+        throw response;
+      } catch (error) {
+        throw error;
+      }
+  })
+
+  const getLogins = ( async () => {
+    return await axios.get('/api/logins').then((res) => {
+      if (res && res.data && res.data.logins) {
+        socials.value = res.data.logins;
+      } else {
+        throw res;
+      }
+    })
+    .catch((err) => {
+      throw err.response;
+    });
   })
 
   const getUser = (() => {
@@ -104,6 +129,11 @@ export const useAuthStore = defineStore('auth', () => {
     impersonatorToken.value = payload.impersonatorToken.plainTextToken;
   })
 
+  const saveToken = ((payload) => {
+    Cookies.set('token', payload.token, { expires: 365 });
+    token.value = payload.token;
+  })
+
   function userIs(role) {
     if (!this.user || !this.user.id || !this.user.roles || this.user.roles.length <= 0) {
       return false;
@@ -132,6 +162,7 @@ export const useAuthStore = defineStore('auth', () => {
     authenticated,
     user,
     login,
+    getLogins,
     getUser,
     getUserByToken,
     logout,
@@ -140,6 +171,9 @@ export const useAuthStore = defineStore('auth', () => {
     setWorkingToken,
     userIs,
     userCan,
+    socials,
+    token,
+    fetchOauthUrl,
   }
 }, {
   persist: true
