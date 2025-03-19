@@ -7,7 +7,7 @@
       class="fa-brands fa-twitter fa-3x mr-3 mb-2 cursor-pointer text-blue-300 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''" @click="socialiteLogin('twitter')" />
     <span v-if="socials.instagram == 1" v-tippy="loginText + ' Instagram'"
-      class="fa-brands fa-instagram fa-3x mr-3 mb-2 cursor-pointer text-gray-700 opacity-80 transition duration-300 hover:opacity-100"
+      class="fa-brands fa-instagram fa-3x mr-3 mb-2 cursor-pointer text-gray-700 dark:text-gray-400 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''" @click="socialiteLogin('instagram')" />
     <span v-if="socials.github == 1" v-tippy="loginText + ' GitHub'"
       class="far fa-brands fa-github fa-3x mr-3 mb-2 cursor-pointer text-gray-800 dark:text-gray-100 opacity-80 transition duration-300 hover:opacity-100"
@@ -25,7 +25,7 @@
       class="fa-brands fa-twitch fa-3x mr-3 mb-2 cursor-pointer text-blue-600 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''" @click="socialiteLogin('twitch')" />
     <span v-if="socials.apple == 1" v-tippy="loginText + ' Apple'"
-      class="fa-brands fa-apple fa-3x mr-3 mb-2 cursor-pointer text-gray-800 opacity-80 transition duration-300 hover:opacity-100"
+      class="fa-brands fa-apple fa-3x mr-3 mb-2 cursor-pointer text-gray-800 dark:text-gray-300 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''" @click="socialiteLogin('apple')" />
     <span v-if="socials.microsoft == 1" v-tippy="loginText + ' Microsoft'"
       class="fa-brands fa-microsoft fa-3x mr-3 mb-2 cursor-pointer text-blue-300 opacity-80 transition duration-300 hover:opacity-100"

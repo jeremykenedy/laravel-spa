@@ -97,9 +97,66 @@ app.use(KonamiCode, {
     }
   }
 });
+if (APP_GA_ENABLED == 1) {
+  let UID = null;
+  if (
+    store &&
+    store.user &&
+    store.user.id &&
+    store.authenticated
+  ) {
+    UID = store.user.id;
+  }
+  app.use(VueGtag, {
+    property: {
+      id: APP_GA_TAG,
+      params: {
+        user_id: UID,
+        send_page_view: true,
+        linker: {
+          domain: [VUE_APP_URL],
+        },
+      },
+    },
+  });
+}
 app.component('EasyDataTable', Vue3EasyDataTable)
 app.component('AppButton', AppButton)
 app.component('Pagination', Bootstrap5Pagination)
 app.component("v-select", vSelect)
 app.component('AppSwitch', AppSwitch)
 app.mount('#app')
+
+// https://docs.sentry.io/platforms/javascript/guides/vue/
+if (VUE_SENTRY_ENABLED == 1) {
+  Sentry.init({
+    app,
+    dsn: VUE_SENTRY_DSN,
+    integrations: [
+      Sentry.browserProfilingIntegration(),
+      Sentry.browserTracingIntegration(),
+      Sentry.httpClientIntegration(),
+      Sentry.captureConsoleIntegration(),
+    ],
+    sendDefaultPii: true,
+    // Set tracesSampleRate to 1.0 to capture 100%
+    // of transactions for performance monitoring.
+    // We recommend adjusting this value in production
+    tracesSampleRate: 1.0,
+    trackComponents: true,
+    hooks: ['activate', 'create', 'destroy', 'mount', 'update'],
+    environment: VUE_ENVIRONMENT,
+    beforeBreadcrumb(breadcrumb, hint) {
+      return breadcrumb.category === 'ui.click' ? null : breadcrumb;
+    },
+    beforeSend(event, hint) {
+      // Check if it is an exception, and if so, show the report dialog
+      if (event.exception) {
+        if (VUE_SENTRY_FEEDBACK_ENABLED) {
+          Sentry.showReportDialog({ eventId: event.event_id });
+        }
+      }
+      return event;
+    },
+  });
+}
