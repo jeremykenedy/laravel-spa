@@ -3,6 +3,7 @@ import axios from 'axios';
 import {ref} from "vue";
 import useDarkMode from "@composables/darkmode";
 import Cookies from 'js-cookie';
+import { useToastStore } from "@store/toast";
 
 export const useAuthStore = defineStore('auth', () => {
   const authenticated = ref(false)
@@ -10,6 +11,7 @@ export const useAuthStore = defineStore('auth', () => {
   const currentUserToken = ref(null)
   const impersonatorToken = ref(null)
   const token = ref(Cookies.get('token'));
+  const toast = useToastStore();
   const socials = ref({
     facebook: false,
     twitter: false,
@@ -95,7 +97,7 @@ export const useAuthStore = defineStore('auth', () => {
     await axios.post('/api/user-by-token', { token: payload.token })
       .then(async res => {
         if (res && res.data && res.data.id) {
-          const u = res.data
+          const u = res.data;
           user.value = u;
           authenticated.value = true;
           if (u.theme_dark) {
@@ -105,14 +107,18 @@ export const useAuthStore = defineStore('auth', () => {
             document.documentElement.className = 'light';
             localStorage.setItem("data-theme", "light");
           }
+          saveToken({ token: payload.token });
+          toast.success('Successfully logged in');
         } else {
-          user.value = {}
-          authenticated.value = false
+          user.value = {};
+          authenticated.value = false;
+          toast.error('An error occurred.');
         }
       })
       .catch((err) => {
-        user.value = {}
-        authenticated.value = false
+        user.value = {};
+        authenticated.value = false;
+        toast.error('An error occurred.');
         throw err.response;
       });
   }

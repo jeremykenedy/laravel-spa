@@ -807,23 +807,26 @@ export default {
               }
             }
             this.loading = false;
-            this.popToast({
-              message,
-              timer: 5000,
-              icon: 'success',
-            });
-            this.track(
-              `App setting "${setting.name}" was updated from "${a.val}" to "${setting.val}"`,
-              'app event',
-              'app setting updated',
-            );
+            if (data && data.data && data.data.id) {
+              this.popToast({
+                message,
+                timer: 5000,
+                icon: 'success',
+              });
+              this.track(
+                `App setting "${setting.name}" was updated from "${a.val}" to "${setting.val}"`,
+                'app event',
+                'app setting updated',
+              );
+            } else {
+              this.popToast({
+                message: 'Error Updating Setting',
+                timer: 5000,
+                icon: 'error',
+              });
+            }
           })
           .catch(({ response }) => {
-            this.popToast({
-              message: 'Error Updating Setting',
-              timer: 5000,
-              icon: 'error',
-            });
             this.loading = false;
           });
       }

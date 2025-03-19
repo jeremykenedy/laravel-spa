@@ -96,17 +96,14 @@
                 </div>
               </div>
             </form>
-
-
-            <!--             <div v-if="socialLoginsEnabled" class="mt-5">
+            <div v-if="socialLoginsEnabled" class="mt-5">
               <div
                 class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300">
                 <p class="mx-4 mb-0 text-center font-semibold">Or</p>
               </div>
               <h3 class="mb-3 font-bold text-gray-700">Register with</h3>
-              <SocialiteLogins />
-            </div> -->
-
+              <SocialiteLogins signup />
+            </div>
           </div>
         </div>
       </div>
@@ -115,23 +112,20 @@
 </template>
 
 <script setup>
+import { computed } from "vue";
 import useAuth from '@/composables/auth'
-const { registerForm, validationErrors, processing, submitRegister } = useAuth();
-</script>
-
-<script>
+import { useAuthStore } from "@store/auth";
+import { useToastStore } from "@store/toast";
+import SocialiteLogins from '@components/auth/SocialiteLogins.vue';
 import CircleSvg from '@components/common/CircleSvg.vue';
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 // import Errors from '@components/Errors.vue';
-// import SocialiteLogins from '@components/auth/SocialiteLogins.vue';
-
-export default {
-  components: {
-    ArrowRightOnRectangleIcon,
-    CircleSvg,
-    // Errors,
-    // SocialiteLogins,
-  },
-};
-
+const { registerForm, validationErrors, processing, submitRegister } = useAuth();
+const { socials } = useAuthStore();
+const socialLoginsEnabled = computed(() => {
+  if (Object.values(socials).find((v) => v == '1')) {
+    return true;
+  }
+  return false;
+})
 </script>
