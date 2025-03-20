@@ -1,68 +1,56 @@
 <template>
-  <div id="permissions" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-    <nav class="mb-6 text-sm font-semibold float-left ml-2 mt-2" aria-label="Breadcrumb">
-      <ol class="inline-flex list-none p-0">
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            {{ $t('dashboard') }}
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'permissions.index' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('permissions') }}
-            </span>
-          </router-link>
-        </li>
-      </ol>
-    </nav>
+  <div id="roles" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
+
+    <AdminBreadcrumbContainer>
+      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="roles.index" :text="$t('roles')" />
+    </AdminBreadcrumbContainer>
 
     <div class="flex justify-end">
-      <AppButton v-tippy="'Create Permission'" secondary :disabled="showCreatePermissionForm || !dataReady"
-        class="mb-2 px-2 py-2 text-sm font-medium" @click="triggerCreatePermission">
+      <AppButton v-tippy="$t('create_role')" :disabled="showCreateRoleForm || !dataReady" secondary
+        class="float-right mb-2 px-2 py-2 text-sm font-medium" @click="triggerCreateRole">
         <template #text>
           <span v-if="dataReady" class="fas fa-plus fa-fw ml-2 mr-2" />
           <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
-          <span class="sr-only">Create New Permission</span>
+          <span class="sr-only">{{ $t('create_new_role') }}</span>
         </template>
       </AppButton>
     </div>
 
-    <easy-data-table v-if="dataReady" :headers="tableHeaders" :items="permissionsData" ref="permissionsTable"
-      :key="permissionsTableKey" :loading="!dataReady" no-hover body-item-class-name="text-xs">
+    <easy-data-table v-if="dataReady" :headers="tableHeaders" :items="rolesData" ref="rolesTable" :key="rolesTableKey"
+      :loading="!dataReady" no-hover body-item-class-name="text-xs">
+
       <template #item-name="item">
-        <input v-model="item.name" v-tippy="'Edit Permission Name'" type="text"
+        <input v-model="item.name" v-tippy="'Edit Role Name'" type="text"
           class="rounded border-0 bg-transparent text-sm" :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)" @blur="update('name', item)" />
       </template>
+
       <template #item-slug="item">
-        <input v-model="item.slug" v-tippy="'Edit Permission Slug'" type="text"
+        <input v-model="item.slug" v-tippy="'Edit Role Slug'" type="text"
           class="rounded border-0 bg-transparent text-sm" :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)" @blur="update('slug', item)" />
       </template>
+
       <template #item-description="item">
-        <input v-model="item.description" v-tippy="'Edit Permission Description'" type="text"
+        <input v-model="item.description" v-tippy="'Edit Role Description'" type="text"
           class="rounded border-0 bg-transparent text-sm" :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)" @blur="update('description', item)" />
       </template>
+
       <template #item-created_at="item">
         <span class="text-xs">
           {{ item.created_at ? parseDisplayDate(item.created_at) : null }}
         </span>
       </template>
+
       <template #item-updated_at="item">
         <span class="text-xs">
           {{ item.updated_at ? parseDisplayDate(item.updated_at) : null }}
         </span>
       </template>
+
       <template #item-actions="item">
         <div class="text-nowrap">
           <AppButton :loading="!dataReady"
@@ -88,34 +76,45 @@
             </template>
           </AppButton>
 
-          <AppButton v-tippy="'Edit Permission'" warning :disabled="locked(item)" :loading="!dataReady"
-            class="mr-2 px-1 py-1 text-sm" @click="triggerEditPermission(item)">
+          <AppButton v-tippy="'Edit Role'" warning :disabled="locked(item)" :loading="!dataReady"
+            class="mr-2 px-1 py-1 text-sm" @click="triggerEditRole(item)">
             <template #text>
               <PencilSquareIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
               <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
-              <span class="sr-only">Edit Permission</span>
+              <span class="sr-only">Edit Role</span>
             </template>
           </AppButton>
 
-          <AppButton v-tippy="'Delete Permission'" danger :disabled="locked(item)" :loading="!dataReady"
-            class="mr-2 px-1 py-1 text-sm" @click="triggerDeletePermission(item)">
+          <AppButton v-tippy="'Delete Role'" danger :disabled="locked(item)" :loading="!dataReady"
+            class="mr-2 px-1 py-1 text-sm" @click="triggerDeleteRole(item)">
             <template #text>
               <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
               <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
-              <span class="sr-only">Delete Permission</span>
+              <span class="sr-only">Delete Role</span>
             </template>
           </AppButton>
         </div>
       </template>
     </easy-data-table>
 
-    <PermissionFormModal :key="permissionFormKey" :showing-form="showCreatePermissionForm"
-      :permission="permissionEditing" :new-permission="creatingNewPermission" :available-roles="availableRoles"
-      @close-modal="closePermissionForm" @permission-created="permissionCreated"
-      @permission-updated="permissionUpdated" />
+    <RoleFormModal :key="roleFormKey" :showing-form="showCreateRoleForm" :role="roleEditing" :new-role="creatingNewRole"
+      :available-permissions="availablePermissions" @close-modal="closeRoleForm" @role-created="roleCreated"
+      @role-updated="roleUpdated" />
 
   </div>
 </template>
+<!--
+Id
+Name
+Slug
+Descriptio
+Level
+Updated At
+Updated A
+Users
+Permissions
+ -->
+
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
@@ -123,8 +122,8 @@ import { useAuthStore } from "@store/auth";
 import { useToastStore } from "@store/toast";
 import moment from 'moment';
 import axios from 'axios';
+import RoleFormModal from '@components/roles/RoleFormModal.vue';
 import CircleSvg from '@components/common/CircleSvg.vue';
-import PermissionFormModal from '@components/roles/PermissionFormModal.vue';
 import {
   ChevronRightIcon,
   LockClosedIcon,
@@ -134,7 +133,7 @@ import {
 } from '@heroicons/vue/24/outline';
 
 export default {
-  name: 'Permissions',
+  name: 'Roles',
   components: {
     ChevronRightIcon,
     LockClosedIcon,
@@ -142,7 +141,7 @@ export default {
     PencilSquareIcon,
     TrashIcon,
     CircleSvg,
-    PermissionFormModal,
+    RoleFormModal,
     EasyDataTable: window['vue3-easy-data-table'],
   },
   computed: {
@@ -158,34 +157,36 @@ export default {
     },
   },
   mounted() {
-    this.getPermissions();
     this.getRoles();
+    this.getPermissions();
   },
   data() {
     return {
       dataReady: false,
-      permissionsData: null,
+      rolesData: null,
       pagination: {},
       perPage: 1000000,
-      showCreatePermissionForm: false,
-      permissionEditing: null,
-      creatingNewPermission: false,
-      permissionFormKey: 432489,
+      lockJigled: false,
+      showCreateRoleForm: false,
+      roleEditing: null,
+      creatingNewRole: false,
+      roleFormKey: 432432489,
       tableHeaders: [
         { text: "ID", value: "id", sortable: true },
         { text: "NAME", value: "name", sortable: true, width: 150 },
         { text: "SLUG", value: "slug", sortable: true, width: 100 },
         { text: "DESCRIPTION", value: "description", width: 150 },
-        { text: "ROLES", value: "roles.length", sortable: true },
+        { text: "LEVEL", value: "level", sortable: true },
+        { text: "PERMISSIONS", value: "permissions.length", sortable: true },
         { text: "USERS", value: "users.length", sortable: true },
         { text: "CREATED AT", value: "created_at", sortable: true, width: 140 },
         { text: "UPDATED AT", value: "updated_at", sortable: true, width: 140 },
         { text: "ACTIONS", value: "actions" },
       ],
       rowsUnlocked: [],
-      availableRoles: [],
-      rolesDataReady: false,
-      permissionsTableKey: 432876,
+      availablePermissions: [],
+      permissionsDataReady: false,
+      rolesTableKey: 978234,
       submitting: false,
     };
   },
@@ -197,13 +198,19 @@ export default {
     ...mapActions(useToastStore, [
       'popToast',
     ]),
-    async getRoles() {
-      this.rolesDataReady = false;
+    async getRoles(updatedPage = null) {
+      if (updatedPage) {
+        this.pagination.current_page = updatedPage;
+      }
       await axios
-        .get('/api/roles')
+        .get(
+          `/api/roles-complete?page=${this.pagination.current_page}&per=${this.perPage}`,
+        )
         .then(({ data }) => {
-          this.availableRoles = data.roles;
-          this.rolesDataReady = true;
+          this.rolesData = data.data;
+          delete data.data;
+          this.pagination = data;
+          this.dataReady = true;
         })
         .catch(({ response }) => {
           this.popToast({
@@ -211,23 +218,17 @@ export default {
             timer: 5000,
             icon: 'error',
           });
-          this.rolesDataReady = true;
-        });
-    },
-    async getPermissions(updatedPage = null) {
-      if (updatedPage) {
-        this.pagination.current_page = updatedPage;
-      }
-      await axios
-        .get(
-          `/api/permissions-paginated?page=${this.pagination.current_page}&per=${this.perPage}`,
-        )
-        .then(({ data }) => {
-          this.permissionsData = data.data;
-          delete data.data;
-          this.pagination = data;
           this.dataReady = true;
-          this.permissionsTableKey += 1;
+        });
+      this.dataReady = true;
+    },
+    async getPermissions() {
+      this.permissionsDataReady = false;
+      await axios
+        .get('/api/permissions')
+        .then(({ data }) => {
+          this.availablePermissions = data.permissions;
+          this.permissionsDataReady = true;
         })
         .catch(({ response }) => {
           this.popToast({
@@ -235,14 +236,14 @@ export default {
             timer: 5000,
             icon: 'error',
           });
-          this.dataReady = true;
+          this.permissionsDataReady = true;
         });
-      this.dataReady = true;
+      this.permissionsDataReady = true;
     },
-    triggerDeletePermission(row) {
+    triggerDeleteRole(row) {
       const self = this;
-      const title = '<strong>Delete Permission?</strong>';
-      const html = `Are you sure you want to Delete<strong> ${row.name}</strong>?<h6 class="font-bold">This will delete the Permission.</h6><p class="font-extrabold">This cannot be undone.</p>`;
+      const title = '<strong>Delete Role?</strong>';
+      const html = `Are you sure you want to Delete<strong> ${row.name}</strong>?<h6 class="font-bold">This will delete the Role.</h6><p class="font-extrabold">This cannot be undone.</p>`;
       const icon = 'warning';
       const confirmButtonColor = '#FF0000';
       const denyButtonColor = '#777777';
@@ -262,7 +263,7 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            this.deletePermission(row);
+            this.deleteRole(row);
           } else if (result.isDenied) {
             self.popToast({
               message: 'Cancelled',
@@ -272,62 +273,57 @@ export default {
           }
         });
     },
-    async deletePermission(value) {
+    async deleteRole(value) {
       await axios
-        .delete(`/api/permissions/delete/permission/${value.id}`)
+        .delete(`/api/roles/delete/role/${value.id}`)
         .then(({ data }) => {
-          this.permissionsData = this.permissionsData.filter((u) => u.id != data.id);
+          this.rolesData = this.rolesData.filter((u) => u.id != data.id);
           this.rowsUnlocked = this.rowsUnlocked.filter((i) => i != value.id);
-          this.pagination.total = this.pagination.total - 1;
-          this.getPermissions(
-            this.pagination.current_page ? this.pagination.current_page : null,
-          );
+          this.getRoles();
           this.rowsUnlocked = [];
           this.popToast({
-            message: 'Successfully Deleted Permission!',
+            message: 'Successfully Deleted Role!',
             timer: 5000,
             icon: 'success',
           });
         })
         .catch(({ response }) => {
           this.popToast({
-            message: 'Error Deleting Permission',
+            message: 'Error Deleting Role',
             timer: 5000,
             icon: 'error',
           });
           this.dataReady = true;
         });
     },
-    closePermissionForm() {
-      this.permissionEditing = null;
-      this.creatingNewPermission = false;
-      this.showCreatePermissionForm = false;
+    closeRoleForm() {
+      this.roleEditing = null;
+      this.creatingNewRole = false;
+      this.showCreateRoleForm = false;
     },
-    triggerEditPermission(permission) {
-      this.permissionFormKey += 1;
-      this.permissionEditing = permission;
-      this.creatingNewPermission = false;
-      this.showCreatePermissionForm = true;
+    triggerEditRole(role) {
+      this.roleFormKey += 1;
+      this.roleEditing = role;
+      this.creatingNewRole = false;
+      this.showCreateRoleForm = true;
     },
-    permissionUpdated(data) {
-      this.permissionsData = this.permissionsData.map((u) =>
-        u.id !== data.id ? u : data,
-      );
+    roleUpdated(data) {
+      this.rolesData = this.rolesData.map((u) => u.id !== data.id ? u : data);
       this.rowsUnlocked = [];
-      this.getPermissions(); // Realign just in case.
-      this.closePermissionForm();
+      this.getRoles(); // Realign just in case.
+      this.closeRoleForm();
     },
-    permissionCreated(data) {
-      this.permissionsData.push(data);
+    roleCreated(data) {
+      this.rolesData.push(data);
       this.rowsUnlocked = [];
-      this.getPermissions(); // Realign just in case.
-      this.closePermissionForm();
+      this.getRoles(); // Realign just in case.
+      this.closeRoleForm();
     },
-    triggerCreatePermission() {
-      this.permissionFormKey += 1;
-      this.creatingNewPermission = true;
-      this.showCreatePermissionForm = true;
-      this.permissionEditing = null;
+    triggerCreateRole() {
+      this.roleFormKey += 1;
+      this.creatingNewRole = true;
+      this.showCreateRoleForm = true;
+      this.roleEditing = null;
     },
     parseDisplayDate(date) {
       return moment(date).format('MMM Do YYYY, h:mma');
@@ -346,18 +342,18 @@ export default {
       if (!this.inputValid(key, row)) {
         this.submitting = false;
         this.popToast({
-          message: 'Error Validating Permission',
+          message: 'Error Validating Role',
           timer: 5000,
           icon: 'error',
         });
         return;
       }
       await axios
-        .patch(`/api/permissions/update-permission/${row.id}`, row)
+        .patch(`/api/roles/update-role/${row.id}`, row)
         .then(({ data }) => {
-          self.permissionUpdated(data.permission);
+          self.roleUpdated(data.role);
           self.popToast({
-            message: `Permission ${data.permission.name} Successfully Updated!`,
+            message: `Role ${data.role.name} Successfully Updated!`,
             timer: 5000,
             icon: 'success',
           });
@@ -374,7 +370,7 @@ export default {
             });
           } else {
             self.popToast({
-              message: 'Error Updating Permission',
+              message: 'Error Updating Role',
               timer: 5000,
               icon: 'error',
             });

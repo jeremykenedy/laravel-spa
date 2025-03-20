@@ -1,29 +1,11 @@
 <template>
   <div id="browser_sessions" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-    <nav class="mb-6 text-sm font-semibold float-left ml-2 mt-2" aria-label="Breadcrumb">
-      <ol class="inline-flex list-none p-0">
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            {{ $t('dashboard') }}
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'browser_sessions.index' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('browser_sessions') }}
-            </span>
-          </router-link>
-        </li>
-      </ol>
-    </nav>
+
+    <AdminBreadcrumbContainer>
+      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="browser_sessions.index" :text="$t('browser_sessions')" />
+    </AdminBreadcrumbContainer>
 
     <div class="mx-auto max-w-screen-lg text-gray-900 clear-both">
       <div class="flex justify-center">
@@ -54,8 +36,7 @@
                 </li>
               </ul>
               <div class="mt-5 mb-3">
-                <AppButton icon="fa-solid fa-power-off " warning @click="logOutOtherDevices"
-                  text="Logout Other Browser Sessions" />
+                <AppButton icon="fa-solid fa-power-off " warning @click="logOutOtherDevices" text="Logout Other Browser Sessions" />
               </div>
             </div>
           </div>

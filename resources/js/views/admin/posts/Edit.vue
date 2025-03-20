@@ -1,57 +1,15 @@
 <template>
   <div id="edit_post" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-    <nav class="mb-6 mt-2 ml-2 text-sm font-semibold float-left" aria-label="Breadcrumb">
-      <ol class="inline-flex list-none p-0">
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            {{ $t('dashboard') }}
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'posts.index' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('posts') }}
-            </span>
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'posts.edit' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('edit_post') }}
-            </span>
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'posts.edit' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ post.title }}
-            </span>
-          </router-link>
-        </li>
-      </ol>
-    </nav>
+
+    <AdminBreadcrumbContainer>
+      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="posts.index" :text="$t('posts')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="posts.edit" :text="$t('edit_post')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="posts.edit" :text="post.title" />
+    </AdminBreadcrumbContainer>
 
     <router-link v-if="userCan('create.articles')" :to="{ name: 'posts.create' }" class="float-right mb-2 ml-2">
       <AppButton v-tippy="$t('create_post')" secondary class="px-2 py-2 text-sm font-medium">

@@ -10,6 +10,9 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import { plugin as VueTippy } from 'vue-tippy';
 import AppButton from '@components/common/AppButton.vue';
 import AppSwitch from '@components/common/AppSwitch.vue';
+import AdminBreadcrumbContainer from '@components/includes/AdminBreadcrumbContainer.vue';
+import AdminBreadcrumb from '@components/includes/AdminBreadcrumb.vue';
+import AdminBreadcrumbSep from '@components/includes/AdminBreadcrumbSep.vue';
 import { abilitiesPlugin } from '@casl/vue';
 import ability from './services/ability';
 import vSelect from "vue-select";
@@ -122,6 +125,9 @@ if (APP_GA_ENABLED == 1) {
 }
 app.component('EasyDataTable', Vue3EasyDataTable)
 app.component('AppButton', AppButton)
+app.component('AdminBreadcrumbContainer', AdminBreadcrumbContainer)
+app.component('AdminBreadcrumb', AdminBreadcrumb)
+app.component('AdminBreadcrumbSep', AdminBreadcrumbSep)
 app.component('Pagination', Bootstrap5Pagination)
 app.component("v-select", vSelect)
 app.component('AppSwitch', AppSwitch)

@@ -1,38 +1,13 @@
 <template>
-  <div id="roles" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-    <nav class="mb-6 text-sm font-semibold float-left ml-2 mt-2" aria-label="Breadcrumb">
-      <ol class="inline-flex list-none p-0">
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            {{ $t('dashboard') }}
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'settings.index' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            {{ $t('settings') }}
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'profile.index' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('profile') }}
-            </span>
-          </router-link>
-        </li>
-      </ol>
-    </nav>
+  <div id="profile" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
+
+    <AdminBreadcrumbContainer>
+      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="settings.index" :text="$t('settings')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="settings.profile" :text="$t('profile')" />
+    </AdminBreadcrumbContainer>
 
     <div class="clear-both">
       <div class="text-gray-900 dark:text-gray-100 md:flex md:flex-row md:items-start md:justify-between">
@@ -94,7 +69,7 @@ import { onMounted, reactive, watchEffect } from "vue";
 import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules"
 import useProfile from "@/composables/profile";
-import SettingsNav from '@pages/settings/SettingsNav.vue';
+import SettingsNav from '@pages/user-settings/SettingsNav.vue';
 defineRule('required', required)
 // defineRule('email', email)
 defineRule('min', min);

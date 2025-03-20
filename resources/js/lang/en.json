@@ -103,5 +103,6 @@
     "app_settings": "App Settings",
     "server_info": "Server Info",
     "admin": "Admin",
-    "external_resources": "External Resources"
+    "external_resources": "External Resources",
+    "account": "Account"
 }

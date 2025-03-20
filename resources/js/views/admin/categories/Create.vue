@@ -1,43 +1,13 @@
 <template>
   <div id="create_category" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-    <nav class="mb-6 mt-2 ml-2 text-sm font-semibold float-left" aria-label="Breadcrumb">
-      <ol class="inline-flex list-none p-0">
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'dashboard' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            {{ $t('dashboard') }}
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'categories.index' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('categories') }}
-            </span>
-          </router-link>
-        </li>
-        <li class="flex items-center">
-          <ChevronRightIcon class="ml-2 mr-2 mt-0 h-4 w-4" />
-        </li>
-        <li class="flex items-center">
-          <router-link v-slot="{ isActive }" :to="{ name: 'categories.create' }"
-            class="text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400">
-            <span :class="[
-              isActive &&
-              'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-            ]">
-              {{ $t('create_category') }}
-            </span>
-          </router-link>
-        </li>
-      </ol>
-    </nav>
+
+    <AdminBreadcrumbContainer>
+      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="categories.index" :text="$t('categories')" />
+      <AdminBreadcrumbSep />
+      <AdminBreadcrumb routeName="categories.create" :text="$t('create_category')" />
+    </AdminBreadcrumbContainer>
 
     <AppButton v-tippy="$t('cancel')" secondary @click.prevent="cancelForm"
       class="px-2 py-2 text-sm font-medium float-right mb-2 ml-2">
