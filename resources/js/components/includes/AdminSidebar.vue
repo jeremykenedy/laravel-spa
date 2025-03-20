@@ -40,7 +40,10 @@
         </template>
       </AdminSidebarLink>
 
-      <div class="text-xs/6 font-semibold text-gray-600 dark:text-gray-300 px-1 pt-5">
+      <div
+        v-if="userCan('view.users') || userCan('view.permissions') || userCan('view.roles') || userCan('view.articles') || userCan('view.categories') || userIs('superadmin')"
+        class="text-xs/6 font-semibold text-gray-600 dark:text-gray-300 px-1 pt-5"
+      >
         {{ $t('admin') }}
       </div>
 
