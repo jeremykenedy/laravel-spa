@@ -30,6 +30,8 @@ const NotFound  = ()  => import(/* webpackChunkName: "js/NotFoundPage" */ '@erro
 const PhpInfo  = ()  => import(/* webpackChunkName: "js/PhpInfo" */ '@admin/PhpInfo.vue');
 const AppSettings  = ()  => import(/* webpackChunkName: "js/AppSettings" */ '@admin/AppSettings.vue');
 
+const Settings  = ()  => import(/* webpackChunkName: "js/Settings" */ '@pages/settings/Settings.vue');
+
 export default [
   {
     path: '/',
@@ -122,12 +124,6 @@ export default [
         meta: { breadCrumb: 'Dashboard' }
       },
       {
-        name: 'profile.index',
-        path: 'profile',
-        component: Profile,
-        meta: { breadCrumb: 'Profile' }
-      },
-      {
         name: 'posts.index',
         path: 'posts',
         component: PostsIndex,
@@ -207,6 +203,25 @@ export default [
         name: 'app-settings',
         component: AppSettings,
         beforeEnter: superAdmin,
+      },
+    ]
+  },
+  {
+    path: '/settings',
+    component: AuthenticatedLayout,
+    beforeEnter: requireLogin,
+    children: [
+      {
+        name: 'settings.index',
+        path: '',
+        component: Settings,
+        meta: { breadCrumb: 'Settings' }
+      },
+      {
+        name: 'profile.index',
+        path: 'profile',
+        component: Profile,
+        meta: { breadCrumb: 'Profile' }
       },
     ]
   },

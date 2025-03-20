@@ -28,126 +28,90 @@
           </div>
         </div>
 
-        <div as="nav" class="ml-5 space-x-10 hidden md:flex">
+        <nav as="nav" class="ml-5 space-x-10 hidden md:flex">
 
-          <NavLink
-            v-if="authenticated"
-            routeName="dashboard"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink v-if="authenticated" routeName="dashboard" @nav-clicked="closeDrop">
             <template #iconBefore>
               <BuildingLibraryIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            routeName="home"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink routeName="home" @nav-clicked="closeDrop">
             <template #iconBefore>
               <HomeIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            routeName="about"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink routeName="about" @nav-clicked="closeDrop">
             <template #iconBefore>
               <InformationCircleIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            routeName="terms"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink routeName="terms" @nav-clicked="closeDrop">
             <template #iconBefore>
               <DocumentTextIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-        </div>
+        </nav>
       </div>
 
-      <div class="relative flex items-center">
-        <!--
-        <div class="my-1 mr-3 w-full py-2 sm:flex sm:items-center">
-          <span
-            v-tippy="'Toggle Theme ' + (form.theme_dark ? 'Light' : 'Dark')"
-            :class="
-              loading ? 'default disabled cursor-pointer' : 'cursor-pointer'
-            "
-            @click="toggleTheme()"
-          >
-            <span
-              class="fa-solid fa-fw fa-2x float-left mr-4 text-slate-600"
-              :class="form.theme_dark ? 'fa-toggle-on' : 'fa-toggle-off'"
-            />
-            <span
-              v-if="loading"
-              class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
-              style="left: -1.4em; top: 1.2em"
-            />
-          </span>
+      <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true"></div>
+
+      <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+        <div class="grid flex-1 grid-cols-1" />
+        <div class="flex items-center gap-x-4 lg:gap-x-6">
+          <ToggleDarkMode class="-mr-1" />
+          <div class="h-6 w-px bg-gray-200 dark:bg-gray-600" aria-hidden="true"></div>
+          <div class="relative">
+            <button type="button" class="-m-1.5 flex items-center p-1.5" id="user-menu-button" aria-expanded="false"
+              aria-haspopup="true" @click="dropDownOpen = !dropDownOpen">
+              <span class="sr-only">Open user menu</span>
+              <img v-if="user && user.avatar" :src="user.avatar" :alt="user.name"
+                class="size-8 rounded-full bg-gray-50 cursor-pointer border shadow-lg dark:border-gray-500" />
+              <UserCircleIcon v-else
+                class="size-9 rounded-full bg-gray-50 cursor-pointer text-gray-700 dark:text-gray-200 " />
+              <span class="hidden lg:flex lg:items-center">
+                <span class="ml-4 text-sm/6 font-semibold text-gray-700 dark:text-gray-200" aria-hidden="true">
+                  {{ user && user.name ? user.name : '' }}
+                </span>
+                <svg class="ml-2 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                  data-slot="icon">
+                  <path fill-rule="evenodd"
+                    d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
-        -->
-        <LeaveImpersonation classes="mr-4 mt-1" />
-        <div class="my-1 mr-5 mt-2 w-full py-2 sm:flex sm:items-center">
-          <ToggleDarkMode class="m-0" />
-        </div>
-        <img v-if="user && user.avatar" :src="user.avatar" :alt="user.name"
-          class="h-8 w-8 cursor-pointer rounded-full border shadow-lg" @click="dropDownOpen = !dropDownOpen" />
-        <UserCircleIcon v-else class="float-right ml-2 mt-0 h-8 w-8 cursor-pointer"
-          @click="dropDownOpen = !dropDownOpen" />
       </div>
     </div>
 
     <div ref="dropMenu" class="relative mt-1">
       <div v-show="dropDownOpen"
-        class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded border bg-white shadow-md dark:bg-slate-900"
-        @click="dropDownOpen = !dropDownOpen">
-        <!--
-        <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'admin.index' }">
-          <span class="flex items-center rounded-t p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white" :class="isActive
-            ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
-            : 'text-gray-700'
-            ">
-            <BuildingLibraryIcon class="mr-2 h-6 w-6" />
-            Admin
-          </span>
-        </router-link>
-        -->
+        class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded border bg-white shadow-md dark:bg-slate-900 transition ease-out duration-100 transition ease-in duration-75"
+        @click="dropDownOpen = !dropDownOpen"
+      >
 
-        <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'dashboard' }">
-          <span class="flex items-center rounded-t p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white"
-            :class="currentRouteName == 'dashboard'
-            ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
-            : 'text-gray-700'
-            ">
-            <BuildingLibraryIcon class="mr-2 h-6 w-6" />
-            {{ $t('dashboard') }}
-          </span>
-        </router-link>
+        <AdminNavBarLink v-if="authenticated && user" routeName="dashboard" :text="$t('dashboard')" itemClass="rounded-t">
+          <template #icon>
+            <BuildingLibraryIcon class="h-6 w-6" />
+          </template>
+        </AdminNavBarLink>
 
-        <!--
-        <router-link v-if="authenticated" v-slot="{ isActive }" :to="{ name: 'settings' }">
-          <span class="flex items-center p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white" :class="isActive
-            ? 'cursor-default whitespace-nowrap bg-slate-500 text-white'
-            : 'text-gray-700'
-            ">
-            <CogIcon class="mr-2 h-6 w-6" />
-            Settings
-          </span>
-        </router-link>
-        -->
+        <AdminNavBarLink v-if="authenticated && user" routeName="settings.index" :text="$t('settings')">
+          <template #icon>
+            <Cog6ToothIcon class="h-6 w-6" />
+          </template>
+        </AdminNavBarLink>
 
-        <div
-          class="flex cursor-pointer items-center rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-800 hover:text-white"
-          @click.prevent="logout()">
-          <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6"></ArrowRightOnRectangleIcon>
-          {{ $t('logout') }}
-        </div>
+        <AdminNavBarLink v-if="authenticated && user" :text="$t('logout')" @nav-clicked="logout()" itemClass="rounded-b">
+          <template #icon>
+            <ArrowRightOnRectangleIcon class="h-6 w-6" />
+          </template>
+        </AdminNavBarLink>
 
       </div>
     </div>
@@ -165,6 +129,7 @@ import { parseDisplayDate } from '@services/common';
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import LeaveImpersonation from '@components/common/LeaveImpersonation.vue';
 import NavLink from '@components/includes/NavLink.vue';
+import AdminNavBarLink from '@components/includes/AdminNavBarLink.vue';
 import {
   Bars3Icon,
   XMarkIcon,
@@ -175,6 +140,7 @@ import {
   Bars3BottomLeftIcon,
   DocumentTextIcon,
   ArrowRightOnRectangleIcon,
+  Cog6ToothIcon,
 } from '@heroicons/vue/24/outline';
 
 export default {
@@ -192,6 +158,8 @@ export default {
     ArrowRightOnRectangleIcon,
     LeaveImpersonation,
     NavLink,
+    AdminNavBarLink,
+    Cog6ToothIcon,
   },
   data() {
     return {

@@ -29,7 +29,6 @@ Route::group(['middleware' => ['forceHTTPS']], function() {
     Route::get('get-post/{id}', [PostController::class, 'getPost']);
     Route::post('/user-by-token', [UserController::class, 'userByToken']);
 
-
     Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
     Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
     Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
