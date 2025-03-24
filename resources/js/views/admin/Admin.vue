@@ -16,7 +16,6 @@
     </div>
 
     <div class="mb-20 -m-3 flex flex-wrap">
-
       <router-link
         v-if="authenticated && user && userIs('superadmin')"
         :to="{ name: 'users.index' }"
@@ -98,6 +97,7 @@
           </template>
         </AdminMiniCard>
       </router-link>
+
     </div>
 
   </div>
