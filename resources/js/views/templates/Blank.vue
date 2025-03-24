@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
 import { watch, ref, watchEffect } from 'vue'
 import { mapStores, mapState, mapActions } from 'pinia';
 import { useAuthStore } from "@store/auth";
@@ -26,7 +25,7 @@ export default {
   },
   data() {
     return {
-      //
+      blank: 'Blank',
     };
   },
   computed: {

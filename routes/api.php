@@ -64,7 +64,6 @@ Route::group(['middleware' => ['forceHTTPS']], function () {
         Route::get('/server-info', [ServerInfoController::class, 'index']);
         Route::get('/app-settings', [AppSettingsController::class, 'index']);
         Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
-
         Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
 
         Route::group(['middleware' => ['role:superadmin']], function () {

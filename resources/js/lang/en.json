@@ -109,5 +109,10 @@
     "disabled": "Disabled",
     "registered_user": "Registered User",
     "registered_users": "Registered Users",
-    "logins_enabled": "Logins Enabled"
+    "logins_enabled": "Logins Enabled",
+    "authentication": "Authentication",
+    "data": "Data",
+    "your_data": "Your Data",
+    "on_demand": "On Demand",
+    "download_data_msg": "Download your user data."
 }
