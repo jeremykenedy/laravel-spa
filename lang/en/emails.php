@@ -27,7 +27,7 @@ return [
             'greeting'  => 'Hello :username,',
             'message'   => 'You are receiving this email because your password for your account was reset.',
             'action'    => 'Go to Login',
-            'goodbye'  => 'If you did not just change your password then you should immediately change it now.',
+            'goodbye'   => 'If you did not just change your password then you should immediately change it now.',
         ],
     ],
     'goodbye' => [

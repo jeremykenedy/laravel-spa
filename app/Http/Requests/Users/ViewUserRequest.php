@@ -16,4 +16,3 @@ class ViewUserRequest extends FormRequest
         return $this->user()->hasPermission('view.users');
     }
 }
-

@@ -90,10 +90,10 @@ return [
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 
     'locales' => [
-        'en' => 'EN',
-        'bn' => 'BN',
-        'es' => 'ES',
-        'fr' => 'FR',
+        'en'    => 'EN',
+        'bn'    => 'BN',
+        'es'    => 'ES',
+        'fr'    => 'FR',
         'pt-BR' => 'BR',
         'zh-CN' => '中文',
     ],
@@ -134,7 +134,7 @@ return [
 
     'maintenance' => [
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
-        'store' => env('APP_MAINTENANCE_STORE', 'database'),
+        'store'  => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
     /*

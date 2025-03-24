@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\AppleToken;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Signer\Ecdsa\Sha256;
 use Lcobucci\JWT\Signer\Key\InMemory;

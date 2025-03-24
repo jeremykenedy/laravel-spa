@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UpdateAppSettingsRequest;
 use App\Http\Requests\Admin\ShowAppSettingsRequest;
+use App\Http\Requests\Admin\UpdateAppSettingsRequest;
 use App\Models\Setting;
 use App\Traits\AppSettingsTrait;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class AppSettingsController extends Controller
 {

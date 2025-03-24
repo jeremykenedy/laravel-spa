@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class ExceptionOccured extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     private $content;
 
@@ -47,11 +48,11 @@ class ExceptionOccured extends Mailable
             $bccEmails = config('exceptions.emailExceptionBCCtoDefault');
         }
 
-        if (! $fromSender) {
+        if (!$fromSender) {
             $fromSender = config('exceptions.emailExceptionFromDefault');
         }
 
-        if (! $subject) {
+        if (!$subject) {
             $subject = config('exceptions.emailExceptionSubjectDefault');
         }
 

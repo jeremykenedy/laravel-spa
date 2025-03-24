@@ -7,11 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -30,7 +27,8 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @param \App\Http\Requests\Auth\LoginRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function login(LoginRequest $request)
@@ -60,7 +58,8 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
@@ -90,8 +89,10 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Create User
+     * Create User.
+     *
      * @param RegisterRequest $request
+     *
      * @return JsonResponse
      */
     public function register(RegisterRequest $request)
@@ -102,9 +103,9 @@ class AuthenticatedSessionController extends Controller
         }
 
         $user = User::create([
-            'email' => $request['email'],
+            'email'    => $request['email'],
             'password' => Hash::make($request['password']),
-            'name' => $request['name'],
+            'name'     => $request['name'],
         ]);
 
         return $this->successResponse($user, 'Registration Successfully');

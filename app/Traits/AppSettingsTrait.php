@@ -10,7 +10,8 @@ trait AppSettingsTrait
     /**
      * Process the settings for additional app needs.
      *
-     * @param  \App\Models\Setting  $setting
+     * @param \App\Models\Setting $setting
+     *
      * @return \App\Models\Setting
      */
     public function processSettingForAdditionalAppChanges(Setting $setting)
@@ -216,9 +217,9 @@ trait AppSettingsTrait
     /**
      * Set .env variables directly to the file.
      *
-     * @param  string  $key
-     * @param  string|null  $value
-     * @param  string|null  $configed
+     * @param string      $key
+     * @param string|null $value
+     * @param string|null $configed
      */
     public function setEnv(string $key, $value, $configed = null)
     {

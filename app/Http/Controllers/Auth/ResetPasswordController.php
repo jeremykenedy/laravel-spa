@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Notifications\SendPasswordResetEmail;
 use App\Models\User;
+use App\Notifications\SendPasswordResetEmail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
@@ -35,7 +35,8 @@ class ResetPasswordController extends Controller
     /**
      * Reset the given user's password.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
     public function reset(Request $request)
@@ -43,7 +44,8 @@ class ResetPasswordController extends Controller
         $request->validate($this->rules(), $this->validationErrorMessages());
 
         $response = $this->broker()->reset(
-            $this->credentials($request), function ($user, $password) {
+            $this->credentials($request),
+            function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
         );
@@ -60,12 +62,12 @@ class ResetPasswordController extends Controller
     /**
      * Send Password Changed Email via Notify.
      *
-     * @param  array  $user
+     * @param array $user
+     *
      * @return void
      */
     public function sendPasswordChangedEmail(User $user)
     {
         $user->notify(new SendPasswordResetEmail($user));
     }
-
 }

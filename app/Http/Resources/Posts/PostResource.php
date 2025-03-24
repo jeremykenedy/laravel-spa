@@ -11,6 +11,7 @@ class PostResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)
@@ -19,17 +20,18 @@ class PostResource extends JsonResource
         try {
             $resized_image = $this->getMedia('*')[0]->getUrl('resized-image');
         } catch (Exception $e) {
-            $resized_image="";
+            $resized_image = '';
         }
+
         return [
-            'id' => $this->id,
-            'title' => $this->title,
-            'categories' => $this->categories,
-            'content' => $this->content,
+            'id'             => $this->id,
+            'title'          => $this->title,
+            'categories'     => $this->categories,
+            'content'        => $this->content,
             'original_image' => count($this->getMedia('*')) > 0 ? $this->getMedia('*')[0]->getUrl() : null,
-            'resized_image' => $resized_image,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'resized_image'  => $resized_image,
+            'created_at'     => $this->created_at,
+            'updated_at'     => $this->updated_at,
         ];
     }
 }

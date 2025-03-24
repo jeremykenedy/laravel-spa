@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Posts\DeletePostRequest;
+use App\Http\Requests\Posts\RestorePostRequest;
 use App\Http\Requests\Posts\ShowPostRequest;
 use App\Http\Requests\Posts\StorePostRequest;
-use App\Http\Requests\Posts\UpdatePostRequest;
-use App\Http\Requests\Posts\RestorePostRequest;
 use App\Http\Resources\Posts\PostResource;
 use App\Models\Category;
 use App\Models\Post;
@@ -51,7 +50,7 @@ class PostController extends Controller
                 if (request('search_category')) {
                     return $query->where(function ($q) {
                         return $q->whereHas('categories', function ($q1) {
-                            $categories = explode(",", request('search_category'));
+                            $categories = explode(',', request('search_category'));
                             $q1->whereIn('id', $categories);
                         });
                     });
@@ -61,16 +60,16 @@ class PostController extends Controller
                 return $query->where('id', request('search_id'));
             })
             ->when(request('search_title'), function ($query) {
-                return $query->where('title', 'like', '%' . request('search_title') . '%');
+                return $query->where('title', 'like', '%'.request('search_title').'%');
             })
             ->when(request('search_content'), function ($query) {
-                return $query->where('content', 'like', '%' . request('search_content') . '%');
+                return $query->where('content', 'like', '%'.request('search_content').'%');
             })
             ->when(request('search_global'), function ($query) {
                 return $query->where(function ($q) {
                     return $q->where('id', request('search_global'))
-                        ->orWhere('title', 'like', '%' . request('search_global') . '%')
-                        ->orWhere('content', 'like', '%' . request('search_global') . '%');
+                        ->orWhere('title', 'like', '%'.request('search_global').'%')
+                        ->orWhere('content', 'like', '%'.request('search_global').'%');
                 });
             })
             ->when(!auth()->user()->hasPermission('Can Edit Articles'), function ($query) {
@@ -89,7 +88,7 @@ class PostController extends Controller
         $validatedData['user_id'] = auth()->id();
         $post = Post::create($validatedData);
 
-        $categories = explode(",", $request->categories);
+        $categories = explode(',', $request->categories);
         $category = Category::findMany($categories);
         $post->categories()->attach($category);
 
@@ -118,6 +117,7 @@ class PostController extends Controller
 
             $category = Category::findMany($request->categories);
             $post->categories()->sync($category);
+
             return new PostResource($post);
         }
     }
@@ -128,10 +128,11 @@ class PostController extends Controller
             return response()->json([
                 'status'    => 405,
                 'success'   => false,
-                'message'   => 'You can only delete your own posts'
+                'message'   => 'You can only delete your own posts',
             ]);
         } else {
             $post->delete();
+
             return response()->noContent();
         }
     }

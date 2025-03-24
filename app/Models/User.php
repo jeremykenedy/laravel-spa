@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\SocialiteProvider;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyEmailNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -15,14 +14,20 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\PersonalDataExport\ExportsPersonalData;
 use Spatie\PersonalDataExport\PersonalDataSelection;
 
 class User extends Authenticatable implements ExportsPersonalData, MustVerifyEmail
 {
-     use HasFactory, Notifiable, HasApiTokens, HasRoleAndPermission, LogsActivity, Prunable, SoftDeletes;
+    use HasFactory;
+    use Notifiable;
+    use HasApiTokens;
+    use HasRoleAndPermission;
+    use LogsActivity;
+    use Prunable;
+    use SoftDeletes;
 
     /**
      * The accessors to append to the model's array.
@@ -142,7 +147,7 @@ class User extends Authenticatable implements ExportsPersonalData, MustVerifyEma
 
     public function canBeImpersonated()
     {
-        return ! $this->hasOneRole(config('roles.models.role')::whereName('Super Admin')->first('id')->id);
+        return !$this->hasOneRole(config('roles.models.role')::whereName('Super Admin')->first('id')->id);
     }
 
     public function isImpersonated()

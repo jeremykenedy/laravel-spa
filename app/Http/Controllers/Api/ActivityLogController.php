@@ -22,13 +22,12 @@ class ActivityLogController extends Controller
             })
             ->when($search, function ($query) use ($search) {
                 $query->where(function ($q) use ($search) {
-                    $q->where('description', 'like', '%' . $search . '%')
-                    ->orWhere('event', 'like', '%' . $search . '%');
+                    $q->where('description', 'like', '%'.$search.'%')
+                    ->orWhere('event', 'like', '%'.$search.'%');
                 });
             })
             ->paginate($perPage);
 
         return ActivityLogResource::collection($activity);
     }
-
 }

@@ -45,15 +45,15 @@ class VerificationController extends Controller
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
     public function verify(Request $request)
     {
         $user = User::findOrFail($request->route('id'));
 
         if (
-            ! hash_equals((string) $request->route('id'), (string) $user->getKey())
-            || ! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))
+            !hash_equals((string) $request->route('id'), (string) $user->getKey())
+            || !hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))
         ) {
             return response()->json(['message' => 'Verification error ! Try again'], 500);
         }
@@ -72,7 +72,7 @@ class VerificationController extends Controller
     /**
      * Resend the email verification notification.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
     public function resend(Request $request)
     {
@@ -80,7 +80,7 @@ class VerificationController extends Controller
 
         $user = User::find($request->id);
 
-        if (! $user) {
+        if (!$user) {
             return response()->json(['message' => 'Verification error '], 500);
         }
 

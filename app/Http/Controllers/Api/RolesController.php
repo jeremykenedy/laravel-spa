@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\CreateRoleRequest;
-use App\Http\Requests\Roles\UpdateRoleRequest;
 use App\Http\Requests\Roles\GetUserRolesRequest;
+use App\Http\Requests\Roles\UpdateRoleRequest;
 use App\Http\Resources\Roles\RolesCollection;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class RolesController extends Controller
 {

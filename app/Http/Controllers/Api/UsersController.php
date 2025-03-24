@@ -3,20 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-
-use App\Http\Requests\Users\ViewUserRequest;
 use App\Http\Requests\Users\CreateUserRequest;
-use App\Http\Requests\Users\VerifyUserRequest;
 use App\Http\Requests\Users\DeleteUserRequest;
 use App\Http\Requests\Users\RestoreUserRequest;
-use App\Http\Requests\Users\GetUserRolesRequest;
 use App\Http\Requests\Users\UpdateUserRequest;
-use App\Http\Resources\Users\UsersCollection;
-use App\Http\Resources\Users\UserResource;
+use App\Http\Requests\Users\VerifyUserRequest;
+use App\Http\Requests\Users\ViewUserRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -37,7 +31,8 @@ class UsersController extends Controller
     /**
      * Tap the guard we need.
      *
-     * @param  string  $guard
+     * @param string $guard
+     *
      * @return middleware guard
      */
     protected function guard($guard = 'web')
@@ -65,9 +60,9 @@ class UsersController extends Controller
 
         $query = User::orderBy($sortBy, $sortType);
 
-        if ($request->has('search') && ($request->input('search')) != 'null') {
-            $query->where('name', 'LIKE', '%'. $request->input('search') .'%')
-                ->orWhere('email', 'LIKE', '%'. $request->input('search') .'%');
+        if ($request->has('search') && $request->input('search') != 'null') {
+            $query->where('name', 'LIKE', '%'.$request->input('search').'%')
+                ->orWhere('email', 'LIKE', '%'.$request->input('search').'%');
         }
 
         return response()->json($query->paginate($per));

@@ -17,10 +17,9 @@ use App\Http\Controllers\Auth\ImpersonateController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerificationController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['forceHTTPS']], function() {
+Route::group(['middleware' => ['forceHTTPS']], function () {
     Route::post('forget-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('forget.password.post');
     Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('password.reset');
     Route::post('/verify-email/{id}/{hash}', [VerificationController::class, 'verify'])->name('verify');
@@ -34,7 +33,7 @@ Route::group(['middleware' => ['forceHTTPS']], function() {
     Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
     Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
 
-    Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::apiResource('posts', PostController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::get('category-list', [CategoryController::class, 'getList']);
@@ -68,9 +67,8 @@ Route::group(['middleware' => ['forceHTTPS']], function() {
 
         Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
 
-        Route::group(['middleware' => ['role:superadmin']], function() {
+        Route::group(['middleware' => ['role:superadmin']], function () {
             // Things should be done using checks within the requests
         });
     });
-
 });

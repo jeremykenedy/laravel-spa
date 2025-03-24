@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Categories\DeleteCategoryRequest;
+use App\Http\Requests\Categories\RestoreCategoryRequest;
 use App\Http\Requests\Categories\ShowCategoryRequest;
 use App\Http\Requests\Categories\StoreCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
-use App\Http\Requests\Categories\RestoreCategoryRequest;
 use App\Http\Resources\Categories\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -46,8 +46,8 @@ class CategoryController extends Controller
         }
 
         $categories = Category::with([
-                'posts:id,title'
-            ])
+            'posts:id,title',
+        ])
             ->when(request('search_id'), function ($query) {
                 $query->where('id', request('search_id'));
             })
@@ -55,10 +55,9 @@ class CategoryController extends Controller
                 $query->where('name', 'like', '%'.request('search_title').'%');
             })
             ->when(request('search_global'), function ($query) {
-                $query->where(function($q) {
+                $query->where(function ($q) {
                     $q->where('id', request('search_global'))
                         ->orWhere('name', 'like', '%'.request('search_global').'%');
-
                 });
             })
             ->orderBy($orderColumn, $orderDirection)
