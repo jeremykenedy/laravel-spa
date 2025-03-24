@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 //use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-
 class Post extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia, LogsActivity;
+    use HasFactory;
+    use InteractsWithMedia;
+    use LogsActivity;
 
-    protected $fillable = ['title', 'content', 'user_id', 'name', 'text',];
+    protected $fillable = ['title', 'content', 'user_id', 'name', 'text'];
 
     public function getActivitylogOptions(): LogOptions
     {
@@ -47,10 +47,9 @@ class Post extends Model implements HasMedia
             ->useFallbackPath(public_path('/images/placeholder.jpg'));
     }
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         if (env('RESIZE_IMAGE') === true) {
-
             $this->addMediaConversion('resized-image')
                 ->width(env('IMAGE_WIDTH', 300))
                 ->height(env('IMAGE_HEIGHT', 300));

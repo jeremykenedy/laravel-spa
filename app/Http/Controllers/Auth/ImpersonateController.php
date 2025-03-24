@@ -7,9 +7,7 @@ use App\Http\Requests\Users\ImpersonateUserRequest;
 use App\Http\Requests\Users\LeaveImpersonateUserRequest;
 use App\Models\Impersonation;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class ImpersonateController extends Controller
 {
@@ -30,8 +28,9 @@ class ImpersonateController extends Controller
     /**
      * Impersonate a user, store the token for returning.
      *
-     * @param  \App\Http\Requests\Users\ImpersonateUserRequest  $request
-     * @param  \App\Models\User  $user
+     * @param \App\Http\Requests\Users\ImpersonateUserRequest $request
+     * @param \App\Models\User                                $user
+     *
      * @return \Illuminate\Http\Response
      */
     public function impersonate(ImpersonateUserRequest $request, User $user)
@@ -43,7 +42,7 @@ class ImpersonateController extends Controller
             abort(418);
         }
 
-        if (! $impersonatee || ! $impersonatee->canBeImpersonated() || ! $impersonator->canImpersonate()) {
+        if (!$impersonatee || !$impersonatee->canBeImpersonated() || !$impersonator->canImpersonate()) {
             abort(403);
         }
 
@@ -72,7 +71,8 @@ class ImpersonateController extends Controller
     /**
      * Leave impersonating a user.
      *
-     * @param  \App\Http\Requests\Users\ImpersonateUserRequest  $request
+     * @param \App\Http\Requests\Users\ImpersonateUserRequest $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function leaveImpersonate(LeaveImpersonateUserRequest $request)
@@ -106,7 +106,8 @@ class ImpersonateController extends Controller
     /**
      * Logout a user herlper function.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
+     *
      * @return void
      */
     public function logoutUser($user)
@@ -119,7 +120,8 @@ class ImpersonateController extends Controller
     /**
      * Access the web guard middleware.
      *
-     * @param  string  $guard
+     * @param string $guard
+     *
      * @return App\Http\Kernel::middlewareGroups['web']
      */
     public function guard($guard = 'web')

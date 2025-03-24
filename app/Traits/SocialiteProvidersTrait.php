@@ -2,17 +2,13 @@
 
 namespace App\Traits;
 
-use App\Exceptions\SocialProviderDeniedException;
 use App\Models\Setting;
 use App\Models\SocialiteProvider;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
@@ -461,11 +457,12 @@ trait SocialiteProvidersTrait
     /**
      * Find or create a user.
      *
-     * @param  string  $provider
-     * @param  SocialiteUser  $user
+     * @param string        $provider
+     * @param SocialiteUser $user
+     *
      * @return App\Models\User
      */
-    protected function findOrCreateUser(string $provider, $user, string $state = null): array
+    protected function findOrCreateUser(string $provider, $user, ?string $state = null): array
     {
         $existingUser = null;
         $token = null;
@@ -503,11 +500,11 @@ trait SocialiteProvidersTrait
             ];
         }
 
-        if (! $existingUser) {
+        if (!$existingUser) {
             $existingUser = User::whereEmail($email)->first();
         }
 
-        if (! $existingUser) {
+        if (!$existingUser) {
             $existingUser = auth('sanctum')->user();
         }
 
@@ -537,8 +534,9 @@ trait SocialiteProvidersTrait
     /**
      * Create a new user.
      *
-     * @param  string  $provider
-     * @param  $sUser
+     * @param string $provider
+     * @param        $sUser
+     *
      * @return App\Models\User
      */
     protected function updateOrCreateUser(string $provider, $sUser, $existingUser = null): User
@@ -579,7 +577,7 @@ trait SocialiteProvidersTrait
                 $name = $sUser->getNickname();
             }
 
-            if (! $email) {
+            if (!$email) {
                 $email = 'email_missing_'.str_random(20).'@'.str_random(20).'.example.org';
                 $emailValid = false;
             }
@@ -614,8 +612,9 @@ trait SocialiteProvidersTrait
     /**
      * Update or Create a Socialite Provider.
      *
-     * @param  \App\Models\User  $user  [description]
-     * @param  array  $data
+     * @param \App\Models\User $user [description]
+     * @param array            $data
+     *
      * @return \App\Models\SocialiteProvider
      */
     protected function addSocialiteProviderToUser(User $user, $data): SocialiteProvider
@@ -644,7 +643,8 @@ trait SocialiteProvidersTrait
     /**
      * Generate a random string for temp Id.
      *
-     * @param  int  $depth
+     * @param int $depth
+     *
      * @return string
      */
     protected function generateTempId($depth = 40)
@@ -656,7 +656,8 @@ trait SocialiteProvidersTrait
      * Cache the current state and modify the url with a random string to be the key for the return user.
      * Not all providers return the state and this will allow us to do so..
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     protected function cacheStatePutKeyInUrl($url = null, $state = null)
@@ -670,9 +671,10 @@ trait SocialiteProvidersTrait
     /**
      * Cache the state temporarily to pick up on callback.
      *
-     * @param  string  $tempId
-     * @param  string  $state
-     * @param  int  $seconds
+     * @param string $tempId
+     * @param string $state
+     * @param int    $seconds
+     *
      * @return void
      */
     protected function tempStoreStateInCache($tempId, $state, $seconds = 60)

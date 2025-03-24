@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources\ActivityLogs;
 
-use App\Http\Resources\ActivityLogs\ActivityLogResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ActivityLogsCollection extends ResourceCollection
@@ -24,7 +23,8 @@ class ActivityLogsCollection extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
     public function toArray($request)

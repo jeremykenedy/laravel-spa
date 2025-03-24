@@ -24,8 +24,8 @@ class UpdateProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:5',
-            'email' => 'required|email|unique:users,email,'.$this->user()->id
+            'name'  => 'required|min:5',
+            'email' => 'required|email|unique:users,email,'.$this->user()->id,
         ];
     }
 }

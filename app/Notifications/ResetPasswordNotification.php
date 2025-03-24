@@ -2,10 +2,9 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotificationOriginal;
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class ResetPasswordNotification extends ResetPasswordNotificationOriginal
 {
@@ -16,8 +15,9 @@ class ResetPasswordNotification extends ResetPasswordNotificationOriginal
      */
     public function toMail($notifiable): MailMessage
     {
-        $resetUrl = url(config('app.url') . '/reset-password/' . $this->token .'?email='. $notifiable->getEmailForPasswordReset());
-        return (new MailMessage)
+        $resetUrl = url(config('app.url').'/reset-password/'.$this->token.'?email='.$notifiable->getEmailForPasswordReset());
+
+        return (new MailMessage())
             ->subject(trans('emails.password.request.subject'))
             ->line(trans('emails.password.request.message'))
             ->action(trans('emails.password.request.action'), $resetUrl)

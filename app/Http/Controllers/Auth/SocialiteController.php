@@ -9,17 +9,16 @@ use App\Models\SocialiteProvider;
 use App\Traits\SocialiteProvidersTrait;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Log;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
 {
-    use AuthenticatesUsers, SocialiteProvidersTrait;
+    use AuthenticatesUsers;
+    use SocialiteProvidersTrait;
 
     private $providerSettings;
     private $providerConfigs;
@@ -43,7 +42,8 @@ class SocialiteController extends Controller
     /**
      * Get a list of enabled socialite logins.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function loginsEnabled(Request $request)
@@ -56,8 +56,9 @@ class SocialiteController extends Controller
     /**
      * Gets the social redirect.
      *
-     * @param  string  $provider  The provider
-     * @param  \Illuminate\Http\Request  $request
+     * @param string                   $provider The provider
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function getSocialRedirect(Request $request, string $provider)
@@ -134,15 +135,16 @@ class SocialiteController extends Controller
     /**
      * Gets the social handle information from the provider.
      *
-     * @param  string  $provider  The provider
-     * @param  \Illuminate\Http\Request  $request
+     * @param string                   $provider The provider
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function handleSocialCallback(Request $request, string $provider)
     {
         $denied = $request->denied ? $request->denied : null;
         if ($denied != null || $denied != '') {
-            throw new SocialProviderDeniedException;
+            throw new SocialProviderDeniedException();
         }
 
         if ($provider == 'twitter') {
@@ -176,7 +178,8 @@ class SocialiteController extends Controller
     /**
      * Get Twitter Oauth1.0 Url built with identifier if user is present.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function twitterUserAuthenticationUrl($state = null)
@@ -204,7 +207,8 @@ class SocialiteController extends Controller
     /**
      * Get Twitter user credentials from Oauth1.0.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return array
      */
     public function twitterUserAuthentication(Request $request)
@@ -233,8 +237,9 @@ class SocialiteController extends Controller
      * Revoke a social media login provider for
      * a user from the app and from the provider.
      *
-     * @param  \App\Models\SocialiteProvider  $provider
-     * @param  \Illuminate\Http\Request  $request
+     * @param \App\Models\SocialiteProvider $provider
+     * @param \Illuminate\Http\Request      $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function revokeSocialProvider(SocialiteProvider $provider, Request $request)

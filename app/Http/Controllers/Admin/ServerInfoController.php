@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ShowServerInfoRequest;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class ServerInfoController extends Controller
 {

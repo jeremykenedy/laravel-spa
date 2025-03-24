@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminDashboardRequest;
-use App\Models\User;
-use App\Models\Role;
 use App\Models\Permission;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
