@@ -194,39 +194,20 @@ The following Sanctum features are implemented in this Vue SPA:
 ## File Tree
 ```
 LaravelSpa
-├── .browserslistrc
 ├── .editorconfig
 ├── .env.example
-├── .env.travis
 ├── .eslintrc.js
+├── .eslintrc.json
 ├── .gitattributes
 ├── .github
 │   ├── FUNDING.yml
 │   ├── dependabot.yml
 │   ├── labeler.yml
 │   └── workflows
-│       ├── changelog.yml
-│       ├── codeql.yml
-│       ├── create-release.yml
-│       ├── dependency-review.yml
-│       ├── deploy.yml
-│       ├── gitguardian.yml
-│       ├── greetings.yml
-│       ├── labeler.yml
-│       ├── laravel.yml
-│       ├── manual.yml
-│       ├── node.js.yml
-│       ├── php.yml
-│       ├── release.yml
-│       ├── sentry.yml
-│       └── stale.yml
 ├── .gitignore
-├── .npmrc
 ├── .prettierignore
 ├── .scripts
 │   └── deploy.sh
-├── .styleci.yml
-├── .travis.yml
 ├── LICENSE
 ├── README.md
 ├── SECURITY.md
@@ -238,28 +219,34 @@ LaravelSpa
 │   │   └── SocialProviderDeniedException.php
 │   ├── Http
 │   │   ├── Controllers
-│   │   │   ├── AppSettingsController.php
-│   │   │   ├── AppleSocialController.php
+│   │   │   ├── Admin
+│   │   │   │   ├── AppSettingsController.php
+│   │   │   │   ├── DashboardController.php
+│   │   │   │   └── ServerInfoController.php
+│   │   │   ├── Api
+│   │   │   │   ├── ActivityLogController.php
+│   │   │   │   ├── BrowserSessionController.php
+│   │   │   │   ├── CategoryController.php
+│   │   │   │   ├── PermissionsController.php
+│   │   │   │   ├── PostController.php
+│   │   │   │   ├── ProfileController.php
+│   │   │   │   ├── RolesController.php
+│   │   │   │   ├── UserController.php
+│   │   │   │   └── UsersController.php
 │   │   │   ├── Auth
-│   │   │   │   ├── AuthController.php
+│   │   │   │   ├── AuthenticatedSessionController.php
+│   │   │   │   ├── ConfirmPasswordController.php
 │   │   │   │   ├── ForgotPasswordController.php
-│   │   │   │   ├── PasswordController.php
+│   │   │   │   ├── ImpersonateController.php
+│   │   │   │   ├── LoginController.php
 │   │   │   │   ├── RegisterController.php
 │   │   │   │   ├── ResetPasswordController.php
 │   │   │   │   ├── SocialiteController.php
 │   │   │   │   └── VerificationController.php
 │   │   │   ├── Controller.php
-│   │   │   ├── DashboardController.php
-│   │   │   ├── ImpersonateController.php
-│   │   │   ├── PermissionsController.php
-│   │   │   ├── ProfileController.php
-│   │   │   ├── RolesController.php
-│   │   │   ├── ServerInfoController.php
-│   │   │   ├── UserController.php
-│   │   │   └── UsersController.php
+│   │   │   └── HomeController.php
 │   │   ├── Kernel.php
 │   │   ├── Middleware
-│   │   │   ├── AddContentSecurityPolicyHeaders.php
 │   │   │   ├── Authenticate.php
 │   │   │   ├── EncryptCookies.php
 │   │   │   ├── PreventRequestsDuringMaintenance.php
@@ -267,35 +254,79 @@ LaravelSpa
 │   │   │   ├── TrimStrings.php
 │   │   │   ├── TrustHosts.php
 │   │   │   ├── TrustProxies.php
+│   │   │   ├── ValidateSignature.php
 │   │   │   └── VerifyCsrfToken.php
 │   │   ├── Requests
-│   │   │   ├── AppSettings
+│   │   │   ├── Admin
+│   │   │   │   ├── AdminDashboardRequest.php
+│   │   │   │   ├── ShowAppSettingsRequest.php
+│   │   │   │   ├── ShowServerInfoRequest.php
+│   │   │   │   └── UpdateAppSettingsRequest.php
+│   │   │   ├── Auth
+│   │   │   │   ├── LoginRequest.php
+│   │   │   │   └── RegisterRequest.php
+│   │   │   ├── Categories
+│   │   │   │   ├── DeleteCategoryRequest.php
+│   │   │   │   ├── RestoreCategoryRequest.php
+│   │   │   │   ├── ShowCategoryRequest.php
+│   │   │   │   ├── StoreCategoryRequest.php
+│   │   │   │   └── UpdateCategoryRequest.php
 │   │   │   ├── Permissions
 │   │   │   │   ├── CreatePermissionRequest.php
 │   │   │   │   ├── GetPermissionsRequest.php
 │   │   │   │   └── UpdatePermissionRequest.php
+│   │   │   ├── Posts
+│   │   │   │   ├── DeletePostRequest.php
+│   │   │   │   ├── RestorePostRequest.php
+│   │   │   │   ├── ShowPostRequest.php
+│   │   │   │   ├── StorePostRequest.php
+│   │   │   │   └── UpdatePostRequest.php
 │   │   │   ├── Roles
 │   │   │   │   ├── CreateRoleRequest.php
+│   │   │   │   ├── GetUserRolesRequest.php
 │   │   │   │   └── UpdateRoleRequest.php
+│   │   │   ├── StoreRoleRequest.php
+│   │   │   ├── StoreUserRequest.php
+│   │   │   ├── UpdateProfileRequest.php
+│   │   │   ├── User
 │   │   │   └── Users
 │   │   │       ├── CreateUserRequest.php
-│   │   │       ├── GetUserRolesRequest.php
+│   │   │       ├── DeleteUserRequest.php
 │   │   │       ├── ImpersonateUserRequest.php
-│   │   │       └── UpdateUserRequest.php
+│   │   │       ├── LeaveImpersonateUserRequest.php
+│   │   │       ├── RestoreUserRequest.php
+│   │   │       ├── UpdateUserRequest.php
+│   │   │       ├── VerifyUserRequest.php
+│   │   │       └── ViewUserRequest.php
 │   │   └── Resources
+│   │       ├── ActivityLogs
+│   │       │   ├── ActivityLogResource.php
+│   │       │   └── ActivityLogsCollection.php
+│   │       ├── Categories
+│   │       │   ├── CategoryResource.php
+│   │       │   └── GategoriesCollection.php
 │   │       ├── Permissions
 │   │       │   ├── PermissionResource.php
 │   │       │   └── PermissionsCollection.php
+│   │       ├── Posts
+│   │       │   ├── PostResource.php
+│   │       │   └── PostsCollection.php
+│   │       ├── Roles
+│   │       │   ├── RoleResource.php
+│   │       │   └── RolesCollection.php
 │   │       └── Users
-│   │           ├── RoleResource.php
-│   │           └── RolesCollection.php
+│   │           ├── UserResource.php
+│   │           └── UsersCollection.php
 │   ├── Jobs
 │   │   └── PersonalDataExportJob.php
 │   ├── Mail
 │   │   └── ExceptionOccured.php
 │   ├── Models
+│   │   ├── Category.php
+│   │   ├── CategoryPost.php
 │   │   ├── Impersonation.php
 │   │   ├── Permission.php
+│   │   ├── Post.php
 │   │   ├── Role.php
 │   │   ├── Setting.php
 │   │   ├── SocialiteProvider.php
@@ -303,6 +334,9 @@ LaravelSpa
 │   ├── Notifications
 │   │   ├── PersonalDataExportedNotification.php
 │   │   ├── ResetPasswordNotification.php
+│   │   ├── SendActivationEmail.php
+│   │   ├── SendGoodbyeEmail.php
+│   │   ├── SendPasswordResetEmail.php
 │   │   └── VerifyEmailNotification.php
 │   ├── Providers
 │   │   ├── AppServiceProvider.php
@@ -322,67 +356,19 @@ LaravelSpa
 │           └── GaEnabledComposer.php
 ├── artisan
 ├── bootstrap
-│   ├── android-chrome-192x192.png
-│   ├── android-chrome-512x512.png
 │   ├── app.php
-│   ├── apple-touch-icon.png
-│   ├── cache
-│   │   ├── .gitignore
-│   │   ├── packages.php
-│   │   ├── routes-v7.php
-│   │   └── services.php
-│   ├── favicon-16x16.png
-│   ├── favicon-32x32.png
-│   ├── favicon.ico
-│   └── ssr
-│       ├── android-chrome-192x192.png
-│       ├── android-chrome-512x512.png
-│       ├── app2.mjs
-│       ├── apple-touch-icon.png
-│       ├── assets
-│       │   ├── About-8055ba51.mjs
-│       │   ├── Account-db07883a.mjs
-│       │   ├── Admin-1aef526f.mjs
-│       │   ├── AdminLayout-b06d3e9f.mjs
-│       │   ├── AppSettings-493dc486.mjs
-│       │   ├── Dashboard-00d0a96f.mjs
-│       │   ├── Errors-cfd7b346.mjs
-│       │   ├── ForgotPassword-ca93934f.mjs
-│       │   ├── Home-092f52e0.mjs
-│       │   ├── Login-3d895534.mjs
-│       │   ├── NotFound-52f67599.mjs
-│       │   ├── Password-0f549b05.mjs
-│       │   ├── Permissions-d779932d.mjs
-│       │   ├── PhpInfo-c54b8303.mjs
-│       │   ├── Profile-8dc4ce3e.mjs
-│       │   ├── Register-c8d7fa41.mjs
-│       │   ├── ResetPassword-4e7ca3b7.mjs
-│       │   ├── Roles-53fcb449.mjs
-│       │   ├── RolesBadges-5ee6b7bc.mjs
-│       │   ├── Settings-a3568c63.mjs
-│       │   ├── SocialiteLogins-6af0e372.mjs
-│       │   ├── Success-4b3d058c.mjs
-│       │   ├── Terms-3b1605fc.mjs
-│       │   ├── Users-fcead5b0.mjs
-│       │   ├── VerifyEmail-3b245fb1.mjs
-│       │   ├── default.css_vue_type_style_index_0_src_true_lang-6d22712f.mjs
-│       │   ├── workbox-window.prod.es5-77e1b1e1.mjs
-│       │   └── zoho-monocrome-black-b48ed5c0.mjs
-│       ├── favicon-16x16.png
-│       ├── favicon-32x32.png
-│       ├── favicon.ico
-│       ├── js-bundle-stats.html
-│       ├── manifest.webmanifest
-│       └── pluginWebUpdateNotice
-│           ├── webUpdateNoticeInjectScript.global.js
-│           ├── webUpdateNoticeInjectStyle.css
-│           └── web_version_by_plugin.json
+│   └── cache
+│       ├── .gitignore
+│       ├── packages.php
+│       └── services.php
 ├── composer.json
 ├── composer.lock
 ├── config
+│   ├── activitylog.php
 │   ├── app.php
 │   ├── auth.php
 │   ├── broadcasting.php
+│   ├── browser-sessions.php
 │   ├── cache.php
 │   ├── cors.php
 │   ├── database.php
@@ -391,19 +377,21 @@ LaravelSpa
 │   ├── filesystems.php
 │   ├── hashing.php
 │   ├── laravel-https.php
-│   ├── laravel-logger.php
 │   ├── laravel-page-speed.php
 │   ├── laravelpwa.php
 │   ├── logging.php
 │   ├── mail.php
+│   ├── media-library.php
 │   ├── personal-data-export.php
 │   ├── queue.php
+│   ├── request-docs.php
 │   ├── roles.php
 │   ├── sanctum.php
 │   ├── sentry.php
 │   ├── services.php
 │   ├── session.php
 │   ├── settings.php
+│   ├── sitemap.php
 │   ├── users.php
 │   └── view.php
 ├── database
@@ -411,30 +399,43 @@ LaravelSpa
 │   ├── factories
 │   │   └── UserFactory.php
 │   ├── migrations
+│   │   ├── 0001_01_01_000000_create_users_table.php
+│   │   ├── 0001_01_01_000001_create_cache_table.php
+│   │   ├── 0001_01_01_000002_create_jobs_table.php
 │   │   ├── 2014_10_00_000000_create_settings_table.php
 │   │   ├── 2014_10_00_000001_add_group_column_on_settings_table.php
-│   │   ├── 2014_10_12_000000_create_users_table.php
 │   │   ├── 2014_10_12_100000_create_password_resets_table.php
 │   │   ├── 2016_01_15_105324_create_roles_table.php
 │   │   ├── 2016_01_15_114412_create_role_user_table.php
 │   │   ├── 2016_01_26_115212_create_permissions_table.php
 │   │   ├── 2016_01_26_115523_create_permission_role_table.php
 │   │   ├── 2016_02_09_132439_create_permission_user_table.php
-│   │   ├── 2019_08_19_000000_create_failed_jobs_table.php
 │   │   ├── 2019_12_14_000001_create_personal_access_tokens_table.php
-│   │   ├── 2021_04_26_093603_create_jobs_table.php
-│   │   ├── 2022_09_05_192055_update_users_table.php
-│   │   ├── 2022_11_02_051027_update_settings_table.php
+│   │   ├── 2022_09_30_181156_create_posts_table.php
+│   │   ├── 2022_09_30_181227_create_categories_table.php
 │   │   ├── 2022_11_28_073632_create_socialite_providers_table.php
-│   │   └── 2022_12_06_061947_create_impersonations_table.php
+│   │   ├── 2022_12_06_061947_create_impersonations_table.php
+│   │   ├── 2023_10_02_010617_create_category_post_table.php
+│   │   ├── 2023_10_02_175025_create_media_table.php
+│   │   ├── 2024_11_25_022836_create_permission_tables.php
+│   │   ├── 2025_01_23_093055_create_activity_log_table.php
+│   │   ├── 2025_01_23_093056_add_event_column_to_activity_log_table.php
+│   │   └── 2025_01_23_093057_add_batch_uuid_column_to_activity_log_table.php
 │   └── seeders
 │       ├── AppSettingsSeeder.php
 │       ├── ConnectRelationshipsSeeder.php
 │       ├── DatabaseSeeder.php
+│       ├── PermissionTableSeeder.php
 │       ├── PermissionsTableSeeder.php
 │       ├── RolesTableSeeder.php
 │       └── UsersTableSeeder.php
-├── env.d.ts
+├── lang
+│   └── en
+│       ├── auth.php
+│       ├── emails.php
+│       ├── pagination.php
+│       ├── passwords.php
+│       └── validation.php
 ├── package-lock.json
 ├── package.json
 ├── phpunit.xml
@@ -446,50 +447,17 @@ LaravelSpa
 │   ├── android-chrome-192x192.png
 │   ├── android-chrome-512x512.png
 │   ├── apple-touch-icon.png
-│   ├── css
-│   │   └── app.css
 │   ├── favicon-16x16.png
 │   ├── favicon-32x32.png
 │   ├── favicon.ico
+│   ├── favicon.png
 │   ├── images
-│   │   └── icons
-│   │       ├── icon-128x128.png
-│   │       ├── icon-144x144.png
-│   │       ├── icon-152x152.png
-│   │       ├── icon-192x192.png
-│   │       ├── icon-384x384.png
-│   │       ├── icon-512x512.png
-│   │       ├── icon-72x72.png
-│   │       ├── icon-96x96.png
-│   │       ├── splash-1125x2436.png
-│   │       ├── splash-1242x2208.png
-│   │       ├── splash-1242x2688.png
-│   │       ├── splash-1536x2048.png
-│   │       ├── splash-1668x2224.png
-│   │       ├── splash-1668x2388.png
-│   │       ├── splash-2048x2732.png
-│   │       ├── splash-640x1136.png
-│   │       ├── splash-750x1334.png
-│   │       └── splash-828x1792.png
+│   │   └── placeholder.jpg
 │   ├── index.php
-│   ├── js
-│   │   ├── app.js
-│   │   ├── resources_js_Views_ForgotPassword_vue.js
-│   │   ├── resources_js_Views_Home_vue.js
-│   │   ├── resources_js_Views_Login_vue.js
-│   │   ├── resources_js_Views_Password_vue.js
-│   │   ├── resources_js_Views_Profile_vue.js
-│   │   ├── resources_js_Views_Register_vue.js
-│   │   ├── resources_js_Views_ResetPassword_vue.js
-│   │   ├── resources_js_Views_Settings_vue.js
-│   │   ├── resources_js_Views_VerifyEmail_vue.js
-│   │   ├── resources_js_Views_Welcome_vue.js
-│   │   └── s-code.min.js
-│   ├── mix-manifest.json
 │   ├── robots.txt
 │   ├── serviceworker.js
-│   ├── sw.ts
-│   └── web.config
+│   ├── site.webmanifest
+│   └── sw.js
 ├── resources
 │   ├── css
 │   │   ├── app.css
@@ -502,7 +470,47 @@ LaravelSpa
 │   │   │   ├── apple-touch-icon.png
 │   │   │   ├── favicon-16x16.png
 │   │   │   ├── favicon-32x32.png
-│   │   │   └── favicon.ico
+│   │   │   ├── favicon.ico
+│   │   │   ├── favicon.png
+│   │   │   └── site.webmanifest
+│   │   ├── fonts
+│   │   │   ├── Leckerli_One
+│   │   │   │   ├── LeckerliOne-Regular.ttf
+│   │   │   │   └── OFL.txt
+│   │   │   ├── Nunito
+│   │   │   │   ├── Nunito-Italic-VariableFont_wght.ttf
+│   │   │   │   ├── Nunito-VariableFont_wght.ttf
+│   │   │   │   ├── OFL.txt
+│   │   │   │   ├── README.txt
+│   │   │   │   └── static
+│   │   │   │       ├── Nunito-Black.ttf
+│   │   │   │       ├── Nunito-BlackItalic.ttf
+│   │   │   │       ├── Nunito-Bold.ttf
+│   │   │   │       ├── Nunito-BoldItalic.ttf
+│   │   │   │       ├── Nunito-ExtraBold.ttf
+│   │   │   │       ├── Nunito-ExtraBoldItalic.ttf
+│   │   │   │       ├── Nunito-ExtraLight.ttf
+│   │   │   │       ├── Nunito-ExtraLightItalic.ttf
+│   │   │   │       ├── Nunito-Italic.ttf
+│   │   │   │       ├── Nunito-Light.ttf
+│   │   │   │       ├── Nunito-LightItalic.ttf
+│   │   │   │       ├── Nunito-Medium.ttf
+│   │   │   │       ├── Nunito-MediumItalic.ttf
+│   │   │   │       ├── Nunito-Regular.ttf
+│   │   │   │       ├── Nunito-SemiBold.ttf
+│   │   │   │       └── Nunito-SemiBoldItalic.ttf
+│   │   │   └── Quicksand
+│   │   │       ├── OFL.txt
+│   │   │       ├── Quicksand-VariableFont_wght.ttf
+│   │   │       ├── README.txt
+│   │   │       └── static
+│   │   │           ├── Quicksand-Bold.ttf
+│   │   │           ├── Quicksand-Light.ttf
+│   │   │           ├── Quicksand-Medium.ttf
+│   │   │           ├── Quicksand-Regular.ttf
+│   │   │           └── Quicksand-SemiBold.ttf
+│   │   ├── login.png
+│   │   ├── login.webp
 │   │   ├── plugs.png
 │   │   └── vendor-logos
 │   │       ├── vultr-1.webp
@@ -513,48 +521,66 @@ LaravelSpa
 │   │   ├── app.js
 │   │   ├── bootstrap.js
 │   │   ├── components
-│   │   │   ├── AppFooter.vue
-│   │   │   ├── AppNav.vue
-│   │   │   ├── BmcButtons.vue
-│   │   │   ├── CircleSvg.vue
-│   │   │   ├── Errors.vue
-│   │   │   ├── GHButton.vue
-│   │   │   ├── GHButtons.vue
-│   │   │   ├── OctoCat.vue
-│   │   │   ├── Pagination.vue
-│   │   │   ├── PatreonButton.vue
-│   │   │   ├── PerPage.vue
-│   │   │   ├── ReloadPrompt.vue
-│   │   │   ├── Success.vue
-│   │   │   ├── VerifyNotice.vue
-│   │   │   ├── VultrReferral.vue
+│   │   │   ├── DualListBox.vue
+│   │   │   ├── ExampleComponent.vue
+│   │   │   ├── Footer.vue
+│   │   │   ├── LocaleSwitcher.vue
+│   │   │   ├── ToggleDarkMode.vue
 │   │   │   ├── account
-│   │   │   │   ├── AccountAdministration.vue
-│   │   │   │   ├── AccountAuthentication.vue
-│   │   │   │   ├── AccountData.vue
-│   │   │   │   └── AccountPrivacy.vue
 │   │   │   ├── admin
-│   │   │   │   ├── AdminNavBar.vue
-│   │   │   │   ├── AdminSidebar.vue
-│   │   │   │   ├── RolesTable.vue
-│   │   │   │   ├── RolesTableRow.vue
-│   │   │   │   ├── UsersTable.vue
-│   │   │   │   └── UsersTableRow.vue
+│   │   │   │   ├── Create.vue
+│   │   │   │   ├── Edit.vue
+│   │   │   │   └── Index.vue
 │   │   │   ├── auth
 │   │   │   │   └── SocialiteLogins.vue
 │   │   │   ├── common
+│   │   │   │   ├── AdminMiniCard.vue
 │   │   │   │   ├── AppButton.vue
 │   │   │   │   ├── AppDeleteModal.vue
 │   │   │   │   ├── AppModal.vue
 │   │   │   │   ├── AppSwitch.vue
 │   │   │   │   ├── AppTable.vue
-│   │   │   │   └── AppToast.vue
+│   │   │   │   ├── CKEditorComponent.vue
+│   │   │   │   ├── CircleSvg.vue
+│   │   │   │   ├── DropZone.vue
+│   │   │   │   ├── Errors.vue
+│   │   │   │   ├── ImpersonateUser.vue
+│   │   │   │   ├── LeaveImpersonation.vue
+│   │   │   │   ├── LoadingCircle.vue
+│   │   │   │   ├── NoRecordsCTA.vue
+│   │   │   │   ├── Pagination.vue
+│   │   │   │   ├── PerPage.vue
+│   │   │   │   ├── SocialMediaLoginStatus.vue
+│   │   │   │   ├── SocialMediaLoginStatusItem.vue
+│   │   │   │   ├── Success.vue
+│   │   │   │   ├── TextEditorComponent.vue
+│   │   │   │   ├── TinyMCEditor.vue
+│   │   │   │   └── UmoEditor.vue
 │   │   │   ├── form
 │   │   │   │   ├── AppSettingTextInput.vue
 │   │   │   │   ├── AppSettingTextarea.vue
 │   │   │   │   └── AppSettingToggle.vue
+│   │   │   ├── includes
+│   │   │   │   ├── AdminBreadcrumb.vue
+│   │   │   │   ├── AdminBreadcrumbContainer.vue
+│   │   │   │   ├── AdminBreadcrumbSep.vue
+│   │   │   │   ├── AdminNavBarLink.vue
+│   │   │   │   ├── AdminNavbar.vue
+│   │   │   │   ├── AdminSidebar.vue
+│   │   │   │   ├── AdminSidebarLink.vue
+│   │   │   │   ├── AppFooter.vue
+│   │   │   │   ├── Breadcrumb.vue
+│   │   │   │   ├── Nav.vue
+│   │   │   │   └── NavLink.vue
 │   │   │   ├── loaders
 │   │   │   │   └── AnimatedTableLoader.vue
+│   │   │   ├── plugs
+│   │   │   │   ├── BmcButtons.vue
+│   │   │   │   ├── GHButton.vue
+│   │   │   │   ├── GHButtons.vue
+│   │   │   │   ├── OctoCat.vue
+│   │   │   │   ├── PatreonButton.vue
+│   │   │   │   └── VultrReferral.vue
 │   │   │   ├── roles
 │   │   │   │   ├── PermissionFormModal.vue
 │   │   │   │   ├── RoleFormModal.vue
@@ -563,94 +589,134 @@ LaravelSpa
 │   │   │       ├── UserDownloadData.vue
 │   │   │       ├── UserForm.vue
 │   │   │       └── UserFormModal.vue
-│   │   ├── layouts
-│   │   │   └── AdminLayout.vue
-│   │   ├── middleware
+│   │   ├── composables
+│   │   │   ├── activityLogs.js
 │   │   │   ├── auth.js
-│   │   │   ├── guest.js
-│   │   │   ├── middlewarePipeline.js
-│   │   │   ├── roleAdmin.js
-│   │   │   ├── roleSuperAdmin.js
-│   │   │   └── roleUser.js
-│   │   ├── router
+│   │   │   ├── categories.js
+│   │   │   ├── darkmode.js
+│   │   │   ├── posts.js
+│   │   │   ├── profile.js
+│   │   │   ├── roles.js
+│   │   │   └── users.js
+│   │   ├── lang
+│   │   │   ├── bn.json
+│   │   │   ├── en.json
+│   │   │   ├── es.json
+│   │   │   ├── fr.json
+│   │   │   ├── pt-BR.json
+│   │   │   └── zh-CN.json
+│   │   ├── layouts
+│   │   │   ├── Admin.vue
+│   │   │   ├── Authenticated.vue
+│   │   │   ├── Error.vue
+│   │   │   └── Guest.vue
+│   │   ├── plugins
+│   │   │   └── i18n.js
+│   │   ├── routes
 │   │   │   ├── index.js
+│   │   │   ├── middleware.js
 │   │   │   └── routes.js
 │   │   ├── services
+│   │   │   ├── ability.js
 │   │   │   ├── analytics.js
 │   │   │   ├── asteroids.js
 │   │   │   ├── common.js
 │   │   │   ├── excanvas.js
 │   │   │   ├── s-code.js
 │   │   │   ├── s-code.min.js
-│   │   │   └── users.js
+│   │   │   └── utilities.js
 │   │   ├── store
+│   │   │   ├── auth.js
 │   │   │   ├── index.js
-│   │   │   ├── modules
-│   │   │   │   ├── auth.js
-│   │   │   │   ├── sidebar.js
-│   │   │   │   └── toast.js
-│   │   │   └── mutation-types.js
+│   │   │   ├── lang.js
+│   │   │   ├── sidebar.js
+│   │   │   └── toast.js
+│   │   ├── validation
+│   │   │   └── rules.js
 │   │   └── views
-│   │       ├── App.vue
 │   │       ├── Blank.vue
 │   │       ├── admin
+│   │       │   ├── ActivityLog.vue
 │   │       │   ├── Admin.vue
 │   │       │   ├── AppSettings.vue
+│   │       │   ├── BrowserSessions.vue
+│   │       │   ├── Dashboard.vue
 │   │       │   ├── Permissions.vue
 │   │       │   ├── PhpInfo.vue
 │   │       │   ├── Roles.vue
-│   │       │   └── Users.vue
-│   │       └── pages
-│   │           ├── About.vue
-│   │           ├── Dashboard.vue
-│   │           ├── ForgotPassword.vue
-│   │           ├── Home.vue
-│   │           ├── Login.vue
-│   │           ├── NotFound.vue
-│   │           ├── Register.vue
-│   │           ├── ResetPassword.vue
-│   │           ├── Terms.vue
-│   │           ├── VerifyEmail.vue
-│   │           ├── auth
-│   │           └── settings
-│   │               ├── Account.vue
-│   │               ├── Password.vue
-│   │               ├── Profile.vue
-│   │               └── Settings.vue
-│   ├── lang
-│   │   └── en
-│   │       ├── auth.php
-│   │       ├── pagination.php
-│   │       ├── passwords.php
-│   │       ├── personal-data-exports.php
-│   │       └── validation.php
+│   │       │   ├── Users.vue
+│   │       │   ├── categories
+│   │       │   │   ├── Create.vue
+│   │       │   │   ├── Edit.vue
+│   │       │   │   └── Index.vue
+│   │       │   └── posts
+│   │       │       ├── Create.vue
+│   │       │       ├── Edit.vue
+│   │       │       └── Index.vue
+│   │       ├── auth
+│   │       │   ├── Verify.vue
+│   │       │   └── passwords
+│   │       │       ├── Confirm.vue
+│   │       │       ├── RequestReset.vue
+│   │       │       └── Reset.vue
+│   │       ├── category
+│   │       │   └── posts.vue
+│   │       ├── errors
+│   │       │   └── 404.vue
+│   │       ├── home
+│   │       │   └── index.vue
+│   │       ├── kiosk
+│   │       ├── login
+│   │       │   └── Login.vue
+│   │       ├── misc
+│   │       │   ├── about.vue
+│   │       │   ├── pricing.vue
+│   │       │   ├── support.vue
+│   │       │   └── terms.vue
+│   │       ├── pages
+│   │       │   └── user-settings
+│   │       │       ├── Account.vue
+│   │       │       ├── Password.vue
+│   │       │       ├── Profile.vue
+│   │       │       ├── Settings.vue
+│   │       │       ├── SettingsNav.vue
+│   │       │       └── SettingsNavLink.vue
+│   │       ├── posts
+│   │       │   ├── details.vue
+│   │       │   └── index.vue
+│   │       └── register
+│   │           └── index.vue
+│   ├── pwa
+│   │   ├── serviceworker.js
+│   │   └── sw.js
 │   └── views
 │       ├── app.blade.php
-│       ├── emails
-│       │   └── exception.blade.php
-│       ├── errors
-│       │   ├── 401.blade.php
-│       │   ├── 403.blade.php
-│       │   ├── 500.blade.php
-│       │   ├── 503.blade.php
-│       │   └── layout.blade.php
-│       ├── socialite
-│       │   ├── callback.blade.php
-│       │   └── denied.blade.php
-│       └── welcome.blade.php
+│       ├── auth
+│       │   ├── login.blade.php
+│       │   ├── passwords
+│       │   │   ├── confirm.blade.php
+│       │   │   ├── email.blade.php
+│       │   │   └── reset.blade.php
+│       │   ├── register.blade.php
+│       │   └── verify.blade.php
+│       ├── home.blade.php
+│       ├── layouts
+│       │   ├── app.blade.php
+│       │   └── master.blade.php
+│       └── socialite
+│           ├── callback.blade.php
+│           └── denied.blade.php
 ├── routes
 │   ├── api.php
 │   ├── channels.php
 │   ├── console.php
 │   └── web.php
-├── server.php
 ├── tailwind.config.js
 ├── tailwindcss-perspective.js
-├── tsconfig.json
-├── tsconfig.vite-config.json
-└── vite.config.ts
+├── vite.config.js
+└── vue.config.js
 
-76 directories, 380 files
+103 directories, 419 files
 
 ```
 
