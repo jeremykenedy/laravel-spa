@@ -50,6 +50,19 @@
   white-space: nowrap !important; /* 3 */
 }
 
+.cleafix {
+  display: inline-block;
+  overflow: auto;
+}
+
+.clearfix::after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+
 html,
 body {
   line-height: 1.15;

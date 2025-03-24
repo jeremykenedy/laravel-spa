@@ -19,6 +19,7 @@
     </div>
 
     <nav class="mb-4 px-4 flex flex-1 flex-col">
+
       <AdminSidebarLink v-if="authenticated && user" routeName="dashboard" :text="$t('dashboard')"
         @nav-clicked="toggleSidebar">
         <template #icon>
@@ -46,6 +47,13 @@
       >
         {{ $t('admin') }}
       </div>
+
+      <AdminSidebarLink v-if="authenticated && user" routeName="admin.index" :text="$t('admin')"
+        @nav-clicked="toggleSidebar">
+        <template #icon>
+          <BuildingOfficeIcon class="h-6 w-6" />
+        </template>
+      </AdminSidebarLink>
 
       <AdminSidebarLink v-if="authenticated && user && userCan('view.users')"
         routeName="users.index" :text="$t('users')" @nav-clicked="toggleSidebar">
@@ -209,6 +217,7 @@ import {
   LifebuoyIcon,
   PencilIcon,
   TagIcon,
+  BuildingOfficeIcon,
 } from '@heroicons/vue/24/outline';
 
 export default {
@@ -225,6 +234,7 @@ export default {
     PencilIcon,
     TagIcon,
     AdminSidebarLink,
+    BuildingOfficeIcon,
   },
   computed: {
     ...mapState(useAuth, [

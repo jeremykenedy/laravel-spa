@@ -164,6 +164,17 @@ export const useAuthStore = defineStore('auth', () => {
     return false;
   }
 
+  function loginEnabled(social) {
+    for (const [key, value] of Object.entries(this.socials)) {
+      if (key == social) {
+        if (value == 1) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
   return {
     authenticated,
     user,
@@ -180,6 +191,7 @@ export const useAuthStore = defineStore('auth', () => {
     socials,
     token,
     fetchOauthUrl,
+    loginEnabled,
   }
 }, {
   persist: true

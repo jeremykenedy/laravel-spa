@@ -1,7 +1,7 @@
 <template>
   <li class="flex items-center">
     <router-link
-      v-if="!url" v-slot="{ isActive }"
+      v-slot="{ isActive }"
       :to="{ name: routeName }"
       class="font-semibold"
         :class="currentRouteName == routeName
@@ -25,9 +25,7 @@ export default {
     text: { type: String, default: null },
   },
   computed: {
-    hasIconSlot() {
-      return this.$slots.icon;
-    },
+
     currentRouteName() {
       return this.$route.name;
     },

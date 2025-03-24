@@ -18,6 +18,7 @@ const Register  = ()  => import(/* webpackChunkName: "js/RegisterPage" */ '@regi
 const ForgotPassword  = ()  => import(/* webpackChunkName: "js/ForgotPasswordPage" */ '@auth/passwords/RequestReset.vue');
 const ResetPassword  = ()  => import(/* webpackChunkName: "js/ResetPasswordPage" */ '@auth/passwords/Reset.vue');
 
+const Admin  = ()  => import(/* webpackChunkName: "js/AdminPage" */ '@admin/Admin.vue');
 const Dashboard  = ()  => import(/* webpackChunkName: "js/DashboardPage" */ '@admin/Dashboard.vue');
 const Categories  = ()  => import(/* webpackChunkName: "js/CategoriesPage" */ '@admin/categories/Index.vue');
 const CreateCategory  = ()  => import(/* webpackChunkName: "js/CreateCategoryPage" */ '@admin/categories/Create.vue');
@@ -108,25 +109,17 @@ export default [
       },
     ]
   },
-
-  // TODO :: ADMIN
-
   {
-    path: '/dashboard',
+    path: '/admin',
     component: AuthenticatedLayout,
     beforeEnter: requireLogin,
     children: [
       {
-        name: 'dashboard',
-        path: '',
-        component: Dashboard,
-        meta: { breadCrumb: 'Dashboard' }
-      },
-      {
         name: 'admin.index',
         path: '',
-        component: Dashboard,
-        meta: { breadCrumb: 'Dashboard' }
+        component: Admin,
+        meta: { breadCrumb: 'Admin' },
+        beforeEnter: superAdmin,
       },
       {
         name: 'posts.index',
@@ -184,6 +177,20 @@ export default [
         component: Users,
         beforeEnter: admin,
         meta: { breadCrumb: 'Users' }
+      },
+
+    ]
+  },
+  {
+    path: '/dashboard',
+    component: AuthenticatedLayout,
+    beforeEnter: requireLogin,
+    children: [
+      {
+        name: 'dashboard',
+        path: '',
+        component: Dashboard,
+        meta: { breadCrumb: 'Dashboard' }
       },
       {
         name: 'browser_sessions.index',

@@ -2,7 +2,7 @@
   <div id="edit_post" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
 
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumb routeName="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
       <AdminBreadcrumb routeName="posts.index" :text="$t('posts')" />
       <AdminBreadcrumbSep />

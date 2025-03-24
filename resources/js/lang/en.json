@@ -104,5 +104,10 @@
     "server_info": "Server Info",
     "admin": "Admin",
     "external_resources": "External Resources",
-    "account": "Account"
+    "account": "Account",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "registered_user": "Registered User",
+    "registered_users": "Registered Users",
+    "logins_enabled": "Logins Enabled"
 }

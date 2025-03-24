@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AppSettingsController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ServerInfoController;
 use App\Http\Controllers\Api\ActivityLogController;
 use App\Http\Controllers\Api\BrowserSessionController;
@@ -64,6 +65,8 @@ Route::group(['middleware' => ['forceHTTPS']], function() {
         Route::get('/server-info', [ServerInfoController::class, 'index']);
         Route::get('/app-settings', [AppSettingsController::class, 'index']);
         Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
+
+        Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
 
         Route::group(['middleware' => ['role:superadmin']], function() {
             // Things should be done using checks within the requests

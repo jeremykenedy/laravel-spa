@@ -2,7 +2,7 @@
   <div id="roles" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
 
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumb routeName="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
       <AdminBreadcrumb routeName="roles.index" :text="$t('roles')" />
     </AdminBreadcrumbContainer>
@@ -103,18 +103,6 @@
 
   </div>
 </template>
-<!--
-Id
-Name
-Slug
-Descriptio
-Level
-Updated At
-Updated A
-Users
-Permissions
- -->
-
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';

@@ -1,13 +1,11 @@
 <template>
-<h1>Verify</h1>
+  <h1>
+    Verify
+  </h1>
 </template>
 
 <script>
 export default {
-    name: "Verify"
+  name: "Verify"
 }
 </script>
-
-<style scoped>
-
-</style>
