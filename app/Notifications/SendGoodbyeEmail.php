@@ -42,7 +42,7 @@ class SendGoodbyeEmail extends Notification implements ShouldQueue
     {
         $message = new MailMessage();
         $message->subject(trans('emails.goodbye.subject'))
-            ->greeting(trans('emails.goodbye.greeting'), ['username' => \Auth::User()->name]))
+            ->greeting(trans('emails.goodbye.greeting'), ['username' => \Auth::User()->name])
             ->line(trans('emails.goodbye.message'))
             ->action(trans('emails.goodbye.action'), route('user.reactivate', ['token' => $this->token]))
             ->line(trans('emails.goodbye.goodbye'));
