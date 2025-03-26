@@ -18,6 +18,12 @@ import { track } from '@services/analytics';
 
 export default {
   name: 'UserDownloadData',
+  computed: {
+    ...mapState(useAuthStore, [
+      'user',
+      'authenticated',
+    ]),
+  },
   data() {
     return {
       loading: false,
@@ -35,10 +41,48 @@ export default {
     ]),
     track,
     async triggerUserDataDownload() {
-      // HERE :: TODO
+      this.loading = true;
+      try {
+        const response = await axios.post(`/api/user/${this.user.id}/data`);
+        if (
+          response &&
+          response.data &&
+          response.data.status &&
+          response.data.status == 'success'
+        ) {
+          this.loading = false;
+          this.userDataDownloadConfirmed();
+          this.track(
+            'User Triggered Data Download Successfully',
+            'user actions',
+            'trigger download success',
+          );
+        } else {
+          this.loading = false;
+          this.error('Failed to trigger data download.');
+        }
+      } catch (e) {
+        this.loading = false;
+        this.error('Failed to trigger data download.');
+      }
     },
     userDataDownloadConfirmed() {
-      // HERE :: TODO
+      this.$swal.fire({
+        title: 'Success!',
+        icon: 'success',
+        html: `Your data will be ready for download shortly. <br>A download link has been sent to your email <br>${this.user.email}`,
+        showCancelButton: false,
+        showDenyButton: false,
+        confirmButtonColor: '#008000',
+        confirmButtonText: 'Dismiss',
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          //
+        } else if (result.isDenied) {
+          //
+        }
+      });
     },
   },
 };

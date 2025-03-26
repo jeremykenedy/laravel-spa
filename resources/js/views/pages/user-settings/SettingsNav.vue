@@ -20,7 +20,7 @@
         </template>
       </SettingsNavLink>
 
-      <SettingsNavLink routeName="settings.password" :text="$t('password')" itemClass="rounded-b">
+      <SettingsNavLink routeName="settings.password" :text="$t('security')" itemClass="rounded-b">
         <template #icon>
           <KeyIcon class="h-5 w-5" />
         </template>

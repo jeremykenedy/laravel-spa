@@ -32,6 +32,7 @@ Route::group(['middleware' => ['forceHTTPS']], function () {
     Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
     Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
     Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
+    Route::post('/oauth-revoke/{provider}', [SocialiteController::class, 'revokeSocialProvider']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::apiResource('posts', PostController::class);
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['forceHTTPS']], function () {
         Route::get('/app-settings', [AppSettingsController::class, 'index']);
         Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
         Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
+        Route::post('/user/{user}/data', [UserController::class, 'exportUserPersonalData']);
 
         Route::group(['middleware' => ['role:superadmin']], function () {
             // Things should be done using checks within the requests

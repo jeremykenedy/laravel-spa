@@ -466,7 +466,8 @@ video {
 .dark .swal2-success-fix,
 .dark .swal2-success-circular-line-left,
 .dark .swal2-success-circular-line-right {
-  background-color: rgb(15, 23, 42) !important;
+/*  background-color: rgb(15, 23, 42) !important;*/
+background-color: transparent !important;
 }
 
 

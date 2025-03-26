@@ -56,6 +56,11 @@ return [
             'throw'                   => false,
         ],
 
+        'personal-data-exports' => [
+            'driver'    => 'local',
+            'root'      => storage_path('app/personal-data-exports'),
+        ],
+
     ],
 
     /*

@@ -114,5 +114,6 @@
     "data": "Data",
     "your_data": "Your Data",
     "on_demand": "On Demand",
-    "download_data_msg": "Download your user data."
+    "download_data_msg": "Download your user data.",
+    "security": "Security"
 }

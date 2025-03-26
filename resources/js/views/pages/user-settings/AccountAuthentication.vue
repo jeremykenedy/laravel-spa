@@ -36,7 +36,6 @@
               {{ parseDisplayDate(provider.created_at) }}
             </div>
 
-            <!--
             <div
               v-if="provider.updated_at"
               class="mb-0 text-gray-600 dark:text-gray-400"
@@ -50,7 +49,6 @@
               <br />
               {{ parseDisplayDate(provider.updated_at) }}
             </div>
-            -->
 
             <div class="mt-4 flex space-x-3 md:mt-3">
               <AppButton
@@ -87,6 +85,7 @@
                   capitalizeFirstLetter(provider) +
                   ' to your account.'
                 "
+                :disabled="loading"
                 accent
                 text="Connect"
                 icon="fa-solid fa-plug-circle-plus fw-fw"
@@ -128,7 +127,7 @@ export default {
   props: {},
   data() {
     return {
-      //
+      loading: false,
     };
   },
   computed: {
@@ -181,6 +180,14 @@ export default {
     window.removeEventListener('message', this.onMessage);
   },
   methods: {
+    ...mapActions(useAuthStore, [
+      'userIs',
+      'userCan',
+      'fetchOauthUrl',
+      'getUser',
+      'getUserByToken',
+      'revokeProvider',
+    ]),
     ...mapActions(useToastStore, [
       'popToast',
       'success',
@@ -235,18 +242,10 @@ export default {
             self
               .revokeProvider(provider)
               .then((response) => {
-                self.popToast({
-                  message: 'Provider successfully revoked',
-                  timer: 5000,
-                  icon: 'success',
-                });
+                self.success('Provider successfully revoked');
               })
               .catch((err) => {
-                self.popToast({
-                  message: 'Error revoking provider',
-                  timer: 10000,
-                  icon: 'error',
-                });
+                self.error('Error revoking provider');
               });
           } else if (result.isDenied) {
             //
@@ -254,56 +253,44 @@ export default {
         });
     },
     async triggerConnect(provider) {
-      // this.track(
-      //   `Social Login Provider Clicked: ${provider}`,
-      //   'clicked',
-      //   'user-account',
-      // );
-      // this.loading = true;
-      // try {
-      //   await axios.get('/sanctum/csrf-cookie').then((response) => {});
-      //   const url = await this.fetchOauthUrl({ provider }).then((response) => {
-      //     this.loading = false;
-      //     return response;
-      //   });
-      //   this.window = this.openWindow(url, this.authWindowTitle);
-      // } catch (e) {
-      //   this.track(
-      //     `Social Provider Failed to Authorize: ${provider}`,
-      //     'error',
-      //     'auth-error',
-      //   );
-      //   this.popToast({
-      //     message: 'Failed authorize provider.',
-      //     timer: 10000,
-      //     icon: 'error',
-      //   });
-      //   this.window.close();
-      //   this.loading = false;
-      // }
+      this.track(
+        `Social Login Provider Clicked: ${provider}`,
+        'clicked',
+        'user-account',
+      );
+      this.loading = true;
+      try {
+        await axios.get('/sanctum/csrf-cookie').then((response) => {});
+        const url = await this.fetchOauthUrl({ provider }).then((response) => {
+          this.loading = false;
+          return response;
+        });
+        this.track(
+          `Social Provider succesfully Authorized to Authorize: ${provider}, User Id: ${this.user.id}`,
+          'error',
+          'auth-error',
+        );
+        this.window = this.openWindow(url, this.authWindowTitle);
+      } catch (e) {
+        this.track(
+          `Social Provider Failed to Authorize: ${provider}`,
+          'error',
+          'auth-error',
+        );
+        self.error('Failed authorize provider.');
+        this.window.close();
+        this.loading = false;
+      }
     },
     async onMessage(e) {
       const self = this;
       if (e.origin !== window.origin || !e.data.token) {
-        // self.popToast({
-        //   message: 'An Error Occurred',
-        //   timer: 5000,
-        //   icon: 'error',
-        // });
         return;
       }
       if (e.data.token && e.data.token == 'cannot_add') {
-        self.popToast({
-          message: 'Unable to authorize provider',
-          timer: 5000,
-          icon: 'error',
-        });
+        self.error('Unable to authorize provider.');
       } else {
-        self.popToast({
-          message: 'Successfully authorized provider',
-          timer: 2500,
-          icon: 'success',
-        });
+        self.success('Successfully authorized provider.');
         self.getUser().then((response) => {
           //
         });

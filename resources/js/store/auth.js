@@ -46,15 +46,38 @@ export const useAuthStore = defineStore('auth', () => {
   })
 
   const fetchOauthUrl = ( async (provider) => {
-      try {
-        const response = await axios.post(`/api/oauth/${provider.provider}`);
-        if (response && response.data && response.data.url) {
-          return response.data.url;
-        }
-        throw response;
-      } catch (error) {
-        throw error;
+    try {
+      const response = await axios.post(`/api/oauth/${provider.provider}`);
+      if (response && response.data && response.data.url) {
+        return response.data.url;
       }
+      throw response;
+    } catch (error) {
+      throw error;
+    }
+  })
+
+  const revokeProvider = ( async (payload) => {
+    try {
+      const response = await axios.post(`/api/oauth-revoke/${payload.id}`)
+        .then((res) => {
+          if (
+            res.status &&
+            res.status == 200 &&
+            res.data &&
+            res.data.status &&
+            res.data.status == 'success' &&
+            res.data.user &&
+            res.data.user.id
+          ) {
+            user.value = res.data.user;
+            return res;
+          }
+          throw res;
+        })
+    } catch (error) {
+      throw error;
+    }
   })
 
   const getLogins = ( async () => {
@@ -192,6 +215,7 @@ export const useAuthStore = defineStore('auth', () => {
     token,
     fetchOauthUrl,
     loginEnabled,
+    revokeProvider,
   }
 }, {
   persist: true

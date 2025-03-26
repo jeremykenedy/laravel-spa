@@ -169,6 +169,15 @@ class SocialiteController extends Controller
             $token = 'cannot_add';
         }
 
+        $providerFound = SocialiteProvider::where('provider', $provider)
+                            ->where('user_id', $user->id)
+                            ->first();
+
+        if ($providerFound) {
+            $providerFound->updated_at = now();
+            $providerFound->save();
+        }
+
         return view('socialite/callback', [
             'token'         => $token,
             'token_type'    => 'bearer',

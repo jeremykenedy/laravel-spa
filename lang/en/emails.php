@@ -39,10 +39,11 @@ return [
     ],
     'personal-data-exports' => [
         'notifications' => [
-            'subject'           => '',
-            'instructions'      => '',
-            'action'            => '',
-            'deletion_message'  => '',
+            'greeting'          => 'Hello :username,',
+            'subject'           => 'Your data is ready to download',
+            'instructions'      => 'You can click on the link to download your user data.',
+            'action'            => 'Download Data',
+            'deletion_message'  => 'Your data wil be available to download until :date.',
         ],
     ],
 ];

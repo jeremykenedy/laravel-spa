@@ -48,7 +48,7 @@
         {{ $t('admin') }}
       </div>
 
-      <AdminSidebarLink v-if="authenticated && user" routeName="admin.index" :text="$t('admin')"
+      <AdminSidebarLink v-if="authenticated && user && userIs('superadmin')" routeName="admin.index" :text="$t('admin')"
         @nav-clicked="toggleSidebar">
         <template #icon>
           <BuildingOfficeIcon class="h-6 w-6" />
