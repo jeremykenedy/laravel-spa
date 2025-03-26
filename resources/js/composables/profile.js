@@ -1,6 +1,7 @@
 import { ref, inject } from 'vue'
 import { useRouter } from 'vue-router'
-import {useAuthStore} from "@/store/auth";
+import { useAuthStore } from "@/store/auth";
+import { useToastStore } from "@store/toast";
 import Swal from 'sweetalert2/dist/sweetalert2';
 
 export default function useProfile() {
@@ -15,6 +16,7 @@ export default function useProfile() {
     const validationErrors = ref({})
     const isLoading = ref(false)
     // const swal = inject('$swal')
+    const toast = useToastStore();
 
     const getProfile = async () => {
         profile.value = store.user
@@ -35,10 +37,7 @@ export default function useProfile() {
                 if (data.success) {
                     store.user = data.data
                     // router.push({name: 'profile.index'})
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Profile updated successfully'
-                    })
+                    toast.success('Profile updated successfully');
                 }
             })
             .catch(error => {

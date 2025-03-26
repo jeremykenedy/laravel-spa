@@ -3,8 +3,8 @@
     <span v-if="socials.facebook == 1" v-tippy="loginText + ' Facebook'"
       class="fa-brands fa-square-facebook fa-3x mr-3 mb-2 cursor-pointer text-blue-500 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''" @click="socialiteLogin('facebook')" />
-    <span v-if="socials.twitter == 1" v-tippy="loginText + ' Twitter'"
-      class="fa-brands fa-twitter fa-3x mr-3 mb-2 cursor-pointer text-blue-300 opacity-80 transition duration-300 hover:opacity-100"
+    <span v-if="socials.twitter == 1" v-tippy="loginText + ' X'"
+      class="fa-brands fa-x fa-3x mr-3 mb-2 cursor-pointer text-blue-300 opacity-80 transition duration-300 hover:opacity-100"
       :class="loading ? 'disabled opacity-40' : ''" @click="socialiteLogin('twitter')" />
     <span v-if="socials.instagram == 1" v-tippy="loginText + ' Instagram'"
       class="fa-brands fa-instagram fa-3x mr-3 mb-2 cursor-pointer text-gray-700 dark:text-gray-400 opacity-80 transition duration-300 hover:opacity-100"

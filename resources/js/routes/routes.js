@@ -231,7 +231,7 @@ export default [
       },
       {
         name: 'settings.account',
-        path: 'profile',
+        path: 'account',
         component: Account,
         meta: { breadCrumb: 'Account' }
       },

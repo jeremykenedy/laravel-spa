@@ -13,63 +13,69 @@
       <div class="text-gray-900 dark:text-gray-100 md:flex md:flex-row md:items-start md:justify-between">
         <SettingsNav />
         <div class="none w-full rounded-md border dark:border-gray-500 p-4">
+          <form @submit.prevent="submitForm">
+            <AppTextInput
+              v-model="profile.name"
+              :label="$t('name')"
+              placeholder="Enter text here"
+              autocomplete="name"
+              :disabled="isLoading"
+              :error="errors.name"
+              class="mt-1"
+            >
+              <template #message>
+                <div class="text-danger mt-1">
+                  <div v-for="message in validationErrors?.name">
+                    {{ message }}
+                  </div>
+                </div>
+              </template>
+            </AppTextInput>
 
-          Profile Content
-
+            <AppTextInput
+              v-model="profile.email"
+              :label="$t('email')"
+              placeholder="Enter email here"
+              autocomplete="email"
+              :disabled="isLoading"
+              :error="errors.email"
+            >
+              <template #message>
+                <div class="text-danger mt-1">
+                  <div v-for="message in validationErrors?.email">
+                    {{ message }}
+                  </div>
+                </div>
+              </template>
+            </AppTextInput>
+            <div class="md:flex md:items-center mb-2">
+              <div class="md:w-3/12" />
+              <div class="md:w-9/12">
+                <AppButton
+                  primary
+                  :disabled="isLoading"
+                  :loading="isLoading"
+                  :text="isLoading ? 'Updating' : 'Update'"
+                />
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
   </div>
 
-  <!--   <div class="card border-0">
-    <div class="card-header bg-transparent">
-      <h5 class="float-start">Profile</h5>
-    </div>
-    <div class="card-body">
-      <form @submit.prevent="submitForm">
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" v-model="profile.name" class="form-control" id="name">
-          <div class="text-danger mt-1">
-            {{ errors.name }}
-          </div>
-          <div class="text-danger mt-1">
-            <div v-for="message in validationErrors?.name">
-              {{ message }}
-            </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" v-model="profile.email" class="form-control" id="email">
-          <div class="text-danger mt-1">
-            {{ errors.email }}
-          </div>
-          <div class="text-danger mt-1">
-            <div v-for="message in validationErrors?.email">
-              {{ message }}
-            </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <button :disabled="isLoading" class="btn btn-primary">
-            <div v-show="isLoading" class=""></div>
-            <span v-if="isLoading">Processing...</span>
-            <span v-else>Update</span>
-          </button>
-        </div>
-      </form>
-    </div>
-  </div> -->
 </template>
 
 <script setup>
-import { onMounted, reactive, watchEffect } from "vue";
+import { onMounted, reactive, ref, watchEffect } from "vue";
 import { useForm, useField, defineRule } from "vee-validate";
 import { required, min } from "@/validation/rules"
 import useProfile from "@/composables/profile";
+import CircleSvg from '@components/common/CircleSvg.vue';
 import SettingsNav from '@pages/user-settings/SettingsNav.vue';
+import AppTextInput from '@components/form/AppTextInput.vue';
+
 defineRule('required', required)
 // defineRule('email', email)
 defineRule('min', min);
@@ -99,30 +105,4 @@ watchEffect(() => {
   profile.name = profileData.value.name
   profile.email = profileData.value.email
 })
-</script>
-
-<script>
-import moment from 'moment';
-import {
-  ChevronRightIcon,
-} from '@heroicons/vue/24/outline';
-
-export default {
-  name: 'Roles',
-  components: {
-    ChevronRightIcon,
-  },
-  computed: {
-  },
-  mounted() {
-  },
-  data() {
-    return {
-      //
-    };
-  },
-  methods: {
-  },
-};
-
 </script>
