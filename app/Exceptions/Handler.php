@@ -59,9 +59,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Throwable               $e
-     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $e
      * @return \Illuminate\Http\Response
      */
     public function render($request, Throwable $e)
@@ -87,8 +86,7 @@ class Handler extends ExceptionHandler
     /**
      * Sends an email upon exception.
      *
-     * @param \Throwable $exception
-     *
+     * @param  \Throwable  $exception
      * @return void
      */
     public function sendEmail(Throwable $exception)
