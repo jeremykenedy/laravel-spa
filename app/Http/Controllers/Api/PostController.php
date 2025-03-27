@@ -35,13 +35,13 @@ class PostController extends Controller
 
         $orderColumn = request('order_column', 'created_at');
 
-        if (!in_array($orderColumn, ['id', 'title', 'created_at'])) {
+        if (! in_array($orderColumn, ['id', 'title', 'created_at'])) {
             $orderColumn = 'created_at';
         }
 
         $orderDirection = request('order_direction', 'desc');
 
-        if (!in_array($orderDirection, ['asc', 'desc'])) {
+        if (! in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
 
@@ -72,7 +72,7 @@ class PostController extends Controller
                         ->orWhere('content', 'like', '%'.request('search_global').'%');
                 });
             })
-            ->when(!auth()->user()->hasPermission('Can Edit Articles'), function ($query) {
+            ->when(! auth()->user()->hasPermission('Can Edit Articles'), function ($query) {
                 return $query->where('user_id', auth()->id());
             })
 
@@ -101,7 +101,7 @@ class PostController extends Controller
 
     public function show(ShowPostRequest $request, Post $post)
     {
-        if ($post->user_id !== auth()->user()->id && !auth()->user()->hasPermission('Can View Articles')) {
+        if ($post->user_id !== auth()->user()->id && ! auth()->user()->hasPermission('Can View Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {
             return new PostResource($post);
@@ -110,7 +110,7 @@ class PostController extends Controller
 
     public function update(StorePostRequest $request, Post $post)
     {
-        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('Can Edit Articles')) {
+        if ($post->user_id !== auth()->id() && ! auth()->user()->hasPermission('Can Edit Articles')) {
             return response()->json(['status' => 405, 'success' => false, 'message' => 'You can only edit your own posts']);
         } else {
             $post->update($request->validated());
@@ -124,7 +124,7 @@ class PostController extends Controller
 
     public function destroy(DeletePostRequest $request, Post $post)
     {
-        if ($post->user_id !== auth()->id() && !auth()->user()->hasPermission('delete.articles')) {
+        if ($post->user_id !== auth()->id() && ! auth()->user()->hasPermission('delete.articles')) {
             return response()->json([
                 'status'    => 405,
                 'success'   => false,

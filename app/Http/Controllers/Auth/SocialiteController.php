@@ -42,8 +42,7 @@ class SocialiteController extends Controller
     /**
      * Get a list of enabled socialite logins.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function loginsEnabled(Request $request)
@@ -56,9 +55,8 @@ class SocialiteController extends Controller
     /**
      * Gets the social redirect.
      *
-     * @param string                   $provider The provider
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  string  $provider  The provider
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function getSocialRedirect(Request $request, string $provider)
@@ -135,9 +133,8 @@ class SocialiteController extends Controller
     /**
      * Gets the social handle information from the provider.
      *
-     * @param string                   $provider The provider
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  string  $provider  The provider
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function handleSocialCallback(Request $request, string $provider)
@@ -187,8 +184,7 @@ class SocialiteController extends Controller
     /**
      * Get Twitter Oauth1.0 Url built with identifier if user is present.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function twitterUserAuthenticationUrl($state = null)
@@ -216,8 +212,7 @@ class SocialiteController extends Controller
     /**
      * Get Twitter user credentials from Oauth1.0.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function twitterUserAuthentication(Request $request)
@@ -246,9 +241,8 @@ class SocialiteController extends Controller
      * Revoke a social media login provider for
      * a user from the app and from the provider.
      *
-     * @param \App\Models\SocialiteProvider $provider
-     * @param \Illuminate\Http\Request      $request
-     *
+     * @param  \App\Models\SocialiteProvider  $provider
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function revokeSocialProvider(SocialiteProvider $provider, Request $request)

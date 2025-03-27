@@ -27,8 +27,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      *
-     * @param \App\Http\Requests\Auth\LoginRequest $request
-     *
+     * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function login(LoginRequest $request)
@@ -58,8 +57,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Destroy an authenticated session.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request)
@@ -91,8 +89,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Create User.
      *
-     * @param RegisterRequest $request
-     *
+     * @param  RegisterRequest  $request
      * @return JsonResponse
      */
     public function register(RegisterRequest $request)
