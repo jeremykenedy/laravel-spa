@@ -1,0 +1,21 @@
+name: Build Changelog
+on:
+  release:
+    types: [created, edited]
+
+jobs:
+  build-changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: mikepenz/release-changelog-builder-action@v3
+        with:
+          owner: 'jeremykenedy'
+          repo: 'laravel-spa'
+          ignorePreReleases: 'false'
+          fetchReleaseInformation: 'true'
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
