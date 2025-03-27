@@ -48,11 +48,11 @@ class ExceptionOccured extends Mailable
             $bccEmails = config('exceptions.emailExceptionBCCtoDefault');
         }
 
-        if (!$fromSender) {
+        if (! $fromSender) {
             $fromSender = config('exceptions.emailExceptionFromDefault');
         }
 
-        if (!$subject) {
+        if (! $subject) {
             $subject = config('exceptions.emailExceptionSubjectDefault');
         }
 

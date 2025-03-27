@@ -36,7 +36,7 @@ class ProfileController extends Controller
     public function darkModeToggle(Request $request)
     {
         $user = Auth::user();
-        $user->theme_dark = !$user->theme_dark;
+        $user->theme_dark = ! $user->theme_dark;
 
         if ($user->save()) {
             return $this->successResponse($user->theme_dark, 'Mode Switched');
