@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ImpersonateController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\Auth\VerificationController;
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['forceHTTPS']], function () {
         Route::patch('/app-settings/{setting}', [AppSettingsController::class, 'updateSetting']);
         Route::get('/dashboard/data', [DashboardController::class, 'dashboardData']);
         Route::post('/user/{user}/data', [UserController::class, 'exportUserPersonalData']);
+        Route::patch('/password', PasswordController::class);
 
         Route::group(['middleware' => ['role:superadmin']], function () {
             // Things should be done using checks within the requests

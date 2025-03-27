@@ -17,7 +17,7 @@
             <AppTextInput
               v-model="profile.name"
               :label="$t('name')"
-              placeholder="Enter text here"
+              placeholder="Enter name here"
               autocomplete="name"
               :disabled="isLoading"
               :error="errors.name"
@@ -89,7 +89,7 @@ const { validate, errors } = useForm({ validationSchema: schema })
 // Define actual fields for validation
 const { value: name } = useField('name', null, { initialValue: '' });
 const { value: email } = useField('email', null, { initialValue: '' });
-const { profile: profileData, getProfile, updateProfile, validationErrors, isLoading } = useProfile()
+const { profile: profileData, getProfile, updateProfile, validationErrors, isLoading } = useProfile();
 const profile = reactive({
   name,
   email

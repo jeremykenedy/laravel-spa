@@ -691,6 +691,7 @@ background-color: transparent !important;
 }
 
 .vue3-easy-data-table {
+  z-index: 1 !important;
   --easy-table-border: none;
   --easy-table-header-font-size: 14px;
   --easy-table-header-item-padding: 10px 15px;

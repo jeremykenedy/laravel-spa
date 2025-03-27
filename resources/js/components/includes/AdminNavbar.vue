@@ -89,7 +89,7 @@
       </div>
     </div>
 
-    <div ref="dropMenu" class="relative mt-1">
+    <div ref="dropMenu" class="relative mt-1 z-50">
       <div v-show="dropDownOpen"
         class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded border bg-white shadow-md dark:bg-slate-900 transition ease-in-out duration-75"
         @click="dropDownOpen = !dropDownOpen"

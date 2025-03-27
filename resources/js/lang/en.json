@@ -16,6 +16,7 @@
     "password": "Password",
     "forgot_password": "Forgot Password?",
     "confirm_password": "Confirm Password",
+    "password_confirmation": "Confirm Password",
     "name": "Name",
     "toggle_navigation": "Toggle navigation",
     "home": "Home",
