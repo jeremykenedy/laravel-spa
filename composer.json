@@ -1,14 +1,17 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "jeremykenedy/budgetmaster",
+    "name": "jeremykenedy/laravel-spa",
     "type": "project",
-    "description": "A Laravel Auto SPA Vue starter project",
+    "description": "The Laravel Framework as and API and Vue SSO SPA.",
     "keywords": [
         "spa",
         "laravel",
         "auth",
         "SSO",
-        "vue"
+        "vite",
+        "vue",
+        "vue3",
+        "tailwindcss"
     ],
     "license": "MIT",
     "authors": [

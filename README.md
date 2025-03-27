@@ -239,6 +239,7 @@ LaravelSpa
 │   │   │   │   ├── ForgotPasswordController.php
 │   │   │   │   ├── ImpersonateController.php
 │   │   │   │   ├── LoginController.php
+│   │   │   │   ├── PasswordController.php
 │   │   │   │   ├── RegisterController.php
 │   │   │   │   ├── ResetPasswordController.php
 │   │   │   │   ├── SocialiteController.php
@@ -521,9 +522,6 @@ LaravelSpa
 │   │   ├── app.js
 │   │   ├── bootstrap.js
 │   │   ├── components
-│   │   │   ├── DualListBox.vue
-│   │   │   ├── ExampleComponent.vue
-│   │   │   ├── Footer.vue
 │   │   │   ├── LocaleSwitcher.vue
 │   │   │   ├── ToggleDarkMode.vue
 │   │   │   ├── account
@@ -557,9 +555,11 @@ LaravelSpa
 │   │   │   │   ├── TinyMCEditor.vue
 │   │   │   │   └── UmoEditor.vue
 │   │   │   ├── form
+│   │   │   │   ├── AppPasswordInput.vue
 │   │   │   │   ├── AppSettingTextInput.vue
 │   │   │   │   ├── AppSettingTextarea.vue
-│   │   │   │   └── AppSettingToggle.vue
+│   │   │   │   ├── AppSettingToggle.vue
+│   │   │   │   └── AppTextInput.vue
 │   │   │   ├── includes
 │   │   │   │   ├── AdminBreadcrumb.vue
 │   │   │   │   ├── AdminBreadcrumbContainer.vue
@@ -586,7 +586,6 @@ LaravelSpa
 │   │   │   │   ├── RoleFormModal.vue
 │   │   │   │   └── RolesBadges.vue
 │   │   │   └── users
-│   │   │       ├── UserDownloadData.vue
 │   │   │       ├── UserForm.vue
 │   │   │       └── UserFormModal.vue
 │   │   ├── composables
@@ -634,7 +633,6 @@ LaravelSpa
 │   │   ├── validation
 │   │   │   └── rules.js
 │   │   └── views
-│   │       ├── Blank.vue
 │   │       ├── admin
 │   │       │   ├── ActivityLog.vue
 │   │       │   ├── Admin.vue
@@ -676,16 +674,22 @@ LaravelSpa
 │   │       ├── pages
 │   │       │   └── user-settings
 │   │       │       ├── Account.vue
+│   │       │       ├── AccountAuthentication.vue
+│   │       │       ├── AccountData.vue
 │   │       │       ├── Password.vue
 │   │       │       ├── Profile.vue
 │   │       │       ├── Settings.vue
 │   │       │       ├── SettingsNav.vue
-│   │       │       └── SettingsNavLink.vue
+│   │       │       ├── SettingsNavLink.vue
+│   │       │       └── UserDownloadData.vue
 │   │       ├── posts
 │   │       │   ├── details.vue
 │   │       │   └── index.vue
-│   │       └── register
-│   │           └── index.vue
+│   │       ├── register
+│   │       │   └── index.vue
+│   │       └── templates
+│   │           ├── Bare.vue
+│   │           └── Blank.vue
 │   ├── pwa
 │   │   ├── serviceworker.js
 │   │   └── sw.js
@@ -715,6 +719,8 @@ LaravelSpa
 ├── tailwindcss-perspective.js
 ├── vite.config.js
 └── vue.config.js
+
+104 directories, 422 files
 
 103 directories, 419 files
 
