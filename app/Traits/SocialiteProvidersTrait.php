@@ -465,7 +465,7 @@ trait SocialiteProvidersTrait
      * @param  SocialiteUser  $user
      * @return App\Models\User
      */
-    protected function findOrCreateUser(string $provider, $user, string $state = null): array
+    protected function findOrCreateUser(string $provider, $user, ?string $state = null): array
     {
         $existingUser = null;
         $token = null;
