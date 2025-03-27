@@ -722,8 +722,6 @@ LaravelSpa
 
 104 directories, 422 files
 
-103 directories, 419 files
-
 ```
 
 * Tree command can be installed using brew: `brew install tree`
