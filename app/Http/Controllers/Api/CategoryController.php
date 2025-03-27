@@ -35,13 +35,13 @@ class CategoryController extends Controller
 
         $orderColumn = request('order_column', 'created_at');
 
-        if (!in_array($orderColumn, ['id', 'name', 'created_at'])) {
+        if (! in_array($orderColumn, ['id', 'name', 'created_at'])) {
             $orderColumn = 'created_at';
         }
 
         $orderDirection = request('order_direction', 'desc');
 
-        if (!in_array($orderDirection, ['asc', 'desc'])) {
+        if (! in_array($orderDirection, ['asc', 'desc'])) {
             $orderDirection = 'desc';
         }
 

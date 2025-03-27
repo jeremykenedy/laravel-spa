@@ -31,8 +31,7 @@ class UsersController extends Controller
     /**
      * Tap the guard we need.
      *
-     * @param string $guard
-     *
+     * @param  string  $guard
      * @return middleware guard
      */
     protected function guard($guard = 'web')

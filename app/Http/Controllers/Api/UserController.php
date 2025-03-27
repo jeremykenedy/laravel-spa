@@ -23,8 +23,7 @@ class UserController extends Controller
     /**
      * Tap the guard we need.
      *
-     * @param string $guard
-     *
+     * @param  string  $guard
      * @return middleware guard
      */
     protected function guard($guard = 'web')
@@ -35,8 +34,7 @@ class UserController extends Controller
     /**
      * Retreive the user by sanctum middleware.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function user(Request $request)
@@ -49,8 +47,7 @@ class UserController extends Controller
     /**
      * Retreive the user by sanctum authtoken.
      *
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function userByToken(Request $request)
@@ -70,14 +67,13 @@ class UserController extends Controller
     /**
      * Process request to download user data.
      *
-     * @param \App\Models\User         $user
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function exportUserPersonalData(User $user, Request $request)
     {
-        if (!auth('sanctum')->check()) {
+        if (! auth('sanctum')->check()) {
             abort(403);
         }
 
@@ -98,14 +94,13 @@ class UserController extends Controller
     /**
      * Delete the users account.
      *
-     * @param \App\Models\User         $user
-     * @param \Illuminate\Http\Request $request
-     *
+     * @param  \App\Models\User  $user
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function deleteUserAccount(User $user, Request $request)
     {
-        if (!auth('sanctum')->check()) {
+        if (! auth('sanctum')->check()) {
             abort(403);
         }
 
