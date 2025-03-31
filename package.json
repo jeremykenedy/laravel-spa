@@ -82,7 +82,7 @@
         "lodash.clonedeep": "^4.5.0",
         "moment": "^2.30.1",
         "pinia": "^3.0.1",
-        "pinia-plugin-persistedstate": "^3.2.1",
+        "pinia-plugin-persistedstate": "^4.2.0",
         "quill-blot-formatter": "^1.0.5",
         "sweetalert2": "^11.16.1",
         "toasty": "^6.0.3",
