@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import {useAuthStore} from "@/store/auth";
+import { useAuthStore } from '@/store/auth';
 import Swal from 'sweetalert2/dist/sweetalert2';
 
 export default function useDarkMode() {
@@ -10,8 +10,9 @@ export default function useDarkMode() {
     if (isLoading.value) return;
     isLoading.value = true;
     if (auth.authenticated && auth.user && auth.user.id) {
-      axios.post('/api/toggle-dark-mode')
-        .then(({data}) => {
+      axios
+        .post('/api/toggle-dark-mode')
+        .then(({ data }) => {
           if (data.success) {
             auth.user.theme_dark = data.data;
             if (auth.user.theme_dark) {
@@ -21,7 +22,7 @@ export default function useDarkMode() {
             }
           }
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.response?.data) {
             Swal.fire({
               toast: true,
@@ -34,9 +35,9 @@ export default function useDarkMode() {
             });
           }
         })
-        .finally(() => isLoading.value = false);
+        .finally(() => (isLoading.value = false));
     } else {
-      if (localStorage.getItem("data-theme") == 'dark') {
+      if (localStorage.getItem('data-theme') == 'dark') {
         disableDarkMode(msg);
       } else {
         enableDarkMode(msg);
@@ -47,7 +48,7 @@ export default function useDarkMode() {
 
   const enableDarkMode = (msg = false) => {
     document.documentElement.className = 'dark';
-    localStorage.setItem("data-theme", "dark");
+    localStorage.setItem('data-theme', 'dark');
     if (msg) {
       Swal.fire({
         toast: true,
@@ -63,7 +64,7 @@ export default function useDarkMode() {
 
   const disableDarkMode = (msg = false) => {
     document.documentElement.className = 'light';
-    localStorage.setItem("data-theme", "light");
+    localStorage.setItem('data-theme', 'light');
     if (msg) {
       Swal.fire({
         toast: true,
@@ -81,6 +82,6 @@ export default function useDarkMode() {
     toggleDarkMode,
     isLoading,
     enableDarkMode,
-    disableDarkMode
+    disableDarkMode,
   };
 }

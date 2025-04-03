@@ -1,8 +1,5 @@
 <template>
-  <AppModal
-    :show-modal="showingForm"
-    @close-modal="closeModal"
-  >
+  <AppModal :show-modal="showingForm" @close-modal="closeModal">
     <template #title>
       {{ newUser ? 'Create User' : 'Editing User ' + userName }}
     </template>
@@ -18,11 +15,8 @@
               :src="form.avatar"
               :alt="form.name"
               class="float-left ml-2 mr-2 mt-1 h-10 w-10 rounded-full"
-            >
-            <UserCircleIcon
-              v-else
-              class="float-left ml-2 mr-2 mt-1 h-10 w-10 text-gray-500"
             />
+            <UserCircleIcon v-else class="float-left ml-2 mr-2 mt-1 h-10 w-10 text-gray-500" />
           </div>
           <div class="flex-item relative mb-3 flex-auto">
             <input
@@ -32,18 +26,16 @@
               placeholder="Name"
               name="name"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.name
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.name
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
-            >
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
             >
-              <span
-                class="fas fa-user"
-                :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'"
-              />
+              <span class="fas fa-user" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -57,18 +49,16 @@
               placeholder="E-mail"
               name="email"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.email
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'"
-            >
+              :class="
+                errors && errors.email
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              "
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <span
-                class="fas fa-envelope"
-                :class="errors && errors.email ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-envelope" :class="errors && errors.email ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -83,19 +73,16 @@
               name="password"
               autocomplete="on"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.password
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.password
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
-            >
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <span
-                class="fas fa-user-shield"
-                :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-user-shield" :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -110,19 +97,16 @@
               name="password_confirmation"
               autocomplete="on"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.password
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.password
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
-            >
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <span
-                class="fas fa-user-shield"
-                :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-user-shield" :class="errors && errors.password ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -143,11 +127,7 @@
               </AppButton>
             </h6>
             <div class="mt-2 whitespace-nowrap text-xs">
-              {{
-                form && form.email_verified_at
-                  ? parseDisplayDate(form.email_verified_at)
-                  : 'Not Verified'
-              }}
+              {{ form && form.email_verified_at ? parseDisplayDate(form.email_verified_at) : 'Not Verified' }}
             </div>
           </div>
         </div>
@@ -156,37 +136,24 @@
           <div class="flex-item relative mb-3 ml-3 flex-auto">
             <div class="my-1 mr-3 w-full py-2 sm:flex sm:items-center">
               <div
-                :class="loading || submitting
-                  ? 'default disabled cursor-pointer'
-                  : 'cursor-pointer'
-                "
+                :class="loading || submitting ? 'default disabled cursor-pointer' : 'cursor-pointer'"
                 @click="form.theme_dark = !form.theme_dark"
               >
                 <SwitchComp
                   :default-checked="form.theme_dark"
                   :class="form.theme_dark ? 'bg-gray-500' : 'bg-gray-400'"
                   class="relative inline-flex h-[20px] w-[36px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 float-left"
-                  style="margin-top: 5px;"
+                  style="margin-top: 5px"
                 >
                   <span class="sr-only">Toggle Theme</span>
                   <span
                     aria-hidden="true"
-                    :class="form.theme_dark
-                      ? 'translate-x-4 bg-gray-800'
-                      : 'translate-x-0 bg-white'
-                    "
+                    :class="form.theme_dark ? 'translate-x-4 bg-gray-800' : 'translate-x-0 bg-white'"
                     class="pointer-events-none inline-block h-[16px] w-[16px] transform rounded-full shadow-lg ring-0 transition duration-200 ease-in-out"
                   />
 
-                  <SunIcon
-                    v-if="!form.theme_dark"
-                    class="text-white h-4 w-4"
-                  />
-                  <MoonIcon
-                    v-if="form.theme_dark"
-                    class="absolute h-4 w-4 text-gray-800"
-                    style="left: -1px"
-                  />
+                  <SunIcon v-if="!form.theme_dark" class="text-white h-4 w-4" />
+                  <MoonIcon v-if="form.theme_dark" class="absolute h-4 w-4 text-gray-800" style="left: -1px" />
                 </SwitchComp>
 
                 <div class="inline-flex text-sm ml-4 mt-1">
@@ -233,21 +200,13 @@
           </div>
         </div>
 
-        <p
-          v-if="enablePermissons"
-          class="italic"
-        >
-          Note: It is best practice to create a role with attached permissions rather than assign a
-          permission
-          directly.
+        <p v-if="enablePermissons" class="italic">
+          Note: It is best practice to create a role with attached permissions rather than assign a permission directly.
         </p>
 
         <div class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative flex-auto text-xs uppercase">
-            <div
-              v-if="form.created_at"
-              class="float-left"
-            >
+            <div v-if="form.created_at" class="float-left">
               Created at:
               <div class="text-xs font-bold">
                 {{ parseDisplayDate(form.created_at) }}
@@ -255,10 +214,7 @@
             </div>
           </div>
           <div class="flex-item relative flex-auto text-xs uppercase">
-            <div
-              v-if="form.updated_at"
-              class="float-right"
-            >
+            <div v-if="form.updated_at" class="float-right">
               Updated at:
               <div class="text-xs font-bold">
                 {{ parseDisplayDate(form.updated_at) }}
@@ -270,7 +226,7 @@
     </template>
 
     <template #footer>
-      <hr>
+      <hr />
       <div style="width: 100%">
         <AppButton
           v-if="changed"
@@ -280,27 +236,11 @@
           @click="submit"
         >
           <template #text>
-            {{
-              newUser
-                ? submitting
-                  ? 'Creating'
-                  : 'Create'
-                : submitting
-                  ? 'Updating'
-                  : 'Update'
-            }}
-            <span
-              v-if="submitting"
-              class="fa fa-circle-notch fa-spin ml-3"
-            />
+            {{ newUser ? (submitting ? 'Creating' : 'Create') : submitting ? 'Updating' : 'Update' }}
+            <span v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
           </template>
         </AppButton>
-        <AppButton
-          :disabled="loading || submitting"
-          class="float-right"
-          secondary
-          @click="closeModal"
-        >
+        <AppButton :disabled="loading || submitting" class="float-right" secondary @click="closeModal">
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}
           </template>
@@ -312,26 +252,17 @@
 
 <script lang="ts">
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
 import axios from 'axios';
 import clonedeep from 'lodash.clonedeep';
 import moment from 'moment';
 import AppModal from '@components/common/AppModal.vue';
 import Multiselect from '@vueform/multiselect';
-// import Errors from '@components/common/Errors.vue';
+// import Errors from '@components/common/ErrorsNotice.vue';
 import { Switch as SwitchComp } from '@headlessui/vue';
-import {
-  isEmpty,
-  validateEmail,
-  parseDisplayDate,
-  isObjEmpty,
-} from "@services/utilities";
-import {
-  UserCircleIcon,
-  SunIcon,
-  MoonIcon,
-} from '@heroicons/vue/24/outline';
+import { isEmpty, validateEmail, parseDisplayDate, isObjEmpty } from '@services/utilities';
+import { UserCircleIcon, SunIcon, MoonIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'UserFormModal',
@@ -355,10 +286,7 @@ export default {
     enablePermissons: { type: Boolean, default: false }, // Careful: Using this will not auto-detach roles for users. // You must also update UsersController.php
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -425,13 +353,8 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan']),
+    ...mapActions(useToastStore, ['popToast']),
     isEmpty,
     isObjEmpty,
     validateEmail,
@@ -456,10 +379,10 @@ export default {
         });
         this.errors.email = true;
       } else {
-        const emailValid = await this.validateEmail(this.form.email, true)
-        if(!emailValid) {
+        const emailValid = await this.validateEmail(this.form.email, true);
+        if (!emailValid) {
           this.popToast({
-            message:'Email is invalid',
+            message: 'Email is invalid',
             timer: 5000,
             icon: 'error',
           });
@@ -541,7 +464,7 @@ export default {
           this.submitting = false;
         });
       this.submitting = false;
-    }
+    },
   },
 };
 </script>

@@ -1,18 +1,9 @@
 <template>
-  <div
-    id="roles"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="roles" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="admin.index"
-        :text="$t('admin')"
-      />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="roles.index"
-        :text="$t('roles')"
-      />
+      <AdminBreadcrumb route-name="roles.index" :text="$t('roles')" />
     </AdminBreadcrumbContainer>
 
     <div class="flex justify-end">
@@ -24,14 +15,8 @@
         @click="triggerCreateRole"
       >
         <template #text>
-          <span
-            v-if="dataReady"
-            class="fas fa-plus fa-fw ml-2 mr-2"
-          />
-          <CircleSvg
-            v-if="!dataReady"
-            class="ml-2 mr-2 mt-0 h-4 w-4"
-          />
+          <span v-if="dataReady" class="fas fa-plus fa-fw ml-2 mr-2" />
+          <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
           <span class="sr-only">{{ $t('create_new_role') }}</span>
         </template>
       </AppButton>
@@ -56,7 +41,7 @@
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('name', item)"
-        >
+        />
       </template>
 
       <template #item-slug="item">
@@ -68,7 +53,7 @@
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('slug', item)"
-        >
+        />
       </template>
 
       <template #item-description="item">
@@ -80,7 +65,7 @@
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('description', item)"
-        >
+        />
       </template>
 
       <template #item-created_at="item">
@@ -100,37 +85,32 @@
           <AppButton
             :loading="!dataReady"
             class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
-            :btn-class="locked(item)
-              ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-class="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-hover-class="locked(item)
-              ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-hover-class="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-class-dark="locked(item)
-              ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-class-dark="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-hover-class-dark="locked(item)
-              ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-hover-class-dark="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
             @click="toggleLock(item, false)"
           >
             <template #text>
-              <LockClosedIcon
-                v-if="locked(item) && dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <LockOpenIcon
-                v-if="!locked(item) && dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <LockClosedIcon v-if="locked(item) && dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <LockOpenIcon v-if="!locked(item) && dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">{{ locked(item) ? 'Unlock' : 'Lock' }} User Settings</span>
             </template>
           </AppButton>
@@ -144,14 +124,8 @@
             @click="triggerEditRole(item)"
           >
             <template #text>
-              <PencilSquareIcon
-                v-if="dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <PencilSquareIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">Edit Role</span>
             </template>
           </AppButton>
@@ -165,14 +139,8 @@
             @click="triggerDeleteRole(item)"
           >
             <template #text>
-              <TrashIcon
-                v-if="dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">Delete Role</span>
             </template>
           </AppButton>
@@ -195,18 +163,13 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
 import moment from 'moment';
 import axios from 'axios';
 import RoleFormModal from '@components/roles/RoleFormModal.vue';
 import CircleSvg from '@components/common/CircleSvg.vue';
-import {
-  LockClosedIcon,
-  LockOpenIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from '@heroicons/vue/24/outline';
+import { LockClosedIcon, LockOpenIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'RolesPage',
@@ -231,16 +194,16 @@ export default {
       creatingNewRole: false,
       roleFormKey: 432432489,
       tableHeaders: [
-        { text: "ID", value: "id", sortable: true },
-        { text: "NAME", value: "name", sortable: true, width: 150 },
-        { text: "SLUG", value: "slug", sortable: true, width: 100 },
-        { text: "DESCRIPTION", value: "description", width: 150 },
-        { text: "LEVEL", value: "level", sortable: true },
-        { text: "PERMISSIONS", value: "permissions.length", sortable: true },
-        { text: "USERS", value: "users.length", sortable: true },
-        { text: "CREATED AT", value: "created_at", sortable: true, width: 140 },
-        { text: "UPDATED AT", value: "updated_at", sortable: true, width: 140 },
-        { text: "ACTIONS", value: "actions" },
+        { text: 'ID', value: 'id', sortable: true },
+        { text: 'NAME', value: 'name', sortable: true, width: 150 },
+        { text: 'SLUG', value: 'slug', sortable: true, width: 100 },
+        { text: 'DESCRIPTION', value: 'description', width: 150 },
+        { text: 'LEVEL', value: 'level', sortable: true },
+        { text: 'PERMISSIONS', value: 'permissions.length', sortable: true },
+        { text: 'USERS', value: 'users.length', sortable: true },
+        { text: 'CREATED AT', value: 'created_at', sortable: true, width: 140 },
+        { text: 'UPDATED AT', value: 'updated_at', sortable: true, width: 140 },
+        { text: 'ACTIONS', value: 'actions' },
       ],
       rowsUnlocked: [],
       availablePermissions: [],
@@ -254,10 +217,7 @@ export default {
     this.getPermissions();
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -266,21 +226,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan']),
+    ...mapActions(useToastStore, ['popToast']),
     async getRoles(updatedPage = null) {
       if (updatedPage) {
         this.pagination.current_page = updatedPage;
       }
       await axios
-        .get(
-          `/api/roles-complete?page=${this.pagination.current_page}&per=${this.perPage}`,
-        )
+        .get(`/api/roles-complete?page=${this.pagination.current_page}&per=${this.perPage}`)
         .then(({ data }) => {
           this.rolesData = data.data;
           delete data.data;
@@ -383,7 +336,7 @@ export default {
       this.showCreateRoleForm = true;
     },
     roleUpdated(data) {
-      this.rolesData = this.rolesData.map((u) => u.id !== data.id ? u : data);
+      this.rolesData = this.rolesData.map((u) => (u.id !== data.id ? u : data));
       this.rowsUnlocked = [];
       this.getRoles(); // Realign just in case.
       this.closeRoleForm();

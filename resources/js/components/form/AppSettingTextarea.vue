@@ -1,10 +1,6 @@
 <template>
   <div>
-    <label
-      class="m:w-3/12 mb-1 inline-flex w-10/12"
-      :for="setting.key"
-    >{{ setting.name }}:
-    </label>
+    <label class="m:w-3/12 mb-1 inline-flex w-10/12" :for="setting.key">{{ setting.name }}: </label>
     <textarea
       :id="setting.key"
       type="text"

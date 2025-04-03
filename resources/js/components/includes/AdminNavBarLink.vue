@@ -1,25 +1,18 @@
 <template>
   <span>
-    <router-link
-      v-if="routeName"
-      :to="{ name: routeName }"
-      @click.prevent="navClicked()"
-    >
+    <router-link v-if="routeName" :to="{ name: routeName }" @click.prevent="navClicked()">
       <span
         class="flex items-center p-4 pr-10 pl-8 hover:bg-slate-800 hover:text-white"
-        :class="itemClass + ' ' + (currentRouteName == routeName
-          ? 'cursor-default whitespace-nowrap bg-slate-500 text-white '
-          : 'text-gray-700')
+        :class="
+          itemClass +
+          ' ' +
+          (currentRouteName == routeName
+            ? 'cursor-default whitespace-nowrap bg-slate-500 text-white '
+            : 'text-gray-700')
         "
       >
-        <slot
-          v-if="hasIconSlot"
-          name="icon"
-        />
-        <span
-          v-if="text"
-          class="ml-2"
-        >{{ text }}</span>
+        <slot v-if="hasIconSlot" name="icon" />
+        <span v-if="text" class="ml-2">{{ text }}</span>
       </span>
     </router-link>
 
@@ -28,16 +21,9 @@
       class="flex cursor-pointer items-center rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-800 hover:text-white"
       @click.prevent="navClicked()"
     >
-      <slot
-        v-if="hasIconSlot"
-        name="icon"
-      />
-      <span
-        v-if="text"
-        class="ml-2"
-      >{{ text }}</span>
+      <slot v-if="hasIconSlot" name="icon" />
+      <span v-if="text" class="ml-2">{{ text }}</span>
     </div>
-
   </span>
 </template>
 

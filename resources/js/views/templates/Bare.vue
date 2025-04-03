@@ -1,7 +1,5 @@
 <template>
-  <div>
-    Bare
-  </div>
+  <div>Bare</div>
 </template>
 
 <script>

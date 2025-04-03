@@ -23,9 +23,9 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import useAuth from '@composables/auth';
 import { track } from '@services/analytics';
 
 export default {
@@ -35,12 +35,7 @@ export default {
     classes: { type: String, default: null },
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-      'impersonatorToken',
-      'currentUserToken',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated', 'impersonatorToken', 'currentUserToken']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -52,12 +47,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions(useAuth, [
-      'leaveImpersonatingUser',
-    ]),
-    ...mapActions(useToastStore, [
-      'error',
-    ]),
+    ...mapActions(useAuth, ['leaveImpersonatingUser']),
+    ...mapActions(useToastStore, ['error']),
     track,
     async triggerLeaveImpersonatingUser() {
       this.$emit('clicked');
@@ -70,7 +61,6 @@ export default {
         this.error('An error occurred, you are still are not yourself!');
       }
     },
-
   },
 };
 </script>

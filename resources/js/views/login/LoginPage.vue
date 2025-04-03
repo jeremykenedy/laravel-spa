@@ -3,20 +3,12 @@
     <div class="mx-auto mt-10 max-w-7xl px-4 text-gray-800 sm:px-6">
       <div class="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between xl:justify-center">
         <div class="shrink-1 mb-12 grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12">
-          <img
-            :src="loginImage"
-            class="w-full"
-            :alt="loginImageAlt"
-          >
+          <img :src="loginImage" class="w-full" :alt="loginImageAlt" />
         </div>
         <div class="mb-12 md:mb-0 md:w-8/12 lg:w-5/12 xl:ml-20 xl:w-5/12">
           <form @submit.prevent="submitLogin">
             <div class="mb-7 md:mt-16 lg:mt-12">
-              <label
-                for="email"
-                class="text-small mb-2 hidden"
-                :class="{ 'text-red-500': validationErrors?.email }"
-              >
+              <label for="email" class="text-small mb-2 hidden" :class="{ 'text-red-500': validationErrors?.email }">
                 {{ $t('email') }}
               </label>
               <input
@@ -29,12 +21,8 @@
                 :class="{ 'border-red-500': validationErrors?.email }"
                 :disabled="processing.value"
                 :placeholder="$t('email')"
-              >
-              <div
-                v-for="message in validationErrors?.email"
-                :key="message"
-                class="mt-1 text-sm text-red-500 absolute"
-              >
+              />
+              <div v-for="message in validationErrors?.email" :key="message" class="mt-1 text-sm text-red-500 absolute">
                 {{ message }}
               </div>
             </div>
@@ -55,16 +43,9 @@
                 :class="{ 'border-red-500': validationErrors?.password }"
                 :disabled="processing.value"
                 :placeholder="$t('password')"
-              >
-              <div
-                v-if="validationErrors?.password"
-                class="absolute"
-              >
-                <div
-                  v-for="message in validationErrors?.password"
-                  :key="message"
-                  class="mt-1 text-sm text-red-500"
-                >
+              />
+              <div v-if="validationErrors?.password" class="absolute">
+                <div v-for="message in validationErrors?.password" :key="message" class="mt-1 text-sm text-red-500">
                   {{ message }}
                 </div>
               </div>
@@ -77,11 +58,12 @@
                   name="remember"
                   type="checkbox"
                   class="form-check-input float-left mt-1 mr-2 h-4 w-4 cursor-pointer appearance-none rounded-sm border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none dark:bg-gray-800"
-                >
+                />
                 <label
                   class="form-check-label inline-block cursor-pointer text-gray-800 dark:text-gray-100 mt-1"
                   for="flexCheckIndeterminate"
-                >{{ $t('remember_me') }}</label>
+                  >{{ $t('remember_me') }}</label
+                >
               </div>
               <router-link
                 :to="{ name: 'auth.forgot-password' }"
@@ -101,32 +83,19 @@
                 type="submit"
               >
                 <template #text>
-                  <ArrowRightOnRectangleIcon
-                    v-if="!processing.value"
-                    class="mr-2 h-6 w-6"
-                  />
-                  <CircleSvg
-                    v-if="processing.value"
-                    class="mr-2 h-6 w-6"
-                  />
+                  <ArrowRightOnRectangleIcon v-if="!processing.value" class="mr-2 h-6 w-6" />
+                  <CircleSvg v-if="processing.value" class="mr-2 h-6 w-6" />
                   {{ $t('login') }}
                 </template>
               </AppButton>
 
-              <div
-                v-if="socialLoginsEnabled"
-                class="mt-5"
-              >
+              <div v-if="socialLoginsEnabled" class="mt-5">
                 <div
                   class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300"
                 >
-                  <p class="mx-4 mb-0 text-center font-semibold dark:text-gray-400 cursor-default">
-                    Or
-                  </p>
+                  <p class="mx-4 mb-0 text-center font-semibold dark:text-gray-400 cursor-default">Or</p>
                 </div>
-                <h3 class="mb-3 font-bold text-gray-700">
-                  Login with
-                </h3>
+                <h3 class="mb-3 font-bold text-gray-700">Login with</h3>
                 <SocialiteLogins />
               </div>
             </div>
@@ -138,11 +107,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
-import useAuth from '@composables/auth'
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
+import { ref, onMounted, watch, computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import useAuth from '@composables/auth';
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
 const { userCan, userIs, user, authenticated, socials } = useAuthStore();
 const { popToast, success, error } = useToastStore();
 const toast = useToastStore();
@@ -153,7 +122,7 @@ const socialLoginsEnabled = computed(() => {
     return true;
   }
   return false;
-})
+});
 </script>
 
 <script>

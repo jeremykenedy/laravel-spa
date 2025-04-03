@@ -1,18 +1,9 @@
 <template>
-  <div
-    id="users"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="users" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="admin.index"
-        :text="$t('admin')"
-      />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="users.index"
-        :text="$t('users')"
-      />
+      <AdminBreadcrumb route-name="users.index" :text="$t('users')" />
     </AdminBreadcrumbContainer>
 
     <AppButton
@@ -24,14 +15,8 @@
       @click="triggerCreateUser"
     >
       <template #text>
-        <UserPlusIcon
-          v-if="dataReady"
-          class="ml-2 mr-2 mt-0 h-4 w-4"
-        />
-        <CircleSvg
-          v-if="!dataReady"
-          class="ml-2 mr-2 mt-0 h-4 w-4"
-        />
+        <UserPlusIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+        <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
         <span class="sr-only">{{ $t('create_new_user') }}</span>
       </template>
     </AppButton>
@@ -46,9 +31,9 @@
         type="text"
         name="search_users"
         class="col-start-1 row-start-1 block w-full rounded-md placeholder:text-gray-400 pl-9 dark:bg-gray-900 dark:text-gray-200 border-0"
-        :placeholder="$t('search_users')+'...'"
+        :placeholder="$t('search_users') + '...'"
         @keydown.enter="getUsers()"
-      >
+      />
       <MagnifyingGlassIcon
         class="pointer-events-none col-start-1 row-start-1 ml-3 size-5 self-center text-gray-600 sm:size-4"
       />
@@ -76,22 +61,19 @@
             :src="item.avatar"
             :alt="item.name"
             class="h-8 w-8 cursor-default rounded-full border shadow float-left"
-          >
-          <UserCircleIcon
-            v-else
-            class="mt-0 h-8 w-8 cursor-default shadow float-left"
           />
+          <UserCircleIcon v-else class="mt-0 h-8 w-8 cursor-default shadow float-left" />
 
           <input
             v-model="item.name"
             v-tippy="'Edit Name'"
             type="text"
             class="rounded border-0 text-sm mr-3 px-1 ml-2"
-            style="field-sizing: content;"
+            style="field-sizing: content"
             :class="locked(item) ? 'disabled bg-transparent' : 'bg-gray-100 dark:bg-gray-800'"
             :readonly="locked(item)"
             @blur="update('name', item)"
-          >
+          />
         </div>
       </template>
 
@@ -110,11 +92,11 @@
           v-tippy="'Edit Email'"
           type="text"
           class="rounded border-0 text-sm whitespace-nowrap mr-2 pl-1"
-          style="field-sizing: content;"
+          style="field-sizing: content"
           :class="locked(item) ? 'disabled bg-transparent' : 'bg-gray-100 dark:bg-gray-800'"
           :readonly="locked(item)"
           @blur="update('email', item)"
-        >
+        />
       </template>
 
       <template #item-theme_dark="item">
@@ -126,30 +108,20 @@
           @click="update('theme_dark', item)"
         >
           <template #text>
-            <SunIcon
-              v-if="!item.theme_dark"
-              class="h-5 w-5 ml-4"
-            />
-            <MoonIcon
-              v-if="item.theme_dark"
-              class="h-5 w-5 ml-4"
-            />
+            <SunIcon v-if="!item.theme_dark" class="h-5 w-5 ml-4" />
+            <MoonIcon v-if="item.theme_dark" class="h-5 w-5 ml-4" />
           </template>
         </AppButton>
       </template>
 
       <template #item-roles="item">
-        <RolesBadges
-          v-if="item && item.roles"
-          class="mr-1 mb-1"
-          :roles="item.roles"
-        />
+        <RolesBadges v-if="item && item.roles" class="mr-1 mb-1" :roles="item.roles" />
       </template>
 
       <template #item-permissions="item">
         <div v-if="item.permissions">
           <div
-            v-for="permission in item.permissions "
+            v-for="permission in item.permissions"
             :key="permission.id"
             :value="permission"
             class="mr-1 mb-1 cursor-default rounded text-xs font-medium whitespace-nowrap"
@@ -161,9 +133,7 @@
         </div>
       </template>
 
-      <template
-        #item-email_verified_at="item"
-      >
+      <template #item-email_verified_at="item">
         <div class="whitespace-nowrap">
           <div class="text-xs text-center">
             {{ item.email_verified_at ? parseDisplayDate(item.email_verified_at) : $t('not_verified') }}
@@ -188,7 +158,7 @@
 
               <AppButton
                 v-if="!item.email_verified_at"
-                v-tippy="'Send ' + item.name +' email to verify'"
+                v-tippy="'Send ' + item.name + ' email to verify'"
                 :loading="!dataReady"
                 :disabled="locked(item)"
                 @click="triggerUserConfirmEmail(item)"
@@ -220,37 +190,32 @@
             v-if="authenticated && user && (userIs('superadmin') || userCan('edit.users'))"
             :loading="!dataReady"
             class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
-            :btn-class="locked(item)
-              ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-class="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-hover-class="locked(item)
-              ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-hover-class="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-class-dark="locked(item)
-              ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-class-dark="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-hover-class-dark="locked(item)
-              ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-hover-class-dark="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
             @click="toggleLock(item, false)"
           >
             <template #text>
-              <LockClosedIcon
-                v-if="locked(item) && dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <LockOpenIcon
-                v-if="!locked(item) && dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <LockClosedIcon v-if="locked(item) && dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <LockOpenIcon v-if="!locked(item) && dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">{{ locked(item) ? 'Unlock' : 'Lock' }} {{ $t('user_settings') }}</span>
             </template>
           </AppButton>
@@ -265,14 +230,8 @@
             @click="triggerEditUser(item)"
           >
             <template #text>
-              <PencilSquareIcon
-                v-if="dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <PencilSquareIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">{{ $t('edit_user') }}</span>
             </template>
           </AppButton>
@@ -287,20 +246,14 @@
             @click="triggerDeleteUser(item)"
           >
             <template #text>
-              <TrashIcon
-                v-if="dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">{{ $t('delete_user') }}</span>
             </template>
           </AppButton>
 
           <ImpersonateUser
-            v-if="(user.id != item.id) && (authenticated && user && (userIs('superadmin') || userCan('impersonate.users')))"
+            v-if="user.id != item.id && authenticated && user && (userIs('superadmin') || userCan('impersonate.users'))"
             :person="item"
             :loading="!dataReady"
             :disabled="!dataReady || locked(item)"
@@ -326,15 +279,15 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import useAuth from '@composables/auth';
 import axios from 'axios';
 import UserFormModal from '@components/users/UserFormModal.vue';
 import CircleSvg from '@components/common/CircleSvg.vue';
 // import PerPage from '@components/common/PerPage.vue';
 import RolesBadges from '@components/roles/RolesBadges.vue';
-import { inputNotEmpty, validateEmail, parseDisplayDate } from "@services/utilities";
+import { inputNotEmpty, validateEmail, parseDisplayDate } from '@services/utilities';
 import ImpersonateUser from '@components/common/ImpersonateUser.vue';
 
 import {
@@ -374,16 +327,21 @@ export default {
     return {
       users: [],
       tableHeaders: [
-        { text: "ID", value: "id", sortable: true },
-        { text: "NAME", value: "name", sortable: true },
-        { text: "EMAIL", value: "email", sortable: true },
-        { text: "THEME", value: "theme_dark", width: 130, sortable: true },
-        { text: "ROLES", value: "roles", width: 140 },
-        { text: "PERMISSIONS", value: "permissions" },
-        { text: "VERIFIED AT", value: "email_verified_at", sortable: true, width: 140 },
-        { text: "CREATED AT", value: "created_at", sortable: true, width: 140 },
-        { text: "UPDATED AT", value: "updated_at", sortable: true, width: 140 },
-        { text: "ACTIONS", value: "actions" },
+        { text: 'ID', value: 'id', sortable: true },
+        { text: 'NAME', value: 'name', sortable: true },
+        { text: 'EMAIL', value: 'email', sortable: true },
+        { text: 'THEME', value: 'theme_dark', width: 130, sortable: true },
+        { text: 'ROLES', value: 'roles', width: 140 },
+        { text: 'PERMISSIONS', value: 'permissions' },
+        {
+          text: 'VERIFIED AT',
+          value: 'email_verified_at',
+          sortable: true,
+          width: 140,
+        },
+        { text: 'CREATED AT', value: 'created_at', sortable: true, width: 140 },
+        { text: 'UPDATED AT', value: 'updated_at', sortable: true, width: 140 },
+        { text: 'ACTIONS', value: 'actions' },
       ],
       dataReady: false,
       showCreateUserForm: false,
@@ -404,9 +362,7 @@ export default {
         sortBy: 'id',
         sortType: 'asc',
       },
-      perPage: [
-        10, 25, 50, 100, 500, 1000, 10000
-      ],
+      perPage: [10, 25, 50, 100, 500, 1000, 10000],
       search_global: '',
     };
   },
@@ -416,10 +372,7 @@ export default {
     this.getUsers();
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -438,25 +391,16 @@ export default {
     search_global: {
       handler(newValue, oldValue) {
         const self = this;
-        setTimeout(function() {
+        setTimeout(function () {
           self.getUsers();
         }, 600);
       },
-    }
+    },
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-      'getUser',
-    ]),
-    ...mapActions(useAuth, [
-      'verifyResend',
-      'impersonateUser',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan', 'getUser']),
+    ...mapActions(useAuth, ['verifyResend', 'impersonateUser']),
+    ...mapActions(useToastStore, ['popToast']),
     inputNotEmpty,
     validateEmail,
     parseDisplayDate,
@@ -480,7 +424,7 @@ export default {
     },
     async getUsers() {
       this.loading = true;
-      if(this.authenticated && this.user && this.userCan('view.users')) {
+      if (this.authenticated && this.user && this.userCan('view.users')) {
         await axios
           .get(
             `/api/users?page=${this.paginationOptions.page}&per=${this.paginationOptions.rowsPerPage}&sortBy=${this.paginationOptions.sortBy}&sortType=${this.paginationOptions.sortType}&search=${this.search_global}`,
@@ -507,7 +451,7 @@ export default {
     },
     async getRoles() {
       this.rolesDataReady = false;
-      if(this.authenticated && this.user && this.userCan('view.roles')) {
+      if (this.authenticated && this.user && this.userCan('view.roles')) {
         await axios
           .get('/api/roles')
           .then(({ data }) => {
@@ -526,7 +470,7 @@ export default {
     async getPermissions() {
       this.permissionsDataReady = false;
 
-      if(this.authenticated && this.user && this.userCan('view.permissions')) {
+      if (this.authenticated && this.user && this.userCan('view.permissions')) {
         await axios
           .get('/api/permissions')
           .then(({ data }) => {
@@ -548,27 +492,27 @@ export default {
     async update(key, row) {
       const self = this;
       let update = false;
-      let cu = this.users.find(u => u.id === row.id);
+      let cu = this.users.find((u) => u.id === row.id);
 
-      if(key == 'email') {
-        if(cu.email != row.email) {
+      if (key == 'email') {
+        if (cu.email != row.email) {
           update = true;
         }
       }
 
-      if(key == 'name') {
-        if(cu.name != row.name) {
+      if (key == 'name') {
+        if (cu.name != row.name) {
           update = true;
         }
       }
 
-      if(key == 'theme_dark') {
-        row.theme_dark =!row.theme_dark
+      if (key == 'theme_dark') {
+        row.theme_dark = !row.theme_dark;
         update = true;
       }
 
-      if(update){
-        if(key != 'theme_dark') {
+      if (update) {
+        if (key != 'theme_dark') {
           if (!this.inputNotEmpty(key, row)) {
             this.popToast({
               message: key + ' is required',
@@ -578,11 +522,11 @@ export default {
             return;
           }
         }
-        if(key == 'email') {
-          const emailValid = await this.validateEmail(row[key])
-          if(!emailValid) {
+        if (key == 'email') {
+          const emailValid = await this.validateEmail(row[key]);
+          if (!emailValid) {
             this.popToast({
-              message:'Invalid Email',
+              message: 'Invalid Email',
               timer: 5000,
               icon: 'error',
             });
@@ -590,7 +534,7 @@ export default {
           }
         }
 
-        row['roles'] = row['roles'].map(value => value.id);
+        row['roles'] = row['roles'].map((value) => value.id);
 
         await axios
           .patch(`/api/users/update-user/${row.id}`, row)
@@ -601,7 +545,7 @@ export default {
               timer: 5000,
               icon: 'success',
             });
-            if(row.id == this.user.id) {
+            if (row.id == this.user.id) {
               self.getUser();
             }
             self.submitting = false;
@@ -682,7 +626,7 @@ export default {
         })
         .then((result) => {
           if (result.isConfirmed) {
-            self.sendUserVerification(user)
+            self.sendUserVerification(user);
           } else if (result.isDenied) {
             self.popToast({
               message: 'Cancelled',

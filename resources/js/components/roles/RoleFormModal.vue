@@ -1,8 +1,5 @@
 <template>
-  <AppModal
-    :show-modal="showingForm"
-    @close-modal="closeModal"
-  >
+  <AppModal :show-modal="showingForm" @close-modal="closeModal">
     <template #title>
       {{ newRole ? 'Create Role' : 'Editing Role ' + roleName }}
     </template>
@@ -26,19 +23,16 @@
               placeholder="Name"
               name="name"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.name
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.name
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
-            >
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
             >
-              <span
-                class="fas fa-lock"
-                :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-lock" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -53,19 +47,16 @@
               placeholder="Slug"
               name="slug"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.slug
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.slug
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
-            >
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <span
-                class="fas fa-code"
-                :class="errors && errors.slug ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-code" :class="errors && errors.slug ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -80,21 +71,16 @@
               placeholder="Description"
               name="description"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.description
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.description
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
             />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <span
-                class="fas fa-pencil"
-                :class="errors && errors.description
-                  ? 'text-red-600'
-                  : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-pencil" :class="errors && errors.description ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -109,19 +95,16 @@
               placeholder="Level"
               name="level"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
-              :class="errors && errors.level
-                ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
-                : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
+              :class="
+                errors && errors.level
+                  ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
+                  : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
               "
-            >
+            />
             <span
               class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
             >
-              <span
-                class="fas fa-pencil"
-                :class="errors && errors.level ? 'text-red-600' : 'text-slate-300'
-                "
-              />
+              <span class="fas fa-pencil" :class="errors && errors.level ? 'text-red-600' : 'text-slate-300'" />
             </span>
           </div>
         </div>
@@ -142,25 +125,18 @@
         </div>
 
         <div
-          v-if="role && role.users && role.users.length && role.users.length > 0
-          "
+          v-if="role && role.users && role.users.length && role.users.length > 0"
           class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch"
         >
           <div class="flex-item relative flex-auto text-xs">
-            <strong class="text-red-400"><span class="fas fa-warning fa-fw mr-1" />Warning</strong>: This will
-            affect
-            <span class="font-bold">{{ role.users.length }}</span> User{{
-              role.users.length > 1 ? 's' : ''
-            }}
+            <strong class="text-red-400"><span class="fas fa-warning fa-fw mr-1" />Warning</strong>: This will affect
+            <span class="font-bold">{{ role.users.length }}</span> User{{ role.users.length > 1 ? 's' : '' }}
           </div>
         </div>
 
         <div class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative flex-auto text-xs uppercase">
-            <div
-              v-if="form.created_at"
-              class="float-left"
-            >
+            <div v-if="form.created_at" class="float-left">
               Created at:
               <div class="text-xs font-bold">
                 {{ parseDisplayDate(form.created_at) }}
@@ -168,10 +144,7 @@
             </div>
           </div>
           <div class="flex-item relative flex-auto text-xs uppercase">
-            <div
-              v-if="form.updated_at"
-              class="float-right"
-            >
+            <div v-if="form.updated_at" class="float-right">
               Updated at:
               <div class="text-xs font-bold">
                 {{ parseDisplayDate(form.updated_at) }}
@@ -191,27 +164,11 @@
           @click="submit"
         >
           <template #text>
-            {{
-              newRole
-                ? submitting
-                  ? 'Creating'
-                  : 'Create'
-                : submitting
-                  ? 'Updating'
-                  : 'Update'
-            }}
-            <span
-              v-if="submitting"
-              class="fa fa-circle-notch fa-spin ml-3"
-            />
+            {{ newRole ? (submitting ? 'Creating' : 'Create') : submitting ? 'Updating' : 'Update' }}
+            <span v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
           </template>
         </AppButton>
-        <AppButton
-          :disabled="loading || submitting"
-          class="float-right"
-          secondary
-          @click="closeModal"
-        >
+        <AppButton :disabled="loading || submitting" class="float-right" secondary @click="closeModal">
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}
           </template>
@@ -228,8 +185,8 @@ import { mapActions } from 'pinia';
 import clonedeep from 'lodash.clonedeep';
 import moment from 'moment';
 import Multiselect from '@vueform/multiselect';
-import Errors from '@components/common/Errors.vue';
-import { useToastStore } from "@store/toast";
+import Errors from '@components/common/ErrorsNotice.vue';
+import { useToastStore } from '@store/toast';
 
 export default {
   name: 'UserFormModal',
@@ -289,9 +246,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useToastStore, [
-      'popToast',
-    ]),
+    ...mapActions(useToastStore, ['popToast']),
     parseDisplayDate(date) {
       if (date && date != true) {
         return moment(date).format('MMM Do YYYY, h:mma');

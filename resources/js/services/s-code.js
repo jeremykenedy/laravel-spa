@@ -263,12 +263,7 @@ function go_astroid() {
       },
 
       collidesWith: function (rect) {
-        return (
-          this.x > rect.x &&
-          this.y > rect.y &&
-          this.x < rect.x + rect.width &&
-          this.y < rect.y + rect.height
-        );
+        return this.x > rect.x && this.y > rect.y && this.x < rect.x + rect.width && this.y < rect.y + rect.height;
       },
 
       len: function () {
@@ -282,17 +277,7 @@ function go_astroid() {
       },
 
       toString: function () {
-        return (
-          '[Vector(' +
-          this.x +
-          ', ' +
-          this.y +
-          ') angle: ' +
-          this.angle() +
-          ', length: ' +
-          this.len() +
-          ']'
-        );
+        return '[Vector(' + this.x + ', ' + this.y + ') angle: ' + this.angle() + ', length: ' + this.len() + ']';
       },
     };
 
@@ -338,13 +323,10 @@ function go_astroid() {
         const v3 = line2.p1,
           v4 = line2.p2;
 
-        const denom =
-          (v4.y - v3.y) * (v2.x - v1.x) - (v4.x - v3.x) * (v2.y - v1.y);
-        const numerator =
-          (v4.x - v3.x) * (v1.y - v3.y) - (v4.y - v3.y) * (v1.x - v3.x);
+        const denom = (v4.y - v3.y) * (v2.x - v1.x) - (v4.x - v3.x) * (v2.y - v1.y);
+        const numerator = (v4.x - v3.x) * (v1.y - v3.y) - (v4.y - v3.y) * (v1.x - v3.x);
 
-        const numerator2 =
-          (v2.x - v1.x) * (v1.y - v3.y) - (v2.y - v1.y) * (v1.x - v3.x);
+        const numerator2 = (v2.x - v1.x) * (v1.y - v3.y) - (v2.y - v1.y) * (v1.x - v3.x);
 
         if (denom == 0.0) {
           return false;
@@ -362,14 +344,8 @@ function go_astroid() {
       build: function () {
         const self = this;
 
-        const w =
-          document.clientWidth ||
-          window.innerWidth ||
-          document.documentElement.clientWidth;
-        const h =
-          document.clientHeight ||
-          window.innerHeight ||
-          document.documentElement.clientHeight;
+        const w = document.clientWidth || window.innerWidth || document.documentElement.clientWidth;
+        const h = document.clientHeight || window.innerHeight || document.documentElement.clientHeight;
 
         this.container = document.createElement('div');
         this.container.className = 'ASTEROIDSYEAH';
@@ -471,13 +447,11 @@ function go_astroid() {
       },
 
       hide: function () {
-        if (this.container && this.container.parentNode)
-          this.container.parentNode.removeChild(this.container);
+        if (this.container && this.container.parentNode) this.container.parentNode.removeChild(this.container);
       },
 
       sendScore: function () {
-        const timePlayed =
-          new Date().getTime() - window.ASTEROIDS.startedPlaying;
+        const timePlayed = new Date().getTime() - window.ASTEROIDS.startedPlaying;
         this.iframe.src =
           highscoreURL +
           '?asd=' +
@@ -515,16 +489,7 @@ function go_astroid() {
       [playerHeight / 2, 0],
     ];
 
-    let ignoredTypes = [
-      'HTML',
-      'HEAD',
-      'BODY',
-      'SCRIPT',
-      'TITLE',
-      'META',
-      'STYLE',
-      'LINK',
-    ];
+    let ignoredTypes = ['HTML', 'HEAD', 'BODY', 'SCRIPT', 'TITLE', 'META', 'STYLE', 'LINK'];
     if (window.ActiveXObject)
       ignoredTypes = [
         'HTML',
@@ -580,10 +545,7 @@ function go_astroid() {
       this.updated.blink.isActive = !this.updated.blink.isActive;
     };
 
-    addStylesheet(
-      '.ASTEROIDSBLINK .ASTEROIDSYEAHENEMY',
-      'outline: 2px dotted red;',
-    );
+    addStylesheet('.ASTEROIDSBLINK .ASTEROIDSYEAHENEMY', 'outline: 2px dotted red;');
 
     this.pos = new Vector(100, 100);
     this.lastPos = false;
@@ -610,8 +572,7 @@ function go_astroid() {
 
     // things to shoot is everything textual and an element of type not specified in types AND not a navigation element (see further down)
     function updateEnemyIndex() {
-      for (var i = 0, enemy; (enemy = that.enemies[i]); i++)
-        removeClass(enemy, 'ASTEROIDSYEAHENEMY');
+      for (var i = 0, enemy; (enemy = that.enemies[i]); i++) removeClass(enemy, 'ASTEROIDSYEAHENEMY');
 
       const all = document.body.getElementsByTagName('*');
       that.enemies = [];
@@ -779,10 +740,7 @@ function go_astroid() {
       for (let i = 0; i < amount; i++) {
         that.particles.push({
           // random direction
-          dir: new Vector(
-            Math.random() * 20 - 10,
-            Math.random() * 20 - 10,
-          ).normalize(),
+          dir: new Vector(Math.random() * 20 - 10, Math.random() * 20 - 10).normalize(),
           pos: startPos.cp(),
           cameAlive: time,
         });
@@ -794,21 +752,13 @@ function go_astroid() {
     }
 
     function hasOnlyTextualChildren(element) {
-      if (
-        element.offsetLeft < -100 &&
-        element.offsetWidth > 0 &&
-        element.offsetHeight > 0
-      )
-        return false;
+      if (element.offsetLeft < -100 && element.offsetWidth > 0 && element.offsetHeight > 0) return false;
       if (indexOf(hiddenTypes, element.tagName) != -1) return true;
 
       if (element.offsetWidth == 0 && element.offsetHeight == 0) return false;
       for (let i = 0; i < element.childNodes.length; i++) {
         // <br /> doesn't count... and empty elements
-        if (
-          indexOf(hiddenTypes, element.childNodes[i].tagName) == -1 &&
-          element.childNodes[i].childNodes.length != 0
-        )
+        if (indexOf(hiddenTypes, element.childNodes[i].tagName) == -1 && element.childNodes[i].childNodes.length != 0)
           return false;
       }
       return true;
@@ -817,11 +767,7 @@ function go_astroid() {
     function indexOf(arr, item, from) {
       if (arr.indexOf) return arr.indexOf(item, from);
       const len = arr.length;
-      for (
-        let i = from < 0 ? Math.max(0, len + from) : from || 0;
-        i < len;
-        i++
-      ) {
+      for (let i = from < 0 ? Math.max(0, len + from) : from || 0; i < len; i++) {
         if (arr[i] === item) return i;
       }
       return -1;
@@ -830,17 +776,12 @@ function go_astroid() {
     // taken from MooTools Core
     function addClass(element, className) {
       if (element.className.indexOf(className) == -1)
-        element.className = (element.className + ' ' + className)
-          .replace(/\s+/g, ' ')
-          .replace(/^\s+|\s+$/g, '');
+        element.className = (element.className + ' ' + className).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '');
     }
 
     // taken from MooTools Core
     function removeClass(element, className) {
-      element.className = element.className.replace(
-        new RegExp('(^|\\s)' + className + '(?:\\s|$)'),
-        '$1',
-      );
+      element.className = element.className.replace(new RegExp('(^|\\s)' + className + '(?:\\s|$)'), '$1');
     }
 
     function addStylesheet(selector, rules) {
@@ -1042,8 +983,7 @@ function go_astroid() {
 
       this.scoreTitle.style.minWidth = '100px';
       this.scoreTitle.style.textAlign = 'center';
-      this.scoreTitle.innerHTML =
-        'Score <br /><small>Press "esc" to quit</small>';
+      this.scoreTitle.innerHTML = 'Score <br /><small>Press "esc" to quit</small>';
       this.navigation.appendChild(this.scoreTitle);
     } else {
       this.navigation = document.getElementById('ASTEROIDS-NAVIGATION');
@@ -1052,10 +992,7 @@ function go_astroid() {
 
     // Because IE quirks does not understand position: fixed we set to absolute and just reposition it everything frame
     if (isIEQuirks) {
-      this.gameContainer.style.position =
-        this.canvas.style.position =
-        this.navigation.style.position =
-          'absolute';
+      this.gameContainer.style.position = this.canvas.style.position = this.navigation.style.position = 'absolute';
     }
 
     setScore();
@@ -1190,8 +1127,7 @@ function go_astroid() {
     this.ctx.tracePoly = function (verts) {
       this.beginPath();
       this.moveTo(verts[0][0], verts[0][1]);
-      for (let i = 1; i < verts.length; i++)
-        this.lineTo(verts[i][0], verts[i][1]);
+      for (let i = 1; i < verts.length; i++) this.lineTo(verts[i][0], verts[i][1]);
       this.closePath();
     };
 
@@ -1226,14 +1162,7 @@ function go_astroid() {
     this.ctx.drawBullets = function (bullets) {
       for (let i = 0; i < bullets.length; i++) {
         this.beginPath();
-        this.arc(
-          bullets[i].pos.x,
-          bullets[i].pos.y,
-          bulletRadius,
-          0,
-          PI_SQ,
-          true,
-        );
+        this.arc(bullets[i].pos.x, bullets[i].pos.y, bulletRadius, 0, PI_SQ, true);
         this.closePath();
         this.fill();
       }
@@ -1311,10 +1240,8 @@ function go_astroid() {
         this.updated.flame = nowTime;
       }
 
-      this.scrollPos.x =
-        window.pageXOffset || document.documentElement.scrollLeft;
-      this.scrollPos.y =
-        window.pageYOffset || document.documentElement.scrollTop;
+      this.scrollPos.x = window.pageXOffset || document.documentElement.scrollLeft;
+      this.scrollPos.y = window.pageYOffset || document.documentElement.scrollTop;
 
       // update player
       // move forward
@@ -1340,10 +1267,7 @@ function go_astroid() {
       }
 
       // fire
-      if (
-        this.keysPressed[code(' ')] &&
-        nowTime - this.firedAt > timeBetweenFire
-      ) {
+      if (this.keysPressed[code(' ')] && nowTime - this.firedAt > timeBetweenFire) {
         this.bullets.unshift({
           dir: this.dir.cp(),
           pos: this.pos.cp(),
@@ -1425,10 +1349,7 @@ function go_astroid() {
         boundsCheck(this.bullets[i].pos);
 
         // check collisions
-        const murdered = getElementFromPoint(
-          this.bullets[i].pos.x,
-          this.bullets[i].pos.y,
-        );
+        const murdered = getElementFromPoint(this.bullets[i].pos.x, this.bullets[i].pos.y);
         if (
           murdered &&
           murdered.tagName &&
@@ -1461,9 +1382,7 @@ function go_astroid() {
 
       // update particles position
       for (var i = this.particles.length - 1; i >= 0; i--) {
-        this.particles[i].pos.add(
-          this.particles[i].dir.mulNew(particleSpeed * tDelta * Math.random()),
-        );
+        this.particles[i].pos.add(this.particles[i].dir.mulNew(particleSpeed * tDelta * Math.random()));
 
         if (nowTime - this.particles[i].cameAlive > 1000) {
           this.particles.splice(i, 1);
@@ -1478,18 +1397,12 @@ function go_astroid() {
 
       // Reposition the canvas area for IE quirks because it does not understand position: fixed
       if (isIEQuirks) {
-        this.gameContainer.style.left = this.canvas.style.left =
-          document.documentElement.scrollLeft + 'px';
-        this.gameContainer.style.top = this.canvas.style.top =
-          document.documentElement.scrollTop + 'px';
+        this.gameContainer.style.left = this.canvas.style.left = document.documentElement.scrollLeft + 'px';
+        this.gameContainer.style.top = this.canvas.style.top = document.documentElement.scrollTop + 'px';
 
         this.navigation.style.right = '10px';
         this.navigation.style.top =
-          document.documentElement.scrollTop +
-          document.body.clientHeight -
-          this.navigation.clientHeight -
-          10 +
-          'px';
+          document.documentElement.scrollTop + document.body.clientHeight - this.navigation.clientHeight - 10 + 'px';
       }
 
       // clear
@@ -1564,12 +1477,10 @@ function go_astroid() {
     script.onreadystatechange = function () {
       if (script.readyState == 'loaded' || script.readyState == 'complete') {
         if (typeof G_vmlCanvasManager != 'undefined')
-          window.ASTEROIDSPLAYERS[window.ASTEROIDSPLAYERS.length] =
-            new Asteroids();
+          window.ASTEROIDSPLAYERS[window.ASTEROIDSPLAYERS.length] = new Asteroids();
       }
     };
     script.src = 'excanvas.js';
     document.getElementsByTagName('head')[0].appendChild(script);
-  } else
-    window.ASTEROIDSPLAYERS[window.ASTEROIDSPLAYERS.length] = new Asteroids();
+  } else window.ASTEROIDSPLAYERS[window.ASTEROIDSPLAYERS.length] = new Asteroids();
 }

@@ -1,13 +1,7 @@
 <template>
-  <div
-    id="dashboard"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="dashboard" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="dashboard"
-        :text="$t('dashboard')"
-      />
+      <AdminBreadcrumb route-name="dashboard" :text="$t('dashboard')" />
     </AdminBreadcrumbContainer>
 
     <div class="mx-auto max-w-screen-lg text-gray-900 clear-both">
@@ -19,14 +13,10 @@
             </div>
             <div class="rounded bg-white p-4 dark:bg-slate-800 dark:text-gray-300">
               <h1 class="mt-4 mb-4 text-center text-2xl">
-                {{ greeting() }},
-                {{ user && user.name ? user.name : 'Registered User' }}!
+                {{ greeting() }}, {{ user && user.name ? user.name : 'Registered User' }}!
               </h1>
-              <div
-                v-if="user && user.roles"
-                class="mb-6 text-center"
-              >
-                <hr class="mx-auto mb-3 w-10">
+              <div v-if="user && user.roles" class="mb-6 text-center">
+                <hr class="mx-auto mb-3 w-10" />
                 <h2 class="mb-5">
                   {{ $t('your_roles') }}
                 </h2>
@@ -55,7 +45,7 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 import GHButtons from '@components/plugs/GHButtons.vue';
 import RolesBadges from '@components/roles/RolesBadges.vue';
 import { greeting, providerIcon } from '@services/common';
@@ -67,10 +57,7 @@ export default {
     RolesBadges,
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
   },
   methods: {
     greeting,

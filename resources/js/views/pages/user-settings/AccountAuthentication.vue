@@ -1,32 +1,24 @@
 <template>
   <div>
-    <div
-      v-if="!socialLoginsEnabled"
-      class="p-10 text-center text-gray-600"
-    >
+    <div v-if="!socialLoginsEnabled" class="p-10 text-center text-gray-600">
       <div>
         <PowerIcon class="ml-auto mr-auto mb-4 h-12 w-12" />
       </div>
-      <h2 class="text-lg">
-        No applications are available for integration.
-      </h2>
+      <h2 class="text-lg">No applications are available for integration.</h2>
     </div>
 
     <div v-if="socialLoginsEnabled">
-      <div class="grid grid-cols-1 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-2 lg:grid-cols-3">
+      <div
+        class="grid grid-cols-1 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-2 lg:grid-cols-3"
+      >
         <div
           v-for="(provider, index) in enabledProviders"
           :key="provider + '_' + index"
           class="mb-1 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-900 dark:bg-gray-900"
         >
           <div class="flex flex-col items-center pt-4 pb-4 pl-2 pr-2">
-            <span
-              class="fa-4x mb-2"
-              :class="providerIcon(provider.provider)"
-            />
-            <h5
-              class="mb-0 text-lg font-extrabold capitalize text-gray-900 dark:text-white"
-            >
+            <span class="fa-4x mb-2" :class="providerIcon(provider.provider)" />
+            <h5 class="mb-0 text-lg font-extrabold capitalize text-gray-900 dark:text-white">
               {{ provider.provider }}
             </h5>
             <div
@@ -34,12 +26,10 @@
               class="mb-3 text-gray-600 dark:text-gray-400"
               style="line-height: 1.2; font-size: 0.6em"
             >
-              <span
-                class="font-bold uppercase text-gray-700 dark:text-gray-200"
-              >
+              <span class="font-bold uppercase text-gray-700 dark:text-gray-200">
                 <span class="far fa-clock" /> First Used:
               </span>
-              <br>
+              <br />
               {{ parseDisplayDate(provider.created_at) }}
             </div>
 
@@ -48,22 +38,16 @@
               class="mb-0 text-gray-600 dark:text-gray-400"
               style="line-height: 1.2; font-size: 0.6em"
             >
-              <span
-                class="font-bold uppercase text-gray-700 dark:text-gray-200"
-              >
+              <span class="font-bold uppercase text-gray-700 dark:text-gray-200">
                 <span class="far fa-clock" /> Last Used:
               </span>
-              <br>
+              <br />
               {{ parseDisplayDate(provider.updated_at) }}
             </div>
 
             <div class="mt-4 flex space-x-3 md:mt-3">
               <AppButton
-                v-tippy="
-                  'Disconnect ' +
-                    capitalizeFirstLetter(provider.provider) +
-                    ' from your account.'
-                "
+                v-tippy="'Disconnect ' + capitalizeFirstLetter(provider.provider) + ' from your account.'"
                 danger
                 text="Revoke"
                 icon="fa-solid fa-xmark fa-fw"
@@ -79,22 +63,13 @@
           class="mb-1 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-900 dark:bg-gray-900"
         >
           <div class="flex flex-col items-center pt-4 pb-4 pl-2 pr-2">
-            <span
-              class="fa-4x mb-2"
-              :class="providerIcon(provider)"
-            />
-            <h5
-              class="mb-2 text-lg font-extrabold capitalize text-gray-900 dark:text-white"
-            >
+            <span class="fa-4x mb-2" :class="providerIcon(provider)" />
+            <h5 class="mb-2 text-lg font-extrabold capitalize text-gray-900 dark:text-white">
               {{ provider }}
             </h5>
             <div class="mt-4 mb-5 flex space-x-3 md:mt-5">
               <AppButton
-                v-tippy="
-                  'Connect ' +
-                    capitalizeFirstLetter(provider) +
-                    ' to your account.'
-                "
+                v-tippy="'Connect ' + capitalizeFirstLetter(provider) + ' to your account.'"
                 :disabled="loading"
                 accent
                 text="Connect"
@@ -111,22 +86,15 @@
 </template>
 
 <script>
-
-import { watch, ref, watchEffect } from 'vue'
+import { watch, ref, watchEffect } from 'vue';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import useAuth from '@composables/auth';
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { track } from '@services/analytics';
-import {
-  parseDisplayDate,
-  capitalizeFirstLetter,
-  providerIcon,
-} from '@services/common';
-import {
-  PowerIcon,
-} from '@heroicons/vue/24/solid';
+import { parseDisplayDate, capitalizeFirstLetter, providerIcon } from '@services/common';
+import { PowerIcon } from '@heroicons/vue/24/solid';
 
 export default {
   name: 'AccountAuthentication',
@@ -141,14 +109,8 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuth, [
-      'processing',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-      'socials',
-    ]),
+    ...mapState(useAuth, ['processing']),
+    ...mapState(useAuthStore, ['user', 'authenticated', 'socials']),
     socialLoginsEnabled() {
       if (Object.values(this.socials).find((v) => v == '1')) {
         return true;
@@ -190,19 +152,8 @@ export default {
     window.removeEventListener('message', this.onMessage);
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-      'fetchOauthUrl',
-      'getUser',
-      'getUserByToken',
-      'revokeProvider',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-      'success',
-      'error',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan', 'fetchOauthUrl', 'getUser', 'getUserByToken', 'revokeProvider']),
+    ...mapActions(useToastStore, ['popToast', 'success', 'error']),
     clickButton() {
       this.$emit('buttonClicked');
     },
@@ -263,11 +214,7 @@ export default {
         });
     },
     async triggerConnect(provider) {
-      this.track(
-        `Social Login Provider Clicked: ${provider}`,
-        'clicked',
-        'user-account',
-      );
+      this.track(`Social Login Provider Clicked: ${provider}`, 'clicked', 'user-account');
       this.loading = true;
       try {
         await axios.get('/sanctum/csrf-cookie').then((response) => {});
@@ -282,11 +229,7 @@ export default {
         );
         this.window = this.openWindow(url, this.authWindowTitle);
       } catch (e) {
-        this.track(
-          `Social Provider Failed to Authorize: ${provider}`,
-          'error',
-          'auth-error',
-        );
+        this.track(`Social Provider Failed to Authorize: ${provider}`, 'error', 'auth-error');
         self.error('Failed authorize provider.');
         this.window.close();
         this.loading = false;
@@ -318,16 +261,11 @@ export default {
         height: 720,
         ...options,
       };
-      const dualScreenLeft =
-        window.screenLeft !== undefined
-          ? window.screenLeft
-          : window.screen.left;
-      const dualScreenTop =
-        window.screenTop !== undefined ? window.screenTop : window.screen.top;
+      const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left;
+      const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top;
       const width = window.innerWidth || document.documentElement.clientWidth;
       window.screen.width;
-      const height =
-        window.innerHeight || document.documentElement.clientHeight;
+      const height = window.innerHeight || document.documentElement.clientHeight;
       window.screen.height;
 
       options.left = width / 2 - options.width / 2 + dualScreenLeft;

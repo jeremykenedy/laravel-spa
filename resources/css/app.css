@@ -16,14 +16,14 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 .quicksand-font {
-  font-family: "Quicksand", serif;
+  font-family: 'Quicksand', serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
 .nunito-quicksand-font {
-  font-family: "Nunito", serif;
+  font-family: 'Nunito', serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -31,7 +31,7 @@
 
 .title,
 .leckerli-one-regular {
-  font-family: "Leckerli One", serif;
+  font-family: 'Leckerli One', serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -56,27 +56,38 @@
 }
 
 .clearfix::after {
-   content: " "; /* Older browser do not support empty content */
-   visibility: hidden;
-   display: block;
-   height: 0;
-   clear: both;
+  content: ' '; /* Older browser do not support empty content */
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
 }
 
 html,
 body {
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
   line-height: 1.5;
   margin: 0;
   background-color: #fff;
 }
 
 html.dark,
-.dark body  {
+.dark body {
   @apply bg-gray-800;
 }
 
@@ -291,7 +302,9 @@ video {
   right: 0;
 }
 .shadow {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 .text-center {
   text-align: center;
@@ -466,33 +479,20 @@ video {
 .dark .swal2-success-fix,
 .dark .swal2-success-circular-line-left,
 .dark .swal2-success-circular-line-right {
-/*  background-color: rgb(15, 23, 42) !important;*/
-background-color: transparent !important;
+  /*  background-color: rgb(15, 23, 42) !important;*/
+  background-color: transparent !important;
 }
-
 
 .swal2-icon.swal2-success::before,
 .swal2-success.animate::after,
-.swal2-icon.swal2-success .fix{
-   background-color: rgb(22 22 22) !important;
+.swal2-icon.swal2-success .fix {
+  background-color: rgb(22 22 22) !important;
 }
 
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-success
-  [class^='swal2-success-circular-line'][class$='right'],
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-success
-  [class^='swal2-success-circular-line'][class$='left'],
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-error
-  [class^='swal2-error-circular-line'][class$='right'],
-.dark
-  .swal2-popup.swal2-toast
-  .swal2-error
-  [class^='swal2-error-circular-line'][class$='left'] {
+.dark .swal2-popup.swal2-toast .swal2-success [class^='swal2-success-circular-line'][class$='right'],
+.dark .swal2-popup.swal2-toast .swal2-success [class^='swal2-success-circular-line'][class$='left'],
+.dark .swal2-popup.swal2-toast .swal2-error [class^='swal2-error-circular-line'][class$='right'],
+.dark .swal2-popup.swal2-toast .swal2-error [class^='swal2-error-circular-line'][class$='left'] {
   @apply bg-slate-900 !important;
 }
 .dark .swal2-popup.swal2-toast.swal2-icon-success .swal2-title {
@@ -611,9 +611,20 @@ background-color: transparent !important;
 
 .php-info h1 {
   font-size: 2.4em;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Nunito,
-    Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-    Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Nunito,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol,
+    Noto Color Emoji;
   font-weight: 300;
 }
 .php-info h2 {
@@ -715,7 +726,7 @@ background-color: transparent !important;
 }
 
 .vue3-easy-data-table {
-  --easy-table-header-background-color: #f1f1f1;;
+  --easy-table-header-background-color: #f1f1f1;
   --easy-table-body-row-background-color: #f1f1f1;
   --easy-table-body-row-hover-font-color: #f1f1f1;
   --easy-table-footer-background-color: #f1f1f1;
@@ -763,10 +774,9 @@ background-color: transparent !important;
   @apply border-gray-900;
 }
 
-:root[class~="dark"] div:where(.swal2-container) div:where(.swal2-popup){
-  @apply bg-gray-800 text-gray-200
+:root[class~='dark'] div:where(.swal2-container) div:where(.swal2-popup) {
+  @apply bg-gray-800 text-gray-200;
 }
-
 
 .title-filter {
   background: #fff;
@@ -832,7 +842,6 @@ background-color: transparent !important;
   color: #333;
 }
 
-
 .dark .inactive-filter:hover {
   color: #888;
 }
@@ -847,13 +856,13 @@ background-color: transparent !important;
 }
 
 .vs__dropdown-toggle .vs__selected {
-  @apply text-sm px-3
+  @apply text-sm px-3;
 }
 
 .dark .vs__dropdown-toggle .vs__selected {
-  @apply dark:bg-gray-800 dark:text-gray-100
+  @apply dark:bg-gray-800 dark:text-gray-100;
 }
 
 .vs__dropdown-toggle .vs__selected .vs__deselect {
-  @apply bg-gray-100 rounded-full p-1 ml-2
+  @apply bg-gray-100 rounded-full p-1 ml-2;
 }

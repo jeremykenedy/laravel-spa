@@ -1,22 +1,14 @@
 <template>
   <button
     class="button inline-flex items-center justify-center"
-    :class="(loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass
-    "
+    :class="(loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass"
     :disabled="loading || disabled"
     @click="clickButton"
   >
-    <slot
-      v-if="hasTextSlot"
-      name="text"
-    />
+    <slot v-if="hasTextSlot" name="text" />
     <span v-else>
       {{ text }}
-      <span
-        v-if="icon"
-        class="fa-fw"
-        :class="icon"
-      />
+      <span v-if="icon" class="fa-fw" :class="icon" />
       {{ textAfter }}
     </span>
   </button>

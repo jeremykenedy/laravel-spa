@@ -9,33 +9,14 @@
     <h1 class="mb-2 text-4xl mb-5 quicksand-font text-slate-500 dark:text-slate-300">
       {{ appName }}
     </h1>
-    <p class="mb-2 text-2xl text-slate-500 dark:text-slate-300">
-      Laravel / Vite / Vue3 / TailwindCSS
-    </p>
-    <div
-      v-if="enableGhButtons"
-      class="mb-3 p-5"
-    >
-      <GHButtons
-        show-star
-        show-fork
-        show-watch
-        show-sponsor
-        show-download
-        show-count
-        show-tips
-      />
+    <p class="mb-2 text-2xl text-slate-500 dark:text-slate-300">Laravel / Vite / Vue3 / TailwindCSS</p>
+    <div v-if="enableGhButtons" class="mb-3 p-5">
+      <GHButtons show-star show-fork show-watch show-sponsor show-download show-count show-tips />
     </div>
-    <div
-      v-if="enableVultrReferral"
-      class="mb-3"
-    >
+    <div v-if="enableVultrReferral" class="mb-3">
       <VultrReferral />
     </div>
-    <div
-      v-if="enableBmcButtons"
-      class="mb-3 pb-3"
-    >
+    <div v-if="enableBmcButtons" class="mb-3 pb-3">
       <BmcButtons />
     </div>
   </div>
@@ -43,7 +24,7 @@
 
 <script>
 import { mapStores, mapState } from 'pinia';
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth';
 import { BanknotesIcon } from '@heroicons/vue/24/outline';
 import GHButtons from '@components/plugs/GHButtons.vue';
 import BmcButtons from '@components/plugs/BmcButtons.vue';

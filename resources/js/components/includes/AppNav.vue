@@ -5,15 +5,9 @@
         class="flex items-center justify-between border-b-2 border-gray-100 py-6 dark:border-slate-700 md:justify-start md:space-x-10"
       >
         <div class="flex justify-start lg:w-0 lg:flex-1">
-          <router-link
-            :to="{ name: 'home' }"
-            @click="closeDrop"
-          >
+          <router-link :to="{ name: 'home' }" @click="closeDrop">
             <span class="sr-only">{{ appName }}</span>
-            <svg
-              viewBox="0 0 50 31"
-              class="h-6 w-auto text-indigo-500 dark:text-indigo-300"
-            >
+            <svg viewBox="0 0 50 31" class="h-6 w-auto text-indigo-500 dark:text-indigo-300">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -30,87 +24,54 @@
             @click="openDrop"
           >
             <span class="sr-only">Open menu</span>
-            <Bars3Icon
-              class="h-6 w-6"
-              aria-hidden="true"
-            />
+            <Bars3Icon class="h-6 w-6" aria-hidden="true" />
           </PopoverButton>
         </div>
-        <PopoverGroup
-          as="nav"
-          class="hidden space-x-10 md:flex"
-        >
+        <PopoverGroup as="nav" class="hidden space-x-10 md:flex">
           <!-- TODO: ADMIN/KIOSK ROUTER LINK HERE -->
 
-          <NavLink
-            v-if="authenticated && user"
-            route-name="dashboard"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink v-if="authenticated && user" route-name="dashboard" @nav-clicked="closeDrop">
             <template #iconBefore>
               <BuildingLibraryIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            v-if="authenticated && user"
-            route-name="home"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink v-if="authenticated && user" route-name="home" @nav-clicked="closeDrop">
             <template #iconBefore>
               <HomeIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="about"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="about" @nav-clicked="closeDrop">
             <template #iconBefore>
               <InformationCircleIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="terms"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="terms" @nav-clicked="closeDrop">
             <template #iconBefore>
               <DocumentTextIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="pricing"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="pricing" @nav-clicked="closeDrop">
             <template #iconBefore>
               <BuildingStorefrontIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="support"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="support" @nav-clicked="closeDrop">
             <template #iconBefore>
               <ChatBubbleLeftEllipsisIcon class="h-6 w-6" />
             </template>
           </NavLink>
         </PopoverGroup>
 
-        <div
-          v-if="authenticated"
-          class="hidden items-center justify-end md:flex md:flex-1 lg:w-0"
-        >
+        <div v-if="authenticated" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <LeaveImpersonation classes="float-right mr-4" />
           <ToggleDarkMode v-if="authenticated && user" />
 
-          <div
-            v-if="authenticated && user"
-            ref="dropMenu"
-            class="relative"
-          >
+          <div v-if="authenticated && user" ref="dropMenu" class="relative">
             <div
               class="cursor-pointer items-center p-3 text-base font-medium tracking-wider text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
               @click="drop = !drop"
@@ -124,11 +85,8 @@
                 :src="user.avatar"
                 :alt="user.name"
                 class="float-right ml-2 mt-0 h-6 w-6 rounded-full"
-              >
-              <UserCircleIcon
-                v-else
-                class="float-right ml-2 mt-0 h-6 w-6"
               />
+              <UserCircleIcon v-else class="float-right ml-2 mt-0 h-6 w-6" />
             </div>
 
             <div
@@ -142,7 +100,7 @@
 
               <div
                 class="flex cursor-pointer items-center rounded-b hover:rounded-b p-4 pr-10 pl-8 text-gray-700 hover:bg-slate-600 hover:text-white"
-                @click.prevent="logout(), closeDrop()"
+                @click.prevent="(logout(), closeDrop())"
               >
                 <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6" />
                 {{ $t('logout') }}
@@ -151,10 +109,7 @@
           </div>
         </div>
 
-        <div
-          v-if="!authenticated"
-          class="hidden items-center justify-end md:flex md:flex-1 lg:w-0"
-        >
+        <div v-if="!authenticated" class="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           <ToggleDarkMode />
 
           <router-link
@@ -172,17 +127,8 @@
               {{ $t('signin') }}
             </span>
           </router-link>
-          <router-link
-            v-slot="{ isActive }"
-            :to="{ name: 'auth.register' }"
-            @click="closeDrop"
-          >
-            <AppButton
-              primary
-              :text="$t('signup')"
-              class="ml-8"
-              :class="[isActive && 'opacity-60']"
-            />
+          <router-link v-slot="{ isActive }" :to="{ name: 'auth.register' }" @click="closeDrop">
+            <AppButton primary :text="$t('signup')" class="ml-8" :class="[isActive && 'opacity-60']" />
           </router-link>
         </div>
 
@@ -209,14 +155,8 @@
                     <!-- <img class="h-8 w-auto" :src="logo" :alt="appName" /> -->
                     <span class="sr-only">{{ appName }}</span>
 
-                    <router-link
-                      :to="{ name: 'home' }"
-                      @click="close"
-                    >
-                      <svg
-                        viewBox="0 0 50 31"
-                        class="h-6 w-auto text-indigo-500"
-                      >
+                    <router-link :to="{ name: 'home' }" @click="close">
+                      <svg viewBox="0 0 50 31" class="h-6 w-auto text-indigo-500">
                         <path
                           fill-rule="evenodd"
                           clip-rule="evenodd"
@@ -231,10 +171,7 @@
                       class="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 dark:bg-slate-800"
                     >
                       <span class="sr-only">Close menu</span>
-                      <XMarkIcon
-                        class="h-6 w-6"
-                        aria-hidden="true"
-                      />
+                      <XMarkIcon class="h-6 w-6" aria-hidden="true" />
                     </PopoverButton>
                   </div>
                 </div>
@@ -247,11 +184,8 @@
                       :src="user.avatar"
                       :alt="user.name"
                       class="float-left mt-0 mr-2 h-6 w-6 rounded-full"
-                    >
-                    <UserCircleIcon
-                      v-else
-                      class="float-left mt-0 h-6 w-6 mr-2 text-gray-500"
                     />
+                    <UserCircleIcon v-else class="float-left mt-0 h-6 w-6 mr-2 text-gray-500" />
                     <div
                       class="mb-6 text-left ml-2 text-base font-medium cursor-default text-gray-500 dark:text-gray-300"
                     >
@@ -261,23 +195,16 @@
 
                   <!-- TODO: ADMIN/KIOSK LINK HERE -->
 
-                  <div
-                    v-if="authenticated"
-                    class="mb-6 text-left"
-                  >
+                  <div v-if="authenticated" class="mb-6 text-left">
                     <router-link
                       v-slot="{ isActive }"
                       :to="{ name: 'dashboard' }"
                       class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
                       @click="close"
                     >
-                      <span
-                        :class="[
-                          isActive &&
-                            'text-gray-800 hover:text-gray-900 dark:text-gray-600',
-                        ]"
-                      >
-                        <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" /> Dashboard
+                      <span :class="[isActive && 'text-gray-800 hover:text-gray-900 dark:text-gray-600']">
+                        <BuildingLibraryIcon class="float-left mr-2 h-6 w-6" />
+                        Dashboard
                       </span>
                     </router-link>
                   </div>
@@ -289,12 +216,7 @@
                       class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
                       @click="close"
                     >
-                      <span
-                        :class="[
-                          isActive &&
-                            'text-gray-800 hover:text-gray-900 dark:text-gray-600',
-                        ]"
-                      >
+                      <span :class="[isActive && 'text-gray-800 hover:text-gray-900 dark:text-gray-600']">
                         <InformationCircleIcon class="float-left mr-2 h-6 w-6" />
                         {{ $t('about') }}
                       </span>
@@ -308,12 +230,7 @@
                       class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
                       @click="close"
                     >
-                      <span
-                        :class="[
-                          isActive &&
-                            'text-gray-800 hover:text-gray-900 dark:text-gray-600',
-                        ]"
-                      >
+                      <span :class="[isActive && 'text-gray-800 hover:text-gray-900 dark:text-gray-600']">
                         <DocumentTextIcon class="float-left mr-2 h-6 w-6" />
                         {{ $t('terms') }}
                       </span>
@@ -327,12 +244,7 @@
                       class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
                       @click="close"
                     >
-                      <span
-                        :class="[
-                          isActive &&
-                            'text-gray-800 hover:text-gray-900 dark:text-gray-600',
-                        ]"
-                      >
+                      <span :class="[isActive && 'text-gray-800 hover:text-gray-900 dark:text-gray-600']">
                         <BuildingStorefrontIcon class="float-left mr-2 h-6 w-6" />
                         {{ $t('pricing') }}
                       </span>
@@ -346,12 +258,7 @@
                       class="text-base font-medium text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
                       @click="close"
                     >
-                      <span
-                        :class="[
-                          isActive &&
-                            'text-gray-800 hover:text-gray-900 dark:text-gray-600',
-                        ]"
-                      >
+                      <span :class="[isActive && 'text-gray-800 hover:text-gray-900 dark:text-gray-600']">
                         <ChatBubbleLeftEllipsisIcon class="float-left mr-2 h-6 w-6" />
                         {{ $t('support') }}
                       </span>
@@ -362,18 +269,16 @@
                     <ToggleDarkMode class="float-left mr-0" />
                     <div
                       class="ml-3 text-base font-medium float-left text-gray-500 hover:text-gray-900 dark:hover:text-gray-200"
-                      style="margin-top: 3px;"
+                      style="margin-top: 3px"
                     >
-                      {{ darkMode ? $t('disable') : $t('enable') }} {{ $t('dark_mode') }}
+                      {{ darkMode ? $t('disable') : $t('enable') }}
+                      {{ $t('dark_mode') }}
                     </div>
                   </div>
                 </div>
 
                 <div v-if="!authenticated">
-                  <router-link
-                    v-slot="{ isActive }"
-                    :to="{ name: 'auth.register' }"
-                  >
+                  <router-link v-slot="{ isActive }" :to="{ name: 'auth.register' }">
                     <AppButton
                       primary
                       :text="$t('signup')"
@@ -405,18 +310,14 @@
                 </div>
 
                 <div v-if="authenticated && user">
-                  <LeaveImpersonation
-                    full
-                    classes="mb-5"
-                    @clicked="closeDrop()"
-                  />
+                  <LeaveImpersonation full classes="mb-5" @clicked="closeDrop()" />
 
                   <AppButton
                     primary
                     text="Logout"
                     type="button"
                     class="flex w-full items-center justify-center px-4 py-2"
-                    @click.prevent="logout(), closeDrop()"
+                    @click.prevent="(logout(), closeDrop())"
                   >
                     <template #text>
                       <ArrowRightOnRectangleIcon class="mr-2 h-6 w-6" />
@@ -445,17 +346,12 @@
 import { ref } from 'vue';
 import { parseDisplayDate } from '@services/common';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import useAuth from '@composables/auth';
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import NavLink from '@components/includes/NavLink.vue';
 import LeaveImpersonation from '@components/common/LeaveImpersonation.vue';
-import {
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from '@headlessui/vue';
+import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue';
 import {
   Bars3Icon,
   HomeIcon,
@@ -470,7 +366,7 @@ import {
 } from '@heroicons/vue/24/outline';
 
 export default {
-  name: "AppNav",
+  name: 'AppNav',
   components: {
     HomeIcon,
     BuildingLibraryIcon,
@@ -498,17 +394,14 @@ export default {
         this.theme = 'light';
       }
     } else {
-      this.theme = localStorage.getItem("data-theme");
+      this.theme = localStorage.getItem('data-theme');
     }
     window.addEventListener('theme-localstorage-changed', (event) => {
       this.theme = event.detail.storage;
     });
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     ...mapState(useAuth, ['processing']),
     currentRouteName() {
       return this.$route.name;
@@ -520,7 +413,7 @@ export default {
       if (this.theme == 'dark') {
         return true;
       }
-      return false
+      return false;
     },
   },
   data() {
@@ -532,9 +425,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useAuth, [
-      'logout',
-    ]),
+    ...mapActions(useAuth, ['logout']),
     parseDisplayDate,
     closeDrop() {
       this.drop = false;

@@ -56,7 +56,7 @@ export default {
       this.$emit('changePage', page);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

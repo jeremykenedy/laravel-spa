@@ -1,33 +1,18 @@
 <template>
-  <div
-    id="password"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="password" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="dashboard"
-        :text="$t('dashboard')"
-      />
+      <AdminBreadcrumb route-name="dashboard" :text="$t('dashboard')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="settings.index"
-        :text="$t('settings')"
-      />
+      <AdminBreadcrumb route-name="settings.index" :text="$t('settings')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="settings.password"
-        :text="$t('security')"
-      />
+      <AdminBreadcrumb route-name="settings.password" :text="$t('security')" />
     </AdminBreadcrumbContainer>
 
     <div class="clear-both">
       <div class="text-gray-900 dark:text-gray-100 md:flex md:flex-row md:items-start md:justify-between">
         <SettingsNav />
         <div class="none w-full rounded-md border dark:border-gray-500 p-4">
-          <form
-            class="mt-2"
-            @submit.prevent="submitForm"
-          >
+          <form class="mt-2" @submit.prevent="submitForm">
             <AppPasswordInput
               v-model="form.password"
               :label="$t('password')"
@@ -66,11 +51,11 @@
 
 <script>
 import { mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 import SettingsNav from '@pages/user-settings/SettingsNav.vue';
 import AppPasswordInput from '@components/form/AppPasswordInput.vue';
-import useProfile from "@/composables/profile";
-import { useToastStore } from "@store/toast";
+import useProfile from '@/composables/profile';
+import { useToastStore } from '@store/toast';
 
 export default {
   name: 'PasswordPage',
@@ -92,23 +77,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
   },
   methods: {
-    ...mapActions(useProfile, [
-      'updatePassword',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-      'success',
-      'warning',
-      'error',
-    ]),
+    ...mapActions(useProfile, ['updatePassword']),
+    ...mapActions(useToastStore, ['popToast', 'success', 'warning', 'error']),
     async submitForm() {
-      if(this.validateForm()) {
+      if (this.validateForm()) {
         this.loading = true;
         try {
           await this.updatePassword(this.form).then((response) => {
@@ -136,20 +111,20 @@ export default {
       if (this.form.password.length < 8) {
         this.errors.password = 'Password must be at least 8 characters.';
         pass = false;
-      } else if(this.form.password.length > 200) {
+      } else if (this.form.password.length > 200) {
         this.errors.password = 'Password must be less than 200 characters.';
         pass = false;
-      // } else if(!/[A-Z]/.test(this.form.password)) {
-      //   this.errors.password = 'Password must contain at least one uppercase letter.';
-      //   pass = false;
-      } else if(this.form.password.length > 200) {
+        // } else if(!/[A-Z]/.test(this.form.password)) {
+        //   this.errors.password = 'Password must contain at least one uppercase letter.';
+        //   pass = false;
+      } else if (this.form.password.length > 200) {
         this.errors.password = 'Password must be less than 200 characters.';
         pass = false;
-      } else if(!(typeof this.form.password == 'string') || (this.form.password instanceof String)) {
+      } else if (!(typeof this.form.password == 'string') || this.form.password instanceof String) {
         this.errors.password = 'Password is invalid.';
         pass = false;
       }
-      if(this.form.password != this.form.password_confirmation) {
+      if (this.form.password != this.form.password_confirmation) {
         this.errors.password_confirmation = 'Passwords do not match.';
         pass = false;
       }
@@ -157,5 +132,4 @@ export default {
     },
   },
 };
-
 </script>

@@ -22,22 +22,21 @@
           :placeholder="placeholder"
           :disabled="disabled"
           class="col-start-1 row-start-1 block w-full px-4 pr-10 text-base rounded border bg-white p-2 focus:outline-none dark:bg-slate-900 sm:mt-0"
-          :class="inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')"
+          :class="
+            inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')
+          "
           :autocomplete="autocomplete"
           :autofocus="autofocus"
           v-bind="$attrs"
           @input="updateValue"
-        >
+        />
         <i
-          class="fa fa-fw cursor-pointer col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-blue-500 "
+          class="fa fa-fw cursor-pointer col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-blue-500"
           :class="showPassword ? 'fa-eye-slash' : 'fa-eye'"
           @click="toggleShowHide"
         />
       </div>
-      <div
-        v-if="error"
-        class="text-red-500 -mt-0.1 text-xs absolute"
-      >
+      <div v-if="error" class="text-red-500 -mt-0.1 text-xs absolute">
         {{ error }}
       </div>
       <slot name="message" />

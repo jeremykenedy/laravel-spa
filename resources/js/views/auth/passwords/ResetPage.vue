@@ -17,16 +17,8 @@
               </p>
             </div>
 
-            <router-link
-              v-if="success.value"
-              :to="{ name: 'auth.login' }"
-              class="w-full"
-            >
-              <AppButton
-                primary
-                :text="$t('signin')"
-                class="mt-4 w-full"
-              >
+            <router-link v-if="success.value" :to="{ name: 'auth.login' }" class="w-full">
+              <AppButton primary :text="$t('signin')" class="mt-4 w-full">
                 <template #text>
                   {{ $t('signin') }}
                   <ArrowLeftOnRectangleIcon class="ml-2 h-6 w-6" />
@@ -35,32 +27,16 @@
             </router-link>
 
             <div v-if="!success.value">
-              <form
-                class="mx-auto w-full md:w-10/12 md:p-4"
-                @submit.prevent="submitResetPassword"
-              >
-                <input
-                  id="username"
-                  name="username"
-                  type="hidden"
-                  readonly
-                  disabled
-                >
-                <input
-                  id="email"
-                  v-model="resetForm.email"
-                  type="hidden"
-                  autocomplete="email"
-                  readonly
-                  disabled
-                >
+              <form class="mx-auto w-full md:w-10/12 md:p-4" @submit.prevent="submitResetPassword">
+                <input id="username" name="username" type="hidden" readonly disabled />
+                <input id="email" v-model="resetForm.email" type="hidden" autocomplete="email" readonly disabled />
                 <div class="my-1 w-full py-2 mb-2 sm:flex sm:items-center sm:justify-between">
                   <label
                     for="password"
                     class="w-4/12 dark:text-gray-100"
                     :class="{
                       'text-red-500 dark:text-red-500':
-                        ((validationErrors?.password) || (validationErrors?.password_confirmation)),
+                        validationErrors?.password || validationErrors?.password_confirmation,
                     }"
                   >
                     {{ $t('password') }}
@@ -75,14 +51,11 @@
                       class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none2"
                       :class="{
                         'text-red-500 dark:text-red-500 dark:border-red-500':
-                          ((validationErrors?.password) || (validationErrors?.password_confirmation)),
+                          validationErrors?.password || validationErrors?.password_confirmation,
                       }"
                       :disabled="processing.value"
-                    >
-                    <div
-                      v-if="validationErrors?.password"
-                      class="absolute"
-                    >
+                    />
+                    <div v-if="validationErrors?.password" class="absolute">
                       <div
                         v-for="message in validationErrors?.password"
                         :key="message"
@@ -99,7 +72,7 @@
                     class="w-4/12 dark:text-gray-100"
                     :class="{
                       'text-red-500 dark:text-red-500':
-                        ((validationErrors?.password) || (validationErrors?.password_confirmation)),
+                        validationErrors?.password || validationErrors?.password_confirmation,
                     }"
                   >
                     {{ $t('confirm_password') }}
@@ -114,14 +87,11 @@
                       class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none2"
                       :class="{
                         'text-red-500 dark:text-red-500 dark:border-red-500':
-                          ((validationErrors?.password) || (validationErrors?.password_confirmation)),
+                          validationErrors?.password || validationErrors?.password_confirmation,
                       }"
                       :disabled="processing.value"
-                    >
-                    <div
-                      v-if="validationErrors?.password_confirmation"
-                      class="absolute"
-                    >
+                    />
+                    <div v-if="validationErrors?.password_confirmation" class="absolute">
                       <div
                         v-for="message in validationErrors?.password_confirmation"
                         :key="message"
@@ -133,15 +103,8 @@
                   </div>
                 </div>
 
-                <div
-                  v-if="validationErrors?.email"
-                  class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-start"
-                >
-                  <div
-                    v-for="message in validationErrors?.email"
-                    :key="message"
-                    class="mt-1 text-sm text-red-500"
-                  >
+                <div v-if="validationErrors?.email" class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-start">
+                  <div v-for="message in validationErrors?.email" :key="message" class="mt-1 text-sm text-red-500">
                     {{ message }}
                   </div>
                 </div>
@@ -156,18 +119,9 @@
                       type="submit"
                     >
                       <template #text>
-                        <PaperAirplaneIcon
-                          v-if="!processing.value && !success"
-                          class="mr-2 h-6 w-6"
-                        />
-                        <CheckCircleIcon
-                          v-if="!processing.value && success"
-                          class="mr-2 h-6 w-6"
-                        />
-                        <CircleSvg
-                          v-if="processing.value"
-                          class="mr-2 h-5 w-5"
-                        />
+                        <PaperAirplaneIcon v-if="!processing.value && !success" class="mr-2 h-6 w-6" />
+                        <CheckCircleIcon v-if="!processing.value && success" class="mr-2 h-6 w-6" />
+                        <CircleSvg v-if="processing.value" class="mr-2 h-5 w-5" />
                         {{ $t('reset_password') }}
                       </template>
                     </AppButton>
@@ -184,14 +138,14 @@
 
 <script setup>
 import useAuth from '@composables/auth';
-import { useRoute } from "vue-router";
-import { onMounted } from "vue";
+import { useRoute } from 'vue-router';
+import { onMounted } from 'vue';
 const route = useRoute();
 
 onMounted(() => {
   resetForm.token = route.params.token;
-  resetForm.email = route.query.email
-})
+  resetForm.email = route.query.email;
+});
 
 const { resetForm, validationErrors, processing, submitResetPassword, success } = useAuth();
 </script>
@@ -209,5 +163,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

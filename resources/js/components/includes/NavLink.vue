@@ -10,15 +10,9 @@
           'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
       ]"
     >
-      <slot
-        v-if="hasIconBeforeSlot"
-        name="iconBefore"
-      />
+      <slot v-if="hasIconBeforeSlot" name="iconBefore" />
       <span v-if="text">{{ text }}</span>
-      <slot
-        v-if="hasIconAfterSlot"
-        name="iconAfter"
-      />
+      <slot v-if="hasIconAfterSlot" name="iconAfter" />
     </span>
   </router-link>
 </template>
@@ -58,5 +52,4 @@ export default {
   color: #ffffff !important;
 }
 </style>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

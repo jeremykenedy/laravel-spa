@@ -7,14 +7,8 @@
             {{ $t('reset_your_password') }}
           </div>
           <div class="p-4">
-            <div
-              v-if="success"
-              class="mx-auto text-center py-6 bg-green-500 rounded border-0 text-white relative"
-            >
-              <span
-                class="absolute top-2 right-2 cursor-pointer font-bold"
-                @click="dismissSuccess"
-              >
+            <div v-if="success" class="mx-auto text-center py-6 bg-green-500 rounded border-0 text-white relative">
+              <span class="absolute top-2 right-2 cursor-pointer font-bold" @click="dismissSuccess">
                 <XMarkIcon class="h-5 w-5" />
               </span>
               <CheckCircleIcon class="h-20 w-20 mx-auto" />
@@ -22,17 +16,13 @@
                 {{ $t('send_email_success') }}
               </p>
             </div>
-            <form
-              class="mx-auto w-full md:w-10/12 md:p-4"
-              @submit.prevent="submitForgotPassword"
-            >
+            <form class="mx-auto w-full md:w-10/12 md:p-4" @submit.prevent="submitForgotPassword">
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label
                   for="email"
                   class="w-4/12 dark:text-gray-200"
                   :class="{
-                    'text-red-500':
-                      validationErrors?.email,
+                    'text-red-500': validationErrors?.email,
                   }"
                 >
                   {{ $t('email') }}
@@ -45,22 +35,14 @@
                     name="email"
                     autocomplete="username"
                     :class="{
-                      'border-red-500':
-                        validationErrors?.email,
+                      'border-red-500': validationErrors?.email,
                     }"
                     :disabled="processing.value"
                     class="mt-3 w-full rounded border border-gray-300 bg-white p-2 focus:outline-none"
                     autofocus
-                  >
-                  <div
-                    v-if="validationErrors?.email"
-                    class="absolute"
-                  >
-                    <div
-                      v-for="message in validationErrors?.email"
-                      :key="message"
-                      class="mt-1 text-sm text-red-500"
-                    >
+                  />
+                  <div v-if="validationErrors?.email" class="absolute">
+                    <div v-for="message in validationErrors?.email" :key="message" class="mt-1 text-sm text-red-500">
                       {{ message }}
                     </div>
                   </div>
@@ -76,25 +58,13 @@
                     type="submit"
                   >
                     <template #text>
-                      <PaperAirplaneIcon
-                        v-if="!processing.value && !success"
-                        class="mr-2 h-6 w-6"
-                      />
-                      <CheckCircleIcon
-                        v-if="!processing.value && success"
-                        class="mr-2 h-6 w-6"
-                      />
-                      <CircleSvg
-                        v-if="processing.value"
-                        class="mr-2 h-6 w-6"
-                      />
+                      <PaperAirplaneIcon v-if="!processing.value && !success" class="mr-2 h-6 w-6" />
+                      <CheckCircleIcon v-if="!processing.value && success" class="mr-2 h-6 w-6" />
+                      <CircleSvg v-if="processing.value" class="mr-2 h-6 w-6" />
                       {{ $t('send_email') }}
                     </template>
                   </AppButton>
-                  <router-link
-                    :to="{ name: 'auth.login' }"
-                    class="text-sm font-bold text-blue-500 hover:underline"
-                  >
+                  <router-link :to="{ name: 'auth.login' }" class="text-sm font-bold text-blue-500 hover:underline">
                     <span class="fa fa-reply fa-fw" /> {{ $t('go_back') }}
                   </router-link>
                 </div>
@@ -126,5 +96,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

@@ -7,10 +7,7 @@
     <div class="mb-8 flex h-20 w-full items-center border-b px-4">
       <div class="flex justify-center lg:w-0 lg:flex-1">
         <router-link :to="{ name: 'home' }">
-          <svg
-            viewBox="0 0 50 31"
-            class="h-6 w-auto text-indigo-500 dark:text-indigo-300"
-          >
+          <svg viewBox="0 0 50 31" class="h-6 w-auto text-indigo-500 dark:text-indigo-300">
             <path
               fill-rule="evenodd"
               clip-rule="evenodd"
@@ -60,7 +57,14 @@
       </AdminSidebarLink>
 
       <div
-        v-if="userCan('view.users') || userCan('view.permissions') || userCan('view.roles') || userCan('view.articles') || userCan('view.categories') || userIs('superadmin')"
+        v-if="
+          userCan('view.users') ||
+          userCan('view.permissions') ||
+          userCan('view.roles') ||
+          userCan('view.articles') ||
+          userCan('view.categories') ||
+          userIs('superadmin')
+        "
         class="text-xs/6 font-semibold text-gray-600 dark:text-gray-300 px-1 pt-5"
       >
         {{ $t('admin') }}
@@ -167,7 +171,8 @@
         <template #icon>
           <span
             class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-indigo-400 bg-indigo-500 text-[0.625rem] font-medium text-white mr-3"
-          >H</span>
+            >H</span
+          >
         </template>
       </AdminSidebarLink>
 
@@ -255,9 +260,9 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import useAuth from '@composables/auth'
-import { useAuthStore } from "@store/auth";
-import { useSideBarStore } from "@store/sidebar";
+import useAuth from '@composables/auth';
+import { useAuthStore } from '@store/auth';
+import { useSideBarStore } from '@store/sidebar';
 import AdminSidebarLink from '@components/includes/AdminSidebarLink.vue';
 import {
   UsersIcon,
@@ -290,17 +295,9 @@ export default {
     BuildingOfficeIcon,
   },
   computed: {
-    ...mapState(useAuth, [
-      'processing',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
-    ...mapState(useSideBarStore, [
-      'sideBarOpenGetter',
-      'fullScreenSideBarOpenGetter'
-    ]),
+    ...mapState(useAuth, ['processing']),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
+    ...mapState(useSideBarStore, ['sideBarOpenGetter', 'fullScreenSideBarOpenGetter']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -309,17 +306,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions(useAuth, [
-      'logout',
-    ]),
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-    ]),
-    ...mapActions(useSideBarStore, [
-      'toggleSidebar',
-      'toggleFullScreenSidebar',
-    ]),
+    ...mapActions(useAuth, ['logout']),
+    ...mapActions(useAuthStore, ['userIs', 'userCan']),
+    ...mapActions(useSideBarStore, ['toggleSidebar', 'toggleFullScreenSidebar']),
   },
 };
 </script>

@@ -1,10 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a
-        class="navbar-brand"
-        href="#"
-      >Laravel Vue Stater</a>
+      <a class="navbar-brand" href="#">Laravel Vue Stater</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -16,72 +13,33 @@
       >
         <span class="navbar-toggler-icon" />
       </button>
-      <div
-        id="navbarSupportedContent"
-        class="collapse navbar-collapse"
-      >
+      <div id="navbarSupportedContent" class="collapse navbar-collapse">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'posts.index' }"
-              class="nav-link active"
-              aria-current="page"
-            >
-              Posts
-            </router-link>
+            <router-link :to="{ name: 'posts.index' }" class="nav-link active" aria-current="page"> Posts </router-link>
           </li>
           <li class="nav-item">
-            <router-link
-              :to="{ name: 'posts.create' }"
-              class="nav-link"
-            >
-              Create Post
-            </router-link>
+            <router-link :to="{ name: 'posts.create' }" class="nav-link"> Create Post </router-link>
           </li>
         </ul>
-        <form
-          class="d-flex"
-          role="search"
-        >
-          <input
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          >
-          <button
-            class="btn btn-outline-success"
-            type="submit"
-          >
-            Search
-          </button>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Hi, {{ user.name }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a
-                  class="dropdown-item"
-                  href="#"
-                >Profile</a>
+                <a class="dropdown-item" href="#">Profile</a>
               </li>
               <li>
-                <a
-                  class="dropdown-item"
-                  href="#"
-                >Setting</a>
+                <a class="dropdown-item" href="#">Setting</a>
               </li>
               <li>
-                <hr class="dropdown-divider">
+                <hr class="dropdown-divider" />
               </li>
               <li>
                 <a
@@ -90,7 +48,8 @@
                   :disabled="processing"
                   href="javascript:void(0)"
                   @click="logout"
-                >Logout</a>
+                  >Logout</a
+                >
               </li>
             </ul>
           </li>
@@ -111,10 +70,11 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import useAuth from "@/composables/auth";
+import { computed } from 'vue';
+import useAuth from '@/composables/auth';
 
 const { user, processing, logout } = useAuth();
-const currentPageTitle = computed(() => { return this.$route.meta.title })
-
+const currentPageTitle = computed(() => {
+  return this.$route.meta.title;
+});
 </script>

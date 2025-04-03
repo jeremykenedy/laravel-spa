@@ -10,64 +10,39 @@
         </p>
 
         <article class="blog-post">
-          <div
-            v-for="image in post?.media"
-            :key="image.original_url"
-          >
-            <img
-              :src="image.original_url"
-              alt="image"
-              class="img-fluid"
-            >
+          <div v-for="image in post?.media" :key="image.original_url">
+            <img :src="image.original_url" alt="image" class="img-fluid" />
           </div>
-          <div
-            v-html-safe="post?.content"
-            class="mt-4"
-          />
+          <div v-html-safe="post?.content" class="mt-4" />
         </article>
 
-        <nav
-          class="blog-pagination"
-          aria-label="Pagination"
-        >
-          <a
-            class="btn btn-outline-primary rounded-pill"
-            href="#"
-          >Older</a>
+        <nav class="blog-pagination" aria-label="Pagination">
+          <a class="btn btn-outline-primary rounded-pill" href="#">Older</a>
           <a class="btn btn-outline-secondary rounded-pill disabled">Newer</a>
         </nav>
       </div>
 
       <div class="col-md-4">
-        <div
-          class="position-sticky"
-          style="top: 2rem;"
-        >
+        <div class="position-sticky" style="top: 2rem">
           <div class="p-4 mb-3 bg-light rounded">
-            <h4 class="fst-italic">
-              About
-            </h4>
+            <h4 class="fst-italic">About</h4>
             <p class="mb-0">
-              Customize this section to tell your visitors a little bit about your
-              publication, writers, content, or something else entirely. Totally up to you.
+              Customize this section to tell your visitors a little bit about your publication, writers, content, or
+              something else entirely. Totally up to you.
             </p>
           </div>
 
           <div class="p-4">
-            <h4 class="fst-italic">
-              Categories
-            </h4>
-            <ol
-              v-if="categories?.length > 0"
-              class="list-unstyled"
-            >
-              <li
-                v-for="category in categories"
-                :key="category.id"
-              >
-                <router-link :to="{ name: 'category-posts.index', params: { id: category.id } }">
-                  {{
-                    category.name }}
+            <h4 class="fst-italic">Categories</h4>
+            <ol v-if="categories?.length > 0" class="list-unstyled">
+              <li v-for="category in categories" :key="category.id">
+                <router-link
+                  :to="{
+                    name: 'category-posts.index',
+                    params: { id: category.id },
+                  }"
+                >
+                  {{ category.name }}
                 </router-link>
               </li>
             </ol>
@@ -98,18 +73,18 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
-import { useRoute } from "vue-router";
+import { useRoute } from 'vue-router';
 
 const post = ref();
 const categories = ref();
-const route = useRoute()
+const route = useRoute();
 
 onMounted(() => {
   axios.get('/api/get-post/' + route.params.id).then(({ data }) => {
-    post.value = data
-  })
+    post.value = data;
+  });
   axios.get('/api/category-list').then(({ data }) => {
-    categories.value = data.data
-  })
-})
+    categories.value = data.data;
+  });
+});
 </script>

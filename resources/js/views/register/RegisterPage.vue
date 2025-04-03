@@ -8,18 +8,12 @@
           </div>
           <div class="rounded bg-white p-4 dark:bg-slate-800">
             <!-- <Errors v-if="errors && useInlineMessage" :content="form.errors" type="error" @close="errors = null" /> -->
-            <form
-              class="mx-auto w-full rounded md:w-10/12 md:p-4"
-              @submit.prevent="submitRegister"
-            >
+            <form class="mx-auto w-full rounded md:w-10/12 md:p-4" @submit.prevent="submitRegister">
               <div class="my-1 w-full py-2 sm:flex sm:items-center sm:justify-between">
                 <label
                   for="name"
                   class="w-4/12"
-                  :class="validationErrors?.name
-                    ? 'text-red-500'
-                    : 'text-gray-700 dark:text-gray-200'
-                  "
+                  :class="validationErrors?.name ? 'text-red-500' : 'text-gray-700 dark:text-gray-200'"
                 >
                   {{ $t('name') }}
                 </label>
@@ -33,12 +27,8 @@
                     :class="{ 'border-red-500': validationErrors?.name }"
                     :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-                  >
-                  <div
-                    v-for="message in validationErrors?.name"
-                    :key="message"
-                    class="text-xs text-red-500 absolute"
-                  >
+                  />
+                  <div v-for="message in validationErrors?.name" :key="message" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
                 </div>
@@ -47,10 +37,7 @@
                 <label
                   for="email"
                   class="w-4/12 dark:text-gray-200"
-                  :class="validationErrors?.email
-                    ? 'text-red-500'
-                    : 'text-gray-700 dark:text-gray-200 '
-                  "
+                  :class="validationErrors?.email ? 'text-red-500' : 'text-gray-700 dark:text-gray-200 '"
                 >
                   {{ $t('email') }}
                 </label>
@@ -64,12 +51,8 @@
                     :class="{ 'border-red-500': validationErrors?.email }"
                     :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-                  >
-                  <div
-                    v-for="message in validationErrors?.email"
-                    :key="message"
-                    class="text-xs text-red-500 absolute"
-                  >
+                  />
+                  <div v-for="message in validationErrors?.email" :key="message" class="text-xs text-red-500 absolute">
                     {{ message }}
                   </div>
                 </div>
@@ -78,10 +61,7 @@
                 <label
                   for="password"
                   class="w-4/12"
-                  :class="validationErrors?.password
-                    ? 'text-red-500'
-                    : 'text-gray-700 dark:text-gray-200'
-                  "
+                  :class="validationErrors?.password ? 'text-red-500' : 'text-gray-700 dark:text-gray-200'"
                 >
                   {{ $t('password') }}
                 </label>
@@ -95,7 +75,7 @@
                     :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-                  >
+                  />
                   <div
                     v-for="message in validationErrors?.password"
                     :key="message"
@@ -109,10 +89,7 @@
                 <label
                   for="Password confirm"
                   class="w-4/12"
-                  :class="validationErrors?.password
-                    ? 'text-red-500'
-                    : 'text-gray-700 dark:text-gray-200'
-                  "
+                  :class="validationErrors?.password ? 'text-red-500' : 'text-gray-700 dark:text-gray-200'"
                 >
                   {{ $t('confirm_password') }}
                 </label>
@@ -125,7 +102,7 @@
                     :class="{ 'border-red-500': validationErrors?.password }"
                     :disabled="processing.value"
                     class="w-full rounded border border-gray-300 bg-white p-2 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-                  >
+                  />
                   <div
                     v-for="message in validationErrors?.password_confirmation"
                     :key="message"
@@ -146,14 +123,8 @@
                     type="submit"
                   >
                     <template #text>
-                      <ArrowRightOnRectangleIcon
-                        v-if="!processing.value"
-                        class="mr-2 h-6 w-6"
-                      />
-                      <CircleSvg
-                        v-if="processing.value"
-                        class="mr-2 h-6 w-6"
-                      />
+                      <ArrowRightOnRectangleIcon v-if="!processing.value" class="mr-2 h-6 w-6" />
+                      <CircleSvg v-if="processing.value" class="mr-2 h-6 w-6" />
                       {{ $t('register') }}
                     </template>
                   </AppButton>
@@ -171,20 +142,13 @@
                 </div>
               </div>
             </form>
-            <div
-              v-if="socialLoginsEnabled"
-              class="mt-5"
-            >
+            <div v-if="socialLoginsEnabled" class="mt-5">
               <div
                 class="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300"
               >
-                <p class="mx-4 mb-0 text-center font-semibold">
-                  Or
-                </p>
+                <p class="mx-4 mb-0 text-center font-semibold">Or</p>
               </div>
-              <h3 class="mb-3 font-bold text-gray-700">
-                Register with
-              </h3>
+              <h3 class="mb-3 font-bold text-gray-700">Register with</h3>
               <SocialiteLogins signup />
             </div>
           </div>
@@ -195,14 +159,14 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
-import useAuth from '@/composables/auth'
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
+import { computed } from 'vue';
+import useAuth from '@/composables/auth';
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
 import SocialiteLogins from '@components/auth/SocialiteLogins.vue';
 import CircleSvg from '@components/common/CircleSvg.vue';
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
-// import Errors from '@components/Errors.vue';
+// import Errors from '@components/ErrorsNotice.vue';
 const { registerForm, validationErrors, processing, submitRegister } = useAuth();
 const { socials } = useAuthStore();
 const socialLoginsEnabled = computed(() => {
@@ -210,5 +174,5 @@ const socialLoginsEnabled = computed(() => {
     return true;
   }
   return false;
-})
+});
 </script>

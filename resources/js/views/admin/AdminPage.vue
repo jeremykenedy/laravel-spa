@@ -1,19 +1,10 @@
 <template>
-  <div
-    id="admin"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="admin" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="admin.index"
-        :text="$t('admin')"
-      />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
     </AdminBreadcrumbContainer>
 
-    <div
-      v-if="user && user.roles"
-      class="float-right mb-6 text-center"
-    >
+    <div v-if="user && user.roles" class="float-right mb-6 text-center">
       <RolesBadges :roles="user.roles" />
     </div>
 
@@ -38,7 +29,7 @@
             <div v-if="!loading">
               {{ users }}
             </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 ">
+            <div class="text-xs text-gray-500 dark:text-gray-400">
               {{ $t('registered_users') }}
             </div>
           </template>
@@ -59,7 +50,7 @@
             <div v-if="!loading">
               {{ roles }}
             </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 ">
+            <div class="text-xs text-gray-500 dark:text-gray-400">
               {{ $t('roles') }}
             </div>
           </template>
@@ -80,7 +71,7 @@
             <div v-if="!loading">
               {{ permissions }}
             </div>
-            <div class="text-xs text-gray-500 dark:text-gray-400 ">
+            <div class="text-xs text-gray-500 dark:text-gray-400">
               {{ $t('permissions') }}
             </div>
           </template>
@@ -99,7 +90,7 @@
           <template #content>
             <LoadingCircle v-if="loading" />
             <SocialMediaLoginStatus v-if="!loading" />
-            <div class="text-xs text-gray-500 dark:text-gray-400 ">
+            <div class="text-xs text-gray-500 dark:text-gray-400">
               {{ $t('logins_enabled') }}
             </div>
           </template>
@@ -111,9 +102,9 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import useAuth from '@composables/auth';
 import RolesBadges from '@components/roles/RolesBadges.vue';
 import { greeting, providerIcon } from '@services/common';
 import { track } from '@services/analytics';
@@ -122,12 +113,7 @@ import SocialMediaLoginStatus from '@components/common/SocialMediaLoginStatus.vu
 import LoadingCircle from '@components/common/LoadingCircle.vue';
 import axios from 'axios';
 
-import {
-  LockClosedIcon,
-  UsersIcon,
-  ShieldCheckIcon,
-  ShieldExclamationIcon,
-} from '@heroicons/vue/24/solid';
+import { LockClosedIcon, UsersIcon, ShieldCheckIcon, ShieldExclamationIcon } from '@heroicons/vue/24/solid';
 
 export default {
   name: 'AdminPage',
@@ -155,23 +141,12 @@ export default {
     this.getDashboardData();
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-      'socials',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated', 'socials']),
   },
   methods: {
     greeting,
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-      'success',
-      'error',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan']),
+    ...mapActions(useToastStore, ['popToast', 'success', 'error']),
     async getDashboardData() {
       this.loading = true;
       await axios

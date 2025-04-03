@@ -1,18 +1,9 @@
 <template>
-  <div
-    id="permissions"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="permissions" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="admin.index"
-        :text="$t('admin')"
-      />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="permissions.index"
-        :text="$t('permissions')"
-      />
+      <AdminBreadcrumb route-name="permissions.index" :text="$t('permissions')" />
     </AdminBreadcrumbContainer>
 
     <div class="flex justify-end">
@@ -24,14 +15,8 @@
         @click="triggerCreatePermission"
       >
         <template #text>
-          <span
-            v-if="dataReady"
-            class="fas fa-plus fa-fw ml-2 mr-2"
-          />
-          <CircleSvg
-            v-if="!dataReady"
-            class="ml-2 mr-2 mt-0 h-4 w-4"
-          />
+          <span v-if="dataReady" class="fas fa-plus fa-fw ml-2 mr-2" />
+          <CircleSvg v-if="!dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
           <span class="sr-only">Create New Permission</span>
         </template>
       </AppButton>
@@ -56,7 +41,7 @@
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('name', item)"
-        >
+        />
       </template>
       <template #item-slug="item">
         <input
@@ -67,7 +52,7 @@
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('slug', item)"
-        >
+        />
       </template>
       <template #item-description="item">
         <input
@@ -78,7 +63,7 @@
           :class="locked(item) ? 'disabled' : ''"
           :readonly="locked(item)"
           @blur="update('description', item)"
-        >
+        />
       </template>
       <template #item-created_at="item">
         <span class="text-xs">
@@ -95,37 +80,32 @@
           <AppButton
             :loading="!dataReady"
             class="mr-2 inline-block rounded px-1 py-1 text-sm font-medium leading-snug text-gray-700 shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg dark:text-white"
-            :btn-class="locked(item)
-              ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-class="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-hover-class="locked(item)
-              ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-hover-class="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-class-dark="locked(item)
-              ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-class-dark="
+              locked(item)
+                ? 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
-            :btn-hover-class-dark="locked(item)
-              ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
-              : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+            :btn-hover-class-dark="
+              locked(item)
+                ? 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
+                : 'hover:bg-transparent focus:bg-transparent active:bg-transparent dark:focus:bg-transparent dark:active:bg-transparent dark:hover:bg-transparent'
             "
             @click="toggleLock(item, false)"
           >
             <template #text>
-              <LockClosedIcon
-                v-if="locked(item) && dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <LockOpenIcon
-                v-if="!locked(item) && dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <LockClosedIcon v-if="locked(item) && dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <LockOpenIcon v-if="!locked(item) && dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">{{ locked(item) ? 'Unlock' : 'Lock' }} User Settings</span>
             </template>
           </AppButton>
@@ -139,14 +119,8 @@
             @click="triggerEditPermission(item)"
           >
             <template #text>
-              <PencilSquareIcon
-                v-if="dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <PencilSquareIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">Edit Permission</span>
             </template>
           </AppButton>
@@ -160,14 +134,8 @@
             @click="triggerDeletePermission(item)"
           >
             <template #text>
-              <TrashIcon
-                v-if="dataReady"
-                class="ml-2 mr-2 mt-0 h-4 w-4"
-              />
-              <CircleSvg
-                v-if="!dataReady"
-                class="mr-2 h-3 w-3"
-              />
+              <TrashIcon v-if="dataReady" class="ml-2 mr-2 mt-0 h-4 w-4" />
+              <CircleSvg v-if="!dataReady" class="mr-2 h-3 w-3" />
               <span class="sr-only">Delete Permission</span>
             </template>
           </AppButton>
@@ -190,18 +158,13 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
 import moment from 'moment';
 import axios from 'axios';
 import CircleSvg from '@components/common/CircleSvg.vue';
 import PermissionFormModal from '@components/roles/PermissionFormModal.vue';
-import {
-  LockClosedIcon,
-  LockOpenIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from '@heroicons/vue/24/outline';
+import { LockClosedIcon, LockOpenIcon, PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'PermissionsPage',
@@ -215,10 +178,7 @@ export default {
     EasyDataTable: window['vue3-easy-data-table'],
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -241,15 +201,15 @@ export default {
       creatingNewPermission: false,
       permissionFormKey: 432489,
       tableHeaders: [
-        { text: "ID", value: "id", sortable: true },
-        { text: "NAME", value: "name", sortable: true, width: 150 },
-        { text: "SLUG", value: "slug", sortable: true, width: 100 },
-        { text: "DESCRIPTION", value: "description", width: 150 },
-        { text: "ROLES", value: "roles.length", sortable: true },
-        { text: "USERS", value: "users.length", sortable: true },
-        { text: "CREATED AT", value: "created_at", sortable: true, width: 140 },
-        { text: "UPDATED AT", value: "updated_at", sortable: true, width: 140 },
-        { text: "ACTIONS", value: "actions" },
+        { text: 'ID', value: 'id', sortable: true },
+        { text: 'NAME', value: 'name', sortable: true, width: 150 },
+        { text: 'SLUG', value: 'slug', sortable: true, width: 100 },
+        { text: 'DESCRIPTION', value: 'description', width: 150 },
+        { text: 'ROLES', value: 'roles.length', sortable: true },
+        { text: 'USERS', value: 'users.length', sortable: true },
+        { text: 'CREATED AT', value: 'created_at', sortable: true, width: 140 },
+        { text: 'UPDATED AT', value: 'updated_at', sortable: true, width: 140 },
+        { text: 'ACTIONS', value: 'actions' },
       ],
       rowsUnlocked: [],
       availableRoles: [],
@@ -259,13 +219,8 @@ export default {
     };
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan']),
+    ...mapActions(useToastStore, ['popToast']),
     async getRoles() {
       this.rolesDataReady = false;
       await axios
@@ -288,9 +243,7 @@ export default {
         this.pagination.current_page = updatedPage;
       }
       await axios
-        .get(
-          `/api/permissions-paginated?page=${this.pagination.current_page}&per=${this.perPage}`,
-        )
+        .get(`/api/permissions-paginated?page=${this.pagination.current_page}&per=${this.perPage}`)
         .then(({ data }) => {
           this.permissionsData = data.data;
           delete data.data;
@@ -348,9 +301,7 @@ export default {
           this.permissionsData = this.permissionsData.filter((u) => u.id != data.id);
           this.rowsUnlocked = this.rowsUnlocked.filter((i) => i != value.id);
           this.pagination.total = this.pagination.total - 1;
-          this.getPermissions(
-            this.pagination.current_page ? this.pagination.current_page : null,
-          );
+          this.getPermissions(this.pagination.current_page ? this.pagination.current_page : null);
           this.rowsUnlocked = [];
           this.popToast({
             message: 'Successfully Deleted Permission!',
@@ -379,9 +330,7 @@ export default {
       this.showCreatePermissionForm = true;
     },
     permissionUpdated(data) {
-      this.permissionsData = this.permissionsData.map((u) =>
-        u.id !== data.id ? u : data,
-      );
+      this.permissionsData = this.permissionsData.map((u) => (u.id !== data.id ? u : data));
       this.rowsUnlocked = [];
       this.getPermissions(); // Realign just in case.
       this.closePermissionForm();

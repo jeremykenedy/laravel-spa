@@ -9,30 +9,28 @@
 
 <script lang="ts">
 export default {
-    name: 'AppTable',
-    components: {},
-    props: {
-        data: { type: Array, default: null },
-    },
-    setup() {
-        return {};
-    },
-    data() {
-        return {
-            //
-        };
-    },
-    computed: {},
-    watch: {},
-    created() { },
-    mounted() { },
-    beforeUnmount() { },
-    updated() { },
-    methods: {},
+  name: 'AppTable',
+  components: {},
+  props: {
+    data: { type: Array, default: null },
+  },
+  setup() {
+    return {};
+  },
+  data() {
+    return {
+      //
+    };
+  },
+  computed: {},
+  watch: {},
+  created() {},
+  mounted() {},
+  beforeUnmount() {},
+  updated() {},
+  methods: {},
 };
 </script>
 
-<style scoped>
-</style>
-<style lang="scss" scoped>
-</style>
+<style scoped></style>
+<style lang="scss" scoped></style>

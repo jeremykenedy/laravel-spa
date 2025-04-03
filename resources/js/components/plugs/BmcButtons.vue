@@ -16,117 +16,55 @@
         xmlns:xlink="http://www.w3.org/1999/xlink"
       >
         <title>Coffee Cup</title>
-        <g
-          id="Canvas"
-          transform="translate(-5180 -696)"
-        >
+        <g id="Canvas" transform="translate(-5180 -696)">
           <g id="Group">
             <g id="Combined Shape">
-              <use
-                xlink:href="#path0_fill"
-                transform="translate(5201.49 697.468)"
-                fill="#FFFFFF"
-              />
+              <use xlink:href="#path0_fill" transform="translate(5201.49 697.468)" fill="#FFFFFF" />
             </g>
             <g id="Logo">
               <g id="Fill 1">
-                <use
-                  xlink:href="#path1_fill"
-                  transform="translate(5188.19 700.863)"
-                  fill="#FF9100"
-                />
+                <use xlink:href="#path1_fill" transform="translate(5188.19 700.863)" fill="#FF9100" />
               </g>
               <g id="Fill 2">
-                <use
-                  xlink:href="#path2_fill"
-                  transform="translate(5188.19 700.863)"
-                  fill="#FFDD00"
-                />
+                <use xlink:href="#path2_fill" transform="translate(5188.19 700.863)" fill="#FFDD00" />
               </g>
               <g id="Fill 3">
-                <use
-                  xlink:href="#path3_fill"
-                  transform="translate(5186.75 699.413)"
-                  fill="#FFFFFF"
-                />
+                <use xlink:href="#path3_fill" transform="translate(5186.75 699.413)" fill="#FFFFFF" />
               </g>
               <g id="Stroke 4">
-                <use
-                  xlink:href="#path4_stroke"
-                  transform="translate(5186.75 699.413)"
-                />
+                <use xlink:href="#path4_stroke" transform="translate(5186.75 699.413)" />
               </g>
               <g id="Fill 6">
-                <use
-                  xlink:href="#path5_fill"
-                  transform="translate(5188.24 697.056)"
-                  fill="#FFFFFF"
-                />
+                <use xlink:href="#path5_fill" transform="translate(5188.24 697.056)" fill="#FFFFFF" />
               </g>
               <g id="Group 11">
                 <g id="Stroke 7">
-                  <use
-                    xlink:href="#path6_stroke"
-                    transform="translate(5188.24 697.056)"
-                    fill="#050505"
-                  />
+                  <use xlink:href="#path6_stroke" transform="translate(5188.24 697.056)" fill="#050505" />
                 </g>
                 <g id="Stroke 9">
-                  <use
-                    xlink:href="#path7_stroke"
-                    transform="translate(5187.29 700.863)"
-                  />
+                  <use xlink:href="#path7_stroke" transform="translate(5187.29 700.863)" />
                 </g>
               </g>
               <g id="Fill 12">
-                <use
-                  xlink:href="#path8_fill"
-                  transform="translate(5187.07 705.304)"
-                  fill="#FFFFFF"
-                />
+                <use xlink:href="#path8_fill" transform="translate(5187.07 705.304)" fill="#FFFFFF" />
               </g>
               <g id="Stroke 13">
-                <use
-                  xlink:href="#path9_stroke"
-                  transform="translate(5187.07 705.304)"
-                />
+                <use xlink:href="#path9_stroke" transform="translate(5187.07 705.304)" />
               </g>
             </g>
-            <g
-              id="Oval"
-              opacity="0.2"
-            >
+            <g id="Oval" opacity="0.2">
               <mask id="mask0_outline_ins">
-                <use
-                  xlink:href="#path10_fill"
-                  fill="white"
-                  transform="translate(5180.65 701.166)"
-                />
+                <use xlink:href="#path10_fill" fill="white" transform="translate(5180.65 701.166)" />
               </mask>
               <g mask="url(#mask0_outline_ins)">
-                <use
-                  xlink:href="#path11_stroke_2x"
-                  transform="translate(5180.65 701.166)"
-                  fill="#FFFFFF"
-                />
+                <use xlink:href="#path11_stroke_2x" transform="translate(5180.65 701.166)" fill="#FFFFFF" />
               </g>
             </g>
-            <g
-              id="Oval"
-              opacity="0.2"
-            >
-              <use
-                xlink:href="#path12_fill"
-                transform="translate(5200.84 707.692)"
-                fill="#FFFFFF"
-              />
+            <g id="Oval" opacity="0.2">
+              <use xlink:href="#path12_fill" transform="translate(5200.84 707.692)" fill="#FFFFFF" />
             </g>
             <g id="Oval">
-              <use
-                xlink:href="#path12_fill"
-                transform="translate(5184.56 712.696)"
-                fill="#FFFFFF"
-              />
+              <use xlink:href="#path12_fill" transform="translate(5184.56 712.696)" fill="#FFFFFF" />
             </g>
           </g>
         </g>
@@ -146,11 +84,7 @@
             fill-rule="evenodd"
             d="M 5.02978 0.0305451L 0 0L 2.46998 15.7258L 3.00889 15.7258L 6.69141 15.7258L 7.23031 15.7258L 9.7003 0L 5.02978 0.0305451Z"
           />
-          <path
-            id="path3_fill"
-            fill-rule="evenodd"
-            d="M 0 1.45021L 12.9786 1.45021L 12.9786 0L 0 0L 0 1.45021Z"
-          />
+          <path id="path3_fill" fill-rule="evenodd" d="M 0 1.45021L 12.9786 1.45021L 12.9786 0L 0 0L 0 1.45021Z" />
           <path
             id="path4_stroke"
             d="M 0 1.45021L -0.440282 1.45021L -0.440282 1.8905L 0 1.8905L 0 1.45021ZM 12.9786 1.45021L 12.9786 1.8905L 13.4189 1.8905L 13.4189 1.45021L 12.9786 1.45021ZM 12.9786 0L 13.4189 0L 13.4189 -0.440282L 12.9786 -0.440282L 12.9786 0ZM 0 0L 0 -0.440282L -0.440282 -0.440282L -0.440282 0L 0 0ZM 0 1.8905L 12.9786 1.8905L 12.9786 1.00993L 0 1.00993L 0 1.8905ZM 13.4189 1.45021L 13.4189 0L 12.5384 0L 12.5384 1.45021L 13.4189 1.45021ZM 12.9786 -0.440282L 0 -0.440282L 0 0.440282L 12.9786 0.440282L 12.9786 -0.440282ZM -0.440282 0L -0.440282 1.45021L 0.440282 1.45021L 0.440282 0L -0.440282 0Z"

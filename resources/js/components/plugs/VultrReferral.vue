@@ -15,10 +15,10 @@
           alt="Vultr Hosting Services"
           class="ml-auto mr-auto mb-4 rounded-t"
           style="width: 100%; max-width: 300px"
-        >
+        />
         <h2 class="mb-4 text-2xl font-medium text-slate-700 dark:text-slate-100">
           <em>Try <strong>VULTR</strong> for free with </em>
-          <br>
+          <br />
           <strong>$100 free credit!</strong>
         </h2>
       </a>
@@ -35,8 +35,8 @@ export default {
   name: 'VultrReferral',
   data() {
     return {
-      VULTR_REFERRAL_ENABLED: VULTR_REFERRAL_ENABLED,  
-      VULTR_REFERRAL_LINK: VULTR_REFERRAL_LINK,  
+      VULTR_REFERRAL_ENABLED: VULTR_REFERRAL_ENABLED,
+      VULTR_REFERRAL_LINK: VULTR_REFERRAL_LINK,
       images: [vultr1, vultr2],
     };
   },

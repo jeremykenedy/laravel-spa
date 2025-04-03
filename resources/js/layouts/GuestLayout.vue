@@ -1,24 +1,11 @@
 <template>
   <div class="min-h-screen bg-white dark:bg-slate-800">
     <div id="top_border" />
-    <OctoCat
-      v-if="showOctoCat"
-      position="right-top"
-      animated-eye
-      animated-ear
-      animated-arm
-      show-face
-    />
+    <OctoCat v-if="showOctoCat" position="right-top" animated-eye animated-ear animated-arm show-face />
     <Navbar />
     <div class="w-full">
-      <router-view
-        v-slot="{ Component }"
-        class="p-6"
-      >
-        <transition
-          name="fade"
-          mode="out-in"
-        >
+      <router-view v-slot="{ Component }" class="p-6">
+        <transition name="fade" mode="out-in">
           <component :is="Component" />
         </transition>
       </router-view>
@@ -54,15 +41,11 @@ export default {
       return false;
     },
     showOctoCat() {
-      if (
-        this.currentRouteName == 'home' ||
-        this.currentRouteName == 'about' ||
-        this.currentRouteName == 'terms'
-      ) {
+      if (this.currentRouteName == 'home' || this.currentRouteName == 'about' || this.currentRouteName == 'terms') {
         return true;
       }
       return false;
     },
-  }
+  },
 };
 </script>

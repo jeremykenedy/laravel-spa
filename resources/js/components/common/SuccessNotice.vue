@@ -6,10 +6,7 @@
     <span class="block w-full text-left sm:inline">
       {{ content }}
     </span>
-    <span
-      class=""
-      @click="$emit('close')"
-    >
+    <span class="" @click="$emit('close')">
       <XMarkIcon class="h-5 w-5 cursor-pointer font-bold" />
     </span>
   </div>
@@ -19,14 +16,14 @@
 import { XMarkIcon } from '@heroicons/vue/24/outline';
 
 export default {
-    components: {
-        XMarkIcon,
+  components: {
+    XMarkIcon,
+  },
+  props: {
+    content: {
+      type: String,
+      default: 'Success!',
     },
-    props: {
-        content: {
-            type: String,
-            default: 'Success!',
-        },
-    },
+  },
 };
 </script>

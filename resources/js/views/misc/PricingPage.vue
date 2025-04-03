@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="-m-6 p-0"
-    style="margin: 0; padding: 0;"
-  >
+  <div class="-m-6 p-0" style="margin: 0; padding: 0">
     <div class="isolate overflow-hidden">
       <div class="flow-root bg-white dark:bg-gray-900 py-16 sm:pt-32 lg:pb-0">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -15,8 +12,8 @@
             <p
               class="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg font-medium text-gray-600 dark:text-gray-400 sm:text-xl/8"
             >
-              Choose an affordable plan that’s packed with the best features for engaging your audience, creating customer
-              loyalty, and driving sales.
+              Choose an affordable plan that’s packed with the best features for engaging your audience, creating
+              customer loyalty, and driving sales.
             </p>
             <div class="mt-16 flex justify-center">
               <fieldset aria-label="Payment frequency">
@@ -32,8 +29,7 @@
                     :value="option"
                   >
                     <div :class="[checked ? 'bg-indigo-500' : '', 'cursor-pointer rounded-full px-2.5 py-1']">
-                      {{
-                        option.label }}
+                      {{ option.label }}
                     </div>
                   </RadioGroupOption>
                 </RadioGroup>
@@ -48,20 +44,11 @@
               aria-hidden="true"
               class="hidden dark:block absolute -bottom-48 left-1/2 h-[64rem] -translate-x-1/2 translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] lg:-top-48 lg:bottom-auto lg:translate-y-0"
             >
-              <ellipse
-                cx="604"
-                cy="512"
-                fill="url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)"
-                rx="604"
-                ry="512"
-              />
+              <ellipse cx="604" cy="512" fill="url(#d25c25d4-6d43-4bf9-b9ac-1842a30a4867)" rx="604" ry="512" />
               <defs>
                 <radialGradient id="d25c25d4-6d43-4bf9-b9ac-1842a30a4867">
                   <stop stop-color="#7775D6" />
-                  <stop
-                    offset="1"
-                    stop-color="#E935C1"
-                  />
+                  <stop offset="1" stop-color="#E935C1" />
                 </radialGradient>
               </defs>
             </svg>
@@ -73,25 +60,28 @@
             <div
               v-for="tier in pricing.tiers"
               :key="tier.id"
-              :class="[tier.featured ? 'z-10 bg-white shadow-xl ring-1 ring-gray-900/10' : 'bg-gray-800/80 ring-1 ring-white/10 lg:bg-transparent lg:pb-14 lg:ring-0', 'relative rounded-2xl']"
+              :class="[
+                tier.featured
+                  ? 'z-10 bg-white shadow-xl ring-1 ring-gray-900/10'
+                  : 'bg-gray-800/80 ring-1 ring-white/10 lg:bg-transparent lg:pb-14 lg:ring-0',
+                'relative rounded-2xl',
+              ]"
             >
               <div class="p-8 lg:pt-12 xl:p-10 xl:pt-14">
-                <h2
-                  :id="tier.id"
-                  :class="[tier.featured ? 'text-gray-900' : 'text-white', 'text-sm/6 font-semibold']"
-                >
-                  {{
-                    tier.name }}
+                <h2 :id="tier.id" :class="[tier.featured ? 'text-gray-900' : 'text-white', 'text-sm/6 font-semibold']">
+                  {{ tier.name }}
                 </h2>
-                <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-stretch">
+                <div
+                  class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between lg:flex-col lg:items-stretch"
+                >
                   <div class="mt-2 flex items-center gap-x-4">
-                    <p :class="[tier.featured ? 'text-gray-900' : 'text-white', 'text-4xl font-semibold tracking-tight']">
+                    <p
+                      :class="[tier.featured ? 'text-gray-900' : 'text-white', 'text-4xl font-semibold tracking-tight']"
+                    >
                       {{ tier.price[frequency.value] }}
                     </p>
                     <div class="text-sm">
-                      <p :class="tier.featured ? 'text-gray-900' : 'text-white'">
-                        USD
-                      </p>
+                      <p :class="tier.featured ? 'text-gray-900' : 'text-white'">USD</p>
                       <p :class="tier.featured ? 'text-gray-500' : 'text-gray-400'">
                         {{ `Billed ${frequency.value}` }}
                       </p>
@@ -100,20 +90,26 @@
                   <a
                     :href="tier.href"
                     :aria-describedby="tier.id"
-                    :class="[tier.featured ? 'bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600' : 'bg-white/10 hover:bg-white/20 focus-visible:outline-white', 'rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2']"
-                  >Buy
-                    this plan</a>
+                    :class="[
+                      tier.featured
+                        ? 'bg-indigo-600 shadow-sm hover:bg-indigo-500 focus-visible:outline-indigo-600'
+                        : 'bg-white/10 hover:bg-white/20 focus-visible:outline-white',
+                      'rounded-md px-3 py-2 text-center text-sm/6 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2',
+                    ]"
+                    >Buy this plan</a
+                  >
                 </div>
                 <div class="mt-8 flow-root sm:mt-10">
                   <ul
                     role="list"
-                    :class="[tier.featured ? 'divide-gray-900/5 border-gray-900/5 text-gray-600' : 'divide-white/5 border-white/5 text-white', '-my-2 divide-y border-t text-sm/6 lg:border-t-0']"
+                    :class="[
+                      tier.featured
+                        ? 'divide-gray-900/5 border-gray-900/5 text-gray-600'
+                        : 'divide-white/5 border-white/5 text-white',
+                      '-my-2 divide-y border-t text-sm/6 lg:border-t-0',
+                    ]"
                   >
-                    <li
-                      v-for="mainFeature in tier.highlights"
-                      :key="mainFeature"
-                      class="flex gap-x-3 py-2"
-                    >
+                    <li v-for="mainFeature in tier.highlights" :key="mainFeature" class="flex gap-x-3 py-2">
                       <CheckIcon
                         :class="[tier.featured ? 'text-indigo-600' : 'text-gray-500', 'h-6 w-5 flex-none']"
                         aria-hidden="true"
@@ -130,28 +126,22 @@
       <div class="relative bg-gray-50 dark:bg-black lg:pt-14">
         <div class="mx-auto max-w-7xl px-6 py-24 sm:py-32 lg:px-8">
           <!-- Feature comparison (up to lg) -->
-          <section
-            aria-labelledby="mobile-comparison-heading"
-            class="lg:hidden"
-          >
-            <h2
-              id="mobile-comparison-heading"
-              class="sr-only"
-            >
-              Feature comparison
-            </h2>
+          <section aria-labelledby="mobile-comparison-heading" class="lg:hidden">
+            <h2 id="mobile-comparison-heading" class="sr-only">Feature comparison</h2>
 
             <div class="mx-auto max-w-2xl space-y-16">
-              <div
-                v-for="tier in pricing.tiers"
-                :key="tier.id"
-                class="border-t border-gray-900/10"
-              >
+              <div v-for="tier in pricing.tiers" :key="tier.id" class="border-t border-gray-900/10">
                 <div
-                  :class="[tier.featured ? 'border-indigo-600' : 'border-transparent', '-mt-px w-72 border-t-2 pt-10 md:w-80']"
+                  :class="[
+                    tier.featured ? 'border-indigo-600' : 'border-transparent',
+                    '-mt-px w-72 border-t-2 pt-10 md:w-80',
+                  ]"
                 >
                   <h3
-                    :class="[tier.featured ? 'text-indigo-600' : 'text-gray-900 dark:text-gray-500', 'text-sm/6 font-semibold']"
+                    :class="[
+                      tier.featured ? 'text-indigo-600' : 'text-gray-900 dark:text-gray-500',
+                      'text-sm/6 font-semibold',
+                    ]"
                   >
                     {{ tier.name }}
                   </h3>
@@ -161,10 +151,7 @@
                 </div>
 
                 <div class="mt-10 space-y-10">
-                  <div
-                    v-for="section in pricing.sections"
-                    :key="section.name"
-                  >
+                  <div v-for="section in pricing.sections" :key="section.name">
                     <h4 class="text-sm/6 font-semibold text-gray-900 dark:text-gray-400">
                       {{ section.name }}
                     </h4>
@@ -176,7 +163,10 @@
                       />
 
                       <div
-                        :class="[tier.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-gray-900/10', 'relative rounded-lg bg-white shadow-sm sm:rounded-none sm:bg-transparent sm:shadow-none sm:ring-0']"
+                        :class="[
+                          tier.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-gray-900/10',
+                          'relative rounded-lg bg-white shadow-sm sm:rounded-none sm:bg-transparent sm:shadow-none sm:ring-0',
+                        ]"
                       >
                         <dl class="divide-y divide-gray-200 text-sm/6">
                           <div
@@ -191,19 +181,15 @@
                               <span
                                 v-if="typeof feature.tiers[tier.name] === 'string'"
                                 :class="tier.featured ? 'font-semibold text-indigo-600' : 'text-gray-900'"
-                              >{{
-                                feature.tiers[tier.name] }}</span>
+                                >{{ feature.tiers[tier.name] }}</span
+                              >
                               <template v-else>
                                 <CheckIcon
                                   v-if="feature.tiers[tier.name] === true"
                                   class="mx-auto size-5 text-indigo-600"
                                   aria-hidden="true"
                                 />
-                                <XMarkIconMini
-                                  v-else
-                                  class="mx-auto size-5 text-gray-400"
-                                  aria-hidden="true"
-                                />
+                                <XMarkIconMini v-else class="mx-auto size-5 text-gray-400" aria-hidden="true" />
                                 <span class="sr-only">{{ feature.tiers[tier.name] === true ? 'Yes' : 'No' }}</span>
                               </template>
                             </dd>
@@ -214,7 +200,10 @@
                       <!-- Fake card border -->
                       <div
                         aria-hidden="true"
-                        :class="[tier.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-gray-900/10', 'pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 rounded-lg sm:block']"
+                        :class="[
+                          tier.featured ? 'ring-2 ring-indigo-600' : 'ring-1 ring-gray-900/10',
+                          'pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 rounded-lg sm:block',
+                        ]"
                       />
                     </div>
                   </div>
@@ -224,27 +213,17 @@
           </section>
 
           <!-- Feature comparison (lg+) -->
-          <section
-            aria-labelledby="comparison-heading"
-            class="hidden lg:block"
-          >
-            <h2
-              id="comparison-heading"
-              class="sr-only"
-            >
-              Feature comparison
-            </h2>
+          <section aria-labelledby="comparison-heading" class="hidden lg:block">
+            <h2 id="comparison-heading" class="sr-only">Feature comparison</h2>
 
             <div class="grid grid-cols-4 gap-x-8 border-t border-gray-900/10 before:block">
-              <div
-                v-for="tier in pricing.tiers"
-                :key="tier.id"
-                aria-hidden="true"
-                class="-mt-px"
-              >
+              <div v-for="tier in pricing.tiers" :key="tier.id" aria-hidden="true" class="-mt-px">
                 <div :class="[tier.featured ? 'border-indigo-600' : 'border-transparent', 'border-t-2 pt-10']">
                   <p
-                    :class="[tier.featured ? 'text-indigo-600 dark:text-indigo-500' : 'text-gray-900 dark:text-gray-200', 'text-sm/6 font-semibold']"
+                    :class="[
+                      tier.featured ? 'text-indigo-600 dark:text-indigo-500' : 'text-gray-900 dark:text-gray-200',
+                      'text-sm/6 font-semibold',
+                    ]"
                   >
                     {{ tier.name }}
                   </p>
@@ -256,19 +235,13 @@
             </div>
 
             <div class="-mt-6 space-y-16">
-              <div
-                v-for="section in pricing.sections"
-                :key="section.name"
-              >
+              <div v-for="section in pricing.sections" :key="section.name">
                 <h3 class="text-sm/6 font-semibold text-gray-900 dark:text-gray-200">
                   {{ section.name }}
                 </h3>
                 <div class="relative -mx-8 mt-10">
                   <!-- Fake card backgrounds -->
-                  <div
-                    class="absolute inset-x-8 inset-y-0 grid grid-cols-4 gap-x-8 before:block"
-                    aria-hidden="true"
-                  >
+                  <div class="absolute inset-x-8 inset-y-0 grid grid-cols-4 gap-x-8 before:block" aria-hidden="true">
                     <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-sm" />
                     <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-sm" />
                     <div class="size-full rounded-lg bg-white dark:bg-gray-700 shadow-sm" />
@@ -280,20 +253,13 @@
                         <th scope="col">
                           <span class="sr-only">Feature</span>
                         </th>
-                        <th
-                          v-for="tier in pricing.tiers"
-                          :key="tier.id"
-                          scope="col"
-                        >
+                        <th v-for="tier in pricing.tiers" :key="tier.id" scope="col">
                           <span class="sr-only">{{ tier.name }} tier</span>
                         </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr
-                        v-for="(feature, featureIdx) in section.features"
-                        :key="feature.name"
-                      >
+                      <tr v-for="(feature, featureIdx) in section.features" :key="feature.name">
                         <th
                           scope="row"
                           class="w-1/4 py-3 pr-4 text-left text-sm/6 font-normal text-gray-900 dark:text-gray-200"
@@ -304,17 +270,18 @@
                             class="absolute inset-x-8 mt-3 h-px bg-gray-200 dark:bg-gray-600"
                           />
                         </th>
-                        <td
-                          v-for="tier in pricing.tiers"
-                          :key="tier.id"
-                          class="relative w-1/4 px-4 py-0 text-center"
-                        >
+                        <td v-for="tier in pricing.tiers" :key="tier.id" class="relative w-1/4 px-4 py-0 text-center">
                           <span class="relative size-full py-3">
                             <span
                               v-if="typeof feature.tiers[tier.name] === 'string'"
-                              :class="[tier.featured ? 'font-semibold text-indigo-600 dark:text-indigo-300' : 'text-gray-900 dark:text-gray-200', 'text-sm/6']"
-                            >{{
-                              feature.tiers[tier.name] }}</span>
+                              :class="[
+                                tier.featured
+                                  ? 'font-semibold text-indigo-600 dark:text-indigo-300'
+                                  : 'text-gray-900 dark:text-gray-200',
+                                'text-sm/6',
+                              ]"
+                              >{{ feature.tiers[tier.name] }}</span
+                            >
                             <template v-else>
                               <CheckIcon
                                 v-if="feature.tiers[tier.name] === true"
@@ -356,17 +323,17 @@
 </template>
 
 <script setup>
-import { defineComponent, h, ref } from 'vue'
-import { Dialog, DialogPanel, RadioGroup, RadioGroupOption } from '@headlessui/vue'
-import { Bars3Icon, XMarkIcon as XMarkIconOutline } from '@heroicons/vue/24/outline'
-import { CheckIcon, XMarkIcon as XMarkIconMini } from '@heroicons/vue/20/solid'
+import { defineComponent, h, ref } from 'vue';
+import { Dialog, DialogPanel, RadioGroup, RadioGroupOption } from '@headlessui/vue';
+import { Bars3Icon, XMarkIcon as XMarkIconOutline } from '@heroicons/vue/24/outline';
+import { CheckIcon, XMarkIcon as XMarkIconMini } from '@heroicons/vue/20/solid';
 
 const navigation = [
   { name: 'Product', href: '#' },
   { name: 'Features', href: '#' },
   { name: 'Marketplace', href: '#' },
   { name: 'Company', href: '#' },
-]
+];
 const pricing = {
   frequencies: [
     { value: 'monthly', label: 'Monthly' },
@@ -412,32 +379,68 @@ const pricing = {
     {
       name: 'Features',
       features: [
-        { name: 'Edge content delivery', tiers: { Starter: true, Growth: true, Scale: true } },
-        { name: 'Custom domains', tiers: { Starter: '1', Growth: '3', Scale: 'Unlimited' } },
-        { name: 'Team members', tiers: { Starter: '3', Growth: '20', Scale: 'Unlimited' } },
-        { name: 'Single sign-on (SSO)', tiers: { Starter: false, Growth: false, Scale: true } },
+        {
+          name: 'Edge content delivery',
+          tiers: { Starter: true, Growth: true, Scale: true },
+        },
+        {
+          name: 'Custom domains',
+          tiers: { Starter: '1', Growth: '3', Scale: 'Unlimited' },
+        },
+        {
+          name: 'Team members',
+          tiers: { Starter: '3', Growth: '20', Scale: 'Unlimited' },
+        },
+        {
+          name: 'Single sign-on (SSO)',
+          tiers: { Starter: false, Growth: false, Scale: true },
+        },
       ],
     },
     {
       name: 'Reporting',
       features: [
-        { name: 'Advanced analytics', tiers: { Starter: true, Growth: true, Scale: true } },
-        { name: 'Basic reports', tiers: { Starter: false, Growth: true, Scale: true } },
-        { name: 'Professional reports', tiers: { Starter: false, Growth: false, Scale: true } },
-        { name: 'Custom report builder', tiers: { Starter: false, Growth: false, Scale: true } },
+        {
+          name: 'Advanced analytics',
+          tiers: { Starter: true, Growth: true, Scale: true },
+        },
+        {
+          name: 'Basic reports',
+          tiers: { Starter: false, Growth: true, Scale: true },
+        },
+        {
+          name: 'Professional reports',
+          tiers: { Starter: false, Growth: false, Scale: true },
+        },
+        {
+          name: 'Custom report builder',
+          tiers: { Starter: false, Growth: false, Scale: true },
+        },
       ],
     },
     {
       name: 'Support',
       features: [
-        { name: '24/7 online support', tiers: { Starter: true, Growth: true, Scale: true } },
-        { name: 'Quarterly workshops', tiers: { Starter: false, Growth: true, Scale: true } },
-        { name: 'Priority phone support', tiers: { Starter: false, Growth: false, Scale: true } },
-        { name: '1:1 onboarding tour', tiers: { Starter: false, Growth: false, Scale: true } },
+        {
+          name: '24/7 online support',
+          tiers: { Starter: true, Growth: true, Scale: true },
+        },
+        {
+          name: 'Quarterly workshops',
+          tiers: { Starter: false, Growth: true, Scale: true },
+        },
+        {
+          name: 'Priority phone support',
+          tiers: { Starter: false, Growth: false, Scale: true },
+        },
+        {
+          name: '1:1 onboarding tour',
+          tiers: { Starter: false, Growth: false, Scale: true },
+        },
       ],
     },
   ],
-}
+};
 const faqs = [
   {
     id: 1,
@@ -446,7 +449,7 @@ const faqs = [
       "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
   },
   // More questions...
-]
+];
 const footerNavigation = {
   solutions: [
     { name: 'Marketing', href: '#' },
@@ -541,8 +544,8 @@ const footerNavigation = {
       }),
     },
   ],
-}
+};
 
-const mobileMenuOpen = ref(false)
-const frequency = ref(pricing.frequencies[0])
+const mobileMenuOpen = ref(false);
+const frequency = ref(pricing.frequencies[0]);
 </script>

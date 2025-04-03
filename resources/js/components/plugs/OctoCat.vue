@@ -69,7 +69,7 @@
 <script>
 import { track } from '@services/analytics';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 
 export default {
   name: 'OctoCat',
@@ -98,12 +98,7 @@ export default {
       type: String,
       default: 'left-top',
       validator(value) {
-        return [
-          'left-top',
-          'right-top',
-          'left-bottom',
-          'right-bottom',
-        ].includes(value);
+        return ['left-top', 'right-top', 'left-bottom', 'right-bottom'].includes(value);
       },
     },
     bgColor: {
@@ -133,24 +128,21 @@ export default {
   },
   mounted() {
     if (this.user && this.user.id) {
-      localStorage.setItem("data-theme", this.user.theme_dark)
+      localStorage.setItem('data-theme', this.user.theme_dark);
       if (this.user.theme_dark) {
-        this.darkMode = 'dark'
+        this.darkMode = 'dark';
       } else {
-        this.darkMode = 'light'
+        this.darkMode = 'light';
       }
     } else {
-      this.darkMode = localStorage.getItem("data-theme")
+      this.darkMode = localStorage.getItem('data-theme');
     }
     window.addEventListener('theme-localstorage-changed', (event) => {
       this.darkMode = event.detail.storage;
     });
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     isDarkMode() {
       if (this.darkMode == 'dark') {
         return true;
@@ -312,7 +304,6 @@ export default {
 }
 
 @keyframes octocat-wave {
-
   0%,
   100% {
     transform: rotate(0deg);
@@ -330,7 +321,6 @@ export default {
 }
 
 @keyframes octocat-twitch {
-
   0%,
   100% {
     transform: rotate(0deg);
@@ -347,7 +337,6 @@ export default {
 }
 
 @keyframes octocat-blink {
-
   0%,
   25%,
   100% {

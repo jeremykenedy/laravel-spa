@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="socialLoginsEnabled"
-    class="flex flex-wrap justify-around"
-  >
+  <div v-if="socialLoginsEnabled" class="flex flex-wrap justify-around">
     <span
       v-if="socials.facebook == 1"
       v-tippy="loginText + ' Facebook'"
@@ -139,9 +136,9 @@ import * as Vue from 'vue';
 import { mapStores, mapState, mapActions } from 'pinia';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import { useRoute, useRouter } from "vue-router";
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import { useRoute, useRouter } from 'vue-router';
 import { track } from '@services/analytics';
 
 export default {
@@ -161,12 +158,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-      'token',
-      'socials',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated', 'token', 'socials']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -193,36 +185,21 @@ export default {
     window.removeEventListener('message', this.onMessage);
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-      'getUser',
-      'fetchOauthUrl',
-      'getUserByToken',
-      'saveToken',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-      'success',
-      'error',
-    ]),
+    ...mapActions(useAuthStore, ['userIs', 'userCan', 'getUser', 'fetchOauthUrl', 'getUserByToken', 'saveToken']),
+    ...mapActions(useToastStore, ['popToast', 'success', 'error']),
     track,
     async socialiteLogin(provider) {
       this.track(`Social Login Provider Clicked: ${provider}`);
       this.loading = true;
       try {
-        await axios.get('/sanctum/csrf-cookie').then((response) => { });
+        await axios.get('/sanctum/csrf-cookie').then((response) => {});
         const url = await this.fetchOauthUrl({ provider }).then((response) => {
           this.loading = false;
           return response;
         });
         this.window = this.openWindow(url, this.authWindowTitle);
       } catch (e) {
-        this.track(
-          `Social Login Provider Failed to Login: ${provider}`,
-          'error',
-          'auth-error',
-        );
+        this.track(`Social Login Provider Failed to Login: ${provider}`, 'error', 'auth-error');
         this.popToast({
           message: 'Failed to log in.',
           timer: 10000,
@@ -237,13 +214,9 @@ export default {
       if (e.origin !== window.origin || !e.data.token) {
         return;
       }
-      await axios.get('/sanctum/csrf-cookie').then((response) => { });
+      await axios.get('/sanctum/csrf-cookie').then((response) => {});
       self.getUserByToken({ token: e.data.token }).then((res) => {
-        self.track(
-          'Social Login Provider Logged in Successfully',
-          'login',
-          'social login success',
-        );
+        self.track('Social Login Provider Logged in Successfully', 'login', 'social login success');
         setTimeout(() => {
           self.$router.push({ name: 'dashboard' });
         }, 1);
@@ -261,16 +234,11 @@ export default {
         height: 720,
         ...options,
       };
-      const dualScreenLeft =
-        window.screenLeft !== undefined
-          ? window.screenLeft
-          : window.screen.left;
-      const dualScreenTop =
-        window.screenTop !== undefined ? window.screenTop : window.screen.top;
+      const dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left;
+      const dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top;
       const width = window.innerWidth || document.documentElement.clientWidth;
       window.screen.width;
-      const height =
-        window.innerHeight || document.documentElement.clientHeight;
+      const height = window.innerHeight || document.documentElement.clientHeight;
       window.screen.height;
 
       options.left = width / 2 - options.width / 2 + dualScreenLeft;
@@ -292,7 +260,5 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
-<style lang="scss" scoped>
-</style>
+<style scoped></style>
+<style lang="scss" scoped></style>

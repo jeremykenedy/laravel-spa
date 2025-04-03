@@ -21,16 +21,15 @@
         :placeholder="placeholder"
         :disabled="disabled"
         class="w-full rounded border px-4 bg-white p-2 focus:outline-none dark:bg-slate-900 sm:mt-0"
-        :class="inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')"
+        :class="
+          inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')
+        "
         :autocomplete="autocomplete"
         :autofocus="autofocus"
         v-bind="$attrs"
         @input="updateValue"
-      >
-      <div
-        v-if="error"
-        class="text-red-500 -mt-0.1 text-xs absolute"
-      >
+      />
+      <div v-if="error" class="text-red-500 -mt-0.1 text-xs absolute">
         {{ error }}
       </div>
       <slot name="message" />

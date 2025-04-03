@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="ghBbuttonEnable"
-    class="github-buttons"
-  >
+  <div v-if="ghBbuttonEnable" class="github-buttons">
     <github-button
       v-if="showFollow && ghUser"
       :href="ghBaseUrl + ghUser"
@@ -17,178 +14,59 @@
     </github-button>
     <github-button
       v-if="showStar && ghUser && ghRepo"
-      v-tippy="showTips
-        ? starTitle +
-          ' ' +
-          ghBaseUrl +
-          ghUser +
-          '/' +
-          ghRepo +
-          ' on ' +
-          serviceName
-        : null
-      "
+      v-tippy="showTips ? starTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName : null"
       :href="ghBaseUrl + ghUser + '/' + ghRepo"
       :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :data-icon="starIcon"
       :data-size="size"
       :data-show-count="showCountString"
-      :aria-label="starTitle +
-        ' ' +
-        ghBaseUrl +
-        ghUser +
-        '/' +
-        ghRepo +
-        ' on ' +
-        serviceName
-      "
+      :aria-label="starTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName"
       class="gh-button"
-      @click="
-        track(
-          'Clicked ' +
-            starTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-        )
-      "
+      @click="track('Clicked ' + starTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName)"
     >
       {{ starTitle }}
     </github-button>
     <github-button
       v-if="showFork && ghUser && ghRepo"
-      v-tippy="showTips
-        ? starTitle +
-          ' ' +
-          ghBaseUrl +
-          ghUser +
-          '/' +
-          ghRepo +
-          ' on ' +
-          serviceName
-        : null
-      "
+      v-tippy="showTips ? starTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName : null"
       :href="ghBaseUrl + ghUser + '/' + ghRepo + '/fork'"
       :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :data-icon="forkIcon"
       :data-size="size"
       :data-show-count="showCountString"
-      :aria-label="forkTitle +
-        ' ' +
-        ghBaseUrl +
-        ghUser +
-        '/' +
-        ghRepo +
-        ' on ' +
-        serviceName
-      "
+      :aria-label="forkTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName"
       class="gh-button"
-      @click="
-        track(
-          'Clicked ' +
-            forkTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-        )
-      "
+      @click="track('Clicked ' + forkTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName)"
     >
       {{ forkTitle }}
     </github-button>
     <github-button
       v-if="showIssue && ghUser && ghRepo"
-      v-tippy="showTips
-        ? 'Show ' +
-          issueTitle +
-          ' for ' +
-          ghBaseUrl +
-          ghUser +
-          '/' +
-          ghRepo +
-          ' on ' +
-          serviceName
-        : null
+      v-tippy="
+        showTips ? 'Show ' + issueTitle + ' for ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName : null
       "
       :href="ghBaseUrl + ghUser + '/' + ghRepo + '/issues'"
       :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :data-icon="issueIcon"
       :data-size="size"
       :data-show-count="showCountString"
-      :aria-label="issueTitle +
-        ' ' +
-        ghBaseUrl +
-        ghUser +
-        '/' +
-        ghRepo +
-        ' on ' +
-        serviceName
-      "
+      :aria-label="issueTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName"
       class="gh-button"
-      @click="
-        track(
-          'Clicked ' +
-            issueTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-        )
-      "
+      @click="track('Clicked ' + issueTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName)"
     >
       {{ issueTitle }}
     </github-button>
     <github-button
       v-if="showWatch && ghUser && ghRepo"
-      v-tippy="showTips
-        ? watchTitle +
-          ' ' +
-          ghBaseUrl +
-          ghUser +
-          '/' +
-          ghRepo +
-          ' on ' +
-          serviceName
-        : null
-      "
+      v-tippy="showTips ? watchTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName : null"
       :href="ghBaseUrl + ghUser + '/' + ghRepo + '/subscription'"
       :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :data-icon="watchIcon"
       :data-size="size"
       :data-show-count="showCountString"
-      :aria-label="watchTitle +
-        ' ' +
-        ghBaseUrl +
-        ghUser +
-        '/' +
-        ghRepo +
-        ' on ' +
-        serviceName
-      "
+      :aria-label="watchTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName"
       class="gh-button"
-      @click="
-        track(
-          'Clicked ' +
-            watchTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' on ' +
-            serviceName,
-        )
-      "
+      @click="track('Clicked ' + watchTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' on ' + serviceName)"
     >
       {{ watchTitle }}
     </github-button>
@@ -202,55 +80,25 @@
       :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
       class="gh-button"
-      @click="
-        track(
-          'Clicked ' + sponsorTitle + ' ' + ghBaseUrl + 'sponsors/' + ghUser,
-        )
-      "
+      @click="track('Clicked ' + sponsorTitle + ' ' + ghBaseUrl + 'sponsors/' + ghUser)"
     >
       {{ sponsorTitle }}
     </github-button>
 
     <github-button
       v-if="showDownload && ghUser && ghRepo"
-      v-tippy="showTips
-        ? downloadTitle +
-          ' ' +
-          ghBaseUrl +
-          ghUser +
-          '/' +
-          ghRepo +
-          ' directly from ' +
-          serviceName
-        : null
+      v-tippy="
+        showTips ? downloadTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' directly from ' + serviceName : null
       "
       :href="ghBaseUrl + ghUser + '/' + ghRepo + '/archive/HEAD.zip'"
       :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
       :data-icon="downloadIcon"
       :data-size="size"
       :data-show-count="showCountString"
-      :aria-label="downloadTitle +
-        ' ' +
-        ghBaseUrl +
-        ghUser +
-        '/' +
-        ghRepo +
-        ' directly from ' +
-        serviceName
-      "
+      :aria-label="downloadTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' directly from ' + serviceName"
       class="gh-button"
       @click="
-        track(
-          'Clicked ' +
-            downloadTitle +
-            ' ' +
-            ghBaseUrl +
-            ghUser +
-            '/' +
-            ghRepo +
-            ' directly from ' +
-            serviceName,
-        )
+        track('Clicked ' + downloadTitle + ' ' + ghBaseUrl + ghUser + '/' + ghRepo + ' directly from ' + serviceName)
       "
     >
       {{ downloadTitle }}
@@ -262,7 +110,7 @@
 import { mapStores, mapState, mapActions } from 'pinia';
 import { track } from '@services/analytics';
 import GithubButton from 'vue-github-button';
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth';
 // https://buttons.github.io/
 
 export default {
@@ -299,24 +147,21 @@ export default {
   },
   mounted() {
     if (this.user && this.user.id) {
-      localStorage.setItem("data-theme", this.user.theme_dark)
+      localStorage.setItem('data-theme', this.user.theme_dark);
       if (this.user.theme_dark) {
-        this.darkMode = 'dark'
+        this.darkMode = 'dark';
       } else {
-        this.darkMode = 'light'
+        this.darkMode = 'light';
       }
     } else {
-      this.darkMode = localStorage.getItem("data-theme")
+      this.darkMode = localStorage.getItem('data-theme');
     }
     window.addEventListener('theme-localstorage-changed', (event) => {
       this.darkMode = event.detail.storage;
     });
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     isDarkMode() {
       if (this.darkMode == 'dark') {
         return true;
@@ -350,7 +195,5 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
-<style lang="scss" scoped>
-</style>
+<style scoped></style>
+<style lang="scss" scoped></style>

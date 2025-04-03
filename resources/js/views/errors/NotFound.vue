@@ -9,10 +9,7 @@
             <h1 class="my-2 text-2xl font-bold text-gray-800">
               Looks like you've found the doorway to the great nothing
             </h1>
-            <p class="my-7 text-gray-800">
-              Sorry about that! Please visit our hompage to get where you need
-              to go.
-            </p>
+            <p class="my-7 text-gray-800">Sorry about that! Please visit our hompage to get where you need to go.</p>
             <router-link :to="authenticated ? { name: 'dashboard' } : { name: 'home' }">
               <AppButton
                 primary
@@ -23,18 +20,12 @@
           </div>
         </div>
         <div>
-          <img
-            id="fourZeroFour"
-            alt="404"
-          >
+          <img id="fourZeroFour" alt="404" />
         </div>
       </div>
     </div>
     <div>
-      <img
-        id="plugs"
-        alt="plugs"
-      >
+      <img id="plugs" alt="plugs" />
     </div>
   </div>
 </template>
@@ -43,7 +34,7 @@
 import fourZeroFour from '@img/404.png';
 import plugs from '@img/plugs.png';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@/store/auth";
+import { useAuthStore } from '@/store/auth';
 
 export default {
   name: 'NotFound',
@@ -61,18 +52,16 @@ export default {
     ...mapState(useAuthStore, ['user', 'authenticated']),
   },
   watch: {},
-  created() { },
+  created() {},
   mounted() {
     document.getElementById('plugs').src = plugs;
     document.getElementById('fourZeroFour').src = fourZeroFour;
   },
-  beforeUnmount() { },
-  updated() { },
+  beforeUnmount() {},
+  updated() {},
   methods: {},
 };
 </script>
 
-<style scoped>
-</style>
-<style lang="scss" scoped>
-</style>
+<style scoped></style>
+<style lang="scss" scoped></style>

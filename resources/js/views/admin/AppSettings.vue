@@ -1,18 +1,9 @@
 <template>
-  <div
-    id="serverInfo"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="serverInfo" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="admin.index"
-        :text="$t('admin')"
-      />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="app-settings"
-        :text="$t('app_settings')"
-      />
+      <AdminBreadcrumb route-name="app-settings" :text="$t('app_settings')" />
     </AdminBreadcrumbContainer>
 
     <div class="clear-both">
@@ -35,16 +26,13 @@
             >
               <span
                 class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
-                :class="activeTab == tab.name
-                  ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
-                  : ''
+                :class="
+                  activeTab == tab.name
+                    ? 'active border-blue-600 text-blue-600 dark:border-blue-500 dark:text-blue-500'
+                    : ''
                 "
               >
-                <span
-                  class="fa-fw fa-1x mr-3"
-                  :class="tab.icon"
-                  style="margin-top: 2px"
-                />
+                <span class="fa-fw fa-1x mr-3" :class="tab.icon" style="margin-top: 2px" />
                 {{ tab.name }}
               </span>
             </li>
@@ -52,17 +40,11 @@
         </div>
         <div class="rounded-lg bg-gray-50 p-4 dark:bg-gray-800">
           <div v-if="activeTab == 'Authentication'">
-            <h3 class="text-2xl font-semibold">
-              Authentication Settings
-            </h3>
-            <hr class="mt-3 w-10 pb-4">
+            <h3 class="text-2xl font-semibold">Authentication Settings</h3>
+            <hr class="mt-3 w-10 pb-4" />
 
             <div>
-              <div
-                v-for="setting in authSettings"
-                :key="'auth_setting_' + setting.id"
-                class="mb-3"
-              >
+              <div v-for="setting in authSettings" :key="'auth_setting_' + setting.id" class="mb-3">
                 <div class="setting-group mb-3">
                   <div v-if="setting.key == 'enableFbLogin'">
                     <h4 class="w-100 mb-3 text-xl font-semibold">
@@ -109,10 +91,7 @@
                     :disabled="!dataReady"
                     @update-setting="appSettingUpdateTriggered"
                   />
-                  <div
-                    v-if="setting.key == 'appFbRedirect'"
-                    class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
-                  />
+                  <div v-if="setting.key == 'appFbRedirect'" class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300" />
                 </div>
 
                 <div class="setting-group mb-3">
@@ -551,10 +530,7 @@
                     :disabled="!dataReady"
                     @update-setting="appSettingUpdateTriggered"
                   />
-                  <div
-                    v-if="setting.key == 'appAppleRedirect'"
-                    class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
-                  />
+                  <div v-if="setting.key == 'appAppleRedirect'" class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300" />
                 </div>
 
                 <div class="setting-group mb-3">
@@ -670,13 +646,8 @@
                         :src="zohoImgUrl"
                         alt="Zoho"
                         class=""
-                        style="
-                        width: 100%;
-                        max-width: 60px;
-                        margin: -10px 0 0 5px;
-                        display: inline-block;
-                      "
-                      >
+                        style="width: 100%; max-width: 60px; margin: -10px 0 0 5px; display: inline-block"
+                      />
                       <span class="sr-only"> ZoHo </span>
                       <a
                         v-tippy="'Get Credentials'"
@@ -719,10 +690,7 @@
                     :disabled="!dataReady"
                     @update-setting="appSettingUpdateTriggered"
                   />
-                  <div
-                    v-if="setting.key == 'appZoHoRedirect'"
-                    class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300"
-                  />
+                  <div v-if="setting.key == 'appZoHoRedirect'" class="ml-8 mr-5 mt-4 mb-5 border border-b-slate-300" />
                 </div>
 
                 <div class="setting-group mb-3">
@@ -1075,15 +1043,9 @@
           </div>
 
           <div v-if="activeTab == 'Analytics'">
-            <h3 class="text-2xl font-semibold">
-              Analytics Settings
-            </h3>
-            <hr class="mt-3 w-10 pb-4">
-            <div
-              v-for="setting in analyticsSettings"
-              :key="'analytic_settings_' + setting.id"
-              class="mb-3"
-            >
+            <h3 class="text-2xl font-semibold">Analytics Settings</h3>
+            <hr class="mt-3 w-10 pb-4" />
+            <div v-for="setting in analyticsSettings" :key="'analytic_settings_' + setting.id" class="mb-3">
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableGoogleAnalytics'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
@@ -1111,22 +1073,14 @@
           </div>
 
           <div v-if="activeTab == 'General'">
-            <h3 class="text-2xl font-semibold">
-              General Settings
-            </h3>
-            <hr class="mt-3 w-10 pb-4">
+            <h3 class="text-2xl font-semibold">General Settings</h3>
+            <hr class="mt-3 w-10 pb-4" />
           </div>
 
           <div v-if="activeTab == 'Monitoring'">
-            <h3 class="text-2xl font-semibold">
-              Monitoring Settings
-            </h3>
-            <hr class="mt-3 w-10 pb-4">
-            <div
-              v-for="setting in monitoringSettings"
-              :key="'monitoring_settings_' + setting.id"
-              class="mb-3"
-            >
+            <h3 class="text-2xl font-semibold">Monitoring Settings</h3>
+            <hr class="mt-3 w-10 pb-4" />
+            <div v-for="setting in monitoringSettings" :key="'monitoring_settings_' + setting.id" class="mb-3">
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableSentryMonitoring'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
@@ -1185,15 +1139,9 @@
           </div>
 
           <div v-if="activeTab == 'App Meta'">
-            <h3 class="text-2xl font-semibold">
-              App Meta Settings
-            </h3>
-            <hr class="mt-3 w-10 pb-4">
-            <div
-              v-for="setting in metaSettings"
-              :key="'monitoring_settings_' + setting.id"
-              class="mb-3"
-            >
+            <h3 class="text-2xl font-semibold">App Meta Settings</h3>
+            <hr class="mt-3 w-10 pb-4" />
+            <div v-for="setting in metaSettings" :key="'monitoring_settings_' + setting.id" class="mb-3">
               <div class="setting-group mb-3">
                 <AppSettingTextInput
                   v-if="setting.key == 'appName'"
@@ -1229,23 +1177,16 @@
           </div>
 
           <div v-if="activeTab == 'Secrets'">
-            <h3 class="text-2xl font-semibold">
-              Secret Settings
-            </h3>
-            <hr class="mt-3 w-10 pb-4">
-            <div
-              v-for="setting in secretSettings"
-              :key="'monitoring_settings_' + setting.id"
-              class="mb-3"
-            >
+            <h3 class="text-2xl font-semibold">Secret Settings</h3>
+            <hr class="mt-3 w-10 pb-4" />
+            <div v-for="setting in secretSettings" :key="'monitoring_settings_' + setting.id" class="mb-3">
               <div class="setting-group mb-3">
                 <div v-if="setting.key == 'enableKonamiAsteroids'">
                   <h4 class="w-100 mb-3 text-xl font-semibold">
                     <span class="fa-solid fa-egg fa-fw text-green-300 dark:text-green-300" />
                     App Hidden Features
                     <a
-                      v-tippy="'Up, Up, Down, Down, Left, Right, Left, Right, a, b'
-                      "
+                      v-tippy="'Up, Up, Down, Down, Left, Right, Left, Right, a, b'"
                       href="https://en.wikipedia.org/wiki/Konami_Code"
                       target="_blank"
                       class="text-blue-300 duration-300 ease-in-out hover:text-blue-400"
@@ -1310,13 +1251,12 @@
 </template>
 
 <script>
-
-import { watch, ref, watchEffect } from 'vue'
+import { watch, ref, watchEffect } from 'vue';
 import { mapStores, mapState, mapActions } from 'pinia';
 import axios from 'axios';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import useAuth from '@composables/auth';
 import { track } from '@services/analytics';
 import AppSettingToggle from '@components/form/AppSettingToggle.vue';
 import AppSettingTextInput from '@components/form/AppSettingTextInput.vue';
@@ -1361,17 +1301,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuth, [
-      'processing',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuth, ['processing']),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
     sentryEnabled() {
-      const status = this.monitoringSettings.find(
-        (s) => s.key == 'enableSentryMonitoring',
-      );
+      const status = this.monitoringSettings.find((s) => s.key == 'enableSentryMonitoring');
       if (status && status.val && status.val == 1) {
         return true;
       }
@@ -1386,21 +1319,15 @@ export default {
     },
   },
   watch: {},
-  created() { },
+  created() {},
   mounted() {
     this.getAppSettings();
   },
-  beforeUnmount() { },
-  updated() { },
+  beforeUnmount() {},
+  updated() {},
   methods: {
-    ...mapActions(useAuth, [
-      'logout',
-    ]),
-    ...mapActions(useToastStore, [
-      'popToast',
-      'success',
-      'error',
-    ]),
+    ...mapActions(useAuth, ['logout']),
+    ...mapActions(useToastStore, ['popToast', 'success', 'error']),
     clickButton() {
       this.$emit('buttonClicked');
     },
@@ -1443,9 +1370,7 @@ export default {
       }
       if (setting && setting.group && setting.group == 'monitoring') {
         // index = this.monitoringSettings.indexOf(setting);
-        index = this.monitoringSettings
-          .map((o) => o.name)
-          .indexOf(setting.name);
+        index = this.monitoringSettings.map((o) => o.name).indexOf(setting.name);
       }
       if (setting && setting.group && setting.group == 'app-meta') {
         // index = this.metaSettings.indexOf(setting);
@@ -1543,5 +1468,4 @@ export default {
   color: #ffffff !important;
 }
 </style>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,23 +1,11 @@
 <template>
-  <div
-    id="roles"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="roles" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="dashboard"
-        :text="$t('dashboard')"
-      />
+      <AdminBreadcrumb route-name="dashboard" :text="$t('dashboard')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="settings.index"
-        :text="$t('settings')"
-      />
+      <AdminBreadcrumb route-name="settings.index" :text="$t('settings')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="settings.account"
-        :text="$t('account')"
-      />
+      <AdminBreadcrumb route-name="settings.account" :text="$t('account')" />
     </AdminBreadcrumbContainer>
 
     <div class="clear-both">
@@ -44,11 +32,7 @@
                 </span>
               </li>
 
-              <li
-                class="mr-2 cursor-pointer"
-                style="margin-top: 3px; margin-bottom: -2px"
-                @click="changeTab('data')"
-              >
+              <li class="mr-2 cursor-pointer" style="margin-top: 3px; margin-bottom: -2px" @click="changeTab('data')">
                 <span
                   class="group inline-flex rounded-t-lg border-b-2 border-transparent p-4 hover:border-gray-300 hover:text-gray-600 dark:hover:text-gray-300"
                   :class="
@@ -73,19 +57,16 @@
 </template>
 
 <script>
-import { watch, ref, watchEffect } from 'vue'
+import { watch, ref, watchEffect } from 'vue';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import useAuth from '@composables/auth';
 import { track } from '@services/analytics';
 import moment from 'moment';
 import SettingsNav from '@pages/user-settings/SettingsNav.vue';
 import AccountData from '@pages/user-settings/AccountData.vue';
 import AccountAuthentication from '@pages/user-settings/AccountAuthentication.vue';
-import {
-  CircleStackIcon,
-  UserCircleIcon,
-} from '@heroicons/vue/24/outline';
+import { CircleStackIcon, UserCircleIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'AccountPage',
@@ -106,20 +87,14 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuth, [
-      'processing',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-      'socials',
-    ]),
+    ...mapState(useAuth, ['processing']),
+    ...mapState(useAuthStore, ['user', 'authenticated', 'socials']),
   },
   watch: {},
-  created() { },
-  mounted() { },
-  beforeUnmount() { },
-  updated() { },
+  created() {},
+  mounted() {},
+  beforeUnmount() {},
+  updated() {},
   methods: {
     track,
     changeTab(tab) {

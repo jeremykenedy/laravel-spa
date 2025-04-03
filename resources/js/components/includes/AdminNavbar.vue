@@ -5,28 +5,13 @@
         <div class="mr-4 flex items-center lg:hidden">
           <button
             class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
-            :class="sideBarOpenGetter ? 'bg-slate-100 text-gray-900 dark:text-gray-100' : ''
-            "
+            :class="sideBarOpenGetter ? 'bg-slate-100 text-gray-900 dark:text-gray-100' : ''"
             @click.prevent="toggleSidebarTrigger()"
           >
-            <span
-              v-if="!sideBarOpenGetter"
-              class="sr-only"
-            >Open menu</span>
-            <span
-              v-if="sideBarOpenGetter"
-              class="sr-only"
-            >CLose menu</span>
-            <Bars3Icon
-              v-if="!sideBarOpenGetter"
-              class="h-6 w-6"
-              aria-hidden="true"
-            />
-            <XMarkIcon
-              v-if="sideBarOpenGetter"
-              class="h-6 w-6"
-              aria-hidden="true"
-            />
+            <span v-if="!sideBarOpenGetter" class="sr-only">Open menu</span>
+            <span v-if="sideBarOpenGetter" class="sr-only">CLose menu</span>
+            <Bars3Icon v-if="!sideBarOpenGetter" class="h-6 w-6" aria-hidden="true" />
+            <XMarkIcon v-if="sideBarOpenGetter" class="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
 
@@ -36,64 +21,34 @@
               class="navbar-burger rounded text-gray-600 hover:border-white hover:text-gray-500 focus:outline-none dark:bg-slate-800 dark:hover:bg-slate-800"
               @click.prevent="toggleFullScreenSidebarTrigger()"
             >
-              <span
-                v-if="!fullScreenSideBarOpenGetter"
-                class="sr-only"
-              >Open menu</span>
-              <span
-                v-if="fullScreenSideBarOpenGetter"
-                class="sr-only"
-              >CLose menu</span>
-              <Bars3Icon
-                v-if="!fullScreenSideBarOpenGetter"
-                class="h-6 w-6"
-                aria-hidden="true"
-              />
-              <Bars3BottomLeftIcon
-                v-if="fullScreenSideBarOpenGetter"
-                class="h-6 w-6"
-                aria-hidden="true"
-              />
+              <span v-if="!fullScreenSideBarOpenGetter" class="sr-only">Open menu</span>
+              <span v-if="fullScreenSideBarOpenGetter" class="sr-only">CLose menu</span>
+              <Bars3Icon v-if="!fullScreenSideBarOpenGetter" class="h-6 w-6" aria-hidden="true" />
+              <Bars3BottomLeftIcon v-if="fullScreenSideBarOpenGetter" class="h-6 w-6" aria-hidden="true" />
             </button>
           </div>
         </div>
 
-        <nav
-          as="nav"
-          class="ml-5 space-x-10 hidden md:flex"
-        >
-          <NavLink
-            v-if="authenticated"
-            route-name="dashboard"
-            @nav-clicked="closeDrop"
-          >
+        <nav as="nav" class="ml-5 space-x-10 hidden md:flex">
+          <NavLink v-if="authenticated" route-name="dashboard" @nav-clicked="closeDrop">
             <template #iconBefore>
               <BuildingLibraryIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="home"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="home" @nav-clicked="closeDrop">
             <template #iconBefore>
               <HomeIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="about"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="about" @nav-clicked="closeDrop">
             <template #iconBefore>
               <InformationCircleIcon class="h-6 w-6" />
             </template>
           </NavLink>
 
-          <NavLink
-            route-name="terms"
-            @nav-clicked="closeDrop"
-          >
+          <NavLink route-name="terms" @nav-clicked="closeDrop">
             <template #iconBefore>
               <DocumentTextIcon class="h-6 w-6" />
             </template>
@@ -101,19 +56,13 @@
         </nav>
       </div>
 
-      <div
-        class="h-6 w-px bg-gray-900/10 lg:hidden"
-        aria-hidden="true"
-      />
+      <div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
       <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
         <div class="grid flex-1 grid-cols-1" />
         <div class="flex items-center gap-x-4 lg:gap-x-6">
           <ToggleDarkMode class="-mr-1" />
-          <div
-            class="h-6 w-px bg-gray-200 dark:bg-gray-600"
-            aria-hidden="true"
-          />
+          <div class="h-6 w-px bg-gray-200 dark:bg-gray-600" aria-hidden="true" />
           <div class="relative">
             <button
               id="user-menu-button"
@@ -129,16 +78,13 @@
                 :src="user.avatar"
                 :alt="user.name"
                 class="size-8 rounded-full bg-gray-50 cursor-pointer border shadow-lg dark:border-gray-500"
-              >
+              />
               <UserCircleIcon
                 v-else
-                class="size-9 rounded-full bg-gray-50 cursor-pointer text-gray-700 dark:text-gray-200 "
+                class="size-9 rounded-full bg-gray-50 cursor-pointer text-gray-700 dark:text-gray-200"
               />
               <span class="hidden lg:flex lg:items-center">
-                <span
-                  class="ml-4 text-sm/6 font-semibold text-gray-700 dark:text-gray-200"
-                  aria-hidden="true"
-                >
+                <span class="ml-4 text-sm/6 font-semibold text-gray-700 dark:text-gray-200" aria-hidden="true">
                   {{ user && user.name ? user.name : '' }}
                 </span>
                 <svg
@@ -161,10 +107,7 @@
       </div>
     </div>
 
-    <div
-      ref="dropMenu"
-      class="relative mt-1 z-50"
-    >
+    <div ref="dropMenu" class="relative mt-1 z-50">
       <div
         v-show="dropDownOpen"
         class="absolute right-5 z-10 flex w-auto flex-col whitespace-nowrap rounded border bg-white shadow-md dark:bg-slate-900 transition ease-in-out duration-75"
@@ -181,11 +124,7 @@
           </template>
         </AdminNavBarLink>
 
-        <AdminNavBarLink
-          v-if="authenticated && user"
-          route-name="settings.index"
-          :text="$t('settings')"
-        >
+        <AdminNavBarLink v-if="authenticated && user" route-name="settings.index" :text="$t('settings')">
           <template #icon>
             <Cog6ToothIcon class="h-6 w-6" />
           </template>
@@ -208,10 +147,10 @@
 
 <script>
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useSideBarStore } from "@store/sidebar";
-import useAuth from '@composables/auth'
-import useProfile from "@composables/profile";
+import { useAuthStore } from '@store/auth';
+import { useSideBarStore } from '@store/sidebar';
+import useAuth from '@composables/auth';
+import useProfile from '@composables/profile';
 import { parseDisplayDate } from '@services/common';
 import ToggleDarkMode from '@components/ToggleDarkMode.vue';
 import NavLink from '@components/includes/NavLink.vue';
@@ -252,29 +191,16 @@ export default {
     };
   },
   computed: {
-    ...mapState(useAuth, [
-      'processing',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
-    ...mapState(useSideBarStore, [
-      'sideBarOpenGetter',
-      'fullScreenSideBarOpenGetter'
-    ]),
+    ...mapState(useAuth, ['processing']),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
+    ...mapState(useSideBarStore, ['sideBarOpenGetter', 'fullScreenSideBarOpenGetter']),
     currentRouteName() {
       return this.$route.name;
     },
   },
   methods: {
-    ...mapActions(useAuth, [
-      'logout',
-    ]),
-    ...mapActions(useSideBarStore, [
-      'toggleSidebar',
-      'toggleFullScreenSidebar',
-    ]),
+    ...mapActions(useAuth, ['logout']),
+    ...mapActions(useSideBarStore, ['toggleSidebar', 'toggleFullScreenSidebar']),
     toggleSidebarTrigger() {
       this.toggleSidebar();
       this.closeDrop();
@@ -293,7 +219,5 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
-<style lang="scss" scoped>
-</style>
+<style scoped></style>
+<style lang="scss" scoped></style>

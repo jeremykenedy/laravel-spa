@@ -1,11 +1,9 @@
 <template>
-  <h1>
-    Verify
-  </h1>
+  <h1>Verify</h1>
 </template>
 
 <script>
 export default {
-  name: "VerifyPage"
-}
+  name: 'VerifyPage',
+};
 </script>

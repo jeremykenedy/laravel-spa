@@ -7,33 +7,22 @@
             class="r-2 flex h-20 w-20 w-0 flex-1 justify-start text-indigo-400 dark:text-indigo-200"
           />
         </div>
-        <h2 class="text-lg font-semibold text-indigo-600 dark:text-gray-100">
-          Vue Tailwind CSS
-        </h2>
+        <h2 class="text-lg font-semibold text-indigo-600 dark:text-gray-100">Vue Tailwind CSS</h2>
         <p class="mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
           A better way to single page app
         </p>
         <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-300 lg:mx-auto">
-          A Laravel, Vite, Vue SPA (w/ Vue Router), Tailwind CSS (w/ Forms
-          Plugin & Aspect Ratio Plugin), Axios, Headless UI, Heroicons, eslint,
-          &amp; TypeScript starter template.
+          A Laravel, Vite, Vue SPA (w/ Vue Router), Tailwind CSS (w/ Forms Plugin & Aspect Ratio Plugin), Axios,
+          Headless UI, Heroicons, eslint, &amp; TypeScript starter template.
         </p>
       </div>
 
       <div class="mt-10">
         <dl class="space-y-10 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 md:space-y-0">
-          <div
-            v-for="feature in features"
-            :key="feature.name"
-            class="relative"
-          >
+          <div v-for="feature in features" :key="feature.name" class="relative">
             <dt>
               <div class="absolute flex h-12 w-12 items-center justify-center rounded-md bg-indigo-500 text-white">
-                <component
-                  :is="feature.icon"
-                  class="h-6 w-6"
-                  aria-hidden="true"
-                />
+                <component :is="feature.icon" class="h-6 w-6" aria-hidden="true" />
               </div>
               <p class="ml-16 text-lg font-medium leading-6 text-gray-900 dark:text-gray-100">
                 {{ feature.name }}
@@ -107,22 +96,19 @@ export default {
         },
         {
           name: 'Heroicons',
-          description:
-            'Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.',
+          description: 'Beautiful hand-crafted SVG icons, by the makers of Tailwind CSS.',
           icon: ShieldCheckIcon,
         },
       ],
     };
   },
   computed: {},
-  created() { },
-  mounted() { },
+  created() {},
+  mounted() {},
   methods: {},
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

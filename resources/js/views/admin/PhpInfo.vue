@@ -1,18 +1,9 @@
 <template>
-  <div
-    id="serverInfo"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="serverInfo" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="admin.index"
-        :text="$t('admin')"
-      />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="phpinfo"
-        :text="$t('server_info')"
-      />
+      <AdminBreadcrumb route-name="phpinfo" :text="$t('server_info')" />
     </AdminBreadcrumbContainer>
 
     <div class="clear-both px-1">
@@ -23,10 +14,7 @@
           </div>
         </div>
       </div>
-      <div
-        v-if="dataReady"
-        class="php-info"
-      >
+      <div v-if="dataReady" class="php-info">
         <div v-html-safe="info" />
       </div>
     </div>
@@ -36,7 +24,7 @@
 <script>
 import axios from 'axios';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 
 export default {
   name: 'PhpInfo',
@@ -44,13 +32,10 @@ export default {
     return {
       dataReady: false,
       info: null,
-    }
+    };
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
   },
   mounted() {
     this.getServerInfo();

@@ -1,16 +1,11 @@
 <template>
-  <div
-    id="main-body"
-    class="leading-normal tracking-normal"
-  >
+  <div id="main-body" class="leading-normal tracking-normal">
     <div class="flex flex-wrap">
       <AdminSidebar :class="fullScreenSideBarOpenGetter ? '' : 'lg:hidden'" />
       <div
         id="main-content"
         class="min-h-screen w-full bg-white pl-0 dark:bg-slate-800"
-        :class="(sideBarOpenGetter ? 'overlay ' : ' ') +
-          (fullScreenSideBarOpenGetter ? 'lg:pl-64' : '')
-        "
+        :class="(sideBarOpenGetter ? 'overlay ' : ' ') + (fullScreenSideBarOpenGetter ? 'lg:pl-64' : '')"
       >
         <AdminNavbar />
         <div class="mb-20 bg-white dark:bg-slate-800">
@@ -30,10 +25,10 @@
 
 <script>
 import { mapState } from 'pinia';
-import { useSideBarStore } from "@store/sidebar";
-import AdminNavbar from "@components/includes/AdminNavbar.vue";
-import AdminSidebar from "@components/includes/AdminSidebar.vue";
-import AppFooter from "@components/includes/AppFooter.vue";
+import { useSideBarStore } from '@store/sidebar';
+import AdminNavbar from '@components/includes/AdminNavbar.vue';
+import AdminSidebar from '@components/includes/AdminSidebar.vue';
+import AppFooter from '@components/includes/AppFooter.vue';
 
 export default {
   components: {
@@ -45,12 +40,7 @@ export default {
     currentRouteName() {
       return this.$route.name;
     },
-    ...mapState(useSideBarStore, [
-      'sideBarOpenGetter',
-      'fullScreenSideBarOpenGetter'
-    ]),
-
+    ...mapState(useSideBarStore, ['sideBarOpenGetter', 'fullScreenSideBarOpenGetter']),
   },
 };
-
 </script>

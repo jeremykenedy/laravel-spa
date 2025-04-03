@@ -1,23 +1,11 @@
 <template>
-  <div
-    id="profile"
-    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
-  >
+  <div id="profile" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb
-        route-name="dashboard"
-        :text="$t('dashboard')"
-      />
+      <AdminBreadcrumb route-name="dashboard" :text="$t('dashboard')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="settings.index"
-        :text="$t('settings')"
-      />
+      <AdminBreadcrumb route-name="settings.index" :text="$t('settings')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb
-        route-name="settings.profile"
-        :text="$t('profile')"
-      />
+      <AdminBreadcrumb route-name="settings.profile" :text="$t('profile')" />
     </AdminBreadcrumbContainer>
 
     <div class="clear-both">
@@ -36,10 +24,7 @@
             >
               <template #message>
                 <div class="text-danger mt-1">
-                  <div
-                    v-for="message in validationErrors?.name"
-                    :key="message"
-                  >
+                  <div v-for="message in validationErrors?.name" :key="message">
                     {{ message }}
                   </div>
                 </div>
@@ -56,10 +41,7 @@
             >
               <template #message>
                 <div class="text-danger mt-1">
-                  <div
-                    v-for="message in validationErrors?.email"
-                    :key="message"
-                  >
+                  <div v-for="message in validationErrors?.email" :key="message">
                     {{ message }}
                   </div>
                 </div>
@@ -84,41 +66,43 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, watchEffect } from "vue";
-import { useForm, useField, defineRule } from "vee-validate";
-import { required, min } from "@/validation/rules"
-import useProfile from "@/composables/profile";
+import { onMounted, reactive, ref, watchEffect } from 'vue';
+import { useForm, useField, defineRule } from 'vee-validate';
+import { required, min } from '@/validation/rules';
+import useProfile from '@/composables/profile';
 import CircleSvg from '@components/common/CircleSvg.vue';
 import SettingsNav from '@pages/user-settings/SettingsNav.vue';
 import AppTextInput from '@components/form/AppTextInput.vue';
 
-defineRule('required', required)
+defineRule('required', required);
 // defineRule('email', email)
 defineRule('min', min);
 
 const schema = {
   name: 'required|min:3',
   email: 'required',
-}
+};
 // Create a form context with the validation schema
-const { validate, errors } = useForm({ validationSchema: schema })
+const { validate, errors } = useForm({ validationSchema: schema });
 // Define actual fields for validation
 const { value: name } = useField('name', null, { initialValue: '' });
 const { value: email } = useField('email', null, { initialValue: '' });
 const { profile: profileData, getProfile, updateProfile, validationErrors, isLoading } = useProfile();
 const profile = reactive({
   name,
-  email
-})
+  email,
+});
 function submitForm() {
-  validate().then(form => { if (form.valid) updateProfile(profile) })
+  validate().then((form) => {
+    if (form.valid) updateProfile(profile);
+  });
 }
 onMounted(() => {
-  getProfile()
-})
+  getProfile();
+});
 
 watchEffect(() => {
-  profile.name = profileData.value.name
-  profile.email = profileData.value.email
-})
+  profile.name = profileData.value.name;
+  profile.email = profileData.value.email;
+});
 </script>

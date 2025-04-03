@@ -1,4 +1,4 @@
-import {defineStore} from 'pinia';
+import { defineStore } from 'pinia';
 
 export const useSideBarStore = defineStore('sidebar', {
   namespaced: true,

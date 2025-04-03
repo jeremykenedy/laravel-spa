@@ -1,9 +1,6 @@
 <template>
   <div>
-    <label
-      class="m:w-3/12 mb-1 inline-flex w-10/12"
-      :for="setting.key"
-    >{{ setting.name }}:</label>
+    <label class="m:w-3/12 mb-1 inline-flex w-10/12" :for="setting.key">{{ setting.name }}:</label>
     <input
       :id="setting.key"
       type="text"
@@ -14,23 +11,23 @@
       :value="setting.val"
       @blur="updateSetting($event.target.value)"
       @keyup.enter="$event.target.blur()"
-    >
+    />
   </div>
 </template>
 
 <script lang="ts">
 export default {
-    name: 'AppSettingTextInput',
-    props: {
-        setting: { type: Object, required: true },
-        loading: { type: Boolean, default: false },
-        disabled: { type: Boolean, default: false },
+  name: 'AppSettingTextInput',
+  props: {
+    setting: { type: Object, required: true },
+    loading: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+  },
+  methods: {
+    updateSetting(val) {
+      const { setting } = this;
+      this.$emit('updateSetting', { val, setting });
     },
-    methods: {
-        updateSetting(val) {
-            const { setting } = this;
-            this.$emit('updateSetting', { val, setting });
-        },
-    },
+  },
 };
 </script>
