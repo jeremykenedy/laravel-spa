@@ -10,8 +10,14 @@
       class="d-block ml-auto mr-auto"
     />
     -->
-    <github-button :href="repo" :data-color-scheme="colors" :data-size="size" :data-show-count="showCount"
-      :aria-label="ariaLabel" @click="track">
+    <github-button
+      :href="repo"
+      :data-color-scheme="colors"
+      :data-size="size"
+      :data-show-count="showCount"
+      :aria-label="ariaLabel"
+      @click="track"
+    >
       Star
     </github-button>
   </div>

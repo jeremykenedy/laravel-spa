@@ -19,32 +19,27 @@
 
 <script>
 import { mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import { useToastStore } from "@store/toast";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import { useToastStore } from '@store/toast';
+import useAuth from '@composables/auth';
 import { track } from '@services/analytics';
 import CircleSvg from '@components/common/CircleSvg.vue';
 import { UserCircleIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'ImpersonateUser',
-  props: {
-    person: { type: Object},
-    classes: { type: String, default: null },
-    loading: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: false },
-  },
   components: {
     CircleSvg,
     UserCircleIcon,
   },
+  props: {
+    person: { type: Object },
+    classes: { type: String, default: null },
+    loading: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: false },
+  },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-      'impersonatorToken',
-      'currentUserToken',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated', 'impersonatorToken', 'currentUserToken']),
     currentRouteName() {
       return this.$route.name;
     },
@@ -56,17 +51,9 @@ export default {
     },
   },
   methods: {
-    ...mapActions(useAuth, [
-      'impersonateUser',
-    ]),
-    ...mapActions(useToastStore, [
-      'error',
-    ]),
-    ...mapActions(useAuthStore, [
-      'userIs',
-      'userCan',
-      'getUser',
-    ]),
+    ...mapActions(useAuth, ['impersonateUser']),
+    ...mapActions(useToastStore, ['error']),
+    ...mapActions(useAuthStore, ['userIs', 'userCan', 'getUser']),
     track,
     async triggerImpersonateUser() {
       this.$emit('clicked');
@@ -79,7 +66,6 @@ export default {
         this.error('An error occurred, you are still are not yourself!');
       }
     },
-
   },
 };
 </script>

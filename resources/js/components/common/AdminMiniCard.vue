@@ -1,5 +1,7 @@
 <template>
-  <figure class="flex flex-col justify-left p-6 text-left rounded-lg shadow dark:shadow-none bg-gray-100 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700">
+  <figure
+    class="flex flex-col justify-left p-6 text-left rounded-lg shadow dark:shadow-none bg-gray-100 text-gray-600 hover:bg-gray-100 dark:border-slate-900 dark:bg-slate-900 dark:hover:border-slate-700 dark:hover:bg-slate-700"
+  >
     <figcaption class="flex justify-left text-gray-700 dark:text-gray-300">
       <slot v-if="hasIconSlot" name="icon" />
       <div class="space-y-0.5 font-medium dark:text-white text-left ms-3">
