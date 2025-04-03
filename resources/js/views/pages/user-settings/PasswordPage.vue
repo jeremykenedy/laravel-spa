@@ -90,18 +90,18 @@ export default {
             if (response && response == 'Success') {
               this.form.password = '';
               this.form.password_confirmation = '';
-              this.success('Password updated successfully');
+              this.success($t('pw_updated'));
             } else {
-              this.error('Password not updated');
+              this.error($t('pw_not_updated'));
             }
           });
           this.loading = false;
         } catch (e) {
-          this.error('Password not updated');
+          this.error($t('pw_not_updated'));
           this.loading = false;
         }
       } else {
-        this.warning('Password Invalid');
+        this.warning($t('pw_invalid_msg'));
       }
     },
     validateForm() {
@@ -109,23 +109,20 @@ export default {
       this.errors.password_confirmation = null;
       let pass = true;
       if (this.form.password.length < 8) {
-        this.errors.password = 'Password must be at least 8 characters.';
+        this.errors.password = $t('pw_min_length_msg');
         pass = false;
       } else if (this.form.password.length > 200) {
-        this.errors.password = 'Password must be less than 200 characters.';
+        this.errors.password = $t('pw_max_length_msg');
         pass = false;
         // } else if(!/[A-Z]/.test(this.form.password)) {
         //   this.errors.password = 'Password must contain at least one uppercase letter.';
         //   pass = false;
-      } else if (this.form.password.length > 200) {
-        this.errors.password = 'Password must be less than 200 characters.';
-        pass = false;
       } else if (!(typeof this.form.password == 'string') || this.form.password instanceof String) {
-        this.errors.password = 'Password is invalid.';
+        this.errors.password = $t('pw_invalid_msg');
         pass = false;
       }
       if (this.form.password != this.form.password_confirmation) {
-        this.errors.password_confirmation = 'Passwords do not match.';
+        this.errors.password_confirmation = $t('pw_match_msg');
         pass = false;
       }
       return pass;

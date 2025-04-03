@@ -116,5 +116,11 @@
   "your_data": "Your Data",
   "on_demand": "On Demand",
   "download_data_msg": "Download your user data.",
-  "security": "Security"
+  "security": "Security",
+  "pw_min_length_msg": "Password must be at least 8 characters.",
+  "pw_max_length_msg": "Password must be less than 200 characters.",
+  "pw_match_msg": "Passwords do not match.",
+  "pw_invalid_msg": "Password is invalid.",
+  "pw_updated": "Password updated successfully",
+  "pw_not_updated": "Password not updated"
 }
