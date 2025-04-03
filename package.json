@@ -71,7 +71,7 @@
         "@sentry/tracing": "^7.120.3",
         "@sentry/vue": "^9.0.0",
         "@tailwindcss/vite": "^4.0.1",
-        "@tinymce/tinymce-vue": "^5.1.1",
+        "@tinymce/tinymce-vue": "^6.1.0",
         "@umoteam/editor": "^5.0.0",
         "@vueform/multiselect": "^2.6.11",
         "@vueform/slider": "^2.1.10",
