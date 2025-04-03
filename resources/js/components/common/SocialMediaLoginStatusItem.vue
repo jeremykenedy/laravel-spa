@@ -3,17 +3,23 @@
     v-tippy="loginEnabled(name) ? $t('enabled') : $t('disabled')"
     class="fa-brands fa-fw"
     :class="
-      ('fa-' + icon + ' ') +
+      'fa-' +
+      icon +
+      ' ' +
       (loginEnabled(name)
-        ? (enabledClass ? enabledClass : 'text-gray-800 dark:text-gray-200 ')
-        : (disabledClass ? disabledClass : 'text-gray-400 dark:text-gray-600 '))
+        ? enabledClass
+          ? enabledClass
+          : 'text-gray-800 dark:text-gray-200 '
+        : disabledClass
+          ? disabledClass
+          : 'text-gray-400 dark:text-gray-600 ')
     "
   />
 </template>
 
 <script>
 import { mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 
 export default {
   name: 'SocialMediaLoginStatusItem',
@@ -24,9 +30,7 @@ export default {
     disabledClass: { type: String, default: null },
   },
   methods: {
-    ...mapActions(useAuthStore, [
-      'loginEnabled',
-    ]),
+    ...mapActions(useAuthStore, ['loginEnabled']),
   },
 };
 </script>

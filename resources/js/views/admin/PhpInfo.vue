@@ -1,10 +1,9 @@
 <template>
   <div id="serverInfo" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb routeName="admin.index" :text="$t('admin')" />
+      <AdminBreadcrumb route-name="admin.index" :text="$t('admin')" />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb routeName="phpinfo" :text="$t('server_info')" />
+      <AdminBreadcrumb route-name="phpinfo" :text="$t('server_info')" />
     </AdminBreadcrumbContainer>
 
     <div class="clear-both px-1">
@@ -19,30 +18,24 @@
         <div v-html-safe="info" />
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 
 export default {
   name: 'PhpInfo',
-  components: { ChevronRightIcon },
   data() {
     return {
       dataReady: false,
       info: null,
-    }
+    };
   },
   computed: {
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
   },
   mounted() {
     this.getServerInfo();

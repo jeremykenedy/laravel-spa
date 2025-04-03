@@ -1,40 +1,12 @@
 <template>
   <div>
-    <SocialMediaLoginStatusItem
-      icon="facebook"
-      name="facebook"
-      enabled-class="text-blue-500 dark:text-blue-500"
-    />
-    <SocialMediaLoginStatusItem
-      icon="x"
-      name="twitter"
-      enabled-class="text-blue-300 dark:text-blue-300"
-    />
-    <SocialMediaLoginStatusItem
-      icon="instagram"
-      name="instagram"
-      enabled-class="text-green-300 dark:text-yellow-300"
-    />
-    <SocialMediaLoginStatusItem
-      icon="github"
-      name="github"
-      enabled-class="text-gray-300 dark:text-gray-300"
-    />
-    <SocialMediaLoginStatusItem
-      icon="youtube"
-      name="youtube"
-      enabled-class="text-red-500 dark:text-red-500"
-    />
-    <SocialMediaLoginStatusItem
-      icon="google"
-      name="google"
-      enabled-class="text-green-300 dark:text-green-300"
-    />
-    <SocialMediaLoginStatusItem
-      icon="linkedin"
-      name="linkedin"
-      enabled-class="text-blue-500 dark:text-blue-500"
-    />
+    <SocialMediaLoginStatusItem icon="facebook" name="facebook" enabled-class="text-blue-500 dark:text-blue-500" />
+    <SocialMediaLoginStatusItem icon="x" name="twitter" enabled-class="text-blue-300 dark:text-blue-300" />
+    <SocialMediaLoginStatusItem icon="instagram" name="instagram" enabled-class="text-green-300 dark:text-yellow-300" />
+    <SocialMediaLoginStatusItem icon="github" name="github" enabled-class="text-gray-300 dark:text-gray-300" />
+    <SocialMediaLoginStatusItem icon="youtube" name="youtube" enabled-class="text-red-500 dark:text-red-500" />
+    <SocialMediaLoginStatusItem icon="google" name="google" enabled-class="text-green-300 dark:text-green-300" />
+    <SocialMediaLoginStatusItem icon="linkedin" name="linkedin" enabled-class="text-blue-500 dark:text-blue-500" />
     <!--
     <SocialMediaLoginStatusItem
       icon="apple"

@@ -8,14 +8,13 @@
           tooltip-on="Enable"
           tooltip-off="Disable"
         />
-        <span v-if="loading"
+        <span
+          v-if="loading"
           class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
           style="left: -1.4em; top: 1.2em"
         />
       </span>
-      <span>
-        {{ setting.name }} {{ setting.val == '1' ? 'Enabled' : 'Disabled' }}
-      </span>
+      <span> {{ setting.name }} {{ setting.val == '1' ? 'Enabled' : 'Disabled' }} </span>
     </div>
   </div>
 </template>

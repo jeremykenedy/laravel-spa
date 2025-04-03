@@ -6,9 +6,7 @@
 
 <script>
 import { track } from '@services/analytics';
-import {
-  ChevronRightIcon,
-} from '@heroicons/vue/24/outline';
+import { ChevronRightIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'AdminBreadcrumbSep',

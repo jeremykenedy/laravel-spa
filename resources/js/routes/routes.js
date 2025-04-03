@@ -1,42 +1,47 @@
-import { guest, requireLogin, superAdmin, admin } from "@routes/middleware";
+import { guest, requireLogin, superAdmin, admin } from '@routes/middleware';
 
-const AuthenticatedLayout = () => import(/* webpackChunkName: "js/AuthenticatedLayout" */ '@layouts/Authenticated.vue')
-const GuestLayout = ()  => import(/* webpackChunkName: "js/GuestLayout" */ '@layouts/Guest.vue');
-const PostsIndex  = ()  => import(/* webpackChunkName: "js/PostsIndex" */ '@admin/posts/Index.vue');
-const PostsCreate  = ()  => import(/* webpackChunkName: "js/PostsCreate" */ '@admin/posts/Create.vue');
-const PostsEdit  = ()  => import(/* webpackChunkName: "js/PostsEdit" */ '@admin/posts/Edit.vue');
+const AuthenticatedLayout = () =>
+  import(/* webpackChunkName: "js/AuthenticatedLayout" */ '@layouts/AuthenticatedLayout.vue');
+const GuestLayout = () => import(/* webpackChunkName: "js/GuestLayout" */ '@layouts/GuestLayout.vue');
+const PostsIndex = () => import(/* webpackChunkName: "js/PostsIndex" */ '@admin/posts/AdminPostsIndex.vue');
+const PostsCreate = () => import(/* webpackChunkName: "js/PostsCreate" */ '@admin/posts/AdminCreatePost.vue');
+const PostsEdit = () => import(/* webpackChunkName: "js/PostsEdit" */ '@admin/posts/AdminEditPost.vue');
 
-const Home  = ()  => import(/* webpackChunkName: "js/HomePage" */ '@home/index.vue');
-const About  = ()  => import(/* webpackChunkName: "js/AboutPage" */ '@misc/about.vue');
-const Terms  = ()  => import(/* webpackChunkName: "js/TermsPage" */ '@misc/terms.vue');
-const Pricing  = ()  => import(/* webpackChunkName: "js/PricingPage" */ '@misc/pricing.vue');
-const Support  = ()  => import(/* webpackChunkName: "js/SupportPage" */ '@misc/support.vue');
+const Home = () => import(/* webpackChunkName: "js/HomePage" */ '@home/HomePage.vue');
+const About = () => import(/* webpackChunkName: "js/AboutPage" */ '@misc/AboutPage.vue');
+const Terms = () => import(/* webpackChunkName: "js/TermsPage" */ '@misc/TermsPage.vue');
+const Pricing = () => import(/* webpackChunkName: "js/PricingPage" */ '@misc/PricingPage.vue');
+const Support = () => import(/* webpackChunkName: "js/SupportPage" */ '@misc/SupportPage.vue');
 
-const Posts  = ()  => import(/* webpackChunkName: "js/PostsPage" */ '@posts/index.vue');
-const Login  = ()  => import(/* webpackChunkName: "js/LoginPage" */ '@login/Login.vue');
-const Register  = ()  => import(/* webpackChunkName: "js/RegisterPage" */ '@register/index.vue');
-const ForgotPassword  = ()  => import(/* webpackChunkName: "js/ForgotPasswordPage" */ '@auth/passwords/RequestReset.vue');
-const ResetPassword  = ()  => import(/* webpackChunkName: "js/ResetPasswordPage" */ '@auth/passwords/Reset.vue');
+const Posts = () => import(/* webpackChunkName: "js/PostsPage" */ '@posts/PublicIndex.vue');
+const PostDetails = () => import(/* webpackChunkName: "js/PublicPostDetailsPage" */ '@posts/PublicPostDetails.vue');
+const PostsCategories = () => import(/* webpackChunkName: "js/PostsCategoriesPage" */ '@category/CatPostsPage.vue');
 
-const Admin  = ()  => import(/* webpackChunkName: "js/AdminPage" */ '@admin/Admin.vue');
-const Dashboard  = ()  => import(/* webpackChunkName: "js/DashboardPage" */ '@admin/Dashboard.vue');
-const Categories  = ()  => import(/* webpackChunkName: "js/CategoriesPage" */ '@admin/categories/Index.vue');
-const CreateCategory  = ()  => import(/* webpackChunkName: "js/CreateCategoryPage" */ '@admin/categories/Create.vue');
-const EditCategory  = ()  => import(/* webpackChunkName: "js/EditCategoryPage" */ '@admin/categories/Edit.vue');
-const Permissions  = ()  => import(/* webpackChunkName: "js/PermissionsPage" */ '@admin/Permissions.vue');
-const Roles  = ()  => import(/* webpackChunkName: "js/RolesPage" */ '@admin/Roles.vue');
-const Users  = ()  => import(/* webpackChunkName: "js/UsersPage" */ '@admin/Users.vue');
+const Login = () => import(/* webpackChunkName: "js/LoginPage" */ '@login/LoginPage.vue');
+const Register = () => import(/* webpackChunkName: "js/RegisterPage" */ '@register/RegisterPage.vue');
+const ForgotPassword = () => import(/* webpackChunkName: "js/ForgotPasswordPage" */ '@auth/passwords/RequestReset.vue');
+const ResetPassword = () => import(/* webpackChunkName: "js/ResetPasswordPage" */ '@auth/passwords/ResetPage.vue');
 
-const BrowserSessions  = ()  => import(/* webpackChunkName: "js/BrowserSessionsPage" */ '@admin/BrowserSessions.vue');
-const ActivityLogs  = ()  => import(/* webpackChunkName: "js/ActivityLogsPage" */ '@admin/ActivityLog.vue');
+const Admin = () => import(/* webpackChunkName: "js/AdminPage" */ '@admin/AdminPage.vue');
+const Dashboard = () => import(/* webpackChunkName: "js/DashboardPage" */ '@admin/DashboardPage.vue');
+const Categories = () => import(/* webpackChunkName: "js/CategoriesPage" */ '@admin/categories/CategoryIndex.vue');
+const CreateCategory = () =>
+  import(/* webpackChunkName: "js/CreateCategoryPage" */ '@admin/categories/CreateCategory.vue');
+const EditCategory = () => import(/* webpackChunkName: "js/EditCategoryPage" */ '@admin/categories/EditCategory.vue');
+const Permissions = () => import(/* webpackChunkName: "js/PermissionsPage" */ '@admin/PermissionsPage.vue');
+const Roles = () => import(/* webpackChunkName: "js/RolesPage" */ '@admin/RolesPage.vue');
+const Users = () => import(/* webpackChunkName: "js/UsersPage" */ '@admin/UsersPage.vue');
 
-const NotFound  = ()  => import(/* webpackChunkName: "js/NotFoundPage" */ '@errors/404.vue');
-const PhpInfo  = ()  => import(/* webpackChunkName: "js/PhpInfo" */ '@admin/PhpInfo.vue');
-const AppSettings  = ()  => import(/* webpackChunkName: "js/AppSettings" */ '@admin/AppSettings.vue');
-const Settings  = ()  => import(/* webpackChunkName: "js/Settings" */ '@pages/user-settings/Settings.vue');
-const Profile  = ()  => import(/* webpackChunkName: "js/ProfilePage" */ '@pages/user-settings/Profile.vue');
-const Account  = ()  => import(/* webpackChunkName: "js/AccountPage" */ '@pages/user-settings/Account.vue');
-const Password  = ()  => import(/* webpackChunkName: "js/PasswordPage" */ '@pages/user-settings/Password.vue');
+const BrowserSessions = () => import(/* webpackChunkName: "js/BrowserSessionsPage" */ '@admin/BrowserSessions.vue');
+const ActivityLogs = () => import(/* webpackChunkName: "js/ActivityLogsPage" */ '@admin/ActivityLog.vue');
+
+const NotFound = () => import(/* webpackChunkName: "js/NotFoundPage" */ '@errors/NotFound.vue');
+const PhpInfo = () => import(/* webpackChunkName: "js/PhpInfo" */ '@admin/PhpInfo.vue');
+const AppSettings = () => import(/* webpackChunkName: "js/AppSettings" */ '@admin/AppSettings.vue');
+const Settings = () => import(/* webpackChunkName: "js/Settings" */ '@pages/user-settings/SettingsPage.vue');
+const Profile = () => import(/* webpackChunkName: "js/ProfilePage" */ '@pages/user-settings/ProfilePage.vue');
+const Account = () => import(/* webpackChunkName: "js/AccountPage" */ '@pages/user-settings/AccountPage.vue');
+const Password = () => import(/* webpackChunkName: "js/PasswordPage" */ '@pages/user-settings/PasswordPage.vue');
 
 export default [
   {
@@ -76,12 +81,12 @@ export default [
       {
         path: 'posts/:id',
         name: 'public-posts.details',
-        component: () => import('@posts/details.vue'),
+        component: PostDetails,
       },
       {
         path: 'category/:id',
         name: 'category-posts.index',
-        component: () => import('@category/posts.vue'),
+        component: PostsCategories,
       },
       {
         path: 'login',
@@ -107,7 +112,7 @@ export default [
         component: ResetPassword,
         beforeEnter: guest,
       },
-    ]
+    ],
   },
   {
     path: '/admin',
@@ -125,61 +130,60 @@ export default [
         name: 'posts.index',
         path: 'posts',
         component: PostsIndex,
-        meta: { breadCrumb: 'Posts' }
+        meta: { breadCrumb: 'Posts' },
       },
       {
         name: 'posts.create',
         path: 'posts/create',
         component: PostsCreate,
-        meta: { breadCrumb: 'Add new post' }
+        meta: { breadCrumb: 'Add new post' },
       },
       {
         name: 'posts.edit',
         path: 'posts/edit/:id',
         component: PostsEdit,
-        meta: { breadCrumb: 'Edit post' }
+        meta: { breadCrumb: 'Edit post' },
       },
       {
         name: 'categories.index',
         path: 'categories',
         component: Categories,
-        meta: { breadCrumb: 'Categories' }
+        meta: { breadCrumb: 'Categories' },
       },
       {
         name: 'categories.create',
         path: 'categories/create',
         component: CreateCategory,
-        meta: { breadCrumb: 'Add new category' }
+        meta: { breadCrumb: 'Add new category' },
       },
       {
         name: 'categories.edit',
         path: 'categories/edit/:id',
         component: EditCategory,
-        meta: { breadCrumb: 'Edit Category' }
+        meta: { breadCrumb: 'Edit Category' },
       },
       {
         name: 'permissions.index',
         path: 'permissions',
         component: Permissions,
         beforeEnter: superAdmin,
-        meta: { breadCrumb: 'Permissions' }
+        meta: { breadCrumb: 'Permissions' },
       },
       {
         name: 'roles.index',
         path: 'roles',
         component: Roles,
         beforeEnter: superAdmin,
-        meta: { breadCrumb: 'Roles' }
+        meta: { breadCrumb: 'Roles' },
       },
       {
         name: 'users.index',
         path: 'users',
         component: Users,
         beforeEnter: admin,
-        meta: { breadCrumb: 'Users' }
+        meta: { breadCrumb: 'Users' },
       },
-
-    ]
+    ],
   },
   {
     path: '/dashboard',
@@ -190,19 +194,19 @@ export default [
         name: 'dashboard',
         path: '',
         component: Dashboard,
-        meta: { breadCrumb: 'Dashboard' }
+        meta: { breadCrumb: 'Dashboard' },
       },
       {
         name: 'browser_sessions.index',
         path: 'browser-sessions',
         component: BrowserSessions,
-        meta: { breadCrumb: 'Browser Sessions' }
+        meta: { breadCrumb: 'Browser Sessions' },
       },
       {
         name: 'activity_log.index',
         path: 'activity-log-logs',
         component: ActivityLogs,
-        meta: { breadCrumb: 'Activity Logs' }
+        meta: { breadCrumb: 'Activity Logs' },
       },
       {
         path: 'phpinfo',
@@ -216,7 +220,7 @@ export default [
         component: AppSettings,
         beforeEnter: superAdmin,
       },
-    ]
+    ],
   },
   {
     path: '/settings',
@@ -227,30 +231,30 @@ export default [
         name: 'settings.index',
         path: '',
         component: Settings,
-        meta: { breadCrumb: 'Settings' }
+        meta: { breadCrumb: 'Settings' },
       },
       {
         name: 'settings.account',
         path: 'account',
         component: Account,
-        meta: { breadCrumb: 'Account' }
+        meta: { breadCrumb: 'Account' },
       },
       {
         name: 'settings.profile',
         path: 'profile',
         component: Profile,
-        meta: { breadCrumb: 'Profile' }
+        meta: { breadCrumb: 'Profile' },
       },
       {
         name: 'settings.password',
         path: 'password',
         component: Password,
-        meta: { breadCrumb: 'Password' }
+        meta: { breadCrumb: 'Password' },
       },
-    ]
+    ],
   },
   {
-    path: "/:pathMatch(.*)*",
+    path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: NotFound,
   },

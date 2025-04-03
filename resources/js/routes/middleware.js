@@ -1,4 +1,4 @@
-import { useAuthStore } from "@store/auth";
+import { useAuthStore } from '@store/auth';
 
 export function guest(to, from, next) {
   const auth = useAuthStore();
@@ -24,54 +24,90 @@ export function requireLogin(to, from, next) {
 
 export function superAdmin(to, from, next) {
   const auth = useAuthStore();
-  if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || !auth.userIs('superadmin')) {
+  if (
+    !auth.authenticated ||
+    !auth.user ||
+    !auth.user.roles ||
+    auth.user.roles.length <= 0 ||
+    !auth.userIs('superadmin')
+  ) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
 export function admin(to, from, next) {
   const auth = useAuthStore();
-  if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin'))) {
+  if (
+    !auth.authenticated ||
+    !auth.user ||
+    !auth.user.roles ||
+    auth.user.roles.length <= 0 ||
+    (!auth.userIs('admin') && !auth.userIs('superadmin'))
+  ) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
 export function moderator(to, from, next) {
   const auth = useAuthStore();
-  if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('moderator'))) {
+  if (
+    !auth.authenticated ||
+    !auth.user ||
+    !auth.user.roles ||
+    auth.user.roles.length <= 0 ||
+    (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('moderator'))
+  ) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
 export function editor(to, from, next) {
   const auth = useAuthStore();
-  if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('editor'))) {
+  if (
+    !auth.authenticated ||
+    !auth.user ||
+    !auth.user.roles ||
+    auth.user.roles.length <= 0 ||
+    (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('editor'))
+  ) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
 export function user(to, from, next) {
   const auth = useAuthStore();
-  if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('user'))) {
+  if (
+    !auth.authenticated ||
+    !auth.user ||
+    !auth.user.roles ||
+    auth.user.roles.length <= 0 ||
+    (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('user'))
+  ) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
 export function unverified(to, from, next) {
   const auth = useAuthStore();
-  if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('unverified'))) {
+  if (
+    !auth.authenticated ||
+    !auth.user ||
+    !auth.user.roles ||
+    auth.user.roles.length <= 0 ||
+    (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('unverified'))
+  ) {
     next('/');
   } else {
-    next()
+    next();
   }
 }

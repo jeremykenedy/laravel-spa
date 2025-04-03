@@ -1,6 +1,10 @@
 <template>
-  <button class="button inline-flex items-center justify-center" :class="(loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass
-    " :disabled="loading || disabled" @click="clickButton">
+  <button
+    class="button inline-flex items-center justify-center"
+    :class="(loading || disabled ? 'opacity-50 ' : '') + btnClasses + ' ' + btnClass"
+    :disabled="loading || disabled"
+    @click="clickButton"
+  >
     <slot v-if="hasTextSlot" name="text" />
     <span v-else>
       {{ text }}

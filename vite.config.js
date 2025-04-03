@@ -1,11 +1,11 @@
 import { defineConfig, splitVendorChunkPlugin, loadEnv } from 'vite';
 import laravel, { refreshPaths } from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
-import path, { resolve, dirname } from 'path'
-import tailwindcss from '@tailwindcss/vite'
+import path, { resolve, dirname } from 'path';
+import tailwindcss from '@tailwindcss/vite';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
-import { imagetools } from 'vite-imagetools'
-import { manualChunksPlugin } from 'vite-plugin-webpackchunkname'
+import { imagetools } from 'vite-imagetools';
+import { manualChunksPlugin } from 'vite-plugin-webpackchunkname';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
 import { createHtmlPlugin } from 'vite-plugin-html';
@@ -24,10 +24,7 @@ export default defineConfig({
   },
   plugins: [
     laravel({
-      input: [
-        'resources/css/app.css',
-        'resources/js/app.js',
-      ],
+      input: ['resources/css/app.css', 'resources/js/app.js'],
       reactivityTransform: true,
       refresh: true,
     }),
@@ -57,8 +54,8 @@ export default defineConfig({
       cache: {
         enabled: true,
         dir: './node_modules/.cache/imagetools',
-        retention: 172800
-      }
+        retention: 172800,
+      },
     }),
     // legacy({
     //   targets: ['defaults', 'not IE 11'],
@@ -110,8 +107,8 @@ export default defineConfig({
             const chunkName = scopedPackageName.split('@')[scopedPackageName.startsWith('@') ? 1 : 0];
             return chunkName;
           }
-        }
-      }
+        },
+      },
     },
     modulePreload: {
       polyfill: true,
@@ -147,5 +144,5 @@ export default defineConfig({
       '@composables': path.resolve(__dirname, 'resources/js/composables'),
       vue: path.resolve(__dirname, 'node_modules/vue/dist/vue.esm-bundler.js'),
     },
-  }
+  },
 });

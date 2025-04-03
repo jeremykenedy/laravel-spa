@@ -1,51 +1,46 @@
 <template>
   <div>
     <h1>
-      {{ blank }}
+      {{ blankContent }}
+      <ArrowRightOnRectangleIcon />
     </h1>
   </div>
 </template>
 
 <script>
-import { watch, ref, watchEffect } from 'vue'
+import { watch, ref, watchEffect } from 'vue';
 import { mapStores, mapState, mapActions } from 'pinia';
-import { useAuthStore } from "@store/auth";
-import useAuth from '@composables/auth'
+import { useAuthStore } from '@store/auth';
+import useAuth from '@composables/auth';
 import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { track } from '@services/analytics';
 
 export default {
-  name: 'Blank',
+  name: 'BlankTemplate',
   components: {
-    ArrowRightOnRectangleIcon
+    ArrowRightOnRectangleIcon,
   },
   props: {},
+  emits: ['buttonClicked'],
   setup() {
     return {};
   },
   data() {
     return {
-      blank: 'Blank',
+      blankContent: 'Blank',
     };
   },
   computed: {
-    ...mapState(useAuth, [
-      'processing',
-    ]),
-    ...mapState(useAuthStore, [
-      'user',
-      'authenticated',
-    ]),
+    ...mapState(useAuth, ['processing']),
+    ...mapState(useAuthStore, ['user', 'authenticated']),
   },
   watch: {},
-  created() { },
-  mounted() { },
-  beforeUnmount() { },
-  updated() { },
+  created() {},
+  mounted() {},
+  beforeUnmount() {},
+  updated() {},
   methods: {
-    ...mapActions(useAuth, [
-      'logout',
-    ]),
+    ...mapActions(useAuth, ['logout']),
     clickButton() {
       this.$emit('buttonClicked');
     },
@@ -59,5 +54,4 @@ export default {
   color: #ffffff !important;
 }
 </style>
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

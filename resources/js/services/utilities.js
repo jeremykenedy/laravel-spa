@@ -44,25 +44,37 @@ export function isObjEmpty(obj) {
   return true;
 }
 
-export async function validateEmail(address, checkDomain=false){
-  const emailPattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
-  let email, valid = false, error = false, same = false, domain = false;
-  try{
-      const url = new URL(`http://${ address }`);
-      const { username, hostname } = url;
-      email = `${username}@${hostname}`;
-      same = address === email;
-      valid = emailPattern.test( email );
+export async function validateEmail(address, checkDomain = false) {
+  const emailPattern =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/i;
+  let email,
+    valid = false,
+    error = false,
+    same = false,
+    domain = false;
+  try {
+    const url = new URL(`http://${address}`);
+    const { username, hostname } = url;
+    email = `${username}@${hostname}`;
+    same = address === email;
+    valid = emailPattern.test(email);
 
-      if(checkDomain){
-          function hasMX(dns){ return dns?.Answer?.[0]?.data ? true: false; }
-          domain = await fetch(`https://cloudflare-dns.com/dns-query?name=${ hostname }&type=MX`, {headers:{Accept: "application/dns-json"}}).then(res=>res.json()).then(hasMX).catch(hasMX);
+    if (checkDomain) {
+      function hasMX(dns) {
+        return dns?.Answer?.[0]?.data ? true : false;
       }
-  } catch(fail){
+      domain = await fetch(`https://cloudflare-dns.com/dns-query?name=${hostname}&type=MX`, {
+        headers: { Accept: 'application/dns-json' },
+      })
+        .then((res) => res.json())
+        .then(hasMX)
+        .catch(hasMX);
+    }
+  } catch (fail) {
     return false;
-  };
+  }
 
-  if(same && valid && domain && !error) {
+  if (same && valid && domain && !error) {
     return true;
   }
 

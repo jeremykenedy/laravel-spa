@@ -1,8 +1,5 @@
 <template>
-  <div
-    v-if="items && items.length >= 1"
-    class="inline-block rounded border pl-4"
-  >
+  <div v-if="items && items.length >= 1" class="inline-block rounded border pl-4">
     <label>Per Page</label>
     <select
       id="perPage"
