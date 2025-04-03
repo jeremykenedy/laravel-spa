@@ -1,10 +1,18 @@
 <template>
-  <div id="browser_sessions" class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200">
-
+  <div
+    id="browser_sessions"
+    class="bg-white p-3 dark:bg-slate-800 dark:text-gray-200"
+  >
     <AdminBreadcrumbContainer>
-      <AdminBreadcrumb routeName="dashboard" :text="$t('dashboard')" />
+      <AdminBreadcrumb
+        route-name="dashboard"
+        :text="$t('dashboard')"
+      />
       <AdminBreadcrumbSep />
-      <AdminBreadcrumb routeName="browser_sessions.index" :text="$t('browser_sessions')" />
+      <AdminBreadcrumb
+        route-name="browser_sessions.index"
+        :text="$t('browser_sessions')"
+      />
     </AdminBreadcrumbContainer>
 
     <div class="mx-auto max-w-screen-lg text-gray-900 clear-both">
@@ -18,32 +26,47 @@
               <p class="mb-4">
                 {{ $t('browser_sessions_note') }}
               </p>
-              <ul v-if="sessions && sessions.length > 0" role="list" class="divide-y divide-white/5 mb-4">
-                <li v-for="session in sessions" class="py-4">
+              <ul
+                v-if="sessions && sessions.length > 0"
+                role="list"
+                class="divide-y divide-white/5 mb-4"
+              >
+                <li
+                  v-for="session in sessions"
+                  :key="session.id"
+                  class="py-4"
+                >
                   <div class="flex items-center gap-x-3">
                     <ComputerDesktopIcon class="size-6 flex-none rounded text-gray-800" />
                     <h3 class="flex-auto truncate text-sm/6 font-bold text-gray-800 ">
                       {{ session?.device?.platform }} - {{ session?.device?.browser }}
                     </h3>
-                    <span class="flex-none text-xs text-gray-500"
-                      :class="session?.is_current_device ? 'text-green-500' : 'text-gray-500'">
+                    <span
+                      class="flex-none text-xs text-gray-500"
+                      :class="session?.is_current_device ? 'text-green-500' : 'text-gray-500'"
+                    >
                       {{ session?.is_current_device ? 'This device' : ('Last active ' + session?.last_active) }}
                     </span>
                   </div>
-                  <p class="mt-3 truncate text-sm text-gray-700">{{ $t('ip_address') }}
+                  <p class="mt-3 truncate text-sm text-gray-700">
+                    {{ $t('ip_address') }}
                     <span class="font-mono text-gray-600">{{ session?.ip_address }}</span>
                   </p>
                 </li>
               </ul>
               <div class="mt-5 mb-3">
-                <AppButton icon="fa-solid fa-power-off " warning @click="logOutOtherDevices" text="Logout Other Browser Sessions" />
+                <AppButton
+                  icon="fa-solid fa-power-off "
+                  warning
+                  text="Logout Other Browser Sessions"
+                  @click="logOutOtherDevices"
+                />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 

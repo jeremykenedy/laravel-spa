@@ -1,6 +1,6 @@
 <template>
   <AppButton
-    v-if="authenticated && user && isImpersonating && !this.full"
+    v-if="authenticated && user && isImpersonating && !full"
     v-tippy="$t('return_to_your_account')"
     icon="fa-solid fa-user-secret"
     class="h-3 w-3 rounded"
@@ -9,7 +9,7 @@
     @click.prevent="triggerLeaveImpersonatingUser()"
   />
   <AppButton
-    v-if="authenticated && user && isImpersonating && this.full"
+    v-if="authenticated && user && isImpersonating && full"
     v-tippy="$t('return_to_your_account')"
     type="button"
     icon="fa-solid fa-user-secret"

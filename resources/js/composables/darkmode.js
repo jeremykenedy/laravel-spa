@@ -1,10 +1,10 @@
-import { ref } from 'vue'
+import { ref } from 'vue';
 import {useAuthStore} from "@/store/auth";
 import Swal from 'sweetalert2/dist/sweetalert2';
 
 export default function useDarkMode() {
-  const auth = useAuthStore()
-  const isLoading = ref(false)
+  const auth = useAuthStore();
+  const isLoading = ref(false);
 
   const toggleDarkMode = (msg = false) => {
     if (isLoading.value) return;
@@ -13,7 +13,7 @@ export default function useDarkMode() {
       axios.post('/api/toggle-dark-mode')
         .then(({data}) => {
           if (data.success) {
-            auth.user.theme_dark = data.data
+            auth.user.theme_dark = data.data;
             if (auth.user.theme_dark) {
               enableDarkMode(msg);
             } else {
@@ -31,10 +31,10 @@ export default function useDarkMode() {
               showConfirmButton: false,
               title: 'Error Toggling Dark Mode ',
               position: 'bottom-end',
-            })
+            });
           }
         })
-        .finally(() => isLoading.value = false)
+        .finally(() => isLoading.value = false);
     } else {
       if (localStorage.getItem("data-theme") == 'dark') {
         disableDarkMode(msg);
@@ -43,7 +43,7 @@ export default function useDarkMode() {
       }
       isLoading.value = false;
     }
-  }
+  };
 
   const enableDarkMode = (msg = false) => {
     document.documentElement.className = 'dark';
@@ -57,9 +57,9 @@ export default function useDarkMode() {
         showConfirmButton: false,
         title: 'Dark Mode Enabled',
         position: 'bottom-end',
-      })
+      });
     }
-  }
+  };
 
   const disableDarkMode = (msg = false) => {
     document.documentElement.className = 'light';
@@ -73,14 +73,14 @@ export default function useDarkMode() {
         showConfirmButton: false,
         title: 'Dark Mode Disabled',
         position: 'bottom-end',
-      })
+      });
     }
-  }
+  };
 
   return {
     toggleDarkMode,
     isLoading,
     enableDarkMode,
     disableDarkMode
-  }
+  };
 }

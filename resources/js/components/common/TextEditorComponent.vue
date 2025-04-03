@@ -1,6 +1,9 @@
 <template>
   <div class="editor-container">
-    <CKEditorComponent v-model="editorData" :model-value="props.modelValue" />
+    <CKEditorComponent
+      v-model="editorData"
+      :model-value="props.modelValue"
+    />
   </div>
 </template>
 

@@ -1,14 +1,24 @@
 <template>
-  <router-link :to="{ name: routeName }"
+  <router-link
+    :to="{ name: routeName }"
     class="text-base font-medium text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400"
-    @click.prevent="navClicked()">
-    <span :class="[
-      currentRouteName == routeName &&
-      'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
-    ]">
-      <slot v-if="hasIconBeforeSlot" name="iconBefore" />
+    @click.prevent="navClicked()"
+  >
+    <span
+      :class="[
+        currentRouteName == routeName &&
+          'cursor-default text-gray-800 hover:text-gray-900 dark:text-gray-500 dark:hover:text-gray-500',
+      ]"
+    >
+      <slot
+        v-if="hasIconBeforeSlot"
+        name="iconBefore"
+      />
       <span v-if="text">{{ text }}</span>
-      <slot v-if="hasIconAfterSlot" name="iconAfter" />
+      <slot
+        v-if="hasIconAfterSlot"
+        name="iconAfter"
+      />
     </span>
   </router-link>
 </template>

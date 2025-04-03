@@ -1,18 +1,23 @@
 <template>
-    <nav class="mx-2">
-      <ol class="breadcrumb border-radius-0">
-        <li
-          v-for="(crumb, ci) in crumbs"
-          :key="ci"
-          class="breadcrumb-item align-items-center"
+  <nav class="mx-2">
+    <ol class="breadcrumb border-radius-0">
+      <li
+        v-for="(crumb, ci) in crumbs"
+        :key="ci"
+        class="breadcrumb-item align-items-center"
+      >
+        <router-link
+          :to="crumb.href"
+          class="btn btn-link"
+          :class="{ disabled: isLast(ci) }"
+          @click="selected(crumb)"
         >
-          <router-link :to="crumb.href" class="btn btn-link" :class="{ disabled: isLast(ci) }" @click="selected(crumb)">
-            {{ crumb.text }}
-          </router-link>
-        </li>
-      </ol>
-    </nav>
-  </template>
+          {{ crumb.text }}
+        </router-link>
+      </li>
+    </ol>
+  </nav>
+</template>
   
   <script>
   export default {

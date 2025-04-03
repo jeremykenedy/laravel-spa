@@ -24,16 +24,16 @@
         :class="inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')"
         :autocomplete="autocomplete"
         :autofocus="autofocus"
-        @input="updateValue"
         v-bind="$attrs"
-      />
+        @input="updateValue"
+      >
       <div
         v-if="error"
         class="text-red-500 -mt-0.1 text-xs absolute"
       >
         {{ error }}
       </div>
-      <slot name="message"></slot>
+      <slot name="message" />
     </div>
   </div>
 </template>

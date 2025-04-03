@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <!-- Roles Status  -->
-    </div>
+  <div>
+    <!-- Roles Status  -->
+  </div>
 </template>
 
 <script lang="ts">

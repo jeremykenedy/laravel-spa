@@ -25,9 +25,9 @@
           :class="inputClass + ' ' + (error ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600')"
           :autocomplete="autocomplete"
           :autofocus="autofocus"
-          @input="updateValue"
           v-bind="$attrs"
-        />
+          @input="updateValue"
+        >
         <i
           class="fa fa-fw cursor-pointer col-start-1 row-start-1 mr-3 size-5 self-center justify-self-end text-blue-500 "
           :class="showPassword ? 'fa-eye-slash' : 'fa-eye'"
@@ -40,7 +40,7 @@
       >
         {{ error }}
       </div>
-      <slot name="message"></slot>
+      <slot name="message" />
     </div>
   </div>
 </template>

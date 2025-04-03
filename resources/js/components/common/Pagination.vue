@@ -1,30 +1,30 @@
 <template>
   <span class="vue-pagination">
-  <vue-awesome-paginate
-    :total-items="totalPages"
-    :items-per-page="itemsPerPage"
-    :max-pages-shown="maxPagesShown"
-    :disable-breakpoint-buttons="disableBreakpointButtons"
-    :show-ending-buttons="showEndingButtons"
-    :model-value="currentPage"
-    @click="changePage"
-  >
-    <template #first-page-button>
-      <ChevronDoubleLeftIcon class="size-6 mx-auto" />
-    </template>
+    <vue-awesome-paginate
+      :total-items="totalPages"
+      :items-per-page="itemsPerPage"
+      :max-pages-shown="maxPagesShown"
+      :disable-breakpoint-buttons="disableBreakpointButtons"
+      :show-ending-buttons="showEndingButtons"
+      :model-value="currentPage"
+      @click="changePage"
+    >
+      <template #first-page-button>
+        <ChevronDoubleLeftIcon class="size-6 mx-auto" />
+      </template>
 
-    <template #prev-button>
-      <ChevronLeftIcon class="size-6 mx-auto" />
-    </template>
+      <template #prev-button>
+        <ChevronLeftIcon class="size-6 mx-auto" />
+      </template>
 
-    <template #next-button>
-      <ChevronRightIcon class="size-6 mx-auto" />
-    </template>
+      <template #next-button>
+        <ChevronRightIcon class="size-6 mx-auto" />
+      </template>
 
-    <template #last-page-button>
-      <ChevronDoubleRightIcon class="size-6 mx-auto" />
-    </template>
-  </vue-awesome-paginate>
+      <template #last-page-button>
+        <ChevronDoubleRightIcon class="size-6 mx-auto" />
+      </template>
+    </vue-awesome-paginate>
   </span>
 </template>
 
@@ -37,6 +37,12 @@ import {
 } from '@heroicons/vue/24/outline';
 
 export default {
+  components: {
+    ChevronDoubleRightIcon,
+    ChevronRightIcon,
+    ChevronDoubleLeftIcon,
+    ChevronLeftIcon,
+  },
   props: {
     totalPages: { type: Number, required: true },
     currentPage: { type: Number, required: true },
@@ -44,12 +50,6 @@ export default {
     disableBreakpointButtons: { type: Boolean, default: false },
     itemsPerPage: { type: Number, default: 1 },
     maxPagesShown: { type: Number, default: 4 },
-  },
-  components: {
-    ChevronDoubleRightIcon,
-    ChevronRightIcon,
-    ChevronDoubleLeftIcon,
-    ChevronLeftIcon,
   },
   methods: {
     changePage(page) {

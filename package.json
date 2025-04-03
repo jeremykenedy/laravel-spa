@@ -6,7 +6,7 @@
         "build": "vite build"
     },
     "devDependencies": {
-        "@babel/eslint-parser": "^7.26.8",
+        "@babel/eslint-parser": "^7.27.0",
         "@eslint/eslintrc": "^3.2.0",
         "@eslint/js": "^9.19.0",
         "@heroicons/vue": "^2.2.0",
@@ -29,7 +29,7 @@
         "core-js": "^3.40.0",
         "cross-env": "^7.0.3",
         "eslint": "^9.21.0",
-        "eslint-plugin-vue": "^9.32.0",
+        "eslint-plugin-vue": "^9.33.0",
         "globals": "^15.14.0",
         "html-webpack-plugin": "^5.6.3",
         "laravel-vite-plugin": "^1.2.0",

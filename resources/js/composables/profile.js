@@ -1,4 +1,4 @@
-import { ref, inject } from 'vue'
+import { ref, inject } from 'vue';
 import { useAuthStore } from "@/store/auth";
 import { useToastStore } from "@store/toast";
 
@@ -6,39 +6,39 @@ export default function useProfile() {
     const profile = ref({
       name: '',
       email: '',
-    })
+    });
 
-    const store = useAuthStore()
-    const validationErrors = ref({})
-    const isLoading = ref(false)
+    const store = useAuthStore();
+    const validationErrors = ref({});
+    const isLoading = ref(false);
     const toast = useToastStore();
 
     const getProfile = async () => {
-      profile.value = store.user
+      profile.value = store.user;
       // axios.get('/api/user')
       //   .then(({data}) => {
       //       profile.value = data.data;
       //   })
-    }
+    };
 
     const updateProfile = async (profile) => {
       if (isLoading.value) return;
-      isLoading.value = true
-      validationErrors.value = {}
+      isLoading.value = true;
+      validationErrors.value = {};
       axios.put('/api/user', profile)
         .then(({data}) => {
           if (data.success) {
-            store.user = data.data
+            store.user = data.data;
             toast.success('Profile updated successfully');
           }
         })
         .catch(error => {
           if (error.response?.data) {
-            validationErrors.value = error.response.data.errors
+            validationErrors.value = error.response.data.errors;
           }
         })
-        .finally(() => isLoading.value = false)
-    }
+        .finally(() => isLoading.value = false);
+    };
 
     const updatePassword = async (payload) => {
       const res = await axios.patch('/api/password', payload);
@@ -52,7 +52,7 @@ export default function useProfile() {
         return 'Success';
       }
       throw res.response;
-    }
+    };
 
     return {
       profile,
@@ -61,5 +61,5 @@ export default function useProfile() {
       validationErrors,
       isLoading,
       updatePassword,
-    }
+    };
 }

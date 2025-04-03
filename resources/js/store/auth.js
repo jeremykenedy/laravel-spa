@@ -1,4 +1,4 @@
-import {defineStore} from 'pinia'
+import {defineStore} from 'pinia';
 import axios from 'axios';
 import {ref} from "vue";
 import useDarkMode from "@composables/darkmode";
@@ -6,10 +6,10 @@ import Cookies from 'js-cookie';
 import { useToastStore } from "@store/toast";
 
 export const useAuthStore = defineStore('auth', () => {
-  const authenticated = ref(false)
-  const user = ref({})
-  const currentUserToken = ref(null)
-  const impersonatorToken = ref(null)
+  const authenticated = ref(false);
+  const user = ref({});
+  const currentUserToken = ref(null);
+  const impersonatorToken = ref(null);
   const token = ref(Cookies.get('token'));
   const toast = useToastStore();
   const socials = ref({
@@ -37,13 +37,13 @@ export const useAuthStore = defineStore('auth', () => {
 
   const login = (() => {
     return axios.get('/api/user').then(({data}) => {
-      user.value = data
-      authenticated.value = true
+      user.value = data;
+      authenticated.value = true;
     }).catch(({res}) => {
-      user.value = {}
-      authenticated.value = false
-    })
-  })
+      user.value = {};
+      authenticated.value = false;
+    });
+  });
 
   const fetchOauthUrl = ( async (provider) => {
     try {
@@ -55,7 +55,7 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       throw error;
     }
-  })
+  });
 
   const revokeProvider = ( async (payload) => {
     try {
@@ -74,11 +74,11 @@ export const useAuthStore = defineStore('auth', () => {
             return res;
           }
           throw res;
-        })
+        });
     } catch (error) {
       throw error;
     }
-  })
+  });
 
   const getLogins = ( async () => {
     return await axios.get('/api/logins').then((res) => {
@@ -91,13 +91,13 @@ export const useAuthStore = defineStore('auth', () => {
     .catch((err) => {
       throw err.response;
     });
-  })
+  });
 
   const getUser = (() => {
     return axios.get('/api/user').then(({data}) => {
       if (data.success) {
-        user.value = data.data
-        authenticated.value = true
+        user.value = data.data;
+        authenticated.value = true;
         // router.push({name: 'dashboard'})
         if (user.value.theme_dark) {
           document.documentElement.className = 'dark';
@@ -107,14 +107,14 @@ export const useAuthStore = defineStore('auth', () => {
           localStorage.setItem("data-theme", "light");
         }
       } else {
-        user.value = {}
-        authenticated.value = false
+        user.value = {};
+        authenticated.value = false;
       }
     }).catch(({res}) => {
-      user.value = {}
-      authenticated.value = false
-    })
-  })
+      user.value = {};
+      authenticated.value = false;
+    });
+  });
 
   const getUserByToken = async (payload) => {
     await axios.post('/api/user-by-token', { token: payload.token })
@@ -144,24 +144,24 @@ export const useAuthStore = defineStore('auth', () => {
         toast.error('An error occurred.');
         throw err.response;
       });
-  }
+  };
 
   const logout = (() => {
     Cookies.remove('token');
-    user.value = {}
-    authenticated.value = false
-  })
+    user.value = {};
+    authenticated.value = false;
+  });
 
   const setWorkingToken = ((payload) => {
     Cookies.set('token', payload.token, { expires: 365 });
     currentUserToken.value = payload.token;
     impersonatorToken.value = payload.impersonatorToken.plainTextToken;
-  })
+  });
 
   const saveToken = ((payload) => {
     Cookies.set('token', payload.token, { expires: 365 });
     token.value = payload.token;
-  })
+  });
 
   function userIs(role) {
     if (!this.user || !this.user.id || !this.user.roles || this.user.roles.length <= 0) {
@@ -216,7 +216,7 @@ export const useAuthStore = defineStore('auth', () => {
     fetchOauthUrl,
     loginEnabled,
     revokeProvider,
-  }
+  };
 }, {
   persist: true
-})
+});

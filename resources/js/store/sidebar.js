@@ -1,6 +1,4 @@
-import {defineStore} from 'pinia'
-import axios from 'axios';
-import {ref} from "vue";
+import {defineStore} from 'pinia';
 
 export const useSideBarStore = defineStore('sidebar', {
   namespaced: true,
@@ -21,4 +19,4 @@ export const useSideBarStore = defineStore('sidebar', {
     },
   },
   persist: true,
-})
+});

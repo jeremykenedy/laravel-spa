@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: 'Bare',
+  name: 'BareTemplate',
 };
 </script>

@@ -1,8 +1,8 @@
 import './bootstrap';
 
 import { createApp, ref, watchEffect } from 'vue';
-import { createPinia, storeToRefs } from 'pinia'
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { createPinia, storeToRefs } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 import { Bootstrap5Pagination } from 'laravel-vue-pagination';
 import router from '@routes';
 import { useAuthStore } from "@store/auth";
@@ -23,7 +23,7 @@ import VueSecureHTML from 'vue-html-secure';
 import * as Sentry from '@sentry/vue';
 import { BrowserTracing } from '@sentry/tracing';
 import VueGtag from 'vue-gtag-next';
-import KonamiCode from "vue3-konami-code"
+import KonamiCode from "vue3-konami-code";
 import toasty from 'toasty';
 import { asteroidsjs } from '@services/asteroids';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
@@ -37,16 +37,16 @@ import 'vue3-easy-data-table/dist/style.css';
 
 window.Swal = swal;
 
-const APP_GA_TAG = GA_TAG; // eslint-disable-line
-const APP_GA_ENABLED = GA_ENABLED; // eslint-disable-line
-const VUE_APP_URL = APP_URL; // eslint-disable-line
-const VUE_SENTRY_DSN = SENTRY_DSN; // eslint-disable-line
-const VUE_SENTRY_ENABLED = SENTRY_ENABLED; // eslint-disable-line
+const APP_GA_TAG = GA_TAG;  
+const APP_GA_ENABLED = GA_ENABLED;  
+const VUE_APP_URL = APP_URL;  
+const VUE_SENTRY_DSN = SENTRY_DSN;  
+const VUE_SENTRY_ENABLED = SENTRY_ENABLED;  
 const VUE_SENTRY_RATE = SENTRY_RATE; // eslint-disable-line
-const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED; // eslint-disable-line
-const VUE_ENVIRONMENT = ENVIRONMENT; // eslint-disable-line
-const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED; // eslint-disable-line
-const VUE_ASTEROIDS_ENABLED = KONAMI_ASTEROIDS_ENABLED; // eslint-disable-line
+const VUE_SENTRY_FEEDBACK_ENABLED = SENTRY_FEEDBACK_ENABLED;  
+const VUE_ENVIRONMENT = ENVIRONMENT;  
+const VUE_TOASTY_ENABLED = KONAMI_TOASTY_ENABLED;  
+const VUE_ASTEROIDS_ENABLED = KONAMI_ASTEROIDS_ENABLED;  
 const VUE_TINY_MCE_KEY = TINY_MCE_KEY; // eslint-disable-line
 const VUE_CK_EDITOR_KEY = CK_EDITOR_KEY; // eslint-disable-line
 const VUE_OPEN_AI_KEY = OPEN_AI_KEY; // eslint-disable-line
@@ -63,17 +63,17 @@ const app = createApp({
     }
   },
   created() {
-    useAuthStore().getLogins()
-    useAuth().getUser()
+    useAuthStore().getLogins();
+    useAuth().getUser();
   }
 });
-app.use(pinia)
+app.use(pinia);
 
-const store = useAuthStore()
-const { user, authenticated } = storeToRefs(store)
+const store = useAuthStore();
+const { user, authenticated } = storeToRefs(store);
 
-app.use(router)
-app.use(VueSweetalert2)
+app.use(router);
+app.use(VueSweetalert2);
 app.use(VueTippy, {
   directive: 'tippy', // => v-tippy
   component: 'tippy', // => <tippy/>
@@ -85,11 +85,11 @@ app.use(VueTippy, {
     placement: 'auto-end',
     allowHTML: true,
   },
-})
-app.use(VueSecureHTML)
-app.use(VueAwesomePaginate)
-app.use(i18n)
-app.use(abilitiesPlugin, ability)
+});
+app.use(VueSecureHTML);
+app.use(VueAwesomePaginate);
+app.use(i18n);
+app.use(abilitiesPlugin, ability);
 app.use(KonamiCode, {
   onKonamiCodeEntered: function() {
     if (VUE_TOASTY_ENABLED == 1) {
@@ -123,15 +123,15 @@ if (APP_GA_ENABLED == 1) {
     },
   });
 }
-app.component('EasyDataTable', Vue3EasyDataTable)
-app.component('AppButton', AppButton)
-app.component('AdminBreadcrumbContainer', AdminBreadcrumbContainer)
-app.component('AdminBreadcrumb', AdminBreadcrumb)
-app.component('AdminBreadcrumbSep', AdminBreadcrumbSep)
-app.component('Pagination', Bootstrap5Pagination)
-app.component("v-select", vSelect)
-app.component('AppSwitch', AppSwitch)
-app.mount('#app')
+app.component('EasyDataTable', Vue3EasyDataTable);
+app.component('AppButton', AppButton);
+app.component('AdminBreadcrumbContainer', AdminBreadcrumbContainer);
+app.component('AdminBreadcrumb', AdminBreadcrumb);
+app.component('AdminBreadcrumbSep', AdminBreadcrumbSep);
+app.component('Pagination', Bootstrap5Pagination);
+app.component("VSelect", vSelect);
+app.component('AppSwitch', AppSwitch);
+app.mount('#app');
 
 // https://docs.sentry.io/platforms/javascript/guides/vue/
 if (VUE_SENTRY_ENABLED == 1) {

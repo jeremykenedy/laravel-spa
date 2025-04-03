@@ -27,7 +27,7 @@ export function superAdmin(to, from, next) {
   if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || !auth.userIs('superadmin')) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
@@ -36,7 +36,7 @@ export function admin(to, from, next) {
   if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin'))) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
@@ -45,7 +45,7 @@ export function moderator(to, from, next) {
   if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('moderator'))) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
@@ -54,7 +54,7 @@ export function editor(to, from, next) {
   if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('editor'))) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
@@ -63,7 +63,7 @@ export function user(to, from, next) {
   if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('user'))) {
     next('/');
   } else {
-    next()
+    next();
   }
 }
 
@@ -72,6 +72,6 @@ export function unverified(to, from, next) {
   if (!auth.authenticated || !auth.user || !auth.user.roles || auth.user.roles.length <= 0 || (!auth.userIs('admin') && !auth.userIs('superadmin') && !auth.userIs('unverified'))) {
     next('/');
   } else {
-    next()
+    next();
   }
 }

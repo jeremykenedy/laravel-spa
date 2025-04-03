@@ -1,4 +1,4 @@
-import {ref, inject, computed} from 'vue'
+import {ref, inject, computed} from 'vue';
 import {useRoute, useRouter} from "vue-router";
 import axios from "axios";
 
@@ -21,7 +21,7 @@ export default function useActivityLogs() {
         Math.min(currentPage.value * perPage.value, total.value)
     );
 
-    const isLoading = ref(false)
+    const isLoading = ref(false);
 
     const getActivityLogs = (() => {
         const params = {
@@ -34,8 +34,8 @@ export default function useActivityLogs() {
         axios.get(`/api/activity-logs/`, { params })
             .then(({data}) => {
                 activities.value = data;
-                total.value = data.meta.total
-            })
+                total.value = data.meta.total;
+            });
     });
 
     const changePage = (page) => {
@@ -59,7 +59,7 @@ export default function useActivityLogs() {
                     page: currentPage.value,
                 },
             });
-        }, 300)
+        }, 300);
     };
 
     return {
@@ -76,5 +76,5 @@ export default function useActivityLogs() {
         updateFilter,
         searchTerm,
         applyFilters,
-    }
+    };
 }

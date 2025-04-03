@@ -1,4 +1,4 @@
-import {defineStore} from 'pinia'
+import {defineStore} from 'pinia';
 
 export const useToastStore = defineStore('toast', {
   namespaced: true,
@@ -74,4 +74,4 @@ export const useToastStore = defineStore('toast', {
     },
   },
   persist: true,
-})
+});

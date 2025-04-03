@@ -1,14 +1,21 @@
 <template>
   <div class="relative mb-1 flex items-center">
-    <div class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center" @click="updateSetting()">
-      <span class="mr-3" :class="loading ? 'default disabled cursor-pointer' : 'cursor-pointer'">
+    <div
+      class="my-1 mr-3 w-full cursor-pointer sm:flex sm:items-center"
+      @click="updateSetting()"
+    >
+      <span
+        class="mr-3"
+        :class="loading ? 'default disabled cursor-pointer' : 'cursor-pointer'"
+      >
         <AppSwitch
           :enabled="setting.val && setting.val == 1 ? true : false"
           :enable-tooltip="true"
           tooltip-on="Enable"
           tooltip-off="Disable"
         />
-        <span v-if="loading"
+        <span
+          v-if="loading"
           class="fa-solid fa-fw fa-1x fa-circle-notch fa-spin absolute float-left mr-4 text-slate-600"
           style="left: -1.4em; top: 1.2em"
         />

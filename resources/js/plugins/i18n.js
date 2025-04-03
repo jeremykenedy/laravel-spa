@@ -1,4 +1,4 @@
-import {createI18n} from 'vue-i18n'
+import {createI18n} from 'vue-i18n';
 import {useLangStore} from "@/store/lang";
 
 const i18n = createI18n({
@@ -8,7 +8,7 @@ const i18n = createI18n({
     locale: 'en', // set locale
     fallbackLocale: 'en', // set fallback locale
     messages: {} // set locale messages
-})
+});
 
 /**
  * @param {String} locale
@@ -19,7 +19,7 @@ export async function loadMessages(locale) {
         i18n.global.setLocaleMessage(locale, messages);
     }
     if (i18n.locale !== locale) {
-        i18n.locale = locale
+        i18n.locale = locale;
         i18n.global.locale.value = locale;
     }
 }

@@ -1,10 +1,10 @@
 <template>
-    <div>
-        <h1>AppTable</h1>
-        <code>
-              {{ data }}
-            </code>
-    </div>
+  <div>
+    <h1>AppTable</h1>
+    <code>
+      {{ data }}
+    </code>
+  </div>
 </template>
 
 <script lang="ts">

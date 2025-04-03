@@ -1,13 +1,12 @@
 <template>
   <li class="flex items-center">
     <router-link
-      v-slot="{ isActive }"
       :to="{ name: routeName }"
       class="font-semibold"
-        :class="currentRouteName == routeName
+      :class="currentRouteName == routeName
         ? 'cursor-default disabled text-gray-800 dark:text-gray-500'
         : 'cursor-pointer text-gray-500 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-400'
-        "
+      "
       @click.prevent="navClicked()"
     >
       <span v-if="text">{{ text }}</span>

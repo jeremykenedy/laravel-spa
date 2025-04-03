@@ -18,16 +18,16 @@ import { track } from '@services/analytics';
 
 export default {
   name: 'UserDownloadData',
+  data() {
+    return {
+      loading: false,
+    };
+  },
   computed: {
     ...mapState(useAuthStore, [
       'user',
       'authenticated',
     ]),
-  },
-  data() {
-    return {
-      loading: false,
-    };
   },
   methods: {
     ...mapActions(useAuthStore, [

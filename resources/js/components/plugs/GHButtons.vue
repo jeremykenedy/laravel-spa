@@ -1,23 +1,39 @@
 <template>
-  <div v-if="ghBbuttonEnable" class="github-buttons">
-    <github-button v-if="showFollow && ghUser" :href="ghBaseUrl + ghUser"
-      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-size="size" :data-show-count="showCountString"
-      :aria-label="followTitle + ghUser + ' on ' + serviceName" class="gh-button"
-      @click="track('Clicked ' + followTitle + ghUser + ' on ' + serviceName)">
+  <div
+    v-if="ghBbuttonEnable"
+    class="github-buttons"
+  >
+    <github-button
+      v-if="showFollow && ghUser"
+      :href="ghBaseUrl + ghUser"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :data-size="size"
+      :data-show-count="showCountString"
+      :aria-label="followTitle + ghUser + ' on ' + serviceName"
+      class="gh-button"
+      @click="track('Clicked ' + followTitle + ghUser + ' on ' + serviceName)"
+    >
       {{ followTitle }}{{ ghUser }}
     </github-button>
-    <github-button v-if="showStar && ghUser && ghRepo" v-tippy="showTips
-      ? starTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName
-      : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo" :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
-      :data-icon="starIcon" :data-size="size" :data-show-count="showCountString" :aria-label="starTitle +
+    <github-button
+      v-if="showStar && ghUser && ghRepo"
+      v-tippy="showTips
+        ? starTitle +
+          ' ' +
+          ghBaseUrl +
+          ghUser +
+          '/' +
+          ghRepo +
+          ' on ' +
+          serviceName
+        : null
+      "
+      :href="ghBaseUrl + ghUser + '/' + ghRepo"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :data-icon="starIcon"
+      :data-size="size"
+      :data-show-count="showCountString"
+      :aria-label="starTitle +
         ' ' +
         ghBaseUrl +
         ghUser +
@@ -25,34 +41,43 @@
         ghRepo +
         ' on ' +
         serviceName
-        " class="gh-button" @click="
-    track(
-      'Clicked ' +
-      starTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName,
-    )
-    ">
+      "
+      class="gh-button"
+      @click="
+        track(
+          'Clicked ' +
+            starTitle +
+            ' ' +
+            ghBaseUrl +
+            ghUser +
+            '/' +
+            ghRepo +
+            ' on ' +
+            serviceName,
+        )
+      "
+    >
       {{ starTitle }}
     </github-button>
-    <github-button v-if="showFork && ghUser && ghRepo" v-tippy="showTips
-      ? starTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName
-      : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/fork'"
-      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="forkIcon" :data-size="size"
-      :data-show-count="showCountString" :aria-label="forkTitle +
+    <github-button
+      v-if="showFork && ghUser && ghRepo"
+      v-tippy="showTips
+        ? starTitle +
+          ' ' +
+          ghBaseUrl +
+          ghUser +
+          '/' +
+          ghRepo +
+          ' on ' +
+          serviceName
+        : null
+      "
+      :href="ghBaseUrl + ghUser + '/' + ghRepo + '/fork'"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :data-icon="forkIcon"
+      :data-size="size"
+      :data-show-count="showCountString"
+      :aria-label="forkTitle +
         ' ' +
         ghBaseUrl +
         ghUser +
@@ -60,35 +85,44 @@
         ghRepo +
         ' on ' +
         serviceName
-        " class="gh-button" @click="
-    track(
-      'Clicked ' +
-      forkTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName,
-    )
-    ">
+      "
+      class="gh-button"
+      @click="
+        track(
+          'Clicked ' +
+            forkTitle +
+            ' ' +
+            ghBaseUrl +
+            ghUser +
+            '/' +
+            ghRepo +
+            ' on ' +
+            serviceName,
+        )
+      "
+    >
       {{ forkTitle }}
     </github-button>
-    <github-button v-if="showIssue && ghUser && ghRepo" v-tippy="showTips
-      ? 'Show ' +
-      issueTitle +
-      ' for ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName
-      : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/issues'"
-      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="issueIcon" :data-size="size"
-      :data-show-count="showCountString" :aria-label="issueTitle +
+    <github-button
+      v-if="showIssue && ghUser && ghRepo"
+      v-tippy="showTips
+        ? 'Show ' +
+          issueTitle +
+          ' for ' +
+          ghBaseUrl +
+          ghUser +
+          '/' +
+          ghRepo +
+          ' on ' +
+          serviceName
+        : null
+      "
+      :href="ghBaseUrl + ghUser + '/' + ghRepo + '/issues'"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :data-icon="issueIcon"
+      :data-size="size"
+      :data-show-count="showCountString"
+      :aria-label="issueTitle +
         ' ' +
         ghBaseUrl +
         ghUser +
@@ -96,34 +130,43 @@
         ghRepo +
         ' on ' +
         serviceName
-        " class="gh-button" @click="
-    track(
-      'Clicked ' +
-      issueTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName,
-    )
-    ">
+      "
+      class="gh-button"
+      @click="
+        track(
+          'Clicked ' +
+            issueTitle +
+            ' ' +
+            ghBaseUrl +
+            ghUser +
+            '/' +
+            ghRepo +
+            ' on ' +
+            serviceName,
+        )
+      "
+    >
       {{ issueTitle }}
     </github-button>
-    <github-button v-if="showWatch && ghUser && ghRepo" v-tippy="showTips
-      ? watchTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName
-      : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/subscription'"
-      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="watchIcon" :data-size="size"
-      :data-show-count="showCountString" :aria-label="watchTitle +
+    <github-button
+      v-if="showWatch && ghUser && ghRepo"
+      v-tippy="showTips
+        ? watchTitle +
+          ' ' +
+          ghBaseUrl +
+          ghUser +
+          '/' +
+          ghRepo +
+          ' on ' +
+          serviceName
+        : null
+      "
+      :href="ghBaseUrl + ghUser + '/' + ghRepo + '/subscription'"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :data-icon="watchIcon"
+      :data-size="size"
+      :data-show-count="showCountString"
+      :aria-label="watchTitle +
         ' ' +
         ghBaseUrl +
         ghUser +
@@ -131,46 +174,62 @@
         ghRepo +
         ' on ' +
         serviceName
-        " class="gh-button" @click="
-    track(
-      'Clicked ' +
-      watchTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' on ' +
-      serviceName,
-    )
-    ">
+      "
+      class="gh-button"
+      @click="
+        track(
+          'Clicked ' +
+            watchTitle +
+            ' ' +
+            ghBaseUrl +
+            ghUser +
+            '/' +
+            ghRepo +
+            ' on ' +
+            serviceName,
+        )
+      "
+    >
       {{ watchTitle }}
     </github-button>
 
-    <github-button v-if="showSponsor && ghUser" v-tippy="showTips ? 'Sponsor @' + ghUser + ' on GitHub' : null"
-      :href="ghBaseUrl + 'sponsors/' + ghUser" :data-icon="sponsorIcon" :data-size="size"
-      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
-      class="gh-button" @click="
+    <github-button
+      v-if="showSponsor && ghUser"
+      v-tippy="showTips ? 'Sponsor @' + ghUser + ' on GitHub' : null"
+      :href="ghBaseUrl + 'sponsors/' + ghUser"
+      :data-icon="sponsorIcon"
+      :data-size="size"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :aria-label="'Sponsor @' + ghUser + ' on GitHub'"
+      class="gh-button"
+      @click="
         track(
           'Clicked ' + sponsorTitle + ' ' + ghBaseUrl + 'sponsors/' + ghUser,
         )
-        ">
+      "
+    >
       {{ sponsorTitle }}
     </github-button>
 
-    <github-button v-if="showDownload && ghUser && ghRepo" v-tippy="showTips
-      ? downloadTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' directly from ' +
-      serviceName
-      : null
-      " :href="ghBaseUrl + ghUser + '/' + ghRepo + '/archive/HEAD.zip'"
-      :data-color-scheme="isDarkMode ? darkVariant : lightVariant" :data-icon="downloadIcon" :data-size="size"
-      :data-show-count="showCountString" :aria-label="downloadTitle +
+    <github-button
+      v-if="showDownload && ghUser && ghRepo"
+      v-tippy="showTips
+        ? downloadTitle +
+          ' ' +
+          ghBaseUrl +
+          ghUser +
+          '/' +
+          ghRepo +
+          ' directly from ' +
+          serviceName
+        : null
+      "
+      :href="ghBaseUrl + ghUser + '/' + ghRepo + '/archive/HEAD.zip'"
+      :data-color-scheme="isDarkMode ? darkVariant : lightVariant"
+      :data-icon="downloadIcon"
+      :data-size="size"
+      :data-show-count="showCountString"
+      :aria-label="downloadTitle +
         ' ' +
         ghBaseUrl +
         ghUser +
@@ -178,19 +237,22 @@
         ghRepo +
         ' directly from ' +
         serviceName
-        " class="gh-button" @click="
-    track(
-      'Clicked ' +
-      downloadTitle +
-      ' ' +
-      ghBaseUrl +
-      ghUser +
-      '/' +
-      ghRepo +
-      ' directly from ' +
-      serviceName,
-    )
-    ">
+      "
+      class="gh-button"
+      @click="
+        track(
+          'Clicked ' +
+            downloadTitle +
+            ' ' +
+            ghBaseUrl +
+            ghUser +
+            '/' +
+            ghRepo +
+            ' directly from ' +
+            serviceName,
+        )
+      "
+    >
       {{ downloadTitle }}
     </github-button>
   </div>

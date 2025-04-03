@@ -6,10 +6,18 @@
           <form @submit.prevent="submitForm">
             <!-- Title -->
             <div class="mb-3">
-              <label for="post-title" class="form-label">
+              <label
+                for="post-title"
+                class="form-label"
+              >
                 Title
               </label>
-              <input v-model="post.title" id="post-title" type="text" class="form-control">
+              <input
+                id="post-title"
+                v-model="post.title"
+                type="text"
+                class="form-control"
+              >
               <div class="text-danger-600 mt-1">
                 {{ errors.title }}
               </div>
@@ -21,10 +29,17 @@
             </div>
             <!-- Content -->
             <div class="mb-3">
-              <label for="post-content" class="form-label">
+              <label
+                for="post-content"
+                class="form-label"
+              >
                 Content
               </label>
-              <textarea v-model="post.content" id="post-content" class="form-control"></textarea>
+              <textarea
+                id="post-content"
+                v-model="post.content"
+                class="form-control"
+              />
               <div class="invalid-feedback mt-1">
                 {{ errors.content }}
               </div>
@@ -36,11 +51,19 @@
             </div>
             <!-- Category -->
             <div class="mb-3">
-              <label for="post-category" class="form-label">
+              <label
+                for="post-category"
+                class="form-label"
+              >
                 Category
               </label>
-              <v-select v-model="post.category_id" :options="categories" :reduce="category => category.id" label="text"
-                class="form-control" />
+              <v-select
+                v-model="post.category_id"
+                :options="categories"
+                :reduce="category => category.id"
+                label="text"
+                class="form-control"
+              />
               <div class="invalid-feedback mt-1">
                 {{ errors.category_id }}
               </div>
@@ -51,11 +74,18 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="thumbnail" class="form-label">
+              <label
+                for="thumbnail"
+                class="form-label"
+              >
                 Thumbnail
               </label>
-              <input @change="post.thumbnail = $event.target.files[0]" type="file" class="form-control"
-                id="thumbnail" />
+              <input
+                id="thumbnail"
+                type="file"
+                class="form-control"
+                @change="post.thumbnail = $event.target.files[0]"
+              >
               <div class="text-danger-600 mt-1">
                 <div v-for="message in validationErrors?.thumbnail">
                   {{ message }}
@@ -64,8 +94,14 @@
             </div>
             <!-- Buttons -->
             <div class="mt-4">
-              <button :disabled="isLoading" class="btn btn-primary">
-                <div v-show="isLoading" class=""></div>
+              <button
+                :disabled="isLoading"
+                class="btn btn-primary"
+              >
+                <div
+                  v-show="isLoading"
+                  class=""
+                />
                 <span v-if="isLoading">Processing...</span>
                 <span v-else>Save</span>
               </button>

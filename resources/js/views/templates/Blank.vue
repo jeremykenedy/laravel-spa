@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>
-      {{ blank }}
+      {{ blankContent }}
+      <ArrowRightOnRectangleIcon />
     </h1>
   </div>
 </template>
@@ -15,17 +16,18 @@ import { ArrowRightOnRectangleIcon } from '@heroicons/vue/24/outline';
 import { track } from '@services/analytics';
 
 export default {
-  name: 'Blank',
+  name: 'BlankTemplate',
   components: {
     ArrowRightOnRectangleIcon
   },
   props: {},
+  emits: ['buttonClicked'],
   setup() {
     return {};
   },
   data() {
     return {
-      blank: 'Blank',
+      blankContent: 'Blank',
     };
   },
   computed: {

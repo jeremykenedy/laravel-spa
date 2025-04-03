@@ -46,19 +46,19 @@ export default function usePosts() {
         axios.get('/api/posts/' + id)
             .then(response => {
                 post.value = response.data.data;
-            })
+            });
     };
 
     const storePost = async (post) => {
         if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
-        let serializedPost = new FormData()
-        for (let item in post) {
+        const serializedPost = new FormData();
+        for (const item in post) {
             if (post.hasOwnProperty(item)) {
-                serializedPost.append(item, post[item])
+                serializedPost.append(item, post[item]);
             }
         }
 
@@ -68,36 +68,36 @@ export default function usePosts() {
             }
         })
         .then(response => {
-            router.push({name: 'posts.index'})
+            router.push({name: 'posts.index'});
             toast.success('Post created successfully');
         })
         .catch(error => {
             if (error.response?.data) {
-                validationErrors.value = error.response.data.errors
+                validationErrors.value = error.response.data.errors;
                 toast.error('Something went wrong');
             }
         })
-        .finally(() => isLoading.value = false)
+        .finally(() => isLoading.value = false);
     };
 
     const updatePost = async (post) => {
       if (isLoading.value) return;
 
-      isLoading.value = true
-      validationErrors.value = {}
+      isLoading.value = true;
+      validationErrors.value = {};
 
       axios.put('/api/posts/' + post.id, post)
       .then(response => {
-          router.push({name: 'posts.index'})
+          router.push({name: 'posts.index'});
           toast.success('Post updated successfully');
       })
       .catch(error => {
           if (error.response?.data) {
-              validationErrors.value = error.response.data.errors
+              validationErrors.value = error.response.data.errors;
           }
           toast.error('Something went wrong');
       })
-      .finally(() => isLoading.value = false)
+      .finally(() => isLoading.value = false);
     };
 
     const deletePost = async (post) => {
@@ -125,9 +125,9 @@ export default function usePosts() {
             })
             .catch(error => {
               toast.error('Something went wrong');
-            })
+            });
         }
-      })
+      });
     };
 
     return {
@@ -140,5 +140,5 @@ export default function usePosts() {
       deletePost,
       validationErrors,
       isLoading
-    }
+    };
 }

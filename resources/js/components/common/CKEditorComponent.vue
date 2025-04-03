@@ -1,5 +1,10 @@
 <template>
-  <CKEditor :editor="ClassicEditor" v-model="editorData" :model-value="props.modelValue" :config="editorConfig" />
+  <CKEditor
+    v-model="editorData"
+    :editor="ClassicEditor"
+    :model-value="props.modelValue"
+    :config="editorConfig"
+  />
 </template>
 
 <script setup>

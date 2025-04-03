@@ -1,22 +1,29 @@
 <template>
   <div>
-    <div v-if="!socialLoginsEnabled" class="p-10 text-center text-gray-600">
+    <div
+      v-if="!socialLoginsEnabled"
+      class="p-10 text-center text-gray-600"
+    >
       <div>
         <PowerIcon class="ml-auto mr-auto mb-4 h-12 w-12" />
       </div>
-      <h2 class="text-lg">No applications are available for integration.</h2>
+      <h2 class="text-lg">
+        No applications are available for integration.
+      </h2>
     </div>
 
     <div v-if="socialLoginsEnabled">
-      <div class="grid grid-cols-1 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-2 lg:grid-cols-3" >
-
+      <div class="grid grid-cols-1 gap-4 rounded-lg text-center font-mono text-sm font-bold leading-6 text-white sm:grid-cols-2 lg:grid-cols-3">
         <div
           v-for="(provider, index) in enabledProviders"
           :key="provider + '_' + index"
           class="mb-1 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-900 dark:bg-gray-900"
         >
           <div class="flex flex-col items-center pt-4 pb-4 pl-2 pr-2">
-            <span class="fa-4x mb-2" :class="providerIcon(provider.provider)" />
+            <span
+              class="fa-4x mb-2"
+              :class="providerIcon(provider.provider)"
+            />
             <h5
               class="mb-0 text-lg font-extrabold capitalize text-gray-900 dark:text-white"
             >
@@ -32,7 +39,7 @@
               >
                 <span class="far fa-clock" /> First Used:
               </span>
-              <br />
+              <br>
               {{ parseDisplayDate(provider.created_at) }}
             </div>
 
@@ -46,7 +53,7 @@
               >
                 <span class="far fa-clock" /> Last Used:
               </span>
-              <br />
+              <br>
               {{ parseDisplayDate(provider.updated_at) }}
             </div>
 
@@ -54,8 +61,8 @@
               <AppButton
                 v-tippy="
                   'Disconnect ' +
-                  capitalizeFirstLetter(provider.provider) +
-                  ' from your account.'
+                    capitalizeFirstLetter(provider.provider) +
+                    ' from your account.'
                 "
                 danger
                 text="Revoke"
@@ -72,7 +79,10 @@
           class="mb-1 w-full rounded-lg border border-gray-200 bg-white shadow-md dark:border-gray-900 dark:bg-gray-900"
         >
           <div class="flex flex-col items-center pt-4 pb-4 pl-2 pr-2">
-            <span class="fa-4x mb-2" :class="providerIcon(provider)" />
+            <span
+              class="fa-4x mb-2"
+              :class="providerIcon(provider)"
+            />
             <h5
               class="mb-2 text-lg font-extrabold capitalize text-gray-900 dark:text-white"
             >
@@ -82,8 +92,8 @@
               <AppButton
                 v-tippy="
                   'Connect ' +
-                  capitalizeFirstLetter(provider) +
-                  ' to your account.'
+                    capitalizeFirstLetter(provider) +
+                    ' to your account.'
                 "
                 :disabled="loading"
                 accent
@@ -94,7 +104,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
     <div class="clear-both clearfix" />
@@ -125,6 +134,7 @@ export default {
     PowerIcon,
   },
   props: {},
+  emits: ['buttonClicked'],
   data() {
     return {
       loading: false,

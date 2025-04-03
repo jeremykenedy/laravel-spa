@@ -1,13 +1,34 @@
 <template>
-  <AppButton text="Buy me a coffee" type="button"
+  <AppButton
+    text="Buy me a coffee"
+    type="button"
     class="bmc-button inline-block rounded-lg bg-red-500 pl-5 pr-6 pt-4 pb-4 shadow-lg hover:bg-red-600 hover:shadow-none"
-    @click.prevent="openLink">
+    @click.prevent="openLink"
+  >
     <template #text>
-      <svg height="546px" version="1.1" viewBox="0 0 569 546" width="569px" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        height="546px"
+        version="1.1"
+        viewBox="0 0 569 546"
+        width="569px"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <title>Patreon logo</title>
         <g>
-          <circle cx="362.589996" cy="204.589996" data-fill="1" fill="#FFFFFF" r="204.589996"></circle>
-          <rect data-fill="1" height="545.799988" width="100" x="0" y="0"></rect>
+          <circle
+            cx="362.589996"
+            cy="204.589996"
+            data-fill="1"
+            fill="#FFFFFF"
+            r="204.589996"
+          />
+          <rect
+            data-fill="1"
+            height="545.799988"
+            width="100"
+            x="0"
+            y="0"
+          />
         </g>
       </svg>
       <span class="text-1xl ml-2 font-bold text-white">{{ patreonText }}</span>

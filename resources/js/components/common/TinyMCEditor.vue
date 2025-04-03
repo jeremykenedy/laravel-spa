@@ -1,5 +1,8 @@
 <template>
-  <Editor :api-key="tinyKey" :init="editor" />
+  <Editor
+    :api-key="tinyKey"
+    :init="editor"
+  />
 </template>
 
 <script setup>
@@ -14,7 +17,7 @@ const ai_request = (request, respondWith) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${openAiKey}`
+      'Authorization': `Bearer ${openAiKey.value}`
     },
     body: JSON.stringify({
       model: 'gpt-4o',

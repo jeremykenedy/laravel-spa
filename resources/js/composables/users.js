@@ -1,16 +1,16 @@
-import { ref, inject } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, inject } from 'vue';
+import { useRouter } from 'vue-router';
 
 export default function useUsers() {
-    const users = ref([])
+    const users = ref([]);
     const user = ref({
         name: ''
-    })
+    });
 
-    const router = useRouter()
-    const validationErrors = ref({})
-    const isLoading = ref(false)
-    const swal = inject('$swal')
+    const router = useRouter();
+    const validationErrors = ref({});
+    const isLoading = ref(false);
+    const swal = inject('$swal');
 
     const getUsers = async (
         page = 1,
@@ -28,66 +28,66 @@ export default function useUsers() {
             '&order_direction=' + order_direction)
             .then(response => {
                 users.value = response.data;
-            })
-    }
+            });
+    };
 
     const getUser = async (id) => {
         axios.get('/api/users/' + id)
             .then(response => {
                 user.value = response.data.data;
-            })
-    }
+            });
+    };
 
     const storeUser = async (user) => {
         if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
-        let serializedPost = new FormData()
-        for (let item in user) {
+        const serializedPost = new FormData();
+        for (const item in user) {
             if (user.hasOwnProperty(item)) {
-                serializedPost.append(item, user[item])
+                serializedPost.append(item, user[item]);
             }
         }
 
         axios.post('/api/users', serializedPost)
             .then(response => {
-                router.push({name: 'users.index'})
+                router.push({name: 'users.index'});
                 swal({
                     icon: 'success',
                     title: 'User saved successfully'
-                })
+                });
             })
             .catch(error => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => isLoading.value = false)
-    }
+            .finally(() => isLoading.value = false);
+    };
 
     const updateUser = async (user) => {
         if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
         axios.put('/api/users/' + user.id, user)
             .then(response => {
-                router.push({name: 'users.index'})
+                router.push({name: 'users.index'});
                 swal({
                     icon: 'success',
                     title: 'User updated successfully'
-                })
+                });
             })
             .catch(error => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => isLoading.value = false)
-    }
+            .finally(() => isLoading.value = false);
+    };
 
     const deleteUser = async (id) => {
         swal({
@@ -105,22 +105,22 @@ export default function useUsers() {
                 if (result.isConfirmed) {
                     axios.delete('/api/users/' + id)
                         .then(response => {
-                            getUsers()
-                            router.push({name: 'users.index'})
+                            getUsers();
+                            router.push({name: 'users.index'});
                             swal({
                                 icon: 'success',
                                 title: 'User deleted successfully'
-                            })
+                            });
                         })
                         .catch(error => {
                             swal({
                                 icon: 'error',
                                 title: 'Something went wrong'
-                            })
-                        })
+                            });
+                        });
                 }
-            })
-    }
+            });
+    };
 
     return {
         users,
@@ -132,5 +132,5 @@ export default function useUsers() {
         deleteUser,
         validationErrors,
         isLoading
-    }
+    };
 }

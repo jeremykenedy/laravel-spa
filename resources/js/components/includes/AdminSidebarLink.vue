@@ -1,20 +1,42 @@
 <template>
   <span>
-    <router-link v-if="!url" v-slot="{ isActive }" :to="{ name: routeName }" @click.prevent="navClicked()">
+    <router-link
+      v-if="!url"
+      :to="{ name: routeName }"
+      @click.prevent="navClicked()"
+    >
       <div
         class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400"
         :class="currentRouteName == routeName
-        ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
-        : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
-      ">
-        <slot v-if="hasIconSlot" name="icon" />
-        <span v-if="text" class="ml-2">{{ text }}</span>
+          ? 'cursor-default bg-gray-200 text-blue-600 hover:bg-gray-200 dark:bg-gray-900 dark:text-blue-200 dark:hover:bg-gray-900'
+          : 'cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700'
+        "
+      >
+        <slot
+          v-if="hasIconSlot"
+          name="icon"
+        />
+        <span
+          v-if="text"
+          class="ml-2"
+        >{{ text }}</span>
       </div>
     </router-link>
 
-    <a v-if="url" :href="url" target="_blank" class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700">
-      <slot v-if="hasIconSlot" name="icon" />
-      <span v-if="text" class="ml-2 truncate">{{ text }}</span>
+    <a
+      v-if="url"
+      :href="url"
+      target="_blank"
+      class="flex h-10 w-full items-center rounded-lg pl-4 text-blue-400 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700"
+    >
+      <slot
+        v-if="hasIconSlot"
+        name="icon"
+      />
+      <span
+        v-if="text"
+        class="ml-2 truncate"
+      >{{ text }}</span>
     </a>
   </span>
 </template>

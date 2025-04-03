@@ -1,5 +1,8 @@
 <template>
-  <AppModal :show-modal="showingForm" @close-modal="closeModal">
+  <AppModal
+    :show-modal="showingForm"
+    @close-modal="closeModal"
+  >
     <template #title>
       {{
         newPermission
@@ -8,23 +11,39 @@
       }}
     </template>
     <template #body>
-      <Errors v-if="errors && useInlineMessage" :content="errors" :errors="errors" container-class="w-100 mb-5"
-        type="error" @close="errors = null" />
+      <Errors
+        v-if="errors && useInlineMessage"
+        :content="errors"
+        :errors="errors"
+        container-class="w-100 mb-5"
+        type="error"
+        @close="errors = null"
+      />
 
       <form @submit.prevent>
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 flex-auto">
             <label for="name"> Name </label>
-            <input id="name" v-model="form.name" type="text" placeholder="Name" name="name"
+            <input
+              id="name"
+              v-model="form.name"
+              type="text"
+              placeholder="Name"
+              name="name"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
               :class="errors && errors.name
                 ? 'border-red-500 text-red-600 placeholder-red-500 dark:placeholder-red-600'
                 : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-                " />
+              "
+            >
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300">
-              <span class="fas fa-lock" :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'
-                " />
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug text-slate-300"
+            >
+              <span
+                class="fas fa-lock"
+                :class="errors && errors.name ? 'text-red-600' : 'text-slate-300'
+                "
+              />
             </span>
           </div>
         </div>
@@ -32,15 +51,25 @@
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 flex-auto">
             <label for="slug"> Slug </label>
-            <input id="slug" v-model="form.slug" type="text" placeholder="Slug" name="slug"
+            <input
+              id="slug"
+              v-model="form.slug"
+              type="text"
+              placeholder="Slug"
+              name="slug"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
               :class="errors && errors.slug
                 ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
                 : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-                " />
+              "
+            >
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
-              <span class="fas fa-code" :class="errors && errors.slug ? 'text-red-600' : 'text-slate-300'" />
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+            >
+              <span
+                class="fas fa-code"
+                :class="errors && errors.slug ? 'text-red-600' : 'text-slate-300'"
+              />
             </span>
           </div>
         </div>
@@ -48,19 +77,28 @@
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 flex-auto">
             <label for="description"> Description </label>
-            <textarea id="description" v-model="form.description" type="text" placeholder="Description"
+            <textarea
+              id="description"
+              v-model="form.description"
+              type="text"
+              placeholder="Description"
               name="description"
               class="relative w-full rounded border bg-white dark:bg-gray-900 dark:text-gray-300 px-3 py-3 pr-10 text-sm shadow outline-none focus:outline-none"
               :class="errors && errors.description
                 ? 'border-red-500 text-red-600 placeholder-red-500 dark:text-red-600 dark:placeholder-red-600'
                 : 'border-transparent text-slate-600 placeholder-slate-300 dark:placeholder-slate-400'
-                " />
+              "
+            />
             <span
-              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug">
-              <span class="fas fa-pencil" :class="errors && errors.description
-                ? 'text-red-600'
-                : 'text-slate-300'
-                " />
+              class="absolute right-0 z-10 h-full w-8 items-center justify-center rounded bg-transparent py-3 pr-3 text-center text-base font-normal leading-snug"
+            >
+              <span
+                class="fas fa-pencil"
+                :class="errors && errors.description
+                  ? 'text-red-600'
+                  : 'text-slate-300'
+                "
+              />
             </span>
           </div>
         </div>
@@ -68,15 +106,25 @@
         <div class="relative mb-3 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative mb-3 max-w-2xl flex-auto">
             <h6>Permission Roles</h6>
-            <Multiselect v-model="form.roles" :options="availableRoles" track-by="id" label="name" mode="tags"
-              class="dark:bg-gray-900 dark:text-gray-300" placeholder="Select permission roles" />
+            <Multiselect
+              v-model="form.roles"
+              :options="availableRoles"
+              track-by="id"
+              label="name"
+              mode="tags"
+              class="dark:bg-gray-900 dark:text-gray-300"
+              placeholder="Select permission roles"
+            />
           </div>
         </div>
-        <div v-if="permission &&
-          permission.users &&
-          permission.users.length &&
-          permission.users.length > 0
-        " class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch">
+        <div
+          v-if="permission &&
+            permission.users &&
+            permission.users.length &&
+            permission.users.length > 0
+          "
+          class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch"
+        >
           <div class="flex-item relative flex-auto text-xs">
             <strong class="text-red-400"><span class="fas fa-warning fa-fw mr-1" />Warning</strong>: This will
             affect
@@ -88,7 +136,10 @@
 
         <div class="relative mb-3 mt-5 flex w-full flex-wrap items-stretch">
           <div class="flex-item relative flex-auto text-xs uppercase">
-            <div v-if="form.created_at" class="float-left">
+            <div
+              v-if="form.created_at"
+              class="float-left"
+            >
               Created at:
               <div class="text-xs font-bold">
                 {{ parseDisplayDate(form.created_at) }}
@@ -96,7 +147,10 @@
             </div>
           </div>
           <div class="flex-item relative flex-auto text-xs uppercase">
-            <div v-if="form.updated_at" class="float-right">
+            <div
+              v-if="form.updated_at"
+              class="float-right"
+            >
               Updated at:
               <div class="text-xs font-bold">
                 {{ parseDisplayDate(form.updated_at) }}
@@ -108,10 +162,13 @@
     </template>
     <template #footer>
       <div style="width: 100%">
-        <AppButton v-if="changed" :disabled="loading || submitting || !changed"
+        <AppButton
+          v-if="changed"
+          :disabled="loading || submitting || !changed"
           primary
           class="float-left"
-          @click="submit">
+          @click="submit"
+        >
           <template #text>
             {{
               newPermission
@@ -122,13 +179,18 @@
                   ? 'Updating'
                   : 'Update'
             }}
-            <span v-if="submitting" class="fa fa-circle-notch fa-spin ml-3" />
+            <span
+              v-if="submitting"
+              class="fa fa-circle-notch fa-spin ml-3"
+            />
           </template>
         </AppButton>
-        <AppButton :disabled="loading || submitting"
+        <AppButton
+          :disabled="loading || submitting"
           class="float-right"
           secondary
-          @click="closeModal">
+          @click="closeModal"
+        >
           <template #text>
             {{ changed ? 'Cancel' : 'Close' }}
           </template>
@@ -142,7 +204,6 @@
 import AppModal from '@components/common/AppModal.vue';
 import axios from 'axios';
 import { mapActions } from 'pinia';
-import { UserCircleIcon } from '@heroicons/vue/24/outline';
 import clonedeep from 'lodash.clonedeep';
 import moment from 'moment';
 import Multiselect from '@vueform/multiselect';
@@ -153,7 +214,6 @@ export default {
   name: 'PermissionFormModal',
   components: {
     AppModal,
-    UserCircleIcon,
     Multiselect,
     Errors,
   },

@@ -10,8 +10,14 @@
     @click.prevent="triggerImpersonateUser()"
   >
     <template #text>
-      <UserCircleIcon v-if="!loading" class="ml-2 mr-2 mt-0 h-4 w-4" />
-      <CircleSvg v-if="loading" class="mr-2 h-3 w-3" />
+      <UserCircleIcon
+        v-if="!loading"
+        class="ml-2 mr-2 mt-0 h-4 w-4"
+      />
+      <CircleSvg
+        v-if="loading"
+        class="mr-2 h-3 w-3"
+      />
       <span class="sr-only">{{ $t('impersonate_user') }}</span>
     </template>
   </AppButton>
@@ -28,15 +34,15 @@ import { UserCircleIcon } from '@heroicons/vue/24/outline';
 
 export default {
   name: 'ImpersonateUser',
+  components: {
+    CircleSvg,
+    UserCircleIcon,
+  },
   props: {
     person: { type: Object},
     classes: { type: String, default: null },
     loading: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
-  },
-  components: {
-    CircleSvg,
-    UserCircleIcon,
   },
   computed: {
     ...mapState(useAuthStore, [

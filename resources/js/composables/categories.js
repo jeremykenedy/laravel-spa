@@ -4,16 +4,16 @@ import { useToastStore } from "@store/toast";
 
 export default function useCategories() {
     const toast = useToastStore();
-    const categories = ref([])
-    const categoryList = ref([])
+    const categories = ref([]);
+    const categoryList = ref([]);
     const category = ref({
         name: ''
-    })
+    });
 
-    const router = useRouter()
-    const validationErrors = ref({})
-    const isLoading = ref(false)
-    const swal = inject('$swal')
+    const router = useRouter();
+    const validationErrors = ref({});
+    const isLoading = ref(false);
+    const swal = inject('$swal');
 
     const getCategories = async (
         page = 1,
@@ -32,56 +32,56 @@ export default function useCategories() {
             .then(response => {
                 categories.value = response.data;
                 return response.data;
-            })
-    }
+            });
+    };
 
     const getCategory = async (id) => {
         return axios.get('/api/categories/' + id)
             .then(response => {
                 category.value = response.data.data;
                 return response.data.data;
-            })
-    }
+            });
+    };
 
     const storeCategory = async (category) => {
         if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
         return axios.post('/api/categories', category)
             .then(response => {
-                router.push({name: 'categories.index'})
+                router.push({name: 'categories.index'});
                 toast.success('Category saved successfully');
                 return response;
             })
             .catch(error => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => isLoading.value = false)
-    }
+            .finally(() => isLoading.value = false);
+    };
 
     const updateCategory = async (category) => {
         if (isLoading.value) return;
 
-        isLoading.value = true
-        validationErrors.value = {}
+        isLoading.value = true;
+        validationErrors.value = {};
 
         return axios.put('/api/categories/' + category.id, category)
             .then(response => {
-                router.push({name: 'categories.index'})
+                router.push({name: 'categories.index'});
                 toast.success('Category updated successfully');
                 return response;
             })
             .catch(error => {
                 if (error.response?.data) {
-                    validationErrors.value = error.response.data.errors
+                    validationErrors.value = error.response.data.errors;
                 }
             })
-            .finally(() => isLoading.value = false)
-    }
+            .finally(() => isLoading.value = false);
+    };
 
     const deleteCategory = async (item) => {
 
@@ -102,24 +102,24 @@ export default function useCategories() {
         if (result.isConfirmed) {
           return axios.delete('/api/categories/' + item.id)
             .then(response => {
-              router.push({name: 'categories.index'})
+              router.push({name: 'categories.index'});
               toast.success('Category deleted successfully');
               return getCategories();
             })
             .catch(error => {
               toast.error('Something went wrong');
-            })
+            });
         }
-      })
-    }
+      });
+    };
 
     const getCategoryList = async () => {
         return axios.get('/api/category-list')
             .then(response => {
                 categoryList.value = response.data.data;
                 return response.data.data;
-            })
-    }
+            });
+    };
 
     return {
         categoryList,
@@ -133,5 +133,5 @@ export default function useCategories() {
         deleteCategory,
         validationErrors,
         isLoading
-    }
+    };
 }

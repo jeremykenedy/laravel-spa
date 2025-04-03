@@ -6,6 +6,6 @@
 
 <script>
 export default {
-  name: "Verify"
+  name: "VerifyPage"
 }
 </script>
