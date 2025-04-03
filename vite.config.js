@@ -57,10 +57,10 @@ export default defineConfig({
         retention: 172800,
       },
     }),
-    // legacy({
-    //   targets: ['defaults', 'not IE 11'],
-    //   polyfills: true,
-    // }),
+    legacy({
+      targets: ['defaults', 'not IE 11'],
+      polyfills: true,
+    }),
     manifestSRI(),
     createHtmlPlugin({
       minify: true,
