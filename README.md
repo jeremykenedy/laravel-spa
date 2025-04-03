@@ -204,10 +204,25 @@ LaravelSpa
 │   ├── dependabot.yml
 │   ├── labeler.yml
 │   └── workflows
+│       ├── build-changelog.yml
+│       ├── codacy.yml
+│       ├── codeql.yml
+│       ├── dependency-review.yml
+│       ├── deploy.yml
+│       ├── gitguardian.yml
+│       ├── greetings.yml
+│       ├── labeler.yml
+│       ├── laravel.yml
+│       ├── node.js.yml
+│       ├── php.yml
+│       ├── sentry.yml
+│       └── stale.yml
 ├── .gitignore
 ├── .prettierignore
+├── .prettierrc.json
 ├── .scripts
 │   └── deploy.sh
+├── .styleci.yml
 ├── LICENSE
 ├── README.md
 ├── SECURITY.md
@@ -358,10 +373,11 @@ LaravelSpa
 ├── artisan
 ├── bootstrap
 │   ├── app.php
-│   └── cache
-│       ├── .gitignore
-│       ├── packages.php
-│       └── services.php
+│   ├── cache
+│   │   ├── .gitignore
+│   │   ├── packages.php
+│   │   └── services.php
+│   └── ssr
 ├── composer.json
 ├── composer.lock
 ├── config
@@ -430,6 +446,7 @@ LaravelSpa
 │       ├── PermissionsTableSeeder.php
 │       ├── RolesTableSeeder.php
 │       └── UsersTableSeeder.php
+├── eslint.config.js
 ├── lang
 │   └── en
 │       ├── auth.php
@@ -442,7 +459,6 @@ LaravelSpa
 ├── phpunit.xml
 ├── postcss.config.js
 ├── prettier.config.js
-├── prettierrc.json
 ├── public
 │   ├── .htaccess
 │   ├── android-chrome-192x192.png
@@ -524,11 +540,10 @@ LaravelSpa
 │   │   ├── components
 │   │   │   ├── LocaleSwitcher.vue
 │   │   │   ├── ToggleDarkMode.vue
-│   │   │   ├── account
 │   │   │   ├── admin
-│   │   │   │   ├── Create.vue
-│   │   │   │   ├── Edit.vue
-│   │   │   │   └── Index.vue
+│   │   │   │   ├── CreateComp.vue
+│   │   │   │   ├── EditComp.vue
+│   │   │   │   └── IndexComp.vue
 │   │   │   ├── auth
 │   │   │   │   └── SocialiteLogins.vue
 │   │   │   ├── common
@@ -541,16 +556,16 @@ LaravelSpa
 │   │   │   │   ├── CKEditorComponent.vue
 │   │   │   │   ├── CircleSvg.vue
 │   │   │   │   ├── DropZone.vue
-│   │   │   │   ├── Errors.vue
+│   │   │   │   ├── ErrorsNotice.vue
 │   │   │   │   ├── ImpersonateUser.vue
 │   │   │   │   ├── LeaveImpersonation.vue
 │   │   │   │   ├── LoadingCircle.vue
 │   │   │   │   ├── NoRecordsCTA.vue
-│   │   │   │   ├── Pagination.vue
+│   │   │   │   ├── PaginationComp.vue
 │   │   │   │   ├── PerPage.vue
 │   │   │   │   ├── SocialMediaLoginStatus.vue
 │   │   │   │   ├── SocialMediaLoginStatusItem.vue
-│   │   │   │   ├── Success.vue
+│   │   │   │   ├── SuccessNotice.vue
 │   │   │   │   ├── TextEditorComponent.vue
 │   │   │   │   ├── TinyMCEditor.vue
 │   │   │   │   └── UmoEditor.vue
@@ -569,8 +584,8 @@ LaravelSpa
 │   │   │   │   ├── AdminSidebar.vue
 │   │   │   │   ├── AdminSidebarLink.vue
 │   │   │   │   ├── AppFooter.vue
-│   │   │   │   ├── Breadcrumb.vue
-│   │   │   │   ├── Nav.vue
+│   │   │   │   ├── AppNav.vue
+│   │   │   │   ├── BreadcrumbOld.vue
 │   │   │   │   └── NavLink.vue
 │   │   │   ├── loaders
 │   │   │   │   └── AnimatedTableLoader.vue
@@ -605,10 +620,10 @@ LaravelSpa
 │   │   │   ├── pt-BR.json
 │   │   │   └── zh-CN.json
 │   │   ├── layouts
-│   │   │   ├── Admin.vue
-│   │   │   ├── Authenticated.vue
-│   │   │   ├── Error.vue
-│   │   │   └── Guest.vue
+│   │   │   ├── AdminLayout.vue
+│   │   │   ├── AuthenticatedLayout.vue
+│   │   │   ├── ErrorLayout.vue
+│   │   │   └── GuestLayout.vue
 │   │   ├── plugins
 │   │   │   └── i18n.js
 │   │   ├── routes
@@ -635,61 +650,62 @@ LaravelSpa
 │   │   └── views
 │   │       ├── admin
 │   │       │   ├── ActivityLog.vue
-│   │       │   ├── Admin.vue
+│   │       │   ├── AdminPage.vue
 │   │       │   ├── AppSettings.vue
 │   │       │   ├── BrowserSessions.vue
-│   │       │   ├── Dashboard.vue
-│   │       │   ├── Permissions.vue
+│   │       │   ├── DashboardPage.vue
+│   │       │   ├── PermissionsPage.vue
 │   │       │   ├── PhpInfo.vue
-│   │       │   ├── Roles.vue
-│   │       │   ├── Users.vue
+│   │       │   ├── RolesPage.vue
+│   │       │   ├── UsersPage.vue
 │   │       │   ├── categories
-│   │       │   │   ├── Create.vue
-│   │       │   │   ├── Edit.vue
-│   │       │   │   └── Index.vue
+│   │       │   │   ├── CategoryIndex.vue
+│   │       │   │   ├── CreateCategory.vue
+│   │       │   │   └── EditCategory.vue
 │   │       │   └── posts
-│   │       │       ├── Create.vue
-│   │       │       ├── Edit.vue
-│   │       │       └── Index.vue
+│   │       │       ├── AdminCreatePost.vue
+│   │       │       ├── AdminEditPost.vue
+│   │       │       └── AdminPostsIndex.vue
 │   │       ├── auth
 │   │       │   ├── Verify.vue
 │   │       │   └── passwords
-│   │       │       ├── Confirm.vue
+│   │       │       ├── ConfirmPage.vue
 │   │       │       ├── RequestReset.vue
-│   │       │       └── Reset.vue
+│   │       │       └── ResetPage.vue
 │   │       ├── category
-│   │       │   └── posts.vue
+│   │       │   └── CatPostsPage.vue
 │   │       ├── errors
-│   │       │   └── 404.vue
+│   │       │   └── NotFound.vue
 │   │       ├── home
-│   │       │   └── index.vue
+│   │       │   └── HomePage.vue
 │   │       ├── kiosk
 │   │       ├── login
-│   │       │   └── Login.vue
+│   │       │   └── LoginPage.vue
 │   │       ├── misc
-│   │       │   ├── about.vue
-│   │       │   ├── pricing.vue
-│   │       │   ├── support.vue
-│   │       │   └── terms.vue
+│   │       │   ├── AboutPage.vue
+│   │       │   ├── PricingPage.vue
+│   │       │   ├── SupportPage.vue
+│   │       │   └── TermsPage.vue
 │   │       ├── pages
 │   │       │   └── user-settings
-│   │       │       ├── Account.vue
 │   │       │       ├── AccountAuthentication.vue
 │   │       │       ├── AccountData.vue
-│   │       │       ├── Password.vue
-│   │       │       ├── Profile.vue
-│   │       │       ├── Settings.vue
+│   │       │       ├── AccountPage.vue
+│   │       │       ├── PasswordPage.vue
+│   │       │       ├── ProfilePage.vue
 │   │       │       ├── SettingsNav.vue
 │   │       │       ├── SettingsNavLink.vue
+│   │       │       ├── SettingsPage.vue
 │   │       │       └── UserDownloadData.vue
 │   │       ├── posts
-│   │       │   ├── details.vue
-│   │       │   └── index.vue
+│   │       │   ├── PublicIndex.vue
+│   │       │   └── PublicPostDetails.vue
 │   │       ├── register
-│   │       │   └── index.vue
+│   │       │   └── RegisterPage.vue
 │   │       └── templates
 │   │           ├── Bare.vue
 │   │           └── Blank.vue
+│   ├── lang
 │   ├── pwa
 │   │   ├── serviceworker.js
 │   │   └── sw.js
@@ -720,7 +736,7 @@ LaravelSpa
 ├── vite.config.js
 └── vue.config.js
 
-104 directories, 422 files
+105 directories, 437 files
 
 ```
 
