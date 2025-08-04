@@ -45,7 +45,7 @@
         "rollup-plugin-visualizer": "^5.14.0",
         "sass": "^1.83.4",
         "sass-loader": "^16.0.4",
-        "stylelint": "^16.14.1",
+        "stylelint": "^16.23.0",
         "stylelint-webpack-plugin": "^5.0.1",
         "tailwindcss": "^3.4.17",
         "tw-elements": "^2.0.0",
