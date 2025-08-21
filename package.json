@@ -95,7 +95,7 @@
         "vite-plugin-html": "^3.2.2",
         "vite-plugin-manifest-sri": "^0.2.0",
         "vite-plugin-minify": "^2.1.0",
-        "vite-plugin-static-copy": "^2.2.0",
+        "vite-plugin-static-copy": "^2.3.2",
         "vite-plugin-stylelint": "^6.0.0",
         "vite-plugin-webpackchunkname": "^1.0.3",
         "vue": "^3.5.13",
