@@ -87,7 +87,7 @@
         "pinia": "^2.3.1",
         "pinia-plugin-persistedstate": "^4.2.0",
         "quill-blot-formatter": "^1.0.5",
-        "sweetalert2": "^11.16.1",
+        "sweetalert2": "^11.22.5",
         "toasty": "^6.0.3",
         "unplugin-vue-components": "^28.0.0",
         "vee-validate": "^4.11.7",
