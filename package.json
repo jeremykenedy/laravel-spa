@@ -77,7 +77,7 @@
         "@vueform/slider": "^2.1.10",
         "@vueform/vueform": "^1.12.4",
         "@vueup/vue-quill": "^1.2.0",
-        "axios": "^1.7.9",
+        "axios": "^1.12.2",
         "ckeditor": "^4.12.1",
         "ckeditor5-premium-features": "^44.3.0",
         "js-cookie": "^3.0.5",
