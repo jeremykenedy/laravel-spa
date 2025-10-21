@@ -34,7 +34,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 
 ## App Features
 ##### Built on:
-- [Laravel 11.x](https://github.com/laravel/laravel)
+- [Laravel 12.x](https://github.com/laravel/laravel)
 - [Laravel Sanctum](https://laravel.com/docs/11.x/sanctum)
 - [Socialite](https://laravel.com/docs/11.x/socialite)
 - [Vite](https://laravel.com/docs/9.x/vite)
