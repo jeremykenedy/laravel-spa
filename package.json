@@ -79,7 +79,7 @@
         "@vueup/vue-quill": "^1.2.0",
         "axios": "^1.12.2",
         "ckeditor": "^4.12.1",
-        "ckeditor5-premium-features": "^44.3.0",
+        "ckeditor5-premium-features": "^47.3.0",
         "js-cookie": "^3.0.5",
         "laravel-vue-pagination": "^4.1.1",
         "lodash.clonedeep": "^4.5.0",
