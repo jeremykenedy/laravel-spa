@@ -28,7 +28,7 @@
         "@vue/compiler-sfc": "^3.5.13",
         "autoprefixer": "^10.4.20",
         "babel-loader": "^9.2.1",
-        "concurrently": "^9.0.1",
+        "concurrently": "^9.2.4",
         "core-js": "^3.40.0",
         "cross-env": "^7.0.3",
         "eslint": "^9.23.0",
