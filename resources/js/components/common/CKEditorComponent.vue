@@ -19,7 +19,9 @@ const emit = defineEmits(['update:modelValue']);
 // global declared by the Blade layout, not a module import, so it is read
 // through typeof: a bare reference throws a ReferenceError if this component is
 // ever mounted on a page that does not declare it.
-const licenseKey = typeof CK_EDITOR_KEY === 'string' && CK_EDITOR_KEY ? CK_EDITOR_KEY : 'GPL';
+// eslint-disable-next-line no-undef
+const ckEditorKey = typeof CK_EDITOR_KEY === 'undefined' ? null : CK_EDITOR_KEY;
+const licenseKey = ckEditorKey || 'GPL';
 
 const editorConfig = ref({
   licenseKey,
