@@ -221,8 +221,18 @@ The repository also includes Laravel feature and unit tests. Run them with `php 
 
 <table>
   <tbody>
-    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="100%" /></td></tr>
-    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="100%" /></td></tr>
+    <tr>
+      <td align="center">
+        <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="320" />
+        <br />Mobile Menu
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="320" />
+        <br />Mobile Login
+      </td>
+    </tr>
   </tbody>
 </table>
 
