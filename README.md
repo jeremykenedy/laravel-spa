@@ -219,22 +219,10 @@ The repository also includes Laravel feature and unit tests. Run them with `php 
 
 ### Mobile screenshots
 
-<table>
-  <tbody>
-    <tr>
-      <td align="center">
-        <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="320" />
-        <br />Mobile Menu
-      </td>
-    </tr>
-    <tr>
-      <td align="center">
-        <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="320" />
-        <br />Mobile Login
-      </td>
-    </tr>
-  </tbody>
-</table>
+<p align="center">
+  <a href="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png"><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="320" /></a>
+  <a href="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png"><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="320" /></a>
+</p>
 
 ## File Tree
 ```
