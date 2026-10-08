@@ -1,13 +1,22 @@
-# Laravel Auth SPA Boilerplate
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="art/banner-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="art/banner-light.svg">
+        <img src="art/banner-light.svg" alt="Laravel Auth SPA Boilerplate" width="800">
+    </picture>
+</p>
 
-[![StyleCI](https://github.styleci.io/repos/537735029/shield?branch=released&style=flat)](https://github.styleci.io/repos/537735029?branch=master)
-[![CodeQL](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml)
-[![Composer Install](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml/badge.svg)](https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml)
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa)
-[![MadeWithVueJs.com shield](https://madewithvuejs.com/storage/repo-shields/4106-shield.svg)](https://madewithvuejs.com/p/laravel-auth-spa/shield-link)
-[![App Version](https://img.shields.io/github/v/tag/jeremykenedy/laravel-spa.svg?sort=semver&label=App%20Version)](https://github.com/jeremykenedy/laravel-spa/releases)
-[![License: MIT](https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat)](https://opensource.org/licenses/MIT)
+<p align="center">Laravel authentication and user management SPA built with Laravel 13, Vue 3, Socialite, Vite, and Tailwind CSS.</p>
 
+<p align="center">
+    <a href="https://github.com/jeremykenedy/laravel-spa/releases"><img src="https://img.shields.io/github/v/tag/jeremykenedy/laravel-spa.svg?sort=semver&label=App%20Version" alt="App Version"></a>
+    <a href="https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml"><img src="https://github.com/jeremykenedy/laravel-spa/actions/workflows/codeql.yml/badge.svg?branch=master" alt="CodeQL"></a>
+    <a href="https://sonarcloud.io/summary/new_code?id=jeremykenedy_laravel-spa"><img src="https://sonarcloud.io/api/project_badges/measure?project=jeremykenedy_laravel-spa&metric=ncloc" alt="Lines of Code"></a>
+    <a href="https://madewithvuejs.com/p/laravel-auth-spa/shield-link"><img src="https://madewithvuejs.com/storage/repo-shields/4106-shield.svg" alt="MadeWithVueJs.com shield"></a>
+    <a href="https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml"><img src="https://github.com/jeremykenedy/laravel-spa/actions/workflows/php.yml/badge.svg" alt="Composer Install"></a>
+    <a href="https://github.styleci.io/repos/537735029?branch=master"><img src="https://github.styleci.io/repos/537735029/shield?branch=released&style=flat" alt="StyleCI"></a>
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/static/v1?label=License&message=MIT&color=green&style=flat" alt="License: MIT"></a>
+</p>
 
 <p align="center">
     <a href="https://github.com/jeremykenedy"><img src="https://img.shields.io/github/followers/jeremykenedy?label=Follow&amp;style=social" alt="Follow @jeremykenedy"></a>
@@ -15,18 +24,27 @@
     <a href="https://github.com/sponsors/jeremykenedy"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86" alt="Sponsor me on GitHub"></a>
 </p>
 
-### Table of contents
+## Table of Contents
+
 - [About](#about)
 - [Features](#features)
-- [Installation Instructions](#installation-instructions)
-    - [Build the Front End Assets with Vite](#build-the-front-end-assets-with-vitejs)
-    - [Optionally Build Cache](#optionally-build-cache)
+  - [Built on](#built-on)
+  - [Feature list](#feature-list)
+- [Requirements](#requirements)
+- [Installation](#installation)
+  - [Build the Front End Assets with Vite](#build-the-front-end-assets-with-vite)
+  - [Using npm](#using-npm)
+  - [Using Yarn](#using-yarn)
+  - [Optionally Build Cache](#optionally-build-cache)
 - [Seeds](#seeds)
-    - [Seeded Users](#seeded-users)
+  - [Seeded Users](#seeded-users)
 - [Socialite](#socialite)
-    - [Get Socialite Login API Keys](#get-socialite-login-api-keys)
-    - [Add More Socialite Logins](#add-more-socialite-logins)
+  - [Get Socialite Login API Keys](#get-socialite-login-api-keys)
+  - [Add More Socialite Logins](#add-more-socialite-logins)
+- [Testing](#testing)
 - [Screenshots](#screenshots)
+  - [Desktop screenshots](#desktop-screenshots)
+  - [Mobile screenshots](#mobile-screenshots)
 - [File Tree](#file-tree)
 - [License](#license)
 
@@ -37,8 +55,8 @@ social media authentication, password recovery, user management, and roles/permi
 management. Uses official [TailwindCSS](https://tailwindcss.com/). While the front end is
 part of this repository it is a completely separated Vue 3 front end compiled using ViteJS.
 
-## App Features
-##### Built on:
+## Features
+### Built on
 - [Laravel 13.x](https://github.com/laravel/laravel)
 - [Laravel Sanctum](https://laravel.com/docs/11.x/sanctum)
 - [Socialite](https://laravel.com/docs/11.x/socialite)
@@ -54,7 +72,7 @@ part of this repository it is a completely separated Vue 3 front end compiled us
 - [Font Awesome 7](https://fontawesome.com/search)
 - [ESLint](https://eslint.org/) with [Prettier](https://prettier.io/docs/en/index.html)
 
-##### Features:
+### Feature list
 - Users Area
 - Admin Area
 - About Page
@@ -94,9 +112,11 @@ The following Sanctum features are implemented in this Vue SPA:
 - ✅ Browser Sessions - Other Device Logout
 - ✅ User Activity Logs
 
-## Installation Instructions
+## Requirements
 
 **Requirements:** PHP >= 8.4, Composer, and Node.js >= 22.13 (this repo's `.nvmrc` pins Node 24).
+
+## Installation
 
 1. Run `git clone https://github.com/jeremykenedy/laravel-spa.git laravel-spa`
 2. Create a MySQL database for the project
@@ -113,27 +133,27 @@ The following Sanctum features are implemented in this Vue SPA:
 10. From the projects root folder run `php artisan db:seed`
 11. Compile the front end assets with [npm steps](#using-npm) or [yarn steps](#using-yarn).
 
-#### Build the Front End Assets with ViteJs
-##### Using NPM:
+### Build the Front End Assets with Vite
+#### Using npm:
 1. From the projects root folder run `npm install`
 2. From the projects root folder run `npm run dev` or `npm run build`
   * You can lint assets with `npm run lint`
   * You can clean the syntax with `npm run clean`
 
-##### Using Yarn:
+#### Using Yarn:
 1. From the projects root folder run `yarn install`
 2. From the projects root folder run `yarn run dev` or `yarn run build`
   * You can lint assets with `yarn run lint`
   * You can clean the syntax with `yarn run clean`
 
-#### Optionally Build Cache
+### Optionally Build Cache
 1. From the projects root folder run `php artisan config:cache`
 
-###### And thats it with the caveat of setting up and configuring your development environment.
+That's it, with the caveat that you need to set up and configure your development environment.
 
 ## Seeds
 
-##### Seeded Users
+### Seeded Users
 
 |Email|Password|
 |:------------|:------------|
@@ -143,7 +163,7 @@ The following Sanctum features are implemented in this Vue SPA:
 
 ## Socialite
 
-#### Get Socialite Login API Keys:
+### Get Socialite Login API Keys
 * [Facebook API](https://developers.facebook.com/) (Will work with local dev callback)
 * [Twitter API](https://apps.twitter.com/)
 * [Instagram API](https://instagram.com/developer/register/)
@@ -163,41 +183,48 @@ The following Sanctum features are implemented in this Vue SPA:
 * [Meetup API](https://www.meetup.com/api/oauth/list/)
 * [Atlassian](https://developer.atlassian.com/console/myapps/)
 
-#### Add More Socialite Logins
+### Add More Socialite Logins
 * See full list of providers: [https://socialiteproviders.github.io](https://socialiteproviders.com/about/)
+
+## Testing
+
+The CI workflows validate Composer configuration and installation, generate an application key, lint the Vue application, and build the frontend assets. Run the same checks locally:
+
+```bash
+composer validate --strict
+npm install
+npm run lint
+npm run build
+```
+
+The repository also includes Laravel feature and unit tests. Run them with `php artisan test` after installing Composer dependencies and configuring the application environment.
 
 ## Screenshots
 
-<p float="left">
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/login-sm.png" title="Login Social Media" alt="Login Social Media" width="48%"/>
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/login-sm-tiktok.png" title="Login Social Media TikTok" alt="Login Social Media TikTok" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/register-sm-instagram.png" title="Register Social Media Instagram" alt="Register Social Media Instagram" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/register-sm.png" title="Register Social Media" alt="Register Social Media" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/dashboard-success-login-sm.png" title="Social User Dashboard" alt="Social User Dashboard" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-dashboard.png" title="Admin Dashboard Dark Mode" alt="Admin Dashboard Dark Mode" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-users.png" title="Admin Users Table" alt="Admin Users Table" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-roles.png" title="Admin Roles Table" alt="Admin Roles Table" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-permissions.png" title="Admin Permissions Table" alt="Admin Permissions Table" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-app-settings.png" title="Admin App Settings Dark Mode" alt="Admin App Settings Dark Mode" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/home.png" title="Home" alt="Home" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/about.png" title="About" alt="About" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/login.png" title="Login" alt="Login" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/register.png" title="Register" alt="Register" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/dashboard.png" title="Dashboard" alt="Dashboard" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile1.png" title="Settings - Profile" alt="Settings - Profile" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile2.png" title="Settings - Password" alt="Settings - Password" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile3.png" title="Profile Dark" alt="Profile Dark" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-auth.png" title="Account SM Settings" alt="Account SM Settings" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-auth-revoke.png" title="Revoke Account SM Provider" alt="Revoke Account SM Provider" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-delete.png" title="Delete Account" alt="Delete Account" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-delete-confirm.png" title="Confirm Delete Account" alt="Confirm Delete Account" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/account-deleted.png" title="Account Deleted" alt="Account Deleted" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/terms.png" title="Terms Template" alt="Terms Template" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/forgot.png" title="Forgot Password" alt="Forgot Password" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/reset.png" title="Reset Password" alt="Reset Password" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="48%" />
-    <img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="48%" />
-</p>
+### Desktop screenshots
+
+<table>
+  <tbody>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/login-sm.png" title="Login Social Media" alt="Login Social Media" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/login-sm-tiktok.png" title="Login Social Media TikTok" alt="Login Social Media TikTok" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/register-sm-instagram.png" title="Register Social Media Instagram" alt="Register Social Media Instagram" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/register-sm.png" title="Register Social Media" alt="Register Social Media" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/dashboard-success-login-sm.png" title="Social User Dashboard" alt="Social User Dashboard" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-dashboard.png" title="Admin Dashboard Dark Mode" alt="Admin Dashboard Dark Mode" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-users.png" title="Admin Users Table" alt="Admin Users Table" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-roles.png" title="Admin Roles Table" alt="Admin Roles Table" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-permissions.png" title="Admin Permissions Table" alt="Admin Permissions Table" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3/admin-app-settings.png" title="Admin App Settings Dark Mode" alt="Admin App Settings Dark Mode" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/home.png" title="Home" alt="Home" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/about.png" title="About" alt="About" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/login.png" title="Login" alt="Login" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/register.png" title="Register" alt="Register" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/dashboard.png" title="Dashboard" alt="Dashboard" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile1.png" title="Settings - Profile" alt="Settings - Profile" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile2.png" title="Settings - Password" alt="Settings - Password" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/profile3.png" title="Profile Dark" alt="Profile Dark" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-auth.png" title="Account SM Settings" alt="Account SM Settings" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-auth-revoke.png" title="Revoke Account SM Provider" alt="Revoke Account SM Provider" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-delete.png" title="Delete Account" alt="Delete Account" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/settings-account-delete-confirm.png" title="Confirm Delete Account" alt="Confirm Delete Account" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/account-deleted.png" title="Account Deleted" alt="Account Deleted" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/v3.1/terms.png" title="Terms Template" alt="Terms Template" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/forgot.png" title="Forgot Password" alt="Forgot Password" width="100%" /></td><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/reset.png" title="Reset Password" alt="Reset Password" width="100%" /></td></tr>
+  </tbody>
+</table>
+
+### Mobile screenshots
+
+<table>
+  <tbody>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-menu.png" title="Mobile Menu" alt="Mobile Menu" width="100%" /></td></tr>
+    <tr><td><img src="https://laravel-spa.s3.us-west-2.amazonaws.com/mobile-login.png" title="Mobile Login" alt="Mobile Login" width="100%" /></td></tr>
+  </tbody>
+</table>
 
 ## File Tree
 ```
@@ -727,4 +754,7 @@ LaravelSpa
 * File tree generated using command `tree -a -I '.git|node_modules|vendor|build|storage|tests|.DS_Store|.env'`
 
 ## License
-Laravel-Spa is licensed under the [MIT license](https://opensource.org/licenses/MIT). Enjoy!
+
+This project is open-sourced software licensed under the [MIT license](LICENSE).
+
+Enjoy!
