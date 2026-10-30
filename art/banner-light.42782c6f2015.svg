@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-labelledby="title description">
+  <title id="title">Laravel Auth SPA Boilerplate</title>
+  <desc id="description">Laravel authentication, user management, and social login with Vue.</desc>
+  <style>
+    .type { stroke-dasharray: 37 40; animation: type 6s ease-in-out infinite; }
+    .check { transform-box: fill-box; transform-origin: center; animation: check 6s ease-in-out infinite; }
+    .pulse { transform-box: fill-box; transform-origin: center; animation: pulse 3.6s ease-in-out infinite; }
+    .bob { transform-box: fill-box; transform-origin: center; animation: bob 3.2s ease-in-out infinite; }
+    .bob-2 { animation-delay: -1.1s; }
+    .bob-3 { animation-delay: -2.2s; }
+    @keyframes type { 0%, 10% { stroke-dashoffset: 37; } 50%, 84% { stroke-dashoffset: 0; } 96%, 100% { stroke-dashoffset: 37; } }
+    @keyframes check { 0%, 50% { transform: scale(0); opacity: 0; } 58% { transform: scale(1.15); opacity: 1; } 64%, 84% { transform: scale(1); opacity: 1; } 94%, 100% { transform: scale(0); opacity: 0; } }
+    @keyframes pulse { 0% { transform: scale(1); opacity: 0; } 15% { transform: scale(1.06); opacity: .55; } 75%, 100% { transform: scale(1.45); opacity: 0; } }
+    @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @media (prefers-reduced-motion: reduce) { .type, .check, .pulse, .bob { animation: none; } }
+  </style>
+  <rect width="800" height="200" rx="16" fill="#fff" stroke="#e5e7eb"/>
+  <text x="40" y="78" fill="#0f172a" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="40" font-weight="700" letter-spacing="-.5">Laravel Auth SPA</text>
+  <text x="42" y="108" fill="#64748b" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="14">Authentication, user management, and social login with Laravel and Vue.</text>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="10" font-weight="500" text-anchor="middle">
+    <rect x="40" y="132" width="82" height="22" rx="11" fill="#f5f3ff" stroke="#c4b5fd" stroke-width=".8"/><text x="81" y="147" fill="#6d28d9">Laravel 13</text>
+    <rect x="130" y="132" width="58" height="22" rx="11" fill="#eff6ff" stroke="#93c5fd" stroke-width=".8"/><text x="159" y="147" fill="#1e40af">Vue 3</text>
+    <rect x="196" y="132" width="82" height="22" rx="11" fill="#f0fdf4" stroke="#86efac" stroke-width=".8"/><text x="237" y="147" fill="#166534">Socialite</text>
+    <rect x="286" y="132" width="96" height="22" rx="11" fill="#fffbeb" stroke="#fcd34d" stroke-width=".8"/><text x="334" y="147" fill="#b45309">Tailwind CSS</text>
+  </g>
+  <g transform="translate(570 30)">
+    <rect x="0" y="0" width="190" height="140" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <path d="M0 30h190" stroke="#cbd5e1" stroke-width="1.5"/>
+    <circle cx="16" cy="15" r="4" fill="#f87171"/><circle cx="30" cy="15" r="4" fill="#fbbf24"/><circle cx="44" cy="15" r="4" fill="#4ade80"/>
+    <rect x="15" y="44" width="58" height="78" rx="9" fill="#ede9fe" stroke="#c4b5fd"/>
+    <circle class="pulse" cx="44" cy="67" r="13" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0"/>
+    <circle cx="44" cy="67" r="13" fill="#8b5cf6"/>
+    <path d="M25 105c3-12 11-18 19-18s16 6 19 18" fill="#a78bfa"/>
+    <rect x="86" y="48" width="83" height="10" rx="5" fill="#dbeafe"/>
+    <rect x="86" y="66" width="68" height="7" rx="3.5" fill="#cbd5e1"/>
+    <rect x="86" y="81" width="83" height="29" rx="8" fill="#fff" stroke="#e2e8f0"/>
+    <path class="type" d="M99.5 94.5h37" stroke="#94a3b8" stroke-linecap="round" stroke-width="7"/>
+    <g class="check">
+      <circle cx="157" cy="96" r="8" fill="#22c55e"/>
+      <path d="m153 96 3 3 5-6" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+    </g>
+    <circle class="bob" cx="100" cy="126" r="5" fill="#ef4444"/>
+    <circle class="bob bob-2" cx="116" cy="126" r="5" fill="#3b82f6"/>
+    <circle class="bob bob-3" cx="132" cy="126" r="5" fill="#0f172a"/>
+  </g>
+</svg>
