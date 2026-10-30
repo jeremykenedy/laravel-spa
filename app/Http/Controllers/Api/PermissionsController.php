@@ -6,12 +6,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Permissions\CreatePermissionRequest;
+use App\Http\Requests\Permissions\DeletePermissionRequest;
 use App\Http\Requests\Permissions\GetPermissionsRequest;
 use App\Http\Requests\Permissions\UpdatePermissionRequest;
 use App\Http\Resources\Permissions\PermissionsCollection;
 use App\Models\Permission;
 use App\Models\Role;
-use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
 {
@@ -105,7 +105,7 @@ class PermissionsController extends Controller
         ]);
     }
 
-    public function deletePermission(Request $request, Permission $permission)
+    public function deletePermission(DeletePermissionRequest $request, Permission $permission)
     {
         $permission->delete();
 
