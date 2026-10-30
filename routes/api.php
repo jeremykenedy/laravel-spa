@@ -35,9 +35,9 @@ Route::group(['middleware' => ['forceHTTPS']], function () {
     Route::get('/logins', [SocialiteController::class, 'loginsEnabled']);
     Route::post('/oauth/{driver}', [SocialiteController::class, 'getSocialRedirect']);
     Route::get('/oauth/{driver}/callback', [SocialiteController::class, 'handleSocialCallback'])->name('oauth.callback');
-    Route::post('/oauth-revoke/{provider}', [SocialiteController::class, 'revokeSocialProvider']);
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
+        Route::post('/oauth-revoke/{provider}', [SocialiteController::class, 'revokeSocialProvider']);
         Route::apiResource('posts', PostController::class);
         Route::apiResource('categories', CategoryController::class);
         Route::get('category-list', [CategoryController::class, 'getList']);

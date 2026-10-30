@@ -13,9 +13,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Crypt;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialiteController extends Controller
@@ -71,7 +69,6 @@ class SocialiteController extends Controller
 
         $url = null;
         $token = null;
-        $state = null;
         $user = null;
         $scopes = [];
         $with = [];
@@ -82,10 +79,9 @@ class SocialiteController extends Controller
 
         if ($user) {
             $token = $user->createToken($provider.'-user-token')->plainTextToken;
-            $state = Crypt::encrypt($token);
-        } else {
-            $state = Crypt::encrypt(config('app.key'));
         }
+
+        $state = $this->storeOAuthState($provider, $token);
 
         $with = ['state' => $state];
 
@@ -123,8 +119,9 @@ class SocialiteController extends Controller
                 ->getTargetUrl();
         }
 
+        // The StackExchange provider builds its own query string and drops the state when stateless.
         if ($provider == 'stackexchange') {
-            $url = $this->cacheStatePutKeyInUrl($url, $state);
+            $url .= '&state='.$state;
         }
 
         return response()->json([
@@ -145,27 +142,32 @@ class SocialiteController extends Controller
             throw new SocialProviderDeniedException;
         }
 
-        if ($provider == 'twitter') {
-            $socialUser = $this->twitterUserAuthentication($request);
-            $state = $request->state ? Crypt::decrypt(Cache::pull($request->state)) : null;
-        } elseif ($provider == 'stackexchange') {
-            $socialUser = Socialite::driver($provider)->stateless()->user();
-            $state = $request->state ? Crypt::decrypt(Cache::pull($request->state)) : null;
-        } else {
-            $socialUser = Socialite::driver($provider)->stateless()->user();
-            $state = $request->state ? Crypt::decrypt($request->state) : null;
+        $state = $this->pullOAuthState($provider, $request->state);
+
+        if (! $state) {
+            return $this->socialCallbackView(null, __('auth.social_invalid_state'), 403);
         }
 
-        $userData = $this->findOrCreateUser($provider, $socialUser, $state);
+        if ($provider == 'twitter') {
+            $socialUser = $this->twitterUserAuthentication($request);
+        } else {
+            $socialUser = Socialite::driver($provider)->stateless()->user();
+        }
+
+        $userData = $this->findOrCreateUser($provider, $socialUser, $state['token']);
+
+        if (! empty($userData['error'])) {
+            return $this->socialCallbackView(null, $userData['error'], 409);
+        }
 
         $user = $userData['user'];
         $token = $userData['token'];
 
-        if ($user && $token) {
-            auth()->login($user);
-        } else {
-            $token = 'cannot_add';
+        if (! $user || ! $token) {
+            return $this->socialCallbackView('cannot_add', null, 409);
         }
+
+        auth()->login($user);
 
         $providerFound = SocialiteProvider::where('provider', $provider)
             ->where('user_id', $user->id)
@@ -176,10 +178,21 @@ class SocialiteController extends Controller
             $providerFound->save();
         }
 
-        return view('socialite/callback', [
+        return $this->socialCallbackView($token);
+    }
+
+    /**
+     * Render the popup page that hands the result back to the window that opened it.
+     *
+     * @return Response
+     */
+    private function socialCallbackView(?string $token, ?string $error = null, int $status = 200)
+    {
+        return response()->view('socialite/callback', [
             'token' => $token,
             'token_type' => 'bearer',
-        ]);
+            'error' => $error,
+        ], $status);
     }
 
     /**
@@ -196,12 +209,9 @@ class SocialiteController extends Controller
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret);
 
-        $tempId = $this->generateTempId();
         $requestToken = $connection->oauth('oauth/request_token', [
-            'oauth_callback' => $consumerRedirect.'?state='.$tempId,
+            'oauth_callback' => $consumerRedirect.'?state='.$state,
         ]);
-
-        $this->tempStoreStateInCache($tempId, $state);
 
         $url = $connection->url('oauth/authorize', [
             'oauth_token' => $requestToken['oauth_token'],

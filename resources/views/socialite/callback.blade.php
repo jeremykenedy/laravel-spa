@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name') }}</title>
         <script>
-            window.opener.postMessage({ token: "{{ $token }}" }, "{{ url('/') }}")
+            window.opener.postMessage({ token: @json($token), error: @json($error ?? null) }, "{{ url('/') }}")
             window.close()
         </script>
     </head>
