@@ -11,21 +11,12 @@ use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
 
 beforeEach(function () {
-    $this->outputBufferLevel = ob_get_level();
-
     config('roles.models.role')::create([
         'name' => 'User',
         'slug' => 'user',
         'description' => 'User Role',
         'level' => 1,
     ]);
-});
-
-afterEach(function () {
-    // SocialiteController opens a gzip output buffer in its constructor.
-    while (ob_get_level() > $this->outputBufferLevel) {
-        ob_end_clean();
-    }
 });
 
 /**

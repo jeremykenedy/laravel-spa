@@ -6,11 +6,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Roles\CreateRoleRequest;
+use App\Http\Requests\Roles\DeleteRoleRequest;
 use App\Http\Requests\Roles\GetUserRolesRequest;
 use App\Http\Requests\Roles\UpdateRoleRequest;
 use App\Http\Resources\Roles\RolesCollection;
 use App\Models\Role;
-use Illuminate\Http\Request;
 
 class RolesController extends Controller
 {
@@ -80,7 +80,7 @@ class RolesController extends Controller
         ]);
     }
 
-    public function deleteRole(Request $request, Role $role)
+    public function deleteRole(DeleteRoleRequest $request, Role $role)
     {
         $role->delete();
 
