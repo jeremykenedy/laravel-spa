@@ -40,8 +40,8 @@ deployMigrationsAndSeeds() {
 }
 
 deployFrontEnd() {
-    npm install
-    npm update
+    npm install --ignore-scripts
+    npm update --ignore-scripts
     npm run clean
     npm run lint
     npm run optimize

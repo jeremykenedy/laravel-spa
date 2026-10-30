@@ -1,0 +1,5 @@
+---
+# Third-party scripts vendored as-is.
+exclude_paths:
+  - 'resources/js/services/asteroids.js'
+  - 'resources/js/services/excanvas.js'

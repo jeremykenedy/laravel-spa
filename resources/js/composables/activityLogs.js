@@ -10,7 +10,7 @@ export default function useActivityLogs() {
   const activeFilter = ref(route.query.filter || 'all');
   const searchTerm = ref(route.query.search || '');
   // Pagination
-  const currentPage = ref(parseInt(route.query.page) || 1); // Current page
+  const currentPage = ref(parseInt(route.query.page, 10) || 1); // Current page
   const perPage = ref(15); // Items per page
   const total = ref(0); // Total number of items
 
