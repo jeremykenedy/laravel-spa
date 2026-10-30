@@ -1,9 +1,6 @@
 <p align="center">
-    <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="art/banner-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset="art/banner-light.svg">
-        <img src="art/banner-light.svg" alt="Laravel Auth SPA Boilerplate" width="800">
-    </picture>
+  <a href="https://github.com/jeremykenedy/laravel-spa#gh-light-mode-only"><picture><source media="(max-width: 600px) and (prefers-reduced-motion: reduce)" srcset="art/banner-mobile-still-light.e36706275bed.svg"><source media="(prefers-reduced-motion: reduce)" srcset="art/banner-still-light.ffa79bfe9414.svg"><source media="(max-width: 600px)" srcset="art/banner-mobile-light.25326a2db119.svg"><img src="art/banner-light.42782c6f2015.svg#gh-light-mode-only" alt="Laravel Auth SPA Boilerplate" width="800"></picture></a>
+  <a href="https://github.com/jeremykenedy/laravel-spa#gh-dark-mode-only"><picture><source media="(max-width: 600px) and (prefers-reduced-motion: reduce)" srcset="art/banner-mobile-still-dark.273352fe0dbb.svg"><source media="(prefers-reduced-motion: reduce)" srcset="art/banner-still-dark.0e4f55d35e04.svg"><source media="(max-width: 600px)" srcset="art/banner-mobile-dark.f8bb713bc12d.svg"><img src="art/banner-dark.1416e57d5087.svg#gh-dark-mode-only" alt="Laravel Auth SPA Boilerplate" width="800"></picture></a>
 </p>
 
 <p align="center">Laravel authentication and user management SPA built with Laravel 13, Vue 3, Socialite, Vite, and Tailwind CSS.</p>

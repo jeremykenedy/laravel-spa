@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 392 408" width="392" height="408" role="img" aria-labelledby="title description">
+  <title id="title">Laravel Auth SPA Boilerplate</title>
+  <desc id="description">Laravel authentication, user management, and social login with Vue.</desc>
+  <defs><linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c0a09"/><stop offset="1" stop-color="#1c1917"/></linearGradient></defs>
+  <rect width="392" height="408" rx="16" fill="url(#background)" stroke="#292524"/>
+  <text x="20" y="76" fill="#fff" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="36" font-weight="700" letter-spacing="-.5">Laravel Auth SPA</text>
+  <text x="21" y="104" fill="#a8a29e" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="13">Authentication, user management, and social login</text>
+  <text x="21" y="122" fill="#a8a29e" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="13">with Laravel and Vue.</text>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="9" font-weight="500" text-anchor="middle">
+    <rect x="20" y="138" width="70" height="22" rx="11" fill="#1a1a1a" opacity=".8" stroke="#a78bfa" stroke-width=".8"/><text x="55" y="152" fill="#a78bfa">Laravel 13</text>
+    <rect x="98" y="138" width="48" height="22" rx="11" fill="#1a1a1a" opacity=".8" stroke="#60a5fa" stroke-width=".8"/><text x="122" y="152" fill="#60a5fa">Vue 3</text>
+    <rect x="154" y="138" width="64" height="22" rx="11" fill="#1a1a1a" opacity=".8" stroke="#4ade80" stroke-width=".8"/><text x="186" y="152" fill="#4ade80">Socialite</text>
+    <rect x="226" y="138" width="80" height="22" rx="11" fill="#1a1a1a" opacity=".8" stroke="#fbbf24" stroke-width=".8"/><text x="266" y="152" fill="#fbbf24">Tailwind CSS</text>
+  </g>
+  <g transform="translate(53.5 176) scale(1.5)">
+    <rect x="0" y="0" width="190" height="140" rx="14" fill="#1c1917" stroke="#57534e" stroke-width="1.5"/>
+    <path d="M0 30h190" stroke="#57534e" stroke-width="1.5"/>
+    <circle cx="16" cy="15" r="4" fill="#f87171"/><circle cx="30" cy="15" r="4" fill="#fbbf24"/><circle cx="44" cy="15" r="4" fill="#4ade80"/>
+    <rect x="15" y="44" width="58" height="78" rx="9" fill="#292044" stroke="#6d28d9"/>
+    <circle cx="44" cy="67" r="13" fill="none" stroke="#a78bfa" stroke-width="2" opacity="0"/>
+    <circle cx="44" cy="67" r="13" fill="#8b5cf6"/>
+    <path d="M25 105c3-12 11-18 19-18s16 6 19 18" fill="#6d28d9"/>
+    <rect x="86" y="48" width="83" height="10" rx="5" fill="#1e3a5f"/>
+    <rect x="86" y="66" width="68" height="7" rx="3.5" fill="#57534e"/>
+    <rect x="86" y="81" width="83" height="29" rx="8" fill="#292524" stroke="#44403c"/>
+    <path d="M99.5 94.5h37" stroke="#78716c" stroke-linecap="round" stroke-width="7"/>
+    <g>
+      <circle cx="157" cy="96" r="8" fill="#166534"/>
+      <path d="m153 96 3 3 5-6" fill="none" stroke="#4ade80" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"/>
+    </g>
+    <circle cx="100" cy="126" r="5" fill="#f87171"/>
+    <circle cx="116" cy="126" r="5" fill="#60a5fa"/>
+    <circle cx="132" cy="126" r="5" fill="#e7e5e4"/>
+  </g>
+</svg>
