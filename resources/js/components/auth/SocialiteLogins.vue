@@ -211,7 +211,15 @@ export default {
     },
     async onMessage(e) {
       const self = this;
-      if (e.origin !== window.origin || !e.data.token) {
+      if (e.origin !== window.origin || !(e.data.token || e.data.error)) {
+        return;
+      }
+      if (e.data.error) {
+        self.popToast({
+          message: e.data.error,
+          timer: 10000,
+          icon: 'error',
+        });
         return;
       }
       await axios.get('/sanctum/csrf-cookie').then((response) => {});

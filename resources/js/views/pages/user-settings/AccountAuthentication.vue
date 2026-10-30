@@ -237,10 +237,12 @@ export default {
     },
     async onMessage(e) {
       const self = this;
-      if (e.origin !== window.origin || !e.data.token) {
+      if (e.origin !== window.origin || !(e.data.token || e.data.error)) {
         return;
       }
-      if (e.data.token && e.data.token == 'cannot_add') {
+      if (e.data.error) {
+        self.error(e.data.error);
+      } else if (e.data.token == 'cannot_add') {
         self.error('Unable to authorize provider.');
       } else {
         self.success('Successfully authorized provider.');

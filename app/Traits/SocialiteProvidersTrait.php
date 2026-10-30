@@ -9,9 +9,9 @@ use App\Models\SocialiteProvider;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Crypt;
 use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Laravel\Socialite\Facades\Socialite;
@@ -444,75 +444,173 @@ trait SocialiteProvidersTrait
     /**
      * Find or create a user.
      *
-     * @param  SocialiteUser  $user
-     * @return App\Models\User
+     * @param  SocialiteUser|object  $user
+     * @param  string|null  $linkToken  Sanctum token of a signed in user connecting this provider
+     * @return array{user: User|null, token: string|null, error?: string}
      */
-    protected function findOrCreateUser(string $provider, $user, ?string $state = null): array
+    protected function findOrCreateUser(string $provider, $user, ?string $linkToken = null): array
     {
-        $existingUser = null;
-        $token = null;
-        $email = null;
-
         if ($provider == 'twitter') {
-            $email = $user->email;
-            $providerId = $user->id;
+            $email = $user->email ?? null;
+            $providerId = $user->id ?? null;
         } else {
             $email = $user->getEmail();
             $providerId = $user->getId();
         }
 
-        $oauthProvider = SocialiteProvider::where('provider', $provider)
-            ->where('provider_user_id', $providerId)
-            ->first();
+        $oauthProvider = $this->findLinkedProvider($provider, $providerId);
 
-        if ($state && $state != config('app.key')) {
-            $token = PersonalAccessToken::findToken($state);
-            if ($token) {
-                $existingUser = $token->tokenable;
-            }
-            if ($existingUser && $existingUser->id && $oauthProvider && $oauthProvider->user_id && ($existingUser->id != $oauthProvider->user_id)) {
+        // 1. A signed in user connecting this provider from their account.
+        $linkingUser = $this->findLinkingUser($linkToken);
+
+        if ($linkingUser) {
+            if ($oauthProvider && $oauthProvider->user_id != $linkingUser->id) {
                 return [
                     'user' => null,
                     'token' => null,
                 ];
             }
-        }
 
-        if ($oauthProvider) {
-            return [
-                'user' => $oauthProvider->user,
-                'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
-            ];
-        }
-
-        if (! $existingUser) {
-            $existingUser = User::whereEmail($email)->first();
-        }
-
-        if (! $existingUser) {
-            $existingUser = auth('sanctum')->user();
-        }
-
-        if ($existingUser && $oauthProvider) {
-            if ($provider != 'twitter') {
-                $oauthProvider->update([
-                    'access_token' => $user->token ? $user->token : null,
-                    'refresh_token' => $user->refreshToken ? $user->refreshToken : null,
-                ]);
+            if (! $oauthProvider) {
+                $this->updateOrCreateUser($provider, $user, $linkingUser);
             }
 
-            return [
-                'user' => $oauthProvider->user,
-                'token' => $oauthProvider->user->createToken($provider.'-token')->plainTextToken,
-            ];
+            return $this->socialLogin($provider, $linkingUser);
         }
 
-        $user = $this->updateOrCreateUser($provider, $user, $existingUser);
-        $token = $user->createToken($provider.'-token')->plainTextToken;
+        // 2. A provider account already linked to a local user: log that user in.
+        if ($oauthProvider && $oauthProvider->user) {
+            return $this->socialLogin($provider, $oauthProvider->user);
+        }
 
+        // 3. No link yet, but a local user has the same email address. Link only when both the
+        // local account and the provider verified it.
+        $existingUser = $this->findUserByEmail($email);
+
+        if ($existingUser) {
+            if (! $existingUser->hasVerifiedEmail() || ! $this->providerVerifiedEmail($provider, $user)) {
+                return [
+                    'user' => null,
+                    'token' => null,
+                    'error' => __('auth.social_account_exists'),
+                ];
+            }
+
+            return $this->socialLogin($provider, $this->updateOrCreateUser($provider, $user, $existingUser));
+        }
+
+        // 4. Brand new user.
+        return $this->socialLogin($provider, $this->updateOrCreateUser($provider, $user));
+    }
+
+    /**
+     * Find the stored link for this provider account. A missing provider id never matches.
+     *
+     * @param  mixed  $providerId
+     */
+    protected function findLinkedProvider(string $provider, $providerId): ?SocialiteProvider
+    {
+        if ($providerId === null || trim((string) $providerId) === '') {
+            return null;
+        }
+
+        return SocialiteProvider::where('provider', $provider)
+            ->where('provider_user_id', (string) $providerId)
+            ->first();
+    }
+
+    /**
+     * Find the signed in user who started this flow to connect a provider.
+     */
+    protected function findLinkingUser(?string $linkToken): ?User
+    {
+        if (! $linkToken) {
+            return null;
+        }
+
+        $token = PersonalAccessToken::findToken($linkToken);
+
+        return $token && $token->tokenable instanceof User ? $token->tokenable : null;
+    }
+
+    /**
+     * Find a local user by email address. A missing email never matches anyone.
+     *
+     * @param  mixed  $email
+     */
+    protected function findUserByEmail($email): ?User
+    {
+        if (! is_string($email) || trim($email) === '') {
+            return null;
+        }
+
+        return User::whereEmail($email)->first();
+    }
+
+    /**
+     * Determine whether the provider positively confirmed that the email address is verified.
+     *
+     * Only providers that expose an explicit verification claim in their user payload are
+     * trusted. Anything else is treated as unverified.
+     *
+     * @param  SocialiteUser|object  $user
+     */
+    protected function providerVerifiedEmail(string $provider, $user): bool
+    {
+        $raw = $provider == 'twitter' ? (array) $user : $user->getRaw();
+
+        switch ($provider) {
+            case 'google':
+                // Google OpenID Connect userinfo: "email_verified" boolean claim.
+                return $this->isTrueClaim($raw['email_verified'] ?? null);
+
+            case 'github':
+                // GitHub exposes no verified flag on the user object. Socialite only resolves the
+                // email through /user/emails (primary and verified) when the "user:email" scope is
+                // requested; without that scope the address is the user-settable public email.
+                return ! empty($raw['email'])
+                    && in_array('user:email', Socialite::driver($provider)->getScopes(), true);
+
+            case 'twitter':
+                // X (Twitter) OAuth 2 user object: "confirmed_email" is the confirmed address.
+                // This app signs in through OAuth 1.0a verify_credentials, which has no such claim.
+                return ! empty($raw['confirmed_email']);
+
+            case 'linkedin':
+                // LinkedIn OpenID Connect userinfo: "email_verified" boolean claim.
+                return $this->isTrueClaim($raw['email_verified'] ?? null);
+
+            case 'apple':
+                // Sign in with Apple identity token: "email_verified" claim, a boolean or "true"/"false" string.
+                return $this->isTrueClaim($raw['email_verified'] ?? null);
+
+            default:
+                // Facebook, Instagram, YouTube, Twitch, Microsoft, TikTok, Zoho, StackExchange, GitLab,
+                // Reddit, Snapchat, Meetup and Atlassian expose no email verification claim.
+                return false;
+        }
+    }
+
+    /**
+     * Normalize a provider boolean claim.
+     *
+     * @param  mixed  $value
+     */
+    protected function isTrueClaim($value): bool
+    {
+        return $value === true || $value === 1 || $value === '1' || $value === 'true';
+    }
+
+    /**
+     * Issue an API token for a user signing in with a provider.
+     *
+     * @return array{user: User, token: string}
+     */
+    protected function socialLogin(string $provider, User $user): array
+    {
         return [
             'user' => $user,
-            'token' => $token,
+            'token' => $user->createToken($provider.'-token')->plainTextToken,
         ];
     }
 
@@ -632,30 +730,54 @@ trait SocialiteProvidersTrait
     }
 
     /**
-     * Cache the current state and modify the url with a random string to be the key for the return user.
-     * Not all providers return the state and this will allow us to do so..
-     *
-     * @param  Request  $request
-     * @return array
+     * Store a single use OAuth state server side and return its random key, which is sent to the
+     * provider as the state. The Sanctum token of a signed in user connecting a provider stays here.
      */
-    protected function cacheStatePutKeyInUrl($url = null, $state = null)
+    protected function storeOAuthState(string $provider, ?string $linkToken = null): string
     {
-        $tempId = $this->generateTempId();
-        $this->tempStoreStateInCache($tempId, $state);
+        $state = $this->generateTempId();
 
-        return $url.'&state='.$tempId;
+        Cache::put($this->oauthStateCacheKey($state), Crypt::encrypt([
+            'provider' => $provider,
+            'token' => $linkToken,
+        ]), now()->addMinutes(10));
+
+        return $state;
     }
 
     /**
-     * Cache the state temporarily to pick up on callback.
+     * Claim the OAuth state sent back to the callback. Each state is valid once, and only for the
+     * provider it was issued for.
      *
-     * @param  string  $tempId
-     * @param  string  $state
-     * @param  int  $seconds
-     * @return void
+     * @param  mixed  $state
+     * @return array{provider: string, token: string|null}|null
      */
-    protected function tempStoreStateInCache($tempId, $state, $seconds = 60)
+    protected function pullOAuthState(string $provider, $state): ?array
     {
-        Cache::put($tempId, $state, $seconds);
+        if (! is_string($state) || $state === '') {
+            return null;
+        }
+
+        $stored = Cache::pull($this->oauthStateCacheKey($state));
+
+        if (! is_string($stored)) {
+            return null;
+        }
+
+        $stored = Crypt::decrypt($stored);
+
+        if (($stored['provider'] ?? null) !== $provider) {
+            return null;
+        }
+
+        return $stored;
+    }
+
+    /**
+     * Cache key for an OAuth state.
+     */
+    protected function oauthStateCacheKey(string $state): string
+    {
+        return 'socialite-oauth-state:'.$state;
     }
 }
