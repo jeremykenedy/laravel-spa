@@ -18,7 +18,7 @@
         "@vitejs/plugin-vue": "^6.0.10",
         "concurrently": "^10.0.6",
         "core-js": "^3.51.0",
-        "eslint": "^10.13.0",
+        "eslint": "^10.15.0",
         "eslint-plugin-vue": "^10.11.1",
         "globals": "^17.13.0",
         "laravel-vite-plugin": "^3.2.0",
