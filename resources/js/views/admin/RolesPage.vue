@@ -377,7 +377,10 @@ export default {
         return;
       }
       await axios
-        .patch(`/api/roles/update-role/${row.id}`, row)
+        .patch(`/api/roles/update-role/${row.id}`, {
+          ...row,
+          permissions: row.permissions.map((permission) => permission.id),
+        })
         .then(({ data }) => {
           self.roleUpdated(data.role);
           self.popToast({
