@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Permissions;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreatePermissionRequest extends FormRequest
 {
@@ -31,6 +33,11 @@ class CreatePermissionRequest extends FormRequest
             'description' => 'nullable|string|max:255',
             'model' => 'string|nullable',
             'roles' => 'present|array',
+            'roles.*' => [
+                Rule::exists(Role::class, 'id')
+                    ->withoutTrashed()
+                    ->where(fn ($query) => $query->where('level', '<=', $this->user()->level())),
+            ],
         ];
     }
 }

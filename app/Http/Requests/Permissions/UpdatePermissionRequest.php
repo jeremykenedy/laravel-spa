@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Permissions;
 
+use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePermissionRequest extends FormRequest
 {
@@ -15,7 +18,8 @@ class UpdatePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('update.permissions');
+        return $this->user()->hasPermission('edit.permissions')
+            && ($this->user()->hasRole('superadmin') || $this->canManage($this->route('permission')));
     }
 
     /**
@@ -31,6 +35,21 @@ class UpdatePermissionRequest extends FormRequest
             'description' => 'nullable|string|max:255',
             'model' => 'string|nullable',
             'roles' => 'present|array',
+            'roles.*' => [
+                Rule::exists(Role::class, 'id')
+                    ->withoutTrashed()
+                    ->where(fn ($query) => $query->where('level', '<=', $this->user()->level())),
+            ],
         ];
+    }
+
+    /**
+     * Whether the caller holds the permission and no role above the caller's
+     * level relies on it.
+     */
+    private function canManage(Permission $permission): bool
+    {
+        return $this->user()->getPermissions()->contains('id', $permission->id)
+            && ! $permission->roles()->where('level', '>', $this->user()->level())->exists();
     }
 }

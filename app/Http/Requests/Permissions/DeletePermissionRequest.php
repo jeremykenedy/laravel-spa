@@ -15,6 +15,7 @@ class DeletePermissionRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('delete.permissions');
+        return $this->user()->hasPermission('delete.permissions')
+            && ! $this->route('permission')->roles()->where('level', '>', $this->user()->level())->exists();
     }
 }

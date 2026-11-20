@@ -79,21 +79,7 @@ class PermissionsController extends Controller
 
         $validated = $request->validated();
         $permission->update($request->only('name', 'slug', 'description', 'model'));
-
-        if ($permission) {
-            $roles = $validated['roles'];
-            $rolesSync = collect([]);
-            if (count($roles) > 0) {
-                if (is_array($roles[0])) {
-                    foreach ($roles as $key => $role) {
-                        $rolesSync->push($role['id']);
-                    }
-                } else {
-                    $rolesSync = $roles;
-                }
-            }
-            $permission->roles()->sync($rolesSync);
-        }
+        $permission->roles()->sync($validated['roles']);
 
         $permission->load([
             'users:name,id,email',
