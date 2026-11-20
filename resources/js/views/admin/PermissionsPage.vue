@@ -371,7 +371,7 @@ export default {
         return;
       }
       await axios
-        .patch(`/api/permissions/update-permission/${row.id}`, row)
+        .patch(`/api/permissions/update-permission/${row.id}`, { ...row, roles: row.roles.map((role) => role.id) })
         .then(({ data }) => {
           self.permissionUpdated(data.permission);
           self.popToast({
