@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Users;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VerifyUserRequest extends FormRequest
@@ -15,6 +16,9 @@ class VerifyUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('edit.users');
+        $user = User::find($this->input('user.id'));
+
+        return $this->user()->hasPermission('edit.users')
+            && (! $user || $this->user()->level() >= $user->level());
     }
 }

@@ -29,10 +29,10 @@ function signInWithPermission(?string $slug = null): User
 function seededRole(): Role
 {
     return Role::create([
-        'name' => 'Super Admin',
-        'slug' => 'superadmin',
-        'description' => 'Super Admin Role',
-        'level' => 5,
+        'name' => 'Unverified',
+        'slug' => 'unverified',
+        'description' => 'Unverified Role',
+        'level' => 0,
     ]);
 }
 

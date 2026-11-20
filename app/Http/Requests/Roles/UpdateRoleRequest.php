@@ -15,7 +15,8 @@ class UpdateRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('edit.roles');
+        return $this->user()->hasPermission('edit.roles')
+            && $this->user()->level() >= $this->route('role')->level;
     }
 
     /**
@@ -29,7 +30,7 @@ class UpdateRoleRequest extends FormRequest
             'name' => 'required|string|min:3|max:255',
             // 'slug'              => 'required|string|unique:roles,slug,'.$role->id,
             'description' => 'nullable|string|max:255',
-            'level' => 'nullable|integer',
+            'level' => 'nullable|integer|max:'.$this->user()->level(),
             'permissions' => 'present|array',
         ];
     }

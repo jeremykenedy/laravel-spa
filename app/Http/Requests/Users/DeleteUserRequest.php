@@ -15,6 +15,7 @@ class DeleteUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('delete.users');
+        return $this->user()->hasPermission('delete.users')
+            && $this->user()->level() >= $this->route('user')->level();
     }
 }

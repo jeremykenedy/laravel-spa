@@ -15,6 +15,7 @@ class DeleteRoleRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->hasPermission('delete.roles');
+        return $this->user()->hasPermission('delete.roles')
+            && $this->user()->level() >= $this->route('role')->level;
     }
 }
