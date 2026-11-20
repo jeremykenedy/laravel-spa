@@ -31,7 +31,10 @@ class UpdatePermissionRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:3|max:255',
-            // 'slug'              => 'required|string|unique:permissions,slug',
+            'slug' => Rule::when(
+                ! $this->user()->hasRole('superadmin'),
+                [Rule::in([$this->route('permission')->slug])],
+            ),
             'description' => 'nullable|string|max:255',
             'model' => 'string|nullable',
             'roles' => 'present|array',

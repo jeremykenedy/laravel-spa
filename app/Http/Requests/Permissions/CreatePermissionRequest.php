@@ -33,11 +33,13 @@ class CreatePermissionRequest extends FormRequest
             'description' => 'nullable|string|max:255',
             'model' => 'string|nullable',
             'roles' => 'present|array',
-            'roles.*' => [
-                Rule::exists(Role::class, 'id')
-                    ->withoutTrashed()
-                    ->where(fn ($query) => $query->where('level', '<=', $this->user()->level())),
-            ],
+            'roles.*' => $this->user()->hasRole('superadmin')
+                ? [
+                    Rule::exists(Role::class, 'id')
+                        ->withoutTrashed()
+                        ->where(fn ($query) => $query->where('level', '<=', $this->user()->level())),
+                ]
+                : ['prohibited'],
         ];
     }
 }
