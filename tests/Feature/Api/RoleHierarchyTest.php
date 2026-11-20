@@ -256,3 +256,81 @@ it('refuses to let an admin delete the super admin role', function () {
 
     $this->assertNotSoftDeleted($this->superAdminRole);
 });
+
+function makePermission(string $slug): Permission
+{
+    return Permission::create([
+        'name' => $slug,
+        'slug' => $slug,
+        'description' => '',
+        'model' => 'Permission',
+    ]);
+}
+
+it('refuses to let a role editor grant a permission it does not hold', function () {
+    signInWithRole($this->moderatorRole, 'edit.roles');
+    $deleteUsers = makePermission('delete.users');
+
+    $this->patchJson(
+        "/api/roles/update-role/{$this->moderatorRole->id}",
+        rolePayload($this->moderatorRole, ['permissions' => [$deleteUsers->id]]),
+    )->assertUnprocessable()->assertJsonValidationErrors('permissions.0');
+
+    expect($this->moderatorRole->fresh()->permissions)->toBeEmpty();
+});
+
+it('lets a role editor grant a permission it holds', function () {
+    signInWithRole($this->moderatorRole, 'edit.roles');
+    $editRoles = Permission::whereSlug('edit.roles')->first();
+
+    $this->patchJson(
+        "/api/roles/update-role/{$this->moderatorRole->id}",
+        rolePayload($this->moderatorRole, ['permissions' => [$editRoles->id]]),
+    )->assertOk();
+
+    expect($this->moderatorRole->fresh()->permissions->pluck('slug')->all())->toBe(['edit.roles']);
+});
+
+it('keeps permissions a role already has when the editor does not hold them', function () {
+    signInWithRole($this->moderatorRole, 'edit.roles');
+    $reviewerRole = rankedRole('reviewer', 3);
+    $deleteUsers = makePermission('delete.users');
+    $reviewerRole->attachPermission($deleteUsers);
+
+    $this->patchJson(
+        "/api/roles/update-role/{$reviewerRole->id}",
+        rolePayload($reviewerRole, ['permissions' => [$deleteUsers->id]]),
+    )->assertOk();
+
+    expect($reviewerRole->fresh()->permissions->pluck('slug')->all())->toBe(['delete.users']);
+});
+
+it('refuses to let a role creator grant a permission it does not hold', function () {
+    signInWithRole($this->moderatorRole, 'create.roles');
+    $deleteUsers = makePermission('delete.users');
+
+    $this->postJson('/api/roles/create-role', [
+        'name' => 'Helper',
+        'slug' => 'helper',
+        'description' => '',
+        'level' => 3,
+        'permissions' => [$deleteUsers->id],
+    ])->assertUnprocessable()->assertJsonValidationErrors('permissions.0');
+
+    $this->assertDatabaseMissing('roles', ['slug' => 'helper']);
+});
+
+it('lets a super admin grant any permission', function () {
+    signInWithRole($this->superAdminRole, 'create.roles');
+    $deleteUsers = makePermission('delete.users');
+
+    $this->postJson('/api/roles/create-role', [
+        'name' => 'Helper',
+        'slug' => 'helper',
+        'description' => '',
+        'level' => 3,
+        'permissions' => [$deleteUsers->id],
+    ])->assertOk();
+
+    expect(Role::whereSlug('helper')->first()->permissions->pluck('slug')->all())->toBe(['delete.users']);
+});

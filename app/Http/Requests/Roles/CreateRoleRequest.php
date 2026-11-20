@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Roles;
 
+use App\Models\Permission;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Collection;
+use Illuminate\Validation\Rule;
 
 class CreateRoleRequest extends FormRequest
 {
@@ -31,6 +34,22 @@ class CreateRoleRequest extends FormRequest
             'description' => 'nullable|string|max:255',
             'level' => 'nullable|integer|max:'.$this->user()->level(),
             'permissions' => 'present|array',
+            'permissions.*' => [Rule::in($this->grantablePermissionIds()->all())],
         ];
+    }
+
+    /**
+     * Permissions the caller may put on a role: every permission for a
+     * Super Admin, otherwise only the ones the caller holds.
+     *
+     * @return Collection<int, int>
+     */
+    private function grantablePermissionIds(): Collection
+    {
+        if ($this->user()->hasRole('superadmin')) {
+            return Permission::pluck('id');
+        }
+
+        return $this->user()->getPermissions()->pluck('id');
     }
 }
