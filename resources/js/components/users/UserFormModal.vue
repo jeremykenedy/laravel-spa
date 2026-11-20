@@ -413,15 +413,15 @@ export default {
           });
           this.submitting = false;
         })
-        .catch(({ res }) => {
-          if (res.status === 422) {
-            const { errors } = res.data;
+        .catch(({ response }) => {
+          if (response?.status === 422) {
+            const { errors } = response.data;
             this.errors = errors;
-            // this.popToast({
-            //   message: Object.values(errors).flat().toString(),
-            //   timer: 5000,
-            //   icon: 'error',
-            // });
+            this.popToast({
+              message: Object.values(errors).flat().toString(),
+              timer: 5000,
+              icon: 'error',
+            });
           } else {
             this.popToast({
               message: 'Error Creating User',
@@ -445,9 +445,9 @@ export default {
           });
           this.submitting = false;
         })
-        .catch(({ err }) => {
-          if (err && err.status === 422) {
-            const { errors } = err.data;
+        .catch(({ response }) => {
+          if (response?.status === 422) {
+            const { errors } = response.data;
             this.errors = errors;
             this.popToast({
               message: Object.values(errors).flat().toString(),
