@@ -6,6 +6,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Laravel\Sanctum\Sanctum;
 
 beforeEach(function () {
@@ -333,4 +334,157 @@ it('lets a super admin grant any permission', function () {
     ])->assertOk();
 
     expect(Role::whereSlug('helper')->first()->permissions->pluck('slug')->all())->toBe(['delete.users']);
+});
+
+/**
+ * @param  array<int, int>  $roles
+ * @param  array<string, mixed>  $overrides
+ * @return array<string, mixed>
+ */
+function permissionPayload(Permission $permission, array $roles, array $overrides = []): array
+{
+    return [
+        'name' => $permission->name,
+        'slug' => $permission->slug,
+        'description' => $permission->description,
+        'model' => $permission->model,
+        'roles' => $roles,
+        ...$overrides,
+    ];
+}
+
+/**
+ * @param  array<int, int>  $roles
+ */
+function createExportReportsPermission(array $roles): TestResponse
+{
+    return test()->postJson('/api/permissions/create-permission', [
+        'name' => 'Can Export Reports',
+        'slug' => 'export.reports',
+        'description' => '',
+        'model' => 'Permission',
+        'roles' => $roles,
+    ]);
+}
+
+it('lets an admin edit a permission it holds', function () {
+    signInWithRole($this->adminRole, 'edit.permissions');
+    $exportReports = makePermission('export.reports');
+    $this->adminRole->attachPermission($exportReports);
+
+    $this->patchJson(
+        "/api/permissions/update-permission/{$exportReports->id}",
+        permissionPayload($exportReports, [$this->adminRole->id, $this->moderatorRole->id], ['name' => 'Export Reports']),
+    )->assertOk();
+
+    expect($exportReports->fresh()->name)->toBe('Export Reports')
+        ->and($exportReports->fresh()->roles->pluck('slug')->sort()->values()->all())->toBe(['admin', 'moderator']);
+});
+
+it('refuses to let an admin edit a permission the super admin role holds', function () {
+    signInWithRole($this->adminRole, 'edit.permissions');
+    $viewUsers = makePermission('view.users');
+    $this->superAdminRole->attachPermission($viewUsers);
+    $this->adminRole->attachPermission($viewUsers);
+
+    $this->patchJson(
+        "/api/permissions/update-permission/{$viewUsers->id}",
+        permissionPayload($viewUsers, [$this->adminRole->id], ['slug' => 'renamed.users']),
+    )->assertForbidden();
+
+    expect($viewUsers->fresh()->slug)->toBe('view.users')
+        ->and($this->superAdminRole->fresh()->permissions->pluck('slug')->all())->toBe(['view.users']);
+});
+
+it('refuses to let an admin edit a permission it does not hold', function () {
+    signInWithRole($this->adminRole, 'edit.permissions');
+    $exportReports = makePermission('export.reports');
+
+    $this->patchJson(
+        "/api/permissions/update-permission/{$exportReports->id}",
+        permissionPayload($exportReports, [$this->adminRole->id]),
+    )->assertForbidden();
+
+    expect($exportReports->fresh()->roles)->toBeEmpty();
+});
+
+it('refuses to let an admin put a permission on a role above its level', function () {
+    signInWithRole($this->adminRole, 'edit.permissions');
+    $exportReports = makePermission('export.reports');
+    $this->adminRole->attachPermission($exportReports);
+
+    $this->patchJson(
+        "/api/permissions/update-permission/{$exportReports->id}",
+        permissionPayload($exportReports, [$this->adminRole->id, $this->superAdminRole->id]),
+    )->assertUnprocessable()->assertJsonValidationErrors('roles.1');
+
+    expect($exportReports->fresh()->roles->pluck('slug')->all())->toBe(['admin']);
+});
+
+it('lets a super admin edit any permission', function () {
+    signInWithRole($this->superAdminRole, 'edit.permissions');
+    $exportReports = makePermission('export.reports');
+
+    $this->patchJson(
+        "/api/permissions/update-permission/{$exportReports->id}",
+        permissionPayload($exportReports, [$this->superAdminRole->id], ['slug' => 'reports.export']),
+    )->assertOk();
+
+    expect($exportReports->fresh()->slug)->toBe('reports.export')
+        ->and($exportReports->fresh()->roles->pluck('slug')->all())->toBe(['superadmin']);
+});
+
+it('refuses to let an admin rename a permission', function () {
+    signInWithRole($this->adminRole, 'edit.permissions');
+    $exportReports = makePermission('export.reports');
+    $this->adminRole->attachPermission($exportReports);
+
+    $this->patchJson(
+        "/api/permissions/update-permission/{$exportReports->id}",
+        permissionPayload($exportReports, [$this->adminRole->id], ['slug' => 'restore.articles']),
+    )->assertUnprocessable()->assertJsonValidationErrors('slug');
+
+    expect($exportReports->fresh()->slug)->toBe('export.reports');
+});
+
+it('refuses to let an admin create a permission on a role above its level', function () {
+    signInWithRole($this->adminRole, 'create.permissions');
+
+    createExportReportsPermission([$this->superAdminRole->id])->assertUnprocessable()->assertJsonValidationErrors('roles.0');
+
+    $this->assertDatabaseMissing('permissions', ['slug' => 'export.reports']);
+});
+
+it('refuses to let an admin put a new permission on its own role', function () {
+    signInWithRole($this->adminRole, 'create.permissions');
+
+    createExportReportsPermission([$this->adminRole->id])->assertUnprocessable()->assertJsonValidationErrors('roles.0');
+
+    $this->assertDatabaseMissing('permissions', ['slug' => 'export.reports']);
+});
+
+it('lets an admin create a permission without roles', function () {
+    signInWithRole($this->adminRole, 'create.permissions');
+
+    createExportReportsPermission([])->assertOk();
+
+    expect(Permission::whereSlug('export.reports')->first()->roles)->toBeEmpty();
+});
+
+it('lets a super admin create a permission on a role', function () {
+    signInWithRole($this->superAdminRole, 'create.permissions');
+
+    createExportReportsPermission([$this->moderatorRole->id])->assertOk();
+
+    expect(Permission::whereSlug('export.reports')->first()->roles->pluck('slug')->all())->toBe(['moderator']);
+});
+
+it('refuses to let an admin delete a permission the super admin role holds', function () {
+    signInWithRole($this->adminRole, 'delete.permissions');
+    $viewUsers = makePermission('view.users');
+    $this->superAdminRole->attachPermission($viewUsers);
+
+    $this->deleteJson("/api/permissions/delete/permission/{$viewUsers->id}")->assertForbidden();
+
+    $this->assertNotSoftDeleted($viewUsers);
 });

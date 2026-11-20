@@ -58,6 +58,10 @@ class RolesController extends Controller
 
         if ($role) {
             $role->syncPermissions($validated['permissions']);
+            $role->load([
+                'users:name,id,email',
+                'permissions:id,name',
+            ]);
 
             return response()->json([
                 'role' => $role,
@@ -74,6 +78,10 @@ class RolesController extends Controller
         $validated = $request->validated();
         $role->update($request->only('name', 'slug', 'description', 'level'));
         $role->syncPermissions($validated['permissions']);
+        $role->load([
+            'users:name,id,email',
+            'permissions:id,name',
+        ]);
 
         return response()->json([
             'role' => $role,
