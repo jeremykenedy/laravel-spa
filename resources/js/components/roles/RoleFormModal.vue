@@ -307,14 +307,14 @@ export default {
           this.submitting = false;
         })
         .catch(({ response }) => {
-          if (response.status === 422) {
+          if (response?.status === 422) {
             const { errors } = response.data;
             this.errors = errors;
-            // this.popToast({
-            //   message: Object.values(errors).flat().toString(),
-            //   timer: 5000,
-            //   icon: 'error',
-            // });
+            this.popToast({
+              message: Object.values(errors).flat().toString(),
+              timer: 5000,
+              icon: 'error',
+            });
           } else {
             this.popToast({
               message: 'Error Creating Role',
@@ -349,14 +349,14 @@ export default {
           self.submitting = false;
         })
         .catch(({ response }) => {
-          if (response.status === 422) {
+          if (response?.status === 422) {
             const { errors } = response.data;
             self.errors = errors;
-            // self.popToast({
-            //   message: Object.values(errors).flat().toString(),
-            //   timer: 5000,
-            //   icon: 'error',
-            // });
+            self.popToast({
+              message: Object.values(errors).flat().toString(),
+              timer: 5000,
+              icon: 'error',
+            });
           } else {
             self.popToast({
               message: 'Error Updating Role',
