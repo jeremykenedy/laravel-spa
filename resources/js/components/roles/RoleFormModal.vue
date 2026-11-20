@@ -306,24 +306,7 @@ export default {
           });
           this.submitting = false;
         })
-        .catch(({ response }) => {
-          if (response?.status === 422) {
-            const { errors } = response.data;
-            this.errors = errors;
-            this.popToast({
-              message: Object.values(errors).flat().toString(),
-              timer: 5000,
-              icon: 'error',
-            });
-          } else {
-            this.popToast({
-              message: 'Error Creating Role',
-              timer: 5000,
-              icon: 'error',
-            });
-          }
-          this.submitting = false;
-        });
+        .catch(({ response }) => this.handleSaveError(response, 'Error Creating Role'));
       this.submitting = false;
     },
     async updateRole() {
@@ -348,25 +331,20 @@ export default {
           });
           self.submitting = false;
         })
-        .catch(({ response }) => {
-          if (response?.status === 422) {
-            const { errors } = response.data;
-            self.errors = errors;
-            self.popToast({
-              message: Object.values(errors).flat().toString(),
-              timer: 5000,
-              icon: 'error',
-            });
-          } else {
-            self.popToast({
-              message: 'Error Updating Role',
-              timer: 5000,
-              icon: 'error',
-            });
-          }
-          self.submitting = false;
-        });
+        .catch(({ response }) => self.handleSaveError(response, 'Error Updating Role'));
       self.submitting = false;
+    },
+    handleSaveError(response, fallbackMessage) {
+      const errors = response?.status === 422 ? response.data.errors : null;
+      if (errors) {
+        this.errors = errors;
+      }
+      this.popToast({
+        message: errors ? Object.values(errors).flat().toString() : fallbackMessage,
+        timer: 5000,
+        icon: 'error',
+      });
+      this.submitting = false;
     },
     closeModal() {
       this.$emit('closeModal');

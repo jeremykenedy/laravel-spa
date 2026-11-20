@@ -6,6 +6,7 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Testing\TestResponse;
 use Laravel\Sanctum\Sanctum;
 
 beforeEach(function () {
@@ -352,6 +353,20 @@ function permissionPayload(Permission $permission, array $roles, array $override
     ];
 }
 
+/**
+ * @param  array<int, int>  $roles
+ */
+function createExportReportsPermission(array $roles): TestResponse
+{
+    return test()->postJson('/api/permissions/create-permission', [
+        'name' => 'Can Export Reports',
+        'slug' => 'export.reports',
+        'description' => '',
+        'model' => 'Permission',
+        'roles' => $roles,
+    ]);
+}
+
 it('lets an admin edit a permission it holds', function () {
     signInWithRole($this->adminRole, 'edit.permissions');
     $exportReports = makePermission('export.reports');
@@ -359,10 +374,10 @@ it('lets an admin edit a permission it holds', function () {
 
     $this->patchJson(
         "/api/permissions/update-permission/{$exportReports->id}",
-        permissionPayload($exportReports, [$this->adminRole->id, $this->moderatorRole->id], ['name' => 'Can Export Reports']),
+        permissionPayload($exportReports, [$this->adminRole->id, $this->moderatorRole->id], ['name' => 'Export Reports']),
     )->assertOk();
 
-    expect($exportReports->fresh()->name)->toBe('Can Export Reports')
+    expect($exportReports->fresh()->name)->toBe('Export Reports')
         ->and($exportReports->fresh()->roles->pluck('slug')->sort()->values()->all())->toBe(['admin', 'moderator']);
 });
 
@@ -435,13 +450,7 @@ it('refuses to let an admin rename a permission', function () {
 it('refuses to let an admin create a permission on a role above its level', function () {
     signInWithRole($this->adminRole, 'create.permissions');
 
-    $this->postJson('/api/permissions/create-permission', [
-        'name' => 'Can Export Reports',
-        'slug' => 'export.reports',
-        'description' => '',
-        'model' => 'Permission',
-        'roles' => [$this->superAdminRole->id],
-    ])->assertUnprocessable()->assertJsonValidationErrors('roles.0');
+    createExportReportsPermission([$this->superAdminRole->id])->assertUnprocessable()->assertJsonValidationErrors('roles.0');
 
     $this->assertDatabaseMissing('permissions', ['slug' => 'export.reports']);
 });
@@ -449,13 +458,7 @@ it('refuses to let an admin create a permission on a role above its level', func
 it('refuses to let an admin put a new permission on its own role', function () {
     signInWithRole($this->adminRole, 'create.permissions');
 
-    $this->postJson('/api/permissions/create-permission', [
-        'name' => 'Can Export Reports',
-        'slug' => 'export.reports',
-        'description' => '',
-        'model' => 'Permission',
-        'roles' => [$this->adminRole->id],
-    ])->assertUnprocessable()->assertJsonValidationErrors('roles.0');
+    createExportReportsPermission([$this->adminRole->id])->assertUnprocessable()->assertJsonValidationErrors('roles.0');
 
     $this->assertDatabaseMissing('permissions', ['slug' => 'export.reports']);
 });
@@ -463,13 +466,7 @@ it('refuses to let an admin put a new permission on its own role', function () {
 it('lets an admin create a permission without roles', function () {
     signInWithRole($this->adminRole, 'create.permissions');
 
-    $this->postJson('/api/permissions/create-permission', [
-        'name' => 'Can Export Reports',
-        'slug' => 'export.reports',
-        'description' => '',
-        'model' => 'Permission',
-        'roles' => [],
-    ])->assertOk();
+    createExportReportsPermission([])->assertOk();
 
     expect(Permission::whereSlug('export.reports')->first()->roles)->toBeEmpty();
 });
@@ -477,13 +474,7 @@ it('lets an admin create a permission without roles', function () {
 it('lets a super admin create a permission on a role', function () {
     signInWithRole($this->superAdminRole, 'create.permissions');
 
-    $this->postJson('/api/permissions/create-permission', [
-        'name' => 'Can Export Reports',
-        'slug' => 'export.reports',
-        'description' => '',
-        'model' => 'Permission',
-        'roles' => [$this->moderatorRole->id],
-    ])->assertOk();
+    createExportReportsPermission([$this->moderatorRole->id])->assertOk();
 
     expect(Permission::whereSlug('export.reports')->first()->roles->pluck('slug')->all())->toBe(['moderator']);
 });
