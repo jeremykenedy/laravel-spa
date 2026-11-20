@@ -29,7 +29,7 @@ class CreateRoleRequest extends FormRequest
             'name' => 'required|string|min:3|max:255',
             'slug' => 'required|string|unique:roles,slug',
             'description' => 'nullable|string|max:255',
-            'level' => 'nullable|integer',
+            'level' => 'nullable|integer|max:'.$this->user()->level(),
             'permissions' => 'present|array',
         ];
     }
